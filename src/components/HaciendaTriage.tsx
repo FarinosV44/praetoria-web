@@ -43,7 +43,7 @@ export function HaciendaTriage() {
       get('descripcion') && `Descripción: ${get('descripcion')}`,
     ].filter(Boolean);
     const text =
-      'Hola, he recibido una notificación y quiero que la reviséis.\n\n' +
+      'Hola, Praetoria. He recibido una notificación y quiero que la revise un abogado.\n\n' +
       details.join('\n') +
       `\n\nNombre: ${get('nombre')}\nTeléfono: ${get('telefono')}`;
     moved.current = true;

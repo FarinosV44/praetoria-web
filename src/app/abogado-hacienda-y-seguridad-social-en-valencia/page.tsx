@@ -1,6 +1,6 @@
 import { getPosts } from '@/lib/content';
 import { buildMetadata } from '@/lib/seo';
-import { site, whatsapp } from '@/lib/site';
+import { mensajes, site, whatsapp } from '@/lib/site';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { Faq } from '@/components/Faq';
 import { PostList } from '@/components/PostList';
@@ -157,7 +157,7 @@ export default function HaciendaPage() {
           <h2>Cuanto antes estudiemos la notificación, más opciones tendremos para defenderte</h2>
           <div className="actions">
             <a className="btn btn--red" href="#diagnostico">Quiero que revisemos mi caso</a>
-            <a className="btn cta-ghost" href={whatsapp('Hola, he recibido una notificación de Hacienda o de la Seguridad Social.')}>
+            <a className="btn cta-ghost" href={whatsapp(mensajes.hacienda)}>
               <Icon name="whatsapp" /> WhatsApp
             </a>
           </div>

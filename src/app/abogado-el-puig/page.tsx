@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { CtaBand } from '@/components/CtaBand';
 import { Icon } from '@/components/Icon';
-import { areas, site, whatsapp } from '@/lib/site';
+import { areas, mensajes, site, whatsapp } from '@/lib/site';
 import { buildMetadata } from '@/lib/seo';
 
 export const metadata = buildMetadata({
@@ -25,7 +25,7 @@ export default function ElPuigPage() {
               de Hacienda o cuestiones patrimoniales. Ofrecemos una respuesta jurídica práctica y cercana.
             </p>
             <div className="actions">
-              <a className="btn btn--red" href={whatsapp('Hola, quiero consultar mi caso con Praetoria.')}><Icon name="whatsapp" /> Consultar mi caso</a>
+              <a className="btn btn--red" href={whatsapp()}><Icon name="whatsapp" /> Consultar mi caso</a>
               <a className="btn btn--ghost" href={`tel:${site.phoneIntl}`}><Icon name="phone" /> {site.phone}</a>
             </div>
           </div>
@@ -79,7 +79,7 @@ export default function ElPuigPage() {
       <CtaBand
         title="Cuéntanos qué necesitas"
         text="Analizaremos tu situación y las opciones disponibles, ya sea un asunto personal, familiar o empresarial."
-        whatsappText="Hola, necesito información sobre vuestros servicios legales en El Puig."
+        whatsappText={mensajes.elPuig}
       />
 
     </div>

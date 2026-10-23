@@ -48,7 +48,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <a href={`tel:${site.phoneIntl}`}>
             <Icon name="phone" /> Llamar
           </a>
-          <a href={whatsapp('Hola, quiero consultar mi caso con Praetoria.')}>
+          <a href={whatsapp()}>
             <Icon name="whatsapp" /> WhatsApp
           </a>
         </nav>

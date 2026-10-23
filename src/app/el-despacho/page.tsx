@@ -2,7 +2,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { CtaBand } from '@/components/CtaBand';
 import { Icon } from '@/components/Icon';
 import { JsonLd } from '@/components/JsonLd';
-import { site } from '@/lib/site';
+import { laboral, site } from '@/lib/site';
 import { buildMetadata } from '@/lib/seo';
 
 export const metadata = buildMetadata({
@@ -109,6 +109,28 @@ export default function DespachoPage() {
       </section>
 
       <section className="section">
+        <div className="wrap">
+          <h2>Equipo</h2>
+          <ul className="team">
+            <li>
+              <p className="team__name">{site.lawyer}</p>
+              <p className="team__role">Abogado, fundador del despacho · ICAV {site.collegeNumber}</p>
+              <p>
+                <a href={`tel:${site.phoneIntl}`}>{site.phone}</a> · <a href={`mailto:${site.email}`}>{site.email}</a>
+              </p>
+            </li>
+            <li>
+              <p className="team__name">{laboral.name}</p>
+              <p className="team__role">{laboral.role}</p>
+              <p>
+                Asuntos laborales: <a href={`tel:${laboral.phoneIntl}`}>{laboral.phone}</a> (llamadas)
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="section section--stone">
         <div className="wrap">
           <h2>Datos del despacho</h2>
           <dl className="data">

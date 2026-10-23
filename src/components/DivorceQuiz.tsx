@@ -2,7 +2,7 @@
 
 // Comprobación orientativa del divorcio en cinco preguntas. No envía nada: prepara un mensaje de WhatsApp.
 import { useEffect, useRef, useState } from 'react';
-import { site, whatsapp } from '@/lib/site';
+import { mensajes, site, whatsapp } from '@/lib/site';
 import { Icon } from './Icon';
 
 const questions = [
@@ -82,7 +82,7 @@ export function DivorceQuiz() {
   };
 
   const text =
-    'Hola, he hecho la comprobación de divorcio en vuestra web:\n' +
+    'Hola, Praetoria. He hecho la comprobación de divorcio en vuestra web:\n' +
     questions.map((q) => `- ${q.q} ${answers[q.id] ?? ''}`).join('\n');
 
   return (
@@ -130,7 +130,7 @@ export function DivorceQuiz() {
           </p>
         </div>
         <div className="actions">
-          <a className="btn btn--red" href={done ? `https://wa.me/${site.phoneIntl.replace('+', '')}?text=${encodeURIComponent(text)}` : whatsapp('Hola, quiero hablar sobre mi caso de divorcio/familia.')}>
+          <a className="btn btn--red" href={done ? `https://wa.me/${site.phoneIntl.replace('+', '')}?text=${encodeURIComponent(text)}` : whatsapp(mensajes.divorcio)}>
             <Icon name="whatsapp" /> Enviar mis respuestas por WhatsApp
           </a>
           <a className="btn btn--ghost" href={`tel:${site.phoneIntl}`}>

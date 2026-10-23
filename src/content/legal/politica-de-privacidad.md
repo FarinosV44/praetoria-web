@@ -12,9 +12,11 @@ PRAETORIA SL, CIF B21810452, con domicilio social en Calle Pintor Francisco Riba
 
 ## Finalidad del tratamiento
 
-Los datos personales que el usuario facilite a través del formulario de contacto del Sitio Web (nombre, correo electrónico y, en su caso, teléfono y contenido de la consulta) se tratarán para gestionar la solicitud de información o consulta jurídica planteada, responderla y, en su caso, iniciar la relación profesional correspondiente.
+Los datos personales que el usuario facilite a través del formulario de contacto del Sitio Web (nombre, área de la consulta, contenido de la consulta, forma de contacto preferida y, según esa forma, teléfono y/o correo electrónico) se tratarán para gestionar la solicitud de información o consulta jurídica planteada, asignarla a la persona del despacho que corresponda por área (los asuntos laborales los atiende Lucía López; el resto, Juan José Farinós Ibáñez), responderla y, en su caso, iniciar la relación profesional correspondiente.
 
-Los cuestionarios de orientación de las páginas de Hacienda y de divorcio funcionan dentro del navegador del usuario: sus respuestas no se envían a ningún servidor salvo que el propio usuario decida mandarlas por WhatsApp o por correo electrónico.
+El formulario no admite adjuntos y pide expresamente no incluir datos de salud ni documentación: si fuera necesaria, se solicitará después por un canal seguro.
+
+**Cómo se reciben las consultas.** Al enviar el formulario, los datos se comprueban en un servidor de Netlify (validación del contenido y filtro de envíos automáticos) y se registran en el servicio de formularios de Netlify, desde el que se envía un aviso por correo electrónico al despacho. Los cuestionarios de orientación de las páginas de Hacienda y de divorcio funcionan solo en el navegador del usuario: sus respuestas no se envían a ningún servidor salvo que el propio usuario decida mandarlas por WhatsApp o por correo electrónico.
 
 ## Legitimación
 
@@ -26,7 +28,7 @@ Los datos se conservarán mientras se mantenga la relación de consulta o, en su
 
 ## Destinatarios
 
-No se cederán datos a terceros salvo obligación legal. Podrán tener acceso a los datos los proveedores de servicios tecnológicos que el Titular utiliza para el funcionamiento del Sitio Web, en calidad de encargados del tratamiento: el proveedor de alojamiento web y de gestión de formularios (Netlify, Inc.) y, si el usuario lo acepta, Google como proveedor de Google Analytics.
+No se cederán datos a terceros salvo obligación legal. Podrán tener acceso a los datos los proveedores de servicios tecnológicos que el Titular utiliza para el funcionamiento del Sitio Web, en calidad de encargados del tratamiento: el proveedor de alojamiento web, de validación y de registro de formularios (Netlify, Inc.) y, si el usuario lo acepta, Google como proveedor de Google Analytics.
 
 ## Derechos de los interesados
 

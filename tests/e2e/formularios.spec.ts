@@ -57,10 +57,10 @@ test.describe('resumen de Hacienda', () => {
   });
 });
 
-test('el formulario de contacto lleva el marcado de Netlify Forms', async ({ page }) => {
+test('el formulario de contacto envía a la función y Netlify Forms tiene su definición', async ({ page, request }) => {
   await page.goto('/contacto/');
-  const form = page.locator('form[name="contacto"]');
-  await expect(form).toHaveAttribute('data-netlify', 'true');
-  await expect(form).toHaveAttribute('netlify-honeypot', 'empresa-web');
-  await expect(form.locator('input[name="form-name"]')).toHaveValue('contacto');
+  await expect(page.locator('form[name="contacto"]')).toHaveAttribute('action', '/api/consulta');
+  const def = await (await request.get('/__forms.html')).text();
+  expect(def).toContain('name="contacto" data-netlify="true" netlify-honeypot="empresa-web"');
+  for (const campo of ['id', 'nombre', 'email', 'telefono', 'area', 'responsable', 'preferencia', 'mensaje', 'privacidad']) expect(def).toContain(`name="${campo}"`);
 });

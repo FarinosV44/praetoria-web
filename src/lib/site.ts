@@ -24,8 +24,37 @@ export const site = {
   decaUrl: 'https://www.decaprofesional.es/',
 };
 
-export const whatsapp = (text?: string) =>
-  `https://wa.me/${site.phoneIntl.replace('+', '')}${text ? `?text=${encodeURIComponent(text)}` : ''}`;
+/**
+ * Contacto específico del área Laboral, facilitado por el propietario (#3, #7).
+ * Solo teléfono de llamada: no hay WhatsApp ni correo personal autorizados. No sustituye al contacto general.
+ */
+export const laboral = {
+  name: 'Lucía López',
+  role: 'Experta en Derecho Laboral',
+  phone: '649 181 290',
+  phoneIntl: '+34649181290',
+};
+
+/**
+ * Mensajes predefinidos de WhatsApp (#3): siempre dirigidos a Praetoria y al servicio jurídico,
+ * nunca al soporte de DeCA Profesional. El número es el general del despacho.
+ */
+export const mensajes = {
+  general: 'Hola, Praetoria. Quiero consultar mi caso con un abogado.',
+  transporte: 'Hola, Praetoria. Quiero consultar con un abogado un asunto de transporte.',
+  mercantil: 'Hola, Praetoria. Quiero consultar con un abogado un asunto mercantil de mi empresa.',
+  hacienda: 'Hola, Praetoria. He recibido una notificación de Hacienda o de la Seguridad Social y quiero que la revise un abogado.',
+  civil: 'Hola, Praetoria. Quiero consultar con un abogado un asunto civil.',
+  familia: 'Hola, Praetoria. Quiero consultar con un abogado un asunto de familia.',
+  divorcio: 'Hola, Praetoria. Quiero hablar con un abogado sobre mi caso de divorcio.',
+  modificacionMedidas: 'Hola, Praetoria. Quiero consultar con un abogado una modificación de medidas.',
+  arte: 'Hola, Praetoria. Quiero consultar con un abogado un asunto de arte y patrimonio.',
+  elPuig: 'Hola, Praetoria. Necesito información sobre vuestros servicios jurídicos en El Puig.',
+  plazoProximo: 'Hola, Praetoria. Acabo de enviar una consulta desde la web y tiene un plazo próximo.',
+} as const;
+
+export const whatsapp = (text: string = mensajes.general) =>
+  `https://wa.me/${site.phoneIntl.replace('+', '')}?text=${encodeURIComponent(text)}`;
 
 export const deca = (campaign: string) =>
   `${site.decaUrl}?utm_source=praetoria&utm_medium=referral&utm_campaign=${campaign}`;

@@ -1,5 +1,5 @@
 // Contenido de las páginas de área. Textos tomados de la web anterior, ordenados y sin repeticiones.
-import type { CategoryKey } from './site';
+import { mensajes, type CategoryKey } from './site';
 
 export type Service = { name: string; text?: string; links?: { label: string; href: string }[] };
 export type Img = { src: string; alt: string };
@@ -107,7 +107,7 @@ export const areaContent: AreaContent[] = [
       'Una orden de carga bien redactada no elimina todas las responsabilidades, pero permite acreditar cómo se contrató el servicio, exigir el cumplimiento al proveedor y reclamar los perjuicios de una declaración falsa o de una subcontratación irregular.',
     image: { src: '/media/despacho-sala-reunion.webp', alt: 'Sala de reuniones acristalada del despacho Praetoria en El Puig' },
     category: 'transporte',
-    whatsappText: 'Hola, quiero consultar un asunto relacionado con un transporte.',
+    whatsappText: mensajes.transporte,
   },
   {
     slug: 'derecho-mercantil',
@@ -150,7 +150,7 @@ export const areaContent: AreaContent[] = [
       'Si buscas un abogado que entienda tu empresa como un sistema vivo, que sepa cómo se toman decisiones reales y que te acompañe con visión estratégica, hablemos.',
     image: { src: '/media/despacho-planta-abierta.webp', alt: 'Oficina de planta abierta del despacho Praetoria con mamparas de cristal' },
     category: 'mercantil',
-    whatsappText: 'Hola, quiero consultar un asunto mercantil de mi empresa.',
+    whatsappText: mensajes.mercantil,
   },
   {
     slug: 'derecho-civil',
@@ -191,7 +191,7 @@ export const areaContent: AreaContent[] = [
       'Queremos que tomes decisiones con toda la información, sabiendo que cuentas con un respaldo legal sólido. En derecho civil, como en casi todo, lo importante no es solo tener razón, sino saber cómo defenderla.',
     image: { src: '/media/despacho-zona-mesas.webp', alt: 'Zona de mesas del despacho Praetoria en El Puig' },
     category: 'civil-vivienda',
-    whatsappText: 'Hola, quiero consultar un asunto civil.',
+    whatsappText: mensajes.civil,
   },
   {
     slug: 'familia',
@@ -222,7 +222,7 @@ export const areaContent: AreaContent[] = [
       'Te ayudamos a entender tus derechos, poner orden y tomar decisiones seguras. Una separación es una etapa, no una condena, y puede resolverse de forma digna, eficaz y con futuro.',
     image: { src: '/media/despacho-atencion-cliente.webp', alt: 'Espacio de atención a clientes del despacho Praetoria' },
     category: 'familia',
-    whatsappText: 'Hola, quiero consultar un asunto de familia.',
+    whatsappText: mensajes.familia,
   },
   {
     slug: 'arte-y-patrimonio',
@@ -257,6 +257,6 @@ export const areaContent: AreaContent[] = [
       { src: '/media/arte-obra-textil-800.webp', alt: 'Obra textil bordada con plumas naranjas' },
       { src: '/media/arte-obra-abstracta-800.webp', alt: 'Obra abstracta en tonos rojos con estructura de rejilla' },
     ],
-    whatsappText: 'Hola, quiero consultar un asunto de arte y patrimonio.',
+    whatsappText: mensajes.arte,
   },
 ];

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { buildMetadata } from '@/lib/seo';
-import { site, whatsapp } from '@/lib/site';
+import { mensajes, site, whatsapp } from '@/lib/site';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { Faq } from '@/components/Faq';
 import { CtaBand } from '@/components/CtaBand';
@@ -181,7 +181,7 @@ export default function DivorcioPage() {
               </p>
             </div>
             <div className="actions">
-              <a className="btn" href={whatsapp('Hola, quiero consultar una modificación de medidas.')}>Consultar una modificación de medidas</a>
+              <a className="btn" href={whatsapp(mensajes.modificacionMedidas)}>Consultar una modificación de medidas</a>
             </div>
           </div>
           <div>
@@ -226,7 +226,7 @@ export default function DivorcioPage() {
       <CtaBand
         title="¿Empezamos por comprobar tu caso?"
         text="Dos minutos para saber si tu divorcio entra en el precio cerrado o necesita una valoración personalizada."
-        whatsappText="Hola, quiero información sobre mi caso de divorcio/familia."
+        whatsappText={mensajes.divorcio}
       />
 
     </div>

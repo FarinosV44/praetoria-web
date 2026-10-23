@@ -1,5 +1,10 @@
 // Servidor estático mínimo que imita a Netlify para las pruebas en navegador:
 // /ruta/ -> /ruta/index.html, /ruta -> 301 a /ruta/, rutas inexistentes -> 404.html con código 404.
+// Además ejecuta la función real de recepción (POST /api/consulta) y sustituye a Netlify Forms por un
+// registro local (/__mock-forms), para probar el recorrido completo de una consulta sin desplegar:
+//   GET  /__mock-forms/registro        -> consultas entregadas (JSON)
+//   POST /__mock-forms/reset           -> vacía el registro
+//   POST /__mock-forms/fallar?n=1      -> las próximas n entregas responden 500
 //   node scripts/qa/serve.mjs <carpeta> <puerto>
 import { createServer } from 'node:http';
 import { existsSync, readFileSync, statSync } from 'node:fs';
@@ -8,8 +13,54 @@ import { extname, join, normalize } from 'node:path';
 const [dir = 'out', port = '4400'] = process.argv.slice(2);
 const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.xml': 'application/xml', '.txt': 'text/plain; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.ico': 'image/x-icon' };
 
-createServer((req, res) => {
-  const path = decodeURIComponent(new URL(req.url, 'http://x').pathname);
+process.env.FORMS_ENDPOINT = `http://localhost:${port}/__mock-forms`;
+const { default: consulta } = await import(new URL('../../netlify/functions/consulta.mts', import.meta.url).href);
+let registro = [];
+let fallos = 0;
+
+const readBody = (req) =>
+  new Promise((resolve) => {
+    const chunks = [];
+    req.on('data', (c) => chunks.push(c));
+    req.on('end', () => resolve(Buffer.concat(chunks)));
+  });
+
+createServer(async (req, res) => {
+  const url = new URL(req.url, `http://localhost:${port}`);
+  const path = decodeURIComponent(url.pathname);
+
+  if (path.startsWith('/__mock-forms')) {
+    if (path === '/__mock-forms/registro') {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify(registro));
+    }
+    if (path === '/__mock-forms/reset') {
+      registro = [];
+      fallos = 0;
+      return res.end('ok');
+    }
+    if (path === '/__mock-forms/fallar') {
+      fallos = Number(url.searchParams.get('n') ?? 1);
+      return res.end('ok');
+    }
+    const body = Object.fromEntries(new URLSearchParams((await readBody(req)).toString()));
+    if (fallos > 0) {
+      fallos--;
+      res.writeHead(500);
+      return res.end('fallo simulado');
+    }
+    registro.push(body);
+    res.writeHead(200);
+    return res.end('ok');
+  }
+
+  if (path === '/api/consulta') {
+    const body = req.method === 'POST' ? await readBody(req) : undefined;
+    const r = await consulta(new Request(url, { method: req.method, headers: req.headers, body }));
+    res.writeHead(r.status, Object.fromEntries(r.headers));
+    return res.end(Buffer.from(await r.arrayBuffer()));
+  }
+
   const safe = normalize(path).replace(/^(\.\.[/\\])+/, '');
   let file = join(dir, safe);
   if (existsSync(file) && statSync(file).isDirectory()) {

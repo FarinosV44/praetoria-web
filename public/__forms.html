@@ -1,0 +1,23 @@
+<!doctype html>
+<!--
+  Definición del formulario "contacto" para Netlify Forms. Netlify lo detecta al desplegar.
+  No se enlaza ni se indexa: la función netlify/functions/consulta.mts entrega aquí cada consulta
+  ya validada. Si se añade un campo a la consulta, hay que añadirlo también aquí.
+-->
+<html lang="es">
+  <head><meta charset="utf-8" /><meta name="robots" content="noindex" /><title>Formulario contacto</title></head>
+  <body>
+    <form name="contacto" data-netlify="true" netlify-honeypot="empresa-web" hidden>
+      <input name="empresa-web" />
+      <input name="id" />
+      <input name="nombre" />
+      <input name="email" />
+      <input name="telefono" />
+      <input name="area" />
+      <input name="responsable" />
+      <input name="preferencia" />
+      <textarea name="mensaje"></textarea>
+      <input name="privacidad" />
+    </form>
+  </body>
+</html>

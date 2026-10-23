@@ -424,6 +424,7 @@
   .field {
     display: grid;
     gap: 0.35rem;
+    align-content: start; /* en filas de dos campos, un mensaje de error no desplaza el campo vecino */
   }
   .field label,
   .field legend {
@@ -835,4 +836,34 @@
   .page-blog .cats a:hover { border-color: var(--ink); }
   .page-blog .cats a[aria-current] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
   .page-blog .cats a[aria-current] span { color: #c4c8cc; }
+}
+
+/* Formulario de contacto (#3): errores accesibles, fallo de envío y confirmación */
+@layer components {
+  .form-errors { border: 2px solid var(--red); background: var(--red-tint); padding: 14px 18px; }
+  .form-errors:focus { outline: 3px solid var(--red); outline-offset: 2px; }
+  .form-errors p { margin: 0 0 6px; font-weight: 650; }
+  .form-errors ul { margin: 0; padding-left: 1.2em; list-style: disc; }
+  .form-errors a { color: var(--red-dark); }
+  .field-error { margin: 0; color: var(--red-dark); font-size: 0.92rem; font-weight: 600; }
+  .field [aria-invalid='true'] { border-color: var(--red); border-width: 2px; }
+  .check:has([aria-invalid='true']) { color: var(--red-dark); }
+  .req { color: var(--red-dark); font-weight: 600; }
+  .form-fail { margin: 0; padding: 12px 16px; border-left: 4px solid var(--red); background: var(--red-tint); }
+  .form-fail a, .form-ok a { color: var(--red-dark); }
+  .form-ok { border-top: 3px solid var(--red); background: var(--stone); padding: 24px; max-width: 640px; }
+  .form-ok:focus { outline: 3px solid var(--red); outline-offset: 2px; }
+  .form-ok h2 { font-size: var(--step-2); }
+  .btn:disabled { opacity: 0.65; cursor: progress; }
+}
+
+/* Equipo (el despacho): solo los datos facilitados, sin fotos ni biografías inventadas */
+@layer components {
+  .team { list-style: none; padding: 0; margin: 0; display: grid; gap: 0 48px; border-top: 1px solid var(--ink); }
+  @media (min-width: 760px) { .team { grid-template-columns: 1fr 1fr; } }
+  .team li { padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .team p { margin: 0 0 4px; }
+  .team__name { font-weight: 750; font-size: var(--step-1); }
+  .team__role { color: var(--muted); }
+  .team a { color: var(--red-dark); }
 }

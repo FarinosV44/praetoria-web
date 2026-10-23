@@ -12,7 +12,7 @@
     "seo:redirects": "node scripts/seo/generate-redirects.mjs",
     "seo:check": "node scripts/seo/inventario.mjs out",
     "seo:inventario": "node scripts/seo/inventario.mjs out --write",
-    "test": "node --test 'scripts/**/*.test.mjs'",
+    "test": "node --test 'scripts/**/*.test.mjs' 'netlify/**/*.test.mts'",
     "check": "npm run qa:site && npm run seo:check && npm test",
     "qa:site": "node scripts/qa/check-site.mjs out",
     "test:e2e": "playwright test",

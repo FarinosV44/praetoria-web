@@ -103,7 +103,7 @@ export function Header() {
               ),
             )}
           </ul>
-          <a className="btn btn--red menu__cta" href={whatsapp('Hola, quiero consultar mi caso con Praetoria.')}>
+          <a className="btn btn--red menu__cta" href={whatsapp()}>
             <Icon name="whatsapp" /> Escríbenos
           </a>
         </nav>

@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { Icon } from './Icon';
-import { site, whatsapp } from '@/lib/site';
+import { mensajes, site, whatsapp } from '@/lib/site';
 
 export function CtaBand({
   title = 'Cuéntanos tu caso',
   text = 'Escuchamos tu situación antes de proponer una estrategia, y te explicamos el trabajo y los honorarios antes de empezar.',
-  whatsappText = 'Hola, quiero consultar mi caso con Praetoria.',
+  whatsappText = mensajes.general,
 }: {
   title?: string;
   text?: string;

@@ -1,0 +1,97 @@
+// Modelo y validación de una consulta. Lo usan el formulario (navegador) y la función
+// netlify/functions/consulta.mts (servidor): las mismas reglas en los dos lados.
+// Importaciones relativas con extensión: Node ejecuta este archivo directamente en la función y en las pruebas.
+// Sin dependencias (ni zod): este módulo también va al navegador y su peso cuenta (presupuesto de #4).
+import { site, laboral } from './site.ts';
+
+export const AREAS = [
+  { id: 'transporte', label: 'Transporte y logística' },
+  { id: 'mercantil', label: 'Mercantil y sociedades' },
+  { id: 'hacienda', label: 'Hacienda y Seguridad Social' },
+  { id: 'laboral', label: 'Laboral' },
+  { id: 'civil', label: 'Civil, herencias y vivienda' },
+  { id: 'familia', label: 'Familia y divorcio' },
+  { id: 'arte', label: 'Arte y patrimonio' },
+  { id: 'no-se', label: 'No sé qué área corresponde' },
+] as const;
+export type AreaId = (typeof AREAS)[number]['id'];
+
+export const PREFERENCIAS = [
+  { id: 'llamada', label: 'Llamada' },
+  { id: 'correo', label: 'Correo' },
+  { id: 'whatsapp', label: 'WhatsApp' },
+] as const;
+export type Preferencia = (typeof PREFERENCIAS)[number]['id'];
+
+export const LIMITES = { nombre: 100, email: 254, telefono: 20, mensaje: 2000, mensajeMin: 20 } as const;
+/** Un envío hecho en menos de este tiempo desde que se cargó el formulario se trata como automático. */
+export const TIEMPO_MINIMO_MS = 3000;
+
+/** Contacto responsable según el área: Laboral lo atiende Lucía López; el resto, el contacto general. */
+export function responsable(area: AreaId) {
+  return area === 'laboral'
+    ? { nombre: laboral.name, telefono: laboral.phone }
+    : { nombre: site.lawyer, telefono: site.phone };
+}
+
+const telefonoValido = (v: string) => /^\+?\d{9,15}$/.test(v.replace(/[\s().-]/g, ''));
+const emailValido = (v: string) => /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$/.test(v);
+// Quita caracteres de control (salvo saltos de línea y tabuladores) y espacios sobrantes
+const limpia = (v: unknown) => String(v ?? '').replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '').trim();
+
+export type Consulta = {
+  nombre: string;
+  email: string;
+  telefono: string;
+  area: AreaId;
+  mensaje: string;
+  preferencia: Preferencia;
+  privacidad: true;
+  id: string;
+};
+export type ErroresConsulta = Partial<Record<keyof Consulta, string>>;
+
+/** Valida datos crudos (de un formulario o de JSON) y devuelve la consulta o los errores por campo. */
+export function validarConsulta(raw: Record<string, unknown>): { ok: true; data: Consulta } | { ok: false; errores: ErroresConsulta } {
+  const d = {
+    nombre: limpia(raw.nombre),
+    email: limpia(raw.email),
+    telefono: limpia(raw.telefono),
+    area: limpia(raw.area),
+    mensaje: limpia(raw.mensaje),
+    preferencia: limpia(raw.preferencia),
+    privacidad: raw.privacidad === true || raw.privacidad === 'on' || raw.privacidad === 'true',
+    id: limpia(raw.id),
+  };
+  const e: ErroresConsulta = {};
+  const max = (k: 'nombre' | 'email' | 'telefono' | 'mensaje') => {
+    if (d[k].length > LIMITES[k]) e[k] = `Máximo ${LIMITES[k]} caracteres.`;
+  };
+
+  if (d.nombre.length < 2) e.nombre = 'Escribe tu nombre.';
+  max('nombre');
+  if (!AREAS.some((a) => a.id === d.area)) e.area = 'Elige el área de tu consulta (o «No sé qué área corresponde»).';
+  if (d.mensaje.length < LIMITES.mensajeMin) e.mensaje = `Cuéntanos un poco más (mínimo ${LIMITES.mensajeMin} caracteres).`;
+  max('mensaje');
+  if (!PREFERENCIAS.some((p) => p.id === d.preferencia)) e.preferencia = 'Elige cómo prefieres que te contactemos.';
+  if (d.email && !emailValido(d.email)) e.email = 'Revisa el correo: no parece una dirección válida.';
+  if (d.preferencia === 'correo' && !d.email) e.email = 'Para responderte por correo necesitamos tu correo electrónico.';
+  max('email');
+  if ((d.preferencia === 'llamada' || d.preferencia === 'whatsapp') && !d.telefono) {
+    e.telefono = `Para ${d.preferencia === 'llamada' ? 'llamarte' : 'escribirte por WhatsApp'} necesitamos tu teléfono.`;
+  } else if (d.telefono && !telefonoValido(d.telefono)) e.telefono = 'Revisa el teléfono: debe tener entre 9 y 15 cifras.';
+  max('telefono');
+  if (!d.privacidad) e.privacidad = 'Necesitamos que aceptes la política de privacidad para responderte.';
+  if (!/^[a-zA-Z0-9-]{8,64}$/.test(d.id)) e.id = 'Identificador de envío no válido.';
+
+  return Object.keys(e).length ? { ok: false, errores: e } : { ok: true, data: d as Consulta };
+}
+
+/** Señales de envío automático: campo trampa relleno o envío demasiado rápido (o con marca de tiempo imposible). */
+export function pareceAutomatico(raw: Record<string, unknown>, ahora = Date.now()) {
+  if (String(raw['empresa-web'] ?? '').trim() !== '') return true;
+  const t = Number(raw.t);
+  if (!Number.isFinite(t)) return true;
+  const transcurrido = ahora - t;
+  return transcurrido < TIEMPO_MINIMO_MS || transcurrido > 1000 * 60 * 60 * 24;
+}
