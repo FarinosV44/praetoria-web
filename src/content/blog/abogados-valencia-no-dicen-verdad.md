@@ -1,6 +1,7 @@
 ---
 title: "Por qué muchos abogados en Valencia no te dicen la verdad sobre tu caso"
-description: "Cuando una persona acude a un abogado, lo hace normalmente en una situación de incertidumbre, preocupación o urgencia."
+seoTitle: "Abogado en Valencia: por qué no siempre te dicen la verdad"
+description: "Descubre por qué algunos abogados no te cuentan toda la verdad sobre tu caso y cómo elegir uno que sea realmente transparente."
 date: 2026-03-27
 updated: 2026-03-27
 category: elegir-abogado

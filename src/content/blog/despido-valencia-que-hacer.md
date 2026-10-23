@@ -1,6 +1,7 @@
 ---
 title: "Despido en Valencia: qué hacer en las primeras 48 horas para no perder tus derechos"
-description: "Recibir una carta de despido es una de las situaciones más delicadas a nivel laboral."
+seoTitle: "Despido Valencia: Lo Que Debes Saber"
+description: "Descubre todo sobre el despido Valencia y aprende a proteger tus derechos en este proceso laboral delicado."
 date: 2026-03-27
 updated: 2026-04-22
 category: laboral

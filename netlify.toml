@@ -4,6 +4,18 @@
 
 [build.environment]
   NODE_VERSION = "22"
+  # Ningún build es indexable salvo que se active expresamente (ver docs/seo/LANZAMIENTO.md)
+  SITE_INDEXABLE = "false"
+
+# Día del lanzamiento: cambiar a "true" SOLO en producción y volver a desplegar.
+[context.production.environment]
+  SITE_INDEXABLE = "false"
+
+[context.deploy-preview.environment]
+  SITE_INDEXABLE = "false"
+
+[context.branch-deploy.environment]
+  SITE_INDEXABLE = "false"
 
 # Seguridad y caché
 [[headers]]

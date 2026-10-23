@@ -1,6 +1,7 @@
 ---
 title: "DECA para transportistas: cómo la digitalización cambiará la forma de trabajar en la logística"
-description: "El DECA para transportistas no es simplemente la sustitución de un documento en papel por un archivo digital."
+seoTitle: "DECA transportista: la nueva logística digital en 2026"
+description: "Descubre cómo el DECA cambiará el trabajo del transportista y qué debe ofrecer una plataforma desarrollada con experiencia logística y respaldo jurídico."
 date: 2026-09-09
 updated: 2026-10-23
 category: transporte

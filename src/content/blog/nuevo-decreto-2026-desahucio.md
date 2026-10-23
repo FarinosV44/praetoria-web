@@ -1,6 +1,7 @@
 ---
 title: "Nuevo decreto desahucio 2026: cuándo ya no se suspende y qué pueden hacer los propietarios"
-description: "Durante años, la normativa del llamado “escudo social” ha permitido que, si el inquilino acreditaba vulnerabilidad, el juzgado pudiera suspender el…"
+seoTitle: "Nuevo decreto desahucio 2026: qué cambia para propietarios"
+description: "Te explicamos cuándo ya no se suspende el desahucio en 2026 y qué pueden hacer los propietarios ante impagos."
 date: 2026-02-12
 updated: 2026-10-23
 category: civil-vivienda

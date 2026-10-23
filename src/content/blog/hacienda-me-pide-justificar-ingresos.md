@@ -1,6 +1,6 @@
 ---
 title: "Hacienda me pide justificar ingresos: qué hacer"
-description: "Recibir un requerimiento de Hacienda pidiendo que justifiques ingresos o movimientos de tu cuenta bancaria genera, comprensiblemente, inquietud."
+description: "¿Hacienda te pide justificar ingresos o movimientos bancarios? Qué significa el requerimiento, qué documentos preparar y cuándo conviene asesoramiento legal"
 date: 2026-09-05
 updated: 2026-09-08
 category: hacienda

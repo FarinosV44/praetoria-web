@@ -1,6 +1,7 @@
 ---
 title: "El Gobierno quiere regularizar a 500.000 extranjeros en España: cómo aprovechar esta oportunidad legal"
-description: "En los últimos meses, el debate sobre la regularización extraordinaria de más de 500.000 extranjeros en España ha cobrado fuerza."
+seoTitle: "Regularización extranjeros en España 2026"
+description: "El Gobierno prepara la regularización de 500.000 extranjeros en España: descubre si puedes acogerte a esta oportunidad legal y cómo hacerlo."
 date: 2026-02-12
 updated: 2026-10-23
 category: extranjeria

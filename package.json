@@ -5,9 +5,14 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/seo/indexabilidad.mjs dist",
     "preview": "astro preview",
-    "check-links": "node scripts/check-links.mjs"
+    "check-links": "node scripts/check-links.mjs",
+    "seo:redirects": "node scripts/seo/generate-redirects.mjs",
+    "seo:check": "node scripts/seo/inventario.mjs dist",
+    "seo:inventario": "node scripts/seo/inventario.mjs dist --write",
+    "test": "node --test 'scripts/**/*.test.mjs'",
+    "check": "npm run check-links && npm run seo:check && npm test"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
@@ -15,6 +20,8 @@
     "astro": "^5.18.2"
   },
   "devDependencies": {
+    "@netlify/redirect-matcher": "^0.4.2",
+    "@netlify/redirect-parser": "^16.1.1",
     "sharp": "^0.35.5"
   }
 }

@@ -1,6 +1,7 @@
 ---
 title: "Comment obtenir un permis de résidence ou de travail en Espagne (guide complet 2026)"
-description: "Vous souhaitez obtenir la résidence en Espagne ou un permis de travail ?"
+seoTitle: "Résidence en Espagne : comment l’obtenir avec un avocat à Valence"
+description: "Vous voulez obtenir la résidence en Espagne ? Découvrez comment préparer votre dossier sans erreurs et augmenter vos chances avec un avocat à Valence."
 date: 2025-11-23
 updated: 2026-03-27
 category: extranjeria

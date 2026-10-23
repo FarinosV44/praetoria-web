@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build-y-comprobaciones:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: Build de preview (no indexable)
+        run: npm run build
+      - name: Enlaces internos, migración SEO y pruebas
+        run: npm run check
+      - name: Redirecciones e inventario al día con sus fuentes
+        run: |
+          npm run seo:redirects
+          npm run seo:inventario
+          git diff --exit-code -- public/_redirects docs/seo/inventario-urls.csv \
+            || (echo "::error::Regenera con npm run seo:redirects y npm run seo:inventario y súbelo" && exit 1)
+
+      - name: Build de producción (indexable) y validación
+        env:
+          SITE_INDEXABLE: 'true'
+        run: |
+          npm run build
+          npm run seo:check

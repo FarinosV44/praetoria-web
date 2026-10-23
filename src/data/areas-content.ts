@@ -26,9 +26,9 @@ export const areaContent: AreaContent[] = [
   {
     slug: 'logistica-y-transporte-internacional',
     group: 'empresas',
-    title: 'Abogado de transporte y logística en Valencia',
+    title: 'Abogado de transporte y logística',
     description:
-      'Asesoramiento a agencias, transportistas y cargadores: órdenes de carga, contratos, DECA, CMR, portes impagados, daños, seguros y subcontratación.',
+      'Asesoramiento a agencias y empresas de transporte: contratos, órdenes de carga, DECA, CMR, impagos, daños, seguros y subcontratación.',
     h1: 'Abogado de transporte y logística para empresas y agencias',
     lede: 'Impagos, daños, reservas en el CMR, aseguradoras, subcontratación y órdenes de carga: respuesta jurídica práctica, basada en cómo funciona de verdad el sector.',
     intro: [
@@ -112,9 +112,9 @@ export const areaContent: AreaContent[] = [
   {
     slug: 'derecho-mercantil',
     group: 'empresas',
-    title: 'Abogado mercantil en Valencia para empresas y autónomos',
+    title: 'Derecho Mercantil | Contratos, sociedades y reclamaciones',
     description:
-      'Constitución de sociedades, estatutos y pactos de socios, conflictos societarios, reestructuraciones y contratos mercantiles para empresas de Valencia.',
+      'Asesoría en derecho mercantil: contratos, sociedades, reclamaciones comerciales y conflictos entre empresas. Soluciones jurídicas claras para negocios y autónomos en Valencia.',
     h1: 'Abogado mercantil para empresas y autónomos',
     lede: 'Las decisiones legales no pueden tomarse al margen de la estrategia del negocio. Resolvemos los problemas jurídicos dentro de su contexto empresarial.',
     intro: [
@@ -155,9 +155,9 @@ export const areaContent: AreaContent[] = [
   {
     slug: 'derecho-civil',
     group: 'particulares',
-    title: 'Abogado de derecho civil en El Puig y Valencia',
+    title: 'Derecho Civil | Contratos, herencias y conflictos civiles',
     description:
-      'Reclamaciones de cantidad, responsabilidad civil, contratos, herencias, alquileres y desahucios para particulares y empresas en El Puig y Valencia.',
+      'Asesoría en derecho civil: contratos, herencias, propiedad, reclamaciones y resolución de conflictos. Soluciones jurídicas claras para particulares y empresas en Valencia.',
     h1: 'Abogado de derecho civil en El Puig y Valencia',
     lede: 'Herencias, reclamaciones, contratos, propiedades y deudas: te ayudamos a afrontarlas con claridad, seguridad y estrategia.',
     intro: [
@@ -196,9 +196,9 @@ export const areaContent: AreaContent[] = [
   {
     slug: 'familia',
     group: 'particulares',
-    title: 'Abogado de familia y divorcios en Valencia',
+    title: 'Derecho de Familia | Divorcios, custodias y herencias',
     description:
-      'Divorcios y separaciones, custodia, pensiones, convenios reguladores y modificación de medidas, con discreción y soluciones estables.',
+      'Asesoría en derecho de familia: divorcios, custodias, herencias y protección familiar. Soluciones claras, estratégicas y orientadas a acuerdos duraderos en Valencia.',
     h1: 'Abogado de familia y divorcios en Valencia',
     lede: 'Detrás de cada caso hay vínculos personales y decisiones que marcan años. Combinamos rigor técnico con un trato cercano y discreto.',
     intro: [
@@ -227,9 +227,9 @@ export const areaContent: AreaContent[] = [
   {
     slug: 'arte-y-patrimonio',
     group: 'particulares',
-    title: 'Abogado de arte y patrimonio en Valencia',
+    title: 'Arte y Patrimonio | Protección jurídica de obras y colecciones',
     description:
-      'Asesoramiento jurídico en arte y patrimonio: compraventa y cesión de obras, herencias con colecciones, atribución, museos y casas de subastas.',
+      'Asesoramiento legal en arte, patrimonio cultural y protección jurídica de obras, colecciones y bienes históricos: autenticidad, propiedad, sucesiones y compraventas.',
     h1: 'Asesoramiento jurídico en arte y patrimonio',
     lede: 'Las obras de arte no son solo objetos. Son valor, historia y legado, y también un conflicto potencial si no se gestionan bien.',
     intro: [

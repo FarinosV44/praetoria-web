@@ -1,6 +1,7 @@
 ---
 title: "Praetoria recomienda DeCA Profesional y presenta DeCA Conecta"
-description: "Praetoria recomienda DeCA Profesional para generar el DECA y presenta DeCA Conecta, la colaboración jurídica y tecnológica para el sector del transporte."
+seoTitle: "Praetoria recomienda DeCA Profesional y presenta DeCA Conecta"
+description: "PRAETORIA ABOGADOS recomienda DeCA Profesional para cumplir el DECA y descubrir DeCA Conecta, con ofertas de carga para reducir kilómetros en vacío."
 date: 2026-09-13
 updated: 2026-09-13
 category: transporte

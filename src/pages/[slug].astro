@@ -58,7 +58,7 @@ const articleLd = post && {
 {
   post && cat && (
     <Base
-      title={post.data.title}
+      title={post.data.seoTitle ?? post.data.title}
       description={post.data.description}
       type="article"
       published={post.data.date}

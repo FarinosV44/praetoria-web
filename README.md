@@ -60,19 +60,22 @@ Requiere Node.js 22.
 npm install
 npm run dev          # http://localhost:4321
 npm run build        # genera la web en dist/
-npm run check-links  # comprueba que no hay enlaces internos rotos (tras build)
+npm run check        # tras build: enlaces internos, migración SEO y pruebas
 ```
 
-## Publicación en Netlify
+## Publicación
 
-1. En [app.netlify.com](https://app.netlify.com): *Add new site → Import an existing project → GitHub* y elige `FarinosV44/praetoria-web`. La configuración ya está en `netlify.toml`, no hay que tocar nada.
-2. Comprueba la web en la dirección provisional `*.netlify.app` (formularios, redirecciones, móviles).
-3. *Site configuration → Forms → Form notifications*: añade un aviso por correo a `juanfarinos@icav.es` para el formulario **contacto**.
-4. *Domain management*: añade `praetoriaabogados.es` y `www.praetoriaabogados.es` y cambia los DNS en Hostinger según las instrucciones de Netlify. El certificado HTTPS se emite solo.
-5. Opcional, Google Analytics: *Site configuration → Environment variables* → `PUBLIC_GA_ID = G-XXXXXXX` y vuelve a desplegar. Con la variable puesta aparece el aviso de cookies y Analytics solo se carga si el visitante acepta.
-6. Tras el cambio de DNS, envía `https://praetoriaabogados.es/sitemap-index.xml` en Google Search Console.
+**La web no está publicada.** WordPress sigue en producción. El procedimiento completo, con la copia de seguridad, el cambio de DNS sin tocar el correo, la vuelta atrás y el seguimiento a 7, 14 y 30 días, está en [`docs/seo/LANZAMIENTO.md`](docs/seo/LANZAMIENTO.md).
 
-No borres WordPress hasta comprobar durante unas semanas en Search Console que no hay errores 404.
+Ningún build es indexable salvo que se active expresamente con la variable `SITE_INDEXABLE=true`, y eso solo se hace en producción el día del cambio. Los deploy previews y la dirección provisional `*.netlify.app` llevan `noindex` y así no compiten con WordPress en Google.
+
+Para el formulario de contacto: en Netlify, *Site configuration → Forms → Form notifications*, añade un aviso por correo a `juanfarinos@icav.es` para el formulario **contacto**.
+
+Google Analytics es opcional: *Environment variables* → `PUBLIC_GA_ID = G-XXXXXXX`. Con la variable puesta aparece el aviso de cookies, y Analytics solo se carga si el visitante acepta.
+
+## Migración SEO
+
+El inventario de las URLs de WordPress, con su destino, las redirecciones y su validación, está en [`docs/seo/`](docs/seo/README.md). Las redirecciones se generan con `npm run seo:redirects`; no se edita `public/_redirects` a mano.
 
 ## Formularios
 

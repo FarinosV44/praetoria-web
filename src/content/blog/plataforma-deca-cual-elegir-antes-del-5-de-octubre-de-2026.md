@@ -1,6 +1,7 @@
 ---
 title: "Plataforma DECA: ¿cuál elegir antes del 5 de octubre de 2026?"
-description: "El 5 de octubre de 2026 marca un cambio importante para el transporte de mercancías por carretera en España: el documento de control deberá gestionarse en…"
+seoTitle: "Mejor plataforma DECA 2026: cuál elegir"
+description: "Comparamos las opciones para generar el DECA en 2026 y explicamos qué plataforma elegir según precio, facilidad, soporte y utilidad."
 date: 2026-09-09
 updated: 2026-10-23
 category: transporte

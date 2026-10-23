@@ -1,6 +1,7 @@
 ---
 title: "DECA obligatorio en 2026: guía para transportistas y empresas de transporte"
-description: "El 5 de octubre de 2026 cambia la forma de documentar buena parte del transporte público de mercancías por carretera en España."
+seoTitle: "DECA obligatorio en 2026: guía para transportistas"
+description: "Qué exige realmente el DECA obligatorio desde octubre de 2026, cómo elegir plataforma y por qué el respaldo jurídico es clave para transportistas"
 date: 2026-09-06
 updated: 2026-09-09
 category: transporte

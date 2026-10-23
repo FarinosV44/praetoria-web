@@ -1,6 +1,7 @@
 ---
 title: "HERENCIA ¿QUE HACER?"
-description: "Cuando alguien entra en tu despacho y te dice “mi padre ha fallecido y no hemos hecho nada de la herencia”, casi nunca viene con todo ordenado."
+seoTitle: "Herencia: qué hacer paso a paso"
+description: "¿Has recibido una herencia y no sabes qué hacer? Te explicamos los pasos legales para aceptarla, repartirla o renunciar sin errores."
 date: 2026-04-19
 updated: 2026-09-08
 category: civil-vivienda

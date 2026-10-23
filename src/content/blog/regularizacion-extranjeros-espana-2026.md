@@ -1,6 +1,7 @@
 ---
 title: "Regularización de extranjeros en España 2026: quién puede obtener papeles y cómo hacerlo"
-description: "En los últimos meses, la Administración está endureciendo los controles sobre permisos de residencia, trabajo y renovaciones en España."
+seoTitle: "Residencia en España 2026: cómo obtenerla"
+description: "¿Quieres conseguir la residencia en España en 2026? Te contamos quién puede obtener papeles y los pasos legales para lograrlo."
 date: 2026-01-05
 updated: 2026-08-20
 category: extranjeria

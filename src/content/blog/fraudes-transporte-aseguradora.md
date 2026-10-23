@@ -1,6 +1,7 @@
 ---
 title: "Fraudes en transporte: cómo reclamar cuando la aseguradora no quiere pagar"
-description: "En los últimos meses se han multiplicado los fraudes en el sector del transporte, especialmente los casos de suplantación de identidad de empresas…"
+seoTitle: "Fraudes en transporte: cómo reclamar a la aseguradora"
+description: "¿Problemas con fraude en transporte? Aprende cómo reclamar a la aseguradora y evitar perder dinero."
 date: 2026-01-05
 updated: 2026-09-08
 category: transporte

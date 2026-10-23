@@ -1,6 +1,7 @@
 ---
 title: "DECA y subcontratación: qué debe hacer realmente una agencia de transporte"
-description: "La digitalización obligatoria del Documento de Control Administrativo — DECA — está generando muchas dudas entre las agencias de transporte."
+seoTitle: "DECA y subcontratación en agencias de transporte"
+description: "¿Debe una agencia hacer el DECA al subcontratar? Aprende cuándo debe formalizarlo y cómo protegerse mediante cláusulas en sus órdenes de carga."
 date: 2026-09-07
 updated: 2026-10-23
 category: transporte

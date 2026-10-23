@@ -1,6 +1,7 @@
 ---
 title: "Demanda por alquiler: qué hacer paso a paso si te han demandado (guía clara)"
-description: "Cuando recibes un burofax, acta de requerimiento o citación judicial por una demanda de arrendamiento, lo primero es no dejarlo pasar."
+seoTitle: "¿Te han demandado por un alquiler? Qué hacer paso a paso"
+description: "¿Te han demandado por un contrato de alquiler? Te explico qué pasos seguir, qué documentación reunir y cómo defenderte. Revisión inicial sin compromiso."
 date: 2025-11-13
 updated: 2026-09-08
 category: civil-vivienda

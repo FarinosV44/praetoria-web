@@ -1,6 +1,7 @@
 ---
 title: "DeCA Profesional supera las 1.000 empresas usuarias y sigue impulsando la digitalización del transporte"
-description: "Más de mil empresas ya utilizan DeCA Profesional para generar y conservar el Documento Electrónico de Control Administrativo."
+seoTitle: "DeCA Profesional supera las 1.000 empresas usuarias"
+description: "DeCA Profesional supera las 1.000 empresas usuarias y sigue mejorando su plataforma para impulsar la digitalización documental del transporte."
 date: 2026-10-15
 updated: 2026-10-23
 category: transporte

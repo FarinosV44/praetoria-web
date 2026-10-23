@@ -1,6 +1,7 @@
 ---
 title: "Precios del software DeCA 2026: cuánto cuesta y qué plan elegir"
-description: "La implantación del Documento Electrónico de Control Administrativo (DeCA) obliga a muchas empresas de transporte, cargadores, agencias y operadores a…"
+seoTitle: "Precios software DeCA 2026 | DeCA Profesional gratis hasta diciembre"
+description: "Consulta los precios del software DeCA Profesional y elige el plan que mejor se adapta al volumen de documentos y usuarios de tu empresa."
 date: 2026-09-30
 updated: 2026-10-23
 category: transporte

@@ -1,6 +1,7 @@
 ---
 title: "Problemas de ocupación y alquiler en Valencia: qué puede hacer el propietario paso a paso"
-description: "En los últimos meses, Valencia está registrando un aumento claro de conflictos relacionados con alquileres, impagos y ocupaciones."
+seoTitle: "Ocupación vivienda Valencia: qué hacer"
+description: "¿Sufres ocupación de vivienda en Valencia? Descubre qué puede hacer el propietario paso a paso para recuperarla legalmente."
 date: 2026-02-27
 updated: 2026-10-23
 category: civil-vivienda

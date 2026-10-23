@@ -1,6 +1,7 @@
 ---
 title: "Impagos en el transporte: cómo reclamar una factura y no perder el dinero"
-description: "El sector del transporte es uno de los más expuestos a los impagos. Por eso el problema del impago transporte preocupa a muchas empresas del sector."
+seoTitle: "Impago transporte: cómo prevenir pérdidas"
+description: "Conoce los riesgos del impago transporte y cómo pueden afectar tu negocio. Aprende a gestionar esta problemática de forma efectiva."
 date: 2026-03-27
 updated: 2026-09-08
 category: transporte

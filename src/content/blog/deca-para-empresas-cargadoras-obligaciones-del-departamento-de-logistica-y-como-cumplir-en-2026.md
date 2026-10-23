@@ -1,6 +1,7 @@
 ---
 title: "DECA para empresas cargadoras: obligaciones del departamento de logística y cómo cumplir en 2026"
-description: "El DECA no es solo cosa del transportista. Cuándo una empresa es cargador contractual y qué procedimiento debe tener su departamento de logística."
+seoTitle: "DECA para empresas cargadoras: obligaciones y guía 2026"
+description: "¿Tu empresa contrata transportes? Cuándo actúa como cargador contractual, quién debe generar el DECA y cómo organizar su cumplimiento desde octubre de 2026."
 date: 2026-09-17
 updated: 2026-10-23
 category: transporte

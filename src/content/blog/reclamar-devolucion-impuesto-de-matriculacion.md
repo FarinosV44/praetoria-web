@@ -1,6 +1,7 @@
 ---
 title: "🚗 Cómo recuperar el impuesto de matriculación: quién puede reclamar y cuánto dinero puedes recuperar"
-description: "En los últimos meses, han aparecido muchas noticias y campañas sobre la posibilidad de recuperar parte del Impuesto de Matriculación pagado en la compra…"
+seoTitle: "¿Pagaste el Impuesto de Matriculación? Recupera tu dinero"
+description: "Descubre si puedes recuperar el impuesto de matriculación y cuánto dinero puedes reclamar. Guía clara y actualizada."
 date: 2025-11-20
 updated: 2026-09-08
 category: hacienda

@@ -1,6 +1,7 @@
 ---
 title: "DECA para el transporte de mercancías: guía práctica para empresas de transporte y logística"
-description: "El DECA digital es obligatorio desde el 5 de octubre de 2026. Qué es, quién debe hacerlo y cómo organizar su gestión en una empresa de transporte o logística."
+seoTitle: "DECA transporte de mercancías 2026: guía para empresa"
+description: "Guía del DECA para empresas de transporte y logística: obligados, datos, QR, inspecciones, subcontratación y cómo cumplir desde octubre de 2026."
 date: 2026-09-10
 updated: 2026-10-23
 category: transporte

@@ -49,7 +49,7 @@ Inicio
 
 ## Direcciones (URLs)
 
-**Se conservan todas las direcciones con tráfico**: las seis áreas, las tres landings (Hacienda, divorcio, El Puig), los 40 artículos y las páginas legales mantienen exactamente la misma URL, así que no pierden posicionamiento.
+**Se conservan las direcciones de todas las páginas de contenido**: las seis áreas, las tres landings (Hacienda, divorcio, El Puig), los 40 artículos y las páginas legales mantienen exactamente la misma URL, y conservan el título y la descripción que tenían en WordPress. Esto reduce el riesgo de perder posicionamiento, pero no lo garantiza: Google reevalúa una web cuando cambian su plantilla y su enlazado interno. El inventario completo, URL por URL, y su validación están en [`docs/seo/`](seo/README.md); el seguimiento posterior, en [`docs/seo/LANZAMIENTO.md`](seo/LANZAMIENTO.md).
 
 Solo cambian estas, con redirección 301 en `public/_redirects`:
 
@@ -59,12 +59,16 @@ Solo cambian estas, con redirección 301 en `public/_redirects`:
 | `/sobre-mi/` | `/el-despacho/` |
 | `/sobre-praetoria/` | `/el-despacho/` |
 | `/despacho-juridico-valencia/` | `/` |
-| `/category/...` | `/blog/categoria/...` |
-| `/tag/...`, `/author/...`, `/feed/` | `/blog/`, `/el-despacho/`, `/rss.xml` |
+| `/category/...` | Su categoría nueva en `/blog/categoria/...` (la antigua «Derecho» → `/blog/`) |
+| `/tag/...` | El artículo de la etiqueta, o la categoría que agrupa la mayoría de sus artículos |
+| `/feed/`, `/<artículo>/feed/` | `/rss.xml`, el propio artículo |
+| Imágenes migradas en `/wp-content/uploads/` | Su versión nueva en `/media/` |
+
+Lo que no tiene equivalente (autores, rutas internas de WordPress, imágenes de banco no migradas, etiquetas sin artículos) responde 404 en lugar de redirigirse a la portada.
 
 ## SEO técnico incluido
 
-- Títulos y descripciones propios en cada página; las descripciones de los artículos se han redactado a partir de su primer párrafo (el export no incluía los datos de Yoast).
+- Títulos y descripciones recuperados de WordPress (ThinkRank SEO) en las URLs que se conservan; ver [`docs/seo/README.md`](seo/README.md).
 - Datos estructurados: `LegalService` (despacho), `Person` (abogado), `BlogPosting`, `BreadcrumbList` y `FAQPage` en las páginas con preguntas frecuentes.
 - `sitemap-index.xml`, `robots.txt`, RSS, URLs canónicas, Open Graph.
 - Imágenes convertidas a WebP (de 26 MB a 3 MB) con tamaños fijados para evitar saltos de maquetación.
