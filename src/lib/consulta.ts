@@ -79,6 +79,15 @@ const fechaValida = (v: string, ahora: number) => {
   // Fecha real (no 2026-02-31), desde 2000 y como mucho mañana (margen por zona horaria)
   return Number.isFinite(t) && new Date(t).toISOString().slice(0, 10) === v && v >= '2000-01-01' && t <= ahora + 86_400_000;
 };
+// Atribución: rutas internas y valores de campaña cortos y seguros; lo demás se descarta sin error (nunca bloquea una consulta)
+const ruta = (v: unknown) => {
+  const s = limpia(v).split(/[?#]/)[0] ?? '';
+  return /^\/[a-z0-9\-/._%]{0,199}$/i.test(s) ? s : '';
+};
+const utm = (v: unknown) => {
+  const s = limpia(v).toLowerCase();
+  return /^[a-z0-9_\-.]{1,60}$/.test(s) ? s : '';
+};
 const telefonoValido = (v: string) => /^\+?\d{9,15}$/.test(v.replace(/[\s().-]/g, ''));
 const emailValido = (v: string) => /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$/.test(v);
 // Quita caracteres de control (salvo saltos de línea y tabuladores) y espacios sobrantes
@@ -112,6 +121,13 @@ export type Consulta = {
   documento: string;
   /** Respuesta a la pregunta mínima del servicio elegido */
   detalle: string;
+  /** Atribución (#9). origen: página de la web desde la que se llegó al formulario (funcional).
+   *  landing y utm_*: primera página y campaña de la visita, solo si se aceptó la analítica. Saneados; si no cumplen, se descartan. */
+  origen: string;
+  landing: string;
+  utm_source: string;
+  utm_medium: string;
+  utm_campaign: string;
 };
 export type ErroresConsulta = Partial<Record<keyof Consulta, string>>;
 
@@ -138,6 +154,11 @@ export function validarConsulta(raw: Record<string, unknown>, ahora = Date.now()
     organismo: limpia(raw.organismo),
     documento: limpia(raw.documento),
     detalle: limpia(raw.detalle),
+    origen: ruta(raw.origen),
+    landing: ruta(raw.landing),
+    utm_source: utm(raw.utm_source),
+    utm_medium: utm(raw.utm_medium),
+    utm_campaign: utm(raw.utm_campaign),
   };
   // Los datos de un área solo tienen sentido en ella: en otra se descartan
   if (d.area !== 'transporte') d.papel = d.incidencia = d.importe = '';

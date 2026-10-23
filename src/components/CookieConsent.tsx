@@ -4,37 +4,10 @@
 // Analytics no se carga hasta que el visitante pulsa «Aceptar». La elección se guarda en el navegador.
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { GA_ID, guardarConsentimiento as saveChoice, leerConsentimiento as readChoice, type Eleccion as Choice } from '@/lib/consentimiento';
+import { borrarAtribucion } from '@/lib/atribucion';
 
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
-const KEY = 'praetoria-consent';
 const OPEN_EVENT = 'praetoria:cookie-settings';
-
-type Choice = 'granted' | 'denied';
-
-function readChoice(): Choice | null {
-  try {
-    const v = localStorage.getItem(KEY);
-    return v === 'granted' || v === 'denied' ? v : null;
-  } catch {
-    return null;
-  }
-}
-
-function saveChoice(v: Choice) {
-  try {
-    localStorage.setItem(KEY, v);
-  } catch {
-    /* navegador sin almacenamiento: la elección dura lo que la visita */
-  }
-}
-
-declare global {
-  interface Window {
-    dataLayer?: unknown[];
-    gtag?: (...args: unknown[]) => void;
-    __gaLoaded?: boolean;
-  }
-}
 
 function loadGA(id: string) {
   if (window.__gaLoaded) return;
@@ -71,7 +44,8 @@ export function CookieConsent() {
   const decide = (v: Choice) => {
     saveChoice(v);
     setOpen(false);
-    if (v === 'granted') loadGA(GA_ID);
+    if (v === 'granted' && GA_ID) loadGA(GA_ID);
+    else borrarAtribucion();
   };
 
   return (

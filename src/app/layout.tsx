@@ -7,6 +7,7 @@ import './globals.css';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { CookieConsent } from '@/components/CookieConsent';
+import { Medicion } from '@/components/Medicion';
 import { Icon } from '@/components/Icon';
 import { JsonLd } from '@/components/JsonLd';
 import { legalServiceLd } from '@/lib/seo';
@@ -49,6 +50,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </a>
         </nav>
         <CookieConsent />
+        <Medicion />
       </body>
     </html>
   );

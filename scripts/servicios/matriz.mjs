@@ -92,7 +92,7 @@ const checklists =
   ) + '\n';
 
 // Índice ligero para el navegador (formulario y validación): sin textos ampliados, que pesan ~10 KB gzip (#8, presupuesto de #4)
-const LIGEROS = ['id', 'area', 'nombre', 'incidencia', 'problemaLaboral', 'preguntaMinima'];
+const LIGEROS = ['id', 'area', 'nombre', 'pagina', 'incidencia', 'problemaLaboral', 'preguntaMinima'];
 const indice =
   `// GENERADO por scripts/servicios/matriz.mjs a partir de src/lib/servicios.ts. No editar a mano.
 // Versión ligera para el navegador: el formulario y la validación solo necesitan estos campos.

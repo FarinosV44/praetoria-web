@@ -11,6 +11,8 @@ import { servicioPorId, serviciosDe } from '@/lib/servicios-indice';
 import type { ServicioArea } from '@/lib/servicios';
 import { leerRespuestasDivorcio, resumenDivorcio } from '@/lib/cuestionario-divorcio';
 import { leerRespuestasHacienda, resumenHacienda } from '@/lib/cuestionario-hacienda';
+import { leerAtribucion, paginaOrigen } from '@/lib/atribucion';
+import { medir } from '@/lib/medicion';
 
 type Estado = { tipo: 'editando' } | { tipo: 'enviando' } | { tipo: 'error'; mensaje: string } | { tipo: 'enviada'; area: AreaId; asunto?: string };
 
@@ -48,7 +50,9 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
   const exitoRef = useRef<HTMLDivElement>(null);
   const cargado = useRef(0);
   const envioId = useRef('');
-  const enCurso = useRef(false); // guarda inmediata contra doble envío (el estado de React se actualiza en el siguiente render)
+  const enCurso = useRef(false);
+  const empezado = useRef(false); // form_start una sola vez
+  const exitos = useRef(new Set<string>()); // form_success una sola vez por consulta // guarda inmediata contra doble envío (el estado de React se actualiza en el siguiente render)
 
   useEffect(() => {
     cargado.current = Date.now();
@@ -105,6 +109,9 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
       organismo,
       documento,
       detalle,
+      // Atribución (#9): origen siempre (es funcional); landing y UTM solo si hay consentimiento
+      origen: paginaOrigen(),
+      ...(leerAtribucion() ?? {}),
       privacidad: fd.get('privacidad') === 'on',
       'empresa-web': fd.get('empresa-web'),
     };
@@ -135,6 +142,11 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
       });
       const body = await res.json().catch(() => ({}));
       if (res.ok && body.ok) {
+        // Conversión solo cuando el servidor confirma que Netlify Forms aceptó la consulta (no al ver /gracias/)
+        if (!exitos.current.has(envioId.current)) {
+          exitos.current.add(envioId.current);
+          medir('form_success', { area: v.data.area, servicio: v.data.servicio || undefined });
+        }
         setEstado({ tipo: 'enviada', area: v.data.area, asunto: servicioPorId(v.data.servicio)?.nombre });
         return;
       }
@@ -189,7 +201,21 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
   const preguntaMinima = servicio ? servicioPorId(servicio)?.preguntaMinima : undefined;
 
   return (
-    <form ref={formRef} className="form" name="contacto" method="POST" action="/api/consulta" noValidate onSubmit={onSubmit} aria-busy={enviando}>
+    <form
+      ref={formRef}
+      className="form"
+      name="contacto"
+      method="POST"
+      action="/api/consulta"
+      noValidate
+      onSubmit={onSubmit}
+      aria-busy={enviando}
+      onFocus={() => {
+        if (empezado.current) return;
+        empezado.current = true;
+        medir('form_start', { area: area || undefined, servicio: servicio || undefined });
+      }}
+    >
       <div ref={resumenRef} tabIndex={-1} className="form-errors" hidden={!lista.length} role="alert">
         <p>Revisa {lista.length === 1 ? 'este campo' : `estos ${lista.length} campos`} antes de enviar:</p>
         <ul>
