@@ -7,6 +7,8 @@ import { PostList } from './PostList';
 import { DecaBand } from './DecaBand';
 import { CtaBand } from './CtaBand';
 import { Icon } from './Icon';
+import { ServiceList } from './ServiceList';
+import { serviciosDe } from '@/lib/servicios';
 
 export function AreaPage({ area }: { area: AreaContent }) {
   const group = groups[area.group];
@@ -28,7 +30,7 @@ export function AreaPage({ area }: { area: AreaContent }) {
               <p className="lede">{area.lede}</p>
               <div className="actions">
                 <a className="btn btn--red" href={whatsapp(area.whatsappText)}><Icon name="whatsapp" /> Consultar por WhatsApp</a>
-                <Link className="btn btn--ghost" href="/contacto/">Enviar mi consulta</Link>
+                <Link className="btn btn--ghost" href={`/contacto/?area=${area.id}`}>Enviar mi consulta</Link>
               </div>
             </div>
             <img className="photo head-photo" src={area.image.src.replace('.webp', '-800.webp')} alt={area.image.alt} width={800} height={600} />
@@ -58,27 +60,7 @@ export function AreaPage({ area }: { area: AreaContent }) {
           }
 
           <h2 className="services-title">{area.servicesTitle}</h2>
-          <ul className="index-list">
-            {
-              area.services.map((s) => (
-                <li key={s.name}>
-                  <h3>{s.name}</h3>
-                  <div>
-                    {s.text && <p>{s.text}</p>}
-                    {s.links && (
-                      <p className="more">
-                        {s.links.map((l) => (
-                          <Link key={l.href} href={l.href}>
-                            {l.label}
-                          </Link>
-                        ))}
-                      </p>
-                    )}
-                  </div>
-                </li>
-              ))
-            }
-          </ul>
+          <ServiceList services={serviciosDe(area.id)} />
           <p className="closing">{area.closing}</p>
 
           {

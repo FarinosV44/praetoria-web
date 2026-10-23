@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { getPosts } from '@/lib/content';
 import { buildMetadata } from '@/lib/seo';
-import { areas, groups, site } from '@/lib/site';
+import { areas, groups, laboral, site } from '@/lib/site';
 import { PostList } from '@/components/PostList';
 import { DecaBand } from '@/components/DecaBand';
 import { CtaBand } from '@/components/CtaBand';
@@ -13,6 +13,13 @@ export const metadata = buildMetadata({
     'Asesoramiento jurídico para empresas y particulares en Valencia. Transporte, contratos, conflictos mercantiles, Hacienda, Seguridad Social y patrimonio.',
   path: '/',
 });
+
+const metodo = [
+  ['Escuchar y analizar', 'Nos cuentas qué ha pasado y qué te preocupa. Revisamos la documentación y el contexto antes de opinar.'],
+  ['Valorar opciones y riesgos', 'Te explicamos qué caminos hay (negociar, reclamar, defenderse o esperar) y qué puede salir bien o mal en cada uno.'],
+  ['Diseñar la estrategia', 'Decidimos contigo el camino y el calendario. Antes de empezar sabes qué vamos a hacer y cuánto cuesta.'],
+  ['Actuar y hacer seguimiento', 'Ejecutamos lo acordado y te mantenemos informado en cada paso, hasta cerrar el asunto.'],
+] as const;
 
 export default function HomePage() {
   // Últimos artículos sin que el DECA acapare la portada: uno por categoría, en orden de fecha
@@ -28,74 +35,109 @@ export default function HomePage() {
 
   return (
     <div className="page-home">
-    <section className="hero">
-        <div className="wrap">
-          <div className="hero__head">
-            <h1>Abogado en El Puig y Valencia para empresas y particulares</h1>
+      <section className="h-hero">
+        <div className="wrap h-hero__grid">
+          <div>
+            <h1>
+              Estrategia jurídica para empresas y particulares
+              <span className="h-hero__place">Abogados en El Puig y Valencia</span>
+            </h1>
             <p className="lede">
-              Asesoramiento jurídico directo, con experiencia empresarial real. Atendemos en el despacho de El Puig y por
-              videollamada en toda España.
+              Antes de actuar, entendemos tu situación, valoramos las opciones y sus riesgos y te proponemos un camino claro, con el
+              trabajo y los honorarios explicados desde el principio.
             </p>
+            <div className="actions">
+              <Link className="btn btn--red" href="/contacto/">
+                Cuéntanos tu caso
+              </Link>
+              <a className="btn btn--ghost" href={`tel:${site.phoneIntl}`}>
+                <Icon name="phone" /> {site.phone}
+              </a>
+            </div>
           </div>
+          <figure className="h-hero__photo">
+            <img
+              className="photo"
+              src="/media/despacho-salas-reuniones-800.webp"
+              alt="Salas de reuniones acristaladas del despacho en El Puig"
+              width={800}
+              height={600}
+              fetchPriority="high"
+            />
+            <figcaption>El despacho, en El Puig de Santa María.</figcaption>
+          </figure>
+        </div>
+      </section>
 
+      <section className="section section--tight">
+        <div className="wrap">
+          <h2>En qué podemos ayudarte</h2>
           <div className="directory">
-            {
-              (['empresas', 'particulares'] as const).map((g) => (
-                <section key={g} className="directory__col" aria-labelledby={`dir-${g}`}>
-                  <h2 id={`dir-${g}`}>{groups[g].title}</h2>
-                  <ul>
-                    {areas
-                      .filter((a) => a.group === g)
-                      .map((a) => (
-                        <li key={a.slug}>
-                          <Link href={`/${a.slug}/`}>
-                            <span className="directory__name">{a.name}</span>
-                            <span className="directory__desc">{a.short}</span>
-                          </Link>
-                        </li>
-                      ))}
-                  </ul>
-                </section>
-              ))
-            }
+            {(['empresas', 'particulares'] as const).map((g) => (
+              <section key={g} className="directory__col" aria-labelledby={`dir-${g}`}>
+                <h3 id={`dir-${g}`}>{groups[g].title}</h3>
+                <ul>
+                  {areas
+                    .filter((a) => a.group === g)
+                    .map((a) => (
+                      <li key={a.slug}>
+                        <Link href={`/${a.slug}/`}>
+                          <span className="directory__name">{a.name}</span>
+                          <span className="directory__desc">{a.short}</span>
+                        </Link>
+                      </li>
+                    ))}
+                </ul>
+              </section>
+            ))}
           </div>
-
-          <p className="hero__sign">
-            <strong>{site.lawyer}</strong>, abogado colegiado n.º {site.collegeNumber} del Ilustre Colegio de Abogados de
-            Valencia.
-          </p>
         </div>
       </section>
 
       <section className="section section--stone">
-        <div className="wrap split">
-          <div>
-            <h2>Un abogado que conoce la empresa desde dentro</h2>
-            <div className="prose">
-              <p>
-                Juan José Farinós tiene formación en Derecho y en Historia del Arte, y una larga trayectoria en la gestión de
-                empresas, especialmente en el transporte y la logística internacional. Ha asesorado a empresas, autónomos,
-                familias y particulares desde una comprensión práctica de cómo funcionan las cosas: cómo se organiza una
-                sociedad, cómo se negocia un contrato, cómo se defiende una posición en un conflicto o cómo se protege un
-                patrimonio.
-              </p>
-              <p>
-                No resolvemos solo el conflicto que llega: anticipamos escenarios y acompañamos las decisiones importantes
-                con criterio jurídico. Antes de empezar, te explicamos el trabajo necesario y los honorarios.
-              </p>
+        <div className="wrap">
+          <h2>Cómo trabajamos</h2>
+          <p className="lede">Cada asunto sigue el mismo método, tanto si es una reclamación urgente como una decisión de empresa.</p>
+          <ol className="method-steps">
+            {metodo.map(([t, d]) => (
+              <li key={t}>
+                <h3>{t}</h3>
+                <p>{d}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="method-note">
+            No prometemos resultados: te decimos con claridad dónde estás, qué se puede conseguir y qué cuesta intentarlo.
+          </p>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap">
+          <h2>Quién lleva tu asunto</h2>
+          <div className="people">
+            <div className="person person--photo">
+              <img src="/media/juan-jose-farinos-800.webp" alt="Juan José Farinós Ibáñez" width={600} height={800} loading="lazy" />
+              <div>
+                <p className="person__name">{site.lawyer}</p>
+                <p className="person__role">Abogado y fundador del despacho · ICAV {site.collegeNumber}</p>
+                <p>
+                  Formación en Derecho y en Historia del Arte, y una larga trayectoria en la gestión de empresas, sobre todo en el
+                  transporte y la logística internacional. Conoce cómo se organiza una sociedad, cómo se negocia un contrato y cómo
+                  se defiende una posición en un conflicto, porque lo ha vivido desde dentro.
+                </p>
+                <Link href="/el-despacho/">Conocer el despacho</Link>
+              </div>
             </div>
-            <div className="actions">
-              <Link className="btn btn--ghost" href="/el-despacho/">Conocer el despacho</Link>
+            <div className="person person--text">
+              <p className="person__name">{laboral.name}</p>
+              <p className="person__role">{laboral.role}</p>
+              <p>Atiende los asuntos laborales del despacho.</p>
+              <p>
+                <a href={`tel:${laboral.phoneIntl}`}>{laboral.phone}</a> (llamadas)
+              </p>
             </div>
           </div>
-          <img
-            className="photo portrait"
-            src="/media/juan-jose-farinos-800.webp"
-            alt="Juan José Farinós Ibáñez, abogado de Praetoria División Jurídica"
-            width={600}
-            height={800}
-            loading="lazy"
-          />
         </div>
       </section>
 
@@ -140,7 +182,7 @@ export default function HomePage() {
       <section className="section">
         <div className="wrap split split--rev">
           <div className="office">
-            <img src="/media/despacho-salas-reuniones-800.webp" alt="Salas de reuniones acristaladas del despacho" width={800} height={600} loading="lazy" className="photo" />
+            <img src="/media/despacho-planta-abierta-800.webp" alt="Zona de trabajo del despacho, de planta abierta" width={800} height={600} loading="lazy" className="photo" />
             <img src="/media/despacho-zona-espera-800.webp" alt="Zona de espera con sofá y mesas" width={800} height={600} loading="lazy" className="photo" />
           </div>
           <div>

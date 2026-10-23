@@ -3,6 +3,7 @@
 // Importaciones relativas con extensión: Node ejecuta este archivo directamente en la función y en las pruebas.
 // Sin dependencias (ni zod): este módulo también va al navegador y su peso cuenta (presupuesto de #4).
 import { site, laboral } from './site.ts';
+import { servicioPorId } from './servicios.ts';
 
 export const AREAS = [
   { id: 'transporte', label: 'Transporte y logística' },
@@ -48,6 +49,8 @@ export type Consulta = {
   preferencia: Preferencia;
   privacidad: true;
   id: string;
+  /** Servicio preseleccionado desde un CTA (opcional). Debe pertenecer al área elegida. */
+  servicio: string;
 };
 export type ErroresConsulta = Partial<Record<keyof Consulta, string>>;
 
@@ -62,6 +65,7 @@ export function validarConsulta(raw: Record<string, unknown>): { ok: true; data:
     preferencia: limpia(raw.preferencia),
     privacidad: raw.privacidad === true || raw.privacidad === 'on' || raw.privacidad === 'true',
     id: limpia(raw.id),
+    servicio: limpia(raw.servicio),
   };
   const e: ErroresConsulta = {};
   const max = (k: 'nombre' | 'email' | 'telefono' | 'mensaje') => {
@@ -83,6 +87,11 @@ export function validarConsulta(raw: Record<string, unknown>): { ok: true; data:
   max('telefono');
   if (!d.privacidad) e.privacidad = 'Necesitamos que aceptes la política de privacidad para responderte.';
   if (!/^[a-zA-Z0-9-]{8,64}$/.test(d.id)) e.id = 'Identificador de envío no válido.';
+  if (d.servicio) {
+    const sv = servicioPorId(d.servicio);
+    if (!sv) e.servicio = 'El servicio indicado no existe.';
+    else if (sv.area !== d.area) e.servicio = 'El servicio elegido no corresponde al área de la consulta.';
+  }
 
   return Object.keys(e).length ? { ok: false, errores: e } : { ok: true, data: d as Consulta };
 }

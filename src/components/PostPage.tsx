@@ -7,6 +7,8 @@ import { PostList } from './PostList';
 import { DecaBand } from './DecaBand';
 import { CtaBand } from './CtaBand';
 import { JsonLd } from './JsonLd';
+import { enlaceConsulta, serviciosConArticulo } from '@/lib/servicios';
+import { areaContent } from '@/lib/areas-content';
 
 const fmt = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Madrid' });
 const day = (d: Date) => d.toISOString().slice(0, 10);
@@ -17,6 +19,13 @@ export function PostPage({ post }: { post: Post }) {
   const related = getPosts()
     .filter((p) => p.category === post.category && p.slug !== post.slug)
     .slice(0, 3);
+  // El servicio concreto del que trata el artículo, si lo hay (#5); si no, el área
+  const servicio = serviciosConArticulo(post.slug)[0];
+  const areaServicio = servicio ? areas.find((a) => a.id === servicio.area) : undefined;
+  // Ancla al servicio solo en las áreas que listan sus servicios (AreaPage); las landings propias van sin ancla
+  const enlaceServicio = servicio && areaServicio
+    ? servicio.pagina ?? (areaContent.some((a) => a.id === servicio.area) ? `/${areaServicio.slug}/#${servicio.id}` : `/${areaServicio.slug}/`)
+    : undefined;
   const showUpdated = post.updated && day(post.updated) !== day(post.date);
 
   const articleLd = {
@@ -62,7 +71,18 @@ export function PostPage({ post }: { post: Post }) {
           <div className="prose post-body" dangerouslySetInnerHTML={{ __html: post.html }} />
 
           <aside className="post-aside">
-            {area && (
+            {servicio && enlaceServicio ? (
+              <div className="aside-box">
+                <p className="aside-box__title">¿Te pasa algo así?</p>
+                <p>
+                  Te ayudamos con <Link href={enlaceServicio}>{servicio.nombre.toLowerCase()}</Link>. Cuéntanos tu caso y te
+                  diremos qué opciones tienes antes de dar ningún paso.
+                </p>
+                <Link className="btn btn--red" href={servicio.siguientePaso?.href ?? enlaceConsulta(servicio)}>
+                  {servicio.siguientePaso?.label ?? servicio.cta ?? 'Consultar sobre esto'}
+                </Link>
+              </div>
+            ) : area && (
               <div className="aside-box">
                 <p className="aside-box__title">¿Necesitas ayuda con un asunto así?</p>
                 <p>

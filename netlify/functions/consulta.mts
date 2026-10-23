@@ -10,6 +10,7 @@
 // No acepta adjuntos ni guarda nada por su cuenta.
 import { pareceAutomatico, responsable, validarConsulta, AREAS, PREFERENCIAS } from '../../src/lib/consulta.ts';
 import { site } from '../../src/lib/site.ts';
+import { servicioPorId } from '../../src/lib/servicios.ts';
 
 const MAX_BYTES = 12_000;
 
@@ -58,6 +59,7 @@ export default async function consulta(req: Request, context?: Ctx): Promise<Res
     email: c.email,
     telefono: c.telefono,
     area: AREAS.find((a) => a.id === c.area)!.label,
+    servicio: c.servicio ? servicioPorId(c.servicio)!.nombre : '',
     responsable: `${resp.nombre} (${resp.telefono})`,
     preferencia: PREFERENCIAS.find((p) => p.id === c.preferencia)!.label,
     mensaje: c.mensaje,

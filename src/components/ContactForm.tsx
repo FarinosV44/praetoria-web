@@ -7,12 +7,13 @@ import Link from 'next/link';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { AREAS, LIMITES, PREFERENCIAS, responsable, validarConsulta, type AreaId, type ErroresConsulta } from '@/lib/consulta';
 import { site } from '@/lib/site';
+import { servicioPorId } from '@/lib/servicios';
 
 type Estado = { tipo: 'editando' } | { tipo: 'enviando' } | { tipo: 'error'; mensaje: string } | { tipo: 'enviada'; area: AreaId };
 
-const ORDEN: (keyof ErroresConsulta)[] = ['nombre', 'area', 'mensaje', 'preferencia', 'telefono', 'email', 'privacidad'];
+const ORDEN: (keyof ErroresConsulta)[] = ['nombre', 'area', 'servicio', 'mensaje', 'preferencia', 'telefono', 'email', 'privacidad'];
 const ETIQUETA: Partial<Record<keyof ErroresConsulta, string>> = {
-  nombre: 'Nombre', area: 'Área', mensaje: 'Consulta', preferencia: 'Forma de contacto', telefono: 'Teléfono', email: 'Correo', privacidad: 'Privacidad',
+  nombre: 'Nombre', area: 'Área', servicio: 'Asunto', mensaje: 'Consulta', preferencia: 'Forma de contacto', telefono: 'Teléfono', email: 'Correo', privacidad: 'Privacidad',
 };
 
 const nuevoId = () => (typeof crypto !== 'undefined' && 'randomUUID' in crypto ? crypto.randomUUID() : `id-${Date.now()}-${Math.random().toString(36).slice(2)}`);
@@ -30,6 +31,7 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
   const [errores, setErrores] = useState<ErroresConsulta>({});
   const [preferencia, setPreferencia] = useState<string>('');
   const [area, setArea] = useState<string>(areaInicial ?? '');
+  const [servicio, setServicio] = useState<string>('');
   const formRef = useRef<HTMLFormElement>(null);
   const resumenRef = useRef<HTMLDivElement>(null);
   const exitoRef = useRef<HTMLDivElement>(null);
@@ -39,6 +41,16 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
 
   useEffect(() => {
     cargado.current = Date.now();
+    // Servicio o área preseleccionados desde un CTA (/contacto/?servicio=… o ?area=…). Solo se aceptan valores conocidos.
+    const q = new URLSearchParams(window.location.search);
+    const sv = servicioPorId(q.get('servicio') ?? '');
+    const ar = AREAS.find((a) => a.id === q.get('area'));
+    /* eslint-disable react-hooks/set-state-in-effect -- la URL solo existe en el navegador (exportación estática) */
+    if (sv) {
+      setServicio(sv.id);
+      setArea(sv.area);
+    } else if (ar) setArea(ar.id);
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
   useEffect(() => {
     if (estado.tipo === 'enviada') exitoRef.current?.focus();
@@ -53,6 +65,7 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
       area: fd.get('area'),
       mensaje: fd.get('mensaje'),
       preferencia: fd.get('preferencia'),
+      servicio,
       privacidad: fd.get('privacidad') === 'on',
       'empresa-web': fd.get('empresa-web'),
     };
@@ -153,7 +166,18 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
 
       <div className="field">
         <label htmlFor="area">¿Sobre qué es tu consulta?</label>
-        <select id="area" name="area" required value={area} onChange={(e) => setArea(e.target.value)} {...a11y('area')}>
+        <select
+          id="area"
+          name="area"
+          required
+          value={area}
+          onChange={(e) => {
+            setArea(e.target.value);
+            // Si se cambia de área, el asunto preseleccionado deja de aplicar
+            if (servicio && servicioPorId(servicio)?.area !== e.target.value) setServicio('');
+          }}
+          {...a11y('area')}
+        >
           <option value="" disabled>
             Elige una opción
           </option>
@@ -164,6 +188,16 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
           ))}
         </select>
         <FieldError k="area" msg={errores.area} />
+        <input type="hidden" name="servicio" value={servicio} />
+        {servicio && (
+          <p className="preselected" id="servicio">
+            Consulta sobre: <strong>{servicioPorId(servicio)?.nombre}</strong>{' '}
+            <button type="button" className="linklike" onClick={() => setServicio('')}>
+              Quitar o cambiar
+            </button>
+          </p>
+        )}
+        <FieldError k="servicio" msg={errores.servicio} />
         {resp && area === 'laboral' && (
           <p className="small muted">
             Los asuntos laborales los atiende {resp.nombre}, experta en Derecho Laboral ({resp.telefono}).

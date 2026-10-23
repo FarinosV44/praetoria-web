@@ -1,7 +1,7 @@
 // Contenido de las páginas de área. Textos tomados de la web anterior, ordenados y sin repeticiones.
 import { mensajes, type CategoryKey } from './site';
+import type { ServicioArea } from './servicios';
 
-export type Service = { name: string; text?: string; links?: { label: string; href: string }[] };
 export type Img = { src: string; alt: string };
 
 export type AreaContent = {
@@ -13,8 +13,9 @@ export type AreaContent = {
   lede: string;
   intro: string[];
   audience?: { title: string; items: string[] };
+  /** Clave del área en el modelo de servicios (src/lib/servicios.ts) y en el formulario de contacto */
+  id: ServicioArea;
   servicesTitle: string;
-  services: Service[];
   closing: string;
   image: Img;
   gallery?: Img[];
@@ -25,6 +26,7 @@ export type AreaContent = {
 export const areaContent: AreaContent[] = [
   {
     slug: 'logistica-y-transporte-internacional',
+    id: 'transporte',
     group: 'empresas',
     title: 'Abogado de transporte y logística',
     description:
@@ -47,62 +49,6 @@ export const areaContent: AreaContent[] = [
       ],
     },
     servicesTitle: 'Qué hacemos en transporte',
-    services: [
-      {
-        name: 'Redacción y revisión de órdenes de carga',
-        text: 'Órdenes de carga adaptadas a la operativa real de la empresa para prevenir conflictos con transportistas, agencias, clientes y colaboradores.',
-      },
-      {
-        name: 'Contratos de transporte y logística',
-        text: 'Contratos de transporte, logística, almacenaje, distribución, colaboración y prestación continuada de servicios.',
-      },
-      {
-        name: 'DECA y subcontratación',
-        text: 'Cláusulas para identificar al transportista efectivo, regular la subcontratación y repartir las obligaciones del Documento Electrónico de Control Administrativo.',
-        links: [
-          { label: 'Guía legal del DECA', href: '/deca-obligatorio-en-2026-guia-legal-para-transportistas-y-cargadores/' },
-          { label: 'DECA y subcontratación', href: '/deca-y-subcontratacion-que-debe-hacer-realmente-una-agencia-de-transporte/' },
-        ],
-      },
-      {
-        name: 'Reclamación de portes impagados',
-        text: 'Reclamación extrajudicial y judicial de facturas de transporte, con revisión de órdenes, CMR, albaranes y comunicaciones.',
-        links: [
-          { label: 'La acción directa en el transporte', href: '/accion-directa-en-el-transporte-como-reclamar-al-cargador-cuando-no-te-paga-tu-cliente/' },
-        ],
-      },
-      {
-        name: 'Pérdida, avería y retraso de mercancías',
-        text: 'Análisis de responsabilidades, limitaciones indemnizatorias, reservas, prueba del daño y reclamaciones derivadas del transporte.',
-      },
-      {
-        name: 'Convenio CMR y transporte internacional',
-        text: 'Transporte internacional por carretera: documentación CMR, jurisdicción, plazos y responsabilidad del porteador.',
-      },
-      {
-        name: 'Reclamaciones frente a aseguradoras',
-        text: 'Defensa ante rechazos de cobertura, discrepancias en la valoración de daños y conflictos con seguros de transporte.',
-        links: [{ label: 'Fraudes y aseguradoras', href: '/fraudes-transporte-aseguradora/' }],
-      },
-      {
-        name: 'Conflictos entre cargadores, agencias y transportistas',
-        text: 'Determinación de responsabilidades dentro de la cadena de transporte y defensa frente a reclamaciones de terceros.',
-      },
-      {
-        name: 'Prevención de riesgos contractuales',
-        text: 'Revisión de procedimientos, condiciones generales, órdenes de carga y comunicaciones para reducir problemas antes de que se produzcan.',
-        links: [
-          {
-            label: 'Cómo proteger legalmente tu empresa de transporte',
-            href: '/como-proteger-legalmente-tu-empresa-de-transporte-contratos-condiciones-y-claves-para-evitar-problemas/',
-          },
-        ],
-      },
-      {
-        name: 'Apoyo jurídico para gerencia',
-        text: 'Asesoramiento puntual o continuado para tomar decisiones comerciales y operativas con mayor seguridad jurídica.',
-      },
-    ],
     closing:
       'Una orden de carga bien redactada no elimina todas las responsabilidades, pero permite acreditar cómo se contrató el servicio, exigir el cumplimiento al proveedor y reclamar los perjuicios de una declaración falsa o de una subcontratación irregular.',
     image: { src: '/media/despacho-sala-reunion.webp', alt: 'Sala de reuniones acristalada del despacho Praetoria en El Puig' },
@@ -111,6 +57,7 @@ export const areaContent: AreaContent[] = [
   },
   {
     slug: 'derecho-mercantil',
+    id: 'mercantil',
     group: 'empresas',
     title: 'Derecho Mercantil | Contratos, sociedades y reclamaciones',
     description:
@@ -123,29 +70,6 @@ export const areaContent: AreaContent[] = [
       'Ofrecemos un acompañamiento completo, ágil y proactivo, tanto para negocios consolidados como para quienes empiezan, combinando el conocimiento legal con la experiencia en logística, relaciones contractuales, estructura societaria y gestión patrimonial.',
     ],
     servicesTitle: 'Qué hacemos en mercantil',
-    services: [
-      { name: 'Constitución de sociedades', text: 'Asesoramiento sobre la forma jurídica más adecuada para tu actividad.' },
-      {
-        name: 'Estatutos, pactos de socios y contratos internos',
-        text: 'Redacción y revisión de estatutos, pactos de socios, acuerdos de confidencialidad y otros contratos internos.',
-      },
-      {
-        name: 'Conflictos societarios',
-        text: 'Impugnación de acuerdos y defensa de socios minoritarios.',
-        links: [
-          {
-            label: 'Problemas con mi socio: empresas al 50 %',
-            href: '/problemas-con-mi-socio-que-hacer-cuando-una-empresa-al-50-se-convierte-en-un-conflicto/',
-          },
-        ],
-      },
-      {
-        name: 'Reestructuraciones empresariales',
-        text: 'Ampliaciones de capital y compraventa de participaciones.',
-      },
-      { name: 'Contratos mercantiles nacionales e internacionales' },
-      { name: 'Asesoramiento a administradores', text: 'Asesoramiento jurídico integral para directivos y órganos de administración.' },
-    ],
     closing:
       'Si buscas un abogado que entienda tu empresa como un sistema vivo, que sepa cómo se toman decisiones reales y que te acompañe con visión estratégica, hablemos.',
     image: { src: '/media/despacho-planta-abierta.webp', alt: 'Oficina de planta abierta del despacho Praetoria con mamparas de cristal' },
@@ -154,6 +78,7 @@ export const areaContent: AreaContent[] = [
   },
   {
     slug: 'derecho-civil',
+    id: 'civil',
     group: 'particulares',
     title: 'Derecho Civil | Contratos, herencias y conflictos civiles',
     description:
@@ -165,28 +90,6 @@ export const areaContent: AreaContent[] = [
       'No ofrecemos soluciones estándar. Analizamos tu caso en profundidad, valoramos las opciones legales y proponemos el camino más eficaz y realista para proteger tus intereses, ya sea mediante negociación, acuerdo o procedimiento judicial.',
     ],
     servicesTitle: 'Asuntos que llevamos con más frecuencia',
-    services: [
-      { name: 'Reclamaciones de cantidad' },
-      { name: 'Responsabilidad civil' },
-      { name: 'Contratos civiles y privados' },
-      {
-        name: 'Herencias, testamentos y sucesiones',
-        links: [{ label: 'Herencia: qué hacer', href: '/herencia-que-hacer/' }],
-      },
-      {
-        name: 'Vivienda, alquileres, desahucios y conflictos vecinales',
-        links: [
-          { label: 'Si te han demandado por un alquiler', href: '/demanda-contrato-alquiler-que-hacer/' },
-          { label: 'Ocupación y alquiler en Valencia', href: '/ocupacion-alquiler-valencia/' },
-        ],
-      },
-      {
-        name: 'Recursos ante el Tribunal Supremo',
-        links: [
-          { label: 'El recurso de casación civil', href: '/como-abordar-un-recurso-de-casacion-civil-y-no-fracasar-en-el-intento/' },
-        ],
-      },
-    ],
     closing:
       'Queremos que tomes decisiones con toda la información, sabiendo que cuentas con un respaldo legal sólido. En derecho civil, como en casi todo, lo importante no es solo tener razón, sino saber cómo defenderla.',
     image: { src: '/media/despacho-zona-mesas.webp', alt: 'Zona de mesas del despacho Praetoria en El Puig' },
@@ -195,6 +98,7 @@ export const areaContent: AreaContent[] = [
   },
   {
     slug: 'familia',
+    id: 'familia',
     group: 'particulares',
     title: 'Derecho de Familia | Divorcios, custodias y herencias',
     description:
@@ -206,18 +110,6 @@ export const areaContent: AreaContent[] = [
       'Asistimos en divorcios y separaciones, custodia de menores, régimen de visitas, pensión alimenticia y compensatoria, modificación de medidas y patrimonio familiar. Buscamos acuerdos equilibrados que eviten conflictos innecesarios y, cuando no es posible, defendemos con firmeza tus intereses ante los tribunales.',
     ],
     servicesTitle: 'Qué hacemos en familia',
-    services: [
-      { name: 'Asesoramiento previo', text: 'Antes de tomar cualquier decisión, tanto si estás dudando como si ya lo tienes claro.' },
-      { name: 'Convenios reguladores', text: 'Redacción y negociación.' },
-      {
-        name: 'Divorcios y separaciones',
-        text: 'De mutuo acuerdo y contenciosos.',
-        links: [{ label: 'Divorcio de mutuo acuerdo con precio cerrado', href: '/abogado-divorcio-horta-nord-valencia/' }],
-      },
-      { name: 'Custodia, visitas y pensiones' },
-      { name: 'Modificación de medidas y ejecución de sentencias' },
-      { name: 'Protección del patrimonio familiar' },
-    ],
     closing:
       'Te ayudamos a entender tus derechos, poner orden y tomar decisiones seguras. Una separación es una etapa, no una condena, y puede resolverse de forma digna, eficaz y con futuro.',
     image: { src: '/media/despacho-atencion-cliente.webp', alt: 'Espacio de atención a clientes del despacho Praetoria' },
@@ -226,6 +118,7 @@ export const areaContent: AreaContent[] = [
   },
   {
     slug: 'arte-y-patrimonio',
+    id: 'arte',
     group: 'particulares',
     title: 'Arte y Patrimonio | Protección jurídica de obras y colecciones',
     description:
@@ -237,18 +130,6 @@ export const areaContent: AreaContent[] = [
       'Juan José Farinós tiene formación en Derecho y en Historia del Arte. Asesoramos a particulares, coleccionistas, inversores, herederos, galeristas e instituciones para que tomen decisiones bien fundadas y acordes al valor cultural y económico de cada pieza.',
     ],
     servicesTitle: 'Qué hacemos en arte y patrimonio',
-    services: [
-      { name: 'Valoración legal de obras y antigüedades', text: 'En herencias, compraventas o procesos de separación.' },
-      {
-        name: 'Compra de arte',
-        text: 'En galerías, ferias o adquisiciones internacionales, cuidando autenticidad, procedencia y condiciones legales.',
-      },
-      { name: 'Contratos de cesión', text: 'Compraventa, depósito o reproducción de obras.' },
-      { name: 'Herencias con patrimonio artístico o documental' },
-      { name: 'Defensa de derechos', text: 'De artistas, coleccionistas y propietarios frente a terceros.' },
-      { name: 'Relación con museos', text: 'Fundaciones, comisarios y casas de subastas.' },
-      { name: 'Atribución, conservación y exportación de obra' },
-    ],
     closing:
       'Aquí el derecho no es solo un marco legal: es una herramienta para preservar, proteger y transmitir patrimonio con seguridad, criterio y visión a largo plazo.',
     image: { src: '/media/arte-museo-visitantes.webp', alt: 'Visitantes observando cuadros en la sala de un museo' },

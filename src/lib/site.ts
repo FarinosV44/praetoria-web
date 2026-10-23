@@ -61,40 +61,46 @@ export const deca = (campaign: string) =>
 
 /** Las seis áreas de práctica, agrupadas por a quién se dirigen. */
 export type Group = 'empresas' | 'particulares';
-export type AreaRef = { slug: string; name: string; short: string; group: Group };
+export type AreaRef = { id: 'transporte' | 'mercantil' | 'hacienda' | 'civil' | 'familia' | 'arte' | 'laboral'; slug: string; name: string; short: string; group: Group };
 
 export const areas: AreaRef[] = [
   {
+    id: 'transporte',
     slug: 'logistica-y-transporte-internacional',
     name: 'Transporte y logística',
     short: 'Órdenes de carga, CMR, portes impagados, DECA y reclamaciones a aseguradoras.',
     group: 'empresas',
   },
   {
+    id: 'mercantil',
     slug: 'derecho-mercantil',
     name: 'Mercantil y sociedades',
     short: 'Constitución de sociedades, pactos de socios, conflictos societarios y contratos.',
     group: 'empresas',
   },
   {
+    id: 'hacienda',
     slug: 'abogado-hacienda-y-seguridad-social-en-valencia',
     name: 'Hacienda y Seguridad Social',
     short: 'Requerimientos, liquidaciones, sanciones, apremios y embargos.',
     group: 'empresas',
   },
   {
+    id: 'civil',
     slug: 'derecho-civil',
     name: 'Civil, herencias y vivienda',
     short: 'Reclamaciones de cantidad, contratos, herencias, alquileres y desahucios.',
     group: 'particulares',
   },
   {
+    id: 'familia',
     slug: 'familia',
     name: 'Familia y divorcio',
     short: 'Divorcios, custodia, pensiones y modificación de medidas.',
     group: 'particulares',
   },
   {
+    id: 'arte',
     slug: 'arte-y-patrimonio',
     name: 'Arte y patrimonio',
     short: 'Compraventa y cesión de obras, herencias con colecciones y atribución.',

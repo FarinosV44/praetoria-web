@@ -116,6 +116,17 @@ test('sin JavaScript (formulario clásico): éxito redirige a /gracias/ y los er
   assert.match(await ko.text(), /Revisa tu consulta/);
 });
 
+test('servicio preseleccionado: se entrega con su nombre; si no existe o no es del área, 422', async () => {
+  const r = recorder();
+  const ok = await post({ ...base(), servicio: 'transporte-portes-impagados' }, r);
+  assert.equal(ok.status, 200);
+  assert.equal(r.calls[0]!.body.get('servicio'), 'Reclamación de portes impagados');
+  assert.equal((await post({ ...base(), servicio: 'no-existe' }, recorder())).status, 422);
+  const mal = await post({ ...base(), area: 'familia', servicio: 'transporte-portes-impagados' }, recorder());
+  assert.equal(mal.status, 422);
+  assert.match((await mal.json()).errores.servicio, /no corresponde al área/);
+});
+
 test('solo acepta POST', async () => {
   assert.equal((await handler(new Request('https://x/api/consulta'), recorder())).status, 405);
 });

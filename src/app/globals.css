@@ -17,8 +17,8 @@
   --color-red-dark: #8e1c21;
   --color-red-tint: #f6e7e7;
 
-  --font-sans: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Source Serif 4 Variable', 'Source Serif 4', Georgia, 'Times New Roman', serif;
 
   --breakpoint-nav: 1000px;
 }
@@ -671,7 +671,7 @@
   @media (min-width: 900px) {
     .page-home .directory { grid-template-columns: 1fr 1fr; }
   }
-  .page-home .directory h2 { font-size: 1rem; font-weight: 700; font-variation-settings: 'wdth' 100; color: var(--red); margin: 0 0 10px; }
+  .page-home .directory h3 { font-size: 1rem; font-weight: 700; font-variation-settings: 'wdth' 100; color: var(--red); margin: 0 0 10px; }
   .page-home .directory ul { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
   .page-home .directory li { border-bottom: 1px solid var(--line); }
   .page-home .directory a { display: grid; gap: 4px; padding: 18px 40px 18px 0; text-decoration: none; position: relative; }
@@ -866,4 +866,318 @@
   .team__name { font-weight: 750; font-size: var(--step-1); }
   .team__role { color: var(--muted); }
   .team a { color: var(--red-dark); }
+}
+
+/* Asunto preseleccionado desde un CTA (#5) */
+@layer components {
+  .preselected { margin: 0; padding: 8px 12px; background: var(--stone); border-left: 3px solid var(--ink); font-size: 0.95rem; }
+  .preselected .linklike { font: inherit; background: none; border: 0; padding: 0; color: var(--red-dark); text-decoration: underline; cursor: pointer; margin-left: 4px; }
+}
+
+/* ==========================================================================
+   Rediseño (#5). Se conserva la identidad: rojo del logotipo, grafito del techo y piedra del suelo
+   del despacho, Archivo (eco del logotipo) para titulares y Source Serif para textos largos.
+   Se refinan escala tipográfica, ritmo vertical, retícula y estados. El único gesto enfático es la
+   portada; el resto se mantiene sobrio.
+   ========================================================================== */
+:root {
+  /* Fuera de capa: las variables originales también lo están y si no, prevalecerían */
+  --step-4: clamp(2.35rem, 1.45rem + 3.9vw, 4.9rem);
+  --step-3: clamp(1.75rem, 1.35rem + 1.7vw, 2.75rem);
+  --section: clamp(56px, 8vw, 112px);
+  --wrap: 1200px;
+}
+@layer components {
+  body {
+    font-size: 1.0625rem;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1 {
+    font-variation-settings: 'wdth' 74;
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+  }
+  h2 {
+    font-variation-settings: 'wdth' 82;
+    font-weight: 760;
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+  }
+  h3 {
+    font-weight: 680;
+    line-height: 1.25;
+  }
+  .lede {
+    font-size: clamp(1.15rem, 1.05rem + 0.45vw, 1.4rem);
+    line-height: 1.5;
+    max-width: 58ch;
+  }
+  .section {
+    padding-block: var(--section);
+  }
+  .section--tight {
+    padding-block: clamp(36px, 5vw, 64px);
+  }
+  .page-head {
+    padding-block: clamp(40px, 6vw, 88px) clamp(32px, 4.5vw, 56px);
+  }
+  .page-head h1 {
+    font-size: clamp(2.2rem, 1.4rem + 3vw, 3.9rem);
+    max-width: 20ch;
+  }
+  .btn {
+    padding: 0.9em 1.4em;
+    border-radius: 2px;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .photo {
+    border-radius: 2px;
+  }
+
+  /* Portada: titular grande y estrecho con la barra roja del logotipo */
+  .h-hero {
+    padding-block: clamp(40px, 6vw, 96px) clamp(48px, 7vw, 104px);
+    border-bottom: 1px solid var(--line);
+  }
+  .h-hero__grid {
+    display: grid;
+    gap: clamp(32px, 5vw, 72px);
+    align-items: end;
+  }
+  @media (min-width: 960px) {
+    .h-hero__grid {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    }
+  }
+  .h-hero h1 {
+    font-size: clamp(2.6rem, 1.2rem + 5.4vw, 5.6rem);
+    font-variation-settings: 'wdth' 70;
+    line-height: 0.98;
+    max-width: 15ch;
+    margin-bottom: 0.45em;
+  }
+  .h-hero h1::before {
+    content: '';
+    display: block;
+    width: 72px;
+    height: 8px;
+    background: var(--red);
+    margin-bottom: 0.45em;
+  }
+  .h-hero__place {
+    display: block;
+    font-weight: 500;
+    color: var(--ink-2);
+    font-size: 0.52em;
+    letter-spacing: -0.005em;
+    margin-top: 0.28em;
+    font-variation-settings: 'wdth' 80;
+  }
+  .h-hero__photo {
+    margin: 0;
+  }
+  .h-hero__photo img {
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: 30% center;
+    width: 100%;
+  }
+  .h-hero__photo figcaption {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+  @media (max-width: 959px) {
+    .h-hero__photo img {
+      aspect-ratio: 16 / 10;
+    }
+  }
+
+  /* Método: secuencia real de cuatro pasos */
+  .method-steps {
+    list-style: none;
+    padding: 0;
+    margin: clamp(28px, 4vw, 48px) 0 0;
+    display: grid;
+    gap: 0;
+    counter-reset: paso;
+  }
+  @media (min-width: 900px) {
+    .method-steps {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .method-steps li {
+    counter-increment: paso;
+    padding: 22px 0 26px;
+    border-top: 2px solid var(--ink);
+  }
+  @media (min-width: 900px) {
+    .method-steps li {
+      padding: 22px 28px 8px 0;
+    }
+    .method-steps li + li {
+      padding-left: 28px;
+      border-left: 1px solid var(--line);
+    }
+  }
+  .method-steps li::before {
+    content: counter(paso);
+    display: block;
+    font-weight: 800;
+    font-variation-settings: 'wdth' 70;
+    font-size: 3.2rem;
+    line-height: 1;
+    color: var(--red);
+    margin-bottom: 12px;
+  }
+  .method-steps h3 {
+    font-size: 1.22rem;
+    margin-bottom: 0.4em;
+  }
+  .method-steps p {
+    color: var(--ink-2);
+    margin: 0;
+  }
+  .method-note {
+    margin: 28px 0 0;
+    max-width: 62ch;
+    font-family: var(--serif);
+    font-size: 1.12rem;
+    color: var(--ink-2);
+  }
+
+  /* Quién lleva tu asunto */
+  .people {
+    display: grid;
+    gap: 28px 56px;
+    margin-top: clamp(24px, 4vw, 40px);
+  }
+  @media (min-width: 860px) {
+    .people {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      align-items: start;
+    }
+  }
+  .person {
+    display: grid;
+    gap: 20px;
+    align-items: start;
+  }
+  @media (min-width: 560px) {
+    .person--photo {
+      grid-template-columns: 200px 1fr;
+    }
+  }
+  .person img {
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center 25%;
+    width: 100%;
+    max-width: 260px;
+  }
+  .person__name {
+    font-weight: 780;
+    font-variation-settings: 'wdth' 80;
+    font-size: var(--step-2);
+    line-height: 1.1;
+    margin: 0 0 4px;
+  }
+  .person__role {
+    color: var(--muted);
+    margin: 0 0 12px;
+  }
+  .person p {
+    max-width: 52ch;
+  }
+  .person--text {
+    border-left: 3px solid var(--red);
+    padding-left: 20px;
+  }
+  .person a {
+    color: var(--red-dark);
+  }
+
+  /* Servicios de un área con su siguiente paso */
+  .services {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 2px solid var(--ink);
+  }
+  .service {
+    display: grid;
+    gap: 6px 40px;
+    padding: 22px 0 24px;
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: 96px;
+  }
+  @media (min-width: 820px) {
+    .service {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    }
+  }
+  .service__name {
+    margin: 0;
+    font-size: 1.18rem;
+  }
+  .service__body p {
+    margin: 0 0 8px;
+    color: var(--ink-2);
+  }
+  .service__reads {
+    font-size: 0.93rem;
+  }
+  .service__reads span:first-child {
+    color: var(--muted);
+  }
+  .service__reads a {
+    color: var(--ink);
+    text-underline-offset: 3px;
+  }
+  .service__next {
+    margin-top: 10px !important;
+  }
+  .service__next a {
+    font-weight: 680;
+    color: var(--red-dark);
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+  }
+  .service__next a:hover {
+    color: var(--red);
+  }
+  .service:target {
+    background: linear-gradient(90deg, var(--red-tint), transparent 70%);
+  }
+
+  /* Directorio de áreas de la portada: más aire y lectura en dos columnas */
+  .page-home .directory {
+    margin-top: clamp(24px, 3vw, 40px);
+  }
+  .page-home .directory__name {
+    font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem);
+    font-variation-settings: 'wdth' 78;
+  }
+  .page-home .directory a {
+    padding-block: 20px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .h-hero h1::before {
+      animation: rule-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+      transform-origin: left;
+    }
+    @keyframes rule-in {
+      from {
+        transform: scaleX(0);
+      }
+      to {
+        transform: scaleX(1);
+      }
+    }
+  }
 }

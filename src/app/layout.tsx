@@ -1,5 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
+// Fuentes alojadas en la propia web (antes, Google Fonts): más rápidas y sin enviar datos a terceros
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource-variable/source-serif-4/opsz.css';
 import './globals.css';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -28,13 +31,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     // El idioma del documento se ajusta en el build para los artículos en francés y árabe (scripts/postbuild.mjs)
     <html lang="es" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        {/* eslint-disable-next-line @next/next/no-page-custom-font -- fuentes de la marca; next/font descargaría en el build */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400&display=swap"
-          rel="stylesheet"
-        />
         <JsonLd data={legalServiceLd} />
       </head>
       <body className="site-root">
