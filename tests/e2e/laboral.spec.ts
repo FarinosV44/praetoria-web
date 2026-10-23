@@ -107,7 +107,7 @@ test('cuestionario de divorcio: conserva las respuestas y las pasa al formulario
   expect(r[0].cuestionario).toContain('¿Tenéis hijos en común? No');
 });
 
-test('cuestionario: «No enviarlas» las quita de la consulta', async ({ page }) => {
+test('cuestionario: «No enviarlo» las quita de la consulta', async ({ page }) => {
   await page.goto('/abogado-divorcio-horta-nord-valencia/');
   await page.evaluate(() =>
     sessionStorage.setItem(
@@ -117,6 +117,6 @@ test('cuestionario: «No enviarlas» las quita de la consulta', async ({ page })
   );
   await page.goto('/contacto/?servicio=familia-divorcio&cuestionario=divorcio');
   await expect(page.locator('#cuestionario')).toContainText('valoración personalizada');
-  await page.getByRole('button', { name: 'No enviarlas' }).click();
+  await page.getByRole('button', { name: 'No enviarlo' }).click();
   await expect(page.locator('#cuestionario')).toHaveCount(0);
 });

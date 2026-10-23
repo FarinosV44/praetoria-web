@@ -24,8 +24,10 @@ export type AreaContent = {
   /** Recorridos por tipo de problema, al principio de la página (#6): cada uno lleva a su servicio o guía */
   /** Laboral: la llamada principal va a Lucía López (solo llamadas, sin WhatsApp propio) */
   contactoLaboral?: boolean;
-  /** Nota sobre a quién se representa y la revisión de conflictos (Laboral) */
+  /** Nota de alcance: a quién se representa y conflictos (Laboral), qué no hacemos (Arte) */
   nota?: string;
+  /** Texto por defecto del botón de cada servicio del área */
+  ctaServicios?: string;
   recorridos?: { titulo: string; texto: string; enlaces: { label: string; href: string }[] }[];
 };
 
@@ -107,6 +109,32 @@ export const areaContent: AreaContent[] = [
     image: { src: '/media/despacho-planta-abierta.webp', alt: 'Oficina de planta abierta del despacho Praetoria con mamparas de cristal' },
     category: 'mercantil',
     whatsappText: mensajes.mercantil,
+    recorridos: [
+      {
+        titulo: 'Un conflicto con mi socio',
+        texto: 'Bloqueos en la junta, acuerdos que perjudican a un socio o una empresa al 50 % que ya no funciona.',
+        enlaces: [
+          { label: 'Conflictos societarios', href: '#mercantil-conflictos-socios' },
+          { label: 'Qué hacer en una empresa al 50 %', href: '/problemas-con-mi-socio-que-hacer-cuando-una-empresa-al-50-se-convierte-en-un-conflicto/' },
+        ],
+      },
+      {
+        titulo: 'Un contrato que redactar o revisar',
+        texto: 'Contratos mercantiles, pactos de socios, estatutos o acuerdos de confidencialidad.',
+        enlaces: [
+          { label: 'Contratos mercantiles', href: '#mercantil-contratos' },
+          { label: 'Pactos y estatutos', href: '#mercantil-pactos-socios' },
+        ],
+      },
+      {
+        titulo: 'Un cliente o proveedor no cumple',
+        texto: 'Facturas impagadas o incumplimientos entre empresas. Si es un porte, ve a transporte.',
+        enlaces: [
+          { label: 'Reclamaciones entre empresas', href: '#mercantil-reclamaciones' },
+          { label: '¿Es un porte impagado?', href: '/reclamacion-portes-impagados/' },
+        ],
+      },
+    ],
   },
   {
     slug: 'abogado-laboralista-valencia',
@@ -185,6 +213,34 @@ export const areaContent: AreaContent[] = [
     image: { src: '/media/despacho-zona-mesas.webp', alt: 'Zona de mesas del despacho Praetoria en El Puig' },
     category: 'civil-vivienda',
     whatsappText: mensajes.civil,
+    recorridos: [
+      {
+        titulo: 'Una herencia',
+        texto: 'Aceptar o renunciar, repartir entre herederos, testamentos y conflictos familiares por la herencia.',
+        enlaces: [
+          { label: 'Herencias', href: '#civil-herencias' },
+          { label: 'Qué hacer con una herencia', href: '/herencia-que-hacer/' },
+        ],
+      },
+      {
+        titulo: 'Mi vivienda o un alquiler',
+        texto: 'Contratos de alquiler, impagos, desahucios, ocupación y compraventa de vivienda.',
+        enlaces: [{ label: 'Vivienda y alquileres', href: '#civil-vivienda' }],
+      },
+      {
+        titulo: 'Un contrato o una reclamación',
+        texto: 'Alguien no cumple lo pactado, te deben dinero o te reclaman a ti.',
+        enlaces: [
+          { label: 'Reclamaciones de cantidad', href: '#civil-reclamaciones' },
+          { label: 'Contratos', href: '#civil-contratos' },
+        ],
+      },
+      {
+        titulo: 'Vecinos o comunidad',
+        texto: 'Conflictos con vecinos o con la comunidad de propietarios.',
+        enlaces: [{ label: 'Consultar mi caso', href: '/contacto/?servicio=civil-vivienda' }],
+      },
+    ],
   },
   {
     slug: 'familia',
@@ -249,5 +305,7 @@ export const areaContent: AreaContent[] = [
       { src: '/media/arte-obra-abstracta-800.webp', alt: 'Obra abstracta en tonos rojos con estructura de rejilla' },
     ],
     whatsappText: mensajes.arte,
+    nota: 'Nuestro trabajo es jurídico. Cuando hace falta una tasación, un peritaje de autenticidad o un informe de conservación, lo realiza un especialista independiente; nosotros valoramos su informe desde el punto de vista legal y lo integramos en la estrategia.',
+    ctaServicios: 'Solicitar una consulta especializada',
   },
 ];

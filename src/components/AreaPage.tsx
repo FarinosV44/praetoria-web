@@ -89,7 +89,7 @@ export function AreaPage({ area }: { area: AreaContent }) {
           }
 
           <h2 className="services-title">{area.servicesTitle}</h2>
-          <ServiceList services={serviciosDe(area.id)} />
+          <ServiceList services={serviciosDe(area.id)} defaultCta={area.ctaServicios} />
           <p className="closing">{area.closing}</p>
           {area.nota && <p className="area-note">{area.nota}</p>}
 

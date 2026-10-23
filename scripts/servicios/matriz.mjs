@@ -10,6 +10,7 @@ import { AREAS } from '../../src/lib/consulta.ts';
 const BLOG = 'src/content/blog';
 const DOC = 'docs/SERVICIOS.md';
 const CHECKLISTS = 'docs/checklists-documentales.json';
+const INDICE = 'src/lib/servicios-indice.ts';
 const errores = [];
 
 const posts = new Map(
@@ -90,19 +91,39 @@ const checklists =
     1,
   ) + '\n';
 
+// Índice ligero para el navegador (formulario y validación): sin textos ampliados, que pesan ~10 KB gzip (#8, presupuesto de #4)
+const LIGEROS = ['id', 'area', 'nombre', 'incidencia', 'problemaLaboral', 'preguntaMinima'];
+const indice =
+  `// GENERADO por scripts/servicios/matriz.mjs a partir de src/lib/servicios.ts. No editar a mano.
+// Versión ligera para el navegador: el formulario y la validación solo necesitan estos campos.
+import type { Servicio, ServicioArea } from './servicios.ts';
+
+export type ServicioIndice = Pick<Servicio, ${LIGEROS.map((k) => `'${k}'`).join(' | ')}>;
+
+export const indiceServicios: ServicioIndice[] = ${JSON.stringify(
+    servicios.map((s) => Object.fromEntries(LIGEROS.filter((k) => s[k] !== undefined).map((k) => [k, s[k]]))),
+    null,
+    2,
+  )};
+
+export const servicioPorId = (id: string) => indiceServicios.find((s) => s.id === id);
+export const serviciosDe = (area: ServicioArea) => indiceServicios.filter((s) => s.area === area);
+`;
+
 if (errores.length) {
   console.error(`${errores.length} errores en el modelo de servicios:`);
   errores.forEach((e) => console.error(' - ' + e));
   process.exit(1);
 }
 if (process.argv.includes('--check')) {
-  if (!existsSync(DOC) || readFileSync(DOC, 'utf8') !== md || !existsSync(CHECKLISTS) || readFileSync(CHECKLISTS, 'utf8') !== checklists) {
-    console.error(`${DOC} o ${CHECKLISTS} no están al día: ejecuta node scripts/servicios/matriz.mjs`);
+  if (!existsSync(DOC) || readFileSync(DOC, 'utf8') !== md || !existsSync(CHECKLISTS) || readFileSync(CHECKLISTS, 'utf8') !== checklists || !existsSync(INDICE) || readFileSync(INDICE, 'utf8') !== indice) {
+    console.error(`${DOC}, ${CHECKLISTS} o ${INDICE} no están al día: ejecuta node scripts/servicios/matriz.mjs`);
     process.exit(1);
   }
   console.log(`OK: ${servicios.length} servicios válidos y ${DOC} al día`);
 } else {
   writeFileSync(DOC, md);
   writeFileSync(CHECKLISTS, checklists);
+  writeFileSync(INDICE, indice);
   console.log(`${DOC}: ${servicios.length} servicios`);
 }

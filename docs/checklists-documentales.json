@@ -291,6 +291,31 @@
      "obligatorio": false
     }
    ]
+  },
+  {
+   "id": "mercantil-reclamaciones",
+   "area": "mercantil",
+   "nombre": "Reclamaciones entre empresas",
+   "documentos": [
+    {
+     "id": "mercantil-reclamaciones-1",
+     "label": "Contrato o condiciones pactadas",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "mercantil-reclamaciones-2",
+     "label": "Pedidos, albaranes y facturas",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "mercantil-reclamaciones-3",
+     "label": "Comunicaciones con la otra empresa",
+     "sensible": false,
+     "obligatorio": false
+    }
+   ]
   }
  ]
 }

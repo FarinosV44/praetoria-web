@@ -3,7 +3,9 @@
 // Importaciones relativas con extensión: Node ejecuta este archivo directamente en la función y en las pruebas.
 // Sin dependencias (ni zod): este módulo también va al navegador y su peso cuenta (presupuesto de #4).
 import { site, laboral } from './site.ts';
-import { INCIDENCIAS, PROBLEMAS_LABORALES, servicioPorId } from './servicios.ts';
+import { INCIDENCIAS, PROBLEMAS_LABORALES } from './servicios-listas.ts';
+import { servicioPorId } from './servicios-indice.ts';
+import { DOCUMENTOS, ORGANISMOS } from './cuestionario-hacienda.ts';
 
 export const AREAS = [
   { id: 'transporte', label: 'Transporte y logística' },
@@ -53,7 +55,12 @@ export const SITUACIONES = [
   { id: 'otra', label: 'Otra situación' },
 ] as const;
 /** Áreas en las que se pide una fecha relevante (solo para priorizar a mano) */
-export const AREAS_CON_FECHA = ['transporte', 'laboral'] as const;
+export const AREAS_CON_FECHA = ['transporte', 'laboral', 'hacienda'] as const;
+/** Áreas que admiten el resumen de un cuestionario (divorcio; notificación de Hacienda, también si se deriva a Laboral) */
+export const AREAS_CON_CUESTIONARIO = ['familia', 'hacienda', 'laboral'] as const;
+/** Áreas en las que se ofrece elegir el asunto (servicio) en el formulario (#8) */
+export const AREAS_CON_ASUNTO = ['mercantil', 'civil', 'familia', 'arte'] as const;
+export { DOCUMENTOS, ORGANISMOS };
 
 export const LIMITES = { nombre: 100, email: 254, telefono: 20, mensaje: 2000, mensajeMin: 20, cuestionario: 1500 } as const;
 /** Un envío hecho en menos de este tiempo desde que se cargó el formulario se trata como automático. */
@@ -98,8 +105,13 @@ export type Consulta = {
   representa: string;
   problema: string;
   situacion: string;
-  /** Familia: resumen del cuestionario de divorcio, si la persona decide enviarlo */
+  /** Resumen de un cuestionario (divorcio o Hacienda), si la persona decide enviarlo */
   cuestionario: string;
+  /** Hacienda y SS: organismo (obligatorio en esa área) y documento */
+  organismo: string;
+  documento: string;
+  /** Respuesta a la pregunta mínima del servicio elegido */
+  detalle: string;
 };
 export type ErroresConsulta = Partial<Record<keyof Consulta, string>>;
 
@@ -123,11 +135,15 @@ export function validarConsulta(raw: Record<string, unknown>, ahora = Date.now()
     problema: limpia(raw.problema),
     situacion: limpia(raw.situacion),
     cuestionario: limpia(raw.cuestionario),
+    organismo: limpia(raw.organismo),
+    documento: limpia(raw.documento),
+    detalle: limpia(raw.detalle),
   };
   // Los datos de un área solo tienen sentido en ella: en otra se descartan
   if (d.area !== 'transporte') d.papel = d.incidencia = d.importe = '';
   if (d.area !== 'laboral') d.representa = d.problema = d.situacion = '';
-  if (d.area !== 'familia') d.cuestionario = '';
+  if (!(AREAS_CON_CUESTIONARIO as readonly string[]).includes(d.area)) d.cuestionario = '';
+  if (d.area !== 'hacienda') d.organismo = d.documento = '';
   if (!(AREAS_CON_FECHA as readonly string[]).includes(d.area)) d.fecha = '';
   const e: ErroresConsulta = {};
   const max = (k: 'nombre' | 'email' | 'telefono' | 'mensaje') => {
@@ -160,6 +176,13 @@ export function validarConsulta(raw: Record<string, unknown>, ahora = Date.now()
   if (d.importe && !IMPORTES.some((x) => x.id === d.importe)) e.importe = 'Elige una opción de la lista.';
   if (d.area === 'laboral' && !REPRESENTA.some((x) => x.id === d.representa)) e.representa = 'Indica si eres la persona trabajadora o consultas por una empresa u otra persona.';
   if (d.cuestionario.length > LIMITES.cuestionario) e.cuestionario = 'El resumen del cuestionario es demasiado largo.';
+  if (d.area === 'hacienda' && !ORGANISMOS.some((x) => x.id === d.organismo)) e.organismo = 'Indica quién envía la notificación (o «No lo sé»).';
+  if (d.documento && !DOCUMENTOS.some((x) => x.id === d.documento)) e.documento = 'Elige una opción de la lista.';
+  if (d.detalle) {
+    const opciones = servicioPorId(d.servicio)?.preguntaMinima?.opciones;
+    if (!opciones) d.detalle = '';
+    else if (!opciones.includes(d.detalle)) e.detalle = 'Elige una de las opciones.';
+  }
   if (d.problema && !PROBLEMAS_LABORALES.some((x) => x.id === d.problema)) e.problema = 'Elige una opción de la lista.';
   if (d.situacion && !SITUACIONES.some((x) => x.id === d.situacion)) e.situacion = 'Elige una opción de la lista.';
   if (d.fecha && !fechaValida(d.fecha, ahora)) e.fecha = 'Revisa la fecha: debe ser una fecha real y no posterior a hoy.';

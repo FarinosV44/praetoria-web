@@ -41,6 +41,8 @@ export type Servicio = {
   problemaLaboral?: ProblemaLaboral;
   /** Qué no incluye o dónde se trata (para delimitar servicios que se solapan) */
   alcance?: string;
+  /** Una pregunta mínima pertinente que se hace en el formulario al elegir este servicio (#8) */
+  preguntaMinima?: { label: string; opciones: string[] };
   /** Estado de revisión jurídica del texto ampliado por el despacho. Sin revisar no debería publicarse (ver docs/SERVICIOS.md) */
   revision?: 'pendiente' | 'revisado';
   /** Título y descripción SEO de la página propia */
@@ -52,25 +54,8 @@ export type Documento = string | { label: string; sensible: true };
 export const docLabel = (d: Documento) => (typeof d === 'string' ? d : d.label);
 export const docSensible = (d: Documento) => typeof d !== 'string';
 
-/** Tipos de problema del formulario laboral (#7) */
-export const PROBLEMAS_LABORALES = [
-  { id: 'despido', label: 'Despido o fin de contrato' },
-  { id: 'cantidades', label: 'Salarios, horas o finiquito' },
-  { id: 'incapacidad', label: 'Baja, alta médica o incapacidad' },
-  { id: 'accidente', label: 'Accidente laboral o enfermedad profesional' },
-  { id: 'acoso', label: 'Acoso o vulneración de derechos' },
-  { id: 'condiciones', label: 'Cambios en mis condiciones u otro conflicto' },
-] as const;
-export type ProblemaLaboral = (typeof PROBLEMAS_LABORALES)[number]['id'];
-
-/** Tipos de incidencia del formulario de transporte (#6) */
-export const INCIDENCIAS = [
-  { id: 'impago', label: 'Porte o factura impagada' },
-  { id: 'mercancia', label: 'Mercancía dañada, perdida o con retraso' },
-  { id: 'deca', label: 'DeCA, documentación o contratos' },
-  { id: 'otra', label: 'Otra incidencia' },
-] as const;
-export type Incidencia = (typeof INCIDENCIAS)[number]['id'];
+export { PROBLEMAS_LABORALES, INCIDENCIAS, type ProblemaLaboral, type Incidencia } from './servicios-listas.ts';
+import type { ProblemaLaboral, Incidencia } from './servicios-listas.ts';
 
 const BOE_LCTTM = 'https://www.boe.es/eli/es/l/2009/11/11/15/con';
 const BOE_L9_2013 = 'https://www.boe.es/eli/es/l/2013/07/04/9/con';
@@ -360,9 +345,24 @@ export const servicios: Servicio[] = [
   // Mercantil y sociedades -------------------------------------------------------------------
   { id: 'mercantil-constitucion', area: 'mercantil', nombre: 'Constitución de sociedades', resumen: 'Asesoramiento sobre la forma jurídica más adecuada para tu actividad.' },
   { id: 'mercantil-pactos-socios', area: 'mercantil', nombre: 'Estatutos, pactos de socios y contratos internos', resumen: 'Redacción y revisión de estatutos, pactos de socios, acuerdos de confidencialidad y otros contratos internos.' },
-  { id: 'mercantil-conflictos-socios', area: 'mercantil', nombre: 'Conflictos societarios', resumen: 'Impugnación de acuerdos y defensa de socios minoritarios.', articulos: ['problemas-con-mi-socio-que-hacer-cuando-una-empresa-al-50-se-convierte-en-un-conflicto'], cta: 'Consultar un conflicto con mi socio' },
+  { id: 'mercantil-conflictos-socios', area: 'mercantil', preguntaMinima: { label: '¿Qué participación tienes?', opciones: ['Mayoritaria', 'Al 50 %', 'Minoritaria', 'No soy socio (administrador u otro)'] }, nombre: 'Conflictos societarios', resumen: 'Impugnación de acuerdos y defensa de socios minoritarios.', articulos: ['problemas-con-mi-socio-que-hacer-cuando-una-empresa-al-50-se-convierte-en-un-conflicto'], cta: 'Consultar un conflicto con mi socio' },
   { id: 'mercantil-reestructuraciones', area: 'mercantil', nombre: 'Reestructuraciones empresariales', resumen: 'Ampliaciones de capital y compraventa de participaciones.' },
   { id: 'mercantil-contratos', area: 'mercantil', nombre: 'Contratos mercantiles nacionales e internacionales' },
+  {
+    id: 'mercantil-reclamaciones',
+    area: 'mercantil',
+    nombre: 'Reclamaciones entre empresas',
+    resumen: 'Facturas impagadas e incumplimientos de contrato con clientes, proveedores o socios comerciales.',
+    alcance: 'Los portes y servicios de transporte impagados se tratan en Transporte y logística, con su propia vía de reclamación.',
+    revision: 'pendiente',
+    preguntaMinima: { label: '¿Quién reclama?', opciones: ['Mi empresa reclama a otra', 'Reclaman a mi empresa'] },
+    revisamos: [
+      'El contrato, los pedidos, las facturas y las comunicaciones que acreditan la deuda o el incumplimiento.',
+      'Si la reclamación es de transporte: en ese caso se trata en su área, porque tiene reglas propias.',
+      'La vía más adecuada: requerimiento, negociación, procedimiento monitorio o demanda.',
+    ],
+    documentacion: ['Contrato o condiciones pactadas', 'Pedidos, albaranes y facturas', 'Comunicaciones con la otra empresa'],
+  },
   { id: 'mercantil-administradores', area: 'mercantil', nombre: 'Asesoramiento a administradores', resumen: 'Asesoramiento jurídico integral para directivos y órganos de administración.' },
 
   // Hacienda y Seguridad Social ---------------------------------------------------------------
@@ -372,18 +372,18 @@ export const servicios: Servicio[] = [
   { id: 'hacienda-devoluciones', area: 'hacienda', nombre: 'Devolución de ingresos indebidos', resumen: 'Reclamación de cantidades pagadas indebidamente a Hacienda o a la Seguridad Social.', articulos: ['reclamar-devolucion-impuesto-de-matriculacion'] },
 
   // Civil, herencias y vivienda ---------------------------------------------------------------
-  { id: 'civil-reclamaciones', area: 'civil', nombre: 'Reclamaciones de cantidad' },
-  { id: 'civil-responsabilidad', area: 'civil', nombre: 'Responsabilidad civil' },
-  { id: 'civil-contratos', area: 'civil', nombre: 'Contratos civiles y privados' },
-  { id: 'civil-herencias', area: 'civil', nombre: 'Herencias, testamentos y sucesiones', articulos: ['herencia-que-hacer'], cta: 'Consultar una herencia' },
-  { id: 'civil-vivienda', area: 'civil', nombre: 'Vivienda, alquileres, desahucios y conflictos vecinales', articulos: ['demanda-contrato-alquiler-que-hacer', 'ocupacion-alquiler-valencia', 'nuevo-decreto-2026-desahucio', 'registro-alquiler-turistico-2026'], cta: 'Consultar un problema de vivienda' },
+  { id: 'civil-reclamaciones', area: 'civil', nombre: 'Reclamaciones de cantidad', preguntaMinima: { label: '¿Con quién es el problema?', opciones: ['Una empresa o un banco', 'Un particular', 'Un profesional o autónomo'] } },
+  { id: 'civil-responsabilidad', area: 'civil', nombre: 'Responsabilidad civil', preguntaMinima: { label: '¿Con quién es el problema?', opciones: ['Una empresa o un banco', 'Un particular', 'Un profesional o autónomo'] } },
+  { id: 'civil-contratos', area: 'civil', nombre: 'Contratos civiles y privados', preguntaMinima: { label: '¿Con quién es el problema?', opciones: ['Una empresa o un banco', 'Un particular', 'Un profesional o autónomo'] } },
+  { id: 'civil-herencias', area: 'civil', nombre: 'Herencias, testamentos y sucesiones', articulos: ['herencia-que-hacer'], cta: 'Consultar una herencia', preguntaMinima: { label: '¿Hay testamento?', opciones: ['Sí', 'No', 'No lo sé'] } },
+  { id: 'civil-vivienda', area: 'civil', nombre: 'Vivienda, alquileres, desahucios y conflictos vecinales', preguntaMinima: { label: '¿Cuál es tu posición?', opciones: ['Propietario o arrendador', 'Inquilino', 'Comprador o vendedor', 'Vecino o comunidad de propietarios'] }, articulos: ['demanda-contrato-alquiler-que-hacer', 'ocupacion-alquiler-valencia', 'nuevo-decreto-2026-desahucio', 'registro-alquiler-turistico-2026'], cta: 'Consultar un problema de vivienda' },
   { id: 'civil-casacion', area: 'civil', nombre: 'Recursos ante el Tribunal Supremo', articulos: ['como-abordar-un-recurso-de-casacion-civil-y-no-fracasar-en-el-intento'] },
 
   // Familia y divorcio ---------------------------------------------------------------------------
   { id: 'familia-asesoramiento-previo', area: 'familia', nombre: 'Asesoramiento previo', resumen: 'Antes de tomar cualquier decisión, tanto si estás dudando como si ya lo tienes claro.' },
   { id: 'familia-convenio', area: 'familia', nombre: 'Convenios reguladores', resumen: 'Redacción y negociación.' },
   { id: 'familia-divorcio', area: 'familia', nombre: 'Divorcios y separaciones', resumen: 'De mutuo acuerdo y contenciosos.', pagina: '/abogado-divorcio-horta-nord-valencia/', siguientePaso: { label: 'Comprobar si mi divorcio entra en el precio cerrado', href: '/abogado-divorcio-horta-nord-valencia/#comprobar' } },
-  { id: 'familia-custodia', area: 'familia', nombre: 'Custodia, visitas y pensiones' },
+  { id: 'familia-custodia', area: 'familia', nombre: 'Custodia, visitas y pensiones', preguntaMinima: { label: '¿Hay ya una sentencia o un convenio?', opciones: ['Sí', 'No', 'No lo sé'] } },
   { id: 'familia-modificacion-medidas', area: 'familia', nombre: 'Modificación de medidas y ejecución de sentencias', pagina: '/abogado-divorcio-horta-nord-valencia/' },
   { id: 'familia-patrimonio', area: 'familia', nombre: 'Protección del patrimonio familiar' },
   { id: 'familia-filiacion', area: 'familia', nombre: 'Filiación y reconocimiento de la maternidad o paternidad', articulos: ['puede-mi-pareja-ser-reconocida-legalmente-como-madre-en-espana-si-mi-hijo-ha-nacido-en-el-extranjero'] },

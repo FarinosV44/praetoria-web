@@ -1,10 +1,12 @@
 'use client';
 
 // Cuestionario de notificaciones de Hacienda / Seguridad Social.
-// Las respuestas no salen del navegador: se prepara un resumen que el visitante envía él mismo.
+// Las respuestas no salen del navegador hasta que el visitante elige cómo enviarlas: con el formulario de consulta
+// (recomendado, llega al despacho para revisión humana, #8), por WhatsApp o por correo.
 import Link from 'next/link';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { site } from '@/lib/site';
+import { DOCUMENTOS, IMPORTES_HACIENDA, ORGANISMOS, guardarRespuestasHacienda, servicioHacienda } from '@/lib/cuestionario-hacienda';
 import { Icon } from './Icon';
 
 const fmtDate = (v: string) => {
@@ -15,7 +17,7 @@ const fmtDate = (v: string) => {
 
 export function HaciendaTriage() {
   const [error, setError] = useState('');
-  const [summary, setSummary] = useState<{ text: string; emisor: string } | null>(null);
+  const [summary, setSummary] = useState<{ text: string; emisor: string; servicio: string } | null>(null);
   const resultRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -34,9 +36,11 @@ export function HaciendaTriage() {
       return;
     }
     setError('');
+    const emisor = ORGANISMOS.find((x) => x.id === get('emisor'))?.label ?? '';
+    const tipo = DOCUMENTOS.find((x) => x.id === get('tipo'))?.label ?? '';
     const details = [
-      `Organismo: ${get('emisor')}`,
-      get('tipo') && `Documento: ${get('tipo')}`,
+      `Organismo: ${emisor}`,
+      tipo && `Documento: ${tipo}`,
       get('recibida') && `Recibida o abierta el: ${fmtDate(get('recibida'))}`,
       get('limite') && `Fecha límite: ${fmtDate(get('limite'))}`,
       get('importe') && `Importe: ${get('importe')}`,
@@ -47,7 +51,10 @@ export function HaciendaTriage() {
       details.join('\n') +
       `\n\nNombre: ${get('nombre')}\nTeléfono: ${get('telefono')}`;
     moved.current = true;
-    setSummary({ text, emisor: get('emisor') });
+    // Para el formulario de consulta (misma sesión del navegador). Nombre y teléfono se vuelven a pedir allí.
+    const r = { organismo: get('emisor'), documento: get('tipo'), recibida: get('recibida'), limite: get('limite'), importe: get('importe'), descripcion: get('descripcion') };
+    guardarRespuestasHacienda(r);
+    setSummary({ text, emisor, servicio: servicioHacienda(r) });
   };
 
   const edit = () => {
@@ -70,32 +77,22 @@ export function HaciendaTriage() {
         <fieldset className="field">
           <legend>¿Quién la envía?</legend>
           <div className="radios">
-            <label>
-              <input type="radio" name="emisor" value="Hacienda (AEAT)" required /> Hacienda (AEAT)
-            </label>
-            <label>
-              <input type="radio" name="emisor" value="Seguridad Social (TGSS)" /> Seguridad Social (TGSS)
-            </label>
-            <label>
-              <input type="radio" name="emisor" value="INSS" /> INSS
-            </label>
-            <label>
-              <input type="radio" name="emisor" value="No lo sé" /> No lo sé
-            </label>
+            {ORGANISMOS.map((o, i) => (
+              <label key={o.id}>
+                <input type="radio" name="emisor" value={o.id} required={i === 0} /> {o.label}
+              </label>
+            ))}
           </div>
         </fieldset>
         <div className="field">
           <label htmlFor="tipo">¿Qué tipo de documento es?</label>
           <select id="tipo" name="tipo" defaultValue="">
             <option value="">Selecciona la opción más parecida</option>
-            <option>Requerimiento de información o de justificación</option>
-            <option>Propuesta de liquidación o liquidación</option>
-            <option>Inicio de expediente sancionador o sanción</option>
-            <option>Reclamación de deuda o providencia de apremio</option>
-            <option>Diligencia de embargo</option>
-            <option>Derivación de responsabilidad</option>
-            <option>Resolución sobre una prestación</option>
-            <option>No lo sé</option>
+            {DOCUMENTOS.map((d) => (
+              <option key={d.id} value={d.id}>
+                {d.label}
+              </option>
+            ))}
           </select>
           <p className="small muted">No pasa nada si no sabes identificarlo. Para confirmarlo revisaremos el documento completo.</p>
         </div>
@@ -115,12 +112,9 @@ export function HaciendaTriage() {
           </label>
           <select id="importe" name="importe" defaultValue="">
             <option value="">Sin indicar</option>
-            <option>No aparece ninguna cantidad</option>
-            <option>Menos de 3.000 €</option>
-            <option>Entre 3.000 € y 10.000 €</option>
-            <option>Entre 10.000 € y 50.000 €</option>
-            <option>Más de 50.000 €</option>
-            <option>No lo sé</option>
+            {IMPORTES_HACIENDA.map((i) => (
+              <option key={i}>{i}</option>
+            ))}
           </select>
         </div>
         <div className="field">
@@ -163,8 +157,17 @@ export function HaciendaTriage() {
           procedimiento iniciado y la documentación relacionada.
         </p>
         <pre className="summary">{summary?.text}</pre>
+        {summary?.servicio.startsWith('laboral') && (
+          <p className="small">
+            Las resoluciones sobre prestaciones (incapacidad, altas médicas) las atiende el <Link href="/abogado-laboralista-valencia/">área laboral</Link>:
+            tu consulta irá a ella.
+          </p>
+        )}
         <div className="actions">
-          <a className="btn btn--red" href={summary ? `https://wa.me/${phone}?text=${encodeURIComponent(summary.text)}` : '#'}>
+          <Link className="btn btn--red" href={summary ? `/contacto/?servicio=${summary.servicio}&cuestionario=hacienda` : '/contacto/'}>
+            Enviar con el formulario de consulta
+          </Link>
+          <a className="btn btn--ghost" href={summary ? `https://wa.me/${phone}?text=${encodeURIComponent(summary.text)}` : '#'}>
             <Icon name="whatsapp" /> Enviar por WhatsApp
           </a>
           <a

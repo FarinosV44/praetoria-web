@@ -6,7 +6,7 @@ Un servicio es algo concreto que el despacho hace, con un siguiente paso. Las p�
 
 **Texto ampliado** (qué revisamos, proceso, documentación, preguntas y normas citadas): lo redacta la web a partir de lo ya publicado y de fuentes oficiales, y queda *pendiente de revisión* hasta que el despacho lo valide (`revision: 'revisado'`).
 
-Total: 47 servicios.
+Total: 48 servicios.
 
 ## Transporte y logística (10)
 
@@ -23,7 +23,7 @@ Total: 47 servicios.
 | Prevención de riesgos contractuales | `transporte-prevencion` | [Cómo proteger legalmente tu empresa de transporte: contratos, condiciones y claves para evitar problemas](/como-proteger-legalmente-tu-empresa-de-transporte-contratos-condiciones-y-claves-para-evitar-problemas/) | [Consultar sobre esto](/contacto/?servicio=transporte-prevencion) | — |
 | Apoyo jurídico para gerencia | `transporte-gerencia` | — | [Consultar sobre esto](/contacto/?servicio=transporte-gerencia) | — |
 
-## Mercantil y sociedades (6)
+## Mercantil y sociedades (7)
 
 | Servicio | id | Artículos relacionados | Siguiente paso | Texto ampliado |
 | --- | --- | --- | --- | --- |
@@ -32,6 +32,7 @@ Total: 47 servicios.
 | Conflictos societarios | `mercantil-conflictos-socios` | [Problemas con mi socio: qué hacer cuando una empresa al 50% se convierte en un conflicto](/problemas-con-mi-socio-que-hacer-cuando-una-empresa-al-50-se-convierte-en-un-conflicto/) | [Consultar un conflicto con mi socio](/contacto/?servicio=mercantil-conflictos-socios) | — |
 | Reestructuraciones empresariales | `mercantil-reestructuraciones` | — | [Consultar sobre esto](/contacto/?servicio=mercantil-reestructuraciones) | — |
 | Contratos mercantiles nacionales e internacionales | `mercantil-contratos` | — | [Consultar sobre esto](/contacto/?servicio=mercantil-contratos) | — |
+| Reclamaciones entre empresas | `mercantil-reclamaciones` | — | [Consultar sobre esto](/contacto/?servicio=mercantil-reclamaciones) | **pendiente de revisión** |
 | Asesoramiento a administradores | `mercantil-administradores` | — | [Consultar sobre esto](/contacto/?servicio=mercantil-administradores) | — |
 
 ## Hacienda y Seguridad Social (4)

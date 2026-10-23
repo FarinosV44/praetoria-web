@@ -174,6 +174,31 @@ test('laboral: «representa» es obligatorio; problema, situación y fecha llega
   assert.equal(r2.calls[0]!.body.get('representa'), '');
 });
 
+test('hacienda: el organismo es obligatorio; organismo, documento y fecha llegan con su etiqueta', async () => {
+  const r = recorder();
+  const sin = await post({ ...base(), area: 'hacienda' }, r);
+  assert.equal(sin.status, 422);
+  assert.ok((await sin.json()).errores.organismo);
+  const ok = await post({ ...base(), area: 'hacienda', organismo: 'tgss', documento: 'embargo', fecha: '2026-10-01', servicio: 'hacienda-seguridad-social' }, r);
+  assert.equal(ok.status, 200);
+  const b = r.calls[0]!.body;
+  assert.equal(b.get('organismo'), 'Seguridad Social (TGSS)');
+  assert.equal(b.get('documento'), 'Diligencia de embargo');
+  assert.equal(b.get('fecha'), '2026-10-01');
+});
+
+test('pregunta mínima del servicio: se entrega con su pregunta; opción ajena, 422; sin servicio, se descarta', async () => {
+  const r = recorder();
+  const ok = await post({ ...base(), area: 'civil', servicio: 'civil-herencias', detalle: 'No' }, r);
+  assert.equal(ok.status, 200);
+  assert.equal(r.calls[0]!.body.get('detalle'), '¿Hay testamento? No');
+  const mal = await post({ ...base(), area: 'civil', servicio: 'civil-herencias', detalle: 'Inquilino' }, r);
+  assert.equal(mal.status, 422);
+  const r2 = recorder();
+  await post({ ...base(), area: 'civil', detalle: 'Sí' }, r2);
+  assert.equal(r2.calls[0]!.body.get('detalle'), '');
+});
+
 test('solo acepta POST', async () => {
   assert.equal((await handler(new Request('https://x/api/consulta'), recorder())).status, 405);
 });
