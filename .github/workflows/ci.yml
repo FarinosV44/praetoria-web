@@ -10,7 +10,8 @@ permissions:
 
 jobs:
   build-y-comprobaciones:
-    runs-on: ubuntu-latest
+    # Imagen fija: ubuntu-latest cambiará a Ubuntu 26 y podría alterar la CI sin cambios en el repo
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
