@@ -401,7 +401,7 @@ p {
   font-weight: 600;
   font-size: 0.95rem;
 }
-.field input,
+.field input:not([type='radio']):not([type='checkbox']),
 .field select,
 .field textarea {
   font: inherit;
@@ -417,7 +417,7 @@ p {
   min-height: 140px;
   resize: vertical;
 }
-.field input:focus,
+.field input:not([type='radio']):not([type='checkbox']):focus,
 .field select:focus,
 .field textarea:focus {
   outline: 2px solid var(--red);
@@ -452,6 +452,9 @@ p {
 }
 .radios input {
   accent-color: var(--red);
+  width: 1.1em;
+  height: 1.1em;
+  margin: 0;
 }
 .hp {
   position: absolute;
