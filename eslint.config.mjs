@@ -10,7 +10,7 @@ const config = [
       '@next/next/no-img-element': 'off',
     },
   },
-  { ignores: ['out/', '.next/', 'dist/', '.astro/', 'scripts/', 'next-env.d.ts'] },
+  { ignores: ['out/', 'out-ga/', 'test-results/', 'playwright-report/', '.next/', 'dist/', '.astro/', 'scripts/', 'next-env.d.ts'] },
 ];
 
 export default config;

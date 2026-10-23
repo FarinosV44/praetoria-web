@@ -64,8 +64,12 @@ npm run dev          # http://localhost:3000
 npm run typecheck    # TypeScript estricto
 npm run lint         # ESLint con las reglas de Next
 npm run build        # genera la web estática en out/
-npm run check        # tras build: enlaces internos, migración SEO y pruebas
+npm run check        # tras build: calidad del sitio, migración SEO y pruebas unitarias
+npm run test:e2e     # tras build: pruebas en navegador (Playwright)
+npm run test:e2e:ga  # build normal + build con Analytics y todas las pruebas en navegador
 ```
+
+Qué comprueba cada cosa está en [`docs/CALIDAD.md`](docs/CALIDAD.md).
 
 ## Publicación
 

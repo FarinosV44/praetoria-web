@@ -75,7 +75,7 @@ export function CookieConsent() {
   };
 
   return (
-    <div className="consent-root">
+    <div className="consent-root" lang="es">
       <div className="consent" role="dialog" aria-live="polite" aria-label="Aviso de cookies">
         <p>
           Usamos cookies analíticas de Google Analytics para saber cuántas personas visitan la web. Solo se activan si las

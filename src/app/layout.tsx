@@ -26,7 +26,7 @@ export const viewport: Viewport = { width: 'device-width', initialScale: 1 };
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     // El idioma del documento se ajusta en el build para los artículos en francés y árabe (scripts/postbuild.mjs)
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
@@ -38,13 +38,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <JsonLd data={legalServiceLd} />
       </head>
       <body className="site-root">
-        <a className="skip" href="#contenido">
+        <a className="skip" href="#contenido" lang="es">
           Saltar al contenido
         </a>
         <Header />
         <main id="contenido">{children}</main>
         <Footer />
-        <nav className="quickbar" aria-label="Contacto rápido">
+        <nav className="quickbar" aria-label="Contacto rápido" lang="es">
           <a href={`tel:${site.phoneIntl}`}>
             <Icon name="phone" /> Llamar
           </a>

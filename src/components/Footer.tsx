@@ -7,7 +7,7 @@ import { CookieSettingsButton } from './CookieConsent';
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="site-footer">
+    <footer className="site-footer" lang="es">
       <div className="wrap cols">
         <div className="col col--id">
           <img src="/media/logo-praetoria-sin-fondo.png" alt={site.name} width={560} height={151} loading="lazy" />

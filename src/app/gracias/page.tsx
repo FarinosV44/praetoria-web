@@ -4,7 +4,7 @@ import { buildMetadata } from '@/lib/seo';
 
 export const metadata = buildMetadata({
   title: "Consulta enviada",
-  description: "Hemos recibido tu consulta.",
+  description: "Hemos recibido tu consulta en Praetoria División Jurídica. Te responderemos por el medio que hayas indicado.",
   path: '/gracias/',
   noindex: true,
 });

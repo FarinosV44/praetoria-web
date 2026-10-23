@@ -40,7 +40,7 @@ export function Header() {
   }, []);
 
   return (
-    <header className="site-header">
+    <header className="site-header" lang="es">
       <div className="wrap bar">
         <Link href="/" className="brand" aria-label={`${site.name}, inicio`}>
           <img src="/media/logo-praetoria-sin-fondo.png" alt={site.name} width={560} height={151} />
