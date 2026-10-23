@@ -37,6 +37,7 @@ for (const s of servicios) {
     if (!posts.has(a)) errores.push(`${s.id}: artículo inexistente ${a}`);
     else if (posts.get(a).draft) errores.push(`${s.id}: enlaza un borrador ${a}`);
   }
+  if ((s.revisamos || s.faqs) && !s.revision) errores.push(`${s.id}: texto ampliado sin estado de revisión`);
   if (s.pagina && !rutaExiste(s.pagina)) errores.push(`${s.id}: página inexistente ${s.pagina}`);
   if (s.siguientePaso && !rutaExiste(s.siguientePaso.href)) errores.push(`${s.id}: siguiente paso inexistente ${s.siguientePaso.href}`);
 }
@@ -46,6 +47,7 @@ let md = `# Servicios (#5)\n\n`;
 md += `Generado por \`node scripts/servicios/matriz.mjs\` a partir de \`src/lib/servicios.ts\`. **No editar a mano.**\n\n`;
 md += `Un servicio es algo concreto que el despacho hace, con un siguiente paso. Las páginas de área los agrupan y los artículos enlazan al que corresponde. `;
 md += `El botón de cada servicio abre \`/contacto/?servicio=<id>\`, que deja preelegidos el área y el asunto (se pueden cambiar). El id se guarda con la consulta: no debe cambiarse.\n\n`;
+md += `**Texto ampliado** (qué revisamos, proceso, documentación, preguntas y normas citadas): lo redacta la web a partir de lo ya publicado y de fuentes oficiales, y queda *pendiente de revisión* hasta que el despacho lo valide (\`revision: 'revisado'\`).\n\n`;
 md += `Total: ${servicios.length} servicios.\n`;
 for (const area of AREAS.filter((a) => a.id !== 'no-se')) {
   const lista = servicios.filter((s) => s.area === area.id);
@@ -54,11 +56,12 @@ for (const area of AREAS.filter((a) => a.id !== 'no-se')) {
     md += `Sin servicios definidos todavía.\n`;
     continue;
   }
-  md += `| Servicio | id | Artículos relacionados | Siguiente paso |\n| --- | --- | --- | --- |\n`;
+  md += `| Servicio | id | Artículos relacionados | Siguiente paso | Texto ampliado |\n| --- | --- | --- | --- | --- |\n`;
   for (const s of lista) {
     const arts = (s.articulos ?? []).map((a) => `[${esc(posts.get(a)?.title ?? a)}](/${a}/)`).join('<br>') || '—';
     const paso = s.siguientePaso ? `[${esc(s.siguientePaso.label)}](${s.siguientePaso.href})` : `[${esc(s.cta ?? 'Consultar sobre esto')}](${enlaceConsulta(s)})`;
-    md += `| ${esc(s.nombre)}${s.pagina ? ` ([página](${s.pagina}))` : ''} | \`${s.id}\` | ${arts} | ${paso} |\n`;
+    const ampliado = s.revisamos || s.faqs ? (s.revision === 'revisado' ? 'revisado' : '**pendiente de revisión**') : '—';
+    md += `| ${esc(s.nombre)}${s.pagina ? ` ([página](${s.pagina}))` : ''} | \`${s.id}\` | ${arts} | ${paso} | ${ampliado} |\n`;
   }
 }
 

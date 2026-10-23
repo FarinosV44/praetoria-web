@@ -16,6 +16,34 @@ export function ServiceList({ services }: { services: Servicio[] }) {
             <h3 className="service__name">{s.nombre}</h3>
             <div className="service__body">
               {s.resumen && <p>{s.resumen}</p>}
+              {!s.pagina && s.revisamos && (
+                <details className="service__more">
+                  <summary>Qué revisamos y qué documentación ayuda</summary>
+                  <ul className="checks">
+                    {s.revisamos.map((r) => (
+                      <li key={r}>{r}</li>
+                    ))}
+                  </ul>
+                  {s.documentacion && (
+                    <p className="small">
+                      <strong>Documentación orientativa</strong> (no la adjuntes en el formulario): {s.documentacion.join('; ')}.
+                    </p>
+                  )}
+                  {s.fuentes && (
+                    <p className="small muted">
+                      Normas:{' '}
+                      {s.fuentes.map((f, i) => (
+                        <span key={f.href}>
+                          {i > 0 && ' · '}
+                          <a href={f.href} rel="noopener">
+                            {f.label}
+                          </a>
+                        </span>
+                      ))}
+                    </p>
+                  )}
+                </details>
+              )}
               {reads.length > 0 && (
                 <p className="service__reads">
                   <span>Para leer antes:</span>{' '}

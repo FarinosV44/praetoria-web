@@ -127,6 +127,33 @@ test('servicio preseleccionado: se entrega con su nombre; si no existe o no es d
   assert.match((await mal.json()).errores.servicio, /no corresponde al área/);
 });
 
+test('transporte: papel, incidencia, importe y fecha se entregan con su etiqueta; en otra área se descartan', async () => {
+  const r = recorder();
+  const ok = await post({ ...base(), papel: 'transportista', incidencia: 'impago', importe: '3000-15000', fecha: '2026-09-15' }, r);
+  assert.equal(ok.status, 200);
+  const b = r.calls[0]!.body;
+  assert.equal(b.get('papel'), 'Transportista (hago el porte)');
+  assert.equal(b.get('incidencia'), 'Porte o factura impagada');
+  assert.equal(b.get('importe'), 'Entre 3.000 y 15.000 €');
+  assert.equal(b.get('fecha'), '2026-09-15');
+
+  const r2 = recorder();
+  await post({ ...base(), area: 'familia', papel: 'transportista', incidencia: 'impago', fecha: '2026-09-15' }, r2);
+  assert.equal(r2.calls[0]!.body.get('papel'), '');
+  assert.equal(r2.calls[0]!.body.get('fecha'), '');
+});
+
+test('transporte: valores fuera de lista o fechas imposibles o futuras dan 422', async () => {
+  const r = recorder();
+  for (const extra of [{ papel: 'pirata' }, { incidencia: 'x' }, { importe: '1000000' }, { fecha: '2026-02-31' }, { fecha: '15/09/2026' }, { fecha: '2999-01-01' }]) {
+    const res = await post({ ...base(), ...extra }, r);
+    assert.equal(res.status, 422, JSON.stringify(extra));
+    const k = Object.keys(extra)[0]!;
+    assert.ok((await res.json()).errores[k], k);
+  }
+  assert.equal(r.calls.length, 0);
+});
+
 test('solo acepta POST', async () => {
   assert.equal((await handler(new Request('https://x/api/consulta'), recorder())).status, 405);
 });

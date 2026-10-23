@@ -40,6 +40,26 @@ export function AreaPage({ area }: { area: AreaContent }) {
 
       <section className="section">
         <div className="wrap">
+          {area.recorridos && (
+            <>
+              <h2 className="journeys-title">¿Qué te ha pasado?</h2>
+              <ul className="journeys">
+                {area.recorridos.map((r) => (
+                  <li key={r.titulo} className="journey">
+                    <h3>{r.titulo}</h3>
+                    <p>{r.texto}</p>
+                    <p className="journey__links">
+                      {r.enlaces.map((e) => (
+                        <Link key={e.href} href={e.href}>
+                          {e.label}
+                        </Link>
+                      ))}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
           <div className="prose intro">
             {area.intro.map((p) => (
               <p key={p.slice(0, 40)}>{p}</p>

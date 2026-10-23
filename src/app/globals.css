@@ -1180,4 +1180,155 @@
       }
     }
   }
+
+  /* Página de servicio (#6) y recorridos por incidencia ---------------------------------------- */
+  .service-page__for {
+    margin: 18px 0 0;
+    padding-left: 14px;
+    border-left: 3px solid var(--red);
+    color: var(--ink-2);
+    max-width: 62ch;
+  }
+  .service-page__grid {
+    display: grid;
+    gap: clamp(32px, 5vw, 72px);
+  }
+  @media (min-width: 960px) {
+    .service-page__grid {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+  }
+  .checks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .checks li {
+    position: relative;
+    padding: 14px 0 14px 30px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-2);
+  }
+  .checks li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 1.35em;
+    width: 14px;
+    height: 3px;
+    background: var(--red);
+  }
+  .method-steps--compact {
+    margin-top: 8px;
+  }
+  .method-steps--compact li {
+    padding: 18px 0 18px 64px !important;
+    border-left: 0 !important;
+    border-top: 1px solid var(--line);
+    position: relative;
+  }
+  .method-steps--compact li:first-child {
+    border-top: 2px solid var(--ink);
+  }
+  .method-steps--compact li::before {
+    position: absolute;
+    left: 0;
+    top: 14px;
+    font-size: 2.4rem;
+  }
+  @media (min-width: 900px) {
+    .method-steps--compact {
+      grid-template-columns: 1fr;
+    }
+  }
+  .service-page__docs {
+    display: grid;
+    gap: 24px 56px;
+  }
+  @media (min-width: 900px) {
+    .service-page__docs {
+      grid-template-columns: 0.9fr 1.1fr;
+    }
+  }
+  .service-page__reads,
+  .service-page__sources {
+    margin-top: clamp(36px, 5vw, 56px);
+  }
+  .service-page__sources ul {
+    padding-left: 1.1em;
+  }
+  .service-page__sources li {
+    margin: 6px 0;
+  }
+
+  .journeys {
+    display: grid;
+    gap: 16px;
+    margin: 0 0 clamp(40px, 6vw, 64px);
+    padding: 0;
+    list-style: none;
+  }
+  @media (min-width: 900px) {
+    .journeys {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .journey {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 24px;
+    background: var(--stone, #f1efea);
+    border-top: 4px solid var(--red);
+  }
+  .journey h3 {
+    font-size: 1.3rem;
+    margin: 0;
+  }
+  .journey p {
+    margin: 0;
+    color: var(--ink-2);
+  }
+  .journey__links {
+    margin-top: auto !important;
+    padding-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    font-weight: 600;
+  }
+  .journeys-title {
+    margin-bottom: 18px;
+  }
+  .service__more {
+    margin: 10px 0 12px;
+  }
+  .service__more summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .service__more .checks li {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .form-extra {
+    border: 0;
+    border-left: 3px solid var(--red);
+    background: var(--stone);
+    padding: 16px 18px 6px;
+    margin: 0;
+    display: grid;
+    gap: 14px;
+  }
+  .form-extra legend {
+    float: left;
+    width: 100%;
+    font-weight: 700;
+    padding: 0;
+    margin-bottom: 4px;
+  }
+  .form-extra .row {
+    clear: both;
+  }
 }

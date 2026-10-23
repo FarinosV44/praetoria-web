@@ -16,6 +16,7 @@ const STATIC = [
   '/contacto/',
   '/abogado-hacienda-y-seguridad-social-en-valencia/',
   '/abogado-divorcio-horta-nord-valencia/',
+  '/reclamacion-portes-impagados/',
   '/aviso-legal/',
   '/politica-de-privacidad/',
   '/politica-de-cookies/',

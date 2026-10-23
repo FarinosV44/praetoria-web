@@ -8,7 +8,7 @@
 // 5. Solo responde éxito si Netlify Forms ha aceptado la entrega. Si falla, 502: el navegador ofrece reintentar.
 //
 // No acepta adjuntos ni guarda nada por su cuenta.
-import { pareceAutomatico, responsable, validarConsulta, AREAS, PREFERENCIAS } from '../../src/lib/consulta.ts';
+import { pareceAutomatico, responsable, validarConsulta, AREAS, PREFERENCIAS, PAPELES, INCIDENCIAS, IMPORTES } from '../../src/lib/consulta.ts';
 import { site } from '../../src/lib/site.ts';
 import { servicioPorId } from '../../src/lib/servicios.ts';
 
@@ -60,6 +60,10 @@ export default async function consulta(req: Request, context?: Ctx): Promise<Res
     telefono: c.telefono,
     area: AREAS.find((a) => a.id === c.area)!.label,
     servicio: c.servicio ? servicioPorId(c.servicio)!.nombre : '',
+    papel: PAPELES.find((x) => x.id === c.papel)?.label ?? '',
+    incidencia: INCIDENCIAS.find((x) => x.id === c.incidencia)?.label ?? '',
+    importe: IMPORTES.find((x) => x.id === c.importe)?.label ?? '',
+    fecha: c.fecha,
     responsable: `${resp.nombre} (${resp.telefono})`,
     preferencia: PREFERENCIAS.find((p) => p.id === c.preferencia)!.label,
     mensaje: c.mensaje,

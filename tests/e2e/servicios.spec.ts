@@ -68,7 +68,7 @@ test('una consulta enviada desde un servicio llega con ese asunto', async ({ pag
 test('un artículo enlaza al servicio del que trata, con el asunto preelegido', async ({ page }) => {
   await page.goto('/impagos-transporte-reclamar-factura/');
   const caja = page.locator('.post-aside .aside-box');
-  await expect(caja.getByRole('link', { name: 'reclamación de portes impagados' })).toHaveAttribute('href', '/logistica-y-transporte-internacional/#transporte-portes-impagados');
+  await expect(caja.getByRole('link', { name: 'reclamación de portes impagados' })).toHaveAttribute('href', '/reclamacion-portes-impagados/');
   await caja.getByRole('link', { name: 'Reclamar un porte impagado' }).click();
   await expect(page.locator('#servicio')).toContainText('Reclamación de portes impagados');
 });

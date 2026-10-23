@@ -21,6 +21,8 @@ export type AreaContent = {
   gallery?: Img[];
   category?: CategoryKey;
   whatsappText: string;
+  /** Recorridos por tipo de problema, al principio de la página (#6): cada uno lleva a su servicio o guía */
+  recorridos?: { titulo: string; texto: string; enlaces: { label: string; href: string }[] }[];
 };
 
 export const areaContent: AreaContent[] = [
@@ -54,6 +56,32 @@ export const areaContent: AreaContent[] = [
     image: { src: '/media/despacho-sala-reunion.webp', alt: 'Sala de reuniones acristalada del despacho Praetoria en El Puig' },
     category: 'transporte',
     whatsappText: mensajes.transporte,
+    recorridos: [
+      {
+        titulo: 'No me pagan un porte',
+        texto: 'Facturas de transporte pendientes, también cuando quien te contrató es una agencia o un intermediario.',
+        enlaces: [
+          { label: 'Cómo lo reclamamos', href: '/reclamacion-portes-impagados/' },
+          { label: 'Qué es la acción directa', href: '/accion-directa-en-el-transporte-como-reclamar-al-cargador-cuando-no-te-paga-tu-cliente/' },
+        ],
+      },
+      {
+        titulo: 'La mercancía llegó dañada, se perdió o llegó tarde',
+        texto: 'Reservas, responsabilidad de cada parte, límites de indemnización y reclamaciones frente a la aseguradora.',
+        enlaces: [
+          { label: 'Qué revisamos', href: '#transporte-mercancias' },
+          { label: 'Consultar mi caso', href: '/contacto/?servicio=transporte-mercancias' },
+        ],
+      },
+      {
+        titulo: 'Dudas con el DeCA, la documentación o los contratos',
+        texto: 'Órdenes de carga, subcontratación, quién debe emitir el DeCA y cómo repartir las obligaciones.',
+        enlaces: [
+          { label: 'Ver el servicio', href: '#transporte-deca-subcontratacion' },
+          { label: 'Guías sobre el DeCA', href: '#deca' },
+        ],
+      },
+    ],
   },
   {
     slug: 'derecho-mercantil',

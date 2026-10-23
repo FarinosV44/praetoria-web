@@ -26,6 +26,8 @@ Sin JavaScript, el mismo formulario se envía de forma clásica a `/api/consulta
 | Forma de contacto | Obligatoria, sin opción preelegida: llamada, correo o WhatsApp |
 | Teléfono | **Obligatorio si se elige llamada o WhatsApp**. Entre 9 y 15 cifras |
 | Correo | **Obligatorio si se elige correo**. Formato válido, máximo 254 caracteres |
+| Asunto (servicio) | Opcional, viene de un CTA (`?servicio=`). Debe pertenecer al área elegida |
+| Transporte: papel, tipo de incidencia, importe orientativo y fecha | Opcionales, **solo en el área de transporte** (en otra se descartan). Valores de lista; la fecha debe ser real y no futura. Sirve para priorizar a mano: no se calculan plazos |
 | Privacidad | Hay que aceptarla |
 | Cuerpo de la petición | Máximo 12 KB. No se admiten adjuntos |
 

@@ -5,15 +5,15 @@
 // reintento si falla la red o la entrega, y confirmación solo cuando el servidor la acepta.
 import Link from 'next/link';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
-import { AREAS, LIMITES, PREFERENCIAS, responsable, validarConsulta, type AreaId, type ErroresConsulta } from '@/lib/consulta';
+import { AREAS, IMPORTES, INCIDENCIAS, LIMITES, PAPELES, PREFERENCIAS, responsable, validarConsulta, type AreaId, type ErroresConsulta } from '@/lib/consulta';
 import { site } from '@/lib/site';
 import { servicioPorId } from '@/lib/servicios';
 
 type Estado = { tipo: 'editando' } | { tipo: 'enviando' } | { tipo: 'error'; mensaje: string } | { tipo: 'enviada'; area: AreaId };
 
-const ORDEN: (keyof ErroresConsulta)[] = ['nombre', 'area', 'servicio', 'mensaje', 'preferencia', 'telefono', 'email', 'privacidad'];
+const ORDEN: (keyof ErroresConsulta)[] = ['nombre', 'area', 'servicio', 'papel', 'incidencia', 'importe', 'fecha', 'mensaje', 'preferencia', 'telefono', 'email', 'privacidad'];
 const ETIQUETA: Partial<Record<keyof ErroresConsulta, string>> = {
-  nombre: 'Nombre', area: 'Área', servicio: 'Asunto', mensaje: 'Consulta', preferencia: 'Forma de contacto', telefono: 'Teléfono', email: 'Correo', privacidad: 'Privacidad',
+  nombre: 'Nombre', area: 'Área', servicio: 'Asunto', papel: 'Papel en el transporte', incidencia: 'Tipo de incidencia', importe: 'Importe', fecha: 'Fecha', mensaje: 'Consulta', preferencia: 'Forma de contacto', telefono: 'Teléfono', email: 'Correo', privacidad: 'Privacidad',
 };
 
 const nuevoId = () => (typeof crypto !== 'undefined' && 'randomUUID' in crypto ? crypto.randomUUID() : `id-${Date.now()}-${Math.random().toString(36).slice(2)}`);
@@ -32,6 +32,7 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
   const [preferencia, setPreferencia] = useState<string>('');
   const [area, setArea] = useState<string>(areaInicial ?? '');
   const [servicio, setServicio] = useState<string>('');
+  const [incidencia, setIncidencia] = useState<string>('');
   const formRef = useRef<HTMLFormElement>(null);
   const resumenRef = useRef<HTMLDivElement>(null);
   const exitoRef = useRef<HTMLDivElement>(null);
@@ -49,6 +50,7 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
     if (sv) {
       setServicio(sv.id);
       setArea(sv.area);
+      if (sv.incidencia) setIncidencia(sv.incidencia);
     } else if (ar) setArea(ar.id);
     /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
@@ -66,6 +68,10 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
       mensaje: fd.get('mensaje'),
       preferencia: fd.get('preferencia'),
       servicio,
+      papel: fd.get('papel'),
+      incidencia: fd.get('incidencia'),
+      importe: fd.get('importe'),
+      fecha: fd.get('fecha'),
       privacidad: fd.get('privacidad') === 'on',
       'empresa-web': fd.get('empresa-web'),
     };
@@ -175,6 +181,7 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
             setArea(e.target.value);
             // Si se cambia de área, el asunto preseleccionado deja de aplicar
             if (servicio && servicioPorId(servicio)?.area !== e.target.value) setServicio('');
+            if (e.target.value !== 'transporte') setIncidencia('');
           }}
           {...a11y('area')}
         >
@@ -204,6 +211,64 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
           </p>
         )}
       </div>
+
+
+      {area === 'transporte' && (
+        <fieldset className="field form-extra">
+          <legend>
+            Sobre el transporte <span className="muted">(opcional: nos ayuda a priorizar)</span>
+          </legend>
+          <div className="row">
+            <div className="field">
+              <label htmlFor="papel">Tu papel</label>
+              <select id="papel" name="papel" defaultValue="" {...a11y('papel')}>
+                <option value="">Sin indicar</option>
+                {PAPELES.map((x) => (
+                  <option key={x.id} value={x.id}>
+                    {x.label}
+                  </option>
+                ))}
+              </select>
+              <FieldError k="papel" msg={errores.papel} />
+            </div>
+            <div className="field">
+              <label htmlFor="incidencia">Tipo de incidencia</label>
+              <select id="incidencia" name="incidencia" value={incidencia} onChange={(e) => setIncidencia(e.target.value)} {...a11y('incidencia')}>
+                <option value="">Sin indicar</option>
+                {INCIDENCIAS.map((x) => (
+                  <option key={x.id} value={x.id}>
+                    {x.label}
+                  </option>
+                ))}
+              </select>
+              <FieldError k="incidencia" msg={errores.incidencia} />
+            </div>
+          </div>
+          <div className="row">
+            <div className="field">
+              <label htmlFor="importe">Importe orientativo</label>
+              <select id="importe" name="importe" defaultValue="" {...a11y('importe')}>
+                <option value="">Sin indicar</option>
+                {IMPORTES.map((x) => (
+                  <option key={x.id} value={x.id}>
+                    {x.label}
+                  </option>
+                ))}
+              </select>
+              <FieldError k="importe" msg={errores.importe} />
+            </div>
+            <div className="field">
+              <label htmlFor="fecha">Fecha de la factura, la entrega o la incidencia</label>
+              <input id="fecha" name="fecha" type="date" min="2000-01-01" {...a11y('fecha')} aria-describedby={err('fecha') ? 'err-fecha fecha-ayuda' : 'fecha-ayuda'} />
+              <p className="small muted" id="fecha-ayuda">
+                Solo para revisar antes los asuntos con fechas próximas. No calculamos plazos automáticamente.
+              </p>
+              <FieldError k="fecha" msg={errores.fecha} />
+            </div>
+          </div>
+          <p className="small muted">No adjuntes CMR, facturas ni otros documentos: si hacen falta, te los pediremos por un canal seguro.</p>
+        </fieldset>
+      )}
 
       <div className="field">
         <label htmlFor="mensaje">¿Qué ha pasado y qué te gustaría conseguir?</label>

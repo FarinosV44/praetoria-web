@@ -102,7 +102,9 @@ export function PostPage({ post }: { post: Post }) {
         </div>
       </article>
 
-      {post.category === 'transporte' && (
+      {/* La herramienta DeCA solo aparece en artículos marcados con «deca» (guía o herramienta).
+          En los de reclamaciones manda la contratación jurídica: no se promociona software (#6). */}
+      {post.deca && (
         <section className="section section--tight">
           <div className="wrap">
             <DecaBand campaign="articulo_blog" />
@@ -119,7 +121,15 @@ export function PostPage({ post }: { post: Post }) {
         </section>
       )}
 
-      <CtaBand />
+      {servicio ? (
+        <CtaBand
+          title={servicio.cta ?? `¿Necesitas ayuda con ${servicio.nombre.toLowerCase()}?`}
+          text="Cuéntanos qué ha pasado. Revisamos tu caso y te explicamos las opciones, el trabajo y los honorarios antes de empezar."
+          href={servicio.siguientePaso?.href ?? enlaceConsulta(servicio)}
+        />
+      ) : (
+        <CtaBand />
+      )}
     </div>
   );
 }
