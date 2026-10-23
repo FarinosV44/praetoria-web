@@ -61,6 +61,6 @@ Las mediciones son en local. Las fuentes de Google estaban bloqueadas en el ento
 
 ## Vuelta atrás
 
-- La etiqueta git `astro-final` marca el último estado en Astro, con todo #2 incluido. Para volver basta con crear una rama desde ella y desplegarla. `netlify.toml` de esa versión publica `dist/`.
+- La rama `astro-final` conserva el último estado en Astro, con todo #2 incluido. Para volver basta con desplegar esa rama (o fusionarla de nuevo en main). `netlify.toml` de esa versión publica `dist/`.
 - Ninguna URL ha cambiado y las redirecciones son las mismas, así que volver a Astro no afecta al SEO.
 - Nada se ha publicado: WordPress sigue en producción.
