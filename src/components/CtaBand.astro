@@ -1,0 +1,33 @@
+---
+import Icon from './Icon.astro';
+import { site, whatsapp } from '../data/site';
+interface Props { title?: string; text?: string; whatsappText?: string }
+const {
+  title = 'Cuéntanos tu caso',
+  text = 'Escuchamos tu situación antes de proponer una estrategia, y te explicamos el trabajo y los honorarios antes de empezar.',
+  whatsappText = 'Hola, quiero consultar mi caso con Praetoria.',
+} = Astro.props;
+---
+<section class="section section--ink cta">
+  <div class="wrap cta__inner">
+    <div>
+      <h2>{title}</h2>
+      <p class="cta__text">{text}</p>
+    </div>
+    <div class="cta__actions">
+      <a class="btn btn--red" href={whatsapp(whatsappText)}><Icon name="whatsapp" /> Escribir por WhatsApp</a>
+      <a class="btn cta__ghost" href={`tel:${site.phoneIntl}`}><Icon name="phone" /> Llamar al {site.phone}</a>
+      <a class="cta__link" href="/contacto/">O envíanos tu consulta por escrito</a>
+    </div>
+  </div>
+</section>
+<style>
+  .cta__inner { display: grid; gap: 28px 64px; align-items: end; }
+  @media (min-width: 900px) { .cta__inner { grid-template-columns: 1.2fr 1fr; } }
+  .cta h2 { margin-bottom: 0.4em; }
+  .cta__text { color: #cfd3d7; max-width: 52ch; margin: 0; font-size: var(--step-1); line-height: 1.45; }
+  .cta__actions { display: grid; gap: 12px; justify-items: start; }
+  .cta__ghost { background: transparent; border-color: #8a9096; }
+  .cta__ghost:hover { background: var(--ink-2); }
+  .cta__link { font-size: 0.95rem; text-underline-offset: 3px; }
+</style>

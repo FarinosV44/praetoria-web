@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import { areas } from '../data/site';
+---
+<Base title="Página no encontrada" description="La página que buscas no existe o ha cambiado de dirección." noindex>
+  <section class="section">
+    <div class="wrap">
+      <h1>Esta página no existe</h1>
+      <p class="lede">Puede que haya cambiado de dirección al reorganizar la web. Prueba desde una de estas secciones:</p>
+      <ul class="index-list">
+        {areas.map((a) => <li><h3><a href={`/${a.slug}/`}>{a.name}</a></h3><p>{a.short}</p></li>)}
+        <li><h3><a href="/blog/">Blog</a></h3><p>Todos los artículos, ordenados por tema.</p></li>
+      </ul>
+    </div>
+  </section>
+</Base>

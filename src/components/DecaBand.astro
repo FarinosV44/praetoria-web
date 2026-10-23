@@ -1,0 +1,31 @@
+---
+// Recomendación de DeCA Profesional. Aparece en la página de transporte y en los artículos de transporte.
+import { deca } from '../data/site';
+interface Props { campaign?: string }
+const { campaign = 'recomendacion_abogado' } = Astro.props;
+---
+<aside class="deca" aria-label="Herramienta para crear el DECA">
+  <div>
+    <h2>¿Necesitas crear el DECA de un transporte?</h2>
+    <p>
+      DECA Profesional sirve para generar, compartir y conservar el Documento Electrónico de Control Administrativo.
+      Es una herramienta impulsada y recomendada por Juan José Farinós Ibáñez, abogado del sector del transporte.
+    </p>
+    <p class="small muted">DECA Profesional es un servicio tecnológico independiente de los servicios jurídicos del despacho.</p>
+  </div>
+  <a class="btn" href={deca(campaign)} rel="noopener">Crear un DECA gratis</a>
+</aside>
+<style>
+  .deca {
+    display: grid;
+    gap: 20px 40px;
+    align-items: center;
+    padding: clamp(24px, 4vw, 40px);
+    background: var(--stone);
+    border-left: 4px solid var(--ink);
+  }
+  @media (min-width: 820px) { .deca { grid-template-columns: 1fr auto; } }
+  .deca h2 { font-size: var(--step-2); }
+  .deca p { max-width: 62ch; }
+  .deca .small { margin: 0; }
+</style>

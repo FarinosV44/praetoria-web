@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { categories } from '../data/site';
+interface Props { posts: CollectionEntry<'blog'>[]; showCategory?: boolean; compact?: boolean }
+const { posts, showCategory = true, compact = false } = Astro.props;
+const fmt = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<ul class:list={['posts', { 'posts--compact': compact }]}>
+  {posts.map((p) => (
+    <li lang={p.data.lang !== 'es' ? p.data.lang : undefined} dir={p.data.lang === 'ar' ? 'rtl' : undefined}>
+      <p class="posts__meta">
+        {showCategory && <a href={`/blog/categoria/${p.data.category}/`}>{categories[p.data.category].name}</a>}
+        <time datetime={p.data.date.toISOString()}>{fmt.format(p.data.date)}</time>
+      </p>
+      <h3><a href={`/${p.id}/`}>{p.data.title}</a></h3>
+      {!compact && <p class="posts__desc">{p.data.description}</p>}
+    </li>
+  ))}
+</ul>
+<style>
+  .posts { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
+  .posts > li { padding: 1.2rem 0 1.3rem; border-bottom: 1px solid var(--line); }
+  .posts__meta { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.85rem; color: var(--muted); margin: 0 0 0.4rem; }
+  .posts__meta a { color: var(--red-dark); text-decoration: none; font-weight: 600; }
+  .posts__meta a:hover { text-decoration: underline; }
+  .posts h3 { margin: 0; font-size: 1.15rem; line-height: 1.3; max-width: 60ch; }
+  .posts h3 a { text-decoration: none; }
+  .posts h3 a:hover { color: var(--red); text-decoration: underline; text-underline-offset: 3px; }
+  .posts__desc { margin: 0.4rem 0 0; color: var(--ink-2); max-width: 70ch; font-size: 0.97rem; }
+  .posts--compact h3 { font-size: 1.02rem; }
+</style>

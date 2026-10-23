@@ -1,0 +1,387 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Faq from '../components/Faq.astro';
+import PostList from '../components/PostList.astro';
+import Icon from '../components/Icon.astro';
+import { site, whatsapp } from '../data/site';
+
+const posts = (await getCollection('blog', (p) => p.data.category === 'hacienda')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const faq = [
+  {
+    q: 'Me ha llegado una carta de Hacienda, ¿qué debo hacer?',
+    a: 'No la ignores ni envíes documentación sin revisar antes qué procedimiento se ha iniciado. Conserva la notificación completa y anota cuándo la recibiste o abriste para comprobar el plazo aplicable.',
+  },
+  {
+    q: '¿Cuánto tiempo tengo para contestar un requerimiento de Hacienda?',
+    a: 'Depende del acto recibido y de la forma y fecha de notificación. El plazo debe verificarse en el documento completo; no conviene esperar al último día.',
+  },
+  {
+    q: '¿Se puede recurrir una liquidación o una sanción de Hacienda?',
+    a: 'En muchos casos existen vías de alegación o recurso, pero deben valorarse el expediente, los hechos, las pruebas, la motivación y el plazo concreto.',
+  },
+  {
+    q: '¿Recurrir paraliza automáticamente el cobro?',
+    a: 'No siempre. La impugnación y el riesgo recaudatorio deben estudiarse conjuntamente según el acto y la fase del procedimiento.',
+  },
+  {
+    q: '¿Qué puedo hacer si me embargan una cuenta por una deuda de Hacienda o de la Seguridad Social?',
+    a: 'Conviene revisar de inmediato el origen de la deuda, si el procedimiento se notificó correctamente y si existen motivos de oposición al apremio o al propio embargo, antes de que se ejecuten más actuaciones.',
+  },
+  {
+    q: '¿Puede Hacienda derivar la responsabilidad de una deuda al administrador de la empresa?',
+    a: 'En determinados supuestos sí, mediante un expediente de derivación de responsabilidad. Es un procedimiento independiente que también admite alegaciones y recurso, y conviene analizarlo cuanto antes.',
+  },
+  {
+    q: '¿Qué documentación necesitáis para estudiar mi caso?',
+    a: 'La notificación completa, la fecha de recepción o apertura, los documentos relacionados y una explicación breve de lo sucedido.',
+  },
+  {
+    q: '¿Podéis atenderme fuera de Valencia o de El Puig?',
+    a: 'Sí. Muchos procedimientos con Hacienda y la Seguridad Social se tramitan electrónicamente, por lo que podemos estudiar documentación y preparar actuaciones en toda España.',
+  },
+];
+
+const steps = [
+  ['Identificamos', 'El acto recibido, el procedimiento y la fecha que condiciona la actuación.'],
+  ['Estudiamos', 'El expediente, la documentación, los cálculos y los riesgos existentes.'],
+  ['Planteamos', 'La respuesta, alegación, recurso o solución de pago adecuada al caso.'],
+  ['Explicamos', 'El trabajo necesario y los honorarios antes de iniciar la actuación.'],
+];
+---
+
+<Base
+  title="Abogado para requerimientos de Hacienda y Seguridad Social en Valencia"
+  description="¿Te ha llegado una carta, liquidación, sanción o deuda de Hacienda o de la Seguridad Social? Revisamos la notificación, el plazo y la respuesta adecuada."
+>
+  <section class="page-head">
+    <div class="wrap split">
+      <div>
+        <Breadcrumbs items={[{ label: 'Empresas y autónomos', href: '/areas/#empresas' }, { label: 'Hacienda y Seguridad Social' }]} />
+        <h1>Abogados para requerimientos de Hacienda y Seguridad Social</h1>
+        <p class="lede">
+          ¿Has recibido una carta, liquidación, sanción o reclamación de deuda? Estudiamos la notificación, comprobamos
+          los plazos y planteamos la respuesta, alegación o recurso adecuado.
+        </p>
+        <div class="actions">
+          <a class="btn btn--red" href="#diagnostico">Revisar qué he recibido</a>
+          <a class="btn btn--ghost" href={`tel:${site.phoneIntl}`}><Icon name="phone" /> {site.phone}</a>
+        </div>
+      </div>
+      <div class="deadline">
+        <h2>No dejes correr el plazo</h2>
+        <p>
+          Una respuesta bien planteada desde el inicio puede evitar que el problema avance hacia recargos, sanciones o
+          apremio. Particulares, autónomos, administradores y empresas, en Valencia, El Puig y toda España.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="diagnostico">
+    <div class="wrap split">
+      <div>
+        <h2>¿Qué notificación has recibido?</h2>
+        <p>
+          Responde unas preguntas breves y prepararemos un resumen para que nos lo envíes por WhatsApp o por correo, sin
+          subir documentación sensible a esta página. Tus respuestas no salen de tu dispositivo hasta que decidas
+          enviarlas.
+        </p>
+        <form class="form triage" id="triage" novalidate>
+          <fieldset class="field">
+            <legend>¿Quién la envía?</legend>
+            <div class="radios">
+              <label><input type="radio" name="emisor" value="Hacienda (AEAT)" required /> Hacienda (AEAT)</label>
+              <label><input type="radio" name="emisor" value="Seguridad Social (TGSS)" /> Seguridad Social (TGSS)</label>
+              <label><input type="radio" name="emisor" value="INSS" /> INSS</label>
+              <label><input type="radio" name="emisor" value="No lo sé" /> No lo sé</label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="tipo">¿Qué tipo de documento es?</label>
+            <select id="tipo" name="tipo">
+              <option value="">Selecciona la opción más parecida</option>
+              <option>Requerimiento de información o de justificación</option>
+              <option>Propuesta de liquidación o liquidación</option>
+              <option>Inicio de expediente sancionador o sanción</option>
+              <option>Reclamación de deuda o providencia de apremio</option>
+              <option>Diligencia de embargo</option>
+              <option>Derivación de responsabilidad</option>
+              <option>Resolución sobre una prestación</option>
+              <option>No lo sé</option>
+            </select>
+            <p class="small muted">No pasa nada si no sabes identificarlo. Para confirmarlo revisaremos el documento completo.</p>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="recibida">Fecha de recepción o apertura</label>
+              <input id="recibida" name="recibida" type="date" />
+            </div>
+            <div class="field">
+              <label for="limite">Fecha límite (si la conoces)</label>
+              <input id="limite" name="limite" type="date" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="importe">Importe aproximado <span class="muted">(opcional)</span></label>
+            <select id="importe" name="importe">
+              <option value="">Sin indicar</option>
+              <option>No aparece ninguna cantidad</option>
+              <option>Menos de 3.000 €</option>
+              <option>Entre 3.000 € y 10.000 €</option>
+              <option>Entre 10.000 € y 50.000 €</option>
+              <option>Más de 50.000 €</option>
+              <option>No lo sé</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="descripcion">Descripción breve</label>
+            <textarea id="descripcion" name="descripcion" maxlength="900"></textarea>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="tnombre">Nombre</label>
+              <input id="tnombre" name="nombre" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="ttel">Teléfono</label>
+              <input id="ttel" name="telefono" type="tel" autocomplete="tel" required />
+            </div>
+          </div>
+          <label class="check">
+            <input type="checkbox" name="privacidad" required />
+            <span>He leído y acepto la <a href="/politica-de-privacidad/">política de privacidad</a>.</span>
+          </label>
+          <p class="small muted">Enviar esta información no crea una relación abogado-cliente ni suspende o interrumpe ningún plazo administrativo.</p>
+          <p class="error" role="alert" hidden></p>
+          <div><button class="btn btn--red" type="submit">Preparar mi resumen</button></div>
+        </form>
+
+        <div class="result" id="triage-result" hidden tabindex="-1">
+          <h3>Tu resumen está listo</h3>
+          <p>Tu asunto necesita una revisión individual: comprobaremos el documento completo, la fecha de notificación, el procedimiento iniciado y la documentación relacionada.</p>
+          <pre class="summary"></pre>
+          <div class="actions">
+            <a class="btn btn--red" data-send="wa" href="#"><Icon name="whatsapp" /> Enviar por WhatsApp</a>
+            <a class="btn btn--ghost" data-send="mail" href="#"><Icon name="mail" /> Enviar por correo</a>
+            <button class="btn btn--ghost" type="button" data-edit>Corregir mis respuestas</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="scope">
+        <h2>Dónde intervenimos</h2>
+        <h3>Hacienda: requerimientos, liquidaciones y sanciones</h3>
+        <p>
+          Requerimientos de información, justificación de ingresos y movimientos bancarios, comprobaciones de IRPF, IVA o
+          Sociedades, propuestas de liquidación, expedientes sancionadores, derivaciones de responsabilidad al
+          administrador y aplazamientos de deuda.
+        </p>
+        <h3>Seguridad Social: deudas, apremios y embargos</h3>
+        <p>
+          Reclamaciones de deuda, providencias de apremio, embargos, diferencias de cotización, actas de liquidación,
+          cuotas de autónomos, devolución de ingresos indebidos y resoluciones de prestaciones del INSS.
+        </p>
+        <h3>Abogado fiscal en Valencia y El Puig, también para autónomos</h3>
+        <p>
+          Muchos procedimientos se tramitan electrónicamente, así que en la mayoría de los casos podemos revisar la
+          documentación y plantear la defensa sin necesidad de desplazamiento.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--stone">
+    <div class="wrap">
+      <h2>Cómo trabajamos</h2>
+      <p class="lede">Abogados, economistas y especialistas fiscales analizan juntos las implicaciones jurídicas y económicas de tu caso.</p>
+      <ol class="method">
+        {steps.map(([t, d]) => <li><h3>{t}</h3><p>{d}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <Faq items={faq}>
+        <p class="muted">Cada notificación exige una lectura individual. Estas respuestas son una orientación general y no sustituyen la revisión de tu caso.</p>
+      </Faq>
+    </div>
+  </section>
+
+  {
+    posts.length > 0 && (
+      <section class="section section--stone">
+        <div class="wrap">
+          <h2>Artículos sobre Hacienda y Seguridad Social</h2>
+          <PostList posts={posts} showCategory={false} />
+        </div>
+      </section>
+    )
+  }
+
+  <section class="section section--ink">
+    <div class="wrap">
+      <h2>Cuanto antes estudiemos la notificación, más opciones tendremos para defenderte</h2>
+      <div class="actions">
+        <a class="btn btn--red" href="#diagnostico">Quiero que revisemos mi caso</a>
+        <a class="btn cta-ghost" href={whatsapp('Hola, he recibido una notificación de Hacienda o de la Seguridad Social.')}>
+          <Icon name="whatsapp" /> WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script define:vars={{ phone: site.phoneIntl.replace('+', ''), email: site.email }} is:inline>
+  (function () {
+    var form = document.getElementById('triage');
+    var out = document.getElementById('triage-result');
+    var err = form.querySelector('.error');
+    var fmt = function (v) {
+      if (!v) return '';
+      var p = v.split('-');
+      return p[2] + '/' + p[1] + '/' + p[0];
+    };
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var d = new FormData(form);
+      var missing = [];
+      if (!d.get('emisor')) missing.push('quién envía la notificación');
+      if (!String(d.get('nombre') || '').trim()) missing.push('tu nombre');
+      if (!String(d.get('telefono') || '').trim()) missing.push('tu teléfono');
+      if (!d.get('privacidad')) missing.push('aceptar la política de privacidad');
+      if (missing.length) {
+        err.textContent = 'Para preparar el resumen falta: ' + missing.join(', ') + '.';
+        err.hidden = false;
+        return;
+      }
+      err.hidden = true;
+      var details = [
+        'Organismo: ' + d.get('emisor'),
+        d.get('tipo') ? 'Documento: ' + d.get('tipo') : '',
+        d.get('recibida') ? 'Recibida o abierta el: ' + fmt(d.get('recibida')) : '',
+        d.get('limite') ? 'Fecha límite: ' + fmt(d.get('limite')) : '',
+        d.get('importe') ? 'Importe: ' + d.get('importe') : '',
+        String(d.get('descripcion') || '').trim() ? 'Descripción: ' + String(d.get('descripcion')).trim() : '',
+      ].filter(Boolean);
+      var text =
+        'Hola, he recibido una notificación y quiero que la reviséis.\n\n' +
+        details.join('\n') +
+        '\n\nNombre: ' + String(d.get('nombre')).trim() +
+        '\nTeléfono: ' + String(d.get('telefono')).trim();
+      out.querySelector('.summary').textContent = text;
+      out.querySelector('[data-send="wa"]').href = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(text);
+      out.querySelector('[data-send="mail"]').href =
+        'mailto:' + email + '?subject=' + encodeURIComponent('Revisión de notificación: ' + d.get('emisor')) + '&body=' + encodeURIComponent(text);
+      form.hidden = true;
+      out.hidden = false;
+      out.focus();
+    });
+    out.querySelector('[data-edit]').addEventListener('click', function () {
+      out.hidden = true;
+      form.hidden = false;
+      form.querySelector('input').focus();
+    });
+  })();
+</script>
+
+<style>
+  .deadline {
+    border-left: 4px solid var(--red);
+    background: var(--red-tint);
+    padding: 24px 28px;
+    align-self: center;
+  }
+  .deadline h2 {
+    font-size: var(--step-2);
+  }
+  .deadline p {
+    margin: 0;
+  }
+  .triage {
+    margin-top: 20px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--ink);
+  }
+  .row {
+    display: grid;
+    gap: 1rem;
+  }
+  @media (min-width: 600px) {
+    .row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  fieldset.field {
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+  .field .small {
+    margin: 0;
+  }
+  .check a {
+    color: var(--red-dark);
+  }
+  .error {
+    color: var(--red-dark);
+    font-weight: 600;
+    margin: 0;
+  }
+  .result {
+    margin-top: 20px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--red);
+  }
+  .summary {
+    white-space: pre-wrap;
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    background: var(--stone);
+    padding: 16px;
+    margin: 0;
+  }
+  .scope h3 {
+    margin-top: 1.4em;
+    font-size: 1.1rem;
+  }
+  .scope p {
+    color: var(--ink-2);
+  }
+  .method {
+    list-style: none;
+    padding: 0;
+    margin: 28px 0 0;
+    display: grid;
+    gap: 0;
+    counter-reset: m;
+    border-top: 2px solid var(--ink);
+  }
+  @media (min-width: 800px) {
+    .method {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .method li {
+    counter-increment: m;
+    padding: 20px 20px 8px 0;
+  }
+  .method h3::before {
+    content: counter(m) '. ';
+    color: var(--red);
+  }
+  .method p {
+    color: var(--ink-2);
+  }
+  .cta-ghost {
+    background: transparent;
+    border-color: #8a9096;
+  }
+</style>

@@ -1,0 +1,42 @@
+# Redirecciones permanentes (301) desde la web anterior en WordPress.
+# Las páginas de área, los artículos y las landings conservan su dirección, así que no necesitan redirección.
+
+# Páginas fusionadas o renombradas
+/ambitos-de-especializacion/     /areas/            301
+/ambitos-de-especializacion      /areas/            301
+/sobre-mi/                       /el-despacho/      301
+/sobre-mi                        /el-despacho/      301
+/sobre-praetoria/                /el-despacho/      301
+/sobre-praetoria                 /el-despacho/      301
+/despacho-juridico-valencia/     /                  301
+/despacho-juridico-valencia      /                  301
+/blogs/                          /blog/             301
+
+# Enlace roto que existía en un artículo
+/deca-subcontratacion-agencias-transporte/  /deca-y-subcontratacion-que-debe-hacer-realmente-una-agencia-de-transporte/  301
+
+# Categorías antiguas de WordPress
+/category/transporte-y-logistica/*               /blog/categoria/transporte/       301
+/category/logistica-y-transporte/*               /blog/categoria/transporte/       301
+/category/normativa-transporte/*                 /blog/categoria/transporte/       301
+/category/hacienda-y-seguridad-social/*          /blog/categoria/hacienda/         301
+/category/mercantil-y-sociedades/*               /blog/categoria/mercantil/        301
+/category/civil-y-patrimonio/*                   /blog/categoria/civil-vivienda/   301
+/category/familia/*                              /blog/categoria/familia/          301
+/category/arte-y-patrimonio/*                    /arte-y-patrimonio/               301
+/category/*                                      /blog/                            301
+
+# Etiquetas, autores, paginación y feeds de WordPress
+/tag/*                       /blog/          301
+/author/*                    /el-despacho/   301
+/blog/page/*                 /blog/          301
+/page/*                      /blog/          301
+/feed/                       /rss.xml        301
+/feed                        /rss.xml        301
+/comments/feed/              /rss.xml        301
+/*/feed/                     /rss.xml        301
+
+# Rutas internas de WordPress que ya no existen
+/wp-admin/*                  /               302
+/wp-login.php                /               302
+/xmlrpc.php                  /               302

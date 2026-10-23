@@ -1,0 +1,22 @@
+---
+import { getEntry, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+interface Props { id: 'aviso-legal' | 'politica-de-privacidad' | 'politica-de-cookies' }
+const entry = (await getEntry('legal', Astro.props.id))!;
+const { Content } = await render(entry);
+---
+<Base title={entry.data.title} description={entry.data.description}>
+  <section class="page-head">
+    <div class="wrap">
+      <Breadcrumbs items={[{ label: entry.data.title }]} />
+      <h1>{entry.data.title}</h1>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap prose">
+      <Content />
+      <p class="muted"><em>Última actualización: {entry.data.updated}.</em></p>
+    </div>
+  </section>
+</Base>

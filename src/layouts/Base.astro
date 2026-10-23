@@ -1,0 +1,150 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CookieConsent from '../components/CookieConsent.astro';
+import Icon from '../components/Icon.astro';
+import { site, whatsapp } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+  lang?: string;
+  /** Datos estructurados adicionales (JSON-LD) de la página */
+  schema?: object[];
+  published?: Date;
+  modified?: Date;
+}
+
+const { title, description, image = '/media/og-praetoria.jpg', type = 'website', noindex = false, lang = 'es', schema = [], published, modified } =
+  Astro.props;
+
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const fullTitle = title.includes('Praetoria') ? title : `${title} | ${site.name}`;
+const ogImage = new URL(image, site.url).href;
+
+const legalService = {
+  '@context': 'https://schema.org',
+  '@type': 'LegalService',
+  '@id': `${site.url}/#despacho`,
+  name: site.name,
+  legalName: site.legalName,
+  url: site.url,
+  image: `${site.url}/media/despacho-salas-reuniones.webp`,
+  logo: `${site.url}/media/logo-praetoria-sin-fondo.png`,
+  telephone: site.phoneIntl,
+  email: site.email,
+  priceRange: '€€',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    postalCode: site.address.postalCode,
+    addressLocality: site.address.locality,
+    addressRegion: site.address.region,
+    addressCountry: site.address.country,
+  },
+  areaServed: ['El Puig de Santa María', "L'Horta Nord", 'Valencia', 'España'],
+  founder: {
+    '@type': 'Person',
+    name: site.lawyer,
+    jobTitle: 'Abogado',
+    memberOf: { '@type': 'Organization', name: site.college },
+    sameAs: [site.linkedin],
+  },
+  sameAs: [site.linkedin],
+};
+---
+
+<!doctype html>
+<html lang={lang} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {published && <meta property="article:published_time" content={published.toISOString()} />}
+    {modified && <meta property="article:modified_time" content={modified.toISOString()} />}
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="48x48" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title={`Blog de ${site.name}`} href="/rss.xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(legalService)} />
+    {schema.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+  </head>
+  <body>
+    <a class="skip" href="#contenido">Saltar al contenido</a>
+    <Header />
+    <main id="contenido">
+      <slot />
+    </main>
+    <Footer />
+
+    <nav class="quickbar" aria-label="Contacto rápido">
+      <a href={`tel:${site.phoneIntl}`}><Icon name="phone" /> Llamar</a>
+      <a href={whatsapp('Hola, quiero consultar mi caso con Praetoria.')}><Icon name="whatsapp" /> WhatsApp</a>
+    </nav>
+    <CookieConsent />
+  </body>
+</html>
+
+<style>
+  .quickbar {
+    display: none;
+  }
+  @media (max-width: 999px) {
+    body {
+      padding-bottom: 60px;
+    }
+    .quickbar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: fixed;
+      z-index: 60;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 60px;
+      background: var(--ink);
+      border-top: 1px solid var(--ink-2);
+    }
+    .quickbar a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--paper);
+      text-decoration: none;
+      font-weight: 650;
+    }
+    .quickbar a + a {
+      background: var(--red);
+    }
+    .quickbar :global(svg) {
+      width: 20px;
+      height: 20px;
+    }
+  }
+</style>
