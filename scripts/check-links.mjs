@@ -1,9 +1,9 @@
-// Comprueba que todos los enlaces internos de la web construida (dist/) apuntan a una página existente.
-// Uso: npm run build && npm run check-links
+// Comprueba que todos los enlaces internos de la web construida (out/) apuntan a una página existente.
+// Uso: npm run build && npm run check-links  (carpeta por defecto: out/)
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
-const dist = 'dist';
+const dist = process.argv[2] || 'out';
 const walk = (d) => readdirSync(d).flatMap((f) => (statSync(join(d, f)).isDirectory() ? walk(join(d, f)) : [join(d, f)]));
 const html = walk(dist).filter((f) => f.endsWith('.html'));
 const exists = (p) => {

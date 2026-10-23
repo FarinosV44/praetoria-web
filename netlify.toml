@@ -1,9 +1,11 @@
 [build]
   command = "npm run build"
-  publish = "dist"
+  publish = "out"
 
 [build.environment]
   NODE_VERSION = "22"
+  # Exportación estática de Next servida como archivos: se desactiva el adaptador de Next de Netlify
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
   # Ningún build es indexable salvo que se active expresamente (ver docs/seo/LANZAMIENTO.md)
   SITE_INDEXABLE = "false"
 
@@ -32,6 +34,6 @@
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
-  for = "/_astro/*"
+  for = "/_next/static/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"

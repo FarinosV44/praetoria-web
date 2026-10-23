@@ -1,0 +1,105 @@
+import Link from 'next/link';
+import type { Post } from '@/lib/content';
+import { getPosts } from '@/lib/content';
+import { areas, categories, site } from '@/lib/site';
+import { Breadcrumbs } from './Breadcrumbs';
+import { PostList } from './PostList';
+import { DecaBand } from './DecaBand';
+import { CtaBand } from './CtaBand';
+import { JsonLd } from './JsonLd';
+
+const fmt = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Madrid' });
+const day = (d: Date) => d.toISOString().slice(0, 10);
+
+export function PostPage({ post }: { post: Post }) {
+  const cat = categories[post.category];
+  const area = cat.area ? areas.find((a) => a.slug === cat.area) : undefined;
+  const related = getPosts()
+    .filter((p) => p.category === post.category && p.slug !== post.slug)
+    .slice(0, 3);
+  const showUpdated = post.updated && day(post.updated) !== day(post.date);
+
+  const articleLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date.toISOString(),
+    dateModified: (post.updated ?? post.date).toISOString(),
+    inLanguage: post.lang,
+    mainEntityOfPage: new URL(`/${post.slug}/`, site.url).href,
+    author: { '@type': 'Person', name: site.lawyer, url: `${site.url}/el-despacho/` },
+    publisher: { '@id': `${site.url}/#despacho` },
+    keywords: post.tags.join(', ') || undefined,
+  };
+
+  return (
+    <div className="page-post">
+      <JsonLd data={articleLd} />
+      <article lang={post.lang !== 'es' ? post.lang : undefined} dir={post.lang === 'ar' ? 'rtl' : undefined}>
+        <header className="page-head">
+          <div className="wrap">
+            <Breadcrumbs
+              items={[{ label: 'Blog', href: '/blog/' }, { label: cat.name, href: `/blog/categoria/${post.category}/` }, { label: post.title }]}
+            />
+            <h1 className="post-title">{post.title}</h1>
+            <p className="post-meta">
+              Por <Link href="/el-despacho/">{site.lawyer}</Link>, abogado ICAV {site.collegeNumber}. Publicado el{' '}
+              <time dateTime={post.date.toISOString()}>{fmt.format(post.date)}</time>
+              {showUpdated && (
+                <>
+                  {' '}
+                  y revisado el <time dateTime={post.updated!.toISOString()}>{fmt.format(post.updated!)}</time>
+                </>
+              )}
+              .
+            </p>
+          </div>
+        </header>
+
+        <div className="wrap post-grid">
+          {/* HTML generado en el build a partir del Markdown del repositorio (contenido propio, no de usuarios) */}
+          <div className="prose post-body" dangerouslySetInnerHTML={{ __html: post.html }} />
+
+          <aside className="post-aside">
+            {area && (
+              <div className="aside-box">
+                <p className="aside-box__title">¿Necesitas ayuda con un asunto así?</p>
+                <p>
+                  Este artículo pertenece al área de <Link href={`/${area.slug}/`}>{area.name.toLowerCase()}</Link>, donde
+                  explicamos cómo podemos ayudarte.
+                </p>
+                <Link className="btn btn--ghost" href={`/${area.slug}/`}>
+                  Ver el área
+                </Link>
+              </div>
+            )}
+            <p className="disclaimer">
+              Este artículo es informativo y no sustituye el estudio de tu caso concreto. Las normas cambian: comprueba la fecha de
+              revisión.
+            </p>
+          </aside>
+        </div>
+      </article>
+
+      {post.category === 'transporte' && (
+        <section className="section section--tight">
+          <div className="wrap">
+            <DecaBand campaign="articulo_blog" />
+          </div>
+        </section>
+      )}
+
+      {related.length > 0 && (
+        <section className="section section--stone">
+          <div className="wrap">
+            <h2>Más artículos de {cat.name}</h2>
+            <PostList posts={related} showCategory={false} />
+          </div>
+        </section>
+      )}
+
+      <CtaBand />
+    </div>
+  );
+}

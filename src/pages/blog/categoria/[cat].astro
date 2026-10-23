@@ -1,9 +1,0 @@
----
-import BlogIndex from '../../../components/BlogIndex.astro';
-import { categories, type CategoryKey } from '../../../data/site';
-export function getStaticPaths() {
-  return Object.keys(categories).map((cat) => ({ params: { cat } }));
-}
-const { cat } = Astro.params as { cat: CategoryKey };
----
-<BlogIndex category={cat} />

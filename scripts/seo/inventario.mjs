@@ -15,7 +15,7 @@ import { createEngine } from './netlify-engine.mjs';
 
 const root = new URL('../../', import.meta.url).pathname;
 const args = process.argv.slice(2);
-const outDir = join(root, args.find((a) => !a.startsWith('--')) || 'dist');
+const outDir = join(root, args.find((a) => !a.startsWith('--')) || 'out');
 const write = args.includes('--write');
 const SITE = 'https://praetoriaabogados.es';
 const indexable = process.env.SITE_INDEXABLE === 'true';

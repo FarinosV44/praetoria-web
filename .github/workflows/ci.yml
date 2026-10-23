@@ -21,6 +21,11 @@ jobs:
           cache: npm
       - run: npm ci
 
+      - name: Tipos (TypeScript estricto)
+        run: npm run typecheck
+      - name: Lint (ESLint + reglas de Next)
+        run: npm run lint
+
       - name: Build de preview (no indexable)
         run: npm run build
       - name: Enlaces internos, migración SEO y pruebas

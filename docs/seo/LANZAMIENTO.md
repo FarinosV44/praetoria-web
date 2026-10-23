@@ -36,7 +36,7 @@ Elegir un día laborable por la mañana, con alguien disponible durante unas hor
 5. [ ] Comprobar las variantes: `http://` → `https://`, `www` → sin `www`, y ambas en un solo salto.
 6. [ ] Ejecutar `node scripts/seo/probar-preview.mjs https://praetoriaabogados.es`. El único cambio esperado respecto al preview es la cabecera `X-Robots-Tag`, que ya no debe aparecer.
 7. [ ] Enviar una consulta real de prueba desde el formulario y confirmar la recepción.
-8. [ ] En Search Console: enviar `https://praetoriaabogados.es/sitemap-index.xml` y solicitar la indexación de la portada y de 3 o 4 páginas clave.
+8. [ ] En Search Console: enviar `https://praetoriaabogados.es/sitemap.xml` (misma dirección que el sitemap de WordPress, así Search Console lo relee sin cambios) y solicitar la indexación de la portada y de 3 o 4 páginas clave.
 
 ## 3. Vuelta atrás
 

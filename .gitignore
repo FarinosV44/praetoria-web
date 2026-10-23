@@ -1,6 +1,10 @@
 node_modules/
+.next/
+out/
 dist/
-.astro/
+next-env.d.ts
+*.tsbuildinfo
 .netlify/
-.env
+.env*
 .DS_Store
+.astro/
