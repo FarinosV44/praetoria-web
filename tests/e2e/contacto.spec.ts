@@ -62,6 +62,7 @@ test('envío correcto: llega una sola consulta con área y responsable, y se con
 
 test('Laboral: se indica y se asigna a Lucía López', async ({ page }) => {
   await rellenar(page, { area: 'Laboral' });
+  await page.getByLabel('Soy la persona trabajadora').check();
   await expect(page.getByText('Los asuntos laborales los atiende Lucía López')).toBeVisible();
   await esperarTiempoMinimo(page);
   await page.getByRole('button', { name: 'Enviar mi consulta' }).click();

@@ -50,7 +50,7 @@ test('consulta válida: se entrega a Netlify Forms y responde 200 con su id', as
 
 test('laboral: el responsable es Lucía López', async () => {
   const r = recorder();
-  await post({ ...base(), area: 'laboral' }, r);
+  await post({ ...base(), area: 'laboral', representa: 'trabajador' }, r);
   assert.equal(r.calls[0]!.body.get('responsable'), 'Lucía López (649 181 290)');
 });
 
@@ -152,6 +152,26 @@ test('transporte: valores fuera de lista o fechas imposibles o futuras dan 422',
     assert.ok((await res.json()).errores[k], k);
   }
   assert.equal(r.calls.length, 0);
+});
+
+test('laboral: «representa» es obligatorio; problema, situación y fecha llegan con su etiqueta y responsable Lucía', async () => {
+  const r = recorder();
+  const sin = await post({ ...base(), area: 'laboral' }, r);
+  assert.equal(sin.status, 422);
+  assert.ok((await sin.json()).errores.representa);
+  const ok = await post({ ...base(), area: 'laboral', representa: 'trabajador', problema: 'despido', situacion: 'fuera', fecha: '2026-10-20', servicio: 'laboral-despidos' }, r);
+  assert.equal(ok.status, 200);
+  const b = r.calls[0]!.body;
+  assert.equal(b.get('representa'), 'Soy la persona trabajadora');
+  assert.equal(b.get('problema'), 'Despido o fin de contrato');
+  assert.equal(b.get('situacion'), 'Ya no trabajo en la empresa');
+  assert.equal(b.get('fecha'), '2026-10-20');
+  assert.equal(b.get('servicio'), 'Despidos e impugnación');
+  assert.equal(b.get('responsable'), 'Lucía López (649 181 290)');
+  // En otra área, los datos laborales se descartan y no se exige «representa»
+  const r2 = recorder();
+  await post({ ...base(), representa: 'pirata', problema: 'despido' }, r2);
+  assert.equal(r2.calls[0]!.body.get('representa'), '');
 });
 
 test('solo acepta POST', async () => {

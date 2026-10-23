@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { getPosts } from '@/lib/content';
-import { enlaceConsulta, type Servicio } from '@/lib/servicios';
+import { docLabel, enlaceConsulta, type Servicio } from '@/lib/servicios';
 
 // Lista de servicios de un área con su siguiente paso concreto (#5):
 // la consulta con el servicio ya elegido, o la herramienta propia del servicio (cuestionario de Hacienda o divorcio).
@@ -26,9 +26,10 @@ export function ServiceList({ services }: { services: Servicio[] }) {
                   </ul>
                   {s.documentacion && (
                     <p className="small">
-                      <strong>Documentación orientativa</strong> (no la adjuntes en el formulario): {s.documentacion.join('; ')}.
+                      <strong>Documentación orientativa</strong> (no la adjuntes en el formulario): {s.documentacion.map(docLabel).join('; ')}.
                     </p>
                   )}
+                  {s.alcance && <p className="small muted">{s.alcance}</p>}
                   {s.fuentes && (
                     <p className="small muted">
                       Normas:{' '}

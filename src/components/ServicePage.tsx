@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { getPosts } from '@/lib/content';
-import { areas, groups, mensajes, site } from '@/lib/site';
-import { enlaceConsulta, type Servicio } from '@/lib/servicios';
+import { areas, groups, laboral, mensajes, site } from '@/lib/site';
+import { docLabel, enlaceConsulta, type Servicio } from '@/lib/servicios';
 import { Breadcrumbs } from './Breadcrumbs';
 import { CtaBand } from './CtaBand';
 import { Faq } from './Faq';
@@ -18,6 +18,8 @@ export function ServicePage({ servicio: s }: { servicio: Servicio }) {
   const guias = (s.articulos ?? []).map((slug) => posts.find((p) => p.slug === slug)).filter((p) => !!p);
   const consulta = enlaceConsulta(s);
   const cta = s.cta ?? 'Consultar sobre esto';
+  // Laboral: la llamada va a Lucía López (solo llamadas). El resto, al teléfono general.
+  const tel = s.area === 'laboral' ? { ...laboral, label: `Llamar a ${laboral.name}` } : { ...site, label: '' };
 
   return (
     <div className="service-page">
@@ -30,8 +32,8 @@ export function ServicePage({ servicio: s }: { servicio: Servicio }) {
             <Link className="btn btn--red" href={consulta}>
               {cta}
             </Link>
-            <a className="btn btn--ghost" href={`tel:${site.phoneIntl}`}>
-              <Icon name="phone" /> {site.phone}
+            <a className="btn btn--ghost" href={`tel:${tel.phoneIntl}`}>
+              <Icon name="phone" /> {tel.label ? `${tel.label} · ${tel.phone}` : tel.phone}
             </a>
           </div>
           {s.destinatario && <p className="service-page__for">{s.destinatario}</p>}
@@ -77,7 +79,7 @@ export function ServicePage({ servicio: s }: { servicio: Servicio }) {
             </div>
             <ul className="checks">
               {s.documentacion.map((d) => (
-                <li key={d}>{d}</li>
+                <li key={docLabel(d)}>{docLabel(d)}</li>
               ))}
             </ul>
           </div>
@@ -106,6 +108,7 @@ export function ServicePage({ servicio: s }: { servicio: Servicio }) {
                     </li>
                   ))}
                 </ul>
+                {s.alcance && <p className="small muted">{s.alcance}</p>}
                 <p className="small muted">
                   Información general, no asesoramiento sobre tu caso. La aplicación de cada norma depende de los hechos y documentos concretos.
                 </p>
@@ -119,6 +122,7 @@ export function ServicePage({ servicio: s }: { servicio: Servicio }) {
         title={cta}
         text="Cuéntanos qué ha pasado. Revisamos tu caso y te explicamos las opciones, el trabajo y los honorarios antes de empezar."
         href={consulta}
+        telefono={s.area === 'laboral' ? { phone: laboral.phone, phoneIntl: laboral.phoneIntl, label: `Llamar a ${laboral.name}` } : undefined}
         whatsappText={area.id in mensajes ? mensajes[area.id as keyof typeof mensajes] : mensajes.general}
       />
     </div>

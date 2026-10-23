@@ -7,7 +7,10 @@ export function CtaBand({
   text = 'Escuchamos tu situación antes de proponer una estrategia, y te explicamos el trabajo y los honorarios antes de empezar.',
   whatsappText = mensajes.general,
   href = '/contacto/',
+  telefono,
 }: {
+  /** Teléfono de llamada distinto del general (Laboral: Lucía López, solo llamadas) */
+  telefono?: { phone: string; phoneIntl: string; label: string };
   title?: string;
   text?: string;
   whatsappText?: string;
@@ -25,8 +28,8 @@ export function CtaBand({
           <a className="btn btn--red" href={whatsapp(whatsappText)}>
             <Icon name="whatsapp" /> Escribir por WhatsApp
           </a>
-          <a className="btn cta__ghost" href={`tel:${site.phoneIntl}`}>
-            <Icon name="phone" /> Llamar al {site.phone}
+          <a className="btn cta__ghost" href={`tel:${telefono?.phoneIntl ?? site.phoneIntl}`}>
+            <Icon name="phone" /> {telefono ? `${telefono.label} · ${telefono.phone}` : `Llamar al ${site.phone}`}
           </a>
           <Link className="cta__link" href={href}>
             O envíanos tu consulta por escrito

@@ -136,6 +136,7 @@ export default function HomePage() {
               <p>
                 <a href={`tel:${laboral.phoneIntl}`}>{laboral.phone}</a> (llamadas)
               </p>
+              <Link href="/abogado-laboralista-valencia/">Ver el área laboral</Link>
             </div>
           </div>
         </div>

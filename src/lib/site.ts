@@ -49,6 +49,7 @@ export const mensajes = {
   divorcio: 'Hola, Praetoria. Quiero hablar con un abogado sobre mi caso de divorcio.',
   modificacionMedidas: 'Hola, Praetoria. Quiero consultar con un abogado una modificación de medidas.',
   arte: 'Hola, Praetoria. Quiero consultar con un abogado un asunto de arte y patrimonio.',
+  laboral: 'Hola, Praetoria. Quiero consultar con un abogado un asunto laboral.',
   elPuig: 'Hola, Praetoria. Necesito información sobre vuestros servicios jurídicos en El Puig.',
   plazoProximo: 'Hola, Praetoria. Acabo de enviar una consulta desde la web y tiene un plazo próximo.',
 } as const;
@@ -59,7 +60,7 @@ export const whatsapp = (text: string = mensajes.general) =>
 export const deca = (campaign: string) =>
   `${site.decaUrl}?utm_source=praetoria&utm_medium=referral&utm_campaign=${campaign}`;
 
-/** Las seis áreas de práctica, agrupadas por a quién se dirigen. */
+/** Las siete áreas de práctica, agrupadas por a quién se dirigen. */
 export type Group = 'empresas' | 'particulares';
 export type AreaRef = { id: 'transporte' | 'mercantil' | 'hacienda' | 'civil' | 'familia' | 'arte' | 'laboral'; slug: string; name: string; short: string; group: Group };
 
@@ -84,6 +85,13 @@ export const areas: AreaRef[] = [
     name: 'Hacienda y Seguridad Social',
     short: 'Requerimientos, liquidaciones, sanciones, apremios y embargos.',
     group: 'empresas',
+  },
+  {
+    id: 'laboral',
+    slug: 'abogado-laboralista-valencia',
+    name: 'Laboral',
+    short: 'Despidos, salarios y finiquitos, incapacidad, altas médicas y accidentes laborales.',
+    group: 'particulares',
   },
   {
     id: 'civil',
@@ -120,7 +128,7 @@ export const categories = {
   hacienda: { name: 'Hacienda y Seguridad Social', area: 'abogado-hacienda-y-seguridad-social-en-valencia' },
   'civil-vivienda': { name: 'Civil, herencias y vivienda', area: 'derecho-civil' },
   familia: { name: 'Familia', area: 'familia' },
-  laboral: { name: 'Laboral', area: null },
+  laboral: { name: 'Laboral', area: 'abogado-laboralista-valencia' },
   extranjeria: { name: 'Extranjería', area: null },
   'elegir-abogado': { name: 'Cómo elegir abogado', area: null },
 } as const;

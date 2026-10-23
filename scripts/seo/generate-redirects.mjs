@@ -91,6 +91,8 @@ lines.push(
   '# que reúne la mayoría de ellos; si están repartidos -> el blog. Las etiquetas sin artículos se dejan en 404.',
 );
 const tagDecisions = [];
+// Etiquetas cuya intención coincide con una página de área o de servicio nueva (decisión editorial, #7)
+const TAG_A_PAGINA = { 'abogado-laboralista-valencia': '/abogado-laboralista-valencia/' };
 for (const t of [...wp.tags].sort((a, b) => a.slug.localeCompare(b.slug))) {
   const tagged = wp.posts.filter((x) => x.tags.includes(t.id)).map((x) => byWpId.get(x.id)).filter((x) => x && !x.draft);
   if (!tagged.length) {
@@ -98,7 +100,8 @@ for (const t of [...wp.tags].sort((a, b) => a.slug.localeCompare(b.slug))) {
     continue;
   }
   let to;
-  if (tagged.length === 1) to = `/${tagged[0].slug}/`;
+  if (TAG_A_PAGINA[t.slug]) to = TAG_A_PAGINA[t.slug];
+  else if (tagged.length === 1) to = `/${tagged[0].slug}/`;
   else {
     const counts = {};
     tagged.forEach((x) => (counts[x.category] = (counts[x.category] || 0) + 1));

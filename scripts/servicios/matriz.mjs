@@ -9,6 +9,7 @@ import { AREAS } from '../../src/lib/consulta.ts';
 
 const BLOG = 'src/content/blog';
 const DOC = 'docs/SERVICIOS.md';
+const CHECKLISTS = 'docs/checklists-documentales.json';
 const errores = [];
 
 const posts = new Map(
@@ -65,18 +66,43 @@ for (const area of AREAS.filter((a) => a.id !== 'no-se')) {
   }
 }
 
+// Checklists documentales para el futuro portal de clientes (#7): solo el modelo, sin almacenamiento en la web.
+// Los documentos «sensibles» (p. ej. informes médicos) no se piden nunca por la web pública.
+const checklists =
+  JSON.stringify(
+    {
+      nota: 'Generado por scripts/servicios/matriz.mjs a partir de src/lib/servicios.ts. Modelo para el futuro portal; la web pública no almacena documentos.',
+      servicios: servicios
+        .filter((s) => s.documentacion?.length)
+        .map((s) => ({
+          id: s.id,
+          area: s.area,
+          nombre: s.nombre,
+          documentos: s.documentacion.map((d, i) => ({
+            id: `${s.id}-${i + 1}`,
+            label: typeof d === 'string' ? d : d.label,
+            sensible: typeof d !== 'string',
+            obligatorio: false,
+          })),
+        })),
+    },
+    null,
+    1,
+  ) + '\n';
+
 if (errores.length) {
   console.error(`${errores.length} errores en el modelo de servicios:`);
   errores.forEach((e) => console.error(' - ' + e));
   process.exit(1);
 }
 if (process.argv.includes('--check')) {
-  if (!existsSync(DOC) || readFileSync(DOC, 'utf8') !== md) {
-    console.error(`${DOC} no está al día: ejecuta node scripts/servicios/matriz.mjs`);
+  if (!existsSync(DOC) || readFileSync(DOC, 'utf8') !== md || !existsSync(CHECKLISTS) || readFileSync(CHECKLISTS, 'utf8') !== checklists) {
+    console.error(`${DOC} o ${CHECKLISTS} no están al día: ejecuta node scripts/servicios/matriz.mjs`);
     process.exit(1);
   }
   console.log(`OK: ${servicios.length} servicios válidos y ${DOC} al día`);
 } else {
   writeFileSync(DOC, md);
+  writeFileSync(CHECKLISTS, checklists);
   console.log(`${DOC}: ${servicios.length} servicios`);
 }

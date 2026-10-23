@@ -5,15 +5,16 @@
 // reintento si falla la red o la entrega, y confirmación solo cuando el servidor la acepta.
 import Link from 'next/link';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
-import { AREAS, IMPORTES, INCIDENCIAS, LIMITES, PAPELES, PREFERENCIAS, responsable, validarConsulta, type AreaId, type ErroresConsulta } from '@/lib/consulta';
-import { site } from '@/lib/site';
+import { AREAS, IMPORTES, INCIDENCIAS, LIMITES, PAPELES, PREFERENCIAS, PROBLEMAS_LABORALES, REPRESENTA, SITUACIONES, responsable, validarConsulta, type AreaId, type ErroresConsulta } from '@/lib/consulta';
+import { laboral, site } from '@/lib/site';
 import { servicioPorId } from '@/lib/servicios';
+import { leerRespuestasDivorcio, resumenDivorcio } from '@/lib/cuestionario-divorcio';
 
 type Estado = { tipo: 'editando' } | { tipo: 'enviando' } | { tipo: 'error'; mensaje: string } | { tipo: 'enviada'; area: AreaId };
 
-const ORDEN: (keyof ErroresConsulta)[] = ['nombre', 'area', 'servicio', 'papel', 'incidencia', 'importe', 'fecha', 'mensaje', 'preferencia', 'telefono', 'email', 'privacidad'];
+const ORDEN: (keyof ErroresConsulta)[] = ['nombre', 'area', 'servicio', 'papel', 'incidencia', 'importe', 'representa', 'problema', 'situacion', 'fecha', 'mensaje', 'preferencia', 'telefono', 'email', 'privacidad'];
 const ETIQUETA: Partial<Record<keyof ErroresConsulta, string>> = {
-  nombre: 'Nombre', area: 'Área', servicio: 'Asunto', papel: 'Papel en el transporte', incidencia: 'Tipo de incidencia', importe: 'Importe', fecha: 'Fecha', mensaje: 'Consulta', preferencia: 'Forma de contacto', telefono: 'Teléfono', email: 'Correo', privacidad: 'Privacidad',
+  nombre: 'Nombre', area: 'Área', servicio: 'Asunto', papel: 'Papel en el transporte', incidencia: 'Tipo de incidencia', importe: 'Importe', representa: 'A quién representas', problema: 'Tipo de problema', situacion: 'Situación', fecha: 'Fecha', mensaje: 'Consulta', preferencia: 'Forma de contacto', telefono: 'Teléfono', email: 'Correo', privacidad: 'Privacidad',
 };
 
 const nuevoId = () => (typeof crypto !== 'undefined' && 'randomUUID' in crypto ? crypto.randomUUID() : `id-${Date.now()}-${Math.random().toString(36).slice(2)}`);
@@ -33,6 +34,8 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
   const [area, setArea] = useState<string>(areaInicial ?? '');
   const [servicio, setServicio] = useState<string>('');
   const [incidencia, setIncidencia] = useState<string>('');
+  const [problema, setProblema] = useState<string>('');
+  const [cuestionario, setCuestionario] = useState<string>('');
   const formRef = useRef<HTMLFormElement>(null);
   const resumenRef = useRef<HTMLDivElement>(null);
   const exitoRef = useRef<HTMLDivElement>(null);
@@ -51,7 +54,13 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
       setServicio(sv.id);
       setArea(sv.area);
       if (sv.incidencia) setIncidencia(sv.incidencia);
+      if (sv.problemaLaboral) setProblema(sv.problemaLaboral);
     } else if (ar) setArea(ar.id);
+    // Respuestas del cuestionario de divorcio de esta sesión (nunca por la URL)
+    if (q.get('cuestionario') === 'divorcio') {
+      const resp = leerRespuestasDivorcio();
+      if (resp) setCuestionario(resumenDivorcio(resp));
+    }
     /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
   useEffect(() => {
@@ -72,6 +81,10 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
       incidencia: fd.get('incidencia'),
       importe: fd.get('importe'),
       fecha: fd.get('fecha'),
+      representa: fd.get('representa'),
+      problema: fd.get('problema'),
+      situacion: fd.get('situacion'),
+      cuestionario,
       privacidad: fd.get('privacidad') === 'on',
       'empresa-web': fd.get('empresa-web'),
     };
@@ -129,7 +142,13 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
         <h2>Hemos recibido tu consulta</h2>
         <p>
           La revisará {r.nombre}. Te responderemos por el medio que has indicado lo antes posible. Si tu asunto tiene un plazo que vence en
-          los próximos días, llámanos al <a href={`tel:${site.phoneIntl}`}>{site.phone}</a> para revisarlo con prioridad.
+          los próximos días, llama al{' '}
+          {estado.area === 'laboral' ? (
+            <a href={`tel:${laboral.phoneIntl}`}>{laboral.phone}</a>
+          ) : (
+            <a href={`tel:${site.phoneIntl}`}>{site.phone}</a>
+          )}{' '}
+          para revisarlo con prioridad.
         </p>
       </div>
     );
@@ -182,6 +201,8 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
             // Si se cambia de área, el asunto preseleccionado deja de aplicar
             if (servicio && servicioPorId(servicio)?.area !== e.target.value) setServicio('');
             if (e.target.value !== 'transporte') setIncidencia('');
+            if (e.target.value !== 'laboral') setProblema('');
+            if (e.target.value !== 'familia') setCuestionario('');
           }}
           {...a11y('area')}
         >
@@ -203,6 +224,18 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
               Quitar o cambiar
             </button>
           </p>
+        )}
+        {cuestionario && area === 'familia' && (
+          <div className="preselected preselected--quiz" id="cuestionario">
+            <p>
+              <strong>Tus respuestas del cuestionario de divorcio</strong> se enviarán con la consulta:{' '}
+              <button type="button" className="linklike" onClick={() => setCuestionario('')}>
+                No enviarlas
+              </button>
+            </p>
+            <pre>{cuestionario}</pre>
+            <input type="hidden" name="cuestionario" value={cuestionario} />
+          </div>
         )}
         <FieldError k="servicio" msg={errores.servicio} />
         {resp && area === 'laboral' && (
@@ -267,6 +300,60 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
             </div>
           </div>
           <p className="small muted">No adjuntes CMR, facturas ni otros documentos: si hacen falta, te los pediremos por un canal seguro.</p>
+        </fieldset>
+      )}
+
+      {area === 'laboral' && (
+        <fieldset className="field form-extra">
+          <legend>Sobre tu asunto laboral</legend>
+          <fieldset className="field" {...(err('representa') ? { 'aria-describedby': 'err-representa' } : {})}>
+            <legend className="sublegend">¿A quién representas?</legend>
+            <div className="radios radios--stack">
+              {REPRESENTA.map((x) => (
+                <label key={x.id}>
+                  <input type="radio" id={`rep-${x.id}`} name="representa" value={x.id} required /> {x.label}
+                </label>
+              ))}
+            </div>
+            <FieldError k="representa" msg={errores.representa} />
+          </fieldset>
+          <div className="row">
+            <div className="field">
+              <label htmlFor="problema">Tipo de problema</label>
+              <select id="problema" name="problema" value={problema} onChange={(e) => setProblema(e.target.value)} {...a11y('problema')}>
+                <option value="">Sin indicar</option>
+                {PROBLEMAS_LABORALES.map((x) => (
+                  <option key={x.id} value={x.id}>
+                    {x.label}
+                  </option>
+                ))}
+              </select>
+              <FieldError k="problema" msg={errores.problema} />
+            </div>
+            <div className="field">
+              <label htmlFor="situacion">Situación actual</label>
+              <select id="situacion" name="situacion" defaultValue="" {...a11y('situacion')}>
+                <option value="">Sin indicar</option>
+                {SITUACIONES.map((x) => (
+                  <option key={x.id} value={x.id}>
+                    {x.label}
+                  </option>
+                ))}
+              </select>
+              <FieldError k="situacion" msg={errores.situacion} />
+            </div>
+          </div>
+          <div className="field">
+            <label htmlFor="fecha">Fecha en que te lo comunicaron o en que tiene efectos (opcional)</label>
+            <input id="fecha" name="fecha" type="date" min="2000-01-01" {...a11y('fecha')} aria-describedby={err('fecha') ? 'err-fecha fecha-ayuda' : 'fecha-ayuda'} />
+            <p className="small muted" id="fecha-ayuda">
+              Nos ayuda a revisar antes los asuntos con plazos cortos. No calculamos plazos automáticamente: te lo confirmaremos al revisar tu caso.
+            </p>
+            <FieldError k="fecha" msg={errores.fecha} />
+          </div>
+          <p className="small muted">
+            No incluyas diagnósticos, informes médicos ni otros documentos, ni en este formulario ni en el mensaje. Si hacen falta, te los pediremos por un canal seguro.
+          </p>
         </fieldset>
       )}
 

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { getPosts } from '@/lib/content';
 import type { AreaContent } from '@/lib/areas-content';
-import { areas, categories, groups, whatsapp } from '@/lib/site';
+import { areas, categories, groups, laboral, whatsapp } from '@/lib/site';
 import { Breadcrumbs } from './Breadcrumbs';
 import { PostList } from './PostList';
 import { DecaBand } from './DecaBand';
@@ -29,8 +29,17 @@ export function AreaPage({ area }: { area: AreaContent }) {
               <h1>{area.h1}</h1>
               <p className="lede">{area.lede}</p>
               <div className="actions">
-                <a className="btn btn--red" href={whatsapp(area.whatsappText)}><Icon name="whatsapp" /> Consultar por WhatsApp</a>
-                <Link className="btn btn--ghost" href={`/contacto/?area=${area.id}`}>Enviar mi consulta</Link>
+                {area.contactoLaboral ? (
+                  <>
+                    <a className="btn btn--red" href={`tel:${laboral.phoneIntl}`}><Icon name="phone" /> Llamar a {laboral.name} · {laboral.phone}</a>
+                    <Link className="btn btn--ghost" href={`/contacto/?area=${area.id}`}>Enviar mi consulta</Link>
+                  </>
+                ) : (
+                  <>
+                    <a className="btn btn--red" href={whatsapp(area.whatsappText)}><Icon name="whatsapp" /> Consultar por WhatsApp</a>
+                    <Link className="btn btn--ghost" href={`/contacto/?area=${area.id}`}>Enviar mi consulta</Link>
+                  </>
+                )}
               </div>
             </div>
             <img className="photo head-photo" src={area.image.src.replace('.webp', '-800.webp')} alt={area.image.alt} width={800} height={600} />
@@ -82,6 +91,7 @@ export function AreaPage({ area }: { area: AreaContent }) {
           <h2 className="services-title">{area.servicesTitle}</h2>
           <ServiceList services={serviciosDe(area.id)} />
           <p className="closing">{area.closing}</p>
+          {area.nota && <p className="area-note">{area.nota}</p>}
 
           {
             area.gallery && (
@@ -150,7 +160,11 @@ export function AreaPage({ area }: { area: AreaContent }) {
         </div>
       </section>
 
-      <CtaBand whatsappText={area.whatsappText} />
+      <CtaBand
+        whatsappText={area.whatsappText}
+        href={`/contacto/?area=${area.id}`}
+        telefono={area.contactoLaboral ? { phone: laboral.phone, phoneIntl: laboral.phoneIntl, label: `Llamar a ${laboral.name}` } : undefined}
+      />
 
     </div>
 

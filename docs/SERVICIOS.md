@@ -6,7 +6,7 @@ Un servicio es algo concreto que el despacho hace, con un siguiente paso. Las p�
 
 **Texto ampliado** (qué revisamos, proceso, documentación, preguntas y normas citadas): lo redacta la web a partir de lo ya publicado y de fuentes oficiales, y queda *pendiente de revisión* hasta que el despacho lo valide (`revision: 'revisado'`).
 
-Total: 40 servicios.
+Total: 47 servicios.
 
 ## Transporte y logística (10)
 
@@ -43,9 +43,17 @@ Total: 40 servicios.
 | Derivación de responsabilidad al administrador ([página](/abogado-hacienda-y-seguridad-social-en-valencia/)) | `hacienda-derivacion` | — | [Consultar sobre esto](/contacto/?servicio=hacienda-derivacion) | — |
 | Devolución de ingresos indebidos | `hacienda-devoluciones` | [🚗 Cómo recuperar el impuesto de matriculación: quién puede reclamar y cuánto dinero puedes recuperar](/reclamar-devolucion-impuesto-de-matriculacion/) | [Consultar sobre esto](/contacto/?servicio=hacienda-devoluciones) | — |
 
-## Laboral (0)
+## Laboral (7)
 
-Sin servicios definidos todavía.
+| Servicio | id | Artículos relacionados | Siguiente paso | Texto ampliado |
+| --- | --- | --- | --- | --- |
+| Despidos e impugnación ([página](/impugnar-despido/)) | `laboral-despidos` | [Despido en Valencia: qué hacer en las primeras 48 horas para no perder tus derechos](/despido-valencia-que-hacer/) | [Solicitar revisión de mi despido](/contacto/?servicio=laboral-despidos) | **pendiente de revisión** |
+| Salarios y finiquitos ([página](/reclamar-salarios-y-finiquito/)) | `laboral-cantidades` | — | [Reclamar lo que me deben](/contacto/?servicio=laboral-cantidades) | **pendiente de revisión** |
+| Incapacidad permanente ([página](/incapacidad-permanente/)) | `laboral-incapacidad` | — | [Revisar mi caso de incapacidad](/contacto/?servicio=laboral-incapacidad) | **pendiente de revisión** |
+| Altas médicas y prestaciones | `laboral-altas` | — | [Consultar sobre esto](/contacto/?servicio=laboral-altas) | **pendiente de revisión** |
+| Accidentes laborales y responsabilidad empresarial ([página](/accidente-laboral/)) | `laboral-accidentes` | — | [Consultar mi accidente laboral](/contacto/?servicio=laboral-accidentes) | **pendiente de revisión** |
+| Acoso y vulneración de derechos | `laboral-acoso` | — | [Consultar sobre esto](/contacto/?servicio=laboral-acoso) | **pendiente de revisión** |
+| Modificaciones de condiciones y conflictos laborales | `laboral-condiciones` | [Baja laboral de larga duración: cómo dejar tu empresa con indemnización y derecho a paro](/baja-laboral-de-larga-duracion-como-dejar-tu-empresa-con-indemnizacion-y-derecho-a-paro/) | [Consultar sobre esto](/contacto/?servicio=laboral-condiciones) | **pendiente de revisión** |
 
 ## Civil, herencias y vivienda (6)
 

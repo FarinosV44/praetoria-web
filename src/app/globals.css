@@ -1331,4 +1331,39 @@
   .form-extra .row {
     clear: both;
   }
+  .area-note {
+    max-width: 68ch;
+    margin-top: 18px;
+    padding: 14px 18px;
+    border-left: 3px solid var(--ink);
+    background: var(--stone);
+    color: var(--ink-2);
+  }
+  .form-extra .sublegend {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+  }
+  .form-extra fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+  .radios--stack {
+    display: grid;
+    gap: 6px;
+  }
+  .preselected--quiz {
+    display: block;
+  }
+  .preselected--quiz p {
+    margin: 0 0 6px;
+  }
+  .preselected--quiz pre {
+    margin: 0;
+    white-space: pre-wrap;
+    font: inherit;
+    font-size: 0.9rem;
+    color: var(--ink-2);
+  }
 }

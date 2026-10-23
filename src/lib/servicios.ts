@@ -21,8 +21,9 @@ export type Servicio = {
   /** Qué revisa y hace el despacho */
   revisamos?: string[];
   proceso?: string[];
-  /** Documentación orientativa: se pide después por canal seguro, nunca en el formulario público */
-  documentacion?: string[];
+  /** Documentación orientativa: se pide después por canal seguro, nunca en el formulario público.
+   *  Un documento `sensible` (p. ej. informes médicos) solo se pedirá por el futuro portal, nunca por la web pública. */
+  documentacion?: Documento[];
   faqs?: { q: string; a: string }[];
   /** Artículos del blog relacionados (slug) */
   articulos?: string[];
@@ -36,11 +37,31 @@ export type Servicio = {
   fuentes?: { label: string; href: string }[];
   /** Transporte: tipo de incidencia que se preelige en el formulario */
   incidencia?: Incidencia;
+  /** Laboral: tipo de problema que se preelige en el formulario */
+  problemaLaboral?: ProblemaLaboral;
+  /** Qué no incluye o dónde se trata (para delimitar servicios que se solapan) */
+  alcance?: string;
   /** Estado de revisión jurídica del texto ampliado por el despacho. Sin revisar no debería publicarse (ver docs/SERVICIOS.md) */
   revision?: 'pendiente' | 'revisado';
   /** Título y descripción SEO de la página propia */
   seo?: { title: string; description: string; h1: string };
 };
+
+/** Modelo de checklist documental, reutilizable por el futuro portal de clientes (#7). Sin almacenamiento en la web pública. */
+export type Documento = string | { label: string; sensible: true };
+export const docLabel = (d: Documento) => (typeof d === 'string' ? d : d.label);
+export const docSensible = (d: Documento) => typeof d !== 'string';
+
+/** Tipos de problema del formulario laboral (#7) */
+export const PROBLEMAS_LABORALES = [
+  { id: 'despido', label: 'Despido o fin de contrato' },
+  { id: 'cantidades', label: 'Salarios, horas o finiquito' },
+  { id: 'incapacidad', label: 'Baja, alta médica o incapacidad' },
+  { id: 'accidente', label: 'Accidente laboral o enfermedad profesional' },
+  { id: 'acoso', label: 'Acoso o vulneración de derechos' },
+  { id: 'condiciones', label: 'Cambios en mis condiciones u otro conflicto' },
+] as const;
+export type ProblemaLaboral = (typeof PROBLEMAS_LABORALES)[number]['id'];
 
 /** Tipos de incidencia del formulario de transporte (#6) */
 export const INCIDENCIAS = [
@@ -53,6 +74,9 @@ export type Incidencia = (typeof INCIDENCIAS)[number]['id'];
 
 const BOE_LCTTM = 'https://www.boe.es/eli/es/l/2009/11/11/15/con';
 const BOE_L9_2013 = 'https://www.boe.es/eli/es/l/2013/07/04/9/con';
+const BOE_ET = 'https://www.boe.es/eli/es/rdlg/2015/10/23/2/con';
+const BOE_LGSS = 'https://www.boe.es/eli/es/rdlg/2015/10/30/8/con';
+const MEDICOS: Documento = { label: 'Informes médicos: solo cuando te los pidamos, y por un canal seguro', sensible: true };
 
 export const servicios: Servicio[] = [
   // Transporte y logística -------------------------------------------------------------------
@@ -125,6 +149,213 @@ export const servicios: Servicio[] = [
   { id: 'transporte-conflictos-cadena', area: 'transporte', nombre: 'Conflictos entre cargadores, agencias y transportistas', resumen: 'Determinación de responsabilidades dentro de la cadena de transporte y defensa frente a reclamaciones de terceros.' },
   { id: 'transporte-prevencion', area: 'transporte', nombre: 'Prevención de riesgos contractuales', resumen: 'Revisión de procedimientos, condiciones generales, órdenes de carga y comunicaciones para reducir problemas antes de que se produzcan.', articulos: ['como-proteger-legalmente-tu-empresa-de-transporte-contratos-condiciones-y-claves-para-evitar-problemas'] },
   { id: 'transporte-gerencia', area: 'transporte', nombre: 'Apoyo jurídico para gerencia', resumen: 'Asesoramiento puntual o continuado para tomar decisiones comerciales y operativas con mayor seguridad jurídica.' },
+
+  // Laboral (#7). Atiende Lucía López. Textos ampliados pendientes de revisión del despacho. -------------
+  {
+    id: 'laboral-despidos',
+    area: 'laboral',
+    nombre: 'Despidos e impugnación',
+    resumen: 'Revisión de la carta y del finiquito, conciliación e impugnación del despido disciplinario, objetivo o colectivo.',
+    articulos: ['despido-valencia-que-hacer'],
+    cta: 'Solicitar revisión de mi despido',
+    pagina: '/impugnar-despido/',
+    problemaLaboral: 'despido',
+    revision: 'pendiente',
+    seo: {
+      title: 'Impugnar un despido: revisión de la carta y el finiquito',
+      h1: 'Impugnar un despido: revisamos tu carta y tu finiquito',
+      description: 'Te han despedido y no sabes si firmar ni qué reclamar. Revisamos la carta, el finiquito y las fechas, y te explicamos tus opciones antes de actuar.',
+    },
+    problema: 'Te han entregado una carta de despido, o te han comunicado el despido sin carta. No sabes si firmar, si el finiquito es correcto ni qué puedes reclamar.',
+    destinatario: 'Personas trabajadoras que han recibido una comunicación de despido o de fin de un contrato temporal.',
+    revisamos: [
+      'La carta: el tipo de despido, los hechos o las causas que se alegan y la fecha de efectos.',
+      'El finiquito y, si la hay, la indemnización ofrecida: si se han liquidado bien salario, vacaciones y pagas.',
+      'Si el despido podría ser procedente, improcedente o nulo, y qué consecuencias tendría cada caso.',
+      'Las fechas: la acción contra el despido caduca a los veinte días hábiles, aunque la solicitud de conciliación interrumpe el plazo.',
+    ],
+    proceso: [
+      'Revisamos la carta, el finiquito y tu situación.',
+      'Te explicamos las opciones, el trabajo necesario y los honorarios.',
+      'Presentamos la solicitud de conciliación previa y negociamos si hay margen.',
+      'Si no hay acuerdo, preparamos la demanda y te acompañamos al juicio.',
+    ],
+    documentacion: ['Carta de despido o comunicación recibida', 'Contrato y, si las hay, prórrogas o modificaciones', 'Últimas nóminas', 'Finiquito o liquidación ofrecida, firmada o no', 'Informe de vida laboral'],
+    faqs: [
+      { q: '¿Tengo que firmar la carta de despido?', a: 'Firmar solo acredita que la has recibido. Puedes escribir «no conforme» junto a tu firma para dejar constancia de que no estás de acuerdo.' },
+      { q: '¿Cuánto tiempo tengo para reclamar?', a: 'La acción contra el despido caduca a los veinte días hábiles siguientes (artículo 59.3 del Estatuto de los Trabajadores), y la solicitud de conciliación interrumpe ese plazo. El cómputo depende de tu caso: consulta cuanto antes. La web no lo calcula de forma automática.' },
+      { q: '¿Qué diferencia hay entre finiquito e indemnización?', a: 'El finiquito liquida lo que ya se te debía: salario de los últimos días, vacaciones no disfrutadas y partes proporcionales de pagas. La indemnización compensa la extinción del contrato y depende del tipo de despido. Son conceptos distintos.' },
+      { q: 'Ya he firmado el finiquito. ¿Puedo reclamar?', a: 'Depende de lo que hayas firmado y de cómo lo hayas hecho. Firmar el finiquito no siempre impide reclamar, pero conviene revisarlo cuanto antes.' },
+    ],
+    fuentes: [
+      { label: 'Estatuto de los Trabajadores, art. 55 (forma y efectos del despido disciplinario)', href: `${BOE_ET}#a55` },
+      { label: 'Estatuto de los Trabajadores, art. 59 (prescripción y caducidad)', href: `${BOE_ET}#a59` },
+    ],
+  },
+  {
+    id: 'laboral-cantidades',
+    area: 'laboral',
+    nombre: 'Salarios y finiquitos',
+    resumen: 'Reclamación de salarios, horas, pagas o finiquitos que no se han pagado o se han calculado mal.',
+    cta: 'Reclamar lo que me deben',
+    pagina: '/reclamar-salarios-y-finiquito/',
+    problemaLaboral: 'cantidades',
+    revision: 'pendiente',
+    seo: {
+      title: 'Reclamar salarios atrasados o un finiquito mal calculado',
+      h1: 'Reclamar salarios, horas o un finiquito mal calculado',
+      description: 'Te deben nóminas, pagas o horas, o el finiquito no cuadra. Revisamos contrato, convenio y nóminas, y reclamamos lo que corresponda.',
+    },
+    problema: 'La empresa te debe nóminas, pagas extra, horas o vacaciones, o el finiquito que te ofrecen no cuadra con lo que te corresponde.',
+    destinatario: 'Personas trabajadoras en activo o que ya han dejado la empresa y tienen cantidades pendientes.',
+    revisamos: [
+      'Qué conceptos se deben y en qué se basan: contrato, convenio colectivo y nóminas.',
+      'Si el finiquito liquida bien el salario, las vacaciones no disfrutadas y las partes proporcionales de pagas.',
+      'Las fechas de cada cantidad: con carácter general, la reclamación de percepciones económicas prescribe al año desde que pudo ejercitarse.',
+      'Si la empresa ha cerrado o es insolvente, qué vías existen para cobrar.',
+    ],
+    proceso: [
+      'Revisamos las nóminas, el contrato y el convenio.',
+      'Calculamos lo que se reclama y te explicamos el trabajo y los honorarios.',
+      'Presentamos la solicitud de conciliación previa.',
+      'Si no hay pago, presentamos la demanda de reclamación de cantidad.',
+    ],
+    documentacion: ['Contrato de trabajo', 'Nóminas del periodo reclamado', 'Finiquito o liquidación', 'Registro de jornada u otra prueba de las horas, si se reclaman', 'Comunicaciones con la empresa'],
+    faqs: [
+      { q: '¿Cuánto tiempo tengo para reclamar salarios atrasados?', a: 'Con carácter general, un año desde que cada cantidad pudo reclamarse (artículo 59 del Estatuto de los Trabajadores). Por eso conviene revisar cuanto antes las cantidades más antiguas.' },
+      { q: '¿Puedo reclamar si sigo trabajando en la empresa?', a: 'Sí: la reclamación de cantidad no exige haber dejado la empresa. Valoramos contigo cómo y cuándo plantearla.' },
+      { q: '¿Y si la empresa ha cerrado o no tiene con qué pagar?', a: 'Hay que estudiar la situación de la empresa. En determinados casos de insolvencia interviene el Fondo de Garantía Salarial (FOGASA), con sus propios límites.' },
+    ],
+    fuentes: [
+      { label: 'Estatuto de los Trabajadores, art. 29 (liquidación y pago del salario)', href: `${BOE_ET}#a29` },
+      { label: 'Estatuto de los Trabajadores, art. 59 (prescripción y caducidad)', href: `${BOE_ET}#a59` },
+    ],
+  },
+  {
+    id: 'laboral-incapacidad',
+    area: 'laboral',
+    nombre: 'Incapacidad permanente',
+    resumen: 'Solicitud, revisión y reclamación de la incapacidad permanente ante la Seguridad Social.',
+    cta: 'Revisar mi caso de incapacidad',
+    pagina: '/incapacidad-permanente/',
+    problemaLaboral: 'incapacidad',
+    revision: 'pendiente',
+    alcance: 'Las deudas, cotizaciones, apremios y embargos de la Seguridad Social se tratan en Hacienda y Seguridad Social.',
+    seo: {
+      title: 'Abogado de incapacidad permanente',
+      h1: 'Incapacidad permanente: solicitud, revisión y reclamación',
+      description: '¿Te han denegado la incapacidad permanente o te la han reconocido en un grado inferior? Revisamos la resolución y te explicamos cómo reclamar.',
+    },
+    problema: 'Llevas tiempo de baja o con limitaciones para trabajar y quieres saber si puedes pedir una incapacidad permanente, o te la han denegado o reconocido en un grado inferior al que esperabas.',
+    destinatario: 'Personas trabajadoras, en activo o de baja, con secuelas o limitaciones duraderas.',
+    revisamos: [
+      'En qué fase estás: baja, solicitud, resolución del INSS o reclamación previa.',
+      'Qué grado podría corresponder (parcial, total, absoluta o gran incapacidad) según tu profesión habitual y tus limitaciones.',
+      'Si la resolución está motivada y qué plazo de reclamación indica.',
+      'Cómo afecta a tu contrato y a tu relación con la empresa.',
+    ],
+    proceso: [
+      'Revisamos la resolución o tu situación y la documentación disponible.',
+      'Te explicamos las opciones, el trabajo y los honorarios.',
+      'Preparamos la solicitud o la reclamación previa ante la Seguridad Social.',
+      'Si se desestima, presentamos la demanda ante el juzgado de lo social.',
+    ],
+    documentacion: ['Resolución del INSS o de la mutua, si la hay', 'Informe de vida laboral', 'Descripción de tu puesto y de tus tareas habituales', MEDICOS],
+    faqs: [
+      { q: '¿Qué grados de incapacidad permanente existen?', a: 'Parcial, total, absoluta y gran incapacidad (artículo 194 de la Ley General de la Seguridad Social). El grado depende de cómo afectan tus limitaciones a tu profesión habitual o a cualquier trabajo.' },
+      { q: 'Me han denegado la incapacidad. ¿Puedo reclamar?', a: 'Normalmente cabe una reclamación previa y, después, la demanda. El plazo figura en la propia resolución: no esperes para revisarla.' },
+      { q: '¿Tengo que enviar mis informes médicos por el formulario?', a: 'No. No los incluyas en el formulario ni en el mensaje. Si hacen falta, te los pediremos por un canal seguro.' },
+    ],
+    fuentes: [{ label: 'Ley General de la Seguridad Social, art. 194 (grados de incapacidad permanente)', href: `${BOE_LGSS}#a194` }],
+  },
+  {
+    id: 'laboral-altas',
+    area: 'laboral',
+    nombre: 'Altas médicas y prestaciones',
+    resumen: 'Disconformidad con un alta médica, prestaciones por incapacidad temporal y su efecto sobre el contrato.',
+    problemaLaboral: 'incapacidad',
+    revision: 'pendiente',
+    alcance: 'La incapacidad permanente tiene su propio servicio. Las deudas y cotizaciones de la Seguridad Social se tratan en Hacienda y Seguridad Social.',
+    revisamos: [
+      'La fecha del alta y quién la ha emitido: servicio público de salud, INSS o mutua.',
+      'Si cabe manifestar disconformidad o reclamar, y en qué plazo, que suele ser muy breve.',
+      'Qué ocurre con tu puesto y tu salario mientras se resuelve.',
+      'Las prestaciones afectadas y si se han calculado bien.',
+    ],
+    documentacion: ['Parte o resolución de alta', 'Comunicaciones de la mutua o del INSS', 'Nóminas recientes', MEDICOS],
+  },
+  {
+    id: 'laboral-accidentes',
+    area: 'laboral',
+    nombre: 'Accidentes laborales y responsabilidad empresarial',
+    resumen: 'Accidentes de trabajo y enfermedades profesionales: calificación, prestaciones, recargo e indemnización por daños.',
+    cta: 'Consultar mi accidente laboral',
+    pagina: '/accidente-laboral/',
+    problemaLaboral: 'accidente',
+    revision: 'pendiente',
+    seo: {
+      title: 'Abogado de accidentes laborales',
+      h1: 'Accidente laboral: prestaciones, recargo e indemnización',
+      description: 'Has sufrido un accidente de trabajo o una enfermedad profesional. Revisamos la calificación, las prestaciones y la responsabilidad de la empresa.',
+    },
+    problema: 'Has sufrido un accidente en el trabajo o de camino a él, o una enfermedad causada por tu trabajo, y no sabes qué te corresponde ni quién debe responder.',
+    destinatario: 'Personas trabajadoras accidentadas y sus familias.',
+    revisamos: [
+      'Si lo ocurrido se ha calificado como accidente de trabajo o enfermedad profesional, o debería haberse calificado así.',
+      'Las prestaciones que corresponden y si se han reconocido correctamente.',
+      'Si hubo falta de medidas de seguridad que permita pedir el recargo de las prestaciones, de entre el 30 % y el 50 %.',
+      'Si cabe reclamar una indemnización por los daños y perjuicios que las prestaciones no cubren.',
+    ],
+    proceso: [
+      'Revisamos lo ocurrido, la calificación y las prestaciones.',
+      'Te explicamos las vías posibles, el trabajo y los honorarios.',
+      'Iniciamos las reclamaciones ante la Seguridad Social, la mutua o la empresa.',
+      'Si es necesario, acudimos al juzgado de lo social.',
+    ],
+    documentacion: ['Parte de accidente de trabajo, si se emitió', 'Datos de testigos y fotografías del lugar, si las hay', 'Resoluciones de la mutua o del INSS', 'Nóminas anteriores al accidente', MEDICOS],
+    faqs: [
+      { q: '¿Qué es el recargo de prestaciones?', a: 'Si el accidente se debe a la falta de medidas de seguridad, las prestaciones se incrementan entre un 30 % y un 50 % a cargo de la empresa (artículo 164 de la Ley General de la Seguridad Social).' },
+      { q: '¿Un accidente de camino al trabajo es accidente laboral?', a: 'El accidente al ir o volver del trabajo («in itinere») puede tener la consideración de accidente de trabajo. Depende del trayecto y de las circunstancias.' },
+      { q: 'Además de las prestaciones, ¿puedo pedir una indemnización?', a: 'En algunos casos sí, por los daños y perjuicios que las prestaciones no cubren. Hay que estudiar la responsabilidad de la empresa y los daños sufridos.' },
+    ],
+    fuentes: [
+      { label: 'Ley General de la Seguridad Social, art. 156 (concepto de accidente de trabajo)', href: `${BOE_LGSS}#a156` },
+      { label: 'Ley General de la Seguridad Social, art. 164 (recargo de prestaciones)', href: `${BOE_LGSS}#a164` },
+    ],
+  },
+  {
+    id: 'laboral-acoso',
+    area: 'laboral',
+    nombre: 'Acoso y vulneración de derechos',
+    resumen: 'Acoso laboral, discriminación y vulneración de derechos fundamentales en el trabajo: medidas, reclamación y, en su caso, extinción del contrato.',
+    problemaLaboral: 'acoso',
+    revision: 'pendiente',
+    revisamos: [
+      'Los hechos, desde cuándo ocurren y qué pruebas existen.',
+      'Si la empresa conocía la situación y qué medidas tomó o debió tomar.',
+      'Las vías posibles: denuncia interna, Inspección de Trabajo, demanda de tutela de derechos fundamentales o extinción del contrato.',
+    ],
+    documentacion: ['Comunicaciones, correos o mensajes relacionados', 'Datos de posibles testigos', 'Denuncias internas y respuestas de la empresa'],
+  },
+  {
+    id: 'laboral-condiciones',
+    area: 'laboral',
+    nombre: 'Modificaciones de condiciones y conflictos laborales',
+    resumen: 'Cambios de horario, funciones, salario o centro de trabajo, y extinción del contrato por incumplimientos graves de la empresa.',
+    articulos: ['baja-laboral-de-larga-duracion-como-dejar-tu-empresa-con-indemnizacion-y-derecho-a-paro'],
+    problemaLaboral: 'condiciones',
+    revision: 'pendiente',
+    revisamos: [
+      'Si el cambio es una modificación sustancial de condiciones y si se ha seguido el procedimiento.',
+      'Las opciones: aceptar, impugnar o, en algunos casos, extinguir el contrato con indemnización.',
+      'Las fechas: la impugnación de una modificación sustancial también caduca a los veinte días hábiles.',
+    ],
+    documentacion: ['Comunicación escrita del cambio', 'Contrato y nóminas', 'Comunicaciones con la empresa'],
+    fuentes: [
+      { label: 'Estatuto de los Trabajadores, art. 41 (modificación sustancial de condiciones)', href: `${BOE_ET}#a41` },
+      { label: 'Estatuto de los Trabajadores, art. 50 (extinción por voluntad del trabajador)', href: `${BOE_ET}#a50` },
+    ],
+  },
 
   // Mercantil y sociedades -------------------------------------------------------------------
   { id: 'mercantil-constitucion', area: 'mercantil', nombre: 'Constitución de sociedades', resumen: 'Asesoramiento sobre la forma jurídica más adecuada para tu actividad.' },
