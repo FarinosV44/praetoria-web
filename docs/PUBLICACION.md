@@ -1,7 +1,20 @@
 # Publicación de la web pública (Fase 1)
 
-Estado a 24/10/2026, sobre la rama `publicacion/fase-1` (por encima de la PR #29). WordPress sigue en producción,
-el DNS no se ha tocado y no se ha fusionado nada en `main`. Este documento prepara la decisión de publicación; no la toma.
+Estado a 24/10/2026 (noche), sobre la rama `fase-1/ampliacion` (PR #35, que sigue a #30 sobre `publicacion/fase-1`).
+WordPress sigue en producción, el DNS no se ha tocado y no se ha fusionado nada en `main`. Este documento prepara la
+decisión de publicación; no la toma.
+
+### Qué añade la PR #35
+
+| Issue | Cambio | Estado |
+| --- | --- | --- |
+| #31 | Hacienda y Seguridad Social enlazada desde Empresas y Particulares, misma URL y canonical; sección «Según tu situación» | Hecho |
+| #10 | Imagen pertinente en 8 artículos más (Unsplash, con crédito) y en Penal | Hecho; quedan 2 artículos con encargo de imagen (apartado 2.B) |
+| #32 | Área Penal y seis servicios con fuentes del BOE consolidado | Hecho, **pendiente de revisión jurídica**: aviso en la previsualización, `noindex`, fuera del sitemap |
+| #33 | «Que me llame un abogado»: `/que-me-llame-un-abogado/`, función `/api/llamada`, formularios `llamada-urgente` y `llamada-urgente-laboral` | Hecho; recepción real pendiente (sitio privado) |
+| #34 | Paquetes editoriales desde chat, importador validado, landings dentro del dominio (`docs/CONTENIDOS-DESDE-CHAT.md`) | Hecho; dos ejemplos importados como pendientes (solo en la previsualización) |
+| #2 | WordPress revisado de nuevo: sitemap (56 URLs) y API (40 entradas, 17 páginas) idénticos al inventario del 23/10 | Sin cambios que migrar |
+| #2/#3 | 223/223 URLs antiguas correctas en la previsualización de #35; páginas nuevas 200 con `noindex`; función de llamada desplegada (valida y responde 422/502 como está previsto) | Hecho |
 
 
 ## 0. Estado en Netlify (24/10/2026, 17:00)
@@ -12,8 +25,9 @@ el DNS no se ha tocado y no se ha fusionado nada en `main`. Este documento prepa
   Cada `push` a esta rama es un despliegue de producción de Netlify y gasta 15 créditos; los cambios solo de
   documentación se suben con `[skip netlify]`. El día de la publicación se cambia la rama de producción a `main`.
 - **Visibilidad privada** (decisión del propietario): solo la ve el equipo de Netlify con la sesión iniciada.
-- Formularios detectados: `contacto` y `contacto-laboral`. Avisos por correo a `juanfarinos@icav.es`, con asunto
-  «[Praetoria web] Consulta - ATENCION GENERAL» y «[Praetoria web] Consulta - AREA LABORAL».
+- Formularios detectados: `contacto`, `contacto-laboral`, `llamada-urgente` y `llamada-urgente-laboral`. Avisos por
+  correo a `juanfarinos@icav.es` en los dos de consulta, con asunto «[Praetoria web] Consulta - ATENCION GENERAL» y
+  «[Praetoria web] Consulta - AREA LABORAL». **Los dos de llamada aún no tienen aviso** (acción C3 bis).
 
 Comprobado en el despliegue real:
 
@@ -71,6 +85,10 @@ despliegue que atiende la petición (prueba en `consulta.test.mts`).
    desde la función, la alternativa preparada es enviar el correo con un proveedor (requiere su clave) o guardar en
    Netlify Blobs (ver `docs/CONSULTAS.md`).
 2. **Revisión completa en la previsualización** (móvil y escritorio) y aprobación del contenido por tu parte.
+2 bis. **Revisión jurídica de los textos pendientes.** `npm run check:produccion` los lista y falla mientras quede alguno:
+   hoy, 17 servicios (10 de las PR anteriores: transporte, laboral y mercantil; 7 de Penal) y el área Penal. Opciones
+   para cada uno: revisarlo y marcarlo `revision: 'revisado'`, o publicar sin él (Penal ya sale con `noindex` y fuera
+   del sitemap mientras esté pendiente). Los ejemplos de #34 no se generan en producción.
 3. ~~Prueba de las 223 URLs antiguas en Netlify~~: hecha, 223/223 (apartado 0).
 4. **Política de privacidad (tu revisión jurídica)**. Está actualizada al funcionamiento real (Netlify, formularios
    por área, analítica con consentimiento), pero falta decidir dos puntos que no debo redactar por ti:
@@ -86,7 +104,17 @@ despliegue que atiende la petición (prueba en `consulta.test.mts`).
   la consulta se ha recibido de verdad. Netlify Forms no envía acuses al remitente; requiere un proveedor de correo.
 - Auditoría editorial de los 40 artículos (#10): restos de relleno de palabras clave en algunos textos antiguos
   (p. ej. «despido Valencia»), emojis en títulos internos, dos guías DeCA y dos de regularización muy parecidas.
-- 10 artículos con imagen pendiente (composición tipográfica, `docs/BLOG-MATRIZ.md`).
+- 2 artículos con imagen pendiente (composición tipográfica, `docs/BLOG-MATRIZ.md`). Encargo para ChatGPT:
+  - `como-proteger-legalmente-tu-empresa-de-transporte-…`: oficina de tráfico de una empresa de transporte; sobre la
+    mesa, un contrato o unas condiciones generales impresas junto a un portátil y un casco o chaleco reflectante; al
+    fondo, por la ventana, camiones en el muelle. Luz natural, sin texto legible, sin logotipos, sin personas
+    identificables. Horizontal 3:2, mínimo 2000 px.
+  - `existe-una-plataforma-del-ministerio-para-crear-el-deca`: persona de espaldas en la oficina de una empresa de
+    transporte consultando un portal administrativo genérico en la pantalla (formularios y botones sin texto legible,
+    sin escudos ni logotipos oficiales inventados), con un albarán en papel al lado. Horizontal 3:2, mínimo 2000 px.
+  - Opcional, Penal (hoy con composición tipográfica): «asistencia al detenido», pasillo sobrio de un edificio
+    judicial o de una comisaría, sin rótulos, uniformes ni personas identificables; «citaciones», una carta oficial
+    sin texto legible sobre una mesa con un calendario. Mismas condiciones.
 - Backlog SEO con datos de Search Console/DinoRANK (#11) y medición (#9, ya implementada a falta de datos reales).
 - Rendimiento: puntuaciones de 81–93 en móvil con simulación; el margen restante es JavaScript de Next (TBT), no
   imágenes. No afecta al uso; se puede reducir después.
@@ -98,6 +126,7 @@ despliegue que atiende la petición (prueba en `consulta.test.mts`).
 | C1 | Conectar `FarinosV44/praetoria-web` a Netlify (cuenta del despacho), elegir plan (apartado 1) y activar *Branch deploys* para `publicacion/fase-1` | Netlify | 10 min |
 | C2 | Activar la detección de formularios (*Forms → Enable form detection*; en sitios nuevos viene desactivada) y volver a desplegar | Netlify | 2 min |
 | C3 | Avisos por correo: `contacto` → `juanfarinos@icav.es`; `contacto-laboral` → correo de Lucía López (**falta la dirección**) y, si quieres, copia a `juanfarinos@icav.es` | Netlify → Forms → Notifications | 5 min |
+| C3 bis | Avisos de `llamada-urgente` y `llamada-urgente-laboral` con un asunto que empiece por «URGENTE» (propuesta: «[Praetoria web] URGENTE - Solicitud de llamada» y «… - AREA LABORAL») | Netlify → Forms → Notifications | 5 min |
 | C4 | Revisar la previsualización y aprobar contenido, privacidad (A4) y publicación | Navegador | — |
 | C5 | Copia de WordPress (archivos y base de datos) y de la zona DNS; bajar TTL a 300 s 24 h antes | Hostinger | 30 min |
 | C6 | Autorizar la unión de las PR en `main` | GitHub | — |
@@ -117,11 +146,11 @@ tocado la facturación ni las protecciones.
 | Comprobación | Resultado |
 | --- | --- |
 | `tsc --noEmit`, `npm run lint`, `npm run build` | OK |
-| `npm run check`: enlaces, anclas, recursos, metadatos, JSON-LD, idioma, sitemap, peso; migración SEO (223 URLs, motor de Netlify); matriz de servicios; registro de imágenes; 49 pruebas unitarias | OK |
-| `npm run test:e2e:ga`: formularios de extremo a extremo con la función real, embudos, laboral, transporte, móvil, consentimiento y medición, imágenes | OK (todas) |
-| Build de producción con `SITE_INDEXABLE=true`: `robots.txt` con `Sitemap:`, 70 URLs en el sitemap, canonical a `https://praetoriaabogados.es/…`, `noindex` solo en `/gracias/`, 404 y `__forms.html` | OK |
-| Accesibilidad automática (axe) en las 72 páginas, móvil y escritorio: errores graves o críticos | 0 |
-| Desbordamiento horizontal en móvil (412 px) en las 72 páginas | 0 (corregido el artículo en árabe) |
+| `npm run check`: enlaces, anclas, recursos, metadatos, JSON-LD, idioma, sitemap, peso; migración SEO (223 URLs, motor de Netlify); matriz de servicios; registro de imágenes; 61 pruebas unitarias (consulta, llamada, importador) | OK |
+| `playwright test`: formularios de extremo a extremo con las funciones reales (consulta y llamada, con fallo y reintento y doble clic), embudos, laboral, transporte, Penal, contenidos importados, móvil, imágenes, navegación de #31 | OK (71; la variante con analítica, `test:e2e:ga`, no se ha repetido) |
+| Build de producción con `SITE_INDEXABLE=true`: `robots.txt` con `Sitemap:`, 71 URLs en el sitemap, canonical a `https://praetoriaabogados.es/…`; `noindex` en `/gracias/`, 404, `__forms.html` y las 7 páginas de Penal pendientes de revisión; sin aviso de revisión; sin los ejemplos de #34 | OK |
+| Accesibilidad automática (axe) en 81 páginas (sitemap, Penal y solicitud de llamada), móvil y escritorio: errores graves o críticos | 0 |
+| Desbordamiento horizontal en móvil (412 px) en esas 81 páginas | 0 |
 | Teléfonos, WhatsApp y correo en toda la web | Solo 607 527 719 (general), 649 181 290 (laboral) y juanfarinos@icav.es |
 | Lighthouse móvil (simulación) | Accesibilidad 100; rendimiento 81–93; CLS ≤ 0,05 |
 
@@ -130,8 +159,8 @@ redirecciones servidas y certificado.
 
 ## 4. Decisión final de publicación (preparada)
 
-Validación que falta: A1–A4 de la lista anterior. Con ellas, la publicación es reversible en minutos (DNS con TTL corto
-y WordPress intacto 30 días).
+Validación que falta: A1, A2, A2 bis y A4 de la lista anterior. Con ellas, la publicación es reversible en minutos
+(DNS con TTL corto y WordPress intacto 30 días): procedimiento completo, con vuelta atrás, en `docs/seo/LANZAMIENTO.md`.
 
 Cómo llevar el código a `main` (necesita tu autorización):
 
