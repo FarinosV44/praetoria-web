@@ -59,3 +59,12 @@ test('tablas del blog dentro de un contenedor desplazable en móvil', async ({ p
   const ancho = await page.evaluate(() => document.documentElement.scrollWidth);
   expect(ancho).toBeLessThanOrEqual(375);
 });
+
+test('recreaciones IA personalizadas: discretas, con crédito y nunca en la portada (#28 §8)', async ({ page }) => {
+  await page.goto('/el-despacho/');
+  await expect(page.locator('.foto-secundaria figcaption')).toHaveText('Recreación visual con IA a partir de fotografías autorizadas');
+  await page.goto('/');
+  expect(await page.locator('img[src*="personalizad"], img[src*="estrategia-revision-dossier"], img[src*="analisis-documentacion-caso"]').count()).toBe(0);
+  await page.goto('/derecho-mercantil/');
+  await expect(page.locator('.area-head__media img')).toHaveAttribute('src', /negociacion-mesa-reuniones/);
+});

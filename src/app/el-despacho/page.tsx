@@ -7,7 +7,7 @@ import { JsonLd } from '@/components/JsonLd';
 import { areas, laboral, site } from '@/lib/site';
 import { iconoArea, metodo } from '@/lib/iconos';
 import { buildMetadata } from '@/lib/seo';
-import { imagen } from '@/lib/imagenes';
+import { creditoDe, imagen } from '@/lib/imagenes';
 import { Composicion, Foto } from '@/components/Foto';
 
 export const metadata = buildMetadata({
@@ -29,6 +29,8 @@ export default function DespachoPage() {
     sameAs: [site.linkedin],
   };
   // Únicas fotos de instalaciones del sitio (#28): dos, secundarias, al final de la página
+  // Recreación personalizada autorizada (#28 §8): discreta, en un bloque secundario
+  const estrategia = imagen('despacho-estrategia');
   const instalaciones = [imagen('despacho-salas'), imagen('despacho-atencion')].filter((i) => !!i);
   return (
     <div className="page-despacho">
@@ -71,6 +73,13 @@ export default function DespachoPage() {
               Atendemos de forma presencial y, cuando el asunto lo permite, por teléfono o videollamada en toda España.
             </p>
           </div>
+          <div className="intro-lateral">
+            {estrategia && (
+              <figure className="foto-secundaria">
+                <Foto img={estrategia} sizes="(min-width: 960px) 340px, 92vw" ancho={800} />
+                <figcaption>{creditoDe(estrategia)}</figcaption>
+              </figure>
+            )}
           <aside className="metodo-mini" aria-label="Cómo trabajamos">
             <p className="metodo-mini__titulo">Cómo trabajamos</p>
             <ol>
@@ -82,6 +91,7 @@ export default function DespachoPage() {
               ))}
             </ol>
           </aside>
+          </div>
         </div>
       </section>
 

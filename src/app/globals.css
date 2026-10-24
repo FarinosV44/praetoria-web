@@ -2321,4 +2321,10 @@
   @media (min-width: 720px) {
     .deca-bloque { grid-template-columns: 168px 1fr auto; }
   }
+
+  /* Foto secundaria junto al método compacto (#28 §8) */
+  .intro-lateral { display: grid; gap: 20px; align-content: start; }
+  .foto-secundaria { margin: 0; }
+  .foto-secundaria img { aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); }
+  .foto-secundaria figcaption { margin-top: 6px; font-size: 0.78rem; color: var(--muted); }
 }

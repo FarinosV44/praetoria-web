@@ -8,7 +8,7 @@ category: elegir-abogado
 tags: ["abogado valencia", "asesoría legal", "contratar abogado", "despacho jurídico", "elegir abogado", "problemas con abogados"]
 wpId: 2773
 intencion: "Saber si un abogado está siendo franco sobre las posibilidades reales del caso"
-imagen: abogado-explicacion
+imagen: blog-analisis-caso
 ---
 
 Cuando una persona acude a un abogado, lo hace normalmente en una situación de incertidumbre, preocupación o urgencia. Busca claridad, estrategia y, sobre todo, honestidad.

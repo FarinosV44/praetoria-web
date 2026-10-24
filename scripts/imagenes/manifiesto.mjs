@@ -44,6 +44,16 @@ for (const f of fuentes(join(raiz, 'src'))) {
   for (const id of instalaciones) if (t.includes(`'${id}'`) || t.includes(`"${id}"`)) err(`${rel}: usa «${id}» fuera de «El despacho»`);
 }
 
+// 2b. Recreaciones personalizadas (#28 §8): una o dos en total, cada una en un solo sitio, nunca en la portada
+const fuentesSrc = fuentes(join(raiz, 'src')).filter((f) => !f.endsWith('imagenes.json'));
+const personalizadas = imagenes.filter((i) => i.origen.tipo === 'ia' && i.origen.personalizada);
+if (personalizadas.length > 2) err(`hay ${personalizadas.length} recreaciones personalizadas; el máximo es dos`);
+for (const img of personalizadas) {
+  const usos = fuentesSrc.filter((f) => new RegExp(`['"]${img.id}['"]|^imagen: ${img.id}$`, 'm').test(readFileSync(f, 'utf8')));
+  if (usos.length > 1) err(`${img.id}: recreación personalizada usada en ${usos.length} sitios (máximo uno)`);
+  if (usos.some((f) => f.endsWith('src/app/page.tsx'))) err(`${img.id}: no va en la portada`);
+}
+
 // 3. Blog: cada artículo declara imagen o pendiente; matriz editorial
 const dirBlog = join(raiz, 'src/content/blog');
 const servicios = readFileSync(join(raiz, 'src/lib/servicios.ts'), 'utf8');
@@ -68,7 +78,9 @@ const servicioDe = (slug) => {
   return servicios.slice(ini + 5, servicios.indexOf("'", ini + 5));
 };
 const procedencia = (img) =>
-  img.origen.tipo === 'unsplash'
+  img.origen.tipo === 'ia'
+    ? `${img.origen.personalizada ? 'Recreación con IA a partir de fotografías autorizadas por el titular' : 'Generada con IA'} (\`${img.origen.original}\`) · ${img.origen.nota}`
+    : img.origen.tipo === 'unsplash'
     ? img.origen.autor ? `[${img.origen.autor} / Unsplash](${img.origen.url}) · Licencia Unsplash` : `Unsplash ${img.origen.id} (pendiente de procesar)`
     : img.origen.tipo === 'deca'
       ? `Captura real de DeCA Profesional (${img.origen.archivos.map((a) => a.split('/').pop()).join(', ')}) · material propio`

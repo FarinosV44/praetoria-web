@@ -105,16 +105,14 @@
       "id": "mercantil",
       "estado": "publicada",
       "escena": "Negociación empresarial",
-      "archivo": "ed/negociacion-empresarial",
-      "alt": "Negociación entre tres personas alrededor de una mesa con gráficos impresos",
-      "foco": "50% 45%",
+      "archivo": "ed/negociacion-mesa-reuniones",
+      "alt": "Una abogada explica una propuesta a dos socios sentados al otro lado de la mesa",
+      "foco": "55% 45%",
       "origen": {
-        "tipo": "unsplash",
-        "id": "RbYg6fKSfcY",
-        "autor": "Vitaly Gariev",
-        "url": "https://unsplash.com/photos/RbYg6fKSfcY",
-        "perfil": "https://unsplash.com/@silverkblack",
-        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+        "tipo": "ia",
+        "original": "fotos/ia/praetoria-mercantil.png",
+        "personalizada": false,
+        "nota": "Escena generada con IA (paquete praetoria-imagenes-claude-v2, #28 §8). No representa personal, clientes ni instalaciones reales."
       },
       "ancho": 1600,
       "alto": 1000,
@@ -130,16 +128,14 @@
       "id": "civil",
       "estado": "publicada",
       "escena": "Vivienda, patrimonio y documentación",
-      "archivo": "ed/vivienda-llaves",
-      "alt": "Maqueta de una casa junto a un juego de llaves sobre una mesa de madera",
-      "foco": "50% 50%",
+      "archivo": "ed/revision-plano-vivienda",
+      "alt": "Un asesor señala un plano de vivienda ante una mujer que lo escucha, con unas llaves sobre la mesa",
+      "foco": "62% 40%",
       "origen": {
-        "tipo": "unsplash",
-        "id": "rgJ1J8SDEAY",
-        "autor": "Tierra Mallorca",
-        "url": "https://unsplash.com/photos/rgJ1J8SDEAY",
-        "perfil": "https://unsplash.com/@tierramallorca",
-        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+        "tipo": "ia",
+        "original": "fotos/ia/praetoria-civil.png",
+        "personalizada": false,
+        "nota": "Escena generada con IA (paquete praetoria-imagenes-claude-v2, #28 §8). No representa personal, clientes ni instalaciones reales."
       },
       "ancho": 1600,
       "alto": 1000,
@@ -154,17 +150,15 @@
     {
       "id": "familia",
       "estado": "publicada",
-      "escena": "Conversación confidencial y cercana",
-      "archivo": "ed/conversacion-confidencial",
-      "alt": "Una profesional escucha con atención a una joven en una conversación tranquila",
-      "foco": "50% 45%",
+      "escena": "Conversación confidencial y cercana sobre un acuerdo familiar",
+      "archivo": "ed/asesoramiento-familiar",
+      "alt": "Una abogada toma notas mientras una pareja le explica su situación sentada en un sofá",
+      "foco": "60% 45%",
       "origen": {
-        "tipo": "unsplash",
-        "id": "tw-mAZXr6H4",
-        "autor": "Vitaly Gariev",
-        "url": "https://unsplash.com/photos/tw-mAZXr6H4",
-        "perfil": "https://unsplash.com/@silverkblack",
-        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+        "tipo": "ia",
+        "original": "fotos/ia/praetoria-familia.png",
+        "personalizada": false,
+        "nota": "Escena generada con IA (paquete praetoria-imagenes-claude-v2, #28 §8). No representa personal, clientes ni instalaciones reales."
       },
       "ancho": 1600,
       "alto": 1000,
@@ -513,31 +507,6 @@
       "avif": true
     },
     {
-      "id": "logistica-carretilla",
-      "estado": "publicada",
-      "escena": "Carga de mercancías en el muelle",
-      "archivo": "ed/carga-muelle-carretilla",
-      "alt": "Carretilla elevadora junto a la entrada de una nave industrial",
-      "foco": "50% 50%",
-      "origen": {
-        "tipo": "unsplash",
-        "id": "IcB8U3l9Slg",
-        "autor": "Osmany M Leyva Aldana",
-        "url": "https://unsplash.com/photos/IcB8U3l9Slg",
-        "perfil": "https://unsplash.com/@ozym",
-        "licencia": "Licencia Unsplash (uso comercial gratuito)"
-      },
-      "ancho": 1600,
-      "alto": 1000,
-      "variantes": [
-        480,
-        800,
-        1200,
-        1600
-      ],
-      "avif": true
-    },
-    {
       "id": "logistica-paquetes",
       "estado": "publicada",
       "escena": "Departamento de logística de un cargador",
@@ -640,17 +609,15 @@
     {
       "id": "hacienda-notificacion",
       "estado": "publicada",
-      "escena": "Revisión ordenada de papeles fiscales",
-      "archivo": "ed/mesa-calculadora-libreta",
-      "alt": "Mesa de trabajo con calculadora, móvil, libreta y gráficos impresos",
-      "foco": "50% 50%",
+      "escena": "Revisión de una notificación con cifras no legibles",
+      "archivo": "ed/revision-notificacion-calculadora",
+      "alt": "Dos personas revisan un documento con cifras junto a una calculadora y una carpeta",
+      "foco": "45% 60%",
       "origen": {
-        "tipo": "unsplash",
-        "id": "heiYgqp0Tsk",
-        "autor": "Jakub Żerdzicki",
-        "url": "https://unsplash.com/photos/heiYgqp0Tsk",
-        "perfil": "https://unsplash.com/@jakubzerdzicki",
-        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+        "tipo": "ia",
+        "original": "fotos/ia/praetoria-hacienda.png",
+        "personalizada": false,
+        "nota": "Escena generada con IA (paquete praetoria-imagenes-claude-v2, #28 §8). No representa personal, clientes ni instalaciones reales."
       },
       "ancho": 1600,
       "alto": 1000,
@@ -888,31 +855,6 @@
       "avif": true
     },
     {
-      "id": "abogado-explicacion",
-      "estado": "publicada",
-      "escena": "Explicar el caso con franqueza",
-      "archivo": "ed/explicacion-cuaderno",
-      "alt": "Un hombre explica algo a una mujer sentados a una mesa redonda",
-      "foco": "50% 50%",
-      "origen": {
-        "tipo": "unsplash",
-        "id": "R5_hobznBfY",
-        "autor": "The Jopwell Collection",
-        "url": "https://unsplash.com/photos/R5_hobznBfY",
-        "perfil": "https://unsplash.com/@jopwell",
-        "licencia": "Licencia Unsplash (uso comercial gratuito)"
-      },
-      "ancho": 1600,
-      "alto": 1000,
-      "variantes": [
-        480,
-        800,
-        1200,
-        1600
-      ],
-      "avif": true
-    },
-    {
       "id": "abogado-presupuesto",
       "estado": "publicada",
       "escena": "Honorarios explicados: documento y portátil",
@@ -1001,6 +943,75 @@
         ]
       },
       "composicion": "escritorio",
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "despacho-estrategia",
+      "estado": "publicada",
+      "escena": "Estrategia: revisión conjunta de documentación (bloque secundario de «El despacho»)",
+      "archivo": "ed/estrategia-revision-dossier",
+      "alt": "Un abogado y una compañera revisan juntos un dossier sobre la mesa de trabajo",
+      "foco": "55% 45%",
+      "origen": {
+        "tipo": "ia",
+        "original": "fotos/ia/praetoria-estrategia-personalizada.png",
+        "personalizada": true,
+        "nota": "Recreación con IA a partir de fotografías aportadas y autorizadas por el titular (#28 §8). Escena y lugar no documentan instalaciones ni clientes reales."
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "blog-analisis-caso",
+      "estado": "publicada",
+      "escena": "Análisis honesto de un caso antes de aconsejar",
+      "archivo": "ed/analisis-documentacion-caso",
+      "alt": "Un abogado lee y anota documentación en su mesa de trabajo",
+      "foco": "35% 40%",
+      "origen": {
+        "tipo": "ia",
+        "original": "fotos/ia/praetoria-analisis-personalizado.png",
+        "personalizada": true,
+        "nota": "Recreación con IA a partir de fotografías aportadas y autorizadas por el titular (#28 §8). Escena y lugar no documentan instalaciones ni clientes reales."
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "logistica-revision-recinto",
+      "estado": "publicada",
+      "escena": "Cargador y transportista revisan la documentación del transporte en el recinto",
+      "archivo": "ed/revision-documental-recinto-logistico",
+      "alt": "Un operario con chaleco reflectante repasa unos documentos con una profesional en el patio de un centro logístico",
+      "foco": "55% 50%",
+      "origen": {
+        "tipo": "ia",
+        "original": "fotos/ia/praetoria-transporte.png",
+        "personalizada": false,
+        "nota": "Escena generada con IA (paquete praetoria-imagenes-claude-v2, #28 §8). No representa personal, clientes ni instalaciones reales."
+      },
       "ancho": 1600,
       "alto": 1000,
       "variantes": [

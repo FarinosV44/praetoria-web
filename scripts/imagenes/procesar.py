@@ -3,6 +3,7 @@
 
 Originales privados (no se publican; Netlify solo publica out/):
   fotos/editorial/<id-unsplash>.jpg   fotografías con licencia Unsplash
+  fotos/ia/*.png                      escenas generadas con IA (#28 §8), incluidas dos recreaciones autorizadas
   fotos/deca/*.png                    capturas reales de DeCA Profesional (repositorio farvertrans-deca, public/guia)
 
 Salida en public/media/ed/:
@@ -82,7 +83,8 @@ def composicion_deca(img):
 
 
 def fotografia(img):
-    src = RAIZ / 'fotos/editorial' / f"{img['origen']['id']}.jpg"
+    o = img['origen']
+    src = RAIZ / (o['original'] if o['tipo'] == 'ia' else f"fotos/editorial/{o['id']}.jpg")
     if not src.exists():
         return None
     im = ImageOps.exif_transpose(Image.open(src)).convert('RGB')
@@ -117,7 +119,7 @@ def main(ids):
             continue
         master = composicion_deca(img) if tipo == 'deca' else fotografia(img)
         if master is None:
-            faltan.append(f"{img['id']}: falta el original fotos/editorial/{img['origen']['id']}.jpg")
+            faltan.append(f"{img['id']}: falta el original")
             continue
         exportar(img, master)
         img.update(estado='publicada', ancho=W, alto=H, variantes=VARIANTES, avif=True)

@@ -15,3 +15,6 @@ Limitación: las copias que ya existan fuera (cachés de buscadores, la web Word
   y el logotipo original (`logo-original.png`). No se retocan ni se recrean.
 
 Se procesan con `npm run imagenes` (recorte por punto focal, AVIF y WebP en 1600/1200/800/480 px y JPEG para redes).
+- `ia/*.png`: escenas generadas con IA entregadas por el titular (paquete `praetoria-imagenes-claude-v2.zip`, #28 §8).
+  Solo se guardan las siete incorporadas. Dos son recreaciones a partir de fotografías autorizadas por el titular; las
+  fotografías personales de referencia no están en el repositorio. No se retocan ni se regeneran las caras.

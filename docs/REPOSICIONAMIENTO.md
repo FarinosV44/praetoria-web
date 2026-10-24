@@ -165,6 +165,30 @@ solo quedan dos, como fotos secundarias, al final de «El despacho». En su luga
 
 Registro único, procedencia, licencias y usos: `docs/IMAGENES.md`. Matriz del blog: `docs/BLOG-MATRIZ.md`.
 
+### Decisión vigente (#28 §8): integración selectiva del paquete IA
+
+Se conserva el diseño y las imágenes que ya funcionaban (portada, Laboral, Despidos, Transporte, Arte, Hacienda y la
+optimización). Del paquete de 11 imágenes generadas con IA se incorporan 7, con el mismo pipeline y registro:
+
+| Imagen | Dónde | Sustituye a | Por qué |
+| --- | --- | --- | --- |
+| estrategia-personalizada | «El despacho», junto al método (foto secundaria) | — (nueva) | Bloque secundario preferido por el titular; una sola por página |
+| analisis-personalizado | Blog «Por qué muchos abogados… no te dicen la verdad» | Unsplash R5_hobznBfY | El artículo trata del análisis franco del caso; lo firma el titular |
+| transporte | Guía legal DeCA «DeCA obligatorio en 2026: guía legal…» | Carretilla (Unsplash IcB8U3l9Slg) | Revisión documental en el recinto: más pertinente que una carretilla |
+| mercantil | Cabecera de Mercantil | Unsplash RbYg6fKSfcY | Evita repetir las personas de la portada |
+| civil | Cabecera de Civil | Casa en miniatura (Unsplash rgJ1J8SDEAY) | Plano, llaves y conversación: tono patrimonial y humano |
+| familia | Cabecera de Familia | Unsplash tw-mAZXr6H4 | La anterior se titulaba «sesión de terapia»; esta es asesoramiento familiar |
+| hacienda | Blog «¿Has recibido una carta… de Hacienda…?» | Unsplash heiYgqp0Tsk | Revisión de una notificación con cifras ilegibles, en vez de un bodegón |
+
+Descartadas: portada-estrategia (no se sustituye la portada aprobada; ventana con paisaje urbano), laboral (repetiría la
+misma abogada que Familia y la cabecera actual funciona), arte (repetiría el mismo hombre que Mercantil; la restauradora
+actual ya muestra el estudio de obra) y consulta-personalizada (máximo dos personalizadas; no se atribuye identidad a la
+persona). Los 10 artículos pendientes siguen con composición tipográfica: ninguna escena del paquete responde a su tema.
+
+Las recreaciones personalizadas llevan el crédito «Recreación visual con IA a partir de fotografías autorizadas»; las
+demás, «Escena ilustrativa generada con IA». El check falla si hay más de dos personalizadas, si una se usa en más de un
+sitio o si aparece en la portada.
+
 ## 7. Comprobaciones (locales)
 
 Las comprobaciones de GitHub siguen bloqueadas por la facturación. Ver la PR para el detalle.
