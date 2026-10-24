@@ -35,3 +35,14 @@ test('la barra de contacto llama al teléfono general', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('.quickbar').getByRole('link', { name: 'Llamar' })).toHaveAttribute('href', 'tel:+34607527719');
 });
+
+test('en las páginas laborales la barra móvil llama y escribe al área laboral', async ({ page }) => {
+  await page.goto('/impugnar-despido/');
+  const bar = page.locator('.quickbar');
+  await expect(bar.getByRole('link', { name: /Llamar/ })).toHaveAttribute('href', 'tel:+34649181290');
+  await expect(bar.getByRole('link', { name: /WhatsApp/ })).toHaveAttribute('href', /^https:\/\/wa\.me\/34649181290/);
+  await expect(bar).toContainText('Área laboral');
+  // y al navegar a otra área vuelve al contacto general
+  await page.goto('/derecho-civil/');
+  await expect(bar.getByRole('link', { name: /Llamar/ })).toHaveAttribute('href', 'tel:+34607527719');
+});

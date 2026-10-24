@@ -38,14 +38,22 @@ test('el CTA de un servicio en su página de área abre el formulario con ese as
   await expect(page.locator('#servicio')).toContainText('Reclamación de portes impagados');
 });
 
-test('la portada muestra método y equipo sin prometer resultados', async ({ page }) => {
+test('la portada: objetivos y estrategia, áreas y método; sin retratos ni bloque de personas', async ({ page }) => {
   await page.goto('/');
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('Estrategia jurídica');
-  await expect(page.getByRole('heading', { name: 'Cómo trabajamos' })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Quién lleva tu asunto' })).toBeVisible();
-  await expect(page.getByText('Lucía López').first()).toBeVisible();
-  // Lucía: solo llamadas, nunca un enlace de WhatsApp con su número
-  expect(await page.locator('a[href*="wa.me/34649181290"], a[href*="whatsapp"][href*="649181290"]').count()).toBe(0);
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Tus objetivos. Nuestra estrategia jurídica.');
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Abogados en Valencia para empresas y particulares');
+  await expect(page.getByRole('heading', { name: 'Una estrategia para cada asunto' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Primero tu objetivo/ })).toBeVisible();
+  await expect(page.locator('.metodo li')).toHaveCount(4);
+  await expect(page.getByText('Quién lleva tu asunto')).toHaveCount(0);
+  expect(await page.locator('img[src*="juan-jose"]').count()).toBe(0);
+  // El Puig solo puede aparecer en la dirección real (tarjeta de contacto), no en los mensajes de la portada
+  const mensajes = await page.evaluate(() => {
+    const m = document.querySelector('main')!.cloneNode(true) as HTMLElement;
+    m.querySelectorAll('.contactos').forEach((n) => n.remove());
+    return m.textContent ?? '';
+  });
+  expect(mensajes).not.toContain('El Puig');
 });
 
 test('una consulta enviada desde un servicio llega con ese asunto', async ({ page }) => {

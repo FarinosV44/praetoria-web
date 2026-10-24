@@ -5,7 +5,7 @@
 // (recomendado, llega al despacho para revisión humana, #8), por WhatsApp o por correo.
 import Link from 'next/link';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
-import { site } from '@/lib/site';
+import { mensajes, site, whatsapp } from '@/lib/site';
 import { DOCUMENTOS, IMPORTES_HACIENDA, ORGANISMOS, guardarRespuestasHacienda, servicioHacienda } from '@/lib/cuestionario-hacienda';
 import { Icon } from './Icon';
 
@@ -70,7 +70,6 @@ export function HaciendaTriage() {
     else formRef.current?.querySelector('input')?.focus();
   }, [summary]);
 
-  const phone = site.phoneIntl.replace('+', '');
   return (
     <>
       <form ref={formRef} className="form triage" id="triage" noValidate onSubmit={onSubmit} hidden={!!summary}>
@@ -167,8 +166,9 @@ export function HaciendaTriage() {
           <Link className="btn btn--red" href={summary ? `/contacto/?servicio=${summary.servicio}&cuestionario=hacienda` : '/contacto/'}>
             Enviar con el formulario de consulta
           </Link>
-          <a className="btn btn--ghost" href={summary ? `https://wa.me/${phone}?text=${encodeURIComponent(summary.text)}` : '#'}>
-            <Icon name="whatsapp" /> Enviar por WhatsApp
+          {/* WhatsApp sin el resumen: los datos de la notificación no van en la URL (#28) */}
+          <a className="btn btn--ghost" href={whatsapp(mensajes.hacienda)}>
+            <Icon name="whatsapp" /> Consultar por WhatsApp
           </a>
           <a
             className="btn btn--ghost"

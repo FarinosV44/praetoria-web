@@ -3,7 +3,7 @@
 // Medición de embudos (#9), montada una vez en el layout. Sin consentimiento no envía nada (ver src/lib/medicion.ts).
 // - service_view: al ver una página de área o de servicio.
 // - cta_click: clic en un enlace al formulario (/contacto/…), con el servicio o el área del enlace.
-// - whatsapp_click y phone_click: microconversiones separadas. Un clic NO es una consulta ni un cliente.
+// - whatsapp_click y phone_click: microconversiones separadas, con destino general o laboral (#28). Un clic NO es una consulta ni un cliente.
 // También anota la ruta anterior (origen de la consulta) y la atribución de la visita, esta solo con consentimiento.
 import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
@@ -59,7 +59,7 @@ export function Medicion() {
         const sv = servicioPorId(q.get('servicio') ?? '');
         medir('cta_click', { destino: 'formulario', servicio: sv?.id, area: sv?.area ?? q.get('area') ?? undefined, landing, ubicacion });
       } else if (href.startsWith('https://wa.me/')) {
-        medir('whatsapp_click', { destino: 'general', landing, ubicacion });
+        medir('whatsapp_click', { destino: href.includes(laboral.phoneIntl.slice(1)) ? 'laboral' : 'general', landing, ubicacion });
       } else if (href.startsWith('tel:')) {
         medir('phone_click', { destino: href.includes(laboral.phoneIntl.slice(1)) ? 'laboral' : 'general', landing, ubicacion });
       }

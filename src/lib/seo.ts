@@ -1,6 +1,6 @@
 // Metadatos comunes de cada página (equivalente a lo que hacía layouts/Base.astro).
 import type { Metadata } from 'next';
-import { site } from './site';
+import { contactos, site } from './site';
 
 type MetaInput = {
   title: string;
@@ -47,7 +47,7 @@ export const legalServiceLd = {
   name: site.name,
   legalName: site.legalName,
   url: site.url,
-  image: `${site.url}/media/despacho-salas-reuniones.webp`,
+  image: `${site.url}/media/v2/despacho-salas-reuniones.webp`,
   logo: `${site.url}/media/logo-praetoria-sin-fondo.png`,
   telephone: site.phoneIntl,
   email: site.email,
@@ -60,7 +60,12 @@ export const legalServiceLd = {
     addressRegion: site.address.region,
     addressCountry: site.address.country,
   },
-  areaServed: ['El Puig de Santa María', "L'Horta Nord", 'Valencia', 'España'],
+  // Mercado atendido (#28): Valencia. La dirección real (El Puig de Santa María) se mantiene en address.
+  areaServed: ['Valencia', 'Provincia de Valencia', 'España'],
+  contactPoint: [
+    { '@type': 'ContactPoint', name: contactos.general.etiqueta, telephone: contactos.general.phoneIntl, contactType: 'customer service', availableLanguage: 'es' },
+    { '@type': 'ContactPoint', name: contactos.laboral.etiqueta, telephone: contactos.laboral.phoneIntl, contactType: 'customer service', availableLanguage: 'es' },
+  ],
   founder: {
     '@type': 'Person',
     name: site.lawyer,

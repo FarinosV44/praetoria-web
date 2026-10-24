@@ -78,7 +78,7 @@ Si tienes un problema con un alquiler, una ocupación o un impago en Valencia, *
 
 Analizamos tu caso sin compromiso y te explicamos exactamente qué opciones reales tienes.
 
-📍 Valencia – El Puig  
+📍 Valencia  
 🌐 **[www.praetoriaabogados.es](/)**
 
 **Praetoria División Jurídica**  

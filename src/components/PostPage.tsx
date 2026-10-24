@@ -126,9 +126,10 @@ export function PostPage({ post }: { post: Post }) {
           title={servicio.cta ?? `¿Necesitas ayuda con ${servicio.nombre.toLowerCase()}?`}
           text="Cuéntanos qué ha pasado. Revisamos tu caso y te explicamos las opciones, el trabajo y los honorarios antes de empezar."
           href={servicio.siguientePaso?.href ?? enlaceConsulta(servicio)}
+          canal={servicio.area === 'laboral' ? 'laboral' : 'general'}
         />
       ) : (
-        <CtaBand />
+        <CtaBand canal={post.category === 'laboral' ? 'laboral' : 'general'} />
       )}
     </div>
   );

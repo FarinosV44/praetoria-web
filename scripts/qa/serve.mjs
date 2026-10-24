@@ -9,6 +9,7 @@
 import { createServer } from 'node:http';
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { extname, join, normalize } from 'node:path';
+import { gzipSync } from 'node:zlib';
 
 const [dir = 'out', port = '4400'] = process.argv.slice(2);
 const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.xml': 'application/xml', '.txt': 'text/plain; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.ico': 'image/x-icon' };
@@ -74,6 +75,13 @@ createServer(async (req, res) => {
     res.writeHead(404, { 'Content-Type': TYPES['.html'] });
     return res.end(readFileSync(join(dir, '404.html')));
   }
-  res.writeHead(200, { 'Content-Type': TYPES[extname(file)] || 'application/octet-stream' });
-  res.end(readFileSync(file));
+  // Compresión gzip como en Netlify (sin ella, las medidas de rendimiento locales se inflan)
+  const tipo = TYPES[extname(file)] || 'application/octet-stream';
+  const cuerpo = readFileSync(file);
+  if (/text|javascript|json|xml|svg/.test(tipo) && /gzip/.test(req.headers['accept-encoding'] ?? '')) {
+    res.writeHead(200, { 'Content-Type': tipo, 'Content-Encoding': 'gzip', Vary: 'Accept-Encoding' });
+    return res.end(gzipSync(cuerpo));
+  }
+  res.writeHead(200, { 'Content-Type': tipo });
+  res.end(cuerpo);
 }).listen(Number(port), () => console.log(`Sirviendo ${dir} en http://localhost:${port}`));

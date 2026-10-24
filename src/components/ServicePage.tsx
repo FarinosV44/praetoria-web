@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import { getPosts } from '@/lib/content';
-import { areas, groups, laboral, mensajes, site } from '@/lib/site';
+import { areas, canalDe, groups, mensajes, whatsapp } from '@/lib/site';
+import { areaContent } from '@/lib/areas-content';
+import { iconoArea, objetivoArea } from '@/lib/iconos';
 import { docLabel, enlaceConsulta, type Servicio } from '@/lib/servicios';
 import { Breadcrumbs } from './Breadcrumbs';
 import { CtaBand } from './CtaBand';
 import { Faq } from './Faq';
-import { Icon } from './Icon';
+import { Icon, LineIcon } from './Icon';
 import { PostList } from './PostList';
 
 // Página propia de un servicio (#6, reutilizable en #7 y #8): problema, a quién va, qué revisamos,
@@ -18,25 +20,62 @@ export function ServicePage({ servicio: s }: { servicio: Servicio }) {
   const guias = (s.articulos ?? []).map((slug) => posts.find((p) => p.slug === slug)).filter((p) => !!p);
   const consulta = enlaceConsulta(s);
   const cta = s.cta ?? 'Consultar sobre esto';
-  // Laboral: la llamada va a Lucía López (solo llamadas). El resto, al teléfono general.
-  const tel = s.area === 'laboral' ? { ...laboral, label: `Llamar a ${laboral.name}` } : { ...site, label: '' };
+  // Canal del área (#28): laboral -> área laboral (llamadas y WhatsApp); el resto -> atención jurídica general
+  const canal = canalDe(s.area);
+  const imagen = areaContent.find((a) => a.id === s.area)?.image;
+  const textoWa = s.area in mensajes ? mensajes[s.area as keyof typeof mensajes] : mensajes.general;
 
   return (
     <div className="service-page">
-      <section className="page-head">
+      <section className="page-head area-head">
         <div className="wrap">
           <Breadcrumbs items={[{ label: group.title, href: group.href }, { label: area.name, href: `/${area.slug}/` }, { label: s.nombre }]} />
-          <h1>{s.seo?.h1 ?? s.nombre}</h1>
-          {s.problema && <p className="lede">{s.problema}</p>}
-          <div className="actions">
-            <Link className="btn btn--red" href={consulta}>
-              {cta}
-            </Link>
-            <a className="btn btn--ghost" href={`tel:${tel.phoneIntl}`}>
-              <Icon name="phone" /> {tel.label ? `${tel.label} · ${tel.phone}` : tel.phone}
-            </a>
+          <div className="area-head__grid">
+            <div className="area-head__texto">
+              <p className="antetitulo">
+                <LineIcon name={iconoArea[s.area]} /> {s.area === 'laboral' ? 'Área laboral' : area.name}
+              </p>
+              <h1>{s.seo?.h1 ?? s.nombre}</h1>
+              {s.problema && <p className="lede">{s.problema}</p>}
+              <div className="actions">
+                <Link className="btn btn--red" href={consulta}>
+                  {cta} <LineIcon name="flecha" />
+                </Link>
+                {canal.id === 'laboral' ? (
+                  <a className="btn btn--ghost" href={`tel:${canal.phoneIntl}`}>
+                    <Icon name="phone" /> {canal.llamar}
+                  </a>
+                ) : (
+                  <a className="btn btn--ghost" href={whatsapp(textoWa, canal.id)}>
+                    <Icon name="whatsapp" /> {canal.escribir}
+                  </a>
+                )}
+              </div>
+            </div>
+            <figure className="area-head__media area-head__media--card">
+              {imagen && (
+                <img
+                  src={imagen.src.replace('.webp', '-800.webp')}
+                  srcSet={`${imagen.src.replace('.webp', '-480.webp')} 480w, ${imagen.src.replace('.webp', '-800.webp')} 800w`}
+                  sizes="(min-width: 960px) 44vw, 92vw"
+                  alt={imagen.alt}
+                  width={800}
+                  height={520}
+                  fetchPriority="high"
+                />
+              )}
+              <figcaption className="objetivo-card">
+                <span className="objetivo-card__icono">
+                  <LineIcon name="objetivo" />
+                </span>
+                <span>
+                  <small>El objetivo</small>
+                  <strong>{objetivoArea[s.area]}</strong>
+                  {s.destinatario && <span className="objetivo-card__para">{s.destinatario}</span>}
+                </span>
+              </figcaption>
+            </figure>
           </div>
-          {s.destinatario && <p className="service-page__for">{s.destinatario}</p>}
         </div>
       </section>
 
@@ -44,7 +83,9 @@ export function ServicePage({ servicio: s }: { servicio: Servicio }) {
         <div className="wrap service-page__grid">
           {s.revisamos && (
             <div>
-              <h2>Qué revisamos</h2>
+              <h2 className="h-icono">
+                <LineIcon name="analisis" /> Qué revisamos
+              </h2>
               <ul className="checks">
                 {s.revisamos.map((r) => (
                   <li key={r}>{r}</li>
@@ -54,7 +95,9 @@ export function ServicePage({ servicio: s }: { servicio: Servicio }) {
           )}
           {s.proceso && (
             <div>
-              <h2>Cómo trabajamos</h2>
+              <h2 className="h-icono">
+                <LineIcon name="estrategia" /> Cómo trabajamos
+              </h2>
               <ol className="method-steps method-steps--compact">
                 {s.proceso.map((p) => (
                   <li key={p}>
@@ -71,7 +114,9 @@ export function ServicePage({ servicio: s }: { servicio: Servicio }) {
         <section className="section section--stone">
           <div className="wrap service-page__docs">
             <div>
-              <h2>Qué documentación ayuda</h2>
+              <h2 className="h-icono">
+                <LineIcon name="documento" /> Qué documentación ayuda
+              </h2>
               <p>
                 Es orientativa: no hace falta tenerla toda para consultar. <strong>No la adjuntes en el formulario</strong>; si hace falta,
                 te la pediremos después por un canal seguro.
@@ -120,10 +165,10 @@ export function ServicePage({ servicio: s }: { servicio: Servicio }) {
 
       <CtaBand
         title={cta}
-        text="Cuéntanos qué ha pasado. Revisamos tu caso y te explicamos las opciones, el trabajo y los honorarios antes de empezar."
+        text="Cuéntanos qué quieres conseguir. Revisamos tu caso y te explicamos las opciones, el trabajo y los honorarios antes de empezar."
         href={consulta}
-        telefono={s.area === 'laboral' ? { phone: laboral.phone, phoneIntl: laboral.phoneIntl, label: `Llamar a ${laboral.name}` } : undefined}
-        whatsappText={area.id in mensajes ? mensajes[area.id as keyof typeof mensajes] : mensajes.general}
+        canal={canal.id}
+        whatsappText={textoWa}
       />
     </div>
   );

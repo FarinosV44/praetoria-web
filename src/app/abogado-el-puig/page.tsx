@@ -9,7 +9,7 @@ export const metadata = buildMetadata({
   title: "Abogado en El Puig",
   description: "Abogado en El Puig y comarca: derecho civil, mercantil, familia, transporte, Hacienda y patrimonio. Asesoramiento cercano y respuesta rápida.",
   path: '/abogado-el-puig/',
-  image: "/media/despacho-zona-mesas.webp",
+  image: "/media/v2/despacho-zona-mesas.webp",
 });
 
 export default function ElPuigPage() {
@@ -29,7 +29,7 @@ export default function ElPuigPage() {
               <a className="btn btn--ghost" href={`tel:${site.phoneIntl}`}><Icon name="phone" /> {site.phone}</a>
             </div>
           </div>
-          <img className="photo" src="/media/despacho-zona-mesas-800.webp" alt="Despacho de Praetoria en El Puig: zona de mesas" width={800} height={600} />
+          <img className="photo" src="/media/v2/despacho-zona-mesas-800.webp" alt="Despacho de Praetoria en El Puig: zona de mesas" width={800} height={600} />
         </div>
       </section>
 
@@ -72,7 +72,7 @@ export default function ElPuigPage() {
               <a className="btn btn--ghost" href={site.googleReviews} rel="noopener">Reseñas en Google</a>
             </div>
           </div>
-          <img className="photo" src="/media/despacho-atencion-cliente-800.webp" alt="Espacio de atención al cliente del despacho" width={800} height={600} loading="lazy" />
+          <img className="photo" src="/media/v2/despacho-atencion-cliente-800.webp" alt="Espacio de atención al cliente del despacho" width={800} height={600} loading="lazy" />
         </div>
       </section>
 

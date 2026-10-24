@@ -106,7 +106,7 @@ Si tienes un impago, especialmente relacionado con transporte, actúa siguiendo 
 
 ## 💬 Nuestra experiencia en transporte
 
-Juan José Farinós Ibáñez dirige también una empresas de transporte y logística. Gracias a la experiencia en procesos de impago transporte, podemos ayudar a nuestros clientes a recuperar lo que les pertenece.
+El área de transporte del despacho cuenta con experiencia directa en la dirección de empresas de transporte y logística. Gracias a esa experiencia en procesos de impago, podemos ayudar a nuestros clientes a recuperar lo que les pertenece.
 
 Por tanto, sabemos que:
 

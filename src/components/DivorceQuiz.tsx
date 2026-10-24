@@ -10,7 +10,6 @@ import {
   isSimpleCase,
   leerRespuestasDivorcio,
   preguntasDivorcio,
-  resumenDivorcio,
   type RespuestasDivorcio as Answers,
 } from '@/lib/cuestionario-divorcio';
 import { Icon } from './Icon';
@@ -58,7 +57,6 @@ export function DivorceQuiz() {
     markMoved();
   };
 
-  const text = 'Hola, Praetoria. He hecho la comprobación de divorcio en vuestra web:\n' + (done ? resumenDivorcio(answers) : '');
 
   return (
     <form ref={formRef} className="quiz" id="quiz" onSubmit={(e) => e.preventDefault()}>
@@ -105,12 +103,13 @@ export function DivorceQuiz() {
           </p>
         </div>
         <div className="actions">
-          <a className="btn btn--red" href={done ? `https://wa.me/${site.phoneIntl.replace('+', '')}?text=${encodeURIComponent(text)}` : whatsapp(mensajes.divorcio)}>
-            <Icon name="whatsapp" /> Enviar mis respuestas por WhatsApp
-          </a>
-          <Link className="btn btn--ghost" href="/contacto/?servicio=familia-divorcio&cuestionario=divorcio">
+          {/* Las respuestas solo viajan con el formulario (sessionStorage), nunca en la URL de WhatsApp (#28) */}
+          <Link className="btn btn--red" href="/contacto/?servicio=familia-divorcio&cuestionario=divorcio">
             Enviarlas con el formulario
           </Link>
+          <a className="btn btn--ghost" href={whatsapp(mensajes.divorcio)}>
+            <Icon name="whatsapp" /> Consultar por WhatsApp
+          </a>
           <a className="btn btn--ghost" href={`tel:${site.phoneIntl}`}>
             <Icon name="phone" /> Llamar
           </a>

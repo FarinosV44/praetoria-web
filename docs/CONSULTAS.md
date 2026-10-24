@@ -45,7 +45,7 @@ La validación en el navegador es accesible:
 Todos se configuran en `src/lib/site.ts`:
 
 - **General**: 607 527 719 (`tel:+34607527719`, WhatsApp `34607527719`) y `juanfarinos@icav.es`. Coincide con el teléfono publicado en decaprofesional.es/contacto, según la consulta del 23/10 que recoge la issue. Ningún enlace de la web usa otro número.
-- **Laboral**: Lucía López, experta en Derecho Laboral, 649 181 290 (`tel:+34649181290`). **Solo llamadas**: no hay autorización para su WhatsApp ni un correo propio. Aparece en contacto y en el equipo, y será la persona responsable de las consultas de Laboral. Su página de área llega con #7.
+- **Área laboral**: 649 181 290 (`tel:+34649181290`, WhatsApp `34649181290`). **Llamadas y WhatsApp** (autorizado en #28; antes, solo llamadas). Sin correo propio. Atiende Lucía López, que figura como responsable interna de las consultas laborales.
 - **Mensajes predefinidos de WhatsApp**: centralizados en `mensajes`. Todos mencionan a Praetoria y el servicio jurídico, y ninguno el soporte de DeCA.
 
 Corrección: el artículo sobre DeCA Conecta remitía a `info@praetoriaabogados.es` para consultas jurídicas. Se ha sustituido por `juanfarinos@icav.es`, el correo confirmado. **Si `info@` es un buzón real y atendido, puede volver a ponerse.**

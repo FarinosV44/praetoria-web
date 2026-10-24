@@ -60,13 +60,13 @@ test('envío correcto: llega una sola consulta con área y responsable, y se con
   expect(r[0]).toMatchObject({ 'form-name': 'contacto', area: 'Transporte y logística', responsable: 'Juan José Farinós Ibáñez (607 527 719)', preferencia: 'Llamada' });
 });
 
-test('Laboral: se indica y se asigna a Lucía López', async ({ page }) => {
+test('Laboral: se indica y se asigna al área laboral', async ({ page }) => {
   await rellenar(page, { area: 'Laboral' });
   await page.getByLabel('Soy la persona trabajadora').check();
-  await expect(page.getByText('Los asuntos laborales los atiende Lucía López')).toBeVisible();
+  await expect(page.getByText('Los asuntos laborales los atiende el área laboral')).toBeVisible();
   await esperarTiempoMinimo(page);
   await page.getByRole('button', { name: 'Enviar mi consulta' }).click();
-  await expect(page.getByText('La revisará Lucía López')).toBeVisible();
+  await expect(page.getByText('La revisará el área laboral')).toBeVisible();
   expect((await registro(page))[0].responsable).toBe('Lucía López (649 181 290)');
 });
 

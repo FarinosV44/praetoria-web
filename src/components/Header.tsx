@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { areas, groups, nav, site, whatsapp, type Group } from '@/lib/site';
+import { areas, groups, nav, site, type Group } from '@/lib/site';
 import { Icon } from './Icon';
 
 export function Header() {
@@ -103,9 +103,9 @@ export function Header() {
               ),
             )}
           </ul>
-          <a className="btn btn--red menu__cta" href={whatsapp()}>
-            <Icon name="whatsapp" /> Escríbenos
-          </a>
+          <Link className="btn btn--red menu__cta" href="/contacto/">
+            Contactar con el despacho
+          </Link>
         </nav>
       </div>
     </header>

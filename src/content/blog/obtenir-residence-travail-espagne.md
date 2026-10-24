@@ -15,7 +15,7 @@ Vous avez besoin de renouveler vos papiers ou de préparer correctement votre do
 
 👉 Dans ces démarches, une erreur peut suffire à bloquer toute la procédure.
 
-Chez **Praetoria División Jurídica**, l’avocat **Juan José Farinós Ibáñez**, spécialisé en droit des étrangers, accompagne les ressortissants étrangers à Valence et dans toute l’Espagne.
+**Praetoria División Jurídica** accompagne les ressortissants étrangers à Valence et dans toute l’Espagne.
 
 Nous vous guidons de manière claire et personnalisée, **du premier contact jusqu’à l’obtention de votre résidence**.
 
@@ -126,7 +126,7 @@ Vous ne savez pas quelle option est la meilleure pour vous ?
 
 👉 Contactez-nous pour une première analyse sans engagement.
 
-📍 Valence – El Puig  
+📍 Valence  
 🌐 [www.praetoriaabogados.es](/)  
 📞 +34 607 527 719
 

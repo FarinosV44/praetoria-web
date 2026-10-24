@@ -67,6 +67,6 @@ Cuando se anuncian procesos de regularización masiva:
 
 Prepararse con antelación es una ventaja competitiva real.
 
-## Abogado de extranjería en Valencia (El Puig)
+## Abogados de extranjería en Valencia
 
 Si resides en Valencia o alrededores y quieres saber si puedes beneficiarte de una posible regularización, en Praetoria División Jurídica estudiamos tu situación sin compromiso inicial.

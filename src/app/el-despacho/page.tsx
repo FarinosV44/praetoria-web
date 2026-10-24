@@ -1,18 +1,22 @@
+import Link from 'next/link';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { CtaBand } from '@/components/CtaBand';
-import { Icon } from '@/components/Icon';
+import { ContactosArea } from '@/components/ContactosArea';
+import { Icon, LineIcon } from '@/components/Icon';
 import { JsonLd } from '@/components/JsonLd';
-import { laboral, site } from '@/lib/site';
+import { areas, laboral, site } from '@/lib/site';
+import { iconoArea, metodo } from '@/lib/iconos';
 import { buildMetadata } from '@/lib/seo';
 
 export const metadata = buildMetadata({
-  title: "Juan José Farinós Ibáñez | Abogado en El Puig y Valencia",
-  description: "Conoce a Juan José Farinós Ibáñez, abogado en El Puig y Valencia especializado en transporte, mercantil, civil, familia y Hacienda. Trayectoria y enfoque profesional.",
+  title: 'El despacho | Praetoria, abogados en Valencia',
+  description:
+    'Praetoria División Jurídica: despacho de abogados en Valencia para empresas y particulares. Entendemos tu objetivo, analizamos las opciones y diseñamos la estrategia jurídica.',
   path: '/el-despacho/',
-  image: "/media/juan-jose-farinos.webp",
 });
 
 export default function DespachoPage() {
+  // Identificación profesional y autoría de los contenidos (sin fotografía, #28)
   const person = {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -21,83 +25,103 @@ export default function DespachoPage() {
     worksFor: { '@id': `${site.url}/#despacho` },
     memberOf: { '@type': 'Organization', name: site.college },
     sameAs: [site.linkedin],
-    image: `${site.url}/media/juan-jose-farinos.webp`,
   };
   const photos = [
-    ['despacho-salas-reuniones', 'Salas de reuniones acristaladas'],
-    ['despacho-zona-espera', 'Zona de espera con sofá y mesas'],
-    ['despacho-planta-abierta', 'Oficina de planta abierta'],
-    ['despacho-sala-reunion', 'Sala de reuniones para consultas confidenciales'],
+    ['v2/despacho-salas-reuniones', 'Salas de reuniones acristaladas'],
+    ['v2/despacho-zona-espera', 'Zona de espera con sofá y mesas'],
+    ['v2/despacho-planta-abierta', 'Oficina de planta abierta'],
+    ['v2/despacho-atencion-cliente', 'Espacio de atención a clientes'],
   ] as const;
   return (
     <div className="page-despacho">
       <JsonLd data={person} />
-    <section className="page-head">
+      <section className="page-head area-head">
         <div className="wrap">
           <Breadcrumbs items={[{ label: 'El despacho' }]} />
-          <h1>Soy Juan José Farinós, abogado y fundador de Praetoria</h1>
+          <div className="area-head__grid">
+            <div className="area-head__texto">
+              <p className="antetitulo">
+                <LineIcon name="edificio" /> Praetoria División Jurídica
+              </p>
+              <h1>Un despacho que empieza por tu objetivo</h1>
+              <p className="lede">
+                Asesoramos a empresas, autónomos, familias y particulares en Valencia. Primero entendemos qué quieres conseguir;
+                después analizamos las opciones y diseñamos la estrategia jurídica para defender tus intereses.
+              </p>
+            </div>
+            <figure className="area-head__media">
+              <img src="/media/v2/despacho-salas-reuniones-800.webp" alt="Salas de reuniones acristaladas del despacho" width={800} height={528} fetchPriority="high" />
+            </figure>
+          </div>
         </div>
       </section>
 
       <section className="section">
-        <div className="wrap split">
+        <div className="wrap intro-grid">
           <div className="prose">
+            <h2>Criterio jurídico y visión de empresa</h2>
             <p>
-              Soy abogado colegiado en el Ilustre Colegio de Abogados de Valencia, con el número {site.collegeNumber}, y
-              tengo formación en Derecho y en Historia del Arte. A lo largo de los años he desarrollado mi actividad tanto en
-              el ejercicio jurídico como en la gestión empresarial, especialmente en el transporte y la logística
-              internacional.
+              El despacho combina el ejercicio de la abogacía con experiencia directa en la gestión empresarial, especialmente en
+              el transporte y la logística internacional, y con formación humanística. Por eso analizamos cada asunto desde más de
+              un ángulo: cómo se organiza una sociedad, cómo se negocia un contrato, cómo se defiende una posición en un conflicto
+              o cómo se protege un patrimonio, económico, familiar o cultural.
             </p>
             <p>
-              He asesorado a empresas, autónomos, familias y particulares, no solo desde el conocimiento legal, sino desde
-              una comprensión de cómo funcionan realmente las cosas: cómo se organiza una sociedad, cómo se negocia un
-              contrato, cómo se defiende una posición en un conflicto o cómo se protege un patrimonio, ya sea económico,
-              familiar o cultural.
+              No entendemos el trabajo como una simple aplicación de normas. Negociamos cuando conviene y preparamos la vía
+              judicial cuando hace falta, siempre con un objetivo claro y con el trabajo y los honorarios explicados antes de
+              empezar. En los asuntos que lo requieren colaboramos con economistas y especialistas fiscales.
             </p>
             <p>
-              La formación humanística me ayuda a mirar cada asunto desde más de un ángulo. Esa doble mirada, legal y
-              estratégica, me permite ofrecer soluciones prácticas y pensadas para conseguir resultados. No concibo mi
-              trabajo como una simple aplicación de normas: mi enfoque es acompañar, analizar, planificar y actuar con
-              inteligencia jurídica y sentido común. Cada caso es distinto, y cada persona también.
-            </p>
-            <h2>Cómo trabajamos</h2>
-            <p>
-              Empezamos siempre por escuchar tu situación. Después identificamos qué está en juego, estudiamos la
-              documentación y te proponemos una estrategia. Antes de iniciar cualquier actuación te explicamos el trabajo
-              necesario y los honorarios.
-            </p>
-            <p>
-              Atendemos en el despacho de El Puig y, cuando el asunto lo permite, por teléfono o videollamada en toda
-              España. En los asuntos que lo requieren colaboramos con economistas y especialistas fiscales.
-            </p>
-            <p className="links">
-              <a href={site.linkedin} rel="noopener"><Icon name="linkedin" /> Perfil en LinkedIn</a>
-              <a href={site.googleReviews} rel="noopener">Opiniones de clientes en Google</a>
+              Atendemos de forma presencial y, cuando el asunto lo permite, por teléfono o videollamada en toda España.
             </p>
           </div>
-          <figure className="portrait">
-            <img
-              className="photo"
-              src="/media/juan-jose-farinos-800.webp"
-              alt="Juan José Farinós Ibáñez"
-              width={600}
-              height={800}
-            />
-            <figcaption>
-              {site.lawyer}<br />Abogado, ICAV {site.collegeNumber}
-            </figcaption>
-          </figure>
+          <aside className="metodo-mini" aria-label="Cómo trabajamos">
+            <p className="metodo-mini__titulo">Cómo trabajamos</p>
+            <ol>
+              {metodo.map((m) => (
+                <li key={m.titulo}>
+                  <LineIcon name={m.icono} />
+                  <span>{m.titulo}</span>
+                </li>
+              ))}
+            </ol>
+          </aside>
         </div>
       </section>
 
       <section className="section section--stone">
         <div className="wrap">
-          <h2>Nuestro espacio</h2>
-          <p className="lede">
-            Un despacho moderno y sobrio en El Puig, con salas privadas para reuniones y consultas confidenciales.
-          </p>
-          <div className="grid">
-            {photos.map(([src, alt]) => <img key={src} className="photo" src={`/media/${src}-800.webp`} alt={alt} width={800} height={600} loading="lazy" />)}
+          <div className="seccion-cabecera">
+            <p className="antetitulo">Áreas de práctica</p>
+            <h2>Organizados por áreas</h2>
+          </div>
+          <ul className="areas-lista">
+            {areas.map((a) => (
+              <li key={a.slug}>
+                <Link href={`/${a.slug}/`}>
+                  <LineIcon name={iconoArea[a.id]} />
+                  <span>
+                    <strong>{a.name}</strong>
+                    {a.short}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap">
+          <div className="seccion-cabecera">
+            <p className="antetitulo">Nuestro espacio</p>
+            <h2>Un espacio sobrio y confidencial</h2>
+            <p className="lede">Salas privadas para reuniones y consultas confidenciales.</p>
+          </div>
+          <div className="galeria">
+            {photos.map(([src, alt]) => (
+              <img key={src} className="photo" src={`/media/${src}-800.webp`} alt={alt} width={800} height={520} loading="lazy" />
+            ))}
           </div>
           <address className="addr">
             <Icon name="pin" />
@@ -108,43 +132,32 @@ export default function DespachoPage() {
         </div>
       </section>
 
-      <section className="section">
-        <div className="wrap">
-          <h2>Equipo</h2>
-          <ul className="team">
-            <li>
-              <p className="team__name">{site.lawyer}</p>
-              <p className="team__role">Abogado, fundador del despacho · ICAV {site.collegeNumber}</p>
-              <p>
-                <a href={`tel:${site.phoneIntl}`}>{site.phone}</a> · <a href={`mailto:${site.email}`}>{site.email}</a>
-              </p>
-            </li>
-            <li>
-              <p className="team__name">{laboral.name}</p>
-              <p className="team__role">{laboral.role}</p>
-              <p>
-                Asuntos laborales: <a href={`tel:${laboral.phoneIntl}`}>{laboral.phone}</a> (llamadas)
-              </p>
-            </li>
-          </ul>
-        </div>
-      </section>
-
       <section className="section section--stone">
         <div className="wrap">
           <h2>Datos del despacho</h2>
           <dl className="data">
             <div><dt>Titular</dt><dd>{site.legalName}, CIF {site.cif}</dd></div>
-            <div><dt>Abogado responsable</dt><dd>{site.lawyer}</dd></div>
-            <div><dt>Colegio profesional</dt><dd>{site.college}, n.º {site.collegeNumber}</dd></div>
+            <div><dt>Letrado responsable</dt><dd>{site.lawyer}, {site.college}, n.º {site.collegeNumber}</dd></div>
+            <div><dt>Área laboral</dt><dd>{laboral.name}, {laboral.role.toLowerCase()}</dd></div>
             <div><dt>Domicilio</dt><dd>{site.address.street}, {site.address.postalCode} {site.address.locality}</dd></div>
+            <div>
+              <dt>Perfiles</dt>
+              <dd>
+                <a href={site.linkedin} rel="noopener">LinkedIn</a> · <a href={site.googleReviews} rel="noopener">Opiniones en Google</a>
+              </dd>
+            </div>
           </dl>
         </div>
       </section>
 
+      <section className="section">
+        <div className="wrap">
+          <h2>Contacta con el despacho</h2>
+          <ContactosArea />
+        </div>
+      </section>
+
       <CtaBand />
-
     </div>
-
   );
 }

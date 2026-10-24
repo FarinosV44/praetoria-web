@@ -12,18 +12,22 @@ const SERVICIOS = [
 
 test('Laboral está en la navegación, la portada y el índice de áreas', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('.page-home .directory').getByRole('link', { name: /Laboral/ })).toHaveAttribute('href', '/abogado-laboralista-valencia/');
+  await expect(page.locator('.page-home .areas-grid').getByRole('link', { name: 'Laboral', exact: true })).toHaveAttribute('href', '/abogado-laboralista-valencia/');
   await page.goto('/areas/');
   await expect(page.getByRole('link', { name: /Laboral/ }).first()).toBeVisible();
   await expect(page.locator('#menu a[href="/abogado-laboralista-valencia/"]')).toHaveCount(1);
 });
 
-test('la landing laboral llama a Lucía López, sin WhatsApp a su número, y separa los recorridos', async ({ page }) => {
+test('la landing laboral contacta con el área laboral (llamada y WhatsApp) sin nombres en los botones', async ({ page }) => {
   await page.goto('/abogado-laboralista-valencia/');
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Abogados laboralistas en Valencia y El Puig');
-  await expect(page.locator('.page-head a[href="tel:+34649181290"]')).toContainText('Lucía López');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Abogados laboralistas en Valencia');
+  await expect(page.locator('.page-head a[href="tel:+34649181290"]')).toHaveText(/Llamar al área laboral/);
+  await expect(page.locator('.page-head a[href^="https://wa.me/34649181290"]')).toHaveText(/WhatsApp del área laboral/);
   await expect(page.locator('.cta a[href="tel:+34649181290"]')).toBeVisible();
-  expect(await page.locator('a[href*="649181290"]:not([href^="tel:"])').count()).toBe(0);
+  await expect(page.locator('.cta a[href^="https://wa.me/34649181290"]')).toBeVisible();
+  // En las páginas laborales, ningún botón lleva al número general salvo el pie
+  expect(await page.locator('main a[href*="607527719"]').count()).toBe(0);
+  expect(await page.locator('main .btn', { hasText: /Lucía|Juan José/ }).count()).toBe(0);
   await expect(page.locator('.journey')).toHaveCount(5);
   await expect(page.locator('.area-note')).toContainText('conflicto de intereses');
   for (const id of ['laboral-altas', 'laboral-acoso', 'laboral-condiciones']) await expect(page.locator(`#${id}`)).toHaveCount(1);
@@ -57,7 +61,7 @@ for (const s of SERVICIOS) {
     await page.getByLabel('Situación actual').selectOption('fuera');
     await page.getByLabel(/Fecha en que te lo comunicaron/).fill('2026-10-20');
     await page.getByRole('button', { name: 'Enviar mi consulta' }).click();
-    await expect(page.getByText('La revisará Lucía López')).toBeVisible();
+    await expect(page.getByText('La revisará el área laboral')).toBeVisible();
     await expect(page.locator('.form-ok a[href="tel:+34649181290"]')).toBeVisible();
     const r = await registro(page);
     expect(r).toHaveLength(1);

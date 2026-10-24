@@ -103,7 +103,7 @@ Regularizar la situación ahora evita problemas futuros.
 
 Si tienes un apartamento turístico o alquilas por corta duración, revisamos tu situación y gestionamos todos los trámites necesarios, incluido el nuevo modelo informativo.
 
-📍 Valencia – El Puig  
+📍 Valencia  
 🌐 [www.praetoriaabogados.es](/)
 
 Praetoria División Jurídica  

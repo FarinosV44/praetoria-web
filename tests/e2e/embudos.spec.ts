@@ -46,7 +46,7 @@ test('Hacienda: el cuestionario pasa organismo, documento, fecha y descripción 
   expect(r[0].cuestionario).toContain('Recibida o abierta el: 15/10/2026');
 });
 
-test('Hacienda: una resolución del INSS sobre una prestación se deriva a Laboral (Lucía López)', async ({ page }) => {
+test('Hacienda: una resolución del INSS sobre una prestación se deriva al área laboral', async ({ page }) => {
   await page.request.post('/__mock-forms/reset');
   await triage(page, 'INSS', 'Resolución sobre una prestación');
   await expect(page.locator('#triage-result')).toContainText('área laboral');
@@ -56,7 +56,7 @@ test('Hacienda: una resolución del INSS sobre una prestación se deriva a Labor
   await expect(page.locator('#cuestionario')).toContainText('Organismo: INSS');
   await page.getByLabel('Soy la persona trabajadora').check();
   await completarYEnviar(page, { mensaje: false });
-  await expect(page.getByText('La revisará Lucía López')).toBeVisible();
+  await expect(page.getByText('La revisará el área laboral')).toBeVisible();
   expect((await registro(page))[0]).toMatchObject({ area: 'Laboral', servicio: 'Altas médicas y prestaciones', responsable: 'Lucía López (649 181 290)' });
 });
 

@@ -3,11 +3,13 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { CtaBand } from '@/components/CtaBand';
 import { areaContent } from '@/lib/areas-content';
 import { areas, groups } from '@/lib/site';
+import { iconoArea } from '@/lib/iconos';
+import { LineIcon } from '@/components/Icon';
 import { buildMetadata } from '@/lib/seo';
 
 export const metadata = buildMetadata({
-  title: "Áreas de práctica: empresas y particulares",
-  description: "Transporte y logística, mercantil, Hacienda y Seguridad Social para empresas; civil, familia, arte y patrimonio para particulares.",
+  title: 'Áreas de práctica | Praetoria, abogados en Valencia',
+  description: 'Áreas de práctica de Praetoria en Valencia: laboral, transporte y logística, mercantil, Hacienda y Seguridad Social, civil, familia y arte y patrimonio.',
   path: '/areas/',
 });
 
@@ -20,8 +22,8 @@ export default function AreasPage() {
           <Breadcrumbs items={[{ label: 'Áreas de práctica' }]} />
           <h1>Áreas de práctica</h1>
           <p className="lede">
-            Seis áreas, ordenadas según a quién se dirigen. Las de empresa nacen de años de gestión empresarial en el
-            transporte y la logística; las de particulares, de la cercanía con familias y patrimonios.
+            Siete áreas, ordenadas según a quién se dirigen. En todas seguimos el mismo método: primero entendemos tu objetivo
+            y después diseñamos la estrategia jurídica.
           </p>
         </div>
       </section>
@@ -32,7 +34,7 @@ export default function AreasPage() {
             <ul className="index-list">
               {areas.filter((a) => a.group === g).map((a) => (
                 <li key={a.slug}>
-                  <h3><Link href={`/${a.slug}/`}>{a.name}</Link></h3>
+                  <h3 className="h-icono"><LineIcon name={iconoArea[a.id]} /><Link href={`/${a.slug}/`}>{a.name}</Link></h3>
                   <div>
                     <p>{bySlug[a.slug]?.lede ?? a.short}</p>
                     <p className="more"><Link href={`/${a.slug}/`}>Ver {a.name.toLowerCase()}</Link></p>
@@ -41,7 +43,7 @@ export default function AreasPage() {
               ))}
               {g === 'particulares' && (
                 <li>
-                  <h3><Link href="/abogado-divorcio-horta-nord-valencia/">Divorcio en l&apos;Horta Nord</Link></h3>
+                  <h3><Link href="/abogado-divorcio-horta-nord-valencia/">Divorcio de mutuo acuerdo</Link></h3>
                   <div>
                     <p>Divorcio de mutuo acuerdo con precio cerrado de 399 € en total, abogado, procurador e IVA incluidos.</p>
                     <p className="more"><Link href="/abogado-divorcio-horta-nord-valencia/">Comprobar si mi caso entra</Link></p>

@@ -44,7 +44,7 @@ const faq = [
     a: 'La notificación completa, la fecha de recepción o apertura, los documentos relacionados y una explicación breve de lo sucedido.',
   },
   {
-    q: '¿Podéis atenderme fuera de Valencia o de El Puig?',
+    q: '¿Podéis atenderme fuera de Valencia?',
     a: 'Sí. Muchos procedimientos con Hacienda y la Seguridad Social se tramitan electrónicamente, por lo que podemos estudiar documentación y preparar actuaciones en toda España.',
   },
 ];
@@ -64,21 +64,21 @@ export default function HaciendaPage() {
         <div className="wrap split">
           <div>
             <Breadcrumbs items={[{ label: 'Empresas y autónomos', href: '/areas/#empresas' }, { label: 'Hacienda y Seguridad Social' }]} />
-            <h1>Abogados para requerimientos de Hacienda y Seguridad Social</h1>
+            <h1>Abogados para requerimientos de Hacienda y Seguridad Social en Valencia</h1>
             <p className="lede">
               ¿Has recibido una carta, liquidación, sanción o reclamación de deuda? Estudiamos la notificación, comprobamos
               los plazos y planteamos la respuesta, alegación o recurso adecuado.
             </p>
             <div className="actions">
               <a className="btn btn--red" href="#diagnostico">Revisar qué he recibido</a>
-              <a className="btn btn--ghost" href={`tel:${site.phoneIntl}`}><Icon name="phone" /> {site.phone}</a>
+              <a className="btn btn--ghost" href={`tel:${site.phoneIntl}`}><Icon name="phone" /> Llamar al despacho</a>
             </div>
           </div>
           <div className="deadline">
             <h2>No dejes correr el plazo</h2>
             <p>
               Una respuesta bien planteada desde el inicio puede evitar que el problema avance hacia recargos, sanciones o
-              apremio. Particulares, autónomos, administradores y empresas, en Valencia, El Puig y toda España.
+              apremio. Particulares, autónomos, administradores y empresas, en Valencia y en toda España.
             </p>
           </div>
         </div>
@@ -109,7 +109,7 @@ export default function HaciendaPage() {
               Reclamaciones de deuda, providencias de apremio, embargos, diferencias de cotización, actas de liquidación,
               cuotas de autónomos, devolución de ingresos indebidos y resoluciones de prestaciones del INSS.
             </p>
-            <h3>Abogado fiscal en Valencia y El Puig, también para autónomos</h3>
+            <h3>Abogados fiscales en Valencia, también para autónomos</h3>
             <p>
               Muchos procedimientos se tramitan electrónicamente, así que en la mayoría de los casos podemos revisar la
               documentación y plantear la defensa sin necesidad de desplazamiento.
