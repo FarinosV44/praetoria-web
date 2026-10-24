@@ -150,6 +150,17 @@ if (existsSync(blogDir)) {
   }
 }
 
+// 7 bis. Landings (#34): los borradores no se generan ni van al sitemap
+const landDir = join(srcRoot, 'src/content/landings');
+if (existsSync(landDir)) {
+  for (const md of readdirSync(landDir).filter((x) => x.endsWith('.md'))) {
+    const slug = md.slice(0, -3);
+    const fm = readFileSync(join(landDir, md), 'utf8').split('---')[1] ?? '';
+    if (/^draft:\s*true\s*$/m.test(fm) && (fileSet.has(`/${slug}/index.html`) || locs.includes(`/${slug}/`))) errors.push(`landing en borrador publicada: /${slug}/`);
+    if (/^revision:\s*pendiente\s*$/m.test(fm) && locs.includes(`/${slug}/`)) errors.push(`landing pendiente de revisión en el sitemap: /${slug}/`);
+  }
+}
+
 // 9. Presupuesto de peso por página
 const gz = (f) => gzipSync(readFileSync(join(dir, f))).length;
 const assetCache = new Map();

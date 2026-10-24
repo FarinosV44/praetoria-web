@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { getPosts } from '@/lib/content';
+import { getLandings, getPosts } from '@/lib/content';
 import { areaContent } from '@/lib/areas-content';
 import { categories } from '@/lib/site';
 import { site } from '@/lib/site';
@@ -35,5 +35,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...areaContent.filter((a) => a.indexable !== false).map((a) => ({ url: url(`/${a.slug}/`) })),
     ...Object.keys(categories).map((c) => ({ url: url(`/blog/categoria/${c}/`) })),
     ...getPosts().map((p) => ({ url: url(`/${p.slug}/`), lastModified: p.updated ?? p.date })),
+    ...getLandings().filter((l) => l.revision !== 'pendiente').map((l) => ({ url: url(`/${l.slug}/`), lastModified: l.updated ?? l.date })),
   ];
 }
