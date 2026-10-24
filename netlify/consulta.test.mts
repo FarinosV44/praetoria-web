@@ -1,7 +1,7 @@
 // Pruebas de la función de recepción: node --test netlify/functions/
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import handler from './consulta.mts';
+import handler from './functions/consulta.mts';
 
 const base = () => ({
   nombre: 'Persona de prueba',

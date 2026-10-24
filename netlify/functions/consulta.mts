@@ -110,7 +110,7 @@ export default async function consulta(req: Request, context?: Ctx): Promise<Res
 export const config = { path: '/api/consulta' };
 
 /** Formulario de Netlify Forms que recibe la consulta: uno por canal, con su propio aviso por correo. */
-export const formularioDe = (area: string) => (area === 'laboral' ? 'contacto-laboral' : 'contacto');
+const formularioDe = (area: string) => (area === 'laboral' ? 'contacto-laboral' : 'contacto');
 
 const esc = (s: string) => s.replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[ch]!);
 

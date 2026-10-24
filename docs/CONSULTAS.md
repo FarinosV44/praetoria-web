@@ -52,7 +52,7 @@ Corrección: el artículo sobre DeCA Conecta remitía a `info@praetoriaabogados.
 
 ## Pruebas
 
-- `netlify/functions/consulta.test.mts` (12 pruebas):
+- `netlify/consulta.test.mts` (12 pruebas; fuera de `netlify/functions/` para que Netlify no la despliegue como función):
   - entrega correcta con área y responsable, y Laboral asignada a Lucía López;
   - llamada o WhatsApp sin teléfono, correo ausente o inválido;
   - área sin elegir, privacidad sin aceptar, mensaje corto, campos largos y cuerpo excesivo;
