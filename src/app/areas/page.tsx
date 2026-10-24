@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { CtaBand } from '@/components/CtaBand';
 import { areaContent } from '@/lib/areas-content';
-import { areas, groups } from '@/lib/site';
+import { areasDe, groups } from '@/lib/site';
 import { iconoArea } from '@/lib/iconos';
 import { LineIcon } from '@/components/Icon';
 import { buildMetadata } from '@/lib/seo';
@@ -32,7 +32,7 @@ export default function AreasPage() {
           <div className="wrap">
             <h2>{groups[g].title}</h2>
             <ul className="index-list">
-              {areas.filter((a) => a.group === g).map((a) => (
+              {areasDe(g).map((a) => (
                 <li key={a.slug}>
                   <h3 className="h-icono"><LineIcon name={iconoArea[a.id]} /><Link href={`/${a.slug}/`}>{a.name}</Link></h3>
                   <div>

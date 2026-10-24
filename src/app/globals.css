@@ -2328,4 +2328,10 @@
   .foto-secundaria { margin: 0; }
   .foto-secundaria img { aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); }
   .foto-secundaria figcaption { margin-top: 6px; font-size: 0.78rem; color: var(--muted); }
+
+  /* Hacienda para particulares y empresas (#31) */
+  .publicos { display: grid; gap: 24px; margin-top: 20px; }
+  @media (min-width: 860px) { .publicos { grid-template-columns: 1fr 1fr; } }
+  .publico { padding: 22px 24px; background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--red); border-radius: var(--radius); }
+  .publico h3 { margin-top: 0; }
 }

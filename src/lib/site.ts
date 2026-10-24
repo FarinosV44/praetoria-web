@@ -90,7 +90,16 @@ export const deca = (campaign: string) =>
 
 /** Las siete áreas de práctica, agrupadas por a quién se dirigen. */
 export type Group = 'empresas' | 'particulares';
-export type AreaRef = { id: 'transporte' | 'mercantil' | 'hacienda' | 'civil' | 'familia' | 'arte' | 'laboral'; slug: string; name: string; short: string; group: Group };
+export type AreaRef = {
+  id: 'transporte' | 'mercantil' | 'hacienda' | 'civil' | 'familia' | 'arte' | 'laboral';
+  slug: string;
+  name: string;
+  short: string;
+  /** Público principal: decide la miga de pan y el orden. */
+  group: Group;
+  /** Otros públicos desde los que también se enlaza (misma URL, sin duplicar contenido ni canonical) (#31). */
+  tambien?: Group[];
+};
 
 export const areas: AreaRef[] = [
   {
@@ -113,6 +122,7 @@ export const areas: AreaRef[] = [
     name: 'Hacienda y Seguridad Social',
     short: 'Requerimientos, liquidaciones, sanciones, apremios y embargos.',
     group: 'empresas',
+    tambien: ['particulares'],
   },
   {
     id: 'laboral',
@@ -143,6 +153,11 @@ export const areas: AreaRef[] = [
     group: 'particulares',
   },
 ];
+
+/** Áreas que se muestran en un público: las suyas y las que también le sirven. */
+export const areasDe = (g: Group) => areas.filter((a) => a.group === g || a.tambien?.includes(g));
+/** Etiqueta de público de un área: «Empresas y particulares» si se dirige a ambos. */
+export const publicoDe = (a: AreaRef) => (a.tambien?.length ? 'Empresas y particulares' : groups[a.group].title);
 
 export const groups = {
   empresas: { title: 'Empresas y autónomos', href: '/areas/#empresas' },

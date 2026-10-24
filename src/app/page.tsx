@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { getPosts } from '@/lib/content';
 import { buildMetadata, ogDe } from '@/lib/seo';
-import { areas, contactos, groups, mensajes, whatsapp } from '@/lib/site';
+import { areas, contactos, publicoDe, mensajes, whatsapp } from '@/lib/site';
 import { iconoArea, metodo, objetivoArea } from '@/lib/iconos';
 import { servicios } from '@/lib/servicios';
 import { PostList } from '@/components/PostList';
@@ -161,7 +161,7 @@ export default function HomePage() {
                 <div className="area-card__icono">
                   <LineIcon name={iconoArea[a.id]} />
                 </div>
-                <p className="area-card__grupo">{groups[a.group].title}</p>
+                <p className="area-card__grupo">{publicoDe(a)}</p>
                 <h3>
                   <Link href={`/${a.slug}/`}>{a.name}</Link>
                 </h3>

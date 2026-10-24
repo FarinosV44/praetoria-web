@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { getPosts } from '@/lib/content';
 import type { AreaContent } from '@/lib/areas-content';
-import { areas, canalDe, categories, groups, whatsapp } from '@/lib/site';
+import { areasDe, canalDe, categories, groups, whatsapp } from '@/lib/site';
 import { iconoArea, metodo, objetivoArea } from '@/lib/iconos';
 import { Breadcrumbs } from './Breadcrumbs';
 import { PostList } from './PostList';
@@ -15,7 +15,7 @@ import { Composicion, Foto } from './Foto';
 
 export function AreaPage({ area }: { area: AreaContent }) {
   const group = groups[area.group];
-  const siblings = areas.filter((a) => a.group === area.group && a.slug !== area.slug);
+  const siblings = areasDe(area.group).filter((a) => a.slug !== area.slug);
   const all = area.category ? getPosts().filter((p) => p.category === area.category) : [];
   const isTransport = area.category === 'transporte';
   const decaGuides = all.filter((p) => p.deca === 'guia');
