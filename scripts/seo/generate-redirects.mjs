@@ -58,7 +58,14 @@ const MEDIA_MAP = {
 const SIZES = ['', '-1024x768', '-768x576', '-300x225', '-768x1024', '-225x300', '-150x150'];
 
 const lines = [];
-const out = (from, to, status = 301) => lines.push(`${from.padEnd(70)} ${to.padEnd(50)} ${status}`);
+const linea = (from, to, status) => lines.push(`${from.padEnd(70)} ${to.padEnd(50)} ${status}`);
+// Netlify compara las reglas con la ruta codificada (%D8%A7…): una ruta con caracteres no ASCII
+// (etiquetas en árabe) no coincide escrita tal cual. Se publica también su forma codificada.
+// Comprobado en el despliegue real de Netlify (24/10/2026): sin ella, esas 5 URLs daban 404.
+const out = (from, to, status = 301) => {
+  linea(from, to, status);
+  if (/[^\x00-\x7f]/.test(from)) linea(encodeURI(from).replace(/%2A$/, '*'), to, status);
+};
 
 lines.push(
   '# GENERADO por scripts/seo/generate-redirects.mjs — no editar a mano.',
