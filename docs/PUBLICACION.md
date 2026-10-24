@@ -3,6 +3,31 @@
 Estado a 24/10/2026, sobre la rama `publicacion/fase-1` (por encima de la PR #29). WordPress sigue en producción,
 el DNS no se ha tocado y no se ha fusionado nada en `main`. Este documento prepara la decisión de publicación; no la toma.
 
+
+## 0. Estado en Netlify (24/10/2026, 17:00)
+
+- Proyecto `eclectic-sopapillas-6aabb3`, equipo «praetoria web» (`farinosv44`), **plan Free**: 300 créditos al mes, sin
+  recarga ni pagos. Consumo hasta ahora: unos 30 créditos (dos despliegues de producción del proyecto).
+- **La rama de producción del proyecto es `publicacion/fase-1`** (no `main`): https://eclectic-sopapillas-6aabb3.netlify.app.
+  Cada `push` a esta rama es un despliegue de producción de Netlify y gasta 15 créditos; los cambios solo de
+  documentación se suben con `[skip netlify]`. El día de la publicación se cambia la rama de producción a `main`.
+- **Visibilidad privada** (decisión del propietario): solo la ve el equipo de Netlify con la sesión iniciada.
+- Formularios detectados: `contacto` y `contacto-laboral`. Avisos por correo a `juanfarinos@icav.es`, con asunto
+  «[Praetoria web] Consulta - ATENCION GENERAL» y «[Praetoria web] Consulta - AREA LABORAL».
+
+Comprobado en el despliegue real:
+
+| Comprobación | Resultado |
+| --- | --- |
+| 223 URLs antiguas (estado final, destino y si redirige) | 223/223. Había 5 fallos (etiquetas en árabe) que solo aparecían en Netlify; corregidos publicando también la ruta codificada |
+| `X-Robots-Tag: noindex, nofollow`, `<meta name="robots" noindex>`, `robots.txt` sin `Sitemap:` | OK |
+| 404 real y caché de `/media/` | OK |
+| Despliegue de la función `consulta` | OK (había un fallo: Netlify desplegaba también el archivo de pruebas como función) |
+| Envío de una consulta | **No probado con éxito**: la función recibe y valida, pero Netlify Forms responde 401 al entregarla porque el proyecto es privado. La página muestra el error, conserva los datos y ofrece reintentar, como está previsto. Se probará el día de la publicación (sitio público) o antes, si el propietario hace pública la previsualización |
+
+No se ha podido comprobar el código del primer salto (301) desde el navegador; sí el destino final. `npm run seo:check`
+lo comprueba con el motor oficial de Netlify en local.
+
 ## 1. Alojamiento y despliegue: Netlify (revisado sobre el código actual)
 
 Lo que el repositorio necesita realmente, y por qué encaja con Netlify:
@@ -39,14 +64,14 @@ despliegue que atiende la petición (prueba en `consulta.test.mts`).
 
 ### A. Bloqueos reales para publicar
 
-1. **Probar la recepción en Netlify (nunca se ha probado fuera de local).** Requiere conectar Netlify (C1).
+1. **Probar la recepción en Netlify.** Netlify ya está conectado; falta un envío con éxito, que requiere el sitio
+   público (la previsualización es privada por decisión del propietario: Netlify Forms rechaza la entrega con 401).
    En una previsualización: enviar una consulta general y una laboral con datos ficticios y comprobar que aparecen en
    *Forms → contacto* y *Forms → contacto-laboral* y que llega el aviso por correo. Si Netlify no aceptara la entrega
    desde la función, la alternativa preparada es enviar el correo con un proveedor (requiere su clave) o guardar en
    Netlify Blobs (ver `docs/CONSULTAS.md`).
 2. **Revisión completa en la previsualización** (móvil y escritorio) y aprobación del contenido por tu parte.
-3. **`node scripts/seo/probar-preview.mjs <url-preview>` con 0 fallos**: 223 URLs antiguas, `noindex` en la
-   previsualización, 404 real y caché.
+3. ~~Prueba de las 223 URLs antiguas en Netlify~~: hecha, 223/223 (apartado 0).
 4. **Política de privacidad (tu revisión jurídica)**. Está actualizada al funcionamiento real (Netlify, formularios
    por área, analítica con consentimiento), pero falta decidir dos puntos que no debo redactar por ti:
    - transferencias internacionales: Netlify, Inc. y Google son de EE. UU. (marco de privacidad de datos UE-EE. UU. o
