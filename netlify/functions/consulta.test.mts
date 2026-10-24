@@ -48,10 +48,24 @@ test('consulta válida: se entrega a Netlify Forms y responde 200 con su id', as
   assert.equal(b.get('responsable'), 'Juan José Farinós Ibáñez (607 527 719)');
 });
 
-test('laboral: el responsable es Lucía López', async () => {
+test('laboral: va al formulario del área laboral y el responsable es Lucía López', async () => {
   const r = recorder();
   await post({ ...base(), area: 'laboral', representa: 'trabajador' }, r);
+  assert.equal(r.calls[0]!.body.get('form-name'), 'contacto-laboral');
   assert.equal(r.calls[0]!.body.get('responsable'), 'Lucía López (649 181 290)');
+});
+
+test('la entrega va al mismo despliegue que atiende la petición, no a la URL principal del sitio', async () => {
+  const previo = process.env.URL;
+  process.env.URL = 'https://praetoriaabogados.es';
+  try {
+    const r = recorder();
+    await post(base(), r);
+    assert.match(r.calls[0]!.url, /^https:\/\/ejemplo\.netlify\.app\/__forms\.html$/);
+  } finally {
+    if (previo === undefined) delete process.env.URL;
+    else process.env.URL = previo;
+  }
 });
 
 test('llamada sin teléfono: 422 con el error en el campo teléfono y sin entregar', async () => {

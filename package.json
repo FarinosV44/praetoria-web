@@ -16,6 +16,7 @@
     "check": "npm run qa:site && npm run seo:check && node scripts/servicios/matriz.mjs --check && node scripts/imagenes/manifiesto.mjs --check && npm test",
     "imagenes": "python3 scripts/imagenes/procesar.py && node scripts/imagenes/manifiesto.mjs --write",
     "qa:site": "node scripts/qa/check-site.mjs out",
+    "qa:a11y": "node scripts/qa/a11y.mjs",
     "test:e2e": "playwright test",
     "test:e2e:ga": "rm -rf out-ga && NEXT_PUBLIC_GA_ID=G-PRUEBA00 npm run build && mv out out-ga && npm run build && E2E_GA=1 playwright test",
     "servicios": "node scripts/servicios/matriz.mjs",

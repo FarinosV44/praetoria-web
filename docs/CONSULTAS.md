@@ -52,7 +52,7 @@ Corrección: el artículo sobre DeCA Conecta remitía a `info@praetoriaabogados.
 
 ## Pruebas
 
-- `netlify/functions/consulta.test.mts` (11 pruebas):
+- `netlify/functions/consulta.test.mts` (12 pruebas):
   - entrega correcta con área y responsable, y Laboral asignada a Lucía López;
   - llamada o WhatsApp sin teléfono, correo ausente o inválido;
   - área sin elegir, privacidad sin aceptar, mensaje corto, campos largos y cuerpo excesivo;
@@ -73,8 +73,9 @@ Corrección: el artículo sobre DeCA Conecta remitía a `info@praetoriaabogados.
 ## Pendiente de accesos a Netlify (no comprobado)
 
 - [ ] **Detección del formulario**: tras el primer despliegue, *Forms* debe mostrar el formulario «contacto» con sus campos, detectados en `__forms.html`.
-- [ ] **Entrega desde la función**: enviar una consulta ficticia desde el deploy preview y verla en *Forms → contacto*. Entre la función y Netlify Forms está todo probado en local salvo esto: que Netlify Forms acepte el POST de la función a `/__forms.html` del propio sitio. Si no lo aceptara, la alternativa es que la función envíe el correo directamente con un proveedor (requiere su clave) o guarde la consulta en Netlify Blobs.
-- [ ] **Aviso por correo**: *Forms → Form notifications → Email notification* a `juanfarinos@icav.es`. Para que las consultas de Laboral le lleguen a Lucía López hace falta una dirección suya, que no se ha facilitado. Hasta entonces llegan al correo general, con el campo «responsable» indicándolo.
+- [ ] **Detección activada**: en sitios nuevos de Netlify viene desactivada (*Forms → Enable form detection*); activarla y volver a desplegar.
+- [ ] **Entrega desde la función**: la función entrega al mismo despliegue que atiende la petición (no a `process.env.URL`, que antes del cambio de DNS apuntaría a WordPress). enviar una consulta ficticia desde el deploy preview y verla en *Forms → contacto*. Entre la función y Netlify Forms está todo probado en local salvo esto: que Netlify Forms acepte el POST de la función a `/__forms.html` del propio sitio. Si no lo aceptara, la alternativa es que la función envíe el correo directamente con un proveedor (requiere su clave) o guarde la consulta en Netlify Blobs.
+- [ ] **Aviso por correo, por área**: las consultas laborales se registran en el formulario `contacto-laboral` y el resto en `contacto` (`formularioDe` en la función). En *Forms → Form notifications*, un aviso por formulario: `contacto` → `juanfarinos@icav.es`; `contacto-laboral` → correo de Lucía López (falta la dirección) y, si se quiere, copia a `juanfarinos@icav.es`.
 - [ ] Revisar en Netlify el filtro antispam y, si con el tráfico real entrara spam, valorar añadir reCAPTCHA de Netlify.
 - [ ] Prueba de teléfonos en un móvil real: `tel:+34607527719` y `tel:+34649181290`.
 

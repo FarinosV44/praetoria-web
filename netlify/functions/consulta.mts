@@ -5,6 +5,8 @@
 // 3. Descarta envíos automáticos (campo trampa o envío en menos de 3 s) sin avisar al bot.
 // 4. Entrega la consulta a Netlify Forms (formulario "contacto" definido en public/__forms.html),
 //    que la guarda, aplica su filtro antispam y envía el aviso por correo configurado en Netlify.
+//    Destino por área: las consultas laborales van al formulario «contacto-laboral» y el resto a «contacto».
+//    Netlify configura los avisos por formulario, así cada área recibe solo las suyas.
 // 5. Solo responde éxito si Netlify Forms ha aceptado la entrega. Si falla, 502: el navegador ofrece reintentar.
 //
 // No acepta adjuntos ni guarda nada por su cuenta.
@@ -53,7 +55,7 @@ export default async function consulta(req: Request, context?: Ctx): Promise<Res
   const c = v.data;
   const resp = responsable(c.area);
   const body = new URLSearchParams({
-    'form-name': 'contacto',
+    'form-name': formularioDe(c.area),
     id: c.id,
     nombre: c.nombre,
     email: c.email,
@@ -82,7 +84,9 @@ export default async function consulta(req: Request, context?: Ctx): Promise<Res
     privacidad: 'aceptada',
   });
 
-  const target = process.env.FORMS_ENDPOINT || `${process.env.URL || new URL(req.url).origin}/__forms.html`;
+  // Mismo despliegue que atiende la petición (deploy preview o producción). No se usa process.env.URL:
+  // es la URL principal del sitio y, antes del cambio de DNS, apuntaría a WordPress.
+  const target = process.env.FORMS_ENDPOINT || `${new URL(req.url).origin}/__forms.html`;
   const doFetch = context?.forward ?? fetch;
   try {
     const r = await doFetch(target, {
@@ -104,6 +108,9 @@ export default async function consulta(req: Request, context?: Ctx): Promise<Res
 }
 
 export const config = { path: '/api/consulta' };
+
+/** Formulario de Netlify Forms que recibe la consulta: uno por canal, con su propio aviso por correo. */
+export const formularioDe = (area: string) => (area === 'laboral' ? 'contacto-laboral' : 'contacto');
 
 const esc = (s: string) => s.replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[ch]!);
 
