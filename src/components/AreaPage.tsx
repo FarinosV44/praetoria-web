@@ -10,6 +10,8 @@ import { CtaBand } from './CtaBand';
 import { Icon, LineIcon } from './Icon';
 import { ServiceList } from './ServiceList';
 import { serviciosDe } from '@/lib/servicios';
+import { imagen } from '@/lib/imagenes';
+import { Composicion, Foto } from './Foto';
 
 export function AreaPage({ area }: { area: AreaContent }) {
   const group = groups[area.group];
@@ -20,6 +22,7 @@ export function AreaPage({ area }: { area: AreaContent }) {
   const decaTools = all.filter((p) => p.deca === 'herramienta');
   const others = all.filter((p) => !p.deca);
   const canal = canalDe(area.id);
+  const foto = imagen(area.imagen);
 
   return (
     <div className="area-page">
@@ -54,9 +57,13 @@ export function AreaPage({ area }: { area: AreaContent }) {
                 </a>
               </div>
             </div>
-            <figure className="area-head__media">
-              <img src={area.image.src.replace('.webp', '-800.webp')} srcSet={`${area.image.src.replace('.webp', '-480.webp')} 480w, ${area.image.src.replace('.webp', '-800.webp')} 800w, ${area.image.src} 1600w`} sizes="(min-width: 960px) 46vw, 92vw" alt={area.image.alt} width={800} height={520} />
-            </figure>
+            {foto ? (
+              <figure className="area-head__media">
+                <Foto img={foto} sizes="(min-width: 960px) 46vw, 92vw" prioridad />
+              </figure>
+            ) : (
+              <Composicion icono={iconoArea[area.id]} titulo={objetivoArea[area.id]} />
+            )}
           </div>
         </div>
       </section>
@@ -121,15 +128,6 @@ export function AreaPage({ area }: { area: AreaContent }) {
           <p className="closing">{area.closing}</p>
           {area.nota && <p className="area-note">{area.nota}</p>}
 
-          {
-            area.gallery && (
-              <div className="gallery">
-                {area.gallery.map((g) => (
-                  <img key={g.src} className="photo" src={g.src} alt={g.alt} width={600} height={800} loading="lazy" />
-                ))}
-              </div>
-            )
-          }
         </div>
       </section>
 

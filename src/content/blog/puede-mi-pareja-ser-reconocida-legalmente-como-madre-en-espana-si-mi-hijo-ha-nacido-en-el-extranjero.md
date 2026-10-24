@@ -6,6 +6,8 @@ date: 2026-04-15
 updated: 2026-10-23
 category: familia
 wpId: 2801
+intencion: "Reconocer en España la maternidad de la pareja de un hijo nacido en el extranjero"
+imagenPendiente: "Escena familiar respetuosa (manos, documentación de registro civil), sin rostros identificables"
 ---
 
 

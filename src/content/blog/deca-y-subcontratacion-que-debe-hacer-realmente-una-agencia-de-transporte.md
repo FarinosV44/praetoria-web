@@ -8,6 +8,8 @@ category: transporte
 deca: guia
 tags: ["transporte internacional"]
 wpId: 2879
+intencion: "Repartir el DeCA entre agencia y transportista subcontratado"
+imagenPendiente: "Agencia de transporte coordinando un servicio con un transportista colaborador (oficina de tráfico o muelle), sin texto legible"
 ---
 
 

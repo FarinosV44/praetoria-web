@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { getPosts } from '@/lib/content';
-import { buildMetadata } from '@/lib/seo';
+import { buildMetadata, ogDe } from '@/lib/seo';
 import { areas, contactos, groups, mensajes, whatsapp } from '@/lib/site';
 import { iconoArea, metodo, objetivoArea } from '@/lib/iconos';
 import { servicios } from '@/lib/servicios';
@@ -9,12 +9,15 @@ import { DecaBand } from '@/components/DecaBand';
 import { CtaBand } from '@/components/CtaBand';
 import { Icon, LineIcon } from '@/components/Icon';
 import { ContactosArea } from '@/components/ContactosArea';
+import { Foto } from '@/components/Foto';
+import { imagen } from '@/lib/imagenes';
 
 export const metadata = buildMetadata({
   title: 'Abogados en Valencia para empresas y particulares | Praetoria',
   description:
     'Praetoria, abogados en Valencia. Entendemos qué quieres conseguir y diseñamos la estrategia jurídica: laboral, transporte, mercantil, civil, familia, Hacienda y patrimonio.',
   path: '/',
+  image: ogDe('portada'),
 });
 
 /** Accesos por objetivo: lo que la persona quiere conseguir, enlazado al área que lo trabaja */
@@ -63,13 +66,17 @@ export default function HomePage() {
     .slice(0, 4);
   const laboralArea = areas.find((a) => a.id === 'laboral')!;
   const resto = areas.filter((a) => a.id !== 'laboral');
+  // Trabajo jurídico con personas, no oficinas vacías (#28). Pendiente => portada solo tipográfica.
+  const fotoPortada = imagen('portada');
 
   return (
     <div className="page-home">
-      <section className="portada">
-        <div className="portada__media" aria-hidden="true">
-          <img src="/media/v2/despacho-salas-reuniones.webp" srcSet="/media/v2/despacho-salas-reuniones-480.webp 480w, /media/v2/despacho-salas-reuniones-800.webp 800w, /media/v2/despacho-salas-reuniones.webp 1600w" sizes="(min-width: 960px) 55vw, 60vw" alt="" width={1600} height={1056} fetchPriority="high" />
-        </div>
+      <section className={fotoPortada ? 'portada' : 'portada portada--tipografica'}>
+        {fotoPortada && (
+          <div className="portada__media">
+            <Foto img={fotoPortada} sizes="(min-width: 960px) 56vw, 100vw" prioridad ancho={1200} />
+          </div>
+        )}
         <div className="wrap portada__grid">
           <div className="portada__texto">
             <h1>
@@ -175,7 +182,6 @@ export default function HomePage() {
               Cada asunto sigue el mismo método, tanto si es una reclamación urgente como una decisión de empresa. Sin promesas de
               resultado: te decimos con claridad dónde estás, qué se puede conseguir y qué cuesta intentarlo.
             </p>
-            <img className="metodo-seccion__foto" src="/media/v2/detalle-madera-cristal.webp" alt="Detalle de madera y cristal de una sala de reuniones del despacho" width={560} height={444} loading="lazy" />
           </div>
           <ol className="metodo">
             {metodo.map((m, i) => (

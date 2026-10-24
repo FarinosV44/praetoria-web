@@ -7,6 +7,8 @@ updated: 2026-09-08
 category: transporte
 tags: ["acción directa transporte", "agencias transporte", "impago transporte", "logística", "reclamaciones transporte", "reclamar factura transporte", "transporte internacional"]
 wpId: 2779
+intencion: "Reclamar una factura de transporte impagada sin perder el dinero"
+imagen: transporte-facturas
 ---
 
 El sector del [transporte](/logistica-y-transporte-internacional/) es uno de los más expuestos a los impagos. Por eso el problema del impago transporte preocupa a muchas empresas del sector. Además, puede afectar considerablemente la rentabilidad de empresas y autónomos.

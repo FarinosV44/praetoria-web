@@ -7,6 +7,8 @@ updated: 2026-10-23
 category: transporte
 deca: herramienta
 wpId: 3088
+intencion: "Comparar SIMPLE DeCA del Ministerio con una herramienta de gestión del DeCA"
+imagen: deca-panel
 ---
 
 

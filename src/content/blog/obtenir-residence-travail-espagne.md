@@ -8,6 +8,8 @@ category: extranjeria
 lang: fr
 tags: ["avocat espagne", "avocat étrangers espagne", "avocat valence", "permis travail espagne", "résidence espagne"]
 wpId: 2737
+intencion: "Obtenir un titre de séjour ou de travail en Espagne"
+imagen: extranjeria-pasaporte
 ---
 
 Vous souhaitez obtenir la résidence en Espagne ou un permis de travail ?  

@@ -7,6 +7,8 @@ updated: 2026-10-23
 category: civil-vivienda
 tags: ["abogado inmobiliario", "alquiler españa", "desahucio", "ley vivienda", "propietarios"]
 wpId: 2749
+intencion: "Qué cambia para el propietario con el decreto de 2026 sobre la suspensión de desahucios"
+imagen: civil-entrega-llaves
 ---
 
 ---

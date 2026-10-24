@@ -1,5 +1,5 @@
 """Imagen para redes sociales (Open Graph) de Praetoria (#28): foto real retocada del despacho, logo y lema.
-Sin retratos y sin El Puig. Uso: python3 scripts/og/generar-og.py  ->  public/media/og-praetoria.jpg (1200x630)
+Sin retratos y sin El Puig; fondo: la foto editorial de la portada (#28), no oficinas vacías. Uso: python3 scripts/og/generar-og.py  ->  public/media/og-praetoria.jpg (1200x630)
 """
 from io import BytesIO
 from pathlib import Path
@@ -24,7 +24,7 @@ def fuente(peso, ancho, tam):
 
 W, H = 1200, 630
 img = Image.new('RGB', (W, H), (34, 38, 42))
-foto = Image.open(RAIZ / 'public/media/v2/despacho-salas-reuniones.webp').convert('RGB')
+foto = Image.open(RAIZ / 'public/media/ed/analisis-reunion-documentos.webp').convert('RGB')
 fw = 620
 foto = foto.resize((fw, round(foto.height * fw / foto.width)))
 foto = foto.crop((0, (foto.height - H) // 2, fw, (foto.height - H) // 2 + H)) if foto.height >= H else foto.resize((fw, H))

@@ -7,6 +7,8 @@ updated: 2026-10-23
 category: extranjeria
 tags: ["abogado extranjería", "extranjería", "permiso residencia", "residencia españa", "sanciones extranjería"]
 wpId: 2752
+intencion: "Entender la regularización extraordinaria anunciada y cómo prepararse"
+imagen: extranjeria-valencia
 ---
 
 

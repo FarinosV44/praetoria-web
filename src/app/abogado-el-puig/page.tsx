@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { CtaBand } from '@/components/CtaBand';
 import { Icon } from '@/components/Icon';
+import { Composicion } from '@/components/Foto';
 import { areas, mensajes, site, whatsapp } from '@/lib/site';
 import { buildMetadata } from '@/lib/seo';
 
@@ -9,7 +10,6 @@ export const metadata = buildMetadata({
   title: "Abogado en El Puig",
   description: "Abogado en El Puig y comarca: derecho civil, mercantil, familia, transporte, Hacienda y patrimonio. Asesoramiento cercano y respuesta rápida.",
   path: '/abogado-el-puig/',
-  image: "/media/v2/despacho-zona-mesas.webp",
 });
 
 export default function ElPuigPage() {
@@ -29,7 +29,8 @@ export default function ElPuigPage() {
               <a className="btn btn--ghost" href={`tel:${site.phoneIntl}`}><Icon name="phone" /> {site.phone}</a>
             </div>
           </div>
-          <img className="photo" src="/media/v2/despacho-zona-mesas-800.webp" alt="Despacho de Praetoria en El Puig: zona de mesas" width={800} height={600} />
+          {/* Sin fotos de instalaciones fuera de «El despacho» (#28): composición tipográfica con la dirección real */}
+          <Composicion icono="edificio" etiqueta="Despacho en El Puig de Santa María" titulo={site.address.street} texto={`${site.address.postalCode} ${site.address.locality} (${site.address.region}) · Atención presencial, por teléfono o por videollamada`} />
         </div>
       </section>
 
@@ -72,7 +73,13 @@ export default function ElPuigPage() {
               <a className="btn btn--ghost" href={site.googleReviews} rel="noopener">Reseñas en Google</a>
             </div>
           </div>
-          <img className="photo" src="/media/v2/despacho-atencion-cliente-800.webp" alt="Espacio de atención al cliente del despacho" width={800} height={600} loading="lazy" />
+          <address className="addr addr--bloque">
+            <Icon name="pin" />
+            <span>
+              <strong>Praetoria</strong>
+              {site.address.street}, {site.address.postalCode} {site.address.locality} ({site.address.region})
+            </span>
+          </address>
         </div>
       </section>
 

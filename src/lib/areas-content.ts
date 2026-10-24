@@ -3,7 +3,6 @@ import { mensajes, type CategoryKey } from './site';
 import type { ServicioArea } from './servicios';
 import type { LineIcon } from '@/components/Icon';
 
-export type Img = { src: string; alt: string };
 
 export type AreaContent = {
   slug: string;
@@ -18,8 +17,8 @@ export type AreaContent = {
   id: ServicioArea;
   servicesTitle: string;
   closing: string;
-  image: Img;
-  gallery?: Img[];
+  /** Id de la imagen editorial (src/content/imagenes.json); si está pendiente, la cabecera es tipográfica */
+  imagen: string;
   category?: CategoryKey;
   whatsappText: string;
   /** Recorridos por tipo de problema, al principio de la página (#6): cada uno lleva a su servicio o guía */
@@ -60,7 +59,7 @@ export const areaContent: AreaContent[] = [
     servicesTitle: 'Qué hacemos en transporte',
     closing:
       'Una orden de carga bien redactada no elimina todas las responsabilidades, pero permite acreditar cómo se contrató el servicio, exigir el cumplimiento al proveedor y reclamar los perjuicios de una declaración falsa o de una subcontratación irregular.',
-    image: { src: '/media/v2/despacho-cristales-planta.webp', alt: 'Salas acristaladas y zona de trabajo del despacho Praetoria' },
+    imagen: 'transporte',
     category: 'transporte',
     whatsappText: mensajes.transporte,
     recorridos: [
@@ -110,7 +109,7 @@ export const areaContent: AreaContent[] = [
     servicesTitle: 'Qué hacemos en mercantil',
     closing:
       'Si buscas un abogado que entienda tu empresa como un sistema vivo, que sepa cómo se toman decisiones reales y que te acompañe con visión estratégica, hablemos.',
-    image: { src: '/media/v2/despacho-planta-abierta.webp', alt: 'Oficina de planta abierta del despacho Praetoria con mamparas de cristal' },
+    imagen: 'mercantil',
     category: 'mercantil',
     whatsappText: mensajes.mercantil,
     recorridos: [
@@ -160,7 +159,7 @@ export const areaContent: AreaContent[] = [
     closing:
       'No envíes informes médicos ni documentos por el formulario: si hacen falta, te los pediremos por un canal seguro. Si tu asunto es una deuda, una cotización o un embargo de la Seguridad Social, corresponde al área de Hacienda y Seguridad Social.',
     nota: 'Si consultas en nombre de una empresa, indícalo en el formulario. Antes de aceptar cualquier encargo revisamos que no exista un conflicto de intereses con otros clientes del despacho.',
-    image: { src: '/media/v2/despacho-zona-espera.webp', alt: 'Zona de espera del despacho Praetoria, con sofá y mesas' },
+    imagen: 'laboral',
     category: 'laboral',
     whatsappText: mensajes.laboral,
     contactoLaboral: true,
@@ -222,7 +221,7 @@ export const areaContent: AreaContent[] = [
     servicesTitle: 'Asuntos que llevamos con más frecuencia',
     closing:
       'Queremos que tomes decisiones con toda la información, sabiendo que cuentas con un respaldo legal sólido. En derecho civil, como en casi todo, lo importante no es solo tener razón, sino saber cómo defenderla.',
-    image: { src: '/media/v2/despacho-zona-mesas.webp', alt: 'Zona de mesas del despacho Praetoria' },
+    imagen: 'civil',
     category: 'civil-vivienda',
     whatsappText: mensajes.civil,
     recorridos: [
@@ -274,7 +273,7 @@ export const areaContent: AreaContent[] = [
     servicesTitle: 'Qué hacemos en familia',
     closing:
       'Te ayudamos a entender tus derechos, poner orden y tomar decisiones seguras. Una separación es una etapa, no una condena, y puede resolverse de forma digna, eficaz y con futuro.',
-    image: { src: '/media/v2/despacho-atencion-cliente.webp', alt: 'Espacio de atención a clientes del despacho Praetoria' },
+    imagen: 'familia',
     category: 'familia',
     whatsappText: mensajes.familia,
     recorridos: [
@@ -317,12 +316,7 @@ export const areaContent: AreaContent[] = [
     servicesTitle: 'Qué hacemos en arte y patrimonio',
     closing:
       'Aquí el derecho no es solo un marco legal: es una herramienta para preservar, proteger y transmitir patrimonio con seguridad, criterio y visión a largo plazo.',
-    image: { src: '/media/arte-museo-visitantes.webp', alt: 'Visitantes observando cuadros en la sala de un museo' },
-    gallery: [
-      { src: '/media/arte-muestras-color-800.webp', alt: 'Panel de muestras de color expuesto en una pared' },
-      { src: '/media/arte-obra-textil-800.webp', alt: 'Obra textil bordada con plumas naranjas' },
-      { src: '/media/arte-obra-abstracta-800.webp', alt: 'Obra abstracta en tonos rojos con estructura de rejilla' },
-    ],
+    imagen: 'arte',
     whatsappText: mensajes.arte,
     nota: 'Nuestro trabajo es jurídico. Cuando hace falta una tasación, un peritaje de autenticidad o un informe de conservación, lo realiza un especialista independiente; nosotros valoramos su informe desde el punto de vista legal y lo integramos en la estrategia.',
     ctaServicios: 'Solicitar una consulta especializada',

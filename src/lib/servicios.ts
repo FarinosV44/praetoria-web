@@ -29,6 +29,8 @@ export type Servicio = {
   articulos?: string[];
   /** Página propia del servicio, si la tiene (landing existente) */
   pagina?: string;
+  /** Imagen editorial de la página propia (id en src/content/imagenes.json). Sin ella, la cabecera es tipográfica (#28). */
+  imagen?: string;
   /** Texto del botón de consulta; por defecto «Consultar sobre esto» */
   cta?: string;
   /** El siguiente paso que se ofrece, si no es el formulario de contacto general */
@@ -75,6 +77,7 @@ export const servicios: Servicio[] = [
     resumen: 'Reclamación extrajudicial y judicial de facturas de transporte, con revisión de órdenes, CMR, albaranes y comunicaciones.',
     articulos: ['accion-directa-en-el-transporte-como-reclamar-al-cargador-cuando-no-te-paga-tu-cliente', 'impagos-transporte-reclamar-factura'],
     cta: 'Reclamar un porte impagado',
+    imagen: 'portes-impagados',
     pagina: '/reclamacion-portes-impagados/',
     incidencia: 'impago',
     revision: 'pendiente',
@@ -143,6 +146,7 @@ export const servicios: Servicio[] = [
     resumen: 'Revisión de la carta y del finiquito, conciliación e impugnación del despido disciplinario, objetivo o colectivo.',
     articulos: ['despido-valencia-que-hacer'],
     cta: 'Solicitar revisión de mi despido',
+    imagen: 'despidos',
     pagina: '/impugnar-despido/',
     problemaLaboral: 'despido',
     revision: 'pendiente',
@@ -183,6 +187,7 @@ export const servicios: Servicio[] = [
     nombre: 'Salarios y finiquitos',
     resumen: 'Reclamación de salarios, horas, pagas o finiquitos que no se han pagado o se han calculado mal.',
     cta: 'Reclamar lo que me deben',
+    imagen: 'salarios-finiquito',
     pagina: '/reclamar-salarios-y-finiquito/',
     problemaLaboral: 'cantidades',
     revision: 'pendiente',

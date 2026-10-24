@@ -1,6 +1,6 @@
 // Icono y objetivo de cada área (#28). Un solo sitio para portada, áreas, servicios y contacto.
 import type { LineIcon } from '@/components/Icon';
-import type { AreaRef } from './site';
+import type { AreaRef, CategoryKey } from './site';
 
 export const iconoArea: Record<AreaRef['id'], LineIcon> = {
   transporte: 'camion',
@@ -30,3 +30,15 @@ export const metodo: { icono: LineIcon; titulo: string; texto: string }[] = [
   { icono: 'negociar', titulo: 'Diseñamos la estrategia y negociamos', texto: 'Elegimos contigo el camino. Negociamos cuando conviene y preparamos la vía judicial cuando hace falta.' },
   { icono: 'acompanar', titulo: 'Actuamos y te acompañamos', texto: 'Ejecutamos lo acordado y te informamos en cada paso, hasta cerrar el asunto.' },
 ];
+
+/** Icono de cada categoría del blog (tarjetas sin imagen y cabecera del artículo) */
+export const iconoCategoria: Record<CategoryKey, LineIcon> = {
+  transporte: 'camion',
+  mercantil: 'maletin',
+  hacienda: 'hacienda',
+  'civil-vivienda': 'vivienda',
+  familia: 'familia',
+  laboral: 'trabajo',
+  extranjeria: 'documento',
+  'elegir-abogado': 'acompanar',
+};

@@ -1,6 +1,13 @@
 // Metadatos comunes de cada página (equivalente a lo que hacía layouts/Base.astro).
 import type { Metadata } from 'next';
 import { contactos, site } from './site';
+import { imagen, ogImagen } from './imagenes';
+
+/** Imagen para compartir de una imagen editorial publicada; si está pendiente, la genérica del despacho. */
+export const ogDe = (id?: string | null) => {
+  const img = imagen(id);
+  return img ? ogImagen(img) : undefined;
+};
 
 type MetaInput = {
   title: string;
@@ -19,8 +26,9 @@ export function pageTitle(title: string) {
   return title.includes('Praetoria') ? title : `${title} | ${site.name}`;
 }
 
-export function buildMetadata({ title, description, path, image = '/media/og-praetoria.jpg', type = 'website', noindex, published, modified, locale = 'es_ES' }: MetaInput): Metadata {
+export function buildMetadata({ title, description, path, image: imagenOg,  type = 'website', noindex, published, modified, locale = 'es_ES' }: MetaInput): Metadata {
   const url = new URL(path, site.url).href;
+  const image = imagenOg ?? '/media/og-praetoria.jpg';
   return {
     title: { absolute: pageTitle(title) },
     description,
@@ -47,7 +55,7 @@ export const legalServiceLd = {
   name: site.name,
   legalName: site.legalName,
   url: site.url,
-  image: `${site.url}/media/v2/despacho-salas-reuniones.webp`,
+  image: `${site.url}/media/og-praetoria.jpg`,
   logo: `${site.url}/media/logo-praetoria-sin-fondo.png`,
   telephone: site.phoneIntl,
   email: site.email,

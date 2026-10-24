@@ -5,6 +5,8 @@ date: 2026-09-05
 updated: 2026-10-23
 category: hacienda
 wpId: 2855
+intencion: "Identificar qué notificación de Hacienda o Seguridad Social has recibido y qué plazo tienes"
+imagen: hacienda-notificacion
 ---
 
 

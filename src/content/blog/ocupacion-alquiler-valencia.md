@@ -7,6 +7,8 @@ updated: 2026-10-23
 category: civil-vivienda
 tags: ["alquiler valencia", "desahucio", "ocupación vivienda", "okupas", "propietarios"]
 wpId: 2757
+intencion: "Qué puede hacer el propietario ante una ocupación o un inquilino que no paga en Valencia"
+imagen: civil-cerradura
 ---
 
 

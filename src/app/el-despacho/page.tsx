@@ -7,6 +7,8 @@ import { JsonLd } from '@/components/JsonLd';
 import { areas, laboral, site } from '@/lib/site';
 import { iconoArea, metodo } from '@/lib/iconos';
 import { buildMetadata } from '@/lib/seo';
+import { imagen } from '@/lib/imagenes';
+import { Composicion, Foto } from '@/components/Foto';
 
 export const metadata = buildMetadata({
   title: 'El despacho | Praetoria, abogados en Valencia',
@@ -26,12 +28,8 @@ export default function DespachoPage() {
     memberOf: { '@type': 'Organization', name: site.college },
     sameAs: [site.linkedin],
   };
-  const photos = [
-    ['v2/despacho-salas-reuniones', 'Salas de reuniones acristaladas'],
-    ['v2/despacho-zona-espera', 'Zona de espera con sofá y mesas'],
-    ['v2/despacho-planta-abierta', 'Oficina de planta abierta'],
-    ['v2/despacho-atencion-cliente', 'Espacio de atención a clientes'],
-  ] as const;
+  // Únicas fotos de instalaciones del sitio (#28): dos, secundarias, al final de la página
+  const instalaciones = [imagen('despacho-salas'), imagen('despacho-atencion')].filter((i) => !!i);
   return (
     <div className="page-despacho">
       <JsonLd data={person} />
@@ -49,9 +47,7 @@ export default function DespachoPage() {
                 después analizamos las opciones y diseñamos la estrategia jurídica para defender tus intereses.
               </p>
             </div>
-            <figure className="area-head__media">
-              <img src="/media/v2/despacho-salas-reuniones-800.webp" alt="Salas de reuniones acristaladas del despacho" width={800} height={528} fetchPriority="high" />
-            </figure>
+            <Composicion icono="edificio" etiqueta="Abogados en Valencia" titulo="Empresas, autónomos, familias y particulares" texto="Atención presencial en El Puig de Santa María y, cuando el asunto lo permite, por teléfono o videollamada." />
           </div>
         </div>
       </section>
@@ -118,9 +114,9 @@ export default function DespachoPage() {
             <h2>Un espacio sobrio y confidencial</h2>
             <p className="lede">Salas privadas para reuniones y consultas confidenciales.</p>
           </div>
-          <div className="galeria">
-            {photos.map(([src, alt]) => (
-              <img key={src} className="photo" src={`/media/${src}-800.webp`} alt={alt} width={800} height={520} loading="lazy" />
+          <div className="galeria galeria--dos">
+            {instalaciones.map((img) => (
+              <Foto key={img.id} img={img} sizes="(min-width: 960px) 36vw, 92vw" className="photo" />
             ))}
           </div>
           <address className="addr">

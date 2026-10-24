@@ -1,5 +1,7 @@
 import { getPosts } from '@/lib/content';
-import { buildMetadata } from '@/lib/seo';
+import { buildMetadata, ogDe } from '@/lib/seo';
+import { imagen } from '@/lib/imagenes';
+import { Foto } from '@/components/Foto';
 import { mensajes, site, whatsapp } from '@/lib/site';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { Faq } from '@/components/Faq';
@@ -12,6 +14,7 @@ export const metadata = buildMetadata({
   description:
     '¿Has recibido un requerimiento, liquidación, sanción o deuda de Hacienda o Seguridad Social? Estudiamos tu caso, los plazos y la respuesta adecuada.',
   path: '/abogado-hacienda-y-seguridad-social-en-valencia/',
+  image: ogDe('hacienda'),
 });
 
 const faq = [
@@ -58,6 +61,7 @@ const steps = [
 
 export default function HaciendaPage() {
   const posts = getPosts().filter((p) => p.category === 'hacienda');
+  const foto = imagen('hacienda');
   return (
     <div className="page-hacienda">
     <section className="page-head">
@@ -74,12 +78,15 @@ export default function HaciendaPage() {
               <a className="btn btn--ghost" href={`tel:${site.phoneIntl}`}><Icon name="phone" /> Llamar al despacho</a>
             </div>
           </div>
-          <div className="deadline">
-            <h2>No dejes correr el plazo</h2>
-            <p>
-              Una respuesta bien planteada desde el inicio puede evitar que el problema avance hacia recargos, sanciones o
-              apremio. Particulares, autónomos, administradores y empresas, en Valencia y en toda España.
-            </p>
+          <div className="hacienda-media">
+            {foto && <Foto img={foto} sizes="(min-width: 960px) 40vw, 92vw" prioridad />}
+            <div className="deadline">
+              <h2>No dejes correr el plazo</h2>
+              <p>
+                Una respuesta bien planteada desde el inicio puede evitar que el problema avance hacia recargos, sanciones o
+                apremio. Particulares, autónomos, administradores y empresas, en Valencia y en toda España.
+              </p>
+            </div>
           </div>
         </div>
       </section>

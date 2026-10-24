@@ -2,7 +2,7 @@
 import { notFound } from 'next/navigation';
 import { getPost, getPosts } from '@/lib/content';
 import { areaContent } from '@/lib/areas-content';
-import { buildMetadata } from '@/lib/seo';
+import { buildMetadata, ogDe } from '@/lib/seo';
 import { AreaPage } from '@/components/AreaPage';
 import { PostPage } from '@/components/PostPage';
 
@@ -21,7 +21,7 @@ export function generateStaticParams(): Params[] {
 export async function generateMetadata({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
   const area = areaContent.find((a) => a.slug === slug);
-  if (area) return buildMetadata({ title: area.title, description: area.description, path: `/${slug}/`, image: area.image.src });
+  if (area) return buildMetadata({ title: area.title, description: area.description, path: `/${slug}/`, image: ogDe(area.imagen) });
   const post = getPost(slug);
   if (!post) return {};
   return buildMetadata({
@@ -31,6 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
     type: 'article',
     published: post.date,
     modified: post.updated,
+    image: ogDe(post.imagen),
   });
 }
 

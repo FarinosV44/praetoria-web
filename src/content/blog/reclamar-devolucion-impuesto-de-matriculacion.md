@@ -1,5 +1,5 @@
 ---
-title: "🚗 Cómo recuperar el impuesto de matriculación: quién puede reclamar y cuánto dinero puedes recuperar"
+title: "Cómo recuperar el impuesto de matriculación: quién puede reclamar y cuánto"
 seoTitle: "¿Pagaste el Impuesto de Matriculación? Recupera tu dinero"
 description: "Descubre si puedes recuperar el impuesto de matriculación y cuánto dinero puedes reclamar. Guía clara y actualizada."
 date: 2025-11-20
@@ -7,6 +7,8 @@ updated: 2026-09-08
 category: hacienda
 tags: ["abogado fiscal", "devolución impuesto", "mpuesto matriculación", "reclamar hacienda", "vehículos diésel"]
 wpId: 2720
+intencion: "Recuperar el impuesto de matriculación pagado de más"
+imagenPendiente: "Coche recién matriculado con su documentación, sin matrícula legible"
 ---
 
 En los últimos meses, han aparecido muchas noticias y campañas sobre la posibilidad de **recuperar parte del [Impuesto de Matriculación](/abogado-hacienda-y-seguridad-social-en-valencia/)** pagado en la compra de un vehículo. Aunque no todo lo que circula es exacto, sí existe un **fundamento legal real** para reclamar en determinados casos.

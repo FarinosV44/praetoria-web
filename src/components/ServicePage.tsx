@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { getPosts } from '@/lib/content';
 import { areas, canalDe, groups, mensajes, whatsapp } from '@/lib/site';
-import { areaContent } from '@/lib/areas-content';
+import { imagen } from '@/lib/imagenes';
+import { Composicion, Foto } from './Foto';
 import { iconoArea, objetivoArea } from '@/lib/iconos';
 import { docLabel, enlaceConsulta, type Servicio } from '@/lib/servicios';
 import { Breadcrumbs } from './Breadcrumbs';
@@ -22,7 +23,8 @@ export function ServicePage({ servicio: s }: { servicio: Servicio }) {
   const cta = s.cta ?? 'Consultar sobre esto';
   // Canal del área (#28): laboral -> área laboral (llamadas y WhatsApp); el resto -> atención jurídica general
   const canal = canalDe(s.area);
-  const imagen = areaContent.find((a) => a.id === s.area)?.image;
+  // Imagen propia del servicio (#28); nunca la del área por defecto ni una oficina vacía
+  const foto = imagen(s.imagen);
   const textoWa = s.area in mensajes ? mensajes[s.area as keyof typeof mensajes] : mensajes.general;
 
   return (
@@ -52,29 +54,23 @@ export function ServicePage({ servicio: s }: { servicio: Servicio }) {
                 )}
               </div>
             </div>
-            <figure className="area-head__media area-head__media--card">
-              {imagen && (
-                <img
-                  src={imagen.src.replace('.webp', '-800.webp')}
-                  srcSet={`${imagen.src.replace('.webp', '-480.webp')} 480w, ${imagen.src.replace('.webp', '-800.webp')} 800w`}
-                  sizes="(min-width: 960px) 44vw, 92vw"
-                  alt={imagen.alt}
-                  width={800}
-                  height={520}
-                  fetchPriority="high"
-                />
-              )}
-              <figcaption className="objetivo-card">
-                <span className="objetivo-card__icono">
-                  <LineIcon name="objetivo" />
-                </span>
-                <span>
-                  <small>El objetivo</small>
-                  <strong>{objetivoArea[s.area]}</strong>
-                  {s.destinatario && <span className="objetivo-card__para">{s.destinatario}</span>}
-                </span>
-              </figcaption>
-            </figure>
+            {foto ? (
+              <figure className="area-head__media area-head__media--card">
+                <Foto img={foto} sizes="(min-width: 960px) 44vw, 92vw" prioridad />
+                <figcaption className="objetivo-card">
+                  <span className="objetivo-card__icono">
+                    <LineIcon name="objetivo" />
+                  </span>
+                  <span>
+                    <small>El objetivo</small>
+                    <strong>{objetivoArea[s.area]}</strong>
+                    {s.destinatario && <span className="objetivo-card__para">{s.destinatario}</span>}
+                  </span>
+                </figcaption>
+              </figure>
+            ) : (
+              <Composicion icono={iconoArea[s.area]} etiqueta="El objetivo" titulo={objetivoArea[s.area]} texto={s.destinatario} />
+            )}
           </div>
         </div>
       </section>

@@ -7,6 +7,8 @@ updated: 2026-09-08
 category: civil-vivienda
 tags: ["abogado alquiler", "contrato alquiler", "demanda alquiler", "desahucio", "problemas alquiler"]
 wpId: 2718
+intencion: "Qué hacer si te han demandado por un contrato de alquiler"
+imagen: civil-alquiler
 ---
 
 ### 1. No ignores la notificación

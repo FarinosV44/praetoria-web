@@ -109,11 +109,11 @@ Están centralizados en `src/lib/site.ts` → `contactos` y `canalDe(area)`.
 
 - **Identidad.** Se conservan el logo, el rojo, el grafito, la piedra y las tipografías Archivo y Source Serif.
 - **Composición nueva:**
-  - portada en banda grafito, con la foto a sangre y los accesos por objetivo;
+  - portada en banda grafito, con una fotografía editorial de trabajo jurídico con personas a sangre y los accesos por objetivo;
   - tarjetas de área con icono;
-  - método en banda oscura;
+  - método en banda oscura, solo con iconos (sin foto);
   - contactos por área;
-  - cabeceras de área y servicio con foto y tarjeta de objetivo, en lugar del vacío anterior;
+  - cabeceras de área y servicio con una escena propia de cada asunto y tarjeta de objetivo; sin imagen pertinente, composición tipográfica (no oficinas vacías);
   - introducción junto al método compacto, en lugar de un bloque largo de texto.
 - **Iconos** (`LineIcon`, `src/components/Icon.tsx`):
   - una sola familia: rejilla de 24, trazo 1,75, extremos redondeados;
@@ -132,16 +132,11 @@ Además, se han difuminado de forma irreversible, con máscara de borde suave:
 
 La foto con el portátil se ha **recortado** para quedarse solo con los cristales y la planta abierta.
 
-| Derivado (public/media/v2/) | Original | Uso |
+| Derivado (public/media/v2/) | Original | Uso (actualizado tras la ampliación de #28) |
 | --- | --- | --- |
-| despacho-salas-reuniones | despacho-salas-reuniones | Portada, «El despacho», imagen para redes |
-| despacho-cristales-planta | despacho-sala-reunion (recorte sin portátil ni persona) | Transporte |
-| despacho-planta-abierta | despacho-planta-abierta | Mercantil, «El despacho» |
-| despacho-atencion-cliente | despacho-atencion-cliente | Familia, «El despacho», `/abogado-el-puig/` |
-| despacho-zona-espera | despacho-zona-espera | Laboral y sus servicios, «El despacho» |
-| despacho-zona-mesas | despacho-zona-mesas | Civil, `/abogado-el-puig/` |
-| despacho-oficina-sofa | despacho-oficina-sofa | Reserva |
-| detalle-madera-cristal | despacho-salas-reuniones (detalle) | Banda del método |
+| despacho-salas-reuniones | despacho-salas-reuniones | «El despacho» (foto secundaria) |
+| despacho-atencion-cliente | despacho-atencion-cliente | «El despacho» (foto secundaria) |
+| despacho-cristales-planta, planta-abierta, zona-espera, zona-mesas, oficina-sofa, detalle-madera-cristal | — | Retiradas de la web (se conservan los archivos como reserva) |
 
 Cada uno tiene versiones de 1600, 800 y 480 px en WebP. Las comparativas original/retocada están en la rama `capturas`, carpeta `pr28/fotos/`.
 
@@ -154,6 +149,21 @@ Para quien lo haga con una herramienta de IA, partiendo de los **originales** (n
 - **atencion-cliente, oficina-sofa y planta-abierta:** las personas del fondo deben seguir irreconocibles (difuminado, no borrado engañoso).
 - **zona-espera y zona-mesas:** aclarar ligeramente las sombras bajo las mesas y respetar el azul de las sillas.
 - **Entrega:** WebP de 1600 px con los mismos nombres, en `public/media/v2/`. Después, regenerar las versiones de 800 y 480 px.
+
+### Ampliación de #28: oficinas vacías fuera, fotografía editorial dentro
+
+Las fotos de oficinas vacías tenían demasiado protagonismo. Se retiran de portada, método, áreas, servicios y `/abogado-el-puig/`;
+solo quedan dos, como fotos secundarias, al final de «El despacho». En su lugar:
+
+- **Fotografía editorial con licencia** (Unsplash, uso comercial gratuito) elegida por escena: portada (análisis y conversación
+  con personas), Transporte (camión en muelle), Laboral (asesoramiento), despidos (revisión conjunta de un documento),
+  Mercantil (negociación), Civil (vivienda y llaves), Familia (conversación tranquila), Arte (restauración de una obra),
+  Hacienda (documentación financiera con cifras desenfocadas). Ninguna persona se presenta como miembro del despacho.
+- **Capturas reales de DeCA Profesional** en los artículos de producto y el **logotipo oficial** en el bloque DeCA.
+- **Composición tipográfica** donde no hay imagen pertinente (incapacidad permanente, accidente laboral, «El despacho»,
+  El Puig y 11 artículos marcados como pendiente editorial).
+
+Registro único, procedencia, licencias y usos: `docs/IMAGENES.md`. Matriz del blog: `docs/BLOG-MATRIZ.md`.
 
 ## 7. Comprobaciones (locales)
 

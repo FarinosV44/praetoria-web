@@ -7,6 +7,8 @@ updated: 2026-10-23
 category: transporte
 deca: guia
 wpId: 3009
+intencion: "Hacer bien el DeCA de un transporte con varias cargas o descargas"
+imagen: logistica-varios-camiones
 ---
 
 ---
