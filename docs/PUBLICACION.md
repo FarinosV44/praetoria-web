@@ -27,7 +27,8 @@ decisión de publicación; no la toma.
 - **Visibilidad privada** (decisión del propietario): solo la ve el equipo de Netlify con la sesión iniciada.
 - Formularios detectados: `contacto`, `contacto-laboral`, `llamada-urgente` y `llamada-urgente-laboral`. Avisos por
   correo a `juanfarinos@icav.es` en los dos de consulta, con asunto «[Praetoria web] Consulta - ATENCION GENERAL» y
-  «[Praetoria web] Consulta - AREA LABORAL». **Los dos de llamada aún no tienen aviso** (acción C3 bis).
+  «[Praetoria web] Consulta - AREA LABORAL»; en los dos de llamada, «[Praetoria web] URGENTE - Solicitud de llamada» y
+  «… - AREA LABORAL» (configurados el 24/10 con autorización del propietario).
 
 Comprobado en el despliegue real:
 
@@ -126,7 +127,7 @@ despliegue que atiende la petición (prueba en `consulta.test.mts`).
 | C1 | Conectar `FarinosV44/praetoria-web` a Netlify (cuenta del despacho), elegir plan (apartado 1) y activar *Branch deploys* para `publicacion/fase-1` | Netlify | 10 min |
 | C2 | Activar la detección de formularios (*Forms → Enable form detection*; en sitios nuevos viene desactivada) y volver a desplegar | Netlify | 2 min |
 | C3 | Avisos por correo: `contacto` → `juanfarinos@icav.es`; `contacto-laboral` → correo de Lucía López (**falta la dirección**) y, si quieres, copia a `juanfarinos@icav.es` | Netlify → Forms → Notifications | 5 min |
-| C3 bis | Avisos de `llamada-urgente` y `llamada-urgente-laboral` con un asunto que empiece por «URGENTE» (propuesta: «[Praetoria web] URGENTE - Solicitud de llamada» y «… - AREA LABORAL») | Netlify → Forms → Notifications | 5 min |
+| C3 bis | ~~Avisos de `llamada-urgente` y `llamada-urgente-laboral`~~: hechos (asunto con «URGENTE»). Cuando se conozca el correo laboral, cambiar también el de `llamada-urgente-laboral` | Netlify → Forms → Notifications | 2 min |
 | C4 | Revisar la previsualización y aprobar contenido, privacidad (A4) y publicación | Navegador | — |
 | C5 | Copia de WordPress (archivos y base de datos) y de la zona DNS; bajar TTL a 300 s 24 h antes | Hostinger | 30 min |
 | C6 | Autorizar la unión de las PR en `main` | GitHub | — |
