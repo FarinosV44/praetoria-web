@@ -127,7 +127,9 @@ const locs = [...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].re
 if (!locs.length) errors.push('sitemap.xml ausente o vacío');
 const dupLocs = locs.filter((x, i) => locs.indexOf(x) !== i);
 if (dupLocs.length) errors.push(`sitemap con URLs duplicadas: ${dupLocs.join(', ')}`);
-const indexable = pages.map(pageOf).filter((p) => p !== '/404.html' && p !== '/gracias/');
+// Páginas pendientes de revisión jurídica y marcadas como no indexables (#32): fuera del sitemap hasta su validación
+const pendienteNoindex = (f) => /<meta name="revision-juridica" content="pendiente-noindex"/.test(read(f));
+const indexable = pages.filter((f) => !pendienteNoindex(f)).map(pageOf).filter((p) => p !== '/404.html' && p !== '/gracias/');
 for (const p of indexable) if (!locs.includes(p)) errors.push(`página indexable fuera del sitemap: ${p}`);
 for (const p of locs) if (!indexable.includes(p)) errors.push(`el sitemap incluye una URL que no es una página indexable: ${p}`);
 

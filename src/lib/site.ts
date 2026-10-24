@@ -51,6 +51,7 @@ export const mensajes = {
   modificacionMedidas: 'Hola, Praetoria. Quiero consultar con un abogado una modificación de medidas.',
   arte: 'Hola, Praetoria. Quiero consultar con un abogado un asunto de arte y patrimonio.',
   laboral: 'Hola, Praetoria. Quiero consultar un asunto laboral con el área laboral del despacho.',
+  penal: 'Hola, Praetoria. Quiero consultar con un abogado un asunto penal.',
   elPuig: 'Hola, Praetoria. Necesito información sobre vuestros servicios jurídicos en El Puig.',
   plazoProximo: 'Hola, Praetoria. Acabo de enviar una consulta desde la web y tiene un plazo próximo.',
 } as const;
@@ -88,10 +89,10 @@ export const whatsapp = (text: string = mensajes.general, canal: CanalId = 'gene
 export const deca = (campaign: string) =>
   `${site.decaUrl}?utm_source=praetoria&utm_medium=referral&utm_campaign=${campaign}`;
 
-/** Las siete áreas de práctica, agrupadas por a quién se dirigen. */
+/** Las ocho áreas de práctica, agrupadas por a quién se dirigen. */
 export type Group = 'empresas' | 'particulares';
 export type AreaRef = {
-  id: 'transporte' | 'mercantil' | 'hacienda' | 'civil' | 'familia' | 'arte' | 'laboral';
+  id: 'transporte' | 'mercantil' | 'hacienda' | 'civil' | 'familia' | 'arte' | 'laboral' | 'penal';
   slug: string;
   name: string;
   short: string;
@@ -143,6 +144,13 @@ export const areas: AreaRef[] = [
     slug: 'familia',
     name: 'Familia y divorcio',
     short: 'Divorcios, custodia, pensiones y modificación de medidas.',
+    group: 'particulares',
+  },
+  {
+    id: 'penal',
+    slug: 'abogado-penalista-valencia',
+    name: 'Penal',
+    short: 'Detenciones, citaciones y juicios rápidos, alcoholemias, lesiones, hurtos y estafas.',
     group: 'particulares',
   },
   {

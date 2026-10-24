@@ -20,6 +20,7 @@
     "test:e2e": "playwright test",
     "test:e2e:ga": "rm -rf out-ga && NEXT_PUBLIC_GA_ID=G-PRUEBA00 npm run build && mv out out-ga && npm run build && E2E_GA=1 playwright test",
     "servicios": "node scripts/servicios/matriz.mjs",
+    "check:produccion": "node scripts/servicios/matriz.mjs --produccion",
     "medicion:informe": "node scripts/medicion/informe.mjs"
   },
   "devDependencies": {

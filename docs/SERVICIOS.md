@@ -6,7 +6,7 @@ Un servicio es algo concreto que el despacho hace, con un siguiente paso. Las p�
 
 **Texto ampliado** (qué revisamos, proceso, documentación, preguntas y normas citadas): lo redacta la web a partir de lo ya publicado y de fuentes oficiales, y queda *pendiente de revisión* hasta que el despacho lo valide (`revision: 'revisado'`).
 
-Total: 48 servicios.
+Total: 55 servicios.
 
 ## Transporte y logística (10)
 
@@ -90,3 +90,15 @@ Total: 48 servicios.
 | Defensa de derechos | `arte-derechos` | — | [Consultar sobre esto](/contacto/?servicio=arte-derechos) | — |
 | Relación con museos | `arte-museos` | — | [Consultar sobre esto](/contacto/?servicio=arte-museos) | — |
 | Atribución, conservación y exportación de obra | `arte-atribucion` | — | [Consultar sobre esto](/contacto/?servicio=arte-atribucion) | — |
+
+## Penal (7)
+
+| Servicio | id | Artículos relacionados | Siguiente paso | Texto ampliado |
+| --- | --- | --- | --- | --- |
+| Asistencia al detenido ([página](/asistencia-al-detenido/)) | `penal-detenido` | — | [Consultar una detención](/contacto/?servicio=penal-detenido) | **pendiente de revisión** |
+| Citaciones y juicios rápidos ([página](/citacion-juzgado-juicio-rapido/)) | `penal-citacion` | — | [Revisar mi citación](/contacto/?servicio=penal-citacion) | **pendiente de revisión** |
+| Alcoholemia y seguridad vial ([página](/alcoholemia-y-seguridad-vial/)) | `penal-seguridad-vial` | — | [Consultar mi caso de tráfico](/contacto/?servicio=penal-seguridad-vial) | **pendiente de revisión** |
+| Lesiones y agresiones ([página](/lesiones-y-agresiones/)) | `penal-lesiones` | — | [Consultar unas lesiones](/contacto/?servicio=penal-lesiones) | **pendiente de revisión** |
+| Hurto y robo ([página](/hurto-y-robo/)) | `penal-hurto-robo` | — | [Consultar un hurto o un robo](/contacto/?servicio=penal-hurto-robo) | **pendiente de revisión** |
+| Estafas ([página](/estafas/)) | `penal-estafas` | — | [Consultar una estafa](/contacto/?servicio=penal-estafas) | **pendiente de revisión** |
+| Amenazas, coacciones y violencia en el entorno familiar | `penal-violencia-amenazas` | — | [Consultar con discreción](/contacto/?servicio=penal-violencia-amenazas) | **pendiente de revisión** |

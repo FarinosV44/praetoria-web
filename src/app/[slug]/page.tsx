@@ -21,7 +21,15 @@ export function generateStaticParams(): Params[] {
 export async function generateMetadata({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
   const area = areaContent.find((a) => a.slug === slug);
-  if (area) return buildMetadata({ title: area.title, description: area.description, path: `/${slug}/`, image: ogDe(area.imagen) });
+  if (area)
+    return buildMetadata({
+      title: area.title,
+      description: area.description,
+      path: `/${slug}/`,
+      image: ogDe(area.imagen),
+      noindex: area.indexable === false,
+      revisionPendiente: area.revision === 'pendiente',
+    });
   const post = getPost(slug);
   if (!post) return {};
   return buildMetadata({

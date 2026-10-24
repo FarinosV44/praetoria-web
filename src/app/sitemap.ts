@@ -14,6 +14,7 @@ const STATIC = [
   '/el-despacho/',
   '/abogado-el-puig/',
   '/contacto/',
+  '/que-me-llame-un-abogado/',
   '/abogado-hacienda-y-seguridad-social-en-valencia/',
   '/abogado-divorcio-horta-nord-valencia/',
   '/reclamacion-portes-impagados/',
@@ -30,7 +31,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const url = (p: string) => new URL(p, site.url).href;
   return [
     ...STATIC.map((p) => ({ url: url(p) })),
-    ...areaContent.map((a) => ({ url: url(`/${a.slug}/`) })),
+    // Áreas pendientes de revisión jurídica (indexable: false, #32) fuera hasta su validación
+    ...areaContent.filter((a) => a.indexable !== false).map((a) => ({ url: url(`/${a.slug}/`) })),
     ...Object.keys(categories).map((c) => ({ url: url(`/blog/categoria/${c}/`) })),
     ...getPosts().map((p) => ({ url: url(`/${p.slug}/`), lastModified: p.updated ?? p.date })),
   ];

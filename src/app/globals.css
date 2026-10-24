@@ -2335,3 +2335,52 @@
   .publico { padding: 22px 24px; background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--red); border-radius: var(--radius); }
   .publico h3 { margin-top: 0; }
 }
+
+/* Aviso de revisión jurídica pendiente (#32): solo en la previsualización */
+.revision-pendiente {
+  background: #fff4d6;
+  border-bottom: 1px solid #e3c46a;
+  color: #4a3a07;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  padding: 0.6rem 0;
+}
+
+/* Qué no puede esperar (#32, #33) */
+.urgencia {
+  border-left: 3px solid var(--red, #b3242a);
+  padding: 1rem 1.25rem;
+  background: #fff;
+}
+.urgencia h2 {
+  margin-top: 0;
+}
+.urgencia .actions {
+  margin-top: 1rem;
+}
+.relacionados {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+.relacionados a {
+  font-weight: 600;
+}
+
+/* Solicitud de llamada (#33) */
+.aviso-llamada {
+  background: var(--red-tint);
+  border-left: 3px solid var(--red);
+  padding: 0.75rem 1rem;
+  margin: 0 0 1.25rem;
+}
+.direct__urgente {
+  border: 1px solid var(--line, #ddd);
+  border-left: 3px solid var(--red);
+  padding: 0.9rem 1rem;
+  margin-bottom: 1.5rem;
+}
+.direct__urgente p {
+  margin: 0 0 0.75rem;
+}
