@@ -1370,6 +1370,30 @@
         1600
       ],
       "avif": true
+    },
+    {
+      "id": "deca-scan",
+      "estado": "publicada",
+      "escena": "Producto DeCA: DECA Scan AI, revisión de los datos leídos de una orden de transporte",
+      "archivo": "ed/deca-scan-revision",
+      "alt": "DECA Scan AI muestra una orden de transporte de ejemplo junto a los datos extraídos del cargador y del transportista, listos para revisar",
+      "foco": "50% 40%",
+      "origen": {
+        "tipo": "deca",
+        "archivos": [
+          "fotos/deca/deca-scan-revision.png"
+        ]
+      },
+      "composicion": "escritorio",
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
     }
   ]
 }
