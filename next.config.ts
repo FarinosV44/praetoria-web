@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
   images: { unoptimized: true },
   poweredByHeader: false,
   reactStrictMode: true,
+  // En el alojamiento compartido de Hostinger el número de procesos está limitado: un solo proceso de generación
+  // (scripts/build.mjs fija NEXT_BUILD_CPUS=1 en ese build). En el resto, el valor por defecto de Next.
+  ...(process.env.NEXT_BUILD_CPUS ? { experimental: { cpus: Number(process.env.NEXT_BUILD_CPUS) } } : {}),
 };
 
 export default nextConfig;

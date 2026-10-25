@@ -14,10 +14,13 @@ const hostinger = env.SITE_INDEXABLE === undefined && env.NETLIFY !== 'true';
 if (hostinger) {
   env.SITE_INDEXABLE = 'true';
   env.NEXT_PUBLIC_API_ORIGIN ??= 'https://eclectic-sopapillas-6aabb3.netlify.app';
+  env.NEXT_BUILD_CPUS ??= '1';
   console.log('Build para Hostinger: indexable, formularios hacia', env.NEXT_PUBLIC_API_ORIGIN);
 }
+// Webpack en lugar de Turbopack: en Hostinger, Turbopack no puede arrancar su proceso auxiliar de PostCSS
+// («node process exited before we could connect to it»). Mismo resultado, sin ese proceso.
 const run = (cmd, args) => execFileSync(cmd, args, { stdio: 'inherit', env });
-run(process.execPath, [new URL('../node_modules/next/dist/bin/next', import.meta.url).pathname, 'build']);
+run(process.execPath, [new URL('../node_modules/next/dist/bin/next', import.meta.url).pathname, 'build', '--webpack']);
 run(process.execPath, [new URL('./postbuild.mjs', import.meta.url).pathname, 'out']);
 if (hostinger) {
   run(process.execPath, [new URL('./hostinger/htaccess.mjs', import.meta.url).pathname, 'out']);
