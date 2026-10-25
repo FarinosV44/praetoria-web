@@ -13,7 +13,7 @@ Este directorio documenta qué pasa con cada URL de la web de WordPress al cambi
 ## Comandos
 
 ```bash
-npm run build            # genera dist/ (no indexable salvo SITE_INDEXABLE=true)
+npm run build            # genera out/ (no indexable salvo SITE_INDEXABLE=true)
 npm run seo:check        # valida redirecciones, sitemap, canonical e indexabilidad; falla si hay errores
 npm run seo:inventario   # lo mismo y además reescribe inventario-urls.csv
 npm run seo:redirects    # regenera public/_redirects desde las fuentes

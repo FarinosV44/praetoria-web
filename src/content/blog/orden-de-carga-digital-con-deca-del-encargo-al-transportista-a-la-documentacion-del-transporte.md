@@ -5,8 +5,10 @@ description: "Crea tu orden de carga digital con el DeCA incorporado. Solicita m
 date: 2026-10-11
 updated: 2026-10-23
 category: transporte
-deca: guia
+deca: herramienta
 wpId: 3086
+intencion: "Crear la orden de carga digital con el DeCA incorporado"
+imagen: deca-ordenes
 ---
 
 

@@ -5,6 +5,8 @@ date: 2026-09-05
 updated: 2026-10-23
 category: hacienda
 wpId: 2855
+intencion: "Identificar qué notificación de Hacienda o Seguridad Social has recibido y qué plazo tienes"
+imagen: hacienda-notificacion
 ---
 
 
@@ -13,7 +15,7 @@ Recibir una notificación de la Agencia Tributaria (AEAT), de la Tesorería Gene
 
 En **Praetoria División Jurídica** ayudamos a particulares, autónomos y empresas que han recibido un **requerimiento de Hacienda o una notificación de la Seguridad Social**, estudiando el expediente y preparando la respuesta, alegación o recurso que corresponda.
 
-Nuestro despacho está situado en **El Puig (Valencia)** y prestamos asistencia jurídica en procedimientos frente a Hacienda y Seguridad Social en toda Valencia.
+Prestamos asistencia jurídica en **Valencia** en procedimientos frente a Hacienda y la Seguridad Social, en la ciudad y en toda la provincia.
 
 Trabajamos con una idea sencilla: **una respuesta jurídicamente bien planteada desde el principio puede evitar que un problema administrativo termine convirtiéndose en una deuda, sanción, recargo o procedimiento de apremio mucho más difícil de resolver.**
 
@@ -126,7 +128,7 @@ Analizamos primero el documento y determinamos qué actuación necesita realment
 
 ## Abogado de Hacienda y Seguridad Social en Valencia
 
-Prestamos servicio desde nuestro despacho en **El Puig de Santa Maria**, atendiendo asuntos de **Valencia capital, El Puig, Puçol, La Pobla de Farnals, Massamagrell, Sagunto y el resto de la provincia de Valencia**.
+Atendemos asuntos de **Valencia capital y del resto de la provincia de Valencia**, de forma presencial y, cuando el procedimiento lo permite, a distancia.
 
 Además, gran parte de estos procedimientos se tramitan electrónicamente, por lo que podemos estudiar documentación y preparar actuaciones aunque el cliente se encuentre fuera de nuestra zona.
 

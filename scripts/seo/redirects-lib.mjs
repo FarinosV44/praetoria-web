@@ -68,7 +68,7 @@ export function applyTo(rule, params) {
   return to;
 }
 
-/** Lista de rutas servibles a partir de la carpeta generada (dist/ u out/). */
+/** Lista de rutas servibles a partir de la carpeta generada (out/). */
 export function listOutput(dir) {
   const files = new Set();
   const walk = (d) => {

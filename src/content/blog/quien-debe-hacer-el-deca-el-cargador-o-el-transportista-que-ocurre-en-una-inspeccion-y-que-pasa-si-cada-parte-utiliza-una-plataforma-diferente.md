@@ -7,6 +7,8 @@ updated: 2026-10-03
 category: transporte
 deca: guia
 wpId: 3081
+intencion: "Saber quién debe hacer el DeCA y qué se enseña en una inspección"
+imagen: logistica-conductor-movil
 ---
 
 La llegada del Documento Electrónico de Control Administrativo (DeCA) está planteando una duda muy habitual entre cargadores, transportistas, agencias y operadores de transporte:

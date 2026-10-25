@@ -70,7 +70,7 @@ Lo que no tiene equivalente (autores, rutas internas de WordPress, imágenes de 
 
 - Títulos y descripciones recuperados de WordPress (ThinkRank SEO) en las URLs que se conservan; ver [`docs/seo/README.md`](seo/README.md).
 - Datos estructurados: `LegalService` (despacho), `Person` (abogado), `BlogPosting`, `BreadcrumbList` y `FAQPage` en las páginas con preguntas frecuentes.
-- `sitemap-index.xml`, `robots.txt`, RSS, URLs canónicas, Open Graph.
+- `sitemap.xml` (la misma dirección que tenía el de WordPress), `robots.txt`, RSS, URLs canónicas, Open Graph.
 - Imágenes convertidas a WebP (de 26 MB a 3 MB) con tamaños fijados para evitar saltos de maquetación.
 - Sin cookies salvo que se active Google Analytics, y en ese caso con consentimiento previo.
 

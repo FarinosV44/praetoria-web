@@ -21,9 +21,14 @@ jobs:
           cache: npm
       - run: npm ci
 
+      - name: Tipos (TypeScript estricto)
+        run: npm run typecheck
+      - name: Lint (ESLint + reglas de Next)
+        run: npm run lint
+
       - name: Build de preview (no indexable)
         run: npm run build
-      - name: Enlaces internos, migración SEO y pruebas
+      - name: Calidad del sitio, migración SEO y pruebas unitarias
         run: npm run check
       - name: Redirecciones e inventario al día con sus fuentes
         run: |
@@ -38,3 +43,24 @@ jobs:
         run: |
           npm run build
           npm run seo:check
+
+  navegador:
+    # Pruebas de humo en Chromium (escritorio y móvil): cuestionarios, menú, teclado, barra fija y cookies
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Builds normal y con Analytics, y pruebas en navegador
+        run: npm run test:e2e:ga
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-trazas
+          path: test-results/
+          retention-days: 7

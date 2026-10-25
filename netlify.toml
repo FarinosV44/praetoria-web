@@ -1,9 +1,16 @@
 [build]
   command = "npm run build"
-  publish = "dist"
+  publish = "out"
+
+[functions]
+  # Recepción de consultas (netlify/functions/consulta.mts), empaquetada con esbuild
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
 
 [build.environment]
   NODE_VERSION = "22"
+  # Exportación estática de Next servida como archivos: se desactiva el adaptador de Next de Netlify
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
   # Ningún build es indexable salvo que se active expresamente (ver docs/seo/LANZAMIENTO.md)
   SITE_INDEXABLE = "false"
 
@@ -26,12 +33,15 @@
     X-Frame-Options = "SAMEORIGIN"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
+# Fotos y logotipo: sus nombres no llevan huella (hash), así que NO pueden ser "immutable":
+# si se sustituye una imagen con el mismo nombre, el navegador la revalida (ETag) al día siguiente.
 [[headers]]
   for = "/media/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=86400, must-revalidate"
 
+# Archivos de Next con huella en el nombre: cambian de nombre si cambian, se pueden cachear un año.
 [[headers]]
-  for = "/_astro/*"
+  for = "/_next/static/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"

@@ -7,6 +7,8 @@ updated: 2026-10-23
 category: transporte
 deca: guia
 wpId: 2999
+intencion: "Guía práctica del DeCA para empresas de transporte y logística"
+imagen: logistica-paquetes
 ---
 
 

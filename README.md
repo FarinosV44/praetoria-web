@@ -1,6 +1,8 @@
 # Praetoria División Jurídica · praetoriaabogados.es
 
-Web del despacho de Juan José Farinós Ibáñez (ICAV 13.981), migrada desde WordPress/Elementor a una web estática hecha con [Astro](https://astro.build). Todo el contenido vive en este repositorio: textos, artículos, imágenes y configuración.
+Web del despacho de Juan José Farinós Ibáñez (ICAV 13.981), migrada desde WordPress/Elementor a una web hecha con [Next.js](https://nextjs.org) (App Router), TypeScript y Tailwind CSS, publicada como exportación estática. Todo el contenido vive en este repositorio: textos, artículos, imágenes y configuración.
+
+Las decisiones técnicas de la migración desde Astro (y cómo volver atrás) están en [`docs/MIGRACION-NEXT.md`](docs/MIGRACION-NEXT.md).
 
 La decisión de cómo se ha reorganizado la web, y el mapa de direcciones antiguas y nuevas, están en [`docs/ARQUITECTURA.md`](docs/ARQUITECTURA.md).
 
@@ -8,13 +10,13 @@ La decisión de cómo se ha reorganizado la web, y el mapa de direcciones antigu
 
 | Ruta | Qué contiene |
 | --- | --- |
-| `src/data/site.ts` | Teléfono, correo, dirección, áreas de práctica, categorías del blog y menú. **Cambia aquí un dato y se actualiza en toda la web.** |
-| `src/data/areas-content.ts` | Textos de las cinco páginas de área (transporte, mercantil, civil, familia, arte). |
+| `src/lib/site.ts` | Teléfono, correo, dirección, áreas de práctica, categorías del blog y menú. **Cambia aquí un dato y se actualiza en toda la web.** |
+| `src/lib/areas-content.ts` | Textos de las páginas de área (transporte, mercantil, civil, familia, arte). |
 | `src/content/blog/` | Los artículos del blog, uno por archivo Markdown (`.md`). |
 | `src/content/legal/` | Aviso legal, privacidad y cookies. |
-| `src/pages/` | Páginas con diseño propio: inicio, Hacienda, divorcio, El Puig, el despacho, contacto, blog. |
-| `src/components/` | Piezas reutilizables: cabecera, pie, listados, bloque DECA, preguntas frecuentes… |
-| `src/styles/global.css` | Colores, tipografías y estilos generales. |
+| `src/app/` | Las rutas (una carpeta por URL): inicio, Hacienda, divorcio, El Puig, el despacho, contacto, blog, sitemap y RSS. `src/app/[slug]/` sirve las áreas y los artículos. |
+| `src/components/` | Piezas reutilizables: cabecera, pie, listados, bloque DECA, preguntas frecuentes, cuestionarios… |
+| `src/app/globals.css` | Tokens de diseño (colores y tipografías de Tailwind) y estilos de los componentes. |
 | `public/media/` | Fotografías (WebP) y logotipo. |
 | `public/_redirects` | Redirecciones 301 desde las direcciones antiguas de WordPress. |
 
@@ -46,7 +48,7 @@ El artículo aparecerá automáticamente en el blog, en su categoría, en la pá
 
 ### Cambiar un texto de un área
 
-Edita `src/data/areas-content.ts`. Cada área tiene su `h1`, `lede` (entradilla), `intro`, `services` y `closing`.
+Edita `src/lib/areas-content.ts`. Cada área tiene su `h1`, `lede` (entradilla), `intro`, `services` y `closing`.
 
 ### Añadir una foto
 
@@ -54,14 +56,20 @@ Súbela a `public/media/` en formato `.webp` o `.jpg` (máximo 1600 px de ancho)
 
 ## Trabajar en local
 
-Requiere Node.js 22.
+Requiere Node.js 22.12 o posterior.
 
 ```bash
 npm install
-npm run dev          # http://localhost:4321
-npm run build        # genera la web en dist/
-npm run check        # tras build: enlaces internos, migración SEO y pruebas
+npm run dev          # http://localhost:3000
+npm run typecheck    # TypeScript estricto
+npm run lint         # ESLint con las reglas de Next
+npm run build        # genera la web estática en out/
+npm run check        # tras build: calidad del sitio, migración SEO y pruebas unitarias
+npm run test:e2e     # tras build: pruebas en navegador (Playwright)
+npm run test:e2e:ga  # build normal + build con Analytics y todas las pruebas en navegador
 ```
+
+Qué comprueba cada cosa está en [`docs/CALIDAD.md`](docs/CALIDAD.md).
 
 ## Publicación
 
@@ -71,7 +79,7 @@ Ningún build es indexable salvo que se active expresamente con la variable `SIT
 
 Para el formulario de contacto: en Netlify, *Site configuration → Forms → Form notifications*, añade un aviso por correo a `juanfarinos@icav.es` para el formulario **contacto**.
 
-Google Analytics es opcional: *Environment variables* → `PUBLIC_GA_ID = G-XXXXXXX`. Con la variable puesta aparece el aviso de cookies, y Analytics solo se carga si el visitante acepta.
+Google Analytics es opcional: *Environment variables* → `NEXT_PUBLIC_GA_ID = G-XXXXXXX`. Con la variable puesta aparece el aviso de cookies, y Analytics solo se carga si el visitante acepta.
 
 ## Migración SEO
 
@@ -79,5 +87,5 @@ El inventario de las URLs de WordPress, con su destino, las redirecciones y su v
 
 ## Formularios
 
-- **Contacto** (`/contacto/`): lo gestiona Netlify Forms (incluye filtro antispam). Los envíos se ven en el panel de Netlify y llegan por correo si configuras el aviso del paso 3.
+- **Contacto** (`/contacto/`): la función `/api/consulta` valida cada consulta en servidor y la entrega a Netlify Forms, que la guarda y avisa por correo. Detalle, pruebas y pendientes en [`docs/CONSULTAS.md`](docs/CONSULTAS.md).
 - **Hacienda** y **divorcio**: los cuestionarios funcionan dentro del navegador del visitante y preparan un resumen que él mismo envía por WhatsApp o correo. No guardan datos en ningún servidor.
