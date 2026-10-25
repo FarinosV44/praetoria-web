@@ -1,11 +1,14 @@
 ---
 title: "Impagos en el transporte: cómo reclamar una factura y no perder el dinero"
-description: "El sector del transporte es uno de los más expuestos a los impagos. Por eso el problema del impago transporte preocupa a muchas empresas del sector."
+seoTitle: "Impago transporte: cómo prevenir pérdidas"
+description: "Conoce los riesgos del impago transporte y cómo pueden afectar tu negocio. Aprende a gestionar esta problemática de forma efectiva."
 date: 2026-03-27
 updated: 2026-09-08
 category: transporte
 tags: ["acción directa transporte", "agencias transporte", "impago transporte", "logística", "reclamaciones transporte", "reclamar factura transporte", "transporte internacional"]
 wpId: 2779
+intencion: "Reclamar una factura de transporte impagada sin perder el dinero"
+imagen: transporte-facturas
 ---
 
 El sector del [transporte](/logistica-y-transporte-internacional/) es uno de los más expuestos a los impagos. Por eso el problema del impago transporte preocupa a muchas empresas del sector. Además, puede afectar considerablemente la rentabilidad de empresas y autónomos.
@@ -105,7 +108,7 @@ Si tienes un impago, especialmente relacionado con transporte, actúa siguiendo 
 
 ## 💬 Nuestra experiencia en transporte
 
-Juan José Farinós Ibáñez dirige también una empresas de transporte y logística. Gracias a la experiencia en procesos de impago transporte, podemos ayudar a nuestros clientes a recuperar lo que les pertenece.
+El área de transporte del despacho cuenta con experiencia directa en la dirección de empresas de transporte y logística. Gracias a esa experiencia en procesos de impago, podemos ayudar a nuestros clientes a recuperar lo que les pertenece.
 
 Por tanto, sabemos que:
 

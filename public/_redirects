@@ -1,42 +1,224 @@
-# Redirecciones permanentes (301) desde la web anterior en WordPress.
-# Las páginas de área, los artículos y las landings conservan su dirección, así que no necesitan redirección.
+# GENERADO por scripts/seo/generate-redirects.mjs — no editar a mano.
+# Fuente: docs/seo/fuentes/wordpress-export-2026-10-23.json y la cabecera de cada artículo.
+# Las áreas, landings, artículos y páginas legales conservan su URL y no necesitan redirección.
+# Netlify trata la barra final como opcional y el comodín * incluye la ruta exacta; distingue mayúsculas.
 
 # Páginas fusionadas o renombradas
-/ambitos-de-especializacion/     /areas/            301
-/ambitos-de-especializacion      /areas/            301
-/sobre-mi/                       /el-despacho/      301
-/sobre-mi                        /el-despacho/      301
-/sobre-praetoria/                /el-despacho/      301
-/sobre-praetoria                 /el-despacho/      301
-/despacho-juridico-valencia/     /                  301
-/despacho-juridico-valencia      /                  301
-/blogs/                          /blog/             301
+/ambitos-de-especializacion/                                           /areas/                                            301
+/sobre-mi/                                                             /el-despacho/                                      301
+/sobre-praetoria/                                                      /el-despacho/                                      301
+/despacho-juridico-valencia/                                           /                                                  301
+/blogs/                                                                /blog/                                             301
 
-# Enlace roto que existía en un artículo
-/deca-subcontratacion-agencias-transporte/  /deca-y-subcontratacion-que-debe-hacer-realmente-una-agencia-de-transporte/  301
+# Enlace interno roto que existía en un artículo de WordPress
+/deca-subcontratacion-agencias-transporte/                             /deca-y-subcontratacion-que-debe-hacer-realmente-una-agencia-de-transporte/ 301
 
-# Categorías antiguas de WordPress
-/category/transporte-y-logistica/*               /blog/categoria/transporte/       301
-/category/logistica-y-transporte/*               /blog/categoria/transporte/       301
-/category/normativa-transporte/*                 /blog/categoria/transporte/       301
-/category/hacienda-y-seguridad-social/*          /blog/categoria/hacienda/         301
-/category/mercantil-y-sociedades/*               /blog/categoria/mercantil/        301
-/category/civil-y-patrimonio/*                   /blog/categoria/civil-vivienda/   301
-/category/familia/*                              /blog/categoria/familia/          301
-/category/arte-y-patrimonio/*                    /arte-y-patrimonio/               301
-/category/*                                      /blog/                            301
+# Categorías de WordPress (incluye su paginación /page/N/ y feed)
+/category/arte-y-patrimonio/*                                          /arte-y-patrimonio/                                301
+/category/civil-y-patrimonio/*                                         /blog/categoria/civil-vivienda/                    301
+/category/derecho/*                                                    /blog/                                             301
+/category/familia/*                                                    /blog/categoria/familia/                           301
+/category/hacienda-y-seguridad-social/*                                /blog/categoria/hacienda/                          301
+/category/logistica-y-transporte/*                                     /blog/categoria/transporte/                        301
+/category/mercantil-y-sociedades/*                                     /blog/categoria/mercantil/                         301
+/category/normativa-transporte/*                                       /blog/categoria/transporte/                        301
+/category/transporte-y-logistica/*                                     /blog/categoria/transporte/                        301
+/category/transporte-y-logistica/transporte-y-logistica-transporte-y-logistica/* /blog/categoria/transporte/                        301
 
-# Etiquetas, autores, paginación y feeds de WordPress
-/tag/*                       /blog/          301
-/author/*                    /el-despacho/   301
-/blog/page/*                 /blog/          301
-/page/*                      /blog/          301
-/feed/                       /rss.xml        301
-/feed                        /rss.xml        301
-/comments/feed/              /rss.xml        301
-/*/feed/                     /rss.xml        301
+# Etiquetas de WordPress: con un solo artículo -> ese artículo; con varios -> la categoría nueva
+# que reúne la mayoría de ellos; si están repartidos -> el blog. Las etiquetas sin artículos se dejan en 404.
+/tag/الإقامة-في-إسبانيا/*                                              /residencia-trabajo-espana-arabe/                  301
+/tag/%D8%A7%D9%84%D8%A5%D9%82%D8%A7%D9%85%D8%A9-%D9%81%D9%8A-%D8%A5%D8%B3%D8%A8%D8%A7%D9%86%D9%8A%D8%A7/* /residencia-trabajo-espana-arabe/                  301
+/tag/الهجرة-إلى-إسبانيا/*                                              /residencia-trabajo-espana-arabe/                  301
+/tag/%D8%A7%D9%84%D9%87%D8%AC%D8%B1%D8%A9-%D8%A5%D9%84%D9%89-%D8%A5%D8%B3%D8%A8%D8%A7%D9%86%D9%8A%D8%A7/* /residencia-trabajo-espana-arabe/                  301
+/tag/تصريح-العمل-إسبانيا/*                                             /residencia-trabajo-espana-arabe/                  301
+/tag/%D8%AA%D8%B5%D8%B1%D9%8A%D8%AD-%D8%A7%D9%84%D8%B9%D9%85%D9%84-%D8%A5%D8%B3%D8%A8%D8%A7%D9%86%D9%8A%D8%A7/* /residencia-trabajo-espana-arabe/                  301
+/tag/محامي-إسبانيا/*                                                   /residencia-trabajo-espana-arabe/                  301
+/tag/%D9%85%D8%AD%D8%A7%D9%85%D9%8A-%D8%A5%D8%B3%D8%A8%D8%A7%D9%86%D9%8A%D8%A7/* /residencia-trabajo-espana-arabe/                  301
+/tag/محامي-فالنسيا/*                                                   /residencia-trabajo-espana-arabe/                  301
+/tag/%D9%85%D8%AD%D8%A7%D9%85%D9%8A-%D9%81%D8%A7%D9%84%D9%86%D8%B3%D9%8A%D8%A7/* /residencia-trabajo-espana-arabe/                  301
+/tag/abogado-alquiler/*                                                /demanda-contrato-alquiler-que-hacer/              301
+/tag/abogado-barato/*                                                  /cuanto-cuesta-abogado-espana/                     301
+/tag/abogado-extranjeria/*                                             /blog/categoria/extranjeria/                       301
+/tag/abogado-fiscal/*                                                  /reclamar-devolucion-impuesto-de-matriculacion/    301
+/tag/abogado-inmobiliario/*                                            /nuevo-decreto-2026-desahucio/                     301
+/tag/abogado-laboralista-valencia/*                                    /abogado-laboralista-valencia/                     301
+/tag/abogado-valencia/*                                                /blog/categoria/elegir-abogado/                    301
+/tag/accion-directa-transporte/*                                       /impagos-transporte-reclamar-factura/              301
+/tag/agencias-transporte/*                                             /impagos-transporte-reclamar-factura/              301
+/tag/alquiler-espana/*                                                 /nuevo-decreto-2026-desahucio/                     301
+/tag/alquiler-turistico/*                                              /registro-alquiler-turistico-2026/                 301
+/tag/alquiler-vacacional/*                                             /registro-alquiler-turistico-2026/                 301
+/tag/alquiler-valencia/*                                               /ocupacion-alquiler-valencia/                      301
+/tag/aseguradoras/*                                                    /fraudes-transporte-aseguradora/                   301
+/tag/asesoria-juridica/*                                               /cuanto-cuesta-abogado-espana/                     301
+/tag/asesoria-legal/*                                                  /blog/categoria/elegir-abogado/                    301
+/tag/avocat-espagne/*                                                  /obtenir-residence-travail-espagne/                301
+/tag/avocat-etrangers-espagne/*                                        /obtenir-residence-travail-espagne/                301
+/tag/avocat-valence/*                                                  /obtenir-residence-travail-espagne/                301
+/tag/contratar-abogado/*                                               /blog/categoria/elegir-abogado/                    301
+/tag/contrato-alquiler/*                                               /demanda-contrato-alquiler-que-hacer/              301
+/tag/coste-abogado/*                                                   /cuanto-cuesta-abogado-espana/                     301
+/tag/demanda-alquiler/*                                                /demanda-contrato-alquiler-que-hacer/              301
+/tag/derecho-laboral/*                                                 /despido-valencia-que-hacer/                       301
+/tag/desahucio/*                                                       /blog/categoria/civil-vivienda/                    301
+/tag/despacho-juridico/*                                               /abogados-valencia-no-dicen-verdad/                301
+/tag/despacho-juridico-valencia/*                                      /mejor-abogado-en-valencia/                        301
+/tag/despido-improcedente/*                                            /despido-valencia-que-hacer/                       301
+/tag/despido-valencia/*                                                /despido-valencia-que-hacer/                       301
+/tag/devolucion-impuesto/*                                             /reclamar-devolucion-impuesto-de-matriculacion/    301
+/tag/documento-de-control-digital/*                                    /plataforma-deca-cual-elegir-antes-del-5-de-octubre-de-2026/ 301
+/tag/elegir-abogado/*                                                  /blog/categoria/elegir-abogado/                    301
+/tag/extranjeria/*                                                     /gobierno-regularizar-extranjeros/                 301
+/tag/extranjeria-espana/*                                              /regularizacion-extranjeros-espana-2026/           301
+/tag/finiquito/*                                                       /despido-valencia-que-hacer/                       301
+/tag/fraude-transporte/*                                               /fraudes-transporte-aseguradora/                   301
+/tag/generar-deca/*                                                    /plataforma-deca-cual-elegir-antes-del-5-de-octubre-de-2026/ 301
+/tag/honorarios-abogados/*                                             /cuanto-cuesta-abogado-espana/                     301
+/tag/impago-transporte/*                                               /impagos-transporte-reclamar-factura/              301
+/tag/ley-alquiler/*                                                    /registro-alquiler-turistico-2026/                 301
+/tag/ley-vivienda/*                                                    /nuevo-decreto-2026-desahucio/                     301
+/tag/logistica/*                                                       /impagos-transporte-reclamar-factura/              301
+/tag/logistica-legal/*                                                 /fraudes-transporte-aseguradora/                   301
+/tag/mejor-abogado-valencia/*                                          /mejor-abogado-en-valencia/                        301
+/tag/mpuesto-matriculacion/*                                           /reclamar-devolucion-impuesto-de-matriculacion/    301
+/tag/normativa-alquiler/*                                              /registro-alquiler-turistico-2026/                 301
+/tag/ocupacion-vivienda/*                                              /ocupacion-alquiler-valencia/                      301
+/tag/okupas/*                                                          /ocupacion-alquiler-valencia/                      301
+/tag/papeles-espana/*                                                  /regularizacion-extranjeros-espana-2026/           301
+/tag/permis-travail-espagne/*                                          /obtenir-residence-travail-espagne/                301
+/tag/permiso-residencia/*                                              /gobierno-regularizar-extranjeros/                 301
+/tag/permiso-trabajo/*                                                 /regularizacion-extranjeros-espana-2026/           301
+/tag/plataforma-deca-gratis/*                                          /plataforma-deca-cual-elegir-antes-del-5-de-octubre-de-2026/ 301
+/tag/precio-abogado-espana/*                                           /cuanto-cuesta-abogado-espana/                     301
+/tag/problemas-alquiler/*                                              /demanda-contrato-alquiler-que-hacer/              301
+/tag/problemas-con-abogados/*                                          /abogados-valencia-no-dicen-verdad/                301
+/tag/propietarios/*                                                    /blog/categoria/civil-vivienda/                    301
+/tag/propietarios-vivienda/*                                           /registro-alquiler-turistico-2026/                 301
+/tag/reclamaciones-transporte/*                                        /blog/categoria/transporte/                        301
+/tag/reclamar-despido/*                                                /despido-valencia-que-hacer/                       301
+/tag/reclamar-factura-transporte/*                                     /impagos-transporte-reclamar-factura/              301
+/tag/reclamar-hacienda/*                                               /reclamar-devolucion-impuesto-de-matriculacion/    301
+/tag/residence-espagne/*                                               /obtenir-residence-travail-espagne/                301
+/tag/residencia-espana/*                                               /blog/categoria/extranjeria/                       301
+/tag/sanciones-extranjeria/*                                           /gobierno-regularizar-extranjeros/                 301
+/tag/software-deca/*                                                   /plataforma-deca-cual-elegir-antes-del-5-de-octubre-de-2026/ 301
+/tag/transporte-internacional/*                                        /blog/categoria/transporte/                        301
+/tag/vehiculos-diesel/*                                                /reclamar-devolucion-impuesto-de-matriculacion/    301
 
-# Rutas internas de WordPress que ya no existen
-/wp-admin/*                  /               302
-/wp-login.php                /               302
-/xmlrpc.php                  /               302
+# Feeds de WordPress
+/feed/                                                                 /rss.xml                                           301
+/comments/feed/                                                        /rss.xml                                           301
+/blog/feed/                                                            /rss.xml                                           301
+/:slug/feed/                                                           /:slug/                                            301
+
+# Paginación antigua del blog
+/blog/page/*                                                           /blog/                                             301
+/page/*                                                                /blog/                                             301
+
+# Imágenes de WordPress migradas (enlazadas desde buscadores de imágenes o redes)
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.17-1.jpeg /media/despacho-puestos-trabajo.webp               301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.17-1-1024x768.jpeg /media/despacho-puestos-trabajo.webp               301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.17-1-768x576.jpeg /media/despacho-puestos-trabajo.webp               301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.17-1-300x225.jpeg /media/despacho-puestos-trabajo.webp               301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.17-1-768x1024.jpeg /media/despacho-puestos-trabajo.webp               301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.17-1-225x300.jpeg /media/despacho-puestos-trabajo.webp               301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.17-1-150x150.jpeg /media/despacho-puestos-trabajo.webp               301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18.jpeg /media/despacho-zona-mesas.webp                    301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-1024x768.jpeg /media/despacho-zona-mesas.webp                    301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-768x576.jpeg /media/despacho-zona-mesas.webp                    301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-300x225.jpeg /media/despacho-zona-mesas.webp                    301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-768x1024.jpeg /media/despacho-zona-mesas.webp                    301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-225x300.jpeg /media/despacho-zona-mesas.webp                    301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-150x150.jpeg /media/despacho-zona-mesas.webp                    301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-1.jpeg /media/despacho-oficina-sofa.webp                  301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-1-1024x768.jpeg /media/despacho-oficina-sofa.webp                  301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-1-768x576.jpeg /media/despacho-oficina-sofa.webp                  301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-1-300x225.jpeg /media/despacho-oficina-sofa.webp                  301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-1-768x1024.jpeg /media/despacho-oficina-sofa.webp                  301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-1-225x300.jpeg /media/despacho-oficina-sofa.webp                  301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-1-150x150.jpeg /media/despacho-oficina-sofa.webp                  301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-2.jpeg /media/despacho-atencion-cliente.webp              301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-2-1024x768.jpeg /media/despacho-atencion-cliente.webp              301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-2-768x576.jpeg /media/despacho-atencion-cliente.webp              301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-2-300x225.jpeg /media/despacho-atencion-cliente.webp              301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-2-768x1024.jpeg /media/despacho-atencion-cliente.webp              301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-2-225x300.jpeg /media/despacho-atencion-cliente.webp              301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-2-150x150.jpeg /media/despacho-atencion-cliente.webp              301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-3.jpeg /media/despacho-zona-espera.webp                   301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-3-1024x768.jpeg /media/despacho-zona-espera.webp                   301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-3-768x576.jpeg /media/despacho-zona-espera.webp                   301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-3-300x225.jpeg /media/despacho-zona-espera.webp                   301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-3-768x1024.jpeg /media/despacho-zona-espera.webp                   301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-3-225x300.jpeg /media/despacho-zona-espera.webp                   301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-3-150x150.jpeg /media/despacho-zona-espera.webp                   301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-4.jpeg /media/despacho-salas-reuniones.webp               301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-4-1024x768.jpeg /media/despacho-salas-reuniones.webp               301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-4-768x576.jpeg /media/despacho-salas-reuniones.webp               301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-4-300x225.jpeg /media/despacho-salas-reuniones.webp               301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-4-768x1024.jpeg /media/despacho-salas-reuniones.webp               301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-4-225x300.jpeg /media/despacho-salas-reuniones.webp               301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-4-150x150.jpeg /media/despacho-salas-reuniones.webp               301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-5.jpeg /media/despacho-planta-abierta.webp                301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-5-1024x768.jpeg /media/despacho-planta-abierta.webp                301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-5-768x576.jpeg /media/despacho-planta-abierta.webp                301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-5-300x225.jpeg /media/despacho-planta-abierta.webp                301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-5-768x1024.jpeg /media/despacho-planta-abierta.webp                301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-5-225x300.jpeg /media/despacho-planta-abierta.webp                301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-5-150x150.jpeg /media/despacho-planta-abierta.webp                301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-6.jpeg /media/v2/despacho-cristales-planta.webp           301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-6-1024x768.jpeg /media/v2/despacho-cristales-planta.webp           301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-6-768x576.jpeg /media/v2/despacho-cristales-planta.webp           301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-6-300x225.jpeg /media/v2/despacho-cristales-planta.webp           301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-6-768x1024.jpeg /media/v2/despacho-cristales-planta.webp           301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-6-225x300.jpeg /media/v2/despacho-cristales-planta.webp           301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-6-150x150.jpeg /media/v2/despacho-cristales-planta.webp           301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.24.33.jpeg /media/trabajo-portatil.webp                       301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.24.33-1024x768.jpeg /media/trabajo-portatil.webp                       301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.24.33-768x576.jpeg /media/trabajo-portatil.webp                       301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.24.33-300x225.jpeg /media/trabajo-portatil.webp                       301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.24.33-768x1024.jpeg /media/trabajo-portatil.webp                       301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.24.33-225x300.jpeg /media/trabajo-portatil.webp                       301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.24.33-150x150.jpeg /media/trabajo-portatil.webp                       301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.19.54.jpeg /media/arte-muestras-color.webp                    301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.19.54-1024x768.jpeg /media/arte-muestras-color.webp                    301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.19.54-768x576.jpeg /media/arte-muestras-color.webp                    301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.19.54-300x225.jpeg /media/arte-muestras-color.webp                    301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.19.54-768x1024.jpeg /media/arte-muestras-color.webp                    301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.19.54-225x300.jpeg /media/arte-muestras-color.webp                    301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.19.54-150x150.jpeg /media/arte-muestras-color.webp                    301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.27.52.jpeg /media/arte-museo-visitantes.webp                  301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.27.52-1024x768.jpeg /media/arte-museo-visitantes.webp                  301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.27.52-768x576.jpeg /media/arte-museo-visitantes.webp                  301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.27.52-300x225.jpeg /media/arte-museo-visitantes.webp                  301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.27.52-768x1024.jpeg /media/arte-museo-visitantes.webp                  301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.27.52-225x300.jpeg /media/arte-museo-visitantes.webp                  301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.27.52-150x150.jpeg /media/arte-museo-visitantes.webp                  301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.17.28.jpeg /media/arte-obra-textil.webp                       301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.17.28-1024x768.jpeg /media/arte-obra-textil.webp                       301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.17.28-768x576.jpeg /media/arte-obra-textil.webp                       301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.17.28-300x225.jpeg /media/arte-obra-textil.webp                       301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.17.28-768x1024.jpeg /media/arte-obra-textil.webp                       301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.17.28-225x300.jpeg /media/arte-obra-textil.webp                       301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.17.28-150x150.jpeg /media/arte-obra-textil.webp                       301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.18.13.jpeg /media/arte-obra-abstracta.webp                    301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.18.13-1024x768.jpeg /media/arte-obra-abstracta.webp                    301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.18.13-768x576.jpeg /media/arte-obra-abstracta.webp                    301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.18.13-300x225.jpeg /media/arte-obra-abstracta.webp                    301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.18.13-768x1024.jpeg /media/arte-obra-abstracta.webp                    301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.18.13-225x300.jpeg /media/arte-obra-abstracta.webp                    301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.18.13-150x150.jpeg /media/arte-obra-abstracta.webp                    301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.20.05.jpeg /media/arte-sala-archivo.webp                      301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.20.05-1024x768.jpeg /media/arte-sala-archivo.webp                      301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.20.05-768x576.jpeg /media/arte-sala-archivo.webp                      301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.20.05-300x225.jpeg /media/arte-sala-archivo.webp                      301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.20.05-768x1024.jpeg /media/arte-sala-archivo.webp                      301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.20.05-225x300.jpeg /media/arte-sala-archivo.webp                      301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.20.05-150x150.jpeg /media/arte-sala-archivo.webp                      301
+/wp-content/uploads/2025/09/logo-praetoria-header.png                  /media/logo-praetoria-sin-fondo.png                301
+/wp-content/uploads/2025/09/logo-praetoria_header-sin-fondo.png        /media/logo-praetoria-sin-fondo.png                301
+/wp-content/uploads/2025/09/Iconopng.png                               /icon-512.png                                      301
+
+# Sin regla a propósito (responden 404): /wp-admin/, /wp-login.php, /xmlrpc.php, /author/*,
+# /?p=ID (WordPress ya redirige a la URL final y la web nueva responde la portada con canonical propio)
+# y el resto de /wp-content/uploads/ (imágenes de banco no migradas).

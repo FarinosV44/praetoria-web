@@ -1,0 +1,1689 @@
+{
+ "fuente": "API REST de WordPress (wp-json/wp/v2) exportada el 2026-10-23 desde el navegador del propietario",
+ "pages": [
+  {
+   "id": 3014,
+   "slug": "abogado-divorcio-horta-nord-valencia",
+   "link": "https://praetoriaabogados.es/abogado-divorcio-horta-nord-valencia/",
+   "status": "publish",
+   "title": "Abogados para separación y divorcios en l’Horta Nord",
+   "modified": "2026-09-14T15:40:15"
+  },
+  {
+   "id": 3001,
+   "slug": "abogado-el-puig",
+   "link": "https://praetoriaabogados.es/abogado-el-puig/",
+   "status": "publish",
+   "title": "Abogado en El Puig",
+   "modified": "2026-09-11T09:15:21"
+  },
+  {
+   "id": 2858,
+   "slug": "abogado-hacienda-y-seguridad-social-en-valencia",
+   "link": "https://praetoriaabogados.es/abogado-hacienda-y-seguridad-social-en-valencia/",
+   "status": "publish",
+   "title": "Abogado Hacienda y Seguridad Social en Valencia",
+   "modified": "2026-09-05T08:50:09"
+  },
+  {
+   "id": 2850,
+   "slug": "politica-de-cookies",
+   "link": "https://praetoriaabogados.es/politica-de-cookies/",
+   "status": "publish",
+   "title": "Política de Cookies",
+   "modified": "2026-08-20T15:33:04"
+  },
+  {
+   "id": 2848,
+   "slug": "politica-de-privacidad",
+   "link": "https://praetoriaabogados.es/politica-de-privacidad/",
+   "status": "publish",
+   "title": "Política de Privacidad",
+   "modified": "2026-08-20T15:32:14"
+  },
+  {
+   "id": 2846,
+   "slug": "aviso-legal",
+   "link": "https://praetoriaabogados.es/aviso-legal/",
+   "status": "publish",
+   "title": "Aviso Legal",
+   "modified": "2026-08-20T15:30:57"
+  },
+  {
+   "id": 1942,
+   "slug": "despacho-juridico-valencia",
+   "link": "https://praetoriaabogados.es/",
+   "status": "publish",
+   "title": "Home",
+   "modified": "2026-09-14T16:08:30"
+  },
+  {
+   "id": 1789,
+   "slug": "arte-y-patrimonio",
+   "link": "https://praetoriaabogados.es/arte-y-patrimonio/",
+   "status": "publish",
+   "title": "Arte y Patrimonio",
+   "modified": "2026-09-08T00:08:31"
+  },
+  {
+   "id": 1772,
+   "slug": "ambitos-de-especializacion",
+   "link": "https://praetoriaabogados.es/ambitos-de-especializacion/",
+   "status": "publish",
+   "title": "Ámbitos de especialización",
+   "modified": "2026-09-08T00:06:23"
+  },
+  {
+   "id": 755,
+   "slug": "sobre-mi",
+   "link": "https://praetoriaabogados.es/sobre-mi/",
+   "status": "publish",
+   "title": "Sobre Mí",
+   "modified": "2026-09-08T00:17:22"
+  },
+  {
+   "id": 740,
+   "slug": "familia",
+   "link": "https://praetoriaabogados.es/familia/",
+   "status": "publish",
+   "title": "Familia",
+   "modified": "2026-09-14T16:13:31"
+  },
+  {
+   "id": 726,
+   "slug": "logistica-y-transporte-internacional",
+   "link": "https://praetoriaabogados.es/logistica-y-transporte-internacional/",
+   "status": "publish",
+   "title": "Logística y transporte internacional",
+   "modified": "2026-09-08T10:25:26"
+  },
+  {
+   "id": 706,
+   "slug": "derecho-mercantil",
+   "link": "https://praetoriaabogados.es/derecho-mercantil/",
+   "status": "publish",
+   "title": "Derecho Mercantil",
+   "modified": "2026-09-08T00:07:21"
+  },
+  {
+   "id": 647,
+   "slug": "contacto",
+   "link": "https://praetoriaabogados.es/contacto/",
+   "status": "publish",
+   "title": "Contacto",
+   "modified": "2026-09-08T00:18:03"
+  },
+  {
+   "id": 600,
+   "slug": "blog",
+   "link": "https://praetoriaabogados.es/blog/",
+   "status": "publish",
+   "title": "Blogs",
+   "modified": "2026-09-08T21:21:32"
+  },
+  {
+   "id": 533,
+   "slug": "derecho-civil",
+   "link": "https://praetoriaabogados.es/derecho-civil/",
+   "status": "publish",
+   "title": "Derecho Civil",
+   "modified": "2026-09-08T00:06:58"
+  },
+  {
+   "id": 8,
+   "slug": "sobre-praetoria",
+   "link": "https://praetoriaabogados.es/sobre-praetoria/",
+   "status": "publish",
+   "title": "Praetoria Divisón Jurídica",
+   "modified": "2025-11-22T15:30:27"
+  }
+ ],
+ "posts": [
+  {
+   "id": 3090,
+   "slug": "deca-profesional-supera-las-1-000-empresas-usuarias-y-sigue-impulsando-la-digitalizacion-del-transporte",
+   "link": "https://praetoriaabogados.es/deca-profesional-supera-las-1-000-empresas-usuarias-y-sigue-impulsando-la-digitalizacion-del-transporte/",
+   "status": "publish",
+   "title": "DeCA Profesional supera las 1.000 empresas usuarias y sigue impulsando la digitalización del transporte",
+   "date": "2026-10-15T16:59:34",
+   "modified": "2026-10-23T12:41:25",
+   "categories": [
+    1
+   ],
+   "tags": []
+  },
+  {
+   "id": 3088,
+   "slug": "alternativa-a-simple-deca-del-generador-gratuito-del-ministerio-a-la-gestion-del-transporte",
+   "link": "https://praetoriaabogados.es/alternativa-a-simple-deca-del-generador-gratuito-del-ministerio-a-la-gestion-del-transporte/",
+   "status": "publish",
+   "title": "Alternativa a SIMPLE DeCA: del generador gratuito del Ministerio a la gestión del transporte",
+   "date": "2026-10-12T23:43:24",
+   "modified": "2026-10-23T12:41:26",
+   "categories": [
+    1
+   ],
+   "tags": []
+  },
+  {
+   "id": 3086,
+   "slug": "orden-de-carga-digital-con-deca-del-encargo-al-transportista-a-la-documentacion-del-transporte",
+   "link": "https://praetoriaabogados.es/orden-de-carga-digital-con-deca-del-encargo-al-transportista-a-la-documentacion-del-transporte/",
+   "status": "publish",
+   "title": "Orden de carga digital con DeCA: del encargo al transportista a la documentación del transporte",
+   "date": "2026-10-11T21:33:18",
+   "modified": "2026-10-23T12:41:26",
+   "categories": [
+    1
+   ],
+   "tags": []
+  },
+  {
+   "id": 3081,
+   "slug": "quien-debe-hacer-el-deca-el-cargador-o-el-transportista-que-ocurre-en-una-inspeccion-y-que-pasa-si-cada-parte-utiliza-una-plataforma-diferente",
+   "link": "https://praetoriaabogados.es/quien-debe-hacer-el-deca-el-cargador-o-el-transportista-que-ocurre-en-una-inspeccion-y-que-pasa-si-cada-parte-utiliza-una-plataforma-diferente/",
+   "status": "publish",
+   "title": "¿Quién debe hacer el DeCA: el cargador o el transportista? ¿Qué ocurre en una inspección y qué pasa si cada parte utiliza una plataforma diferente?",
+   "date": "2026-10-03T23:02:22",
+   "modified": "2026-10-03T23:02:23",
+   "categories": [
+    1
+   ],
+   "tags": []
+  },
+  {
+   "id": 3073,
+   "slug": "consulta-los-precios-del-software-deca-elige-el-plan-que-mejor-se-adapta-al-volumen-de-documentos-y-usuarios-de-tu-empresa",
+   "link": "https://praetoriaabogados.es/consulta-los-precios-del-software-deca-elige-el-plan-que-mejor-se-adapta-al-volumen-de-documentos-y-usuarios-de-tu-empresa/",
+   "status": "publish",
+   "title": "Precios del software DeCA 2026: cuánto cuesta y qué plan elegir",
+   "date": "2026-09-30T21:16:26",
+   "modified": "2026-10-23T12:41:27",
+   "categories": [
+    1
+   ],
+   "tags": []
+  },
+  {
+   "id": 3071,
+   "slug": "aplicacion-movil-para-generar-deca",
+   "link": "https://praetoriaabogados.es/aplicacion-movil-para-generar-deca/",
+   "status": "publish",
+   "title": "APLICACIÓN MÓVIL PARA GENERAR DECA",
+   "date": "2026-09-26T19:21:41",
+   "modified": "2026-10-23T12:41:27",
+   "categories": [
+    1
+   ],
+   "tags": [
+    39
+   ]
+  },
+  {
+   "id": 3067,
+   "slug": "existe-una-plataforma-del-ministerio-para-crear-el-deca",
+   "link": "https://praetoriaabogados.es/existe-una-plataforma-del-ministerio-para-crear-el-deca/",
+   "status": "publish",
+   "title": "¿Existe una plataforma del Ministerio para crear el DECA?",
+   "date": "2026-09-18T10:13:10",
+   "modified": "2026-10-23T12:41:28",
+   "categories": [
+    1,
+    90,
+    78,
+    84
+   ],
+   "tags": []
+  },
+  {
+   "id": 3065,
+   "slug": "deca-para-empresas-cargadoras-obligaciones-del-departamento-de-logistica-y-como-cumplir-en-2026",
+   "link": "https://praetoriaabogados.es/deca-para-empresas-cargadoras-obligaciones-del-departamento-de-logistica-y-como-cumplir-en-2026/",
+   "status": "publish",
+   "title": "DECA para empresas cargadoras: obligaciones del departamento de logística y cómo cumplir en 2026",
+   "date": "2026-09-17T17:38:54",
+   "modified": "2026-10-23T12:41:29",
+   "categories": [
+    1,
+    91,
+    90,
+    78,
+    84
+   ],
+   "tags": [
+    42,
+    39
+   ]
+  },
+  {
+   "id": 3033,
+   "slug": "deca-profesional-crea-decaconecta",
+   "link": "https://praetoriaabogados.es/deca-profesional-crea-decaconecta/",
+   "status": "publish",
+   "title": "PRAETORIA ABOGADOS recomienda DeCA Profesional y presenta DeCA Conecta",
+   "date": "2026-09-13T08:41:13",
+   "modified": "2026-09-13T08:58:51",
+   "categories": [
+    1
+   ],
+   "tags": []
+  },
+  {
+   "id": 3009,
+   "slug": "deca-con-varios-lugares-de-carga-y-descarga-que-dice-la-ley-y-como-hacerlo-correctamente",
+   "link": "https://praetoriaabogados.es/deca-con-varios-lugares-de-carga-y-descarga-que-dice-la-ley-y-como-hacerlo-correctamente/",
+   "status": "publish",
+   "title": "DECA con varios lugares de carga y descarga: qué dice la ley y cómo hacerlo correctamente",
+   "date": "2026-09-12T00:12:22",
+   "modified": "2026-10-23T12:41:29",
+   "categories": [
+    1
+   ],
+   "tags": []
+  },
+  {
+   "id": 2999,
+   "slug": "deca-para-el-transporte-de-mercancias-guia-practica-para-empresas-de-transporte-y-logistica",
+   "link": "https://praetoriaabogados.es/deca-para-el-transporte-de-mercancias-guia-practica-para-empresas-de-transporte-y-logistica/",
+   "status": "publish",
+   "title": "DECA para el transporte de mercancías: guía práctica para empresas de transporte y logística",
+   "date": "2026-09-10T07:33:07",
+   "modified": "2026-10-23T12:41:30",
+   "categories": [
+    1,
+    90
+   ],
+   "tags": []
+  },
+  {
+   "id": 2997,
+   "slug": "plataforma-deca-cual-elegir-antes-del-5-de-octubre-de-2026",
+   "link": "https://praetoriaabogados.es/plataforma-deca-cual-elegir-antes-del-5-de-octubre-de-2026/",
+   "status": "publish",
+   "title": "Plataforma DECA: ¿cuál elegir antes del 5 de octubre de 2026?",
+   "date": "2026-09-09T21:21:07",
+   "modified": "2026-10-23T12:41:31",
+   "categories": [
+    1,
+    78
+   ],
+   "tags": [
+    89,
+    85,
+    88,
+    86
+   ]
+  },
+  {
+   "id": 2994,
+   "slug": "deca-para-transportistas-como-la-digitalizacion-cambiara-la-forma-de-trabajar-en-la-logistica",
+   "link": "https://praetoriaabogados.es/deca-para-transportistas-como-la-digitalizacion-cambiara-la-forma-de-trabajar-en-la-logistica/",
+   "status": "publish",
+   "title": "DECA para transportistas: cómo la digitalización cambiará la forma de trabajar en la logística",
+   "date": "2026-09-09T05:10:40",
+   "modified": "2026-10-23T12:41:31",
+   "categories": [
+    80
+   ],
+   "tags": [
+    39
+   ]
+  },
+  {
+   "id": 2879,
+   "slug": "deca-y-subcontratacion-que-debe-hacer-realmente-una-agencia-de-transporte",
+   "link": "https://praetoriaabogados.es/deca-y-subcontratacion-que-debe-hacer-realmente-una-agencia-de-transporte/",
+   "status": "publish",
+   "title": "DECA y subcontratación: qué debe hacer realmente una agencia de transporte",
+   "date": "2026-09-07T20:29:20",
+   "modified": "2026-10-23T12:43:17",
+   "categories": [
+    1,
+    78
+   ],
+   "tags": [
+    39
+   ]
+  },
+  {
+   "id": 2875,
+   "slug": "deca-obligatorio-en-2026-guia-legal-para-transportistas-y-cargadores",
+   "link": "https://praetoriaabogados.es/deca-obligatorio-en-2026-guia-legal-para-transportistas-y-cargadores/",
+   "status": "publish",
+   "title": "DeCA obligatorio en 2026: guía legal para transportistas y cargadores",
+   "date": "2026-09-06T17:23:27",
+   "modified": "2026-09-09T00:43:03",
+   "categories": [
+    1,
+    78
+   ],
+   "tags": [
+    39
+   ]
+  },
+  {
+   "id": 2872,
+   "slug": "deca-obligatorio-en-2026-guia-para-transportistas-y-empresas-de-transporte",
+   "link": "https://praetoriaabogados.es/deca-obligatorio-en-2026-guia-para-transportistas-y-empresas-de-transporte/",
+   "status": "publish",
+   "title": "DECA obligatorio en 2026: guía para transportistas y empresas de transporte",
+   "date": "2026-09-06T15:50:59",
+   "modified": "2026-09-09T00:45:15",
+   "categories": [
+    1,
+    78
+   ],
+   "tags": []
+  },
+  {
+   "id": 2868,
+   "slug": "hacienda-me-pide-justificar-ingresos",
+   "link": "https://praetoriaabogados.es/hacienda-me-pide-justificar-ingresos/",
+   "status": "publish",
+   "title": "Hacienda me pide justificar ingresos: qué hacer",
+   "date": "2026-09-05T10:49:08",
+   "modified": "2026-09-08T21:50:40",
+   "categories": [
+    1,
+    79
+   ],
+   "tags": []
+  },
+  {
+   "id": 2855,
+   "slug": "has-recibido-una-carta-requerimiento-liquidacion-sancion-o-reclamacion-de-deuda-de-hacienda-o-de-la-seguridad-social",
+   "link": "https://praetoriaabogados.es/has-recibido-una-carta-requerimiento-liquidacion-sancion-o-reclamacion-de-deuda-de-hacienda-o-de-la-seguridad-social/",
+   "status": "publish",
+   "title": "¿Has recibido una carta, requerimiento, liquidación, sanción o reclamación de deuda de Hacienda o de la Seguridad Social?",
+   "date": "2026-09-05T06:43:11",
+   "modified": "2026-10-23T12:44:08",
+   "categories": [
+    1,
+    79
+   ],
+   "tags": []
+  },
+  {
+   "id": 2833,
+   "slug": "problemas-con-mi-socio-que-hacer-cuando-una-empresa-al-50-se-convierte-en-un-conflicto",
+   "link": "https://praetoriaabogados.es/problemas-con-mi-socio-que-hacer-cuando-una-empresa-al-50-se-convierte-en-un-conflicto/",
+   "status": "publish",
+   "title": "Problemas con mi socio: qué hacer cuando una empresa al 50% se convierte en un conflicto",
+   "date": "2026-08-20T12:13:02",
+   "modified": "2026-10-23T12:41:33",
+   "categories": [
+    1,
+    80
+   ],
+   "tags": []
+  },
+  {
+   "id": 2815,
+   "slug": "baja-laboral-de-larga-duracion-como-dejar-tu-empresa-con-indemnizacion-y-derecho-a-paro",
+   "link": "https://praetoriaabogados.es/baja-laboral-de-larga-duracion-como-dejar-tu-empresa-con-indemnizacion-y-derecho-a-paro/",
+   "status": "publish",
+   "title": "Baja laboral de larga duración: cómo dejar tu empresa con indemnización y derecho a paro",
+   "date": "2026-04-22T16:40:37",
+   "modified": "2026-08-20T14:02:17",
+   "categories": [
+    1
+   ],
+   "tags": []
+  },
+  {
+   "id": 2807,
+   "slug": "herencia-que-hacer",
+   "link": "https://praetoriaabogados.es/herencia-que-hacer/",
+   "status": "publish",
+   "title": "HERENCIA ¿QUE HACER?",
+   "date": "2026-04-19T20:21:11",
+   "modified": "2026-09-08T11:40:24",
+   "categories": [
+    82,
+    1
+   ],
+   "tags": []
+  },
+  {
+   "id": 2805,
+   "slug": "como-proteger-legalmente-tu-empresa-de-transporte-contratos-condiciones-y-claves-para-evitar-problemas",
+   "link": "https://praetoriaabogados.es/como-proteger-legalmente-tu-empresa-de-transporte-contratos-condiciones-y-claves-para-evitar-problemas/",
+   "status": "publish",
+   "title": "Cómo proteger legalmente tu empresa de transporte: contratos, condiciones y claves para evitar problemas",
+   "date": "2026-04-15T23:09:21",
+   "modified": "2026-10-23T12:44:24",
+   "categories": [
+    1,
+    78
+   ],
+   "tags": []
+  },
+  {
+   "id": 2803,
+   "slug": "accion-directa-en-el-transporte-como-reclamar-al-cargador-cuando-no-te-paga-tu-cliente",
+   "link": "https://praetoriaabogados.es/accion-directa-en-el-transporte-como-reclamar-al-cargador-cuando-no-te-paga-tu-cliente/",
+   "status": "publish",
+   "title": "Acción directa en el transporte: cómo reclamar al cargador cuando no te paga tu cliente",
+   "date": "2026-04-15T23:05:23",
+   "modified": "2026-10-23T12:44:43",
+   "categories": [
+    1,
+    78
+   ],
+   "tags": []
+  },
+  {
+   "id": 2801,
+   "slug": "puede-mi-pareja-ser-reconocida-legalmente-como-madre-en-espana-si-mi-hijo-ha-nacido-en-el-extranjero",
+   "link": "https://praetoriaabogados.es/puede-mi-pareja-ser-reconocida-legalmente-como-madre-en-espana-si-mi-hijo-ha-nacido-en-el-extranjero/",
+   "status": "publish",
+   "title": "¿Puede mi pareja ser reconocida legalmente como madre en España si mi hijo ha nacido en el extranjero?",
+   "date": "2026-04-15T22:58:42",
+   "modified": "2026-10-23T12:41:35",
+   "categories": [
+    1,
+    81
+   ],
+   "tags": []
+  },
+  {
+   "id": 2799,
+   "slug": "como-abordar-un-recurso-de-casacion-civil-y-no-fracasar-en-el-intento",
+   "link": "https://praetoriaabogados.es/como-abordar-un-recurso-de-casacion-civil-y-no-fracasar-en-el-intento/",
+   "status": "publish",
+   "title": "Cómo abordar un recurso de casación civil (y no fracasar en el intento)",
+   "date": "2026-04-15T22:54:09",
+   "modified": "2026-09-08T11:47:11",
+   "categories": [
+    82,
+    1
+   ],
+   "tags": []
+  },
+  {
+   "id": 2784,
+   "slug": "despido-valencia-que-hacer",
+   "link": "https://praetoriaabogados.es/despido-valencia-que-hacer/",
+   "status": "publish",
+   "title": "Despido en Valencia: qué hacer en las primeras 48 horas para no perder tus derechos",
+   "date": "2026-03-27T16:34:31",
+   "modified": "2026-04-22T17:06:36",
+   "categories": [
+    1
+   ],
+   "tags": [
+    66,
+    70,
+    67,
+    65,
+    68,
+    69
+   ]
+  },
+  {
+   "id": 2779,
+   "slug": "impagos-transporte-reclamar-factura",
+   "link": "https://praetoriaabogados.es/impagos-transporte-reclamar-factura/",
+   "status": "publish",
+   "title": "Impagos en el transporte: cómo reclamar una factura y no perder el dinero",
+   "date": "2026-03-27T16:32:32",
+   "modified": "2026-09-08T21:41:14",
+   "categories": [
+    1,
+    78
+   ],
+   "tags": [
+    62,
+    64,
+    60,
+    63,
+    42,
+    61,
+    39
+   ]
+  },
+  {
+   "id": 2776,
+   "slug": "cuanto-cuesta-abogado-espana",
+   "link": "https://praetoriaabogados.es/cuanto-cuesta-abogado-espana/",
+   "status": "publish",
+   "title": "Cuánto cuesta un abogado en España (y por qué algunos son mucho más baratos)",
+   "date": "2026-03-27T16:29:32",
+   "modified": "2026-04-22T17:11:20",
+   "categories": [
+    1
+   ],
+   "tags": [
+    76,
+    77,
+    72,
+    75,
+    74,
+    73
+   ]
+  },
+  {
+   "id": 2773,
+   "slug": "abogados-valencia-no-dicen-verdad",
+   "link": "https://praetoriaabogados.es/abogados-valencia-no-dicen-verdad/",
+   "status": "publish",
+   "title": "Por qué muchos abogados en Valencia no te dicen la verdad sobre tu caso",
+   "date": "2026-03-27T16:28:00",
+   "modified": "2026-03-27T16:45:03",
+   "categories": [
+    1
+   ],
+   "tags": [
+    6,
+    10,
+    72,
+    14,
+    8,
+    71
+   ]
+  },
+  {
+   "id": 2757,
+   "slug": "ocupacion-alquiler-valencia",
+   "link": "https://praetoriaabogados.es/ocupacion-alquiler-valencia/",
+   "status": "publish",
+   "title": "Problemas de ocupación y alquiler en Valencia: qué puede hacer el propietario paso a paso",
+   "date": "2026-02-27T15:40:52",
+   "modified": "2026-10-23T12:41:36",
+   "categories": [
+    82,
+    1
+   ],
+   "tags": [
+    49,
+    21,
+    47,
+    48,
+    36
+   ]
+  },
+  {
+   "id": 2755,
+   "slug": "registro-alquiler-turistico-2026",
+   "link": "https://praetoriaabogados.es/registro-alquiler-turistico-2026/",
+   "status": "publish",
+   "title": "Nuevo registro de alquiler turístico 2026: qué es y cómo afecta a propietarios",
+   "date": "2026-02-27T15:38:25",
+   "modified": "2026-10-23T12:41:36",
+   "categories": [
+    82,
+    1
+   ],
+   "tags": [
+    25,
+    28,
+    29,
+    26,
+    27
+   ]
+  },
+  {
+   "id": 2752,
+   "slug": "gobierno-regularizar-extranjeros",
+   "link": "https://praetoriaabogados.es/gobierno-regularizar-extranjeros/",
+   "status": "publish",
+   "title": "El Gobierno quiere regularizar a 500.000 extranjeros en España: cómo aprovechar esta oportunidad legal",
+   "date": "2026-02-12T22:56:07",
+   "modified": "2026-10-23T12:41:37",
+   "categories": [
+    1
+   ],
+   "tags": [
+    33,
+    44,
+    46,
+    31,
+    45
+   ]
+  },
+  {
+   "id": 2749,
+   "slug": "nuevo-decreto-2026-desahucio",
+   "link": "https://praetoriaabogados.es/nuevo-decreto-2026-desahucio/",
+   "status": "publish",
+   "title": "Nuevo decreto desahucio 2026: cuándo ya no se suspende y qué pueden hacer los propietarios",
+   "date": "2026-02-12T22:50:48",
+   "modified": "2026-10-23T12:41:37",
+   "categories": [
+    82,
+    1
+   ],
+   "tags": [
+    38,
+    37,
+    21,
+    35,
+    36
+   ]
+  },
+  {
+   "id": 2745,
+   "slug": "fraudes-transporte-aseguradora",
+   "link": "https://praetoriaabogados.es/fraudes-transporte-aseguradora/",
+   "status": "publish",
+   "title": "Fraudes en transporte: cómo reclamar cuando la aseguradora no quiere pagar",
+   "date": "2026-01-05T16:56:12",
+   "modified": "2026-09-08T21:47:46",
+   "categories": [
+    1,
+    78
+   ],
+   "tags": [
+    41,
+    40,
+    43,
+    42,
+    39
+   ]
+  },
+  {
+   "id": 2743,
+   "slug": "regularizacion-extranjeros-espana-2026",
+   "link": "https://praetoriaabogados.es/regularizacion-extranjeros-espana-2026/",
+   "status": "publish",
+   "title": "Regularización de extranjeros en España 2026: quién puede obtener papeles y cómo hacerlo",
+   "date": "2026-01-05T16:51:11",
+   "modified": "2026-08-20T14:10:37",
+   "categories": [
+    1
+   ],
+   "tags": [
+    33,
+    30,
+    32,
+    34,
+    31
+   ]
+  },
+  {
+   "id": 2737,
+   "slug": "obtenir-residence-travail-espagne",
+   "link": "https://praetoriaabogados.es/obtenir-residence-travail-espagne/",
+   "status": "publish",
+   "title": "Comment obtenir un permis de résidence ou de travail en Espagne (guide complet 2026)",
+   "date": "2025-11-23T22:08:14",
+   "modified": "2026-03-27T17:02:21",
+   "categories": [
+    1
+   ],
+   "tags": [
+    50,
+    54,
+    51,
+    53,
+    52
+   ]
+  },
+  {
+   "id": 2734,
+   "slug": "residencia-trabajo-espana-arabe",
+   "link": "https://praetoriaabogados.es/residencia-trabajo-espana-arabe/",
+   "status": "publish",
+   "title": "كيفية الحصول على الإقامة أو تصريح العمل في إسبانيا (دليل شامل 2026)",
+   "date": "2025-11-23T22:05:23",
+   "modified": "2026-03-27T17:04:39",
+   "categories": [
+    1
+   ],
+   "tags": [
+    56,
+    59,
+    57,
+    55,
+    58
+   ]
+  },
+  {
+   "id": 2731,
+   "slug": "mejor-abogado-en-valencia",
+   "link": "https://praetoriaabogados.es/mejor-abogado-en-valencia/",
+   "status": "publish",
+   "title": "Mejor abogado en Valencia: cómo elegir bien y evitar errores que te pueden costar dinero",
+   "date": "2025-11-23T22:00:50",
+   "modified": "2026-03-27T16:59:18",
+   "categories": [
+    1
+   ],
+   "tags": [
+    6,
+    10,
+    9,
+    8,
+    7
+   ]
+  },
+  {
+   "id": 2720,
+   "slug": "reclamar-devolucion-impuesto-de-matriculacion",
+   "link": "https://praetoriaabogados.es/reclamar-devolucion-impuesto-de-matriculacion/",
+   "status": "publish",
+   "title": "🚗 Cómo recuperar el impuesto de matriculación: quién puede reclamar y cuánto dinero puedes recuperar",
+   "date": "2025-11-20T14:55:46",
+   "modified": "2026-09-08T21:57:25",
+   "categories": [
+    1,
+    79
+   ],
+   "tags": [
+    19,
+    16,
+    15,
+    17,
+    18
+   ]
+  },
+  {
+   "id": 2718,
+   "slug": "demanda-contrato-alquiler-que-hacer",
+   "link": "https://praetoriaabogados.es/demanda-contrato-alquiler-que-hacer/",
+   "status": "publish",
+   "title": "Demanda por alquiler: qué hacer paso a paso si te han demandado (guía clara)",
+   "date": "2025-11-13T21:40:19",
+   "modified": "2026-09-08T11:52:12",
+   "categories": [
+    82,
+    1
+   ],
+   "tags": [
+    23,
+    22,
+    20,
+    21,
+    24
+   ]
+  }
+ ],
+ "categories": [
+  {
+   "id": 83,
+   "slug": "arte-y-patrimonio",
+   "name": "Arte y patrimonio",
+   "count": 0,
+   "parent": 0
+  },
+  {
+   "id": 82,
+   "slug": "civil-y-patrimonio",
+   "name": "Civil y patrimonio",
+   "count": 6,
+   "parent": 0
+  },
+  {
+   "id": 1,
+   "slug": "derecho",
+   "name": "Derecho",
+   "count": 39,
+   "parent": 0
+  },
+  {
+   "id": 81,
+   "slug": "familia",
+   "name": "Familia",
+   "count": 1,
+   "parent": 0
+  },
+  {
+   "id": 79,
+   "slug": "hacienda-y-seguridad-social",
+   "name": "Hacienda y Seguridad Social",
+   "count": 3,
+   "parent": 0
+  },
+  {
+   "id": 91,
+   "slug": "logistica-y-transporte",
+   "name": "logistica y transporte",
+   "count": 1,
+   "parent": 0
+  },
+  {
+   "id": 80,
+   "slug": "mercantil-y-sociedades",
+   "name": "Mercantil y sociedades",
+   "count": 2,
+   "parent": 0
+  },
+  {
+   "id": 90,
+   "slug": "normativa-transporte",
+   "name": "NORMATIVA TRANSPORTE",
+   "count": 3,
+   "parent": 0
+  },
+  {
+   "id": 78,
+   "slug": "transporte-y-logistica",
+   "name": "transporte y logistica",
+   "count": 10,
+   "parent": 0
+  },
+  {
+   "id": 84,
+   "slug": "transporte-y-logistica-transporte-y-logistica",
+   "name": "TRANSPORTE Y LOGISTICA",
+   "count": 2,
+   "parent": 78
+  }
+ ],
+ "tags": [
+  {
+   "id": 23,
+   "slug": "abogado-alquiler",
+   "name": "abogado alquiler",
+   "count": 1
+  },
+  {
+   "id": 76,
+   "slug": "abogado-barato",
+   "name": "abogado barato",
+   "count": 1
+  },
+  {
+   "id": 12,
+   "slug": "abogado-cerca-de-mi",
+   "name": "abogado cerca de mi",
+   "count": 0
+  },
+  {
+   "id": 11,
+   "slug": "abogado-el-puig",
+   "name": "abogado el puig",
+   "count": 0
+  },
+  {
+   "id": 33,
+   "slug": "abogado-extranjeria",
+   "name": "abogado extranjería",
+   "count": 2
+  },
+  {
+   "id": 19,
+   "slug": "abogado-fiscal",
+   "name": "abogado fiscal",
+   "count": 1
+  },
+  {
+   "id": 38,
+   "slug": "abogado-inmobiliario",
+   "name": "abogado inmobiliario",
+   "count": 1
+  },
+  {
+   "id": 66,
+   "slug": "abogado-laboralista-valencia",
+   "name": "abogado laboralista valencia",
+   "count": 1
+  },
+  {
+   "id": 6,
+   "slug": "abogado-valencia",
+   "name": "abogado valencia",
+   "count": 2
+  },
+  {
+   "id": 62,
+   "slug": "accion-directa-transporte",
+   "name": "acción directa transporte",
+   "count": 1
+  },
+  {
+   "id": 64,
+   "slug": "agencias-transporte",
+   "name": "agencias transporte",
+   "count": 1
+  },
+  {
+   "id": 37,
+   "slug": "alquiler-espana",
+   "name": "alquiler españa",
+   "count": 1
+  },
+  {
+   "id": 25,
+   "slug": "alquiler-turistico",
+   "name": "alquiler turístico",
+   "count": 1
+  },
+  {
+   "id": 28,
+   "slug": "alquiler-vacacional",
+   "name": "alquiler vacacional",
+   "count": 1
+  },
+  {
+   "id": 49,
+   "slug": "alquiler-valencia",
+   "name": "alquiler valencia",
+   "count": 1
+  },
+  {
+   "id": 41,
+   "slug": "aseguradoras",
+   "name": "aseguradoras",
+   "count": 1
+  },
+  {
+   "id": 77,
+   "slug": "asesoria-juridica",
+   "name": "asesoría jurídica",
+   "count": 1
+  },
+  {
+   "id": 13,
+   "slug": "asesoria-juridica-el-puig",
+   "name": "asesoría jurídica el puig",
+   "count": 0
+  },
+  {
+   "id": 10,
+   "slug": "asesoria-legal",
+   "name": "asesoría legal",
+   "count": 2
+  },
+  {
+   "id": 50,
+   "slug": "avocat-espagne",
+   "name": "avocat espagne",
+   "count": 1
+  },
+  {
+   "id": 54,
+   "slug": "avocat-etrangers-espagne",
+   "name": "avocat étrangers espagne",
+   "count": 1
+  },
+  {
+   "id": 51,
+   "slug": "avocat-valence",
+   "name": "avocat valence",
+   "count": 1
+  },
+  {
+   "id": 72,
+   "slug": "contratar-abogado",
+   "name": "contratar abogado",
+   "count": 2
+  },
+  {
+   "id": 22,
+   "slug": "contrato-alquiler",
+   "name": "contrato alquiler",
+   "count": 1
+  },
+  {
+   "id": 75,
+   "slug": "coste-abogado",
+   "name": "coste abogado",
+   "count": 1
+  },
+  {
+   "id": 20,
+   "slug": "demanda-alquiler",
+   "name": "demanda alquiler",
+   "count": 1
+  },
+  {
+   "id": 70,
+   "slug": "derecho-laboral",
+   "name": "derecho laboral",
+   "count": 1
+  },
+  {
+   "id": 21,
+   "slug": "desahucio",
+   "name": "desahucio",
+   "count": 3
+  },
+  {
+   "id": 14,
+   "slug": "despacho-juridico",
+   "name": "despacho jurídico",
+   "count": 1
+  },
+  {
+   "id": 9,
+   "slug": "despacho-juridico-valencia",
+   "name": "despacho jurídico valencia",
+   "count": 1
+  },
+  {
+   "id": 67,
+   "slug": "despido-improcedente",
+   "name": "despido improcedente",
+   "count": 1
+  },
+  {
+   "id": 65,
+   "slug": "despido-valencia",
+   "name": "despido valencia",
+   "count": 1
+  },
+  {
+   "id": 16,
+   "slug": "devolucion-impuesto",
+   "name": "devolución impuesto",
+   "count": 1
+  },
+  {
+   "id": 89,
+   "slug": "documento-de-control-digital",
+   "name": "documento de control digital",
+   "count": 1
+  },
+  {
+   "id": 8,
+   "slug": "elegir-abogado",
+   "name": "elegir abogado",
+   "count": 2
+  },
+  {
+   "id": 44,
+   "slug": "extranjeria",
+   "name": "extranjería",
+   "count": 1
+  },
+  {
+   "id": 30,
+   "slug": "extranjeria-espana",
+   "name": "extranjería españa",
+   "count": 1
+  },
+  {
+   "id": 68,
+   "slug": "finiquito",
+   "name": "finiquito",
+   "count": 1
+  },
+  {
+   "id": 40,
+   "slug": "fraude-transporte",
+   "name": "fraude transporte",
+   "count": 1
+  },
+  {
+   "id": 85,
+   "slug": "generar-deca",
+   "name": "generar DECA",
+   "count": 1
+  },
+  {
+   "id": 74,
+   "slug": "honorarios-abogados",
+   "name": "honorarios abogados",
+   "count": 1
+  },
+  {
+   "id": 60,
+   "slug": "impago-transporte",
+   "name": "impago transporte",
+   "count": 1
+  },
+  {
+   "id": 87,
+   "slug": "keyword-principal-plataforma-deca-keywords-secundarias-mejor-plataforma-deca",
+   "name": "Keyword principal: plataforma DECA Keywords secundarias: mejor plataforma DECA",
+   "count": 0
+  },
+  {
+   "id": 29,
+   "slug": "ley-alquiler",
+   "name": "ley alquiler",
+   "count": 1
+  },
+  {
+   "id": 35,
+   "slug": "ley-vivienda",
+   "name": "ley vivienda",
+   "count": 1
+  },
+  {
+   "id": 63,
+   "slug": "logistica",
+   "name": "logística",
+   "count": 1
+  },
+  {
+   "id": 43,
+   "slug": "logistica-legal",
+   "name": "logística legal",
+   "count": 1
+  },
+  {
+   "id": 7,
+   "slug": "mejor-abogado-valencia",
+   "name": "mejor abogado valencia",
+   "count": 1
+  },
+  {
+   "id": 15,
+   "slug": "mpuesto-matriculacion",
+   "name": "mpuesto matriculación",
+   "count": 1
+  },
+  {
+   "id": 26,
+   "slug": "normativa-alquiler",
+   "name": "normativa alquiler",
+   "count": 1
+  },
+  {
+   "id": 47,
+   "slug": "ocupacion-vivienda",
+   "name": "ocupación vivienda",
+   "count": 1
+  },
+  {
+   "id": 48,
+   "slug": "okupas",
+   "name": "okupas",
+   "count": 1
+  },
+  {
+   "id": 32,
+   "slug": "papeles-espana",
+   "name": "papeles españa",
+   "count": 1
+  },
+  {
+   "id": 53,
+   "slug": "permis-travail-espagne",
+   "name": "permis travail espagne",
+   "count": 1
+  },
+  {
+   "id": 46,
+   "slug": "permiso-residencia",
+   "name": "permiso residencia",
+   "count": 1
+  },
+  {
+   "id": 34,
+   "slug": "permiso-trabajo",
+   "name": "permiso trabajo",
+   "count": 1
+  },
+  {
+   "id": 88,
+   "slug": "plataforma-deca-gratis",
+   "name": "plataforma DECA gratis",
+   "count": 1
+  },
+  {
+   "id": 73,
+   "slug": "precio-abogado-espana",
+   "name": "precio abogado españa",
+   "count": 1
+  },
+  {
+   "id": 24,
+   "slug": "problemas-alquiler",
+   "name": "problemas alquiler",
+   "count": 1
+  },
+  {
+   "id": 71,
+   "slug": "problemas-con-abogados",
+   "name": "problemas con abogados",
+   "count": 1
+  },
+  {
+   "id": 36,
+   "slug": "propietarios",
+   "name": "propietarios",
+   "count": 2
+  },
+  {
+   "id": 27,
+   "slug": "propietarios-vivienda",
+   "name": "propietarios vivienda",
+   "count": 1
+  },
+  {
+   "id": 42,
+   "slug": "reclamaciones-transporte",
+   "name": "reclamaciones transporte",
+   "count": 3
+  },
+  {
+   "id": 69,
+   "slug": "reclamar-despido",
+   "name": "reclamar despido",
+   "count": 1
+  },
+  {
+   "id": 61,
+   "slug": "reclamar-factura-transporte",
+   "name": "reclamar factura transporte",
+   "count": 1
+  },
+  {
+   "id": 17,
+   "slug": "reclamar-hacienda",
+   "name": "reclamar hacienda",
+   "count": 1
+  },
+  {
+   "id": 52,
+   "slug": "residence-espagne",
+   "name": "résidence espagne",
+   "count": 1
+  },
+  {
+   "id": 31,
+   "slug": "residencia-espana",
+   "name": "residencia españa",
+   "count": 2
+  },
+  {
+   "id": 45,
+   "slug": "sanciones-extranjeria",
+   "name": "sanciones extranjería",
+   "count": 1
+  },
+  {
+   "id": 86,
+   "slug": "software-deca",
+   "name": "software DECA",
+   "count": 1
+  },
+  {
+   "id": 39,
+   "slug": "transporte-internacional",
+   "name": "transporte internacional",
+   "count": 7
+  },
+  {
+   "id": 18,
+   "slug": "vehiculos-diesel",
+   "name": "vehículos diésel",
+   "count": 1
+  },
+  {
+   "id": 56,
+   "slug": "%d8%a7%d9%84%d8%a5%d9%82%d8%a7%d9%85%d8%a9-%d9%81%d9%8a-%d8%a5%d8%b3%d8%a8%d8%a7%d9%86%d9%8a%d8%a7",
+   "name": "الإقامة في إسبانيا",
+   "count": 1
+  },
+  {
+   "id": 59,
+   "slug": "%d8%a7%d9%84%d9%87%d8%ac%d8%b1%d8%a9-%d8%a5%d9%84%d9%89-%d8%a5%d8%b3%d8%a8%d8%a7%d9%86%d9%8a%d8%a7",
+   "name": "الهجرة إلى إسبانيا",
+   "count": 1
+  },
+  {
+   "id": 57,
+   "slug": "%d8%aa%d8%b5%d8%b1%d9%8a%d8%ad-%d8%a7%d9%84%d8%b9%d9%85%d9%84-%d8%a5%d8%b3%d8%a8%d8%a7%d9%86%d9%8a%d8%a7",
+   "name": "تصريح العمل إسبانيا",
+   "count": 1
+  },
+  {
+   "id": 55,
+   "slug": "%d9%85%d8%ad%d8%a7%d9%85%d9%8a-%d8%a5%d8%b3%d8%a8%d8%a7%d9%86%d9%8a%d8%a7",
+   "name": "محامي إسبانيا",
+   "count": 1
+  },
+  {
+   "id": 58,
+   "slug": "%d9%85%d8%ad%d8%a7%d9%85%d9%8a-%d9%81%d8%a7%d9%84%d9%86%d8%b3%d9%8a%d8%a7",
+   "name": "محامي فالنسيا",
+   "count": 1
+  }
+ ],
+ "media": [
+  {
+   "id": 3034,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2026/09/post-wordpress-praetoria-farvertrans-deca-mailchimp-1.html",
+   "alt": ""
+  },
+  {
+   "id": 1988,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.28.26.jpeg",
+   "alt": "Calle urbana con coches aparcados y una persona sentada leyendo en un banco"
+  },
+  {
+   "id": 1987,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.27.52.jpeg",
+   "alt": "Grupo de visitantes observando cuadros en la sala de un museo de arte"
+  },
+  {
+   "id": 1986,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.27.02.jpeg",
+   "alt": "Juan José Farinós, abogado Praetoria Jurídica"
+  },
+  {
+   "id": 1985,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.26.35.jpeg",
+   "alt": "Cuadro clásico con dos figuras masculinas expuesto en un museo"
+  },
+  {
+   "id": 1984,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.24.33.jpeg",
+   "alt": "Mujer trabajando con un ordenador portátil sentada en un sofá"
+  },
+  {
+   "id": 1983,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.20.56.jpeg",
+   "alt": "Fotografía artística de personas en movimiento con efecto de desenfoque sobre fondo amarillo"
+  },
+  {
+   "id": 1982,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.20.27.jpeg",
+   "alt": "Sala de archivo con fotografías y documentación en las paredes y ordenadores antiguos"
+  },
+  {
+   "id": 1981,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.20.20.jpeg",
+   "alt": "Espacio de estudio con mesas de trabajo, ordenadores y paneles informativos en la pared"
+  },
+  {
+   "id": 1980,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.20.12.jpeg",
+   "alt": "Interior de un estudio con lámparas redondas y paneles de documentación en las paredes"
+  },
+  {
+   "id": 1979,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.20.05.jpeg",
+   "alt": "Sala con estanterías de libros, alfombra y fotografías en blanco y negro en la pared"
+  },
+  {
+   "id": 1978,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.19.54.jpeg",
+   "alt": "Panel de muestras de color expuesto en una pared"
+  },
+  {
+   "id": 1977,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.19.30.jpeg",
+   "alt": "Ilustración artística en color de un rostro estilizado"
+  },
+  {
+   "id": 1976,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.18.37.jpeg",
+   "alt": "Pintura contemporánea en colores vivos de una figura reclinada"
+  },
+  {
+   "id": 1975,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.18.13.jpeg",
+   "alt": "Obra de arte abstracta en tonos rojos con estructura de rejilla"
+  },
+  {
+   "id": 1974,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.17.38.jpeg",
+   "alt": "Escultura abstracta en blanco y negro de formas onduladas"
+  },
+  {
+   "id": 1973,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.17.28.jpeg",
+   "alt": "Obra textil bordada con un elemento decorativo de plumas naranjas"
+  },
+  {
+   "id": 1972,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.10.49.jpeg",
+   "alt": "Fachada de un edificio histórico con arcos y jardín"
+  },
+  {
+   "id": 1971,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.10.09.jpeg",
+   "alt": "Pareja vestida de gala frente a una casa señorial con jardín"
+  },
+  {
+   "id": 1970,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18.jpeg",
+   "alt": "Despacho de Praetoria Abogados en El Puig: zona de mesas y sillas de diseño"
+  },
+  {
+   "id": 1969,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-6.jpeg",
+   "alt": "Espacio de atención al cliente de Praetoria Abogados con puesto de trabajo"
+  },
+  {
+   "id": 1968,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-5.jpeg",
+   "alt": "Oficina de planta abierta de Praetoria Abogados con mamparas de cristal"
+  },
+  {
+   "id": 1967,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-4.jpeg",
+   "alt": "Sala de reuniones de Praetoria Abogados con mamparas acristaladas"
+  },
+  {
+   "id": 1966,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-3.jpeg",
+   "alt": "Zona de espera de Praetoria Abogados con sofá y mesas"
+  },
+  {
+   "id": 1965,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-2.jpeg",
+   "alt": "Espacio de atención al cliente de Praetoria Abogados con área de trabajo abierta"
+  },
+  {
+   "id": 1964,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-1.jpeg",
+   "alt": "Despacho de Praetoria Abogados en El Puig: oficina moderna de planta abierta"
+  },
+  {
+   "id": 1963,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.17.jpeg",
+   "alt": "Oficinas de Praetoria Abogados durante la fase de reforma, con paneles de madera"
+  },
+  {
+   "id": 1962,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.17-2.jpeg",
+   "alt": "Oficinas de Praetoria Abogados durante la fase de reforma, con paneles verdes y señalización de seguridad"
+  },
+  {
+   "id": 1961,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.17-1.jpeg",
+   "alt": "Despacho Praetoria"
+  },
+  {
+   "id": 1957,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/10/Fondo-Blanco-Preatoria.png",
+   "alt": "Fondo Blanco Preatoria - 0"
+  },
+  {
+   "id": 1841,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/Logo-Blanco-sin-fondo.png",
+   "alt": "Logo Blanco sin fondo - 0"
+  },
+  {
+   "id": 1810,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/Iconopng.png",
+   "alt": "Iconopng - 0"
+  },
+  {
+   "id": 1809,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/bg_crumble.jpg",
+   "alt": "bg_crumble - 0"
+  },
+  {
+   "id": 1747,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/couple-home-reading-mail-scaled.jpg",
+   "alt": "couple-home-reading-mail - 0"
+  },
+  {
+   "id": 1731,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/medium-shot-happy-friends-hugging-outdoors-scaled.jpg",
+   "alt": "medium-shot-happy-friends-hugging-outdoors - 0"
+  },
+  {
+   "id": 1669,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/group-friends-making-funny-grimaces-scaled.jpg",
+   "alt": "group-friends-making-funny-grimaces - 0"
+  },
+  {
+   "id": 1668,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/front-view-friends-making-grimaces-together-scaled.jpg",
+   "alt": "front-view-friends-making-grimaces-together - 0"
+  },
+  {
+   "id": 1660,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/17932.jpg",
+   "alt": "17932 - 0"
+  },
+  {
+   "id": 1659,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/2150322110.jpg",
+   "alt": "2150322110 - 0"
+  },
+  {
+   "id": 1636,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/telefono-inteligente-57.png",
+   "alt": "telefono-inteligente (57) - 0"
+  },
+  {
+   "id": 1635,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/mensaje-51.png",
+   "alt": "mensaje (51) - 0"
+  },
+  {
+   "id": 1274,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/paleta-de-pintura.png",
+   "alt": "paleta-de-pintura - 0"
+  },
+  {
+   "id": 1270,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/lupa-5.png",
+   "alt": "lupa (5) - 0"
+  },
+  {
+   "id": 1260,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/familia-4.png",
+   "alt": "familia (4) - 0"
+  },
+  {
+   "id": 1247,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/camion-16.png",
+   "alt": "camion (16) - 0"
+  },
+  {
+   "id": 1237,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/personas-2.png",
+   "alt": "personas (2) - 0"
+  },
+  {
+   "id": 1236,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/empresa.png",
+   "alt": "empresa - 0"
+  },
+  {
+   "id": 1169,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/3-IMAGENES-EN-1.png",
+   "alt": "3-IMAGENES-EN-1 - 0"
+  },
+  {
+   "id": 1049,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/2150969884.jpg",
+   "alt": "2150969884 - 0"
+  },
+  {
+   "id": 955,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/2149085984.jpg",
+   "alt": "2149085984 - 0"
+  },
+  {
+   "id": 942,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/Video-Praetoria.mp4",
+   "alt": ""
+  },
+  {
+   "id": 900,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/icono.png",
+   "alt": "icono - 0"
+  },
+  {
+   "id": 733,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/2147704553.png",
+   "alt": "2147704553 - 0"
+  },
+  {
+   "id": 716,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/Abogados6.jpg",
+   "alt": "Abogados6 - 0"
+  },
+  {
+   "id": 712,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/abogados5.jpg",
+   "alt": "abogados5 - 0"
+  },
+  {
+   "id": 571,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/SERVICIOS-2.png",
+   "alt": "SERVICIOS (2) - 0"
+  },
+  {
+   "id": 566,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/Anadir-un-titulo-2025-09-12T011933.298.png",
+   "alt": "Añadir un título – 2025-09-12T011933.298 - 0"
+  },
+  {
+   "id": 553,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/MANOS-TOMADAS.png",
+   "alt": "MANOS TOMADAS - 0"
+  },
+  {
+   "id": 392,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/2147704553.jpg",
+   "alt": "2147704553 - 0"
+  },
+  {
+   "id": 391,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/2150263085.jpg",
+   "alt": "2150263085 - 0"
+  },
+  {
+   "id": 390,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/9274.jpg",
+   "alt": "9274 - 0"
+  },
+  {
+   "id": 389,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/2937.jpg",
+   "alt": "2937 - 0"
+  },
+  {
+   "id": 358,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/14742.jpg",
+   "alt": "14742 - 0"
+  },
+  {
+   "id": 354,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/2148377785.jpg",
+   "alt": "2148377785 - 0"
+  },
+  {
+   "id": 336,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/oficina-2.png",
+   "alt": "oficina (2) - 0"
+  },
+  {
+   "id": 168,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/logo-praetoria_header-sin-fondo.png",
+   "alt": "logo-praetoria_header sin fondo - 0"
+  },
+  {
+   "id": 81,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/Imagen1-4.png",
+   "alt": "Imagen1 (4) - 0"
+  },
+  {
+   "id": 80,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/Imagen2-3.png",
+   "alt": "Imagen2 (3) - 0"
+  },
+  {
+   "id": 22,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/logo-praetoria-header.png",
+   "alt": "logo-praetoria header - 0"
+  },
+  {
+   "id": 21,
+   "source_url": "https://praetoriaabogados.es/wp-content/uploads/2025/09/banners1-3.png",
+   "alt": "banners1 (3) - 0"
+  }
+ ]
+}

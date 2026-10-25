@@ -1,0 +1,1424 @@
+{
+  "$comentario": "Registro único de imágenes editoriales (#28). Cada entrada dice qué escena busca, de dónde sale, con qué licencia y con qué texto alternativo se publica. Las páginas y los artículos solo referencian el id. estado=pendiente: la imagen está elegida pero aún no procesada, o no hay ninguna pertinente; la web muestra una composición tipográfica y el check la lista como pendiente editorial. Proceso: scripts/imagenes/procesar.py. Manifiesto legible: docs/IMAGENES.md.",
+  "imagenes": [
+    {
+      "id": "portada",
+      "estado": "publicada",
+      "escena": "Trabajo jurídico real: análisis o negociación con personas",
+      "archivo": "ed/analisis-reunion-documentos",
+      "alt": "Tres profesionales conversan en torno a una mesa con documentos y tazas de café",
+      "foco": "50% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "KDWgcgMFFVI",
+        "autor": "Vitaly Gariev",
+        "url": "https://unsplash.com/photos/KDWgcgMFFVI",
+        "perfil": "https://unsplash.com/@silverkblack",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "transporte",
+      "estado": "publicada",
+      "escena": "Logística: camión en muelle de carga",
+      "archivo": "ed/camion-muelle-carga",
+      "alt": "Cabeza tractora y semirremolques aparcados frente a la nave de un almacén logístico",
+      "foco": "50% 55%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "xkAIwD0hsbg",
+        "autor": "Troy Mortier",
+        "url": "https://unsplash.com/photos/xkAIwD0hsbg",
+        "perfil": "https://unsplash.com/@troyscanon",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "laboral",
+      "estado": "publicada",
+      "escena": "Asesoramiento a una persona trabajadora",
+      "archivo": "ed/asesoramiento-trabajador",
+      "alt": "Un asesor con una carpeta escucha a la persona sentada frente a él",
+      "foco": "45% 40%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "w7rKpNn53t4",
+        "autor": "Vitaly Gariev",
+        "url": "https://unsplash.com/photos/w7rKpNn53t4",
+        "perfil": "https://unsplash.com/@silverkblack",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "despidos",
+      "estado": "publicada",
+      "escena": "Revisión conjunta de una carta o un contrato",
+      "archivo": "ed/revision-conjunta-documento",
+      "alt": "Dos personas revisan juntas un documento sobre la mesa, bolígrafo en mano",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "TFFn3BYLc5s",
+        "autor": "Van Tay Media",
+        "url": "https://unsplash.com/photos/TFFn3BYLc5s",
+        "perfil": "https://unsplash.com/@vantaymedia",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "mercantil",
+      "estado": "publicada",
+      "escena": "Negociación empresarial",
+      "archivo": "ed/negociacion-mesa-reuniones",
+      "alt": "Una abogada explica una propuesta a dos socios sentados al otro lado de la mesa",
+      "foco": "55% 45%",
+      "origen": {
+        "tipo": "ia",
+        "original": "fotos/ia/praetoria-mercantil.png",
+        "personalizada": false,
+        "nota": "Escena generada con IA (paquete praetoria-imagenes-claude-v2, #28 §8). No representa personal, clientes ni instalaciones reales."
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "civil",
+      "estado": "publicada",
+      "escena": "Vivienda, patrimonio y documentación",
+      "archivo": "ed/revision-plano-vivienda",
+      "alt": "Un asesor señala un plano de vivienda ante una mujer que lo escucha, con unas llaves sobre la mesa",
+      "foco": "62% 40%",
+      "origen": {
+        "tipo": "ia",
+        "original": "fotos/ia/praetoria-civil.png",
+        "personalizada": false,
+        "nota": "Escena generada con IA (paquete praetoria-imagenes-claude-v2, #28 §8). No representa personal, clientes ni instalaciones reales."
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "familia",
+      "estado": "publicada",
+      "escena": "Conversación confidencial y cercana sobre un acuerdo familiar",
+      "archivo": "ed/asesoramiento-familiar",
+      "alt": "Una abogada toma notas mientras una pareja le explica su situación sentada en un sofá",
+      "foco": "60% 45%",
+      "origen": {
+        "tipo": "ia",
+        "original": "fotos/ia/praetoria-familia.png",
+        "personalizada": false,
+        "nota": "Escena generada con IA (paquete praetoria-imagenes-claude-v2, #28 §8). No representa personal, clientes ni instalaciones reales."
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "arte",
+      "estado": "publicada",
+      "escena": "Estudio de obras o documentación de procedencia",
+      "archivo": "ed/estudio-obra-restauracion",
+      "alt": "Una restauradora examina de cerca una gran pintura mural desmontada",
+      "foco": "55% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "LHkn9iu4Swk",
+        "autor": "Green Liu",
+        "url": "https://unsplash.com/photos/LHkn9iu4Swk",
+        "perfil": "https://unsplash.com/@greenliustudio",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "hacienda",
+      "estado": "publicada",
+      "escena": "Documentación financiera ordenada, cifras no identificables",
+      "archivo": "ed/documentacion-financiera",
+      "alt": "Calculadora sobre hojas con gráficos en una mesa de trabajo, cifras desenfocadas",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "8wLZi9OhsWU",
+        "autor": "Jakub Żerdzicki",
+        "url": "https://unsplash.com/photos/8wLZi9OhsWU",
+        "perfil": "https://unsplash.com/@jakubzerdzicki",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "portes-impagados",
+      "estado": "publicada",
+      "escena": "Flota de transporte en muelles: portes y facturas",
+      "archivo": "ed/camiones-muelles",
+      "alt": "Tres camiones de caja blancos atracados en los muelles de una nave",
+      "foco": "50% 55%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "HfYk04kY0ZQ",
+        "autor": "Pascal Meier",
+        "url": "https://unsplash.com/photos/HfYk04kY0ZQ",
+        "perfil": "https://unsplash.com/@zhpix",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "salarios-finiquito",
+      "estado": "publicada",
+      "escena": "Revisión de un documento de liquidación",
+      "archivo": "ed/revision-formulario",
+      "alt": "Dos personas repasan unos impresos sobre la mesa, junto a un móvil y una tableta",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "MhqUBTxQ3Hw",
+        "autor": "Olena Kholina",
+        "url": "https://unsplash.com/photos/MhqUBTxQ3Hw",
+        "perfil": "https://unsplash.com/@sixtynice",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "despacho-salas",
+      "estado": "publicada",
+      "escena": "Instalaciones reales del despacho (solo en «El despacho»)",
+      "archivo": "v2/despacho-salas-reuniones",
+      "alt": "Salas de reuniones acristaladas en las oficinas del despacho en el centro de Valencia",
+      "foco": "50% 50%",
+      "ancho": 1600,
+      "alto": 1056,
+      "variantes": [
+        480,
+        800,
+        1600
+      ],
+      "origen": {
+        "tipo": "praetoria",
+        "original": "fotos/originales (fotografía propia, retocada con scripts/fotos/retocar.py)"
+      },
+      "avif": false
+    },
+    {
+      "id": "despacho-atencion",
+      "estado": "publicada",
+      "escena": "Instalaciones reales del despacho (solo en «El despacho»)",
+      "archivo": "v2/despacho-atencion-cliente",
+      "alt": "Espacio de atención a clientes en las oficinas del despacho en el centro de Valencia",
+      "foco": "50% 50%",
+      "ancho": 1600,
+      "alto": 1056,
+      "variantes": [
+        480,
+        800,
+        1600
+      ],
+      "origen": {
+        "tipo": "praetoria",
+        "original": "fotos/originales (fotografía propia, retocada con scripts/fotos/retocar.py)"
+      },
+      "avif": false
+    },
+    {
+      "id": "deca-panel",
+      "estado": "publicada",
+      "escena": "Producto DeCA: panel de inicio real",
+      "archivo": "ed/deca-panel-inicio",
+      "alt": "Panel de inicio de DeCA Profesional con accesos para crear, repetir y consultar documentos de control",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "deca",
+        "archivos": [
+          "fotos/deca/panel-inicio.png"
+        ]
+      },
+      "composicion": "escritorio",
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "deca-movil",
+      "estado": "publicada",
+      "escena": "Producto DeCA: aplicación en el móvil, ficha y modo inspección",
+      "archivo": "ed/deca-movil-inspeccion",
+      "alt": "Dos pantallas de móvil de DeCA Profesional: la ficha de un documento de control y el modo inspección con su código QR",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "deca",
+        "archivos": [
+          "fotos/deca/movil-deca-detalle.png",
+          "fotos/deca/movil-inspeccion.png"
+        ]
+      },
+      "composicion": "movil-doble",
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "deca-equipo",
+      "estado": "publicada",
+      "escena": "Producto DeCA: usuarios y equipo de una empresa (planes)",
+      "archivo": "ed/deca-equipo",
+      "alt": "Pantalla de equipo de DeCA Profesional para invitar a compañeros y asignarles un rol",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "deca",
+        "archivos": [
+          "fotos/deca/equipo.png"
+        ]
+      },
+      "composicion": "escritorio",
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "deca-conecta",
+      "estado": "publicada",
+      "escena": "Producto DeCA: alta en DeCA Conecta",
+      "archivo": "ed/deca-conecta",
+      "alt": "Casilla de alta voluntaria en DeCA Conecta, con la explicación de qué datos se comunican a los cargadores",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "deca",
+        "archivos": [
+          "fotos/deca/deca-conecta-registro.png"
+        ]
+      },
+      "composicion": "ficha",
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "deca-historial",
+      "estado": "publicada",
+      "escena": "Producto DeCA: historial de documentos de una empresa",
+      "archivo": "ed/deca-historial",
+      "alt": "Historial de DeCA Profesional con buscador, filtros por fecha y estado y la lista de documentos generados",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "deca",
+        "archivos": [
+          "fotos/deca/historial.png"
+        ]
+      },
+      "composicion": "escritorio",
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "logistica-varios-camiones",
+      "estado": "publicada",
+      "escena": "Transporte con varios vehículos y puntos de carga",
+      "archivo": "ed/camiones-rigidos-aparcados",
+      "alt": "Dos camiones rígidos blancos aparcados en un camino entre árboles",
+      "foco": "50% 55%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "g5yxltY2sQQ",
+        "autor": "Josh Miller",
+        "url": "https://unsplash.com/photos/g5yxltY2sQQ",
+        "perfil": "https://unsplash.com/@joshmillerdp",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "logistica-albaran",
+      "estado": "publicada",
+      "escena": "Cargador y transportista revisan la documentación de una entrega",
+      "archivo": "ed/revision-albaran-almacen",
+      "alt": "Operario de almacén con papeles en la mano entre estanterías de cajas",
+      "foco": "50% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "1Bsqy0meA88",
+        "autor": "Reproductive Health Supplies Coalition",
+        "url": "https://unsplash.com/photos/1Bsqy0meA88",
+        "perfil": "https://unsplash.com/@rhsupplies",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "logistica-camion-muelle",
+      "estado": "publicada",
+      "escena": "Camión de caja en muelle: empresa de transporte",
+      "archivo": "ed/camion-caja-muelle",
+      "alt": "Camión de caja cerrada blanco junto a la rampa de una nave",
+      "foco": "50% 55%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "crHhZlES310",
+        "autor": "Maxim Tolchinskiy",
+        "url": "https://unsplash.com/photos/crHhZlES310",
+        "perfil": "https://unsplash.com/@shaikhulud",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "logistica-paquetes",
+      "estado": "publicada",
+      "escena": "Departamento de logística de un cargador",
+      "archivo": "ed/mercancia-preparada",
+      "alt": "Cajas de cartón apiladas en las estanterías de un almacén",
+      "foco": "25% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "2mH3hbrYMac",
+        "autor": "Reproductive Health Supplies Coalition",
+        "url": "https://unsplash.com/photos/2mH3hbrYMac",
+        "perfil": "https://unsplash.com/@rhsupplies",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "logistica-cabina-tableta",
+      "estado": "publicada",
+      "escena": "Digitalización: conductor con tableta en cabina",
+      "archivo": "ed/cabina-tableta",
+      "alt": "Un conductor toca la pantalla de la tableta instalada en el salpicadero",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "A5mWEfOS0gE",
+        "autor": "Denago EV",
+        "url": "https://unsplash.com/photos/A5mWEfOS0gE",
+        "perfil": "https://unsplash.com/@denagoev",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "logistica-conductor-movil",
+      "estado": "publicada",
+      "escena": "Conductor consultando el móvil en ruta",
+      "archivo": "ed/conductor-movil-cabina",
+      "alt": "Conductor consulta un mapa en la tableta desde la cabina",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "B296qZ-Yihw",
+        "autor": "Chris Cordes",
+        "url": "https://unsplash.com/photos/B296qZ-Yihw",
+        "perfil": "https://unsplash.com/@4x4_touring",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "hacienda-ingresos",
+      "estado": "publicada",
+      "escena": "Justificar ingresos: dinero y cuentas",
+      "archivo": "ed/billetes-calculadora",
+      "alt": "Billetes de euro y una calculadora sobre papeles con gráficos",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "QgXJUf6-cv8",
+        "autor": "Jakub Żerdzicki",
+        "url": "https://unsplash.com/photos/QgXJUf6-cv8",
+        "perfil": "https://unsplash.com/@jakubzerdzicki",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "hacienda-notificacion",
+      "estado": "publicada",
+      "escena": "Revisión de una notificación con cifras no legibles",
+      "archivo": "ed/revision-notificacion-calculadora",
+      "alt": "Dos personas revisan un documento con cifras junto a una calculadora y una carpeta",
+      "foco": "45% 60%",
+      "origen": {
+        "tipo": "ia",
+        "original": "fotos/ia/praetoria-hacienda.png",
+        "personalizada": false,
+        "nota": "Escena generada con IA (paquete praetoria-imagenes-claude-v2, #28 §8). No representa personal, clientes ni instalaciones reales."
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "mercantil-socios",
+      "estado": "publicada",
+      "escena": "Conflicto entre socios: reunión tensa",
+      "archivo": "ed/socios-revisan-papeles",
+      "alt": "Dos hombres repasan unos papeles sujetos a una carpeta durante una reunión",
+      "foco": "50% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "Mqc-m8kgxkg",
+        "autor": "Amina Atar",
+        "url": "https://unsplash.com/photos/Mqc-m8kgxkg",
+        "perfil": "https://unsplash.com/@minaslens",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "civil-alquiler",
+      "estado": "publicada",
+      "escena": "Alquiler: llaves junto a la puerta",
+      "archivo": "ed/llaves-puerta",
+      "alt": "Una mano sostiene unas llaves junto a la cerradura de una puerta",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "jJnZg7vBfMs",
+        "autor": "Maria Ziegler",
+        "url": "https://unsplash.com/photos/jJnZg7vBfMs",
+        "perfil": "https://unsplash.com/@schluesseldienstvergleich_eu",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "civil-entrega-llaves",
+      "estado": "publicada",
+      "escena": "Entrega de la posesión de una vivienda",
+      "archivo": "ed/entrega-llaves",
+      "alt": "Una mano ofrece un manojo de llaves",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "Ebj87ehFNNU",
+        "autor": "Jakub Żerdzicki",
+        "url": "https://unsplash.com/photos/Ebj87ehFNNU",
+        "perfil": "https://unsplash.com/@jakubzerdzicki",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "civil-cerradura",
+      "estado": "publicada",
+      "escena": "Ocupación: acceso a la vivienda",
+      "archivo": "ed/llave-cerradura",
+      "alt": "Llavero con varias llaves colgando de una cerradura",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "5Dp7XJxILTk",
+        "autor": "Ries Bosch",
+        "url": "https://unsplash.com/photos/5Dp7XJxILTk",
+        "perfil": "https://unsplash.com/@ries_bosch",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "civil-herencia",
+      "estado": "publicada",
+      "escena": "Herencia: documentos de familia",
+      "archivo": "ed/legajos-familia",
+      "alt": "Legajos de documentos antiguos atados con cintas de tela",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "nCHP8xRf5Xw",
+        "autor": "Eric Prouzet",
+        "url": "https://unsplash.com/photos/nCHP8xRf5Xw",
+        "perfil": "https://unsplash.com/@eprouzet",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "laboral-revision-contrato",
+      "estado": "publicada",
+      "escena": "Revisión tranquila de la documentación del despido",
+      "archivo": "ed/repaso-documentos-despido",
+      "alt": "Una persona repasa a solas varios documentos impresos sobre una mesa oscura",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "ZH4FUYiaczY",
+        "autor": "Dimitri Karastelev",
+        "url": "https://unsplash.com/photos/ZH4FUYiaczY",
+        "perfil": "https://unsplash.com/@dkfra19",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "extranjeria-pasaporte",
+      "estado": "publicada",
+      "escena": "Documentación de residencia y viaje",
+      "archivo": "ed/pasaporte-sellos",
+      "alt": "Pasaporte abierto por una página llena de sellos de entrada",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "eUjufrdx_bM",
+        "autor": "Agus Dietrich",
+        "url": "https://unsplash.com/photos/eUjufrdx_bM",
+        "perfil": "https://unsplash.com/@agusdietrich",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "extranjeria-valencia",
+      "estado": "publicada",
+      "escena": "Valencia como lugar de vida y trabajo",
+      "archivo": "ed/tejados-valencia",
+      "alt": "Tejados del centro histórico de Valencia con un campanario al fondo",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "MFlOVjWwmt4",
+        "autor": "Paula Fenollera",
+        "url": "https://unsplash.com/photos/MFlOVjWwmt4",
+        "perfil": "https://unsplash.com/@zurdacontrariada",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "abogado-reunion-cliente",
+      "estado": "publicada",
+      "escena": "Primera reunión con el abogado: firmar con información",
+      "archivo": "ed/firma-documentos",
+      "alt": "Dos mujeres revisan y firman documentos en una mesa de reuniones",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "HJckKnwCXxQ",
+        "autor": "Gabrielle Henderson",
+        "url": "https://unsplash.com/photos/HJckKnwCXxQ",
+        "perfil": "https://unsplash.com/@gabriellefaithhenderson",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "abogado-presupuesto",
+      "estado": "publicada",
+      "escena": "Honorarios explicados: documento y portátil",
+      "archivo": "ed/documento-portatil",
+      "alt": "Dos personas de pie junto a una mesa con un portátil y una libreta",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "uwpo02K55zw",
+        "autor": "Amy Hirschi",
+        "url": "https://unsplash.com/photos/uwpo02K55zw",
+        "perfil": "https://unsplash.com/@amyhirschi",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "transporte-facturas",
+      "estado": "publicada",
+      "escena": "Impagos: facturas y documentación acumuladas",
+      "archivo": "ed/facturas-apiladas",
+      "alt": "Montón de facturas y papeles apilados, en primer plano",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "3CLPBgNuX40",
+        "autor": "Camilo Rueda López",
+        "url": "https://unsplash.com/photos/3CLPBgNuX40",
+        "perfil": "https://unsplash.com/@kozumel",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "civil-tribunal",
+      "estado": "publicada",
+      "escena": "Recurso ante el Tribunal Supremo: sede judicial",
+      "archivo": "ed/columnas-sede-judicial",
+      "alt": "Columnata de piedra de la fachada de un gran edificio público",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "_JEiyOfC2y8",
+        "autor": "Colin Lloyd",
+        "url": "https://unsplash.com/photos/_JEiyOfC2y8",
+        "perfil": "https://unsplash.com/@onthesearchforpineapples",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "deca-ordenes",
+      "estado": "publicada",
+      "escena": "Producto DeCA: listado de órdenes de carga",
+      "archivo": "ed/deca-ordenes-carga",
+      "alt": "Listado de órdenes de carga en DeCA Profesional, con su estado y el acceso al documento de control de cada una",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "deca",
+        "archivos": [
+          "fotos/deca/orden-de-carga-listado.png"
+        ]
+      },
+      "composicion": "escritorio",
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "despacho-estrategia",
+      "estado": "publicada",
+      "escena": "Estrategia: revisión conjunta de documentación (bloque secundario de «El despacho»)",
+      "archivo": "ed/estrategia-revision-dossier",
+      "alt": "Un abogado y una compañera revisan juntos un dossier sobre la mesa de trabajo",
+      "foco": "55% 45%",
+      "origen": {
+        "tipo": "ia",
+        "original": "fotos/ia/praetoria-estrategia-personalizada.png",
+        "personalizada": true,
+        "nota": "Recreación con IA a partir de fotografías aportadas y autorizadas por el titular (#28 §8). Escena y lugar no documentan instalaciones ni clientes reales."
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "blog-analisis-caso",
+      "estado": "publicada",
+      "escena": "Análisis honesto de un caso antes de aconsejar",
+      "archivo": "ed/analisis-documentacion-caso",
+      "alt": "Un abogado lee y anota documentación en su mesa de trabajo",
+      "foco": "35% 40%",
+      "origen": {
+        "tipo": "ia",
+        "original": "fotos/ia/praetoria-analisis-personalizado.png",
+        "personalizada": true,
+        "nota": "Recreación con IA a partir de fotografías aportadas y autorizadas por el titular (#28 §8). Escena y lugar no documentan instalaciones ni clientes reales."
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "logistica-revision-recinto",
+      "estado": "publicada",
+      "escena": "Cargador y transportista revisan la documentación del transporte en el recinto",
+      "archivo": "ed/revision-documental-recinto-logistico",
+      "alt": "Un operario con chaleco reflectante repasa unos documentos con una profesional en el patio de un centro logístico",
+      "foco": "55% 50%",
+      "origen": {
+        "tipo": "ia",
+        "original": "fotos/ia/praetoria-transporte.png",
+        "personalizada": false,
+        "nota": "Escena generada con IA (paquete praetoria-imagenes-claude-v2, #28 §8). No representa personal, clientes ni instalaciones reales."
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "matriculacion-coche",
+      "estado": "publicada",
+      "escena": "Impuesto de matriculación: vehículo y documentación sin datos legibles",
+      "archivo": "ed/llave-coche-nuevo",
+      "alt": "Una mano acciona el mando de un coche nuevo aparcado, con la matrícula desenfocada",
+      "foco": "50% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "k-yzTJvNUFs",
+        "autor": "Matthias Münning",
+        "url": "https://unsplash.com/photos/k-yzTJvNUFs",
+        "perfil": "https://unsplash.com/@muenningmedia",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "alquiler-turistico",
+      "estado": "publicada",
+      "escena": "Alquiler turístico: llegada a una vivienda de uso turístico",
+      "archivo": "ed/maleta-entrada-vivienda",
+      "alt": "Maleta de viaje junto a la puerta abierta de una vivienda",
+      "foco": "60% 55%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "iGXIjzloB2k",
+        "autor": "Kit (formerly ConvertKit)",
+        "url": "https://unsplash.com/photos/iGXIjzloB2k",
+        "perfil": "https://unsplash.com/@kit",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "familia-filiacion",
+      "estado": "publicada",
+      "escena": "Filiación: contexto familiar respetuoso, sin rostros",
+      "archivo": "ed/manos-bebe-adultos",
+      "alt": "La mano de un bebé agarra los dedos de dos adultos, en blanco y negro",
+      "foco": "50% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "M0oVPGsWk1E",
+        "autor": "Liv Bruce",
+        "url": "https://unsplash.com/photos/M0oVPGsWk1E",
+        "perfil": "https://unsplash.com/@livbruce6",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "laboral-baja-documentos",
+      "estado": "publicada",
+      "escena": "Baja larga: revisión en casa de la documentación laboral",
+      "archivo": "ed/lectura-documentos-cocina",
+      "alt": "Un hombre lee con atención unos documentos en la mesa de su cocina",
+      "foco": "62% 40%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "Ve4FEk-swHY",
+        "autor": "Vitaly Gariev",
+        "url": "https://unsplash.com/photos/Ve4FEk-swHY",
+        "perfil": "https://unsplash.com/@silverkblack",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "logistica-coordinacion-almacen",
+      "estado": "publicada",
+      "escena": "Agencia y transportista colaborador coordinando un servicio",
+      "archivo": "ed/coordinacion-pasillo-almacen",
+      "alt": "Dos profesionales recorren un pasillo de almacén con una carpeta y un lector",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "ZlOlRnWk8zU",
+        "autor": "Centre for Ageing Better",
+        "url": "https://unsplash.com/photos/ZlOlRnWk8zU",
+        "perfil": "https://unsplash.com/@ageing_better",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "logistica-comparar-ordenador",
+      "estado": "publicada",
+      "escena": "Empresa de transporte comparando plataformas en el ordenador",
+      "archivo": "ed/comparar-opciones-ordenador",
+      "alt": "Tres personas comparan opciones ante la pantalla de un ordenador en una oficina",
+      "foco": "60% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "lr5RHwBmrbs",
+        "autor": "ThisisEngineering",
+        "url": "https://unsplash.com/photos/lr5RHwBmrbs",
+        "perfil": "https://unsplash.com/@thisisengineering",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "transporte-embalaje-danado",
+      "estado": "publicada",
+      "escena": "Mercancía dañada tras una incidencia en el transporte",
+      "archivo": "ed/embalaje-danado",
+      "alt": "Cartón de embalaje rasgado sobre una superficie blanca",
+      "foco": "50% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "4SOWP1p8n0I",
+        "autor": "Paper Textures",
+        "url": "https://unsplash.com/photos/4SOWP1p8n0I",
+        "perfil": "https://unsplash.com/@inthemakingstudio",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "penal",
+      "estado": "publicada",
+      "escena": "Penal: conversación confidencial con el abogado",
+      "archivo": "ed/conversacion-confidencial-dos-personas",
+      "alt": "Dos hombres conversan en voz baja sentados a una mesa junto a un ventanal",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "W3Jl3jREpDY",
+        "autor": "LinkedIn Sales Solutions",
+        "url": "https://unsplash.com/photos/W3Jl3jREpDY",
+        "perfil": "https://unsplash.com/@linkedinsalesnavigator",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "penal-seguridad-vial",
+      "estado": "publicada",
+      "escena": "Seguridad vial: conducción nocturna",
+      "archivo": "ed/trafico-nocturno-estelas",
+      "alt": "Estelas de luz de los coches en una calle por la noche",
+      "foco": "50% 60%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "jcwLvtFtgc4",
+        "autor": "Tyler Hardie",
+        "url": "https://unsplash.com/photos/jcwLvtFtgc4",
+        "perfil": "https://unsplash.com/@tylersphotographyus",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "penal-lesiones",
+      "estado": "publicada",
+      "escena": "Lesiones: atención médica y parte de lesiones",
+      "archivo": "ed/pasillo-hospital",
+      "alt": "Pasillo de un hospital visto desde unas puertas abiertas",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "Wn77gCRoegs",
+        "autor": "Cory Mogk",
+        "url": "https://unsplash.com/photos/Wn77gCRoegs",
+        "perfil": "https://unsplash.com/@corymogk",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "penal-hurtos",
+      "estado": "publicada",
+      "escena": "Hurtos y robos: grabaciones como prueba",
+      "archivo": "ed/camaras-vigilancia-fachada",
+      "alt": "Dos cámaras de vigilancia montadas en una fachada metálica",
+      "foco": "50% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "jJYLXHPgwWs",
+        "autor": "Fer Troulik",
+        "url": "https://unsplash.com/photos/jJYLXHPgwWs",
+        "perfil": "https://unsplash.com/@fertroulik",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "penal-estafas",
+      "estado": "publicada",
+      "escena": "Estafas, también por internet o por el móvil",
+      "archivo": "ed/movil-manos",
+      "alt": "Una persona consulta su teléfono móvil",
+      "foco": "60% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "wK-elt11pF0",
+        "autor": "Jonas Leupe",
+        "url": "https://unsplash.com/photos/wK-elt11pF0",
+        "perfil": "https://unsplash.com/@jonasleupe",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "deca-logo",
+      "estado": "publicada",
+      "escena": "Producto DeCA: logotipo de DeCA Profesional (noticias de la plataforma)",
+      "archivo": "ed/deca-logo",
+      "alt": "Logotipo de DeCA Profesional",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "deca",
+        "archivos": [
+          "fotos/deca/logo-deca-profesional.png"
+        ]
+      },
+      "composicion": "logo",
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "abogado-explica-caso",
+      "estado": "publicada",
+      "escena": "Elegir abogado: el profesional explica el caso con los documentos delante",
+      "archivo": "ed/explicacion-documentos-mesa",
+      "alt": "Una profesional señala un documento sobre la mesa mientras explica el caso a la persona que tiene al lado",
+      "foco": "35% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "MhqUBTxQ3Hw",
+        "autor": "Olena Kholina",
+        "url": "https://unsplash.com/photos/MhqUBTxQ3Hw",
+        "perfil": "https://unsplash.com/@sixtynice",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "deca-scan",
+      "estado": "publicada",
+      "escena": "Producto DeCA: DECA Scan AI, revisión de los datos leídos de una orden de transporte",
+      "archivo": "ed/deca-scan-revision",
+      "alt": "DECA Scan AI muestra una orden de transporte de ejemplo junto a los datos extraídos del cargador y del transportista, listos para revisar",
+      "foco": "50% 40%",
+      "origen": {
+        "tipo": "deca",
+        "archivos": [
+          "fotos/deca/deca-scan-revision.png"
+        ]
+      },
+      "composicion": "escritorio",
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "deca-fotografiar-documento",
+      "estado": "publicada",
+      "escena": "Producto DeCA: alguien fotografía con el móvil la documentación de un envío",
+      "archivo": "ed/movil-fotografia-etiqueta-envio",
+      "alt": "Una persona fotografía con el móvil la etiqueta de un paquete de envío para leer sus datos",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "pexels",
+        "id": "7363196",
+        "autor": "RDNE Stock project",
+        "url": "https://www.pexels.com/photo/7363196/",
+        "perfil": "https://www.pexels.com/@rdne/",
+        "licencia": "Licencia Pexels (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    }
+  ]
+}

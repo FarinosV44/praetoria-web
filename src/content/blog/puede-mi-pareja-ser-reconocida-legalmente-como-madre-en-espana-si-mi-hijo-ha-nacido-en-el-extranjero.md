@@ -1,10 +1,13 @@
 ---
 title: "¿Puede mi pareja ser reconocida legalmente como madre en España si mi hijo ha nacido en el extranjero?"
-description: "Cada vez es más frecuente que familias formadas por parejas del mismo sexo se encuentren con un problema jurídico importante: uno de los progenitores no…"
+seoTitle: "¿Puede ser reconocida como madre en España?"
+description: "¿Puede tu pareja ser reconocida como madre española si tu hijo nació en el extranjero? Te explicamos las opciones legales para proteger a tu familia."
 date: 2026-04-15
 updated: 2026-10-23
 category: familia
 wpId: 2801
+intencion: "Reconocer en España la maternidad de la pareja de un hijo nacido en el extranjero"
+imagen: familia-filiacion
 ---
 
 

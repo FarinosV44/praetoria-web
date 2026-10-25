@@ -1,11 +1,14 @@
 ---
 title: "Praetoria recomienda DeCA Profesional y presenta DeCA Conecta"
-description: "Praetoria recomienda DeCA Profesional para generar el DECA y presenta DeCA Conecta, la colaboración jurídica y tecnológica para el sector del transporte."
+seoTitle: "Praetoria recomienda DeCA Profesional y presenta DeCA Conecta"
+description: "PRAETORIA ABOGADOS recomienda DeCA Profesional para cumplir el DECA y descubrir DeCA Conecta, con ofertas de carga para reducir kilómetros en vacío."
 date: 2026-09-13
 updated: 2026-09-13
 category: transporte
 deca: herramienta
 wpId: 3033
+intencion: "Conocer DeCA Conecta y qué datos comparte"
+imagen: deca-conecta
 ---
 
 **Praetoria División Jurídica, despacho jurídico especializado en transporte y logística, recomienda DeCA Profesional** como solución para que cargadores, agencias de transporte y transportistas efectivos puedan prepararse para la obligatoriedad del documento electrónico de control administrativo.
@@ -65,6 +68,6 @@ Prueba gratuitamente la plataforma hasta el 31 de diciembre de 2026.
 
 La tecnología facilita el trabajo, pero el cumplimiento exige también revisar las responsabilidades jurídicas y los procedimientos internos. Praetoria División Jurídica presta asesoramiento especializado a empresas de transporte, operadores logísticos, cargadores y transportistas.
 
-Para consultas sobre el DECA, la responsabilidad del cargador contractual o del transportista efectivo, las órdenes de carga o la subcontratación del transporte, puede escribirnos a [info@praetoriaabogados.es](mailto:info@praetoriaabogados.es).
+Para consultas sobre el DECA, la responsabilidad del cargador contractual o del transportista efectivo, las órdenes de carga o la subcontratación del transporte, puede escribirnos a [juanfarinos@icav.es](mailto:juanfarinos@icav.es).
 
 Artículo informativo actualizado en septiembre de 2026. Su contenido no sustituye el asesoramiento jurídico individualizado sobre una operación concreta.

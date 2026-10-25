@@ -1,12 +1,15 @@
 ---
 title: "Comment obtenir un permis de résidence ou de travail en Espagne (guide complet 2026)"
-description: "Vous souhaitez obtenir la résidence en Espagne ou un permis de travail ?"
+seoTitle: "Résidence en Espagne : comment l’obtenir avec un avocat à Valence"
+description: "Vous voulez obtenir la résidence en Espagne ? Découvrez comment préparer votre dossier sans erreurs et augmenter vos chances avec un avocat à Valence."
 date: 2025-11-23
 updated: 2026-03-27
 category: extranjeria
 lang: fr
 tags: ["avocat espagne", "avocat étrangers espagne", "avocat valence", "permis travail espagne", "résidence espagne"]
 wpId: 2737
+intencion: "Obtenir un titre de séjour ou de travail en Espagne"
+imagen: extranjeria-pasaporte
 ---
 
 Vous souhaitez obtenir la résidence en Espagne ou un permis de travail ?  
@@ -14,7 +17,7 @@ Vous avez besoin de renouveler vos papiers ou de préparer correctement votre do
 
 👉 Dans ces démarches, une erreur peut suffire à bloquer toute la procédure.
 
-Chez **Praetoria División Jurídica**, l’avocat **Juan José Farinós Ibáñez**, spécialisé en droit des étrangers, accompagne les ressortissants étrangers à Valence et dans toute l’Espagne.
+**Praetoria División Jurídica** accompagne les ressortissants étrangers à Valence et dans toute l’Espagne.
 
 Nous vous guidons de manière claire et personnalisée, **du premier contact jusqu’à l’obtention de votre résidence**.
 
@@ -125,7 +128,7 @@ Vous ne savez pas quelle option est la meilleure pour vous ?
 
 👉 Contactez-nous pour une première analyse sans engagement.
 
-📍 Valence – El Puig  
+📍 Valence  
 🌐 [www.praetoriaabogados.es](/)  
 📞 +34 607 527 719
 

@@ -1,11 +1,14 @@
 ---
 title: "Orden de carga digital con DeCA: del encargo al transportista a la documentación del transporte"
-description: "En el trabajo diario de un cargador o una agencia de transporte, preparar un servicio suele implicar varias tareas: comunicar el encargo, indicar las…"
+seoTitle: "Orden de carga digital con DeCA"
+description: "Crea tu orden de carga digital con el DeCA incorporado. Solicita matrículas por enlace y recibe los documentos juntos o separados con DeCA Profesional."
 date: 2026-10-11
 updated: 2026-10-23
 category: transporte
-deca: guia
+deca: herramienta
 wpId: 3086
+intencion: "Crear la orden de carga digital con el DeCA incorporado"
+imagen: deca-ordenes
 ---
 
 

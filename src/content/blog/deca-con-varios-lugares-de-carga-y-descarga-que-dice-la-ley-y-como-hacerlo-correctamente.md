@@ -1,11 +1,14 @@
 ---
 title: "DECA con varios lugares de carga y descarga: qué dice la ley y cómo hacerlo correctamente"
-description: "No todos los transportes consisten en cargar una mercancía en un único almacén y entregarla íntegramente en un solo destino."
+seoTitle: "DECA con varios lugares de carga y descarga: guía legal"
+description: "Descubre cómo crear un DECA con varios lugares de carga y descarga, qué exige la ley y cómo hacerlo fácilmente con DECAProfesional."
 date: 2026-09-12
 updated: 2026-10-23
 category: transporte
 deca: guia
 wpId: 3009
+intencion: "Hacer bien el DeCA de un transporte con varias cargas o descargas"
+imagen: logistica-varios-camiones
 ---
 
 ---

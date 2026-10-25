@@ -1,10 +1,13 @@
 ---
 title: "Acción directa en el transporte: cómo reclamar al cargador cuando no te paga tu cliente"
-description: "Uno de los problemas más habituales en el sector del transporte es claro: haces el porte, entregas la mercancía y no cobras."
+seoTitle: "Reclamar impago transporte: acción directa"
+description: "Si necesitas reclamar impago transporte, te explicamos cómo actuar mediante la acción directa contra el cargador y cobrar lo que te deben."
 date: 2026-04-15
 updated: 2026-10-23
 category: transporte
 wpId: 2803
+intencion: "Cobrar un porte impagado reclamando al cargador principal mediante la acción directa"
+imagen: portes-impagados
 ---
 
 

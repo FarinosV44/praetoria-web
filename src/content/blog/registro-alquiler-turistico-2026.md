@@ -1,11 +1,14 @@
 ---
 title: "Nuevo registro de alquiler turístico 2026: qué es y cómo afecta a propietarios"
-description: "El sector de los apartamentos turísticos y arrendamientos de corta duración está viviendo un nuevo endurecimiento normativo."
+seoTitle: "Registro alquiler turístico 2026: normativa"
+description: "Conoce la nueva normativa de alquiler turístico 2026: qué es el registro obligatorio y cómo afecta a propietarios de apartamentos vacacionales."
 date: 2026-02-27
 updated: 2026-10-23
 category: civil-vivienda
 tags: ["alquiler turístico", "alquiler vacacional", "ley alquiler", "normativa alquiler", "propietarios vivienda"]
 wpId: 2755
+intencion: "Cumplir el registro único de alquiler turístico de 2026"
+imagen: alquiler-turistico
 ---
 
 
@@ -102,7 +105,7 @@ Regularizar la situación ahora evita problemas futuros.
 
 Si tienes un apartamento turístico o alquilas por corta duración, revisamos tu situación y gestionamos todos los trámites necesarios, incluido el nuevo modelo informativo.
 
-📍 Valencia – El Puig  
+📍 Valencia  
 🌐 [www.praetoriaabogados.es](/)
 
 Praetoria División Jurídica  

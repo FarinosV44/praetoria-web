@@ -1,10 +1,13 @@
 ---
 title: "Cómo proteger legalmente tu empresa de transporte: contratos, condiciones y claves para evitar problemas"
-description: "En el sector del transporte, el mayor riesgo no siempre está en la carretera, sino en lo jurídico."
+seoTitle: "Proteger empresa transporte: guía legal"
+description: "Descubre cómo proteger tu empresa de transporte con contratos sólidos y condiciones claras que eviten impagos y conflictos legales."
 date: 2026-04-15
 updated: 2026-10-23
 category: transporte
 wpId: 2805
+intencion: "Proteger una empresa de transporte con contratos y condiciones bien redactados"
+imagenPendiente: "Oficina de tráfico de una empresa de transporte: contrato o condiciones generales sobre la mesa, sin texto legible"
 ---
 
 

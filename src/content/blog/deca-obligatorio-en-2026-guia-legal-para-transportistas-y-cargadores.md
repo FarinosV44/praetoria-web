@@ -1,12 +1,15 @@
 ---
 title: "DeCA obligatorio en 2026: guía legal para transportistas y cargadores"
-description: "El 5 de octubre de 2026 cambiará la forma de documentar miles de transportes de mercancías por carretera en España."
+seoTitle: "DeCA transporte 2026: guía legal y sanciones"
+description: "El DeCA será obligatorio el 5 de octubre de 2026. Descubre quién debe emitirlo, cómo evitar sanciones y qué exigir a tu proveedor."
 date: 2026-09-06
 updated: 2026-09-09
 category: transporte
 deca: guia
 tags: ["transporte internacional"]
 wpId: 2875
+intencion: "Conocer las obligaciones legales y sanciones del DeCA para cargador y transportista"
+imagen: logistica-revision-recinto
 ---
 
 El 5 de octubre de 2026 cambiará la forma de documentar miles de transportes de mercancías por carretera en España. Desde esa fecha, el documento de control administrativo deberá generarse necesariamente en formato digital.

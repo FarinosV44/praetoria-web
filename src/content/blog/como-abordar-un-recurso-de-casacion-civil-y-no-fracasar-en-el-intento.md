@@ -5,6 +5,8 @@ date: 2026-04-15
 updated: 2026-09-08
 category: civil-vivienda
 wpId: 2799
+intencion: "Preparar un recurso de casación civil con posibilidades de ser admitido"
+imagen: civil-tribunal
 ---
 
 

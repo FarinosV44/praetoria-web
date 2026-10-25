@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build-y-comprobaciones:
+    # Imagen fija: ubuntu-latest cambiará a Ubuntu 26 y podría alterar la CI sin cambios en el repo
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: Tipos (TypeScript estricto)
+        run: npm run typecheck
+      - name: Lint (ESLint + reglas de Next)
+        run: npm run lint
+
+      - name: Build de preview (no indexable)
+        run: npm run build
+      - name: Calidad del sitio, migración SEO y pruebas unitarias
+        run: npm run check
+      - name: Redirecciones e inventario al día con sus fuentes
+        run: |
+          npm run seo:redirects
+          npm run seo:inventario
+          git diff --exit-code -- public/_redirects docs/seo/inventario-urls.csv \
+            || (echo "::error::Regenera con npm run seo:redirects y npm run seo:inventario y súbelo" && exit 1)
+
+      - name: Build de producción (indexable) y validación
+        env:
+          SITE_INDEXABLE: 'true'
+        run: |
+          npm run build
+          npm run seo:check
+
+  navegador:
+    # Pruebas de humo en Chromium (escritorio y móvil): cuestionarios, menú, teclado, barra fija y cookies
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Builds normal y con Analytics, y pruebas en navegador
+        run: npm run test:e2e:ga
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-trazas
+          path: test-results/
+          retention-days: 7
