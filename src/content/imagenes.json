@@ -1345,6 +1345,31 @@
         1600
       ],
       "avif": true
+    },
+    {
+      "id": "abogado-explica-caso",
+      "estado": "publicada",
+      "escena": "Elegir abogado: el profesional explica el caso con los documentos delante",
+      "archivo": "ed/explicacion-documentos-mesa",
+      "alt": "Una profesional señala un documento sobre la mesa mientras explica el caso a la persona que tiene al lado",
+      "foco": "35% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "MhqUBTxQ3Hw",
+        "autor": "Olena Kholina",
+        "url": "https://unsplash.com/photos/MhqUBTxQ3Hw",
+        "perfil": "https://unsplash.com/@sixtynice",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
     }
   ]
 }
