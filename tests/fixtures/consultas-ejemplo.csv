@@ -1,0 +1,5 @@
+id,nombre,email,telefono,area,servicio,responsable,preferencia,mensaje,origen,landing,utm_source,utm_medium,utm_campaign,created_at
+id-ejemplo-0001,Persona Ficticia Uno,uno@example.com,600000001,Laboral,Despidos e impugnación,Lucía López (649 181 290),Llamada,"Texto ficticio, con coma",/impugnar-despido/,/despido-valencia-que-hacer/,google,cpc,laboral-otono,2026-11-02T10:00:00Z
+id-ejemplo-0002,Persona Ficticia Dos,dos@example.com,600000002,Transporte y logística,Reclamación de portes impagados,Juan José Farinós Ibáñez (607 527 719),Correo,"Texto ""ficticio""",/reclamacion-portes-impagados/,,,,,2026-11-05T09:30:00Z
+id-ejemplo-0003,Persona Ficticia Tres,tres@example.com,,Laboral,Salarios y finiquitos,Lucía López (649 181 290),WhatsApp,Texto ficticio,/abogado-laboralista-valencia/,/abogado-laboralista-valencia/,newsletter,email,,2026-12-01T12:00:00Z
+id-ejemplo-0002,Persona Ficticia Dos,dos@example.com,600000002,Transporte y logística,Reclamación de portes impagados,Juan José Farinós Ibáñez (607 527 719),Correo,"Texto ""ficticio""",/reclamacion-portes-impagados/,,,,,2026-11-05T09:31:00Z

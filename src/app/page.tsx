@@ -1,18 +1,57 @@
 import Link from 'next/link';
 import { getPosts } from '@/lib/content';
-import { buildMetadata } from '@/lib/seo';
-import { areas, groups, site } from '@/lib/site';
+import { buildMetadata, ogDe } from '@/lib/seo';
+import { areas, contactos, publicoDe, mensajes, whatsapp } from '@/lib/site';
+import { iconoArea, metodo, objetivoArea } from '@/lib/iconos';
+import { servicios } from '@/lib/servicios';
 import { PostList } from '@/components/PostList';
 import { DecaBand } from '@/components/DecaBand';
 import { CtaBand } from '@/components/CtaBand';
-import { Icon } from '@/components/Icon';
+import { Icon, LineIcon } from '@/components/Icon';
+import { ContactosArea } from '@/components/ContactosArea';
+import { Foto } from '@/components/Foto';
+import { imagen } from '@/lib/imagenes';
 
 export const metadata = buildMetadata({
-  title: 'Abogado en El Puig y Valencia | Praetoria División Jurídica',
+  title: 'Abogados en Valencia para empresas y particulares | Praetoria',
   description:
-    'Asesoramiento jurídico para empresas y particulares en Valencia. Transporte, contratos, conflictos mercantiles, Hacienda, Seguridad Social y patrimonio.',
+    'Praetoria, abogados en Valencia. Entendemos qué quieres conseguir y diseñamos la estrategia jurídica: laboral, transporte, mercantil, civil, familia, Hacienda y patrimonio.',
   path: '/',
+  image: ogDe('portada'),
 });
+
+/** Accesos por objetivo: lo que la persona quiere conseguir, enlazado al área que lo trabaja */
+const objetivos = [
+  { icono: 'euro', texto: 'Recuperar lo que te deben', href: '/reclamacion-portes-impagados/' },
+  { icono: 'trabajo', texto: 'Defender tus derechos laborales', href: '/abogado-laboralista-valencia/' },
+  { icono: 'negociar', texto: 'Resolver un conflicto', href: '/derecho-mercantil/' },
+  { icono: 'vivienda', texto: 'Proteger tu patrimonio', href: '/derecho-civil/' },
+  { icono: 'maletin', texto: 'Dar seguridad a una decisión de empresa', href: '/derecho-mercantil/' },
+] as const;
+
+const urgentes = [
+  {
+    icono: 'hacienda',
+    titulo: 'Me ha llegado una carta de Hacienda o de la Seguridad Social',
+    texto: 'Requerimientos, liquidaciones, sanciones, apremios o embargos. Indica qué has recibido y lo revisamos antes de que corra el plazo.',
+    cta: 'Revisar mi notificación',
+    href: '/abogado-hacienda-y-seguridad-social-en-valencia/',
+  },
+  {
+    icono: 'trabajo',
+    titulo: 'Me han despedido',
+    texto: 'La acción contra el despido tiene un plazo corto. Revisamos la carta, el finiquito y las fechas antes de firmar o reclamar.',
+    cta: 'Revisar mi despido',
+    href: '/impugnar-despido/',
+  },
+  {
+    icono: 'camion',
+    titulo: 'Un cliente no me paga un porte',
+    texto: 'Reclamación de facturas de transporte y, cuando procede, acción directa contra el cargador.',
+    cta: 'Ver cómo reclamamos',
+    href: '/reclamacion-portes-impagados/',
+  },
+] as const;
 
 export default function HomePage() {
   // Últimos artículos sin que el DECA acapare la portada: uno por categoría, en orden de fecha
@@ -25,109 +64,169 @@ export default function HomePage() {
       return true;
     })
     .slice(0, 4);
+  const laboralArea = areas.find((a) => a.id === 'laboral')!;
+  const resto = areas.filter((a) => a.id !== 'laboral');
+  // Trabajo jurídico con personas, no oficinas vacías (#28). Pendiente => portada solo tipográfica.
+  const fotoPortada = imagen('portada');
 
   return (
     <div className="page-home">
-    <section className="hero">
-        <div className="wrap">
-          <div className="hero__head">
-            <h1>Abogado en El Puig y Valencia para empresas y particulares</h1>
-            <p className="lede">
-              Asesoramiento jurídico directo, con experiencia empresarial real. Atendemos en el despacho de El Puig y por
-              videollamada en toda España.
+      <section className={fotoPortada ? 'portada' : 'portada portada--tipografica'}>
+        {fotoPortada && (
+          <div className="portada__media">
+            <Foto img={fotoPortada} sizes="(min-width: 960px) 56vw, 100vw" prioridad ancho={1200} />
+          </div>
+        )}
+        <div className="wrap portada__grid">
+          <div className="portada__texto">
+            <h1>
+              <span className="portada__lema">
+                Tus objetivos. <em>Nuestra estrategia jurídica.</em>
+              </span>
+              <span className="portada__lugar">Abogados en Valencia para empresas y particulares</span>
+            </h1>
+            <p className="portada__lede">
+              Entendemos qué quieres conseguir, analizamos las opciones y diseñamos una estrategia para defender tus intereses.
+              Negociamos y actuamos con un objetivo claro.
             </p>
-          </div>
-
-          <div className="directory">
-            {
-              (['empresas', 'particulares'] as const).map((g) => (
-                <section key={g} className="directory__col" aria-labelledby={`dir-${g}`}>
-                  <h2 id={`dir-${g}`}>{groups[g].title}</h2>
-                  <ul>
-                    {areas
-                      .filter((a) => a.group === g)
-                      .map((a) => (
-                        <li key={a.slug}>
-                          <Link href={`/${a.slug}/`}>
-                            <span className="directory__name">{a.name}</span>
-                            <span className="directory__desc">{a.short}</span>
-                          </Link>
-                        </li>
-                      ))}
-                  </ul>
-                </section>
-              ))
-            }
-          </div>
-
-          <p className="hero__sign">
-            <strong>{site.lawyer}</strong>, abogado colegiado n.º {site.collegeNumber} del Ilustre Colegio de Abogados de
-            Valencia.
-          </p>
-        </div>
-      </section>
-
-      <section className="section section--stone">
-        <div className="wrap split">
-          <div>
-            <h2>Un abogado que conoce la empresa desde dentro</h2>
-            <div className="prose">
-              <p>
-                Juan José Farinós tiene formación en Derecho y en Historia del Arte, y una larga trayectoria en la gestión de
-                empresas, especialmente en el transporte y la logística internacional. Ha asesorado a empresas, autónomos,
-                familias y particulares desde una comprensión práctica de cómo funcionan las cosas: cómo se organiza una
-                sociedad, cómo se negocia un contrato, cómo se defiende una posición en un conflicto o cómo se protege un
-                patrimonio.
-              </p>
-              <p>
-                No resolvemos solo el conflicto que llega: anticipamos escenarios y acompañamos las decisiones importantes
-                con criterio jurídico. Antes de empezar, te explicamos el trabajo necesario y los honorarios.
-              </p>
-            </div>
             <div className="actions">
-              <Link className="btn btn--ghost" href="/el-despacho/">Conocer el despacho</Link>
+              <Link className="btn btn--red" href="/contacto/">
+                Cuéntanos qué quieres conseguir <LineIcon name="flecha" />
+              </Link>
+              <a className="btn btn--light" href={whatsapp(mensajes.general)}>
+                <Icon name="whatsapp" /> {contactos.general.escribir}
+              </a>
             </div>
           </div>
-          <img
-            className="photo portrait"
-            src="/media/juan-jose-farinos-800.webp"
-            alt="Juan José Farinós Ibáñez, abogado de Praetoria División Jurídica"
-            width={600}
-            height={800}
-            loading="lazy"
-          />
+        </div>
+        <div className="wrap">
+          <nav className="objetivos" aria-label="¿Qué quieres conseguir?">
+            <p className="objetivos__titulo">¿Qué quieres conseguir?</p>
+            <ul>
+              {objetivos.map((o) => (
+                <li key={o.texto}>
+                  <Link href={o.href}>
+                    <LineIcon name={o.icono} />
+                    <span>{o.texto}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
       </section>
 
       <section className="section">
         <div className="wrap">
-          <h2>Si te urge, empieza por aquí</h2>
-          <div className="urgent">
-            <Link className="urgent__item" href="/abogado-hacienda-y-seguridad-social-en-valencia/">
-              <h3>Me ha llegado una carta de Hacienda o de la Seguridad Social</h3>
-              <p>
-                Requerimientos, liquidaciones, sanciones, apremios o embargos. Responde unas preguntas y envíanos un resumen
-                antes de que corra el plazo.
-              </p>
-              <span className="urgent__go">Revisar mi notificación</span>
-            </Link>
-            <Link className="urgent__item" href="/abogado-divorcio-horta-nord-valencia/">
-              <h3>Queremos divorciarnos de mutuo acuerdo</h3>
-              <p>
-                Precio cerrado de 399 € en total (199,50 € por cónyuge), con abogado, procurador e IVA incluidos, si no hay
-                hijos menores ni bienes que repartir.
-              </p>
-              <span className="urgent__go">Comprobar si mi caso entra</span>
-            </Link>
-            <Link className="urgent__item" href="/logistica-y-transporte-internacional/">
-              <h3>Un cliente no me paga un porte</h3>
-              <p>
-                Reclamación de facturas de transporte, acción directa contra el cargador y revisión de CMR, órdenes de carga y
-                comunicaciones.
-              </p>
-              <span className="urgent__go">Ver cómo reclamamos</span>
-            </Link>
+          <div className="seccion-cabecera">
+            <p className="antetitulo">Áreas de práctica</p>
+            <h2>Una estrategia para cada asunto</h2>
+            <p className="lede">
+              Organizamos el despacho por áreas para que cada asunto lo trabaje quien conoce sus reglas, sus plazos y su forma de
+              negociar.
+            </p>
           </div>
+          <div className="areas-grid">
+            <article className="area-card area-card--destacada">
+              <div className="area-card__icono">
+                <LineIcon name={iconoArea.laboral} />
+              </div>
+              <p className="area-card__grupo">Trabajadores · Área destacada</p>
+              <h3>
+                <Link href={`/${laboralArea.slug}/`}>{laboralArea.name}</Link>
+              </h3>
+              <p className="area-card__objetivo">{objetivoArea.laboral}</p>
+              <ul className="area-card__servicios">
+                {servicios
+                  .filter((sv) => sv.area === 'laboral' && sv.pagina)
+                  .map((sv) => (
+                    <li key={sv.id}>
+                      <Link href={sv.pagina!}>
+                        <LineIcon name="flecha" /> {sv.nombre}
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
+              <div className="area-card__acciones">
+                <Link className="btn btn--red" href={`/${laboralArea.slug}/`}>
+                  Ver el área laboral
+                </Link>
+                <a className="btn btn--ghost" href={`tel:${contactos.laboral.phoneIntl}`}>
+                  <Icon name="phone" /> {contactos.laboral.llamar}
+                </a>
+              </div>
+            </article>
+            {resto.map((a) => (
+              <article key={a.slug} className="area-card">
+                <div className="area-card__icono">
+                  <LineIcon name={iconoArea[a.id]} />
+                </div>
+                <p className="area-card__grupo">{publicoDe(a)}</p>
+                <h3>
+                  <Link href={`/${a.slug}/`}>{a.name}</Link>
+                </h3>
+                <p className="area-card__objetivo">{objetivoArea[a.id]}</p>
+                <p>{a.short}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--ink metodo-seccion">
+        <div className="wrap metodo-seccion__grid">
+          <div className="seccion-cabecera">
+            <p className="antetitulo">Método</p>
+            <h2>Primero tu objetivo. Después, la estrategia.</h2>
+            <p className="lede">
+              Cada asunto sigue el mismo método, tanto si es una reclamación urgente como una decisión de empresa. Sin promesas de
+              resultado: te decimos con claridad dónde estás, qué se puede conseguir y qué cuesta intentarlo.
+            </p>
+          </div>
+          <ol className="metodo">
+            {metodo.map((m, i) => (
+              <li key={m.titulo}>
+                <span className="metodo__icono">
+                  <LineIcon name={m.icono} />
+                </span>
+                <span className="metodo__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                <h3>{m.titulo}</h3>
+                <p>{m.texto}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap">
+          <div className="seccion-cabecera">
+            <p className="antetitulo">Si te urge</p>
+            <h2>Empieza por aquí</h2>
+          </div>
+          <div className="urgentes">
+            {urgentes.map((u) => (
+              <Link key={u.titulo} className="urgente" href={u.href}>
+                <LineIcon name={u.icono} />
+                <h3>{u.titulo}</h3>
+                <p>{u.texto}</p>
+                <span className="urgente__ir">
+                  {u.cta} <LineIcon name="flecha" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--stone">
+        <div className="wrap">
+          <div className="seccion-cabecera">
+            <p className="antetitulo">Contacto</p>
+            <h2>Contacta con el despacho</h2>
+            <p className="lede">Cada consulta llega al área que la atiende. Te respondemos por el medio que prefieras.</p>
+          </div>
+          <ContactosArea />
         </div>
       </section>
 
@@ -138,33 +237,9 @@ export default function HomePage() {
       </section>
 
       <section className="section">
-        <div className="wrap split split--rev">
-          <div className="office">
-            <img src="/media/despacho-salas-reuniones-800.webp" alt="Salas de reuniones acristaladas del despacho" width={800} height={600} loading="lazy" className="photo" />
-            <img src="/media/despacho-zona-espera-800.webp" alt="Zona de espera con sofá y mesas" width={800} height={600} loading="lazy" className="photo" />
-          </div>
-          <div>
-            <h2>El despacho, en El Puig</h2>
-            <p className="lede">
-              Salas de reuniones privadas para consultas confidenciales, a pocos minutos de Valencia y de toda l&apos;Horta Nord.
-            </p>
-            <ul className="facts">
-              <li><Icon name="pin" /> {site.address.street}, {site.address.postalCode} {site.address.locality}</li>
-              <li><Icon name="phone" /> <a href={`tel:${site.phoneIntl}`}>{site.phone}</a>, también por WhatsApp</li>
-              <li><Icon name="mail" /> <a href={`mailto:${site.email}`}>{site.email}</a></li>
-            </ul>
-            <div className="actions">
-              <Link className="btn" href="/abogado-el-puig/">Abogado en El Puig</Link>
-              <a className="btn btn--ghost" href={site.googleReviews} rel="noopener">Reseñas en Google</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section section--stone">
         <div className="wrap">
           <div className="head-row">
-            <h2>Del blog</h2>
+            <h2>Guías del despacho</h2>
             <Link href="/blog/">Todos los artículos</Link>
           </div>
           <PostList posts={latest} />
@@ -172,8 +247,6 @@ export default function HomePage() {
       </section>
 
       <CtaBand />
-
     </div>
-
   );
 }

@@ -7,6 +7,8 @@ updated: 2026-10-23
 category: civil-vivienda
 tags: ["alquiler turístico", "alquiler vacacional", "ley alquiler", "normativa alquiler", "propietarios vivienda"]
 wpId: 2755
+intencion: "Cumplir el registro único de alquiler turístico de 2026"
+imagen: alquiler-turistico
 ---
 
 
@@ -103,7 +105,7 @@ Regularizar la situación ahora evita problemas futuros.
 
 Si tienes un apartamento turístico o alquilas por corta duración, revisamos tu situación y gestionamos todos los trámites necesarios, incluido el nuevo modelo informativo.
 
-📍 Valencia – El Puig  
+📍 Valencia  
 🌐 [www.praetoriaabogados.es](/)
 
 Praetoria División Jurídica  

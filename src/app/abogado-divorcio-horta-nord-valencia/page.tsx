@@ -1,15 +1,15 @@
 import Link from 'next/link';
 import { buildMetadata } from '@/lib/seo';
-import { site, whatsapp } from '@/lib/site';
+import { mensajes, site, whatsapp } from '@/lib/site';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { Faq } from '@/components/Faq';
 import { CtaBand } from '@/components/CtaBand';
 import { DivorceQuiz } from '@/components/DivorceQuiz';
 
 export const metadata = buildMetadata({
-  title: "Abogados para Separación y Divorcios en l'Horta Nord",
+  title: "Abogados de divorcio en Valencia y l'Horta Nord",
   description:
-    "Abogados para separación y divorcios en El Puig y l'Horta Nord. Mutuo acuerdo desde 199,50 € por cónyuge. Custodia y modificación de medidas.",
+    "Abogados de separación y divorcio en Valencia y l'Horta Nord. Mutuo acuerdo desde 199,50 € por cónyuge. Custodia y modificación de medidas.",
   path: '/abogado-divorcio-horta-nord-valencia/',
 });
 
@@ -65,10 +65,10 @@ export default function DivorcioPage() {
     <div className="page-divorcio">
     <section className="page-head">
         <div className="wrap">
-          <Breadcrumbs items={[{ label: 'Familia y divorcio', href: '/familia/' }, { label: "Divorcio en l&apos;Horta Nord" }]} />
+          <Breadcrumbs items={[{ label: 'Familia y divorcio', href: '/familia/' }, { label: 'Divorcio' }]} />
           <div className="split">
             <div>
-              <h1>Abogados para separación y divorcio en l&apos;Horta Nord</h1>
+              <h1>Abogados de divorcio en Valencia y l&apos;Horta Nord</h1>
               <p className="lede">
                 Acuerdo cuando es posible, estrategia cuando hace falta. Resolvemos divorcios de mutuo acuerdo con un precio
                 cerrado y defendemos con rigor los asuntos complejos de custodia, pensiones, vivienda familiar y patrimonio.
@@ -76,7 +76,7 @@ export default function DivorcioPage() {
               <ul className="ticks">
                 <li>Abogado colegiado, ICAV {site.collegeNumber}</li>
                 <li>Presupuesto explicado antes de empezar, sin sorpresas</li>
-                <li>Atención personal desde El Puig, presencial y online</li>
+                <li>Atención personal, presencial y online</li>
                 <li>Confidencialidad en todo el proceso</li>
               </ul>
             </div>
@@ -181,7 +181,7 @@ export default function DivorcioPage() {
               </p>
             </div>
             <div className="actions">
-              <a className="btn" href={whatsapp('Hola, quiero consultar una modificación de medidas.')}>Consultar una modificación de medidas</a>
+              <a className="btn" href={whatsapp(mensajes.modificacionMedidas)}>Consultar una modificación de medidas</a>
             </div>
           </div>
           <div>
@@ -226,7 +226,7 @@ export default function DivorcioPage() {
       <CtaBand
         title="¿Empezamos por comprobar tu caso?"
         text="Dos minutos para saber si tu divorcio entra en el precio cerrado o necesita una valoración personalizada."
-        whatsappText="Hola, quiero información sobre mi caso de divorcio/familia."
+        whatsappText={mensajes.divorcio}
       />
 
     </div>

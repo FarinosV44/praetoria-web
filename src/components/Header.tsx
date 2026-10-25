@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { areas, groups, nav, site, whatsapp, type Group } from '@/lib/site';
+import { areasDe, groups, nav, site, type Group } from '@/lib/site';
 import { Icon } from './Icon';
 
 export function Header() {
@@ -21,7 +21,7 @@ export function Header() {
   }
 
   const isActive = (href: string) => path === href || (href !== '/' && path.startsWith(href));
-  const groupActive = (g: Group) => areas.some((a) => a.group === g && path.startsWith(`/${a.slug}/`));
+  const groupActive = (g: Group) => areasDe(g).some((a) => path.startsWith(`/${a.slug}/`));
 
   // Cerrar submenús al pulsar fuera o Escape; cerrar todo al navegar
   useEffect(() => {
@@ -67,9 +67,7 @@ export function Header() {
                   <div className="sub">
                     <p className="sub__title">{groups[item.group].title}</p>
                     <ul>
-                      {areas
-                        .filter((a) => a.group === item.group)
-                        .map((a) => (
+                      {areasDe(item.group).map((a) => (
                           <li key={a.slug}>
                             <Link href={`/${a.slug}/`} aria-current={path === `/${a.slug}/` ? 'page' : undefined}>
                               <strong>{a.name}</strong>
@@ -103,9 +101,9 @@ export function Header() {
               ),
             )}
           </ul>
-          <a className="btn btn--red menu__cta" href={whatsapp('Hola, quiero consultar mi caso con Praetoria.')}>
-            <Icon name="whatsapp" /> Escríbenos
-          </a>
+          <Link className="btn btn--red menu__cta" href="/contacto/">
+            Contactar con el despacho
+          </Link>
         </nav>
       </div>
     </header>

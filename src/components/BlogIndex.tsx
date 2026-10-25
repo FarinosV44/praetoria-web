@@ -10,7 +10,7 @@ export function blogMeta(category?: CategoryKey) {
   return {
     title: cat ? `${cat.name}: artículos` : 'Blog jurídico',
     description: cat
-      ? `Artículos de ${cat.name.toLowerCase()} escritos por Juan José Farinós Ibáñez, abogado en El Puig y Valencia.`
+      ? `Guías y artículos de ${cat.name.toLowerCase()} del despacho Praetoria, abogados en Valencia.`
       : 'Guías y artículos prácticos sobre transporte y DECA, Hacienda, mercantil, vivienda, familia, laboral y extranjería.',
     path: category ? `/blog/categoria/${category}/` : '/blog/',
   };

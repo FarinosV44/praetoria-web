@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import Link from 'next/link';
-import { areas, groups, site, whatsapp } from '@/lib/site';
+import { areasDe, contactos, groups, mensajes, site, whatsapp } from '@/lib/site';
 import { Icon } from './Icon';
 import { CookieSettingsButton } from './CookieConsent';
 
@@ -12,9 +12,9 @@ export function Footer() {
         <div className="col col--id">
           <img src="/media/logo-praetoria-sin-fondo.png" alt={site.name} width={560} height={151} loading="lazy" />
           <p>
-            {site.lawyer}
+            Abogados en Valencia para empresas y particulares.
             <br />
-            Abogado colegiado n.º {site.collegeNumber} del ICAV
+            <span className="small">Letrado responsable colegiado en el ICAV, n.º {site.collegeNumber}.</span>
           </p>
           <address>
             {site.address.street}
@@ -28,16 +28,14 @@ export function Footer() {
             <Fragment key={g}>
               <p className="col__title">{groups[g].title}</p>
               <ul>
-                {areas
-                  .filter((a) => a.group === g)
-                  .map((a) => (
+                {areasDe(g).map((a) => (
                     <li key={a.slug}>
                       <Link href={`/${a.slug}/`}>{a.name}</Link>
                     </li>
                   ))}
                 {g === 'particulares' && (
                   <li>
-                    <Link href="/abogado-divorcio-horta-nord-valencia/">Divorcio en l&apos;Horta Nord</Link>
+                    <Link href="/abogado-divorcio-horta-nord-valencia/">Divorcio de mutuo acuerdo</Link>
                   </li>
                 )}
               </ul>
@@ -50,9 +48,6 @@ export function Footer() {
           <ul>
             <li>
               <Link href="/el-despacho/">Quiénes somos</Link>
-            </li>
-            <li>
-              <Link href="/abogado-el-puig/">Abogado en El Puig</Link>
             </li>
             <li>
               <Link href="/blog/">Blog</Link>
@@ -68,16 +63,29 @@ export function Footer() {
         <div className="col">
           <p className="col__title">Contacto</p>
           <ul className="contact">
+            <li className="contact__area">{contactos.general.etiqueta}</li>
             <li>
-              <a href={`tel:${site.phoneIntl}`}>
-                <Icon name="phone" /> {site.phone}
+              <a href={`tel:${contactos.general.phoneIntl}`}>
+                <Icon name="phone" /> {contactos.general.phone}
               </a>
             </li>
             <li>
-              <a href={whatsapp()}>
-                <Icon name="whatsapp" /> WhatsApp
+              <a href={whatsapp(mensajes.general)}>
+                <Icon name="whatsapp" /> {contactos.general.escribir}
               </a>
             </li>
+            <li className="contact__area">{contactos.laboral.etiqueta}</li>
+            <li>
+              <a href={`tel:${contactos.laboral.phoneIntl}`}>
+                <Icon name="phone" /> {contactos.laboral.phone}
+              </a>
+            </li>
+            <li>
+              <a href={whatsapp(mensajes.laboral, 'laboral')}>
+                <Icon name="whatsapp" /> {contactos.laboral.escribir}
+              </a>
+            </li>
+            <li className="contact__area">Correo general</li>
             <li>
               <a href={`mailto:${site.email}`}>
                 <Icon name="mail" /> {site.email}
