@@ -14,9 +14,10 @@
   # Ningún build es indexable salvo que se active expresamente (ver docs/seo/LANZAMIENTO.md)
   SITE_INDEXABLE = "false"
 
-# Día del lanzamiento: cambiar a "true" SOLO en producción y volver a desplegar.
+# Producción indexable desde el lanzamiento (25/10/2026, autorizado por el propietario).
+# Vuelta atrás: poner "false" y volver a desplegar (docs/seo/LANZAMIENTO.md §3).
 [context.production.environment]
-  SITE_INDEXABLE = "false"
+  SITE_INDEXABLE = "true"
 
 [context.deploy-preview.environment]
   SITE_INDEXABLE = "false"

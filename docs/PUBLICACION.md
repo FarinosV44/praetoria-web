@@ -1,5 +1,7 @@
 # Publicación de la web pública (Fase 1)
 
+> **25/10/2026, 19:00:** el propietario autoriza la publicación. Pila de PR #19 → #35 fusionada en `main`; producción indexable (`SITE_INDEXABLE=true` en `netlify.toml`). Pendiente del propietario: rama de producción de Netlify a `main`, visibilidad pública, dominio en Netlify, copia de WordPress y DNS en Hostinger (`docs/seo/LANZAMIENTO.md`).
+
 Estado a 24/10/2026 (noche), sobre la rama `fase-1/ampliacion` (PR #35, que sigue a #30 sobre `publicacion/fase-1`).
 WordPress sigue en producción, el DNS no se ha tocado y no se ha fusionado nada en `main`. Este documento prepara la
 decisión de publicación; no la toma.
