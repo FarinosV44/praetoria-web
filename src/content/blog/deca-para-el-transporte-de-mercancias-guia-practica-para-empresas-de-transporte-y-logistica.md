@@ -3,7 +3,7 @@ title: "DECA para el transporte de mercancías: guía práctica para empresas de
 seoTitle: "DECA transporte de mercancías 2026: guía para empresa"
 description: "Guía del DECA para empresas de transporte y logística: obligados, datos, QR, inspecciones, subcontratación y cómo cumplir desde octubre de 2026."
 date: 2026-09-10
-updated: 2026-10-23
+updated: 2026-10-25
 category: transporte
 deca: guia
 wpId: 2999
@@ -189,7 +189,7 @@ Una gran empresa logística puede necesitar integración con su ERP o TMS. En ca
 
 **DECA Profesional** permite generar el documento de control digital, descargarlo, compartirlo con el conductor y conservar un histórico organizado. Con una cuenta pueden guardarse empresas, vehículos y lugares habituales, además de duplicar documentos para reducir el trabajo administrativo.
 
-La plataforma es **gratuita, sin tarjeta y sin límite ordinario de documentos hasta el 31 de diciembre de 2026**, durante su fase de lanzamiento. Está dirigida a transportistas autónomos, empresas de transporte, cargadores, agencias y operadores logísticos.
+Puedes crear tus **3 primeros DeCA gratis, sin tarjeta**, y después elegir un plan desde 19,99 € al mes + IVA ([ver precios](https://decaprofesional.es/precios)). Está dirigida a transportistas autónomos, empresas de transporte, cargadores, agencias y operadores logísticos.
 
 Además, cuando el transportista lo autoriza voluntariamente, puede utilizarse la información mínima de destino y fecha de disponibilidad para recibir propuestas de carga compatibles con el siguiente trayecto. El objetivo es que la gestión del DECA también contribuya a reducir kilómetros en vacío, sin convertir el tratamiento comercial en un requisito para usar la plataforma.
 
@@ -238,7 +238,7 @@ No para su función administrativa. Si el documento se utiliza también con fina
 
 ### ¿Puedo hacer el DECA gratis?
 
-Sí. DECA Profesional permite generar documentos sin coste y sin tarjeta hasta el 31 de diciembre de 2026 durante su fase de lanzamiento.
+Sí, hay dos vías. El Ministerio ofrece una aplicación gratuita dentro de SIMPLE, y DECA Profesional permite crear los 3 primeros DeCA gratis, sin tarjeta, con datos guardados e historial para los siguientes.
 
 ## Fuentes oficiales
 

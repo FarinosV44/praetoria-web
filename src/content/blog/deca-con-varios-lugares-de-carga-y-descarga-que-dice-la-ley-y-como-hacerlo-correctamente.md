@@ -27,7 +27,7 @@ La pregunta es inevitable: **¿hay que generar un DECA diferente para cada lugar
 
 La normativa permite agrupar varios envíos dentro de un mismo Documento Electrónico de Control Administrativo, siempre que se cumplan unas condiciones concretas.
 
-[DECAProfesional](https://www.decaprofesional.es/) permite crear un único DECA con varios lugares de carga y descarga, manteniendo cada envío perfectamente identificado y evitando generar documentos innecesarios.
+[DECAProfesional](https://decaprofesional.es/) permite crear un único DECA con varios lugares de carga y descarga, manteniendo cada envío perfectamente identificado y evitando generar documentos innecesarios.
 
 ## ¿Se pueden incluir varias cargas o descargas en un único DECA?
 
@@ -249,7 +249,7 @@ La trazabilidad es una de las diferencias entre un verdadero sistema DECA y un s
 
 ## Ventajas de gestionar varios envíos con DECAProfesional
 
-Utilizar [DECAProfesional](https://www.decaprofesional.es/) para transportes con varias cargas o descargas permite:
+Utilizar [DECAProfesional](https://decaprofesional.es/) para transportes con varias cargas o descargas permite:
 
 - Evitar generar documentos separados innecesariamente.
 - Cumplir los requisitos del apartado sexto de la Resolución.
@@ -347,6 +347,6 @@ Un transporte con varias recogidas o entregas no tiene por qué convertirse en u
 
 Con DECAProfesional puedes identificar cada trayecto, cumplir las exigencias legales y generar un único documento con todos los envíos, su PDF y su código QR.
 
-**[Crea tu cuenta en DECAProfesional y empieza a gestionar tus DECA](https://www.decaprofesional.es/)**
+**[Crea tu cuenta en DECAProfesional y empieza a gestionar tus DECA](https://decaprofesional.es/)**
 
 Y no pierdas de vista **DECA Conecta**: la próxima descarga de tu camión puede convertirse en el punto de partida de una nueva oportunidad.

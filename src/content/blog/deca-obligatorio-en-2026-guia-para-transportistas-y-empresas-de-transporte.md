@@ -11,7 +11,7 @@ intencion: "Organizar el DeCA en el día a día de una empresa transportista"
 imagen: logistica-camion-muelle
 ---
 
-Desde el 5 de octubre de 2026 ha cambiado la forma de documentar buena parte del transporte público de mercancías por carretera en España. Desde esa fecha, el documento de control administrativo debe generarse en formato electrónico: el denominado Documento Electrónico de Control Administrativo o [DECA](https://www.decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=blog_deca).
+Desde el 5 de octubre de 2026 ha cambiado la forma de documentar buena parte del transporte público de mercancías por carretera en España. Desde esa fecha, el documento de control administrativo debe generarse en formato electrónico: el denominado Documento Electrónico de Control Administrativo o [DECA](https://decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=blog_deca).
 
 En las últimas semanas han aparecido numerosas plataformas, aplicaciones y campañas comerciales alrededor de esta obligación. Algunas ofrecen el servicio gratuitamente; otras lo integran en programas de gestión; y otras recurren a expresiones como “plataforma homologada”, “firma digital obligatoria” o “tecnología blockchain”.
 
@@ -211,11 +211,13 @@ Antes de decidir, conviene comprobar al menos:
 
 ## DeCA Profesional: tecnología especializada con respaldo jurídico
 
-[DeCA Profesional permite generar, gestionar, custodiar y compartir el Documento Electrónico de Control](https://www.decaprofesional.es/) desde una plataforma especializada en transporte.
+[DeCA Profesional permite generar, gestionar, custodiar y compartir el Documento Electrónico de Control](https://decaprofesional.es/) desde una plataforma especializada en transporte.
+
+Si es tu primera vez, DeCA Profesional explica paso a paso [cómo hacer un DeCA con un ejemplo](https://decaprofesional.es/como-hacer-un-deca).
 
 El servicio genera PDF nativo, código QR y URL directa, permite mantener un histórico documental y está pensado para cargadores, transportistas, agencias y operadores que necesitan cumplir la obligación sin añadir complejidad innecesaria a su actividad diaria.
 
-Durante su fase de lanzamiento permite generar documentos gratuitamente, sin tarjeta y sin límite ordinario de documentos hasta el 31 de diciembre de 2026, conforme a las condiciones publicadas en la propia plataforma.
+Puedes crear tus **3 primeros DeCA gratis, sin tarjeta**, y después elegir un plan desde 19,99 € al mes + IVA, sin permanencia ([ver planes y precios](https://decaprofesional.es/precios)).
 
 Su diferencia no se limita al programa informático. DeCA Profesional es un servicio operado por Praetoria y cuenta con el apoyo de abogados con experiencia en transporte y logística.
 
@@ -282,7 +284,7 @@ La normativa no impone una marca o plataforma comercial única. Lo determinante 
 
 ### ¿Dónde puedo generar un DECA?
 
-Puede crearse a través de [DeCA Profesional](https://www.decaprofesional.es/), una plataforma operada por Praetoria para transportistas, cargadores, agencias y empresas de logística.
+Puede crearse a través de [DeCA Profesional](https://decaprofesional.es/), una plataforma operada por Praetoria para transportistas, cargadores, agencias y empresas de logística.
 
 ## Conclusión
 

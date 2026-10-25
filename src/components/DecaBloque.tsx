@@ -13,10 +13,11 @@ export function DecaBloque({ tipo }: { tipo: 'guia' | 'herramienta' }) {
             ? 'Para generar, compartir y conservar el documento de control, el despacho recomienda DeCA Profesional, una herramienta pensada por y para el sector del transporte.'
             : 'Las capturas de este artículo son de DeCA Profesional, la herramienta para generar, compartir y conservar el documento de control que recomienda el despacho.'}
         </p>
+        <p className="small">Crea tus 3 primeros DeCA gratis, sin tarjeta.</p>
         <p className="small muted">Servicio tecnológico independiente de los servicios jurídicos de Praetoria.</p>
       </div>
       <a className="btn btn--ghost" href={deca(tipo === 'guia' ? 'guia_blog' : 'articulo_producto')} rel="noopener">
-        Conocer DeCA Profesional
+        Crear 3 DeCA gratis
       </a>
     </aside>
   );

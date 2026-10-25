@@ -3,7 +3,7 @@ title: "DECA y subcontratación: qué debe hacer realmente una agencia de transp
 seoTitle: "DECA y subcontratación en agencias de transporte"
 description: "¿Debe una agencia hacer el DECA al subcontratar? Aprende cuándo debe formalizarlo y cómo protegerse mediante cláusulas en sus órdenes de carga."
 date: 2026-09-07
-updated: 2026-10-23
+updated: 2026-10-25
 category: transporte
 deca: guia
 tags: ["transporte internacional"]
@@ -14,7 +14,7 @@ imagen: logistica-coordinacion-almacen
 
 
 
-La digitalización obligatoria del Documento de Control Administrativo —[DECA](https://www.decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=blog_deca)— está generando muchas dudas entre las agencias de transporte.
+La digitalización obligatoria del Documento de Control Administrativo —[DECA](https://decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=blog_deca)— está generando muchas dudas entre las agencias de transporte.
 
 La más habitual es muy concreta:
 
@@ -169,7 +169,7 @@ Puedes solicitar información en [Praetoria División Jurídica](/) para que rev
 
 Una vez confirmado que la empresa contratada será quien realice materialmente el transporte, la agencia necesita una herramienta sencilla para generar y compartir el documento.
 
-En [DECA Profesional](https://www.decaprofesional.es/) puedes:
+En [DECA Profesional](https://decaprofesional.es/) puedes:
 
 - Crear el DECA digital.
 - Identificar al cargador contractual y al transportista efectivo.
@@ -177,6 +177,8 @@ En [DECA Profesional](https://www.decaprofesional.es/) puedes:
 - Compartir el documento con el transportista.
 - Mantenerlo accesible durante el viaje.
 - Conservar organizada la documentación de cada servicio.
+
+Cómo trabaja una agencia u operador con varias empresas y transportistas lo explica DeCA Profesional en su página de [DeCA para agencias de transporte](https://decaprofesional.es/deca-agencias-transporte). Puedes crear tus 3 primeros DeCA gratis, sin tarjeta.
 
 ## La regla definitiva para una agencia de transporte
 
@@ -189,6 +191,6 @@ Ante cada contratación, la agencia solo tiene que preguntar:
 
 La agencia no necesita reconstruir toda la cadena ni gestionar el DECA con su cliente cuando ella no es el transportista efectivo. Lo que sí necesita es formular la pregunta correcta, conservar la respuesta y utilizar órdenes de carga bien redactadas que le permitan prevenir problemas.
 
-Para crear el documento: [DECA Profesional](https://www.decaprofesional.es/).
+Para crear el documento: [DECA Profesional](https://decaprofesional.es/).
 
 Para revisar contratos, órdenes de carga y cláusulas de subcontratación: [Praetoria División Jurídica](/).

@@ -74,6 +74,6 @@ Seguimos creciendo con la ambición de consolidar DeCA Profesional como una plat
 
 Si buscas una plataforma para gestionar tus DeCA y avanzar hacia una documentación del transporte más organizada, accesible y conectada, te invitamos a conocer todo lo que estamos construyendo.
 
-**Descubre** [**DeCA Profesional**](https://www.decaprofesional.es/) **y forma parte de una comunidad de más de mil empresas que ya utiliza nuestro servicio.**
+**Descubre** [**DeCA Profesional**](https://decaprofesional.es/) **y forma parte de una comunidad de más de mil empresas que ya utiliza nuestro servicio.**
 
 Seguimos escuchando. Seguimos mejorando. Seguimos creciendo.
