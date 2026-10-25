@@ -1,28 +1,27 @@
 import { expect, test, type Page } from '@playwright/test';
 
-// #32 Penal y #33 «Que me llame un abogado». La previsualización marca la revisión jurídica pendiente;
-// las páginas penales no se indexan ni están en el sitemap hasta su revisión.
+// #32 Penal y #33 «Que me llame un abogado». Revisión jurídica hecha (26/10/2026): las páginas penales
+// son indexables, están en el sitemap y no muestran el aviso de revisión pendiente.
 const registro = async (page: Page) => (await page.request.get('/__mock-forms/registro')).json();
 const PENAL = ['/abogado-penalista-valencia/', '/asistencia-al-detenido/', '/citacion-juzgado-juicio-rapido/', '/alcoholemia-y-seguridad-vial/', '/lesiones-y-agresiones/', '/hurto-y-robo/', '/estafas/'];
 
-test('Penal: accesible desde Particulares, con recorridos y aviso de revisión pendiente', async ({ page }) => {
+test('Penal: accesible desde Particulares, con recorridos y sin aviso de revisión pendiente', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'Particulares' }).click();
   await page.locator('header').getByRole('link', { name: 'Penal' }).click();
   await expect(page).toHaveURL(/\/abogado-penalista-valencia\/$/);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Abogados penalistas en Valencia');
   await expect(page.locator('.journey')).toHaveCount(8);
-  await expect(page.locator('.revision-pendiente')).toContainText('Pendiente de revisión jurídica');
+  await expect(page.locator('.revision-pendiente')).toHaveCount(0);
   await expect(page.locator('.area-head').getByRole('link', { name: 'Que me llame un abogado' })).toHaveAttribute('href', '/que-me-llame-un-abogado/?area=penal');
 });
 
-test('páginas penales: noindex, fuera del sitemap, fuentes del BOE y qué no puede esperar', async ({ page, request }) => {
+test('páginas penales: indexables, en el sitemap, fuentes del BOE y qué no puede esperar', async ({ page, request }) => {
   const sitemap = await (await request.get('/sitemap.xml')).text();
   for (const ruta of PENAL) {
-    expect(sitemap).not.toContain(ruta);
     await page.goto(ruta);
-    await expect(page.locator('meta[name="revision-juridica"]')).toHaveAttribute('content', 'pendiente-noindex');
-    await expect(page.locator('meta[name="robots"]').first()).toHaveAttribute('content', /noindex/);
+    await expect(page.locator('meta[name="revision-juridica"]')).toHaveCount(0);
+    await expect(page.locator('.revision-pendiente')).toHaveCount(0);
     if (ruta !== PENAL[0]) {
       await expect(page.locator('.service-page__sources a').first()).toHaveAttribute('href', /^https:\/\/www\.boe\.es\/eli\//);
       await expect(page.locator('.urgencia')).toContainText('no confirma la asistencia');

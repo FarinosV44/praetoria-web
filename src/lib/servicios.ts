@@ -159,7 +159,7 @@ export const servicios: Servicio[] = [
   { id: 'transporte-prevencion', area: 'transporte', nombre: 'Prevención de riesgos contractuales', resumen: 'Revisión de procedimientos, condiciones generales, órdenes de carga y comunicaciones para reducir problemas antes de que se produzcan.', articulos: ['como-proteger-legalmente-tu-empresa-de-transporte-contratos-condiciones-y-claves-para-evitar-problemas'] },
   { id: 'transporte-gerencia', area: 'transporte', nombre: 'Apoyo jurídico para gerencia', resumen: 'Asesoramiento puntual o continuado para tomar decisiones comerciales y operativas con mayor seguridad jurídica.' },
 
-  // Laboral (#7). Atiende Lucía López. Textos ampliados pendientes de revisión del despacho. -------------
+  // Laboral (#7). Atiende Lucía López. Textos ampliados revisados el 26/10/2026 contra la normativa vigente. ---
   {
     id: 'laboral-despidos',
     area: 'laboral',
@@ -429,8 +429,8 @@ export const servicios: Servicio[] = [
 
   // Penal (#32) -------------------------------------------------------------------------------
   // Texto redactado a partir de la Constitución, la LECrim, el Código Penal y el Reglamento General de Circulación
-  // (versiones consolidadas del BOE consultadas el 24/10/2026). Pendiente de revisión jurídica del despacho:
-  // mientras lo esté, las páginas llevan noindex, quedan fuera del sitemap y la previsualización lo avisa.
+  // (versiones consolidadas del BOE consultadas el 24/10/2026). Revisado el 26/10/2026, incluida la LO 1/2026
+  // de multirreincidencia: indexable y en el sitemap.
   {
     id: 'penal-detenido',
     area: 'penal',
@@ -438,8 +438,8 @@ export const servicios: Servicio[] = [
     resumen: 'Detención propia o de un familiar: derechos, abogado de confianza, declaración y puesta a disposición judicial.',
     cta: 'Consultar una detención',
     pagina: '/asistencia-al-detenido/',
-    revision: 'pendiente',
-    indexable: false,
+    revision: 'revisado',
+    indexable: true,
     seo: {
       title: 'Abogado para un detenido en Valencia: derechos y primeros pasos',
       h1: 'Asistencia al detenido: derechos y primeros pasos',
@@ -460,8 +460,8 @@ export const servicios: Servicio[] = [
       'Preparamos la comparecencia ante el juzgado y los pasos siguientes.',
     ],
     urgencia: [
-      'La detención no puede durar más del tiempo estrictamente necesario ni, como máximo, setenta y dos horas.',
-      'La persona detenida puede designar un abogado de confianza; si no lo hace, se le asigna uno de oficio.',
+      'La detención no puede durar más del tiempo estrictamente necesario ni, como máximo, setenta y dos horas. Hay reglas especiales para menores de edad y para algunos delitos graves.',
+      'La persona detenida puede designar un abogado de confianza; si no lo hace, se le asigna uno de oficio, salvo en los supuestos excepcionales de incomunicación.',
       'Lo que se declare en dependencias policiales puede condicionar el resto del procedimiento.',
     ],
     documentacion: ['Nombre completo de la persona detenida', 'Lugar de la detención y dependencia policial, si se conoce', 'Hora aproximada de la detención', 'Cualquier citación o documento que se haya entregado'],
@@ -469,7 +469,7 @@ export const servicios: Servicio[] = [
       { q: '¿Qué derechos tiene una persona detenida?', a: 'Entre otros, a guardar silencio o declarar solo ante el juez, a no declarar contra sí misma, a designar abogado y ser asistida sin demora injustificada, a acceder a los elementos esenciales para impugnar la detención, a comunicar la detención a un familiar, a un intérprete gratuito si no entiende el idioma y a ser reconocida por un médico (artículo 520 de la Ley de Enjuiciamiento Criminal).' },
       { q: '¿Cuánto tiempo puede durar la detención?', a: 'El tiempo estrictamente necesario para las averiguaciones y, como máximo, setenta y dos horas; después, la persona debe ser puesta en libertad o a disposición judicial (artículo 17.2 de la Constitución).' },
       { q: '¿Puede la familia elegir el abogado?', a: 'La familia puede contactar con un abogado y facilitarle los datos, pero la designación corresponde a la persona detenida. Te explicamos cómo hacerlo en tu caso.' },
-      { q: '¿Qué es el habeas corpus?', a: 'Un procedimiento para que un juez revise de inmediato una detención que se considera ilegal. Pueden pedirlo la persona privada de libertad, su familia cercana, su abogado, el Ministerio Fiscal o el Defensor del Pueblo, y el juez resuelve en veinticuatro horas desde que lo admite (Ley Orgánica 6/1984).' },
+      { q: '¿Qué es el habeas corpus?', a: 'Un procedimiento para que un juez revise de inmediato una detención que se considera ilegal. Pueden pedirlo la persona privada de libertad, su familia cercana, su abogado, el Ministerio Fiscal o el Defensor del Pueblo, y, desde que acuerda iniciarlo, el juez debe resolver en un plazo de veinticuatro horas (artículos 6 y 7 de la Ley Orgánica 6/1984).' },
     ],
     relacionados: ['penal-citacion', 'penal-seguridad-vial'],
     fuentes: [
@@ -485,8 +485,8 @@ export const servicios: Servicio[] = [
     resumen: 'Citación como investigado, juicio rápido ante el juzgado de guardia o juicio por delito leve.',
     cta: 'Revisar mi citación',
     pagina: '/citacion-juzgado-juicio-rapido/',
-    revision: 'pendiente',
-    indexable: false,
+    revision: 'revisado',
+    indexable: true,
     seo: {
       title: 'Citación del juzgado o juicio rápido: qué hacer y cómo preparar la defensa',
       h1: 'Me han citado al juzgado: citaciones y juicios rápidos',
@@ -497,7 +497,7 @@ export const servicios: Servicio[] = [
     revisamos: [
       'Qué tipo de citación es, quién la emite, en qué calidad se te cita y para qué fecha.',
       'Si se trata de un juicio rápido, de diligencias previas o de un juicio por delito leve, porque cada uno tiene reglas distintas.',
-      'Si la conformidad es posible y conveniente, o si conviene defender otra versión de los hechos.',
+      'Si la conformidad es posible y conveniente, o si conviene ir a juicio y defender tu posición.',
       'Qué pruebas, testigos o documentos conviene llevar.',
     ],
     proceso: [
@@ -514,9 +514,9 @@ export const servicios: Servicio[] = [
     documentacion: ['La citación recibida (cédula o diligencia)', 'Atestado o denuncia, si te lo han entregado', 'Datos de testigos y pruebas que tengas', 'Resoluciones anteriores del mismo asunto'],
     faqs: [
       { q: '¿Qué es un juicio rápido?', a: 'Un procedimiento para delitos castigados con prisión de hasta cinco años, u otras penas de hasta diez años, que empieza con un atestado policial y la detención o citación ante el juzgado de guardia, en los casos que prevé el artículo 795 de la Ley de Enjuiciamiento Criminal.' },
-      { q: '¿Qué supone conformarse en el juzgado de guardia?', a: 'Si se cumplen los requisitos del artículo 801 de la Ley de Enjuiciamiento Criminal, se dicta sentencia de conformidad con la pena solicitada reducida en un tercio. Es una decisión con consecuencias: conviene tomarla con un abogado y conociendo las actuaciones.' },
+      { q: '¿Qué supone conformarse en el juzgado de guardia?', a: 'Si se cumplen los requisitos del artículo 801 de la Ley de Enjuiciamiento Criminal (entre otros, que el delito tenga una pena de hasta tres años de prisión y que la pena pedida no supere ese límite), se dicta sentencia de conformidad con la pena solicitada reducida en un tercio. Es una decisión con consecuencias: conviene tomarla con un abogado y conociendo las actuaciones.' },
       { q: '¿Necesito abogado para un juicio por delito leve?', a: 'No siempre es obligatorio: la citación informa de que puedes acudir asistido de abogado si lo deseas. Si el delito leve lleva pena de multa con un máximo de seis meses o más, se aplican las reglas generales de defensa (artículo 967 de la Ley de Enjuiciamiento Criminal).' },
-      { q: '¿Y si me citan como investigado?', a: 'Ser investigado no significa que se te acuse: es la condición que permite ejercer el derecho de defensa desde el principio. Tienes derecho a no declarar y a hacerlo asistido de abogado.' },
+      { q: '¿Y si me citan como investigado?', a: 'Ser investigado no significa que se te acuse: es la condición que permite ejercer el derecho de defensa desde el principio. Tienes derecho a no declarar y, si declaras ante el juez, lo harás siempre asistido de abogado.' },
     ],
     relacionados: ['penal-detenido', 'penal-seguridad-vial', 'penal-lesiones'],
     fuentes: [
@@ -533,8 +533,8 @@ export const servicios: Servicio[] = [
     cta: 'Consultar mi caso de tráfico',
     imagen: 'penal-seguridad-vial',
     pagina: '/alcoholemia-y-seguridad-vial/',
-    revision: 'pendiente',
-    indexable: false,
+    revision: 'revisado',
+    indexable: true,
     seo: {
       title: 'Abogado de alcoholemia y delitos de tráfico en Valencia',
       h1: 'Alcoholemia y delitos contra la seguridad vial',
@@ -546,7 +546,7 @@ export const servicios: Servicio[] = [
       'Si los hechos son una infracción administrativa o un delito: no todo positivo es delito.',
       'Cómo se hicieron las pruebas: el etilómetro, las dos mediciones y la información que se te dio.',
       'Las consecuencias para tu permiso de conducir y, si conduces por trabajo, para tu actividad.',
-      'Si conviene la conformidad en el juicio rápido o defender otra versión.',
+      'Si conviene la conformidad en el juicio rápido o ir a juicio y defender tu posición.',
     ],
     proceso: [
       'Revisamos la citación, el atestado y los tiques de las pruebas.',
@@ -555,14 +555,15 @@ export const servicios: Servicio[] = [
       'Te orientamos sobre el permiso y los pasos posteriores.',
     ],
     urgencia: [
-      'La mayoría de estos casos se tramitan como juicio rápido, con citación ante el juzgado de guardia en pocos días.',
-      'La pena incluye siempre la privación del derecho a conducir, de uno a cuatro años en los supuestos del artículo 379.',
+      'Con frecuencia, estos casos se tramitan como juicio rápido (artículo 795 de la Ley de Enjuiciamiento Criminal), con citación ante el juzgado de guardia en pocos días.',
+      'La pena incluye siempre la privación del derecho a conducir, de más de uno y hasta cuatro años en los supuestos del artículo 379.',
+      'Si la privación supera dos años, el permiso pierde su vigencia y hay que obtenerlo de nuevo (artículo 47 del Código Penal).',
     ],
     documentacion: ['Citación judicial', 'Copia del atestado o de las diligencias que te entregaron', 'Tiques del etilómetro', 'Permiso de conducir', 'Si conduces por trabajo, contrato o actividad'],
     faqs: [
       { q: '¿Cuándo es delito una alcoholemia?', a: 'Es delito conducir bajo la influencia del alcohol o las drogas y, en todo caso, con una tasa de alcohol en aire espirado superior a 0,60 mg/l o en sangre superior a 1,2 g/l (artículo 379.2 del Código Penal). Por debajo de esa tasa puede ser también delito si hay influencia en la conducción, o infracción administrativa.' },
       { q: '¿Cuáles son los límites administrativos?', a: 'Con carácter general, 0,25 mg/l en aire espirado (0,5 g/l en sangre). Para conductores profesionales de determinados vehículos y durante los dos primeros años de permiso, 0,15 mg/l (0,3 g/l en sangre), según el artículo 20 del Reglamento General de Circulación.' },
-      { q: '¿Qué pasa si me niego a hacer la prueba?', a: 'Negarse a las pruebas legalmente establecidas cuando lo requiere un agente es un delito propio (artículo 383 del Código Penal), con pena de prisión de seis meses a un año y privación del derecho a conducir de uno a cuatro años.' },
+      { q: '¿Qué pasa si me niego a hacer la prueba?', a: 'Negarse a las pruebas legalmente establecidas cuando lo requiere un agente es un delito propio (artículo 383 del Código Penal), con pena de prisión de seis meses a un año y privación del derecho a conducir de más de uno y hasta cuatro años.' },
       { q: '¿Y el exceso de velocidad?', a: 'Es delito superar en más de 60 km/h la velocidad permitida en vía urbana, o en más de 80 km/h en vía interurbana (artículo 379.1 del Código Penal).' },
     ],
     relacionados: ['penal-citacion', 'penal-lesiones'],
@@ -580,8 +581,8 @@ export const servicios: Servicio[] = [
     cta: 'Consultar unas lesiones',
     imagen: 'penal-lesiones',
     pagina: '/lesiones-y-agresiones/',
-    revision: 'pendiente',
-    indexable: false,
+    revision: 'revisado',
+    indexable: true,
     seo: {
       title: 'Abogado de lesiones y agresiones en Valencia: denuncia y defensa',
       h1: 'Lesiones y agresiones: denuncia y defensa',
@@ -604,12 +605,12 @@ export const servicios: Servicio[] = [
     urgencia: [
       'Si has sufrido una agresión, acude primero a un centro sanitario: el parte médico es una prueba importante.',
       'Algunas lesiones leves solo se persiguen mediante denuncia de la persona agraviada.',
-      'Las imágenes de cámaras se conservan poco tiempo: si existen, conviene identificarlas cuanto antes.',
+      'Las imágenes de cámaras se conservan poco tiempo (por lo general, como máximo un mes; artículo 22.3 de la Ley Orgánica 3/2018): si existen, conviene identificarlas cuanto antes.',
     ],
     documentacion: ['Partes médicos y de urgencias', { label: 'Informes médicos posteriores (no los envíes por el formulario)', sensible: true }, 'Denuncia o citación', 'Fotografías, mensajes o vídeos', 'Datos de testigos'],
     faqs: [
       { q: '¿Cuándo son delito unas lesiones?', a: 'Cuando la lesión necesita objetivamente, además de una primera asistencia, tratamiento médico o quirúrgico; la simple vigilancia o seguimiento no se considera tratamiento (artículo 147.1 del Código Penal). Las de menor entidad son delito leve, y también lo es golpear o maltratar de obra sin causar lesión (artículo 147.2 y 3).' },
-      { q: '¿Necesito denunciar para que se investigue?', a: 'En los delitos leves de lesiones del artículo 147.2 y 3, sí: solo se persiguen mediante denuncia de la persona agraviada o de su representante legal (artículo 147.4 del Código Penal).' },
+      { q: '¿Necesito denunciar para que se investigue?', a: 'En los delitos leves de lesiones del artículo 147.2 y 3, sí: solo se persiguen mediante denuncia de la persona agraviada o de su representante legal (artículo 147.4 del Código Penal). Si los hechos se producen en la pareja o en el ámbito familiar, se aplican otros preceptos (artículo 153 del Código Penal) y no hace falta la denuncia de la víctima para investigarlos.' },
       { q: '¿Puedo reclamar una indemnización?', a: 'La responsabilidad civil derivada del delito se puede reclamar en el propio procedimiento penal. Depende de las lesiones, del tiempo de curación y de las secuelas, y conviene valorarla con los informes médicos.' },
       { q: '¿Y si la agresión es de mi pareja o expareja?', a: 'La violencia en la pareja o en la familia tiene un tratamiento específico. Si estás en peligro, llama al 112. Para orientación especializada, el 016 atiende de forma gratuita a víctimas de violencia contra las mujeres.' },
     ],
@@ -624,8 +625,8 @@ export const servicios: Servicio[] = [
     cta: 'Consultar un hurto o un robo',
     imagen: 'penal-hurtos',
     pagina: '/hurto-y-robo/',
-    revision: 'pendiente',
-    indexable: false,
+    revision: 'revisado',
+    indexable: true,
     seo: {
       title: 'Abogado de hurto y robo en Valencia: diferencias y defensa',
       h1: 'Hurto y robo: diferencias, penas y defensa',
@@ -635,7 +636,7 @@ export const servicios: Servicio[] = [
     destinatario: 'Personas investigadas por hurto o robo, y personas o comercios perjudicados.',
     revisamos: [
       'Si los hechos son hurto, robo con fuerza o robo con violencia o intimidación: las penas son muy distintas.',
-      'El valor de lo sustraído, que separa el delito leve del delito de hurto.',
+      'El valor de lo sustraído, que separa el delito leve de hurto del delito menos grave.',
       'Si hay antecedentes que puedan agravar la pena.',
       'Las pruebas: grabaciones, testigos, el atestado y la recuperación de los objetos.',
     ],
@@ -651,8 +652,8 @@ export const servicios: Servicio[] = [
     ],
     documentacion: ['Citación o atestado', 'Denuncia presentada, si eres la persona perjudicada', 'Facturas o justificantes del valor de lo sustraído', 'Grabaciones o datos de testigos'],
     faqs: [
-      { q: '¿Qué diferencia hay entre hurto y robo?', a: 'En el hurto se toma una cosa ajena sin la voluntad de su dueño y sin fuerza ni violencia. En el robo se emplea fuerza en las cosas para acceder al lugar donde están, o violencia o intimidación sobre las personas (artículos 234 y 237 del Código Penal).' },
-      { q: '¿Qué importancia tienen los 400 euros?', a: 'Si lo sustraído supera 400 euros, el hurto se castiga con prisión de seis a dieciocho meses; si no los supera, con multa de uno a tres meses, salvo que concurran las circunstancias del artículo 235. Hay una regla especial cuando existen tres condenas anteriores por delitos de este tipo (artículo 234 del Código Penal).' },
+      { q: '¿Qué diferencia hay entre hurto y robo?', a: 'En el hurto se toma, con ánimo de lucro, una cosa mueble ajena sin la voluntad de su dueño y sin fuerza ni violencia. En el robo se emplea fuerza en las cosas para acceder al lugar donde están, o violencia o intimidación sobre las personas (artículos 234 y 237 del Código Penal). El robo no tiene umbral de 400 euros: es delito cualquiera que sea el valor.' },
+      { q: '¿Qué importancia tienen los 400 euros?', a: 'Si lo sustraído supera 400 euros, el hurto se castiga con prisión de seis a dieciocho meses; si no los supera, con multa de uno a tres meses, salvo que concurra alguna circunstancia del artículo 235 (por ejemplo, desde abril de 2026, que lo sustraído sea un teléfono móvil u otro dispositivo con datos personales). Además, si la persona ya ha sido condenada por al menos tres delitos de la misma naturaleza, uno de ellos leve, se aplica la pena de prisión aunque no se superen los 400 euros (artículo 234.2 del Código Penal, reformado por la Ley Orgánica 1/2026).' },
       { q: '¿Qué penas tiene el robo?', a: 'El robo con fuerza en las cosas, de uno a tres años de prisión (artículo 240); el robo con violencia o intimidación, de dos a cinco años, y más si se comete en casa habitada (artículo 242 del Código Penal).' },
     ],
     relacionados: ['penal-citacion', 'penal-detenido'],
@@ -661,6 +662,8 @@ export const servicios: Servicio[] = [
       { label: 'Código Penal, art. 237 (robo)', href: `${BOE_CP}#a237` },
       { label: 'Código Penal, art. 240 (robo con fuerza en las cosas)', href: `${BOE_CP}#a240` },
       { label: 'Código Penal, art. 242 (robo con violencia o intimidación)', href: `${BOE_CP}#a242` },
+      { label: 'Código Penal, art. 235 (hurto agravado)', href: `${BOE_CP}#a235` },
+      { label: 'Ley Orgánica 1/2026, de 8 de abril, de multirreincidencia', href: 'https://www.boe.es/boe/dias/2026/04/09/pdfs/BOE-A-2026-7966.pdf' },
     ],
   },
   {
@@ -671,8 +674,8 @@ export const servicios: Servicio[] = [
     cta: 'Consultar una estafa',
     imagen: 'penal-estafas',
     pagina: '/estafas/',
-    revision: 'pendiente',
-    indexable: false,
+    revision: 'revisado',
+    indexable: true,
     seo: {
       title: 'Abogado de estafas en Valencia: denunciar un fraude o defenderte',
       h1: 'Estafas y fraudes: denunciar o defenderte',
@@ -699,7 +702,7 @@ export const servicios: Servicio[] = [
     ],
     documentacion: ['Justificantes de pagos o transferencias', 'Mensajes, correos, anuncios o capturas', 'Denuncia presentada, si existe', 'Comunicaciones con el banco o la plataforma', 'Citación, si te investigan'],
     faqs: [
-      { q: '¿Qué es exactamente una estafa?', a: 'Utilizar un engaño bastante para producir error en otra persona e inducirla a realizar un acto de disposición en perjuicio propio o ajeno, con ánimo de lucro (artículo 248 del Código Penal). Se castiga con prisión de seis meses a tres años; si la cuantía no supera 400 euros, con multa de uno a tres meses, salvo que concurran las circunstancias del artículo 250.' },
+      { q: '¿Qué es exactamente una estafa?', a: 'Utilizar un engaño bastante para producir error en otra persona e inducirla a realizar un acto de disposición en perjuicio propio o ajeno, con ánimo de lucro (artículo 248 del Código Penal). Se castiga con prisión de seis meses a tres años; si la cuantía no supera 400 euros, con multa de uno a tres meses, salvo que concurran las circunstancias del artículo 250. Desde abril de 2026, si la persona ya ha sido condenada por al menos tres estafas, una de ellas leve, se aplica la pena de prisión aunque no se superen los 400 euros (Ley Orgánica 1/2026).' },
       { q: '¿Y los fraudes por internet o con tarjeta?', a: 'También son estafa la manipulación informática para conseguir una transferencia no consentida y el uso de tarjetas o de sus datos para operar en perjuicio de su titular (artículo 249 del Código Penal).' },
       { q: '¿Todo impago es una estafa?', a: 'No. Que alguien no pague o no cumpla un contrato no es, por sí solo, una estafa: hace falta un engaño previo y bastante. Muchos casos se resuelven mejor por la vía civil, y te lo diremos si es así.' },
     ],
@@ -707,6 +710,7 @@ export const servicios: Servicio[] = [
     fuentes: [
       { label: 'Código Penal, art. 248 (estafa)', href: `${BOE_CP}#a248` },
       { label: 'Código Penal, art. 249 (otras modalidades de estafa)', href: `${BOE_CP}#a249` },
+      { label: 'Ley Orgánica 1/2026, de 8 de abril, de multirreincidencia', href: 'https://www.boe.es/boe/dias/2026/04/09/pdfs/BOE-A-2026-7966.pdf' },
     ],
   },
   {
@@ -715,14 +719,14 @@ export const servicios: Servicio[] = [
     nombre: 'Amenazas, coacciones y violencia en el entorno familiar',
     resumen: 'Orientación y asistencia a víctimas y a personas denunciadas, con la discreción que exige cada caso.',
     cta: 'Consultar con discreción',
-    revision: 'pendiente',
+    revision: 'revisado',
     revisamos: [
       'Qué ha ocurrido, desde cuándo y si existe un riesgo actual.',
       'Qué pruebas hay: mensajes, testigos, partes médicos o denuncias anteriores.',
       'Si hay medidas de protección vigentes, o si conviene solicitarlas.',
       'El canal de contacto seguro: si otra persona puede ver tus mensajes o tu teléfono, indícalo.',
     ],
-    alcance: 'Si estás en peligro, llama al 112. El 016 ofrece información y asesoramiento gratuitos a víctimas de violencia contra las mujeres. Antes de aceptar un asunto revisamos que no exista un conflicto de intereses.',
+    alcance: 'Si estás en peligro, llama al 112. El 016 ofrece información y asesoramiento gratuitos a víctimas de violencia contra las mujeres. Las víctimas de violencia de género tienen derecho a asistencia jurídica gratuita especializada, con independencia de sus recursos (artículo 2.g de la Ley 1/1996). Antes de aceptar un asunto revisamos que no exista un conflicto de intereses.',
   },
 ];
 

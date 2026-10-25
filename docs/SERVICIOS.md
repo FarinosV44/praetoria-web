@@ -95,10 +95,10 @@ Total: 55 servicios.
 
 | Servicio | id | Artículos relacionados | Siguiente paso | Texto ampliado |
 | --- | --- | --- | --- | --- |
-| Asistencia al detenido ([página](/asistencia-al-detenido/)) | `penal-detenido` | — | [Consultar una detención](/contacto/?servicio=penal-detenido) | **pendiente de revisión** |
-| Citaciones y juicios rápidos ([página](/citacion-juzgado-juicio-rapido/)) | `penal-citacion` | — | [Revisar mi citación](/contacto/?servicio=penal-citacion) | **pendiente de revisión** |
-| Alcoholemia y seguridad vial ([página](/alcoholemia-y-seguridad-vial/)) | `penal-seguridad-vial` | — | [Consultar mi caso de tráfico](/contacto/?servicio=penal-seguridad-vial) | **pendiente de revisión** |
-| Lesiones y agresiones ([página](/lesiones-y-agresiones/)) | `penal-lesiones` | — | [Consultar unas lesiones](/contacto/?servicio=penal-lesiones) | **pendiente de revisión** |
-| Hurto y robo ([página](/hurto-y-robo/)) | `penal-hurto-robo` | — | [Consultar un hurto o un robo](/contacto/?servicio=penal-hurto-robo) | **pendiente de revisión** |
-| Estafas ([página](/estafas/)) | `penal-estafas` | — | [Consultar una estafa](/contacto/?servicio=penal-estafas) | **pendiente de revisión** |
-| Amenazas, coacciones y violencia en el entorno familiar | `penal-violencia-amenazas` | — | [Consultar con discreción](/contacto/?servicio=penal-violencia-amenazas) | **pendiente de revisión** |
+| Asistencia al detenido ([página](/asistencia-al-detenido/)) | `penal-detenido` | — | [Consultar una detención](/contacto/?servicio=penal-detenido) | revisado |
+| Citaciones y juicios rápidos ([página](/citacion-juzgado-juicio-rapido/)) | `penal-citacion` | — | [Revisar mi citación](/contacto/?servicio=penal-citacion) | revisado |
+| Alcoholemia y seguridad vial ([página](/alcoholemia-y-seguridad-vial/)) | `penal-seguridad-vial` | — | [Consultar mi caso de tráfico](/contacto/?servicio=penal-seguridad-vial) | revisado |
+| Lesiones y agresiones ([página](/lesiones-y-agresiones/)) | `penal-lesiones` | — | [Consultar unas lesiones](/contacto/?servicio=penal-lesiones) | revisado |
+| Hurto y robo ([página](/hurto-y-robo/)) | `penal-hurto-robo` | — | [Consultar un hurto o un robo](/contacto/?servicio=penal-hurto-robo) | revisado |
+| Estafas ([página](/estafas/)) | `penal-estafas` | — | [Consultar una estafa](/contacto/?servicio=penal-estafas) | revisado |
+| Amenazas, coacciones y violencia en el entorno familiar | `penal-violencia-amenazas` | — | [Consultar con discreción](/contacto/?servicio=penal-violencia-amenazas) | revisado |
