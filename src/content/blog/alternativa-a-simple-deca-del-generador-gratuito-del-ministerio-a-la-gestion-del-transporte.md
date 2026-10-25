@@ -20,6 +20,8 @@ Si debes pedir matrículas, preparar órdenes de carga, recuperar información d
 
 En esta guía explicamos cuándo puede interesarte [DeCA Profesional](https://decaprofesional.es/) y cómo empezar a digitalizar tu operativa de forma gradual.
 
+> **Resumen rápido:** no es obligatorio usar SIMPLE para crear el DeCA: la normativa fija requisitos, pero no impone una plataforma concreta. La herramienta gratuita del Ministerio puede bastar para generar el documento; una alternativa como DeCA Profesional compensa si repites datos, trabajas en equipo, pides matrículas a otra empresa, recibes DeCA externos o preparas órdenes de carga. Puedes probarla con tres DeCA gratuitos por empresa, sin tarjeta.
+
 ## ¿Es obligatorio utilizar SIMPLE para crear el DeCA?
 
 **No. La normativa exige que el documento y el sistema que lo genera cumplan determinados requisitos; no obliga a utilizar una plataforma concreta.**

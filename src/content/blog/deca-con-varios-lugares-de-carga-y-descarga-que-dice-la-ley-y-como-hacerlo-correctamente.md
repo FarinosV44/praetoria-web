@@ -29,6 +29,8 @@ La normativa permite agrupar varios envíos dentro de un mismo Documento Electr�
 
 [DECAProfesional](https://decaprofesional.es/) permite crear un único DECA con varios lugares de carga y descarga, manteniendo cada envío perfectamente identificado y evitando generar documentos innecesarios.
 
+> **Resumen rápido:** sí, varias cargas y descargas pueden incluirse en un único DECA cuando coinciden el cargador contractual y el transportista efectivo, según el apartado sexto de la Resolución de 5 de junio de 2026. Cada envío debe identificar su lugar de carga, su destino, la naturaleza de la mercancía y su propio peso; el peso total no basta. Si cambia el cargador contractual o el transportista efectivo, hay que generar documentos separados.
+
 ## ¿Se pueden incluir varias cargas o descargas en un único DECA?
 
 Sí.

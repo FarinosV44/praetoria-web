@@ -73,6 +73,8 @@ const BOE_CE = 'https://www.boe.es/eli/es/c/1978/12/27/(1)/con';
 const BOE_LECRIM = 'https://www.boe.es/eli/es/rd/1882/09/14/(1)/con';
 const BOE_CP = 'https://www.boe.es/eli/es/lo/1995/11/23/10/con';
 const BOE_RGC = 'https://www.boe.es/eli/es/rd/2003/11/21/1428/con';
+const BOE_LOTT = 'https://www.boe.es/eli/es/l/1987/07/30/16/con';
+const BOE_LO1_2025 = 'https://www.boe.es/eli/es/lo/2025/01/02/1/con';
 const BOE_HABEAS = 'https://www.boe.es/eli/es/lo/1984/05/24/6/con';
 const MEDICOS: Documento = { label: 'Informes médicos: solo cuando te los pidamos, y por un canal seguro', sensible: true };
 
@@ -91,7 +93,7 @@ export const servicios: Servicio[] = [
     imagen: 'portes-impagados',
     pagina: '/reclamacion-portes-impagados/',
     incidencia: 'impago',
-    revision: 'pendiente',
+    revision: 'revisado',
     seo: {
       title: 'Reclamación de portes impagados',
       h1: 'Reclamación de portes impagados para transportistas y agencias',
@@ -101,27 +103,31 @@ export const servicios: Servicio[] = [
     destinatario: 'Transportistas, autónomos con vehículo propio, agencias y operadores logísticos con facturas de transporte pendientes de cobro.',
     revisamos: [
       'Quién te contrató y quién es el cargador real: cómo se ha estructurado la cadena de subcontratación.',
-      'Si cabe la acción directa: el transportista que realizó el porte puede reclamar la parte impagada al cargador principal y a quienes le preceden en la cadena.',
+      'Si cabe la acción directa: cuando quien contrató el porte no paga, el transportista que lo realizó efectivamente puede reclamar la parte impagada al cargador principal y a quienes le preceden en la cadena de subcontratación.',
       'La documentación que acredita el encargo, el transporte y la entrega.',
       'Qué se puede reclamar además de la factura, como los intereses de demora y los costes de cobro.',
       'Las fechas del caso, porque las acciones derivadas del transporte prescriben en plazos cortos.',
+      'La cuantía: en las controversias de transporte de hasta 15.000 euros se presume, salvo rechazo expreso previo, el sometimiento a la Junta Arbitral del Transporte (artículo 38 de la Ley de Ordenación de los Transportes Terrestres).',
     ],
     proceso: [
       'Revisamos la documentación y la cadena de contratación.',
       'Te explicamos a quién conviene reclamar, por qué vía, el trabajo necesario y los honorarios.',
-      'Enviamos un requerimiento formal de pago.',
-      'Si no hay pago, preparamos la reclamación judicial del importe, los intereses y, en su caso, las costas.',
+      'Enviamos un requerimiento de pago fehaciente con una propuesta de negociación, de forma que sirva también como el intento de solución extrajudicial (MASC) que la Ley Orgánica 1/2025 exige antes de acudir a los tribunales.',
+      'Si no hay acuerdo, presentamos la reclamación ante la Junta Arbitral del Transporte o el juzgado, según corresponda, por el importe, los intereses y, en su caso, las costas.',
     ],
     documentacion: ['Orden de carga o encargo del transporte', 'CMR o carta de porte, mejor firmada en destino', 'Albaranes u otra prueba de entrega', 'Factura o facturas pendientes', 'Comunicaciones: correos, mensajes y avisos de pago'],
     faqs: [
       { q: 'Mi cliente es una agencia que no me paga. ¿Puedo reclamar al cargador?', a: 'Puede ser posible. La disposición adicional sexta de la Ley 9/2013 reconoce al transportista que realizó el porte una acción directa por la parte impagada frente al cargador principal y los demás intervinientes anteriores en la cadena de subcontratación. Hay que estudiar cómo se contrató el transporte y qué documentación existe.' },
       { q: '¿Cuánto tiempo tengo para reclamar?', a: 'Con carácter general, las acciones derivadas del contrato de transporte terrestre prescriben en un año (artículo 79 de la Ley 15/2009), con supuestos especiales y causas de suspensión. El plazo de tu caso depende de sus fechas y documentos: conviene revisarlo cuanto antes.' },
       { q: '¿Qué puedo reclamar además de la factura?', a: 'Según el caso, los intereses de demora y los costes de cobro. Lo valoramos al revisar la documentación.' },
+      { q: '¿Tengo que intentar negociar antes de demandar?', a: 'En general, sí. Desde el 3 de abril de 2025, para presentar una demanda civil o mercantil, incluido el procedimiento monitorio según el criterio mayoritario de los juzgados, hay que acreditar un intento previo de solución extrajudicial (MASC). Preparamos el requerimiento de forma que sirva para ese requisito.' },
       { q: 'No tengo el CMR firmado. ¿Puedo reclamar igualmente?', a: 'La reclamación es más difícil, pero otras pruebas, como órdenes de carga, albaranes, correos o mensajes, pueden ayudar a acreditar el servicio y la entrega. Lo revisamos contigo.' },
     ],
     fuentes: [
       { label: 'Ley 15/2009, del contrato de transporte terrestre de mercancías (art. 79, prescripción)', href: `${BOE_LCTTM}#a79` },
       { label: 'Ley 9/2013, que modifica la Ley de Ordenación de los Transportes Terrestres (disposición adicional sexta, acción directa)', href: BOE_L9_2013 },
+      { label: 'Ley 16/1987, de Ordenación de los Transportes Terrestres (art. 38, Juntas Arbitrales del Transporte)', href: `${BOE_LOTT}#a38` },
+      { label: 'Ley Orgánica 1/2025, de medidas en materia de eficiencia del Servicio Público de Justicia (requisito de procedibilidad)', href: BOE_LO1_2025 },
     ],
   },
   {
@@ -130,17 +136,21 @@ export const servicios: Servicio[] = [
     nombre: 'Pérdida, avería y retraso de mercancías',
     resumen: 'Análisis de responsabilidades, limitaciones indemnizatorias, reservas, prueba del daño y reclamaciones derivadas del transporte.',
     incidencia: 'mercancia',
-    revision: 'pendiente',
+    revision: 'revisado',
     revisamos: [
-      'Si se hicieron reservas por escrito y a tiempo: en la entrega, o en 7 días naturales si el daño no era aparente; para el retraso, en 21 días desde la entrega.',
+      'Si se hicieron reservas por escrito y a tiempo: en la entrega, o en 7 días naturales si el daño no era aparente; para el retraso, en 21 días desde la entrega (no son necesarias si la mercancía se examinó conjuntamente).',
       'Quién responde en la cadena: cargador, agencia, transportista efectivo o aseguradora.',
       'El límite de indemnización aplicable y si hay motivos para superarlo.',
-      'Si el transporte fue internacional y se rige por el Convenio CMR.',
+      'Si el transporte fue internacional y se rige por el Convenio CMR, que tiene sus propios plazos de reserva, límites de indemnización y prescripción.',
+      'Los plazos: la acción prescribe, con carácter general, en un año desde la entrega, y antes de demandar hay que intentar una solución extrajudicial (MASC); hasta 15.000 euros puede corresponder a la Junta Arbitral del Transporte.',
     ],
     documentacion: ['CMR o carta de porte, con las reservas anotadas', 'Fotografías y, si existe, informe pericial', 'Orden de carga y factura de la mercancía', 'Póliza de seguro y comunicaciones con la aseguradora'],
     fuentes: [
       { label: 'Ley 15/2009, art. 57 (límite de indemnización)', href: `${BOE_LCTTM}#a57` },
       { label: 'Ley 15/2009, art. 60 (reservas por pérdidas, averías o retraso)', href: `${BOE_LCTTM}#a60` },
+      { label: 'Ley 15/2009, art. 79 (prescripción)', href: `${BOE_LCTTM}#a79` },
+      { label: 'Ley 16/1987, de Ordenación de los Transportes Terrestres (art. 38, Juntas Arbitrales del Transporte)', href: `${BOE_LOTT}#a38` },
+      { label: 'Ley Orgánica 1/2025, de medidas en materia de eficiencia del Servicio Público de Justicia (requisito de procedibilidad)', href: BOE_LO1_2025 },
     ],
   },
   { id: 'transporte-cmr-internacional', area: 'transporte', nombre: 'Convenio CMR y transporte internacional', resumen: 'Transporte internacional por carretera: documentación CMR, jurisdicción, plazos y responsabilidad del porteador.' },
@@ -160,7 +170,7 @@ export const servicios: Servicio[] = [
     imagen: 'despidos',
     pagina: '/impugnar-despido/',
     problemaLaboral: 'despido',
-    revision: 'pendiente',
+    revision: 'revisado',
     seo: {
       title: 'Impugnar un despido: revisión de la carta y el finiquito',
       h1: 'Impugnar un despido: revisamos tu carta y tu finiquito',
@@ -172,7 +182,7 @@ export const servicios: Servicio[] = [
       'La carta: el tipo de despido, los hechos o las causas que se alegan y la fecha de efectos.',
       'El finiquito y, si la hay, la indemnización ofrecida: si se han liquidado bien salario, vacaciones y pagas.',
       'Si el despido podría ser procedente, improcedente o nulo, y qué consecuencias tendría cada caso.',
-      'Las fechas: la acción contra el despido caduca a los veinte días hábiles, aunque la solicitud de conciliación interrumpe el plazo.',
+      'Las fechas: la acción contra el despido caduca a los veinte días hábiles. Presentar la solicitud de conciliación suspende ese plazo, pero no lo reinicia.',
     ],
     proceso: [
       'Revisamos la carta, el finiquito y tu situación.',
@@ -183,7 +193,7 @@ export const servicios: Servicio[] = [
     documentacion: ['Carta de despido o comunicación recibida', 'Contrato y, si las hay, prórrogas o modificaciones', 'Últimas nóminas', 'Finiquito o liquidación ofrecida, firmada o no', 'Informe de vida laboral'],
     faqs: [
       { q: '¿Tengo que firmar la carta de despido?', a: 'Firmar solo acredita que la has recibido. Puedes escribir «no conforme» junto a tu firma para dejar constancia de que no estás de acuerdo.' },
-      { q: '¿Cuánto tiempo tengo para reclamar?', a: 'La acción contra el despido caduca a los veinte días hábiles siguientes (artículo 59.3 del Estatuto de los Trabajadores), y la solicitud de conciliación interrumpe ese plazo. El cómputo depende de tu caso: consulta cuanto antes. La web no lo calcula de forma automática.' },
+      { q: '¿Cuánto tiempo tengo para reclamar?', a: 'La acción contra el despido caduca a los veinte días hábiles siguientes al despido (artículo 59.3 del Estatuto de los Trabajadores). La solicitud de conciliación suspende el plazo, que se reanuda después del acto de conciliación o, si no se celebra, a los quince días hábiles de presentarla (artículo 65.1 de la Ley Reguladora de la Jurisdicción Social). El cómputo depende de tu caso: consulta cuanto antes.' },
       { q: '¿Qué diferencia hay entre finiquito e indemnización?', a: 'El finiquito liquida lo que ya se te debía: salario de los últimos días, vacaciones no disfrutadas y partes proporcionales de pagas. La indemnización compensa la extinción del contrato y depende del tipo de despido. Son conceptos distintos.' },
       { q: 'Ya he firmado el finiquito. ¿Puedo reclamar?', a: 'Depende de lo que hayas firmado y de cómo lo hayas hecho. Firmar el finiquito no siempre impide reclamar, pero conviene revisarlo cuanto antes.' },
     ],
@@ -197,11 +207,11 @@ export const servicios: Servicio[] = [
     area: 'laboral',
     nombre: 'Salarios y finiquitos',
     resumen: 'Reclamación de salarios, horas, pagas o finiquitos que no se han pagado o se han calculado mal.',
-    cta: 'Reclamar lo que me deben',
+    cta: 'Revisar lo que me deben',
     imagen: 'salarios-finiquito',
     pagina: '/reclamar-salarios-y-finiquito/',
     problemaLaboral: 'cantidades',
-    revision: 'pendiente',
+    revision: 'revisado',
     seo: {
       title: 'Reclamar salarios atrasados o un finiquito mal calculado',
       h1: 'Reclamar salarios, horas o un finiquito mal calculado',
@@ -240,7 +250,7 @@ export const servicios: Servicio[] = [
     cta: 'Revisar mi caso de incapacidad',
     pagina: '/incapacidad-permanente/',
     problemaLaboral: 'incapacidad',
-    revision: 'pendiente',
+    revision: 'revisado',
     alcance: 'Las deudas, cotizaciones, apremios y embargos de la Seguridad Social se tratan en Hacienda y Seguridad Social.',
     seo: {
       title: 'Abogado de incapacidad permanente',
@@ -253,21 +263,24 @@ export const servicios: Servicio[] = [
       'En qué fase estás: baja, solicitud, resolución del INSS o reclamación previa.',
       'Qué grado podría corresponder (parcial, total, absoluta o gran incapacidad) según tu profesión habitual y tus limitaciones.',
       'Si la resolución está motivada y qué plazo de reclamación indica.',
-      'Cómo afecta a tu contrato y a tu relación con la empresa.',
+      'Cómo afecta a tu contrato: desde la Ley 2/2025, la incapacidad permanente ya no extingue el contrato automáticamente, y tienes diez días naturales desde la notificación para comunicar por escrito si quieres mantener la relación laboral.',
     ],
     proceso: [
       'Revisamos la resolución o tu situación y la documentación disponible.',
       'Te explicamos las opciones, el trabajo y los honorarios.',
-      'Preparamos la solicitud o la reclamación previa ante la Seguridad Social.',
+      'Preparamos la solicitud o la reclamación previa ante el INSS.',
       'Si se desestima, presentamos la demanda ante el juzgado de lo social.',
     ],
-    documentacion: ['Resolución del INSS o de la mutua, si la hay', 'Informe de vida laboral', 'Descripción de tu puesto y de tus tareas habituales', MEDICOS],
+    documentacion: ['Resolución del INSS y, si lo tienes, dictamen-propuesta del Equipo de Valoración de Incapacidades (EVI)', 'Informe de vida laboral', 'Descripción de tu puesto y de tus tareas habituales', MEDICOS],
     faqs: [
       { q: '¿Qué grados de incapacidad permanente existen?', a: 'Parcial, total, absoluta y gran incapacidad (artículo 194 de la Ley General de la Seguridad Social). El grado depende de cómo afectan tus limitaciones a tu profesión habitual o a cualquier trabajo.' },
-      { q: 'Me han denegado la incapacidad. ¿Puedo reclamar?', a: 'Normalmente cabe una reclamación previa y, después, la demanda. El plazo figura en la propia resolución: no esperes para revisarla.' },
+      { q: 'Me han denegado la incapacidad. ¿Puedo reclamar?', a: 'Cabe reclamación previa ante el INSS, con carácter general en el plazo de treinta días desde la notificación (artículo 71 de la Ley Reguladora de la Jurisdicción Social), y después demanda. Comprueba el plazo que indica tu resolución y no esperes para revisarla.' },
       { q: '¿Tengo que enviar mis informes médicos por el formulario?', a: 'No. No los incluyas en el formulario ni en el mensaje. Si hacen falta, te los pediremos por un canal seguro.' },
     ],
-    fuentes: [{ label: 'Ley General de la Seguridad Social, art. 194 (grados de incapacidad permanente)', href: `${BOE_LGSS}#a194` }],
+    fuentes: [
+      { label: 'Ley General de la Seguridad Social, art. 194 (grados de incapacidad permanente)', href: `${BOE_LGSS}#a194` },
+      { label: 'Estatuto de los Trabajadores, art. 49.1.n) (extinción por incapacidad permanente)', href: `${BOE_ET}#a49` },
+    ],
   },
   {
     id: 'laboral-altas',
@@ -275,12 +288,12 @@ export const servicios: Servicio[] = [
     nombre: 'Altas médicas y prestaciones',
     resumen: 'Disconformidad con un alta médica, prestaciones por incapacidad temporal y su efecto sobre el contrato.',
     problemaLaboral: 'incapacidad',
-    revision: 'pendiente',
+    revision: 'revisado',
     alcance: 'La incapacidad permanente tiene su propio servicio. Las deudas y cotizaciones de la Seguridad Social se tratan en Hacienda y Seguridad Social.',
     revisamos: [
       'La fecha del alta y quién la ha emitido: servicio público de salud, INSS o mutua.',
       'Si cabe manifestar disconformidad o reclamar, y en qué plazo, que suele ser muy breve.',
-      'Qué ocurre con tu puesto y tu salario mientras se resuelve.',
+      'Qué ocurre con tu puesto y tu salario mientras se resuelve: salvo en los supuestos en que la disconformidad prorroga la baja, el alta obliga a reincorporarte al trabajo aunque la impugnes.',
       'Las prestaciones afectadas y si se han calculado bien.',
     ],
     documentacion: ['Parte o resolución de alta', 'Comunicaciones de la mutua o del INSS', 'Nóminas recientes', MEDICOS],
@@ -293,7 +306,7 @@ export const servicios: Servicio[] = [
     cta: 'Consultar mi accidente laboral',
     pagina: '/accidente-laboral/',
     problemaLaboral: 'accidente',
-    revision: 'pendiente',
+    revision: 'revisado',
     seo: {
       title: 'Abogado de accidentes laborales',
       h1: 'Accidente laboral: prestaciones, recargo e indemnización',
@@ -313,9 +326,9 @@ export const servicios: Servicio[] = [
       'Iniciamos las reclamaciones ante la Seguridad Social, la mutua o la empresa.',
       'Si es necesario, acudimos al juzgado de lo social.',
     ],
-    documentacion: ['Parte de accidente de trabajo, si se emitió', 'Datos de testigos y fotografías del lugar, si las hay', 'Resoluciones de la mutua o del INSS', 'Nóminas anteriores al accidente', MEDICOS],
+    documentacion: ['Parte de accidente de trabajo, si se emitió', 'Datos de testigos y fotografías del lugar, si los hay', 'Resoluciones de la mutua o del INSS', 'Nóminas anteriores al accidente', MEDICOS],
     faqs: [
-      { q: '¿Qué es el recargo de prestaciones?', a: 'Si el accidente se debe a la falta de medidas de seguridad, las prestaciones se incrementan entre un 30 % y un 50 % a cargo de la empresa (artículo 164 de la Ley General de la Seguridad Social).' },
+      { q: '¿Qué es el recargo de prestaciones?', a: 'Si el accidente de trabajo o la enfermedad profesional se debe a la falta de medidas de seguridad, las prestaciones económicas se incrementan entre un 30 % y un 50 %, según la gravedad de la falta, a cargo de la empresa (artículo 164 de la Ley General de la Seguridad Social).' },
       { q: '¿Un accidente de camino al trabajo es accidente laboral?', a: 'El accidente al ir o volver del trabajo («in itinere») puede tener la consideración de accidente de trabajo. Depende del trayecto y de las circunstancias.' },
       { q: 'Además de las prestaciones, ¿puedo pedir una indemnización?', a: 'En algunos casos sí, por los daños y perjuicios que las prestaciones no cubren. Hay que estudiar la responsabilidad de la empresa y los daños sufridos.' },
     ],
@@ -330,11 +343,12 @@ export const servicios: Servicio[] = [
     nombre: 'Acoso y vulneración de derechos',
     resumen: 'Acoso laboral, discriminación y vulneración de derechos fundamentales en el trabajo: medidas, reclamación y, en su caso, extinción del contrato.',
     problemaLaboral: 'acoso',
-    revision: 'pendiente',
+    revision: 'revisado',
     revisamos: [
       'Los hechos, desde cuándo ocurren y qué pruebas existen.',
       'Si la empresa conocía la situación y qué medidas tomó o debió tomar.',
       'Las vías posibles: denuncia interna, Inspección de Trabajo, demanda de tutela de derechos fundamentales o extinción del contrato.',
+      'Antes de dejar de ir al trabajo: salvo que el juzgado acuerde medidas cautelares, en la extinción del contrato por incumplimiento de la empresa normalmente hay que seguir trabajando mientras se tramita.',
     ],
     documentacion: ['Comunicaciones, correos o mensajes relacionados', 'Datos de posibles testigos', 'Denuncias internas y respuestas de la empresa'],
   },
@@ -342,14 +356,13 @@ export const servicios: Servicio[] = [
     id: 'laboral-condiciones',
     area: 'laboral',
     nombre: 'Modificaciones de condiciones y conflictos laborales',
-    resumen: 'Cambios de horario, funciones, salario o centro de trabajo, y extinción del contrato por incumplimientos graves de la empresa.',
-    articulos: ['baja-laboral-de-larga-duracion-como-dejar-tu-empresa-con-indemnizacion-y-derecho-a-paro'],
+    resumen: 'Cambios de horario, turnos, funciones o salario, y extinción del contrato por incumplimientos graves de la empresa.',
     problemaLaboral: 'condiciones',
-    revision: 'pendiente',
+    revision: 'revisado',
     revisamos: [
       'Si el cambio es una modificación sustancial de condiciones y si se ha seguido el procedimiento.',
-      'Las opciones: aceptar, impugnar o, en algunos casos, extinguir el contrato con indemnización.',
-      'Las fechas: la impugnación de una modificación sustancial también caduca a los veinte días hábiles.',
+      'Las opciones: aceptar, impugnar o, si el cambio te perjudica y afecta a jornada, horario, turnos, salario o funciones, extinguir el contrato con una indemnización de veinte días por año, con un máximo de nueve meses (artículo 41.3 del Estatuto de los Trabajadores). Si la empresa no ha seguido el procedimiento y el cambio menoscaba tu dignidad, puede caber la extinción del artículo 50, con la indemnización del despido improcedente.',
+      'Las fechas: la impugnación de una modificación sustancial caduca a los veinte días hábiles desde su notificación. No exige conciliación previa, por lo que la demanda debe presentarse dentro de ese plazo.',
     ],
     documentacion: ['Comunicación escrita del cambio', 'Contrato y nóminas', 'Comunicaciones con la empresa'],
     fuentes: [
@@ -370,12 +383,13 @@ export const servicios: Servicio[] = [
     nombre: 'Reclamaciones entre empresas',
     resumen: 'Facturas impagadas e incumplimientos de contrato con clientes, proveedores o socios comerciales.',
     alcance: 'Los portes y servicios de transporte impagados se tratan en Transporte y logística, con su propia vía de reclamación.',
-    revision: 'pendiente',
+    revision: 'revisado',
     preguntaMinima: { label: '¿Quién reclama?', opciones: ['Mi empresa reclama a otra', 'Reclaman a mi empresa'] },
     revisamos: [
       'El contrato, los pedidos, las facturas y las comunicaciones que acreditan la deuda o el incumplimiento.',
       'Si la reclamación es de transporte: en ese caso se trata en su área, porque tiene reglas propias.',
-      'La vía más adecuada: requerimiento, negociación, procedimiento monitorio o demanda.',
+      'La vía más adecuada: negociación o requerimiento fehaciente, que sirve como el intento de solución extrajudicial (MASC) exigido antes de demandar, y después procedimiento monitorio, juicio cambiario o demanda.',
+      'Si reclaman a tu empresa: si la deuda existe, si ha prescrito y cómo responder al requerimiento o a la demanda.',
     ],
     documentacion: ['Contrato o condiciones pactadas', 'Pedidos, albaranes y facturas', 'Comunicaciones con la otra empresa'],
   },
