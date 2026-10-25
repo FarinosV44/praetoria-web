@@ -14,6 +14,7 @@ Este Sitio Web puede utilizar Google Analytics 4, un servicio de análisis web p
 
 - **Cookies técnicas o necesarias:** imprescindibles para el funcionamiento básico del Sitio Web. No requieren consentimiento. Esta web guarda en el navegador, sin cookies, la elección que hagas en el aviso de cookies.
 - **Cookies analíticas (Google Analytics 4):** permiten analizar estadísticamente la navegación. Requieren el consentimiento previo del usuario.
+- **Procedencia de la visita (almacenamiento de sesión, sin cookies):** si aceptas las cookies analíticas, el navegador guarda durante la visita la primera página que visitaste y, si los hay, los parámetros de campaña de la dirección (utm_source, utm_medium, utm_campaign), para asociarlos a la consulta que envíes. Se borra al cerrar la pestaña o si rechazas las cookies analíticas. Sin tu consentimiento no se guarda.
 
 ## Consentimiento
 

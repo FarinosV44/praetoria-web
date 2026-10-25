@@ -2,7 +2,7 @@
 // Versión ligera para el navegador: el formulario y la validación solo necesitan estos campos.
 import type { Servicio, ServicioArea } from './servicios.ts';
 
-export type ServicioIndice = Pick<Servicio, 'id' | 'area' | 'nombre' | 'incidencia' | 'problemaLaboral' | 'preguntaMinima'>;
+export type ServicioIndice = Pick<Servicio, 'id' | 'area' | 'nombre' | 'pagina' | 'incidencia' | 'problemaLaboral' | 'preguntaMinima'>;
 
 export const indiceServicios: ServicioIndice[] = [
   {
@@ -27,6 +27,7 @@ export const indiceServicios: ServicioIndice[] = [
     "id": "transporte-portes-impagados",
     "area": "transporte",
     "nombre": "Reclamación de portes impagados",
+    "pagina": "/reclamacion-portes-impagados/",
     "incidencia": "impago"
   },
   {
@@ -65,18 +66,21 @@ export const indiceServicios: ServicioIndice[] = [
     "id": "laboral-despidos",
     "area": "laboral",
     "nombre": "Despidos e impugnación",
+    "pagina": "/impugnar-despido/",
     "problemaLaboral": "despido"
   },
   {
     "id": "laboral-cantidades",
     "area": "laboral",
     "nombre": "Salarios y finiquitos",
+    "pagina": "/reclamar-salarios-y-finiquito/",
     "problemaLaboral": "cantidades"
   },
   {
     "id": "laboral-incapacidad",
     "area": "laboral",
     "nombre": "Incapacidad permanente",
+    "pagina": "/incapacidad-permanente/",
     "problemaLaboral": "incapacidad"
   },
   {
@@ -89,6 +93,7 @@ export const indiceServicios: ServicioIndice[] = [
     "id": "laboral-accidentes",
     "area": "laboral",
     "nombre": "Accidentes laborales y responsabilidad empresarial",
+    "pagina": "/accidente-laboral/",
     "problemaLaboral": "accidente"
   },
   {
@@ -157,17 +162,20 @@ export const indiceServicios: ServicioIndice[] = [
   {
     "id": "hacienda-requerimientos",
     "area": "hacienda",
-    "nombre": "Requerimientos, liquidaciones y sanciones de Hacienda"
+    "nombre": "Requerimientos, liquidaciones y sanciones de Hacienda",
+    "pagina": "/abogado-hacienda-y-seguridad-social-en-valencia/"
   },
   {
     "id": "hacienda-seguridad-social",
     "area": "hacienda",
-    "nombre": "Deudas, apremios y embargos de la Seguridad Social"
+    "nombre": "Deudas, apremios y embargos de la Seguridad Social",
+    "pagina": "/abogado-hacienda-y-seguridad-social-en-valencia/"
   },
   {
     "id": "hacienda-derivacion",
     "area": "hacienda",
-    "nombre": "Derivación de responsabilidad al administrador"
+    "nombre": "Derivación de responsabilidad al administrador",
+    "pagina": "/abogado-hacienda-y-seguridad-social-en-valencia/"
   },
   {
     "id": "hacienda-devoluciones",
@@ -258,7 +266,8 @@ export const indiceServicios: ServicioIndice[] = [
   {
     "id": "familia-divorcio",
     "area": "familia",
-    "nombre": "Divorcios y separaciones"
+    "nombre": "Divorcios y separaciones",
+    "pagina": "/abogado-divorcio-horta-nord-valencia/"
   },
   {
     "id": "familia-custodia",
@@ -276,7 +285,8 @@ export const indiceServicios: ServicioIndice[] = [
   {
     "id": "familia-modificacion-medidas",
     "area": "familia",
-    "nombre": "Modificación de medidas y ejecución de sentencias"
+    "nombre": "Modificación de medidas y ejecución de sentencias",
+    "pagina": "/abogado-divorcio-horta-nord-valencia/"
   },
   {
     "id": "familia-patrimonio",
@@ -322,6 +332,47 @@ export const indiceServicios: ServicioIndice[] = [
     "id": "arte-atribucion",
     "area": "arte",
     "nombre": "Atribución, conservación y exportación de obra"
+  },
+  {
+    "id": "penal-detenido",
+    "area": "penal",
+    "nombre": "Asistencia al detenido",
+    "pagina": "/asistencia-al-detenido/"
+  },
+  {
+    "id": "penal-citacion",
+    "area": "penal",
+    "nombre": "Citaciones y juicios rápidos",
+    "pagina": "/citacion-juzgado-juicio-rapido/"
+  },
+  {
+    "id": "penal-seguridad-vial",
+    "area": "penal",
+    "nombre": "Alcoholemia y seguridad vial",
+    "pagina": "/alcoholemia-y-seguridad-vial/"
+  },
+  {
+    "id": "penal-lesiones",
+    "area": "penal",
+    "nombre": "Lesiones y agresiones",
+    "pagina": "/lesiones-y-agresiones/"
+  },
+  {
+    "id": "penal-hurto-robo",
+    "area": "penal",
+    "nombre": "Hurto y robo",
+    "pagina": "/hurto-y-robo/"
+  },
+  {
+    "id": "penal-estafas",
+    "area": "penal",
+    "nombre": "Estafas",
+    "pagina": "/estafas/"
+  },
+  {
+    "id": "penal-violencia-amenazas",
+    "area": "penal",
+    "nombre": "Amenazas, coacciones y violencia en el entorno familiar"
   }
 ];
 

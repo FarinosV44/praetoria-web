@@ -1,48 +1,80 @@
 import Link from 'next/link';
 import { getPosts } from '@/lib/content';
 import type { AreaContent } from '@/lib/areas-content';
-import { areas, categories, groups, laboral, whatsapp } from '@/lib/site';
+import { areasDe, canalDe, categories, groups, whatsapp } from '@/lib/site';
+import { iconoArea, metodo, objetivoArea } from '@/lib/iconos';
 import { Breadcrumbs } from './Breadcrumbs';
 import { PostList } from './PostList';
 import { DecaBand } from './DecaBand';
 import { CtaBand } from './CtaBand';
-import { Icon } from './Icon';
+import { Icon, LineIcon } from './Icon';
 import { ServiceList } from './ServiceList';
 import { serviciosDe } from '@/lib/servicios';
+import { imagen } from '@/lib/imagenes';
+import { Composicion, Foto } from './Foto';
+import { RevisionPendiente } from './RevisionPendiente';
 
 export function AreaPage({ area }: { area: AreaContent }) {
   const group = groups[area.group];
-  const siblings = areas.filter((a) => a.group === area.group && a.slug !== area.slug);
+  const siblings = areasDe(area.group).filter((a) => a.slug !== area.slug);
   const all = area.category ? getPosts().filter((p) => p.category === area.category) : [];
   const isTransport = area.category === 'transporte';
   const decaGuides = all.filter((p) => p.deca === 'guia');
   const decaTools = all.filter((p) => p.deca === 'herramienta');
   const others = all.filter((p) => !p.deca);
+  const canal = canalDe(area.id);
+  const foto = imagen(area.imagen);
 
   return (
     <div className="area-page">
-    <section className="page-head">
+      {area.revision === 'pendiente' && <RevisionPendiente indexable={area.indexable !== false} />}
+      <section className="page-head area-head">
         <div className="wrap">
           <Breadcrumbs items={[{ label: group.title, href: group.href }, { label: area.h1 }]} />
-          <div className="split">
-            <div>
+          <div className="area-head__grid">
+            <div className="area-head__texto">
+              <p className="antetitulo">
+                <LineIcon name={iconoArea[area.id]} /> {area.id === 'laboral' ? 'Área laboral' : group.title}
+              </p>
               <h1>{area.h1}</h1>
               <p className="lede">{area.lede}</p>
+              <p className="objetivo-nota">
+                <LineIcon name="objetivo" />
+                <span>
+                  <small>Objetivo</small>
+                  {objetivoArea[area.id]}
+                </span>
+              </p>
               <div className="actions">
-                {area.contactoLaboral ? (
-                  <>
-                    <a className="btn btn--red" href={`tel:${laboral.phoneIntl}`}><Icon name="phone" /> Llamar a {laboral.name} · {laboral.phone}</a>
-                    <Link className="btn btn--ghost" href={`/contacto/?area=${area.id}`}>Enviar mi consulta</Link>
-                  </>
+                <Link className="btn btn--red" href={`/contacto/?area=${area.id}`}>
+                  {canal.consulta} <LineIcon name="flecha" />
+                </Link>
+                {(canal.id === 'laboral' || area.urgente) && (
+                  <a className="btn btn--ghost" href={`tel:${canal.phoneIntl}`}>
+                    <Icon name="phone" /> {canal.llamar}
+                  </a>
+                )}
+                {area.urgente ? (
+                  <Link className="btn btn--ghost" href={`/que-me-llame-un-abogado/?area=${area.id}`}>
+                    <LineIcon name="reloj" /> Que me llame un abogado
+                  </Link>
                 ) : (
-                  <>
-                    <a className="btn btn--red" href={whatsapp(area.whatsappText)}><Icon name="whatsapp" /> Consultar por WhatsApp</a>
-                    <Link className="btn btn--ghost" href={`/contacto/?area=${area.id}`}>Enviar mi consulta</Link>
-                  </>
+                  <a className="btn btn--ghost" href={whatsapp(area.whatsappText, canal.id)}>
+                    <Icon name="whatsapp" /> {canal.escribir}
+                  </a>
                 )}
               </div>
+              {area.urgente && (
+                <p className="small muted">Atendemos según disponibilidad. Si estás en peligro, llama al 112.</p>
+              )}
             </div>
-            <img className="photo head-photo" src={area.image.src.replace('.webp', '-800.webp')} alt={area.image.alt} width={800} height={600} />
+            {foto ? (
+              <figure className="area-head__media">
+                <Foto img={foto} sizes="(min-width: 960px) 46vw, 92vw" prioridad />
+              </figure>
+            ) : (
+              <Composicion icono={iconoArea[area.id]} titulo={objetivoArea[area.id]} />
+            )}
           </div>
         </div>
       </section>
@@ -55,6 +87,7 @@ export function AreaPage({ area }: { area: AreaContent }) {
               <ul className="journeys">
                 {area.recorridos.map((r) => (
                   <li key={r.titulo} className="journey">
+                    {r.icono && <LineIcon name={r.icono} />}
                     <h3>{r.titulo}</h3>
                     <p>{r.texto}</p>
                     <p className="journey__links">
@@ -69,10 +102,23 @@ export function AreaPage({ area }: { area: AreaContent }) {
               </ul>
             </>
           )}
-          <div className="prose intro">
-            {area.intro.map((p) => (
-              <p key={p.slice(0, 40)}>{p}</p>
-            ))}
+          <div className="intro-grid">
+            <div className="prose intro">
+              {area.intro.map((p) => (
+                <p key={p.slice(0, 40)}>{p}</p>
+              ))}
+            </div>
+            <aside className="metodo-mini" aria-label="Cómo trabajamos">
+              <p className="metodo-mini__titulo">Cómo trabajamos</p>
+              <ol>
+                {metodo.map((m) => (
+                  <li key={m.titulo}>
+                    <LineIcon name={m.icono} />
+                    <span>{m.titulo}</span>
+                  </li>
+                ))}
+              </ol>
+            </aside>
           </div>
 
           {
@@ -93,15 +139,6 @@ export function AreaPage({ area }: { area: AreaContent }) {
           <p className="closing">{area.closing}</p>
           {area.nota && <p className="area-note">{area.nota}</p>}
 
-          {
-            area.gallery && (
-              <div className="gallery">
-                {area.gallery.map((g) => (
-                  <img key={g.src} className="photo" src={g.src} alt={g.alt} width={600} height={800} loading="lazy" />
-                ))}
-              </div>
-            )
-          }
         </div>
       </section>
 
@@ -160,11 +197,7 @@ export function AreaPage({ area }: { area: AreaContent }) {
         </div>
       </section>
 
-      <CtaBand
-        whatsappText={area.whatsappText}
-        href={`/contacto/?area=${area.id}`}
-        telefono={area.contactoLaboral ? { phone: laboral.phone, phoneIntl: laboral.phoneIntl, label: `Llamar a ${laboral.name}` } : undefined}
-      />
+      <CtaBand whatsappText={area.whatsappText} href={`/contacto/?area=${area.id}`} canal={canal.id} />
 
     </div>
 

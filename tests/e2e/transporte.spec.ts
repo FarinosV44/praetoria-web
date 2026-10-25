@@ -64,12 +64,12 @@ test('los datos de transporte solo aparecen en esa área y una fecha futura se r
 
 test('DeCA contextual: no aparece en artículos de reclamaciones, sí en las guías DeCA', async ({ page }) => {
   await page.goto('/impagos-transporte-reclamar-factura/');
-  await expect(page.locator('.deca-root')).toHaveCount(0);
-  await expect(page.locator('.cta').getByRole('link', { name: /consulta por escrito/ })).toHaveAttribute('href', '/contacto/?servicio=transporte-portes-impagados');
+  await expect(page.locator('.deca-bloque')).toHaveCount(0);
+  await expect(page.locator('.cta').getByRole('link', { name: /Solicitar una valoración/ })).toHaveAttribute('href', '/contacto/?servicio=transporte-portes-impagados');
   await page.goto('/fraudes-transporte-aseguradora/');
-  await expect(page.locator('.deca-root')).toHaveCount(0);
+  await expect(page.locator('.deca-bloque')).toHaveCount(0);
   await page.goto('/deca-obligatorio-en-2026-guia-legal-para-transportistas-y-cargadores/');
-  await expect(page.locator('.deca-root')).toHaveCount(1);
+  await expect(page.locator('.deca-bloque')).toHaveCount(1);
 });
 
 test('el servicio de mercancías muestra qué revisamos y sus normas', async ({ page }) => {

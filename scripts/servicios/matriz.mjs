@@ -2,6 +2,8 @@
 // y valida el modelo: ids únicos y con formato estable, artículos existentes y no en borrador, páginas propias existentes.
 //   node scripts/servicios/matriz.mjs          → valida y escribe docs/SERVICIOS.md
 //   node scripts/servicios/matriz.mjs --check  → valida y falla si docs/SERVICIOS.md no está al día
+//   node scripts/servicios/matriz.mjs --produccion → puerta previa al cambio de dominio (#32): falla si queda texto
+//     pendiente de revisión jurídica o alguna página marcada como no indexable
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { servicios, enlaceConsulta } from '../../src/lib/servicios.ts';
@@ -42,6 +44,28 @@ for (const s of servicios) {
   if ((s.revisamos || s.faqs) && !s.revision) errores.push(`${s.id}: texto ampliado sin estado de revisión`);
   if (s.pagina && !rutaExiste(s.pagina)) errores.push(`${s.id}: página inexistente ${s.pagina}`);
   if (s.siguientePaso && !rutaExiste(s.siguientePaso.href)) errores.push(`${s.id}: siguiente paso inexistente ${s.siguientePaso.href}`);
+  if (s.urgencia && !s.pagina) errores.push(`${s.id}: factores de urgencia sin página propia`);
+  if (s.indexable === false && s.revision !== 'pendiente') errores.push(`${s.id}: no indexable sin revisión pendiente (si ya está revisado, quita indexable: false)`);
+}
+for (const s of servicios)
+  for (const r of s.relacionados ?? []) {
+    const rel = servicios.find((x) => x.id === r);
+    if (!rel) errores.push(`${s.id}: relacionado inexistente ${r}`);
+    else if (!rel.pagina) errores.push(`${s.id}: relacionado sin página propia ${r}`);
+  }
+
+if (process.argv.includes('--produccion')) {
+  const pendientes = servicios.filter((s) => s.revision === 'pendiente').map((s) => `servicio ${s.id}${s.indexable === false ? ' (noindex)' : ''}`);
+  const areasSrc = readFileSync('src/lib/areas-content.ts', 'utf8');
+  for (const m of areasSrc.matchAll(/slug: '([^']+)'[\s\S]*?(?=\n  \{\n|\n\];)/g))
+    if (/revision: 'pendiente'|indexable: false/.test(m[0])) pendientes.push(`área /${m[1]}/`);
+  if (pendientes.length) {
+    console.error(`Puerta de producción: ${pendientes.length} textos pendientes de revisión jurídica. Revísalos y márcalos como 'revisado' antes de publicar:`);
+    pendientes.forEach((p) => console.error(' - ' + p));
+    process.exit(1);
+  }
+  console.log('Puerta de producción: sin textos pendientes de revisión jurídica');
+  process.exit(0);
 }
 
 const esc = (t) => String(t).replace(/\|/g, '\\|');
@@ -92,7 +116,7 @@ const checklists =
   ) + '\n';
 
 // Índice ligero para el navegador (formulario y validación): sin textos ampliados, que pesan ~10 KB gzip (#8, presupuesto de #4)
-const LIGEROS = ['id', 'area', 'nombre', 'incidencia', 'problemaLaboral', 'preguntaMinima'];
+const LIGEROS = ['id', 'area', 'nombre', 'pagina', 'incidencia', 'problemaLaboral', 'preguntaMinima'];
 const indice =
   `// GENERADO por scripts/servicios/matriz.mjs a partir de src/lib/servicios.ts. No editar a mano.
 // Versión ligera para el navegador: el formulario y la validación solo necesitan estos campos.

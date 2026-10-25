@@ -5,6 +5,8 @@ date: 2026-09-05
 updated: 2026-09-08
 category: hacienda
 wpId: 2868
+intencion: "Responder a Hacienda cuando pide justificar ingresos o movimientos"
+imagen: hacienda-ingresos
 ---
 
 Recibir un requerimiento de [Hacienda](/abogado-hacienda-y-seguridad-social-en-valencia/) pidiendo que justifiques ingresos o movimientos de tu cuenta bancaria genera, comprensiblemente, inquietud. No significa por sí solo que exista un problema: es un procedimiento habitual dentro de las comprobaciones que realiza la Agencia Tributaria. Lo importante es entender qué te están pidiendo exactamente y responder con orden, dentro del plazo que figure en tu propia notificación.

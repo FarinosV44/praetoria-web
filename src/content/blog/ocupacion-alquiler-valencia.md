@@ -7,6 +7,8 @@ updated: 2026-10-23
 category: civil-vivienda
 tags: ["alquiler valencia", "desahucio", "ocupación vivienda", "okupas", "propietarios"]
 wpId: 2757
+intencion: "Qué puede hacer el propietario ante una ocupación o un inquilino que no paga en Valencia"
+imagen: civil-cerradura
 ---
 
 
@@ -78,7 +80,7 @@ Si tienes un problema con un alquiler, una ocupación o un impago en Valencia, *
 
 Analizamos tu caso sin compromiso y te explicamos exactamente qué opciones reales tienes.
 
-📍 Valencia – El Puig  
+📍 Valencia  
 🌐 **[www.praetoriaabogados.es](/)**
 
 **Praetoria División Jurídica**  

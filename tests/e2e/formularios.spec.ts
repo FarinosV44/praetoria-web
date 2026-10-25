@@ -7,14 +7,15 @@ test.describe('cuestionario de divorcio', () => {
 
   const answer = (page: import('@playwright/test').Page, v: string) => page.locator('.quiz__step:not([hidden])').getByLabel(v, { exact: true }).click();
 
-  test('caso sencillo: precio cerrado, foco en el resultado y respuestas en el WhatsApp', async ({ page }) => {
+  test('caso sencillo: precio cerrado, foco en el resultado; las respuestas van con el formulario, no en el WhatsApp', async ({ page }) => {
     for (const v of ['Quiero divorciarme o separarme', 'Sí, estamos completamente de acuerdo', 'No', 'No', 'No, nada urgente']) await answer(page, v);
     const result = page.locator('.quiz__result');
     await expect(result).toBeVisible();
     await expect(result).toBeFocused();
     await expect(result.getByRole('heading', { name: /precio cerrado/ })).toBeVisible();
     const href = decodeURIComponent((await result.getByRole('link', { name: /WhatsApp/ }).getAttribute('href')) ?? '');
-    expect(href).toContain('¿Tenéis hijos en común? No');
+    expect(href).not.toContain('hijos');
+    await expect(result.getByRole('link', { name: 'Enviarlas con el formulario' })).toHaveAttribute('href', '/contacto/?servicio=familia-divorcio&cuestionario=divorcio');
   });
 
   test('caso con hijos menores: valoración personalizada', async ({ page }) => {
