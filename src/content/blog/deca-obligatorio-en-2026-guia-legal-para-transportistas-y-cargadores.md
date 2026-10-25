@@ -1,9 +1,9 @@
 ---
-title: "DeCA obligatorio en 2026: guía legal para transportistas y cargadores"
-seoTitle: "DeCA transporte 2026: guía legal y sanciones"
-description: "El DeCA será obligatorio el 5 de octubre de 2026. Descubre quién debe emitirlo, cómo evitar sanciones y qué exigir a tu proveedor."
+title: "Sanciones del DeCA: guía legal para transportistas y cargadores"
+seoTitle: "Sanciones del DeCA: qué riesgos asumen cargador y transportista"
+description: "Qué sanciones puede acarrear un DeCA inexistente o incorrecto, quién responde (cargador, transportista o agencia) y cómo comprobar que tu proveedor cumple."
 date: 2026-09-06
-updated: 2026-09-09
+updated: 2026-10-25
 category: transporte
 deca: guia
 tags: ["transporte internacional"]
@@ -39,7 +39,7 @@ Su finalidad es que la Inspección de Transporte pueda comprobar, entre otros as
 
 La principal novedad es que el documento deberá generarse electrónicamente y cumplir unos requisitos técnicos que garanticen su integridad, disponibilidad y trazabilidad.
 
-## ¿Cuándo será obligatorio el DeCA digital?
+## ¿Desde cuándo es obligatorio el DeCA digital?
 
 La fecha clave es el **5 de octubre de 2026**.
 
@@ -47,7 +47,7 @@ La Ley 9/2025, de Movilidad Sostenible, estableció que el documento de control 
 
 Posteriormente, la Resolución de 5 de junio de 2026 de la Dirección General de Transporte por Carretera y Ferrocarril concretó las características que deben reunir tanto el documento como las aplicaciones utilizadas para generarlo.
 
-Desde el 5 de octubre de 2026 ya no será válido confeccionar el documento exclusivamente en papel.
+Desde el 5 de octubre de 2026 ya no es válido confeccionar el documento exclusivamente en papel.
 
 ## ¿A qué transportes se aplica?
 
@@ -62,6 +62,8 @@ El DeCA afecta principalmente a:
 Por el contrario, los transportes internacionales que discurran parcialmente por España utilizarán la documentación establecida en los convenios internacionales aplicables, como la carta de porte CMR.
 
 También deben tenerse en cuenta las excepciones previstas en la Orden FOM/2861/2012 para determinados tipos de transporte.
+
+Para una visión práctica de qué debe contener el documento y cómo organizarlo en el día a día, consulta la [guía del DECA obligatorio para transportistas](/deca-obligatorio-en-2026-guia-para-transportistas-y-empresas-de-transporte/).
 
 ## El papel no desaparece completamente
 
@@ -154,6 +156,8 @@ Toda empresa debería establecer un procedimiento que determine:
 - Cómo obtiene una copia la otra parte.
 - Qué protocolo se aplica si falla el sistema.
 
+Desarrollamos este punto, con ejemplos de inspección, en [quién debe hacer el DeCA: el cargador o el transportista](/quien-debe-hacer-el-deca-el-cargador-o-el-transportista-que-ocurre-en-una-inspeccion-y-que-pasa-si-cada-parte-utiliza-una-plataforma-diferente/).
+
 ## El verdadero riesgo está en la subcontratación
 
 Las cadenas de subcontratación pueden convertirse en uno de los principales focos de errores.
@@ -181,6 +185,8 @@ También pueden aparecer errores en:
 - La identidad de quien contrata en nombre propio.
 
 El problema del DeCA no es únicamente informático. Es también un problema contractual y operativo.
+
+Si eres una agencia, revisa también [qué debe hacer una agencia de transporte con el DECA al subcontratar](/deca-y-subcontratacion-que-debe-hacer-realmente-una-agencia-de-transporte/).
 
 ## ¿Qué datos debe contener?
 
@@ -316,9 +322,9 @@ Las rutas, clientes, matrículas, proveedores, volúmenes y operaciones constitu
 
 También debe evitarse la dependencia tecnológica: una empresa no debería quedar atrapada en una plataforma porque todos sus documentos históricos se encuentren almacenados en ella y resulte difícil recuperarlos.
 
-## Protocolo de comprobación antes del 5 de octubre
+## Protocolo de comprobación para evitar sanciones
 
-Antes de que finalice el periodo de adaptación, recomendamos realizar una prueba completa:
+Recomendamos realizar una prueba completa con tu operativa real:
 
 1. Crear una expedición real de prueba.
 2. Generar el PDF antes de la salida del vehículo.
@@ -369,13 +375,13 @@ En Praetoria División Jurídica asesoramos a transportistas, agencias, operador
 - Reclamaciones ante Juntas Arbitrales de Transporte.
 - Implantación de protocolos internos de cumplimiento.
 
-Si tu empresa necesita revisar su funcionamiento antes del 5 de octubre o ha recibido una inspección relacionada con el documento de control, puedes contactar con [Praetoria División Jurídica](/).
+Si tu empresa necesita revisar su funcionamiento o ha recibido una inspección o un expediente sancionador relacionado con el documento de control, puedes contactar con nuestros [abogados de transporte y logística](/logistica-y-transporte-internacional/).
 
 ## Preguntas frecuentes sobre el DeCA
 
-### ¿Cuándo será obligatorio el DeCA?
+### ¿Desde cuándo es obligatorio el DeCA?
 
-El documento de control administrativo deberá generarse obligatoriamente en formato digital desde el 5 de octubre de 2026.
+El documento de control administrativo debe generarse obligatoriamente en formato digital desde el 5 de octubre de 2026.
 
 ### ¿Puede el conductor llevar el DeCA impreso?
 

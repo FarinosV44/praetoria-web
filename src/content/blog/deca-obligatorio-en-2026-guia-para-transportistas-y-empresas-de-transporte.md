@@ -1,9 +1,9 @@
 ---
 title: "DECA obligatorio en 2026: guía para transportistas y empresas de transporte"
-seoTitle: "DECA obligatorio en 2026: guía para transportistas"
-description: "Qué exige realmente el DECA obligatorio desde octubre de 2026, cómo elegir plataforma y por qué el respaldo jurídico es clave para transportistas"
+seoTitle: "DECA obligatorio: qué es, a quién afecta y cómo cumplirlo"
+description: "El DECA es obligatorio desde el 5 de octubre de 2026. Qué debe contener, a quién afecta, si sirve el papel, cuánto conservarlo y cómo elegir plataforma."
 date: 2026-09-06
-updated: 2026-09-09
+updated: 2026-10-25
 category: transporte
 deca: guia
 wpId: 2872
@@ -11,7 +11,7 @@ intencion: "Organizar el DeCA en el día a día de una empresa transportista"
 imagen: logistica-camion-muelle
 ---
 
-El 5 de octubre de 2026 cambia la forma de documentar buena parte del transporte público de mercancías por carretera en España. A partir de esa fecha, el documento de control administrativo deberá generarse en formato electrónico: el denominado Documento Electrónico de Control Administrativo o [DECA](https://www.decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=blog_deca).
+Desde el 5 de octubre de 2026 ha cambiado la forma de documentar buena parte del transporte público de mercancías por carretera en España. Desde esa fecha, el documento de control administrativo debe generarse en formato electrónico: el denominado Documento Electrónico de Control Administrativo o [DECA](https://www.decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=blog_deca).
 
 En las últimas semanas han aparecido numerosas plataformas, aplicaciones y campañas comerciales alrededor de esta obligación. Algunas ofrecen el servicio gratuitamente; otras lo integran en programas de gestión; y otras recurren a expresiones como “plataforma homologada”, “firma digital obligatoria” o “tecnología blockchain”.
 
@@ -130,6 +130,8 @@ Pueden agruparse varios envíos en un mismo documento cuando el cargador contrac
 
 Esto puede resultar especialmente útil en determinados repartos, rutas regulares o servicios sucesivos. Pero agrupar incorrectamente operaciones de distintos cargadores contractuales o transportistas efectivos puede convertir una aparente simplificación administrativa en un problema durante una inspección.
 
+Cuando un mismo transporte tiene varias cargas o descargas, conviene revisar cómo reflejarlas: lo explicamos en [el DECA con varios lugares de carga y descarga](/deca-con-varios-lugares-de-carga-y-descarga-que-dice-la-ley-y-como-hacerlo-correctamente/).
+
 ## El DECA debe conservarse al menos durante un año
 
 Tanto el cargador contractual como el transportista efectivo deben poder conservar o descargar los documentos durante un periodo mínimo de un año.
@@ -189,6 +191,8 @@ También pueden surgir controversias sobre:
 
 Por eso, automatizar el DECA sin revisar previamente los flujos contractuales de la empresa puede digitalizar también errores que antes permanecían ocultos.
 
+Qué consecuencias puede tener un documento inexistente o incorrecto, y quién responde de él, lo analizamos en la guía sobre [las sanciones del DeCA](/deca-obligatorio-en-2026-guia-legal-para-transportistas-y-cargadores/).
+
 ## No todas las empresas necesitan la misma solución
 
 Un transportista autónomo que realiza pocos servicios puede necesitar una herramienta sencilla y rápida. Una agencia de transporte, un operador logístico o una empresa con una flota amplia necesitará además usuarios diferenciados, datos reutilizables, históricos, control de versiones e integración con sus procesos internos.
@@ -227,11 +231,11 @@ Esto permite abordar dudas que una herramienta puramente tecnológica no siempre
 
 Ninguna plataforma puede garantizar que una empresa nunca vaya a ser inspeccionada o sancionada. Lo que sí puede hacer un servicio especializado es ayudar a implantar correctamente el sistema, detectar errores y ofrecer una respuesta profesional cuando aparezca un problema.
 
-## Una recomendación antes del 5 de octubre
+## Una recomendación: comprueba tu operativa real
 
-La transición no debería limitarse a abrir una cuenta el día anterior a la entrada en vigor.
+Cumplir no consiste solo en haber abierto una cuenta en una plataforma.
 
-Es recomendable realizar previamente varias pruebas reales:
+Es recomendable realizar varias pruebas reales:
 
 1. Identificar quién crea el documento en cada tipo de servicio.
 2. Revisar qué datos facilita el cargador y cuáles completa el transportista.
@@ -248,9 +252,9 @@ El objetivo no consiste únicamente en “tener un QR”. Consiste en que el doc
 
 ## Preguntas frecuentes sobre el DECA
 
-### ¿El DECA será obligatorio desde el 5 de octubre de 2026?
+### ¿Desde cuándo es obligatorio el DECA?
 
-Sí, para los transportes públicos de mercancías por carretera sujetos al documento de control administrativo, sin perjuicio de las exenciones y particularidades previstas en la normativa.
+Desde el 5 de octubre de 2026, para los transportes públicos de mercancías por carretera sujetos al documento de control administrativo, sin perjuicio de las exenciones y particularidades previstas en la normativa.
 
 ### ¿Puedo seguir llevando una copia en papel?
 
@@ -287,3 +291,6 @@ El DECA supone una obligación tecnológica, pero también afecta a la organizac
 Elegir una plataforma únicamente por el precio o por un reclamo comercial puede dejar sin resolver las cuestiones más importantes. El verdadero valor aparece cuando el sistema permite trabajar con normalidad, mantener la trazabilidad y obtener una respuesta especializada ante una inspección, una modificación del servicio o un conflicto jurídico.
 
 En el transporte, el documento más sencillo puede terminar teniendo una importancia decisiva. Por eso conviene que, detrás de la herramienta tecnológica, exista también conocimiento real del sector y capacidad para intervenir cuando el problema deja de ser informático.
+
+Si tu empresa afronta una inspección, un impago o un conflicto con un cargador o una agencia, nuestro equipo de [abogados de transporte y logística en Valencia](/logistica-y-transporte-internacional/) puede ayudarte.
+
