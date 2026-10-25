@@ -34,6 +34,14 @@ export default function ContactoPage() {
           <ContactForm />
 
           <aside className="direct">
+            <div className="direct__urgente">
+              <p>
+                <strong>¿Tu asunto tiene una fecha muy próxima?</strong> Una detención, una citación o un plazo que vence.
+              </p>
+              <Link className="btn btn--ghost" href="/que-me-llame-un-abogado/">
+                <LineIcon name="reloj" /> Que me llame un abogado
+              </Link>
+            </div>
             <h2>Contactos del despacho</h2>
             <div className="direct__grupo">
               <p className="direct__area">

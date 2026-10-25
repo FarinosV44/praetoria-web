@@ -7,7 +7,7 @@ updated: 2026-10-23
 category: transporte
 wpId: 2803
 intencion: "Cobrar un porte impagado reclamando al cargador principal mediante la acción directa"
-imagenPendiente: "Documentación de portes impagados (cartas de porte y facturas) sobre la mesa de una agencia, sin texto legible"
+imagen: portes-impagados
 ---
 
 

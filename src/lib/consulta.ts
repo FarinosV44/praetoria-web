@@ -15,6 +15,7 @@ export const AREAS = [
   { id: 'civil', label: 'Civil, herencias y vivienda' },
   { id: 'familia', label: 'Familia y divorcio' },
   { id: 'arte', label: 'Arte y patrimonio' },
+  { id: 'penal', label: 'Penal' },
   { id: 'no-se', label: 'No sé qué área corresponde' },
 ] as const;
 export type AreaId = (typeof AREAS)[number]['id'];
@@ -55,11 +56,13 @@ export const SITUACIONES = [
   { id: 'otra', label: 'Otra situación' },
 ] as const;
 /** Áreas en las que se pide una fecha relevante (solo para priorizar a mano) */
-export const AREAS_CON_FECHA = ['transporte', 'laboral', 'hacienda'] as const;
+export const AREAS_CON_FECHA = ['transporte', 'laboral', 'hacienda', 'penal'] as const;
+/** Áreas en las que la fecha puede ser futura (fecha de una citación o de un juicio, #32) */
+export const AREAS_FECHA_FUTURA = ['penal'] as const;
 /** Áreas que admiten el resumen de un cuestionario (divorcio; notificación de Hacienda, también si se deriva a Laboral) */
 export const AREAS_CON_CUESTIONARIO = ['familia', 'hacienda', 'laboral'] as const;
 /** Áreas en las que se ofrece elegir el asunto (servicio) en el formulario (#8) */
-export const AREAS_CON_ASUNTO = ['mercantil', 'civil', 'familia', 'arte'] as const;
+export const AREAS_CON_ASUNTO = ['mercantil', 'civil', 'familia', 'arte', 'penal'] as const;
 export { DOCUMENTOS, ORGANISMOS };
 
 export const LIMITES = { nombre: 100, email: 254, telefono: 20, mensaje: 2000, mensajeMin: 20, cuestionario: 1500 } as const;
@@ -73,11 +76,13 @@ export function responsable(area: AreaId) {
     : { nombre: site.lawyer, telefono: site.phone };
 }
 
-const fechaValida = (v: string, ahora: number) => {
+export const fechaValida = (v: string, ahora: number, futura = false) => {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(v)) return false;
   const t = Date.parse(v + 'T00:00:00Z');
-  // Fecha real (no 2026-02-31), desde 2000 y como mucho mañana (margen por zona horaria)
-  return Number.isFinite(t) && new Date(t).toISOString().slice(0, 10) === v && v >= '2000-01-01' && t <= ahora + 86_400_000;
+  // Fecha real (no 2026-02-31), desde 2000 y como mucho mañana (margen por zona horaria);
+  // si puede ser futura (una citación), como mucho dentro de dos años
+  const max = ahora + (futura ? 731 : 1) * 86_400_000;
+  return Number.isFinite(t) && new Date(t).toISOString().slice(0, 10) === v && v >= '2000-01-01' && t <= max;
 };
 // Atribución: rutas internas y valores de campaña cortos y seguros; lo demás se descarta sin error (nunca bloquea una consulta)
 const ruta = (v: unknown) => {
@@ -88,10 +93,10 @@ const utm = (v: unknown) => {
   const s = limpia(v).toLowerCase();
   return /^[a-z0-9_\-.]{1,60}$/.test(s) ? s : '';
 };
-const telefonoValido = (v: string) => /^\+?\d{9,15}$/.test(v.replace(/[\s().-]/g, ''));
+export const telefonoValido = (v: string) => /^\+?\d{9,15}$/.test(v.replace(/[\s().-]/g, ''));
 const emailValido = (v: string) => /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$/.test(v);
 // Quita caracteres de control (salvo saltos de línea y tabuladores) y espacios sobrantes
-const limpia = (v: unknown) => String(v ?? '').replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '').trim();
+export const limpia = (v: unknown) => String(v ?? '').replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '').trim();
 
 export type Consulta = {
   nombre: string;
@@ -206,7 +211,9 @@ export function validarConsulta(raw: Record<string, unknown>, ahora = Date.now()
   }
   if (d.problema && !PROBLEMAS_LABORALES.some((x) => x.id === d.problema)) e.problema = 'Elige una opción de la lista.';
   if (d.situacion && !SITUACIONES.some((x) => x.id === d.situacion)) e.situacion = 'Elige una opción de la lista.';
-  if (d.fecha && !fechaValida(d.fecha, ahora)) e.fecha = 'Revisa la fecha: debe ser una fecha real y no posterior a hoy.';
+  const futura = (AREAS_FECHA_FUTURA as readonly string[]).includes(d.area);
+  if (d.fecha && !fechaValida(d.fecha, ahora, futura))
+    e.fecha = futura ? 'Revisa la fecha: debe ser una fecha real.' : 'Revisa la fecha: debe ser una fecha real y no posterior a hoy.';
 
   return Object.keys(e).length ? { ok: false, errores: e } : { ok: true, data: d as Consulta };
 }

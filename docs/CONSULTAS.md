@@ -80,3 +80,15 @@ Corrección: el artículo sobre DeCA Conecta remitía a `info@praetoriaabogados.
 - [ ] Prueba de teléfonos en un móvil real: `tel:+34607527719` y `tel:+34649181290`.
 
 Las consultas solo se envían a Netlify Forms. El campo trampa de Netlify sigue activo, por si alguien envía directamente a `__forms.html` sin pasar por la función; en ese caso se salta la validación del servidor, pero no el filtro antispam de Netlify.
+
+## Solicitud de llamada (#33)
+
+`/que-me-llame-un-abogado/` envía a `POST /api/llamada` (`netlify/functions/llamada.mts`, reglas en `src/lib/llamada.ts`).
+Campos: nombre y teléfono (obligatorios), área, motivo (lista cerrada), fecha de la citación o del plazo (puede ser
+futura, hasta dos años), localidad, forma segura de contacto (sin mensajes; con discreción si otra persona ve el
+teléfono), horario y una descripción breve opcional. Se entrega a Netlify Forms en `llamada-urgente` o, si es laboral,
+`llamada-urgente-laboral`, con el campo `prioridad: URGENTE`. Igual que en las consultas: campo trampa y tiempo mínimo,
+un solo envío a la vez con el mismo id en los reintentos, y confirmación en pantalla solo cuando Netlify Forms ha
+aceptado la entrega. Aviso fijo: «Solicitud de contacto prioritario, sujeta a disponibilidad. El envío no confirma
+asistencia ni suspende plazos». Nunca se promete atención inmediata ni un plazo de respuesta; para un peligro, 112.
+Pruebas: `netlify/llamada.test.mts` y `tests/e2e/penal.spec.ts`.

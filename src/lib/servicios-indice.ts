@@ -332,6 +332,47 @@ export const indiceServicios: ServicioIndice[] = [
     "id": "arte-atribucion",
     "area": "arte",
     "nombre": "Atribución, conservación y exportación de obra"
+  },
+  {
+    "id": "penal-detenido",
+    "area": "penal",
+    "nombre": "Asistencia al detenido",
+    "pagina": "/asistencia-al-detenido/"
+  },
+  {
+    "id": "penal-citacion",
+    "area": "penal",
+    "nombre": "Citaciones y juicios rápidos",
+    "pagina": "/citacion-juzgado-juicio-rapido/"
+  },
+  {
+    "id": "penal-seguridad-vial",
+    "area": "penal",
+    "nombre": "Alcoholemia y seguridad vial",
+    "pagina": "/alcoholemia-y-seguridad-vial/"
+  },
+  {
+    "id": "penal-lesiones",
+    "area": "penal",
+    "nombre": "Lesiones y agresiones",
+    "pagina": "/lesiones-y-agresiones/"
+  },
+  {
+    "id": "penal-hurto-robo",
+    "area": "penal",
+    "nombre": "Hurto y robo",
+    "pagina": "/hurto-y-robo/"
+  },
+  {
+    "id": "penal-estafas",
+    "area": "penal",
+    "nombre": "Estafas",
+    "pagina": "/estafas/"
+  },
+  {
+    "id": "penal-violencia-amenazas",
+    "area": "penal",
+    "nombre": "Amenazas, coacciones y violencia en el entorno familiar"
   }
 ];
 

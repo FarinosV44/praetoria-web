@@ -17,6 +17,8 @@ type MetaInput = {
   image?: string;
   type?: 'website' | 'article';
   noindex?: boolean;
+  /** Texto pendiente de revisión jurídica (#32): lo marca con <meta name="revision-juridica"> para las comprobaciones */
+  revisionPendiente?: boolean;
   published?: Date;
   modified?: Date;
   locale?: string;
@@ -26,7 +28,7 @@ export function pageTitle(title: string) {
   return title.includes('Praetoria') ? title : `${title} | ${site.name}`;
 }
 
-export function buildMetadata({ title, description, path, image: imagenOg,  type = 'website', noindex, published, modified, locale = 'es_ES' }: MetaInput): Metadata {
+export function buildMetadata({ title, description, path, image: imagenOg,  type = 'website', noindex, revisionPendiente, published, modified, locale = 'es_ES' }: MetaInput): Metadata {
   const url = new URL(path, site.url).href;
   const image = imagenOg ?? '/media/og-praetoria.jpg';
   return {
@@ -34,6 +36,7 @@ export function buildMetadata({ title, description, path, image: imagenOg,  type
     description,
     alternates: { canonical: url },
     robots: noindex ? { index: false, follow: true } : undefined,
+    ...(revisionPendiente ? { other: { 'revision-juridica': noindex ? 'pendiente-noindex' : 'pendiente' } } : {}),
     openGraph: {
       type,
       siteName: site.name,

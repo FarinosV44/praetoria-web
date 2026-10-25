@@ -4,7 +4,9 @@
 import { chromium, devices } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 const axe = readFileSync('node_modules/axe-core/axe.min.js', 'utf8');
-const urls = [...readFileSync('out/sitemap.xml', 'utf8').matchAll(/<loc>https:\/\/praetoriaabogados\.es([^<]*)<\/loc>/g)].map((m) => m[1]).concat(['/gracias/', '/contacto/?area=laboral']);
+const urls = [...readFileSync('out/sitemap.xml', 'utf8').matchAll(/<loc>https:\/\/praetoriaabogados\.es([^<]*)<\/loc>/g)].map((m) => m[1]).concat(['/gracias/', '/contacto/?area=laboral', '/que-me-llame-un-abogado/?area=penal'])
+  // Páginas fuera del sitemap por revisión jurídica pendiente (#32): se revisan igual
+  .concat(['/abogado-penalista-valencia/', '/asistencia-al-detenido/', '/citacion-juzgado-juicio-rapido/', '/alcoholemia-y-seguridad-vial/', '/lesiones-y-agresiones/', '/hurto-y-robo/', '/estafas/']);
 const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
 const res = {};
 for (const dev of ['escritorio', 'movil']) {

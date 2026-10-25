@@ -8,7 +8,7 @@ category: civil-vivienda
 tags: ["alquiler turístico", "alquiler vacacional", "ley alquiler", "normativa alquiler", "propietarios vivienda"]
 wpId: 2755
 intencion: "Cumplir el registro único de alquiler turístico de 2026"
-imagenPendiente: "Acceso a un apartamento turístico (caja de llaves o portal), sin números ni marcas legibles"
+imagen: alquiler-turistico
 ---
 
 

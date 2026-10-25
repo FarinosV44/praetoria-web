@@ -10,6 +10,7 @@ export const iconoArea: Record<AreaRef['id'], LineIcon> = {
   civil: 'vivienda',
   familia: 'familia',
   arte: 'arte',
+  penal: 'acompanar',
 };
 
 /** Qué suele querer conseguir quien llega a cada área: orienta el mensaje, no promete el resultado */
@@ -21,6 +22,7 @@ export const objetivoArea: Record<AreaRef['id'], string> = {
   civil: 'Resolver el conflicto y proteger tu patrimonio',
   familia: 'Acordar con seguridad o defender lo que importa',
   arte: 'Proteger el valor y la historia de tu patrimonio',
+  penal: 'Ejercer tus derechos desde el primer momento',
 };
 
 /** Método común (#28): primero el objetivo, después la estrategia */

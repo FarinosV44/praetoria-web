@@ -29,6 +29,12 @@ export type AreaContent = {
   /** Texto por defecto del botón de cada servicio del área */
   ctaServicios?: string;
   recorridos?: { titulo: string; texto: string; icono?: LineIcon; enlaces: { label: string; href: string }[] }[];
+  /** Asuntos que pueden ser urgentes: la cabecera ofrece «Que me llame un abogado» y la llamada al despacho (#33) */
+  urgente?: boolean;
+  /** Estado de revisión jurídica del texto del área (#32) */
+  revision?: 'pendiente' | 'revisado';
+  /** false: noindex y fuera del sitemap hasta la revisión jurídica (#32). Por defecto, indexable. */
+  indexable?: boolean;
 };
 
 export const areaContent: AreaContent[] = [
@@ -320,5 +326,81 @@ export const areaContent: AreaContent[] = [
     whatsappText: mensajes.arte,
     nota: 'Nuestro trabajo es jurídico. Cuando hace falta una tasación, un peritaje de autenticidad o un informe de conservación, lo realiza un especialista independiente; nosotros valoramos su informe desde el punto de vista legal y lo integramos en la estrategia.',
     ctaServicios: 'Solicitar una consulta especializada',
+  },
+  {
+    // #32. Redactado a partir de la Constitución, la LECrim y el Código Penal (BOE consolidado, 24/10/2026).
+    // Pendiente de revisión jurídica: noindex y fuera del sitemap hasta que el despacho lo valide.
+    slug: 'abogado-penalista-valencia',
+    id: 'penal',
+    group: 'particulares',
+    title: 'Abogados penalistas en Valencia | Detenciones, citaciones y juicios rápidos',
+    description:
+      'Asistencia al detenido, citaciones y juicios rápidos, alcoholemias, lesiones, hurtos y estafas. Revisamos tu situación y te explicamos tus derechos y opciones antes de actuar.',
+    h1: 'Abogados penalistas en Valencia',
+    lede: 'Detenciones, citaciones del juzgado, juicios rápidos, alcoholemias, lesiones, hurtos y estafas. Te explicamos tus derechos y tus opciones con calma, también cuando el asunto no puede esperar.',
+    intro: [
+      'Un asunto penal suele empezar de golpe: una detención, una citación del juzgado para dentro de unos días o una denuncia que no esperabas. Lo primero es saber qué derechos tienes y qué fechas hay, y después decidir con información qué conviene hacer.',
+      'Atendemos tanto a la persona investigada o acusada como a la víctima que quiere denunciar o reclamar. Antes de aceptar un asunto revisamos que no exista un conflicto de intereses, te explicamos el trabajo que supone y los honorarios, y no prometemos resultados: dependen de los hechos y de las pruebas de cada caso.',
+    ],
+    servicesTitle: 'Qué hacemos en penal',
+    closing:
+      'Si estás en peligro o presencias un delito que se está cometiendo, llama al 112. Para todo lo demás, cuéntanos qué ha pasado y qué fechas tienes: la solicitud de llamada no suspende ninguna citación ni ningún plazo.',
+    nota: 'No envíes atestados, informes médicos ni otros documentos por el formulario: si hacen falta, te los pediremos por un canal seguro. Atendemos según disponibilidad; no ofrecemos un servicio de guardia permanente.',
+    imagen: 'penal',
+    whatsappText: mensajes.penal,
+    ctaServicios: 'Consultar sobre esto',
+    urgente: true,
+    revision: 'pendiente',
+    indexable: false,
+    recorridos: [
+      {
+        titulo: 'Me han detenido o han detenido a un familiar',
+        icono: 'acompanar',
+        texto: 'Derechos de la persona detenida, abogado de confianza, declaración y puesta a disposición judicial.',
+        enlaces: [{ label: 'Qué derechos tiene', href: '/asistencia-al-detenido/' }],
+      },
+      {
+        titulo: 'Me han citado al juzgado',
+        icono: 'documento',
+        texto: 'Citación como investigado, para un juicio rápido o para un juicio por delito leve.',
+        enlaces: [{ label: 'Cómo prepararte', href: '/citacion-juzgado-juicio-rapido/' }],
+      },
+      {
+        titulo: 'Alcoholemia o un delito de tráfico',
+        icono: 'ruta',
+        texto: 'Positivo en un control, exceso de velocidad grave, conducción sin permiso o negativa a las pruebas.',
+        enlaces: [{ label: 'Cuándo es delito', href: '/alcoholemia-y-seguridad-vial/' }],
+      },
+      {
+        titulo: 'Una pelea, una agresión o unas lesiones',
+        icono: 'negociar',
+        texto: 'Si te han agredido y quieres denunciar, o si te han denunciado por unas lesiones.',
+        enlaces: [{ label: 'Denuncia y defensa', href: '/lesiones-y-agresiones/' }],
+      },
+      {
+        titulo: 'Un hurto o un robo',
+        icono: 'edificio',
+        texto: 'Defensa si te acusan y denuncia si lo has sufrido. La cuantía y la forma de los hechos lo cambian todo.',
+        enlaces: [{ label: 'Diferencias y penas', href: '/hurto-y-robo/' }],
+      },
+      {
+        titulo: 'Me han estafado o me acusan de estafa',
+        icono: 'euro',
+        texto: 'Engaños para pagar o transferir dinero, fraudes por internet o con tarjeta.',
+        enlaces: [{ label: 'Qué hacer', href: '/estafas/' }],
+      },
+      {
+        titulo: 'Amenazas, coacciones o violencia en casa',
+        icono: 'acompanar',
+        texto: 'Orientación con discreción, a víctimas y a personas denunciadas. Si estás en peligro, llama al 112.',
+        enlaces: [{ label: 'Cómo te ayudamos', href: '#penal-violencia-amenazas' }],
+      },
+      {
+        titulo: 'Necesito que me llame un abogado',
+        icono: 'reloj',
+        texto: 'Si tu asunto tiene una fecha muy próxima, pide que te llamemos. Atendemos según disponibilidad.',
+        enlaces: [{ label: 'Solicitar llamada', href: '/que-me-llame-un-abogado/?area=penal' }],
+      },
+    ],
   },
 ];

@@ -51,6 +51,7 @@ export const mensajes = {
   modificacionMedidas: 'Hola, Praetoria. Quiero consultar con un abogado una modificación de medidas.',
   arte: 'Hola, Praetoria. Quiero consultar con un abogado un asunto de arte y patrimonio.',
   laboral: 'Hola, Praetoria. Quiero consultar un asunto laboral con el área laboral del despacho.',
+  penal: 'Hola, Praetoria. Quiero consultar con un abogado un asunto penal.',
   elPuig: 'Hola, Praetoria. Necesito información sobre vuestros servicios jurídicos en El Puig.',
   plazoProximo: 'Hola, Praetoria. Acabo de enviar una consulta desde la web y tiene un plazo próximo.',
 } as const;
@@ -88,9 +89,18 @@ export const whatsapp = (text: string = mensajes.general, canal: CanalId = 'gene
 export const deca = (campaign: string) =>
   `${site.decaUrl}?utm_source=praetoria&utm_medium=referral&utm_campaign=${campaign}`;
 
-/** Las siete áreas de práctica, agrupadas por a quién se dirigen. */
+/** Las ocho áreas de práctica, agrupadas por a quién se dirigen. */
 export type Group = 'empresas' | 'particulares';
-export type AreaRef = { id: 'transporte' | 'mercantil' | 'hacienda' | 'civil' | 'familia' | 'arte' | 'laboral'; slug: string; name: string; short: string; group: Group };
+export type AreaRef = {
+  id: 'transporte' | 'mercantil' | 'hacienda' | 'civil' | 'familia' | 'arte' | 'laboral' | 'penal';
+  slug: string;
+  name: string;
+  short: string;
+  /** Público principal: decide la miga de pan y el orden. */
+  group: Group;
+  /** Otros públicos desde los que también se enlaza (misma URL, sin duplicar contenido ni canonical) (#31). */
+  tambien?: Group[];
+};
 
 export const areas: AreaRef[] = [
   {
@@ -113,6 +123,7 @@ export const areas: AreaRef[] = [
     name: 'Hacienda y Seguridad Social',
     short: 'Requerimientos, liquidaciones, sanciones, apremios y embargos.',
     group: 'empresas',
+    tambien: ['particulares'],
   },
   {
     id: 'laboral',
@@ -136,6 +147,13 @@ export const areas: AreaRef[] = [
     group: 'particulares',
   },
   {
+    id: 'penal',
+    slug: 'abogado-penalista-valencia',
+    name: 'Penal',
+    short: 'Detenciones, citaciones y juicios rápidos, alcoholemias, lesiones, hurtos y estafas.',
+    group: 'particulares',
+  },
+  {
     id: 'arte',
     slug: 'arte-y-patrimonio',
     name: 'Arte y patrimonio',
@@ -143,6 +161,11 @@ export const areas: AreaRef[] = [
     group: 'particulares',
   },
 ];
+
+/** Áreas que se muestran en un público: las suyas y las que también le sirven. */
+export const areasDe = (g: Group) => areas.filter((a) => a.group === g || a.tambien?.includes(g));
+/** Etiqueta de público de un área: «Empresas y particulares» si se dirige a ambos. */
+export const publicoDe = (a: AreaRef) => (a.tambien?.length ? 'Empresas y particulares' : groups[a.group].title);
 
 export const groups = {
   empresas: { title: 'Empresas y autónomos', href: '/areas/#empresas' },
