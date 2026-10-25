@@ -5,11 +5,14 @@
 // 3. Descarta envíos automáticos (campo trampa o envío en menos de 3 s) sin avisar al bot.
 // 4. Entrega la consulta a Netlify Forms (formulario "contacto" definido en public/__forms.html),
 //    que la guarda, aplica su filtro antispam y envía el aviso por correo configurado en Netlify.
+//    Destino por área: las consultas laborales van al formulario «contacto-laboral» y el resto a «contacto».
+//    Netlify configura los avisos por formulario, así cada área recibe solo las suyas.
 // 5. Solo responde éxito si Netlify Forms ha aceptado la entrega. Si falla, 502: el navegador ofrece reintentar.
 //
 // No acepta adjuntos ni guarda nada por su cuenta.
-import { pareceAutomatico, responsable, validarConsulta, AREAS, PREFERENCIAS } from '../../src/lib/consulta.ts';
+import { pareceAutomatico, responsable, validarConsulta, AREAS, PREFERENCIAS, PAPELES, INCIDENCIAS, IMPORTES, REPRESENTA, PROBLEMAS_LABORALES, SITUACIONES, ORGANISMOS, DOCUMENTOS } from '../../src/lib/consulta.ts';
 import { site } from '../../src/lib/site.ts';
+import { servicioPorId } from '../../src/lib/servicios.ts';
 
 const MAX_BYTES = 12_000;
 
@@ -52,19 +55,38 @@ export default async function consulta(req: Request, context?: Ctx): Promise<Res
   const c = v.data;
   const resp = responsable(c.area);
   const body = new URLSearchParams({
-    'form-name': 'contacto',
+    'form-name': formularioDe(c.area),
     id: c.id,
     nombre: c.nombre,
     email: c.email,
     telefono: c.telefono,
     area: AREAS.find((a) => a.id === c.area)!.label,
+    servicio: c.servicio ? servicioPorId(c.servicio)!.nombre : '',
+    papel: PAPELES.find((x) => x.id === c.papel)?.label ?? '',
+    incidencia: INCIDENCIAS.find((x) => x.id === c.incidencia)?.label ?? '',
+    importe: IMPORTES.find((x) => x.id === c.importe)?.label ?? '',
+    fecha: c.fecha,
+    representa: REPRESENTA.find((x) => x.id === c.representa)?.label ?? '',
+    problema: PROBLEMAS_LABORALES.find((x) => x.id === c.problema)?.label ?? '',
+    situacion: SITUACIONES.find((x) => x.id === c.situacion)?.label ?? '',
+    cuestionario: c.cuestionario,
+    organismo: ORGANISMOS.find((x) => x.id === c.organismo)?.label ?? '',
+    documento: DOCUMENTOS.find((x) => x.id === c.documento)?.label ?? '',
+    origen: c.origen,
+    landing: c.landing,
+    utm_source: c.utm_source,
+    utm_medium: c.utm_medium,
+    utm_campaign: c.utm_campaign,
+    detalle: c.detalle ? `${servicioPorId(c.servicio)?.preguntaMinima?.label ?? ''} ${c.detalle}` : '',
     responsable: `${resp.nombre} (${resp.telefono})`,
     preferencia: PREFERENCIAS.find((p) => p.id === c.preferencia)!.label,
     mensaje: c.mensaje,
     privacidad: 'aceptada',
   });
 
-  const target = process.env.FORMS_ENDPOINT || `${process.env.URL || new URL(req.url).origin}/__forms.html`;
+  // Mismo despliegue que atiende la petición (deploy preview o producción). No se usa process.env.URL:
+  // es la URL principal del sitio y, antes del cambio de DNS, apuntaría a WordPress.
+  const target = process.env.FORMS_ENDPOINT || `${new URL(req.url).origin}/__forms.html`;
   const doFetch = context?.forward ?? fetch;
   try {
     const r = await doFetch(target, {
@@ -86,6 +108,9 @@ export default async function consulta(req: Request, context?: Ctx): Promise<Res
 }
 
 export const config = { path: '/api/consulta' };
+
+/** Formulario de Netlify Forms que recibe la consulta: uno por canal, con su propio aviso por correo. */
+const formularioDe = (area: string) => (area === 'laboral' ? 'contacto-laboral' : 'contacto');
 
 const esc = (s: string) => s.replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[ch]!);
 

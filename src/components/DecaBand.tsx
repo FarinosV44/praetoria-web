@@ -9,7 +9,7 @@ export function DecaBand({ campaign = 'recomendacion_abogado' }: { campaign?: st
           <h2>¿Necesitas crear el DECA de un transporte?</h2>
           <p>
             DECA Profesional sirve para generar, compartir y conservar el Documento Electrónico de Control Administrativo. Es una
-            herramienta impulsada y recomendada por Juan José Farinós Ibáñez, abogado del sector del transporte.
+            herramienta recomendada por el despacho, que conoce el sector del transporte desde dentro.
           </p>
           <p className="small muted">DECA Profesional es un servicio tecnológico independiente de los servicios jurídicos del despacho.</p>
         </div>

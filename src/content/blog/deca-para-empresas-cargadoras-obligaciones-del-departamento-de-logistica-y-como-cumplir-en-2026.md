@@ -8,6 +8,8 @@ category: transporte
 deca: guia
 tags: ["reclamaciones transporte", "transporte internacional"]
 wpId: 3065
+intencion: "Qué debe hacer el departamento de logística de un cargador con el DeCA"
+imagen: logistica-albaran
 ---
 
 

@@ -8,6 +8,8 @@ category: transporte
 deca: guia
 tags: ["documento de control digital", "generar DECA", "plataforma DECA gratis", "software DECA"]
 wpId: 2997
+intencion: "Elegir plataforma para el DeCA antes del 5 de octubre de 2026"
+imagen: logistica-comparar-ordenador
 ---
 
 
