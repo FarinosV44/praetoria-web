@@ -13,6 +13,7 @@ import { CtaBand } from './CtaBand';
 import { JsonLd } from './JsonLd';
 import { enlaceConsulta, serviciosConArticulo } from '@/lib/servicios';
 import { areaContent } from '@/lib/areas-content';
+import { RevisionPendiente } from './RevisionPendiente';
 
 const fmt = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Madrid' });
 const day = (d: Date) => d.toISOString().slice(0, 10);
@@ -58,6 +59,7 @@ export function PostPage({ post }: { post: Post }) {
 
   return (
     <div className="page-post">
+      {post.revision === 'pendiente' && <RevisionPendiente indexable={false} />}
       <JsonLd data={articleLd} />
       <article lang={post.lang !== 'es' ? post.lang : undefined} dir={post.lang === 'ar' ? 'rtl' : undefined}>
         <header className="post-head">

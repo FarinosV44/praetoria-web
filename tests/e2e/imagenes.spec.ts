@@ -60,9 +60,10 @@ test('tablas del blog dentro de un contenedor desplazable en móvil', async ({ p
   expect(ancho).toBeLessThanOrEqual(375);
 });
 
-test('recreaciones IA personalizadas: discretas, con crédito y nunca en la portada (#28 §8)', async ({ page }) => {
+test('recreaciones IA personalizadas: discretas y nunca en la portada (#28 §8)', async ({ page }) => {
   await page.goto('/el-despacho/');
-  await expect(page.locator('.foto-secundaria figcaption')).toHaveText('Recreación visual con IA a partir de fotografías autorizadas');
+  await expect(page.locator('.foto-secundaria img')).toBeVisible();
+  await expect(page.locator('.foto-secundaria figcaption')).toHaveCount(0); // sin pie, por decisión del propietario (25/10/2026)
   await page.goto('/');
   expect(await page.locator('img[src*="personalizad"], img[src*="estrategia-revision-dossier"], img[src*="analisis-documentacion-caso"]').count()).toBe(0);
   await page.goto('/derecho-mercantil/');

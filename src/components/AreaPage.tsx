@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { getPosts } from '@/lib/content';
 import type { AreaContent } from '@/lib/areas-content';
-import { areas, canalDe, categories, groups, whatsapp } from '@/lib/site';
+import { areasDe, canalDe, categories, groups, whatsapp } from '@/lib/site';
 import { iconoArea, metodo, objetivoArea } from '@/lib/iconos';
 import { Breadcrumbs } from './Breadcrumbs';
 import { PostList } from './PostList';
@@ -12,10 +12,11 @@ import { ServiceList } from './ServiceList';
 import { serviciosDe } from '@/lib/servicios';
 import { imagen } from '@/lib/imagenes';
 import { Composicion, Foto } from './Foto';
+import { RevisionPendiente } from './RevisionPendiente';
 
 export function AreaPage({ area }: { area: AreaContent }) {
   const group = groups[area.group];
-  const siblings = areas.filter((a) => a.group === area.group && a.slug !== area.slug);
+  const siblings = areasDe(area.group).filter((a) => a.slug !== area.slug);
   const all = area.category ? getPosts().filter((p) => p.category === area.category) : [];
   const isTransport = area.category === 'transporte';
   const decaGuides = all.filter((p) => p.deca === 'guia');
@@ -26,6 +27,7 @@ export function AreaPage({ area }: { area: AreaContent }) {
 
   return (
     <div className="area-page">
+      {area.revision === 'pendiente' && <RevisionPendiente indexable={area.indexable !== false} />}
       <section className="page-head area-head">
         <div className="wrap">
           <Breadcrumbs items={[{ label: group.title, href: group.href }, { label: area.h1 }]} />
@@ -47,15 +49,24 @@ export function AreaPage({ area }: { area: AreaContent }) {
                 <Link className="btn btn--red" href={`/contacto/?area=${area.id}`}>
                   {canal.consulta} <LineIcon name="flecha" />
                 </Link>
-                {canal.id === 'laboral' && (
+                {(canal.id === 'laboral' || area.urgente) && (
                   <a className="btn btn--ghost" href={`tel:${canal.phoneIntl}`}>
                     <Icon name="phone" /> {canal.llamar}
                   </a>
                 )}
-                <a className="btn btn--ghost" href={whatsapp(area.whatsappText, canal.id)}>
-                  <Icon name="whatsapp" /> {canal.escribir}
-                </a>
+                {area.urgente ? (
+                  <Link className="btn btn--ghost" href={`/que-me-llame-un-abogado/?area=${area.id}`}>
+                    <LineIcon name="reloj" /> Que me llame un abogado
+                  </Link>
+                ) : (
+                  <a className="btn btn--ghost" href={whatsapp(area.whatsappText, canal.id)}>
+                    <Icon name="whatsapp" /> {canal.escribir}
+                  </a>
+                )}
               </div>
+              {area.urgente && (
+                <p className="small muted">Atendemos según disponibilidad. Si estás en peligro, llama al 112.</p>
+              )}
             </div>
             {foto ? (
               <figure className="area-head__media">

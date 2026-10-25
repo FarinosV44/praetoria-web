@@ -501,6 +501,18 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
         </fieldset>
       )}
 
+      {area === 'penal' && (
+        <div className="field">
+          <label htmlFor="fecha">Fecha de la citación, del juicio o de los hechos (opcional)</label>
+          <input id="fecha" name="fecha" type="date" min="2000-01-01" {...a11y('fecha')} aria-describedby={err('fecha') ? 'err-fecha fecha-ayuda' : 'fecha-ayuda'} />
+          <p className="small muted" id="fecha-ayuda">
+            Si tienes una citación, indica la fecha para revisar antes tu consulta. Enviar el formulario no suspende ni aplaza ninguna citación. Si es para hoy o mañana,
+            llama al despacho.
+          </p>
+          <FieldError k="fecha" msg={errores.fecha} />
+        </div>
+      )}
+
       <div className="field">
         <label htmlFor="mensaje">¿Qué ha pasado y qué te gustaría conseguir?</label>
         <textarea ref={mensajeRef} id="mensaje" name="mensaje" required minLength={LIMITES.mensajeMin} maxLength={LIMITES.mensaje} {...a11y('mensaje')} />

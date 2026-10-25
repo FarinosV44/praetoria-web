@@ -4,7 +4,8 @@ import { areas, canalDe, groups, mensajes, whatsapp } from '@/lib/site';
 import { imagen } from '@/lib/imagenes';
 import { Composicion, Foto } from './Foto';
 import { iconoArea, objetivoArea } from '@/lib/iconos';
-import { docLabel, enlaceConsulta, type Servicio } from '@/lib/servicios';
+import { docLabel, enlaceConsulta, servicioPorId, type Servicio } from '@/lib/servicios';
+import { RevisionPendiente } from './RevisionPendiente';
 import { Breadcrumbs } from './Breadcrumbs';
 import { CtaBand } from './CtaBand';
 import { Faq } from './Faq';
@@ -26,9 +27,13 @@ export function ServicePage({ servicio: s }: { servicio: Servicio }) {
   // Imagen propia del servicio (#28); nunca la del área por defecto ni una oficina vacía
   const foto = imagen(s.imagen);
   const textoWa = s.area in mensajes ? mensajes[s.area as keyof typeof mensajes] : mensajes.general;
+  // Asuntos con factores de urgencia (#32, #33): solicitud de llamada y llamada directa al canal del área
+  const llamada = s.urgencia ? `/que-me-llame-un-abogado/?area=${s.area}&servicio=${encodeURIComponent(s.id)}` : null;
+  const relacionados = (s.relacionados ?? []).map(servicioPorId).filter((r) => !!r?.pagina) as Servicio[];
 
   return (
     <div className="service-page">
+      {s.revision === 'pendiente' && <RevisionPendiente indexable={s.indexable !== false} />}
       <section className="page-head area-head">
         <div className="wrap">
           <Breadcrumbs items={[{ label: group.title, href: group.href }, { label: area.name, href: `/${area.slug}/` }, { label: s.nombre }]} />
@@ -43,7 +48,11 @@ export function ServicePage({ servicio: s }: { servicio: Servicio }) {
                 <Link className="btn btn--red" href={consulta}>
                   {cta} <LineIcon name="flecha" />
                 </Link>
-                {canal.id === 'laboral' ? (
+                {llamada ? (
+                  <Link className="btn btn--ghost" href={llamada}>
+                    <LineIcon name="reloj" /> Que me llame un abogado
+                  </Link>
+                ) : canal.id === 'laboral' ? (
                   <a className="btn btn--ghost" href={`tel:${canal.phoneIntl}`}>
                     <Icon name="phone" /> {canal.llamar}
                   </a>
@@ -74,6 +83,34 @@ export function ServicePage({ servicio: s }: { servicio: Servicio }) {
           </div>
         </div>
       </section>
+
+      {s.urgencia && (
+        <section className="section section--tight">
+          <div className="wrap">
+            <div className="urgencia">
+              <h2 className="h-icono">
+                <LineIcon name="reloj" /> Qué no puede esperar
+              </h2>
+              <ul className="checks">
+                {s.urgencia.map((u) => (
+                  <li key={u}>{u}</li>
+                ))}
+              </ul>
+              <div className="actions">
+                <a className="btn btn--red" href={`tel:${canal.phoneIntl}`}>
+                  <Icon name="phone" /> {canal.llamar}
+                </a>
+                <Link className="btn btn--ghost" href={llamada!}>
+                  Solicitar que me llamen
+                </Link>
+              </div>
+              <p className="small muted">
+                Atendemos según disponibilidad: la solicitud no confirma la asistencia ni suspende ninguna citación o plazo. Si estás en peligro, llama al 112.
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="section">
         <div className="wrap service-page__grid">
@@ -155,6 +192,22 @@ export function ServicePage({ servicio: s }: { servicio: Servicio }) {
                 </p>
               </div>
             )}
+          </div>
+        </section>
+      )}
+
+      {relacionados.length > 0 && (
+        <section className="section section--stone">
+          <div className="wrap">
+            <h2>Asuntos relacionados</h2>
+            <ul className="relacionados">
+              {relacionados.map((r) => (
+                <li key={r.id}>
+                  <Link href={r.pagina!}>{r.nombre}</Link>
+                  {r.resumen && <span className="small muted"> {r.resumen}</span>}
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
       )}

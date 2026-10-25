@@ -8,7 +8,7 @@ category: hacienda
 tags: ["abogado fiscal", "devolución impuesto", "mpuesto matriculación", "reclamar hacienda", "vehículos diésel"]
 wpId: 2720
 intencion: "Recuperar el impuesto de matriculación pagado de más"
-imagenPendiente: "Coche recién matriculado con su documentación, sin matrícula legible"
+imagen: matriculacion-coche
 ---
 
 En los últimos meses, han aparecido muchas noticias y campañas sobre la posibilidad de **recuperar parte del [Impuesto de Matriculación](/abogado-hacienda-y-seguridad-social-en-valencia/)** pagado en la compra de un vehículo. Aunque no todo lo que circula es exacto, sí existe un **fundamento legal real** para reclamar en determinados casos.

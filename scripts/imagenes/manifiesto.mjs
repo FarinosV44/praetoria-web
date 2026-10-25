@@ -80,6 +80,8 @@ const servicioDe = (slug) => {
 const procedencia = (img) =>
   img.origen.tipo === 'ia'
     ? `${img.origen.personalizada ? 'Recreación con IA a partir de fotografías autorizadas por el titular' : 'Generada con IA'} (\`${img.origen.original}\`) · ${img.origen.nota}`
+    : img.origen.tipo === 'pexels'
+    ? `[${img.origen.autor} / Pexels](${img.origen.url}) · Licencia Pexels`
     : img.origen.tipo === 'unsplash'
     ? img.origen.autor ? `[${img.origen.autor} / Unsplash](${img.origen.url}) · Licencia Unsplash` : `Unsplash ${img.origen.id} (pendiente de procesar)`
     : img.origen.tipo === 'deca'

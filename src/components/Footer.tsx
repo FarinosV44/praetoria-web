@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import Link from 'next/link';
-import { areas, contactos, groups, mensajes, site, whatsapp } from '@/lib/site';
+import { areasDe, contactos, groups, mensajes, site, whatsapp } from '@/lib/site';
 import { Icon } from './Icon';
 import { CookieSettingsButton } from './CookieConsent';
 
@@ -28,9 +28,7 @@ export function Footer() {
             <Fragment key={g}>
               <p className="col__title">{groups[g].title}</p>
               <ul>
-                {areas
-                  .filter((a) => a.group === g)
-                  .map((a) => (
+                {areasDe(g).map((a) => (
                     <li key={a.slug}>
                       <Link href={`/${a.slug}/`}>{a.name}</Link>
                     </li>

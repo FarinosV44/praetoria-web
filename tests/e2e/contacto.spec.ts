@@ -67,7 +67,7 @@ test('Laboral: se indica y se asigna al área laboral', async ({ page }) => {
   await esperarTiempoMinimo(page);
   await page.getByRole('button', { name: 'Enviar mi consulta' }).click();
   await expect(page.getByText('La revisará el área laboral')).toBeVisible();
-  expect((await registro(page))[0].responsable).toBe('Lucía López (649 181 290)');
+  expect((await registro(page))[0]).toMatchObject({ 'form-name': 'contacto-laboral', responsable: 'Lucía López (649 181 290)' });
 });
 
 test('fallo de red: avisa, conserva los datos y el reintento entrega una sola vez', async ({ page }) => {

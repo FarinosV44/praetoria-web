@@ -275,7 +275,7 @@
       "estado": "publicada",
       "escena": "Instalaciones reales del despacho (solo en «El despacho»)",
       "archivo": "v2/despacho-salas-reuniones",
-      "alt": "Salas de reuniones acristaladas del despacho en El Puig",
+      "alt": "Salas de reuniones acristaladas en las oficinas del despacho en el centro de Valencia",
       "foco": "50% 50%",
       "ancho": 1600,
       "alto": 1056,
@@ -295,7 +295,7 @@
       "estado": "publicada",
       "escena": "Instalaciones reales del despacho (solo en «El despacho»)",
       "archivo": "v2/despacho-atencion-cliente",
-      "alt": "Espacio de atención a clientes del despacho en El Puig",
+      "alt": "Espacio de atención a clientes en las oficinas del despacho en el centro de Valencia",
       "foco": "50% 50%",
       "ancho": 1600,
       "alto": 1056,
@@ -1011,6 +1011,404 @@
         "original": "fotos/ia/praetoria-transporte.png",
         "personalizada": false,
         "nota": "Escena generada con IA (paquete praetoria-imagenes-claude-v2, #28 §8). No representa personal, clientes ni instalaciones reales."
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "matriculacion-coche",
+      "estado": "publicada",
+      "escena": "Impuesto de matriculación: vehículo y documentación sin datos legibles",
+      "archivo": "ed/llave-coche-nuevo",
+      "alt": "Una mano acciona el mando de un coche nuevo aparcado, con la matrícula desenfocada",
+      "foco": "50% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "k-yzTJvNUFs",
+        "autor": "Matthias Münning",
+        "url": "https://unsplash.com/photos/k-yzTJvNUFs",
+        "perfil": "https://unsplash.com/@muenningmedia",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "alquiler-turistico",
+      "estado": "publicada",
+      "escena": "Alquiler turístico: llegada a una vivienda de uso turístico",
+      "archivo": "ed/maleta-entrada-vivienda",
+      "alt": "Maleta de viaje junto a la puerta abierta de una vivienda",
+      "foco": "60% 55%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "iGXIjzloB2k",
+        "autor": "Kit (formerly ConvertKit)",
+        "url": "https://unsplash.com/photos/iGXIjzloB2k",
+        "perfil": "https://unsplash.com/@kit",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "familia-filiacion",
+      "estado": "publicada",
+      "escena": "Filiación: contexto familiar respetuoso, sin rostros",
+      "archivo": "ed/manos-bebe-adultos",
+      "alt": "La mano de un bebé agarra los dedos de dos adultos, en blanco y negro",
+      "foco": "50% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "M0oVPGsWk1E",
+        "autor": "Liv Bruce",
+        "url": "https://unsplash.com/photos/M0oVPGsWk1E",
+        "perfil": "https://unsplash.com/@livbruce6",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "laboral-baja-documentos",
+      "estado": "publicada",
+      "escena": "Baja larga: revisión en casa de la documentación laboral",
+      "archivo": "ed/lectura-documentos-cocina",
+      "alt": "Un hombre lee con atención unos documentos en la mesa de su cocina",
+      "foco": "62% 40%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "Ve4FEk-swHY",
+        "autor": "Vitaly Gariev",
+        "url": "https://unsplash.com/photos/Ve4FEk-swHY",
+        "perfil": "https://unsplash.com/@silverkblack",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "logistica-coordinacion-almacen",
+      "estado": "publicada",
+      "escena": "Agencia y transportista colaborador coordinando un servicio",
+      "archivo": "ed/coordinacion-pasillo-almacen",
+      "alt": "Dos profesionales recorren un pasillo de almacén con una carpeta y un lector",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "ZlOlRnWk8zU",
+        "autor": "Centre for Ageing Better",
+        "url": "https://unsplash.com/photos/ZlOlRnWk8zU",
+        "perfil": "https://unsplash.com/@ageing_better",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "logistica-comparar-ordenador",
+      "estado": "publicada",
+      "escena": "Empresa de transporte comparando plataformas en el ordenador",
+      "archivo": "ed/comparar-opciones-ordenador",
+      "alt": "Tres personas comparan opciones ante la pantalla de un ordenador en una oficina",
+      "foco": "60% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "lr5RHwBmrbs",
+        "autor": "ThisisEngineering",
+        "url": "https://unsplash.com/photos/lr5RHwBmrbs",
+        "perfil": "https://unsplash.com/@thisisengineering",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "transporte-embalaje-danado",
+      "estado": "publicada",
+      "escena": "Mercancía dañada tras una incidencia en el transporte",
+      "archivo": "ed/embalaje-danado",
+      "alt": "Cartón de embalaje rasgado sobre una superficie blanca",
+      "foco": "50% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "4SOWP1p8n0I",
+        "autor": "Paper Textures",
+        "url": "https://unsplash.com/photos/4SOWP1p8n0I",
+        "perfil": "https://unsplash.com/@inthemakingstudio",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "penal",
+      "estado": "publicada",
+      "escena": "Penal: conversación confidencial con el abogado",
+      "archivo": "ed/conversacion-confidencial-dos-personas",
+      "alt": "Dos hombres conversan en voz baja sentados a una mesa junto a un ventanal",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "W3Jl3jREpDY",
+        "autor": "LinkedIn Sales Solutions",
+        "url": "https://unsplash.com/photos/W3Jl3jREpDY",
+        "perfil": "https://unsplash.com/@linkedinsalesnavigator",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "penal-seguridad-vial",
+      "estado": "publicada",
+      "escena": "Seguridad vial: conducción nocturna",
+      "archivo": "ed/trafico-nocturno-estelas",
+      "alt": "Estelas de luz de los coches en una calle por la noche",
+      "foco": "50% 60%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "jcwLvtFtgc4",
+        "autor": "Tyler Hardie",
+        "url": "https://unsplash.com/photos/jcwLvtFtgc4",
+        "perfil": "https://unsplash.com/@tylersphotographyus",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "penal-lesiones",
+      "estado": "publicada",
+      "escena": "Lesiones: atención médica y parte de lesiones",
+      "archivo": "ed/pasillo-hospital",
+      "alt": "Pasillo de un hospital visto desde unas puertas abiertas",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "Wn77gCRoegs",
+        "autor": "Cory Mogk",
+        "url": "https://unsplash.com/photos/Wn77gCRoegs",
+        "perfil": "https://unsplash.com/@corymogk",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "penal-hurtos",
+      "estado": "publicada",
+      "escena": "Hurtos y robos: grabaciones como prueba",
+      "archivo": "ed/camaras-vigilancia-fachada",
+      "alt": "Dos cámaras de vigilancia montadas en una fachada metálica",
+      "foco": "50% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "jJYLXHPgwWs",
+        "autor": "Fer Troulik",
+        "url": "https://unsplash.com/photos/jJYLXHPgwWs",
+        "perfil": "https://unsplash.com/@fertroulik",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "penal-estafas",
+      "estado": "publicada",
+      "escena": "Estafas, también por internet o por el móvil",
+      "archivo": "ed/movil-manos",
+      "alt": "Una persona consulta su teléfono móvil",
+      "foco": "60% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "wK-elt11pF0",
+        "autor": "Jonas Leupe",
+        "url": "https://unsplash.com/photos/wK-elt11pF0",
+        "perfil": "https://unsplash.com/@jonasleupe",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "deca-logo",
+      "estado": "publicada",
+      "escena": "Producto DeCA: logotipo de DeCA Profesional (noticias de la plataforma)",
+      "archivo": "ed/deca-logo",
+      "alt": "Logotipo de DeCA Profesional",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "deca",
+        "archivos": [
+          "fotos/deca/logo-deca-profesional.png"
+        ]
+      },
+      "composicion": "logo",
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "abogado-explica-caso",
+      "estado": "publicada",
+      "escena": "Elegir abogado: el profesional explica el caso con los documentos delante",
+      "archivo": "ed/explicacion-documentos-mesa",
+      "alt": "Una profesional señala un documento sobre la mesa mientras explica el caso a la persona que tiene al lado",
+      "foco": "35% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "MhqUBTxQ3Hw",
+        "autor": "Olena Kholina",
+        "url": "https://unsplash.com/photos/MhqUBTxQ3Hw",
+        "perfil": "https://unsplash.com/@sixtynice",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "deca-scan",
+      "estado": "publicada",
+      "escena": "Producto DeCA: DECA Scan AI, revisión de los datos leídos de una orden de transporte",
+      "archivo": "ed/deca-scan-revision",
+      "alt": "DECA Scan AI muestra una orden de transporte de ejemplo junto a los datos extraídos del cargador y del transportista, listos para revisar",
+      "foco": "50% 40%",
+      "origen": {
+        "tipo": "deca",
+        "archivos": [
+          "fotos/deca/deca-scan-revision.png"
+        ]
+      },
+      "composicion": "escritorio",
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "deca-fotografiar-documento",
+      "estado": "publicada",
+      "escena": "Producto DeCA: alguien fotografía con el móvil la documentación de un envío",
+      "archivo": "ed/movil-fotografia-etiqueta-envio",
+      "alt": "Una persona fotografía con el móvil la etiqueta de un paquete de envío para leer sus datos",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "pexels",
+        "id": "7363196",
+        "autor": "RDNE Stock project",
+        "url": "https://www.pexels.com/photo/7363196/",
+        "perfil": "https://www.pexels.com/@rdne/",
+        "licencia": "Licencia Pexels (uso comercial gratuito)"
       },
       "ancho": 1600,
       "alto": 1000,
