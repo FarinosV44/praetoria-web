@@ -7,6 +7,8 @@ updated: 2026-09-13
 category: transporte
 deca: herramienta
 wpId: 3033
+intencion: "Conocer DeCA Conecta y qué datos comparte"
+imagen: deca-conecta
 ---
 
 **Praetoria División Jurídica, despacho jurídico especializado en transporte y logística, recomienda DeCA Profesional** como solución para que cargadores, agencias de transporte y transportistas efectivos puedan prepararse para la obligatoriedad del documento electrónico de control administrativo.

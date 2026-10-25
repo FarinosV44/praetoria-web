@@ -1,12 +1,14 @@
 ---
 title: "Cuánto cuesta un abogado en España (y por qué algunos son mucho más baratos)"
-seoTitle: "Cuanto cuesta abogado España: Lo que debes saber"
+seoTitle: "Cuánto cuesta un abogado en España y qué incluye"
 description: "¿Cuánto cuesta un abogado en España? Te explicamos precios reales, qué incluyen y por qué algunos son mucho más baratos."
 date: 2026-03-27
 updated: 2026-04-22
 category: elegir-abogado
 tags: ["abogado barato", "asesoría jurídica", "contratar abogado", "coste abogado", "honorarios abogados", "precio abogado españa"]
 wpId: 2776
+intencion: "Saber cuánto cuesta un abogado en España y qué incluye el precio"
+imagen: abogado-presupuesto
 ---
 
 Una de las primeras preguntas que se hace cualquier persona antes de contratar un abogado es:

@@ -25,8 +25,9 @@ export const site = {
 };
 
 /**
- * Contacto específico del área Laboral, facilitado por el propietario (#3, #7).
- * Solo teléfono de llamada: no hay WhatsApp ni correo personal autorizados. No sustituye al contacto general.
+ * Área Laboral (#7, #28). Llamadas y WhatsApp autorizados por el propietario el 24/10/2026 (#28),
+ * que sustituye la restricción anterior de «solo llamadas». Sin correo propio: el correo es el general.
+ * El nombre se menciona con discreción (contacto, el despacho); los botones hablan del «área laboral».
  */
 export const laboral = {
   name: 'Lucía López',
@@ -37,7 +38,7 @@ export const laboral = {
 
 /**
  * Mensajes predefinidos de WhatsApp (#3): siempre dirigidos a Praetoria y al servicio jurídico,
- * nunca al soporte de DeCA Profesional. El número es el general del despacho.
+ * nunca al soporte de DeCA Profesional. Nunca llevan respuestas de cuestionarios ni datos del caso (#28).
  */
 export const mensajes = {
   general: 'Hola, Praetoria. Quiero consultar mi caso con un abogado.',
@@ -49,20 +50,57 @@ export const mensajes = {
   divorcio: 'Hola, Praetoria. Quiero hablar con un abogado sobre mi caso de divorcio.',
   modificacionMedidas: 'Hola, Praetoria. Quiero consultar con un abogado una modificación de medidas.',
   arte: 'Hola, Praetoria. Quiero consultar con un abogado un asunto de arte y patrimonio.',
-  laboral: 'Hola, Praetoria. Quiero consultar con un abogado un asunto laboral.',
+  laboral: 'Hola, Praetoria. Quiero consultar un asunto laboral con el área laboral del despacho.',
+  penal: 'Hola, Praetoria. Quiero consultar con un abogado un asunto penal.',
   elPuig: 'Hola, Praetoria. Necesito información sobre vuestros servicios jurídicos en El Puig.',
   plazoProximo: 'Hola, Praetoria. Acabo de enviar una consulta desde la web y tiene un plazo próximo.',
 } as const;
 
-export const whatsapp = (text: string = mensajes.general) =>
-  `https://wa.me/${site.phoneIntl.replace('+', '')}?text=${encodeURIComponent(text)}`;
+/**
+ * Canales de contacto del despacho por área (#28). Los botones nombran el canal, no a la persona,
+ * y el número se muestra en zonas secundarias (contacto, pie, barra móvil), etiquetado por área.
+ */
+export type CanalId = 'general' | 'laboral';
+export const contactos = {
+  general: {
+    id: 'general' as CanalId,
+    etiqueta: 'Atención jurídica general',
+    phone: site.phone,
+    phoneIntl: site.phoneIntl,
+    llamar: 'Llamar al despacho',
+    escribir: 'Consultar por WhatsApp',
+    consulta: 'Solicitar una valoración',
+  },
+  laboral: {
+    id: 'laboral' as CanalId,
+    etiqueta: 'Área laboral',
+    phone: laboral.phone,
+    phoneIntl: laboral.phoneIntl,
+    llamar: 'Llamar al área laboral',
+    escribir: 'WhatsApp del área laboral',
+    consulta: 'Enviar consulta laboral',
+  },
+};
+export const canalDe = (area?: string | null) => (area === 'laboral' ? contactos.laboral : contactos.general);
+
+export const whatsapp = (text: string = mensajes.general, canal: CanalId = 'general') =>
+  `https://wa.me/${contactos[canal].phoneIntl.replace('+', '')}?text=${encodeURIComponent(text)}`;
 
 export const deca = (campaign: string) =>
   `${site.decaUrl}?utm_source=praetoria&utm_medium=referral&utm_campaign=${campaign}`;
 
-/** Las siete áreas de práctica, agrupadas por a quién se dirigen. */
+/** Las ocho áreas de práctica, agrupadas por a quién se dirigen. */
 export type Group = 'empresas' | 'particulares';
-export type AreaRef = { id: 'transporte' | 'mercantil' | 'hacienda' | 'civil' | 'familia' | 'arte' | 'laboral'; slug: string; name: string; short: string; group: Group };
+export type AreaRef = {
+  id: 'transporte' | 'mercantil' | 'hacienda' | 'civil' | 'familia' | 'arte' | 'laboral' | 'penal';
+  slug: string;
+  name: string;
+  short: string;
+  /** Público principal: decide la miga de pan y el orden. */
+  group: Group;
+  /** Otros públicos desde los que también se enlaza (misma URL, sin duplicar contenido ni canonical) (#31). */
+  tambien?: Group[];
+};
 
 export const areas: AreaRef[] = [
   {
@@ -85,6 +123,7 @@ export const areas: AreaRef[] = [
     name: 'Hacienda y Seguridad Social',
     short: 'Requerimientos, liquidaciones, sanciones, apremios y embargos.',
     group: 'empresas',
+    tambien: ['particulares'],
   },
   {
     id: 'laboral',
@@ -108,6 +147,13 @@ export const areas: AreaRef[] = [
     group: 'particulares',
   },
   {
+    id: 'penal',
+    slug: 'abogado-penalista-valencia',
+    name: 'Penal',
+    short: 'Detenciones, citaciones y juicios rápidos, alcoholemias, lesiones, hurtos y estafas.',
+    group: 'particulares',
+  },
+  {
     id: 'arte',
     slug: 'arte-y-patrimonio',
     name: 'Arte y patrimonio',
@@ -115,6 +161,11 @@ export const areas: AreaRef[] = [
     group: 'particulares',
   },
 ];
+
+/** Áreas que se muestran en un público: las suyas y las que también le sirven. */
+export const areasDe = (g: Group) => areas.filter((a) => a.group === g || a.tambien?.includes(g));
+/** Etiqueta de público de un área: «Empresas y particulares» si se dirige a ambos. */
+export const publicoDe = (a: AreaRef) => (a.tambien?.length ? 'Empresas y particulares' : groups[a.group].title);
 
 export const groups = {
   empresas: { title: 'Empresas y autónomos', href: '/areas/#empresas' },

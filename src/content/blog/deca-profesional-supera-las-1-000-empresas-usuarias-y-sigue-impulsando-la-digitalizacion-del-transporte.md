@@ -7,6 +7,8 @@ updated: 2026-10-23
 category: transporte
 deca: herramienta
 wpId: 3090
+intencion: "Noticia: implantación de DeCA Profesional en empresas de transporte"
+imagen: deca-logo
 ---
 
 

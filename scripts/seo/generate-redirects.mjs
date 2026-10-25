@@ -37,7 +37,7 @@ const CATEGORY_MAP = {
 // Fotografías migradas: nombre antiguo (sin extensión) -> archivo nuevo
 const p = 'WhatsApp-Image-2025-09-29-at-';
 const MEDIA_MAP = {
-  [p + '14.27.02']: 'juan-jose-farinos.webp',
+  // [p + '14.27.02']: retrato retirado (#28): sin redirección, da 404
   [p + '14.07.17-1']: 'despacho-puestos-trabajo.webp',
   [p + '14.07.18']: 'despacho-zona-mesas.webp',
   [p + '14.07.18-1']: 'despacho-oficina-sofa.webp',
@@ -45,7 +45,8 @@ const MEDIA_MAP = {
   [p + '14.07.18-3']: 'despacho-zona-espera.webp',
   [p + '14.07.18-4']: 'despacho-salas-reuniones.webp',
   [p + '14.07.18-5']: 'despacho-planta-abierta.webp',
-  [p + '14.07.18-6']: 'despacho-sala-reunion.webp',
+  // El original mostraba datos en un portátil: se redirige al recorte sin pantalla ni personas (#28)
+  [p + '14.07.18-6']: 'v2/despacho-cristales-planta.webp',
   [p + '14.24.33']: 'trabajo-portatil.webp',
   [p + '14.19.54']: 'arte-muestras-color.webp',
   [p + '14.27.52']: 'arte-museo-visitantes.webp',
@@ -57,7 +58,14 @@ const MEDIA_MAP = {
 const SIZES = ['', '-1024x768', '-768x576', '-300x225', '-768x1024', '-225x300', '-150x150'];
 
 const lines = [];
-const out = (from, to, status = 301) => lines.push(`${from.padEnd(70)} ${to.padEnd(50)} ${status}`);
+const linea = (from, to, status) => lines.push(`${from.padEnd(70)} ${to.padEnd(50)} ${status}`);
+// Netlify compara las reglas con la ruta codificada (%D8%A7…): una ruta con caracteres no ASCII
+// (etiquetas en árabe) no coincide escrita tal cual. Se publica también su forma codificada.
+// Comprobado en el despliegue real de Netlify (24/10/2026): sin ella, esas 5 URLs daban 404.
+const out = (from, to, status = 301) => {
+  linea(from, to, status);
+  if (/[^\x00-\x7f]/.test(from)) linea(encodeURI(from).replace(/%2A$/, '*'), to, status);
+};
 
 lines.push(
   '# GENERADO por scripts/seo/generate-redirects.mjs — no editar a mano.',

@@ -6,6 +6,8 @@ date: 2026-04-22
 updated: 2026-08-20
 category: laboral
 wpId: 2815
+intencion: "Salir de la empresa tras una baja larga conservando indemnización y paro"
+imagen: laboral-baja-documentos
 ---
 
 Estar de baja médica durante meses genera una situación de incertidumbre que muchas personas no saben cómo gestionar. La duda es frecuente: **¿puedo marcharme de la empresa sin perder mis derechos?** La respuesta es sí, pero no de cualquier forma.

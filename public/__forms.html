@@ -1,6 +1,6 @@
 <!doctype html>
 <!--
-  Definición del formulario "contacto" para Netlify Forms. Netlify lo detecta al desplegar.
+  Definición de los formularios "contacto" (general), "contacto-laboral", "llamada-urgente" y "llamada-urgente-laboral" para Netlify Forms. Netlify lo detecta al desplegar.
   No se enlaza ni se indexa: la función netlify/functions/consulta.mts entrega aquí cada consulta
   ya validada. Si se añade un campo a la consulta, hay que añadirlo también aquí.
 -->
@@ -23,9 +23,84 @@
       <input name="problema" />
       <input name="situacion" />
       <textarea name="cuestionario"></textarea>
+      <input name="organismo" />
+      <input name="documento" />
+      <input name="detalle" />
+      <input name="origen" />
+      <input name="landing" />
+      <input name="utm_source" />
+      <input name="utm_medium" />
+      <input name="utm_campaign" />
       <input name="responsable" />
       <input name="preferencia" />
       <textarea name="mensaje"></textarea>
+      <input name="privacidad" />
+    </form>
+    <!-- Consultas del área laboral: mismo contenido, aviso por correo propio -->
+    <form name="contacto-laboral" data-netlify="true" netlify-honeypot="empresa-web" hidden>
+      <input name="empresa-web" />
+      <input name="id" />
+      <input name="nombre" />
+      <input name="email" />
+      <input name="telefono" />
+      <input name="area" />
+      <input name="servicio" />
+      <input name="papel" />
+      <input name="incidencia" />
+      <input name="importe" />
+      <input name="fecha" />
+      <input name="representa" />
+      <input name="problema" />
+      <input name="situacion" />
+      <textarea name="cuestionario"></textarea>
+      <input name="organismo" />
+      <input name="documento" />
+      <input name="detalle" />
+      <input name="origen" />
+      <input name="landing" />
+      <input name="utm_source" />
+      <input name="utm_medium" />
+      <input name="utm_campaign" />
+      <input name="responsable" />
+      <input name="preferencia" />
+      <textarea name="mensaje"></textarea>
+      <input name="privacidad" />
+    </form>
+    <!-- Solicitudes de llamada / contacto prioritario (#33): netlify/functions/llamada.mts. Aviso por correo propio con «URGENTE» -->
+    <form name="llamada-urgente" data-netlify="true" netlify-honeypot="empresa-web" hidden>
+      <input name="empresa-web" />
+      <input name="prioridad" />
+      <input name="id" />
+      <input name="nombre" />
+      <input name="telefono" />
+      <input name="area" />
+      <input name="servicio" />
+      <input name="motivo" />
+      <input name="fecha" />
+      <input name="localidad" />
+      <input name="seguro" />
+      <input name="franja" />
+      <textarea name="descripcion"></textarea>
+      <input name="responsable" />
+      <input name="origen" />
+      <input name="privacidad" />
+    </form>
+    <form name="llamada-urgente-laboral" data-netlify="true" netlify-honeypot="empresa-web" hidden>
+      <input name="empresa-web" />
+      <input name="prioridad" />
+      <input name="id" />
+      <input name="nombre" />
+      <input name="telefono" />
+      <input name="area" />
+      <input name="servicio" />
+      <input name="motivo" />
+      <input name="fecha" />
+      <input name="localidad" />
+      <input name="seguro" />
+      <input name="franja" />
+      <textarea name="descripcion"></textarea>
+      <input name="responsable" />
+      <input name="origen" />
       <input name="privacidad" />
     </form>
   </body>

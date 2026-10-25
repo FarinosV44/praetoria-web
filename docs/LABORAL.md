@@ -8,9 +8,9 @@
   - el formulario.
 
   Es una sola página para Valencia y El Puig: no hay sedes ni landings locales duplicadas.
-- **Contacto:** Lucía López, experta en Derecho Laboral, en el 649 181 290 (`tel:+34649181290`, configurado en `site.ts` → `laboral`). **Solo llamadas.**
+- **Contacto: «Área laboral»**, 649 181 290 (`tel:+34649181290`, WhatsApp `34649181290`, configurado en `site.ts` → `contactos.laboral`). **Llamadas y WhatsApp** desde #28 (autorización del propietario del 24/10/2026, que sustituye la restricción anterior). Los botones dicen «Llamar al área laboral» y «WhatsApp del área laboral»; el nombre de Lucía López aparece con discreción en contacto y en «El despacho».
   - En la landing y en las páginas de servicio laboral, el botón de llamada va a Lucía.
-  - No hay WhatsApp a su número, y una prueba lo comprueba. El WhatsApp de la web es siempre el general.
+  - En las páginas laborales (área, servicios y artículos laborales), todos los botones y la barra móvil van al número del área laboral; fuera de ellas, al general. Hay pruebas que lo comprueban.
   - El aviso de recepción indica que la consulta la revisará ella y da su teléfono.
   - Las demás áreas mantienen el contacto general.
 - **Etiqueta antigua:** `/tag/abogado-laboralista-valencia/` redirigía al artículo de despido y ahora redirige a la landing, que coincide con su intención.

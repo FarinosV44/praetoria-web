@@ -7,6 +7,8 @@ updated: 2026-09-08
 category: civil-vivienda
 tags: ["abogado alquiler", "contrato alquiler", "demanda alquiler", "desahucio", "problemas alquiler"]
 wpId: 2718
+intencion: "Qué hacer si te han demandado por un contrato de alquiler"
+imagen: civil-alquiler
 ---
 
 ### 1. No ignores la notificación
@@ -52,7 +54,7 @@ Respecto a costes: la demanda, la contestación, los posibles peritos, costas ju
 
 ### 7. Por qué elegir Praetoria para este tipo de asuntos
 
-- Conocimiento local de El Puig y Valencia: tengo experiencia directa en los juzgados civiles de la zona, lo que da ventaja para conocer los tiempos, los criterios del juzgado y las prácticas habituales.
+- Conocimiento de los juzgados de Valencia: el despacho tiene experiencia directa en los juzgados civiles de la zona, lo que da ventaja para conocer los tiempos, los criterios del juzgado y las prácticas habituales.
 - Enfoque estratégico: no sólo “litigar”, sino buscar la mejor solución para ti (sea salir indemne o llegar a un acuerdo favorable).
 - Comunicación clara: sabrás qué se hace, por qué y qué consecuencias tiene.
 - Orientación práctica: mi lema “Diseño legal y estrategia práctica para que consigas lo que te propones” se traduce en que busco resultados, no solo trámites.
@@ -63,4 +65,4 @@ Respecto a costes: la demanda, la contestación, los posibles peritos, costas ju
 
 Si te han demandado por un alquiler, **no esperes**: cada minuto cuenta. Actuar pronto, reunir la documentación y tener un abogado que conozca el territorio y el tipo de asunto puede marcar la diferencia. En Praetoria estamos a tu lado para ayudarte a enfrentar la demanda con la mejor estrategia.
 
-¿Quieres que revisemos sin compromiso tu situación concreta? Podemos fijar una cita para analizar tu caso y proponer la mejor vía de actuación. Contacta conmigo en El Puig / Valencia.
+¿Quieres que revisemos sin compromiso tu situación concreta? Podemos fijar una cita para analizar tu caso y proponer la mejor vía de actuación. Contacta con el despacho.

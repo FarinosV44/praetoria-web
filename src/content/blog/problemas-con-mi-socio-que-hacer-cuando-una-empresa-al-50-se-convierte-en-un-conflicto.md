@@ -5,6 +5,8 @@ date: 2026-08-20
 updated: 2026-10-23
 category: mercantil
 wpId: 2833
+intencion: "Salir del bloqueo en una sociedad al 50 % con un socio en conflicto"
+imagen: mercantil-socios
 ---
 
 

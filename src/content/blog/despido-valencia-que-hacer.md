@@ -1,12 +1,14 @@
 ---
 title: "Despido en Valencia: qué hacer en las primeras 48 horas para no perder tus derechos"
-seoTitle: "Despido Valencia: Lo Que Debes Saber"
-description: "Descubre todo sobre el despido Valencia y aprende a proteger tus derechos en este proceso laboral delicado."
+seoTitle: "Despido en Valencia: qué hacer en las primeras 48 horas"
+description: "Te han despedido en Valencia: cómo firmar la carta sin renunciar a nada, qué revisar del finiquito y el plazo de 20 días hábiles para reclamar."
 date: 2026-03-27
 updated: 2026-04-22
 category: laboral
 tags: ["abogado laboralista valencia", "derecho laboral", "despido improcedente", "despido valencia", "finiquito", "reclamar despido"]
 wpId: 2784
+intencion: "Qué hacer en las primeras 48 horas tras un despido en Valencia"
+imagen: laboral-revision-contrato
 ---
 
 Recibir una carta de despido es una de las situaciones más delicadas a nivel laboral. En este artículo te explicaremos todo lo que necesitas saber sobre despido Valencia y cómo afrontar este proceso. Además, entender el proceso de despido Valencia es fundamental para proteger tus derechos.

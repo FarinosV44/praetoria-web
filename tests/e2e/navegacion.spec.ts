@@ -26,3 +26,23 @@ test('sin errores de JavaScript en las páginas principales', async ({ page }) =
   }
   expect(errors).toEqual([]);
 });
+
+test('Hacienda y Seguridad Social se enlaza desde Empresas y desde Particulares, con una sola URL (#31)', async ({ page }) => {
+  const url = '/abogado-hacienda-y-seguridad-social-en-valencia/';
+  await page.goto('/');
+  for (const grupo of ['Empresas', 'Particulares']) {
+    await page.getByRole('button', { name: grupo }).click();
+    const sub = page.locator('.menu__item.open .sub');
+    await expect(sub.locator(`a[href="${url}"]`)).toBeVisible();
+    await page.keyboard.press('Escape');
+  }
+  await page.goto('/areas/');
+  await expect(page.locator(`#empresas a[href="${url}"]`).first()).toBeVisible();
+  await expect(page.locator(`#particulares a[href="${url}"]`).first()).toBeVisible();
+  await page.goto(url);
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://praetoriaabogados.es${url}`);
+  await expect(page.locator('#segun-tu-situacion')).toContainText('Particulares');
+  await expect(page.locator('#segun-tu-situacion')).toContainText('Empresas y autónomos');
+  const sitemap = await (await page.request.get('/sitemap.xml')).text();
+  expect(sitemap.split(url).length - 1).toBe(1);
+});

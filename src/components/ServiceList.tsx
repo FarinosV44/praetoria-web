@@ -4,12 +4,12 @@ import { docLabel, enlaceConsulta, type Servicio } from '@/lib/servicios';
 
 // Lista de servicios de un área con su siguiente paso concreto (#5):
 // la consulta con el servicio ya elegido, o la herramienta propia del servicio (cuestionario de Hacienda o divorcio).
-export function ServiceList({ services }: { services: Servicio[] }) {
+export function ServiceList({ services, defaultCta = 'Consultar sobre esto' }: { services: Servicio[]; defaultCta?: string }) {
   const posts = getPosts();
   return (
     <ul className="services">
       {services.map((s) => {
-        const next = s.siguientePaso ?? { label: s.cta ?? 'Consultar sobre esto', href: enlaceConsulta(s) };
+        const next = s.siguientePaso ?? { label: s.cta ?? defaultCta, href: enlaceConsulta(s) };
         const reads = (s.articulos ?? []).map((slug) => posts.find((p) => p.slug === slug)).filter((p) => !!p);
         return (
           <li key={s.id} id={s.id} className="service">

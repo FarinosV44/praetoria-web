@@ -1,166 +1,68 @@
 ---
-title: "Por qué muchos abogados en Valencia no te dicen la verdad sobre tu caso"
-seoTitle: "Abogado en Valencia: por qué no siempre te dicen la verdad"
-description: "Descubre por qué algunos abogados no te cuentan toda la verdad sobre tu caso y cómo elegir uno que sea realmente transparente."
+title: "Qué debe transmitirte un abogado sobre tu caso (y cómo saber si lo hace)"
+seoTitle: "Qué debe transmitirte un abogado sobre tu caso"
+description: "Claridad sobre la viabilidad, los riesgos, los costes y los plazos: lo que un abogado debe explicarte desde la primera consulta y cómo comprobar que lo hace."
 date: 2026-03-27
-updated: 2026-03-27
+updated: 2026-10-25
 category: elegir-abogado
 tags: ["abogado valencia", "asesoría legal", "contratar abogado", "despacho jurídico", "elegir abogado", "problemas con abogados"]
 wpId: 2773
+intencion: "Saber qué debe explicarte un abogado sobre tu caso antes de encargárselo"
+imagen: abogado-explica-caso
 ---
 
-Cuando una persona acude a un abogado, lo hace normalmente en una situación de incertidumbre, preocupación o urgencia. Busca claridad, estrategia y, sobre todo, honestidad.
+Quien acude a un abogado suele hacerlo con prisa, con preocupación o con las dos cosas. Necesita entender dónde está y qué puede hacer. Por eso, más que una promesa, lo que debe llevarse de la primera conversación es **información clara para decidir**.
 
-Sin embargo, una de las mayores frustraciones de muchos clientes es descubrir, demasiado tarde, que **no les dijeron toda la verdad desde el principio**.
+La mayoría de los profesionales trabajan así. Aun así, conviene saber qué esperar de esa conversación, porque es la mejor forma de comprobar que estás en buenas manos y de evitar sorpresas más adelante.
 
-¿Ocurre siempre? No.  
-Pero ocurre lo suficiente como para que merezca la pena explicarlo con claridad.
+## Lo que un abogado debe transmitirte
 
----
+### Una valoración honesta de la viabilidad
 
-## ⚖️ El problema: expectativas irreales desde el inicio
+El Estatuto General de la Abogacía Española obliga al abogado a **informar a su cliente sobre la viabilidad del asunto**, a procurar disuadirle de iniciar conflictos o acciones judiciales sin fundamento y a aconsejarle, cuando proceda, sobre vías alternativas que satisfagan mejor sus intereses (artículo 48.3).
 
-Uno de los errores más frecuentes en el ámbito jurídico es **generar falsas expectativas al cliente**.
+En la práctica, eso significa que te explique con franqueza qué puntos juegan a tu favor, cuáles en contra y qué es lo más probable, no solo lo posible. A veces la respuesta honesta es que el caso es difícil, o que conviene negociar antes que litigar. Esa respuesta también es un buen servicio.
 
-Esto suele ocurrir cuando el abogado:
+### Los riesgos, no solo las oportunidades
 
-- Asegura que el caso está “ganado”
-- Minimiza riesgos importantes
-- Evita hablar de escenarios negativos
-- No explica costes reales o futuros
+Un buen asesoramiento incluye los escenarios desfavorables: qué pasa si no se gana, cuánto puede durar el procedimiento y qué consecuencias tendría. Desconfía de cualquier garantía de resultado: en un pleito intervienen pruebas, plazos y una decisión judicial que nadie controla por completo.
 
-👉 ¿Por qué pasa esto?
+### Los costes, por escrito
 
----
+El abogado debe informarte de los **honorarios y costes de su actuación mediante la hoja de encargo o un medio equivalente**, y también de las consecuencias que puede tener una condena en costas y de su cuantía aproximada (artículo 48.4). Pregunta qué incluye el presupuesto y qué puede quedar fuera, como procurador, peritos o recursos. Si quieres saber cómo se fijan los honorarios, lo explicamos en [cuánto cuesta un abogado en España](/cuanto-cuesta-abogado-espana/).
 
-## 💰 1. Para conseguir el cliente
+### Los plazos que importan
 
-Seamos claros: el sector jurídico es competitivo.
+Muchos asuntos tienen plazos cortos para reclamar o recurrir. Una de las primeras cosas que debe hacer el abogado es identificar las fechas de tu caso y decirte qué no puede esperar.
 
-Algunos despachos priorizan cerrar el cliente frente a decir la verdad completa.  
-Y en ese contexto, es más fácil decir:
+### Información durante todo el asunto
 
-> “Tu caso es viable, no te preocupes”
+El deber de información no termina al aceptar el encargo: el abogado debe informarte del **estado del asunto y de las incidencias y resoluciones relevantes** y, si lo pides en un procedimiento, facilitarte copia de los escritos y resoluciones (artículo 48.5).
 
-que explicar:
+## Cómo comprobar que lo está haciendo
 
-> “Tu caso es complicado, hay riesgos importantes y podrías perder”
+- **Te hace preguntas** y pide documentos antes de opinar con seguridad.
+- **Distingue** entre lo posible y lo probable, y te explica por qué.
+- **Habla de riesgos** sin que tengas que insistir.
+- **Te da los costes por escrito** antes de empezar.
+- **Responde a tus dudas** con claridad, aunque la respuesta no sea la que esperabas.
+- **No te garantiza el resultado.**
 
-👉 El problema es que el cliente toma decisiones basadas en información incompleta.
+Si algo de esto falta, pregunta directamente. Un buen profesional agradece la pregunta. Para elegir con calma, también puede ayudarte nuestra guía sobre [cómo elegir abogado en Valencia](/mejor-abogado-en-valencia/).
 
----
+## Qué puedes hacer tú para que la valoración sea útil
 
-## ⚠️ 2. Porque la verdad es incómoda
+- Lleva **toda la documentación**, también la que crees que te perjudica.
+- Cuenta los hechos **en orden y sin omitir nada**: lo que el abogado no sabe no lo puede valorar.
+- Di **qué quieres conseguir**. A veces el objetivo cambia la estrategia.
+- Pregunta por **alternativas**: negociación, mediación o un acuerdo pueden ser mejores que un juicio.
 
-Decir la verdad en derecho no siempre es agradable.
+## Cómo trabajamos en Praetoria
 
-Ejemplos reales:
+Antes de empezar, entendemos tu objetivo, revisamos la documentación y las fechas y te explicamos las opciones, los riesgos y los honorarios. Si un asunto no tiene recorrido, te lo decimos. Así puedes decidir con toda la información.
 
-- Que un despido probablemente sea procedente
-- Que una reclamación tiene pocas posibilidades
-- Que un procedimiento será largo y costoso
+[Cuéntanos tu caso](/contacto/)
 
-Muchos abogados evitan estas conversaciones para:
+## Fuentes
 
-- No generar rechazo
-- No perder el encargo
-- Evitar conflictos con el cliente
-
----
-
-## 🧩 3. Falta de análisis real del caso
-
-Otro problema habitual es la **falta de profundidad inicial**.
-
-Algunos despachos:
-
-- No estudian bien la documentación
-- No hacen preguntas clave
-- Dan una opinión demasiado rápida
-
-👉 Resultado: una valoración superficial que luego cambia… cuando ya has pagado.
-
----
-
-## 🧾 4. No explicar los costes reales
-
-Uno de los puntos más delicados.
-
-Muchos clientes creen que:
-
-- Pagan una cantidad cerrada
-- El proceso será sencillo
-
-Pero después aparecen:
-
-- Provisiones adicionales
-- Costes de procurador
-- Peritos
-- Recursos
-
-👉 Y ahí empieza el problema.
-
----
-
-## 🔍 5. Confundir “posible” con “probable”
-
-En derecho, muchas cosas son posibles…  
-pero no todas son probables.
-
-Un abogado honesto debe explicarte:
-
-- Qué puede pasar
-- Qué es lo más probable
-- Qué riesgos existen
-
-👉 Si solo te hablan de lo positivo, desconfía.
-
----
-
-## 🚨 Cómo detectar si no te están diciendo la verdad
-
-Hay señales claras:
-
-- Te garantizan el resultado
-- No hablan de riesgos
-- No te explican escenarios alternativos
-- No te detallan costes
-- Respuestas vagas o ambiguas
-
-👉 Un buen abogado nunca promete ganar.  
-Te explica el camino, con todo lo que implica.
-
----
-
-## 🧠 Qué deberías exigir a tu abogado
-
-Antes de contratar, asegúrate de que:
-
-✔️ Te explica lo bueno y lo malo  
-✔️ Te da una estrategia clara  
-✔️ Te habla de probabilidades reales  
-✔️ Te detalla todos los costes  
-✔️ Resuelve tus dudas sin evasivas
-
----
-
-## 💬 Nuestra forma de trabajar
-
-En Praetoria División Jurídica creemos que la base de cualquier relación profesional es la transparencia.
-
-Por eso:
-
-- Analizamos cada caso en profundidad
-- Explicamos riesgos reales desde el inicio
-- No generamos falsas expectativas
-- Diseñamos una estrategia clara contigo
-
-👉 Porque tomar una buena decisión empieza por tener toda la información.
-
----
-
-## 📩 ¿Tienes dudas sobre tu caso?
-
-Si estás en una situación legal y no sabes realmente dónde estás, puedes escribirnos.
-
-👉 Estudiaremos tu caso y te daremos una valoración clara, sin compromiso.
+- [Estatuto General de la Abogacía Española (Real Decreto 135/2021), artículo 48: deberes de información](https://www.boe.es/eli/es/rd/2021/03/02/135/con)
