@@ -10,7 +10,7 @@ export function Footer() {
     <footer className="site-footer" lang="es">
       <div className="wrap cols">
         <div className="col col--id">
-          <img src="/media/logo-praetoria-sin-fondo.png" alt={site.name} width={560} height={151} loading="lazy" />
+          <img src="/media/logo-praetoria-sin-fondo.png" alt={site.name} width={560} height={109} loading="lazy" />
           <p>
             Abogados en Valencia para empresas y particulares.
             <br />

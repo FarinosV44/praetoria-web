@@ -43,7 +43,7 @@ export function Header() {
     <header className="site-header" lang="es">
       <div className="wrap bar">
         <Link href="/" className="brand" aria-label={`${site.name}, inicio`}>
-          <img src="/media/logo-praetoria-sin-fondo.png" alt={site.name} width={560} height={151} />
+          <img src="/media/logo-praetoria-sin-fondo.png" alt={site.name} width={560} height={109} />
         </Link>
 
         <button className="menu-toggle" aria-expanded={menuOpen} aria-controls="menu" onClick={() => setMenuOpen((v) => !v)}>
