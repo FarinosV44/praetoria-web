@@ -14,7 +14,7 @@ imagen: logistica-revision-recinto
 
 El 5 de octubre de 2026 cambiará la forma de documentar miles de transportes de mercancías por carretera en España. Desde esa fecha, el documento de control administrativo deberá generarse necesariamente en formato digital.
 
-En los últimos meses han aparecido numerosas noticias y ofertas comerciales sobre el denominado [DeCA](https://www.decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=blog_deca). La mayoría se limita a repetir tres ideas: que será obligatorio, que desaparecerá el papel y que las empresas deberán contratar una plataforma.
+En los últimos meses han aparecido numerosas noticias y ofertas comerciales sobre el denominado [DeCA](https://decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=blog_deca). La mayoría se limita a repetir tres ideas: que será obligatorio, que desaparecerá el papel y que las empresas deberán contratar una plataforma.
 
 La realidad jurídica es bastante más compleja.
 
@@ -343,7 +343,7 @@ No conviene esperar al 5 de octubre para descubrir que el QR conduce a una panta
 
 ## DeCA Profesional: una solución respaldada por experiencia jurídica y logística
 
-[DECA Profesional](https://www.decaprofesional.es/) nace para facilitar el cumplimiento del documento electrónico de control administrativo sin transformar esta obligación en un proceso innecesariamente complicado.
+[DECA Profesional](https://decaprofesional.es/) nace para facilitar el cumplimiento del documento electrónico de control administrativo sin transformar esta obligación en un proceso innecesariamente complicado.
 
 La diferencia no consiste únicamente en generar un PDF y un código QR.
 
@@ -360,7 +360,7 @@ Porque las dudas más difíciles no suelen ser informáticas:
 - ¿Quién responde si un dato es incorrecto?
 - ¿Cómo se recurre una sanción?
 
-Puedes conocer la solución y preparar tu empresa antes de la fecha límite en [www.decaprofesional.es](https://www.decaprofesional.es/).
+Puedes conocer la solución y crear tus 3 primeros DeCA gratis en [DeCA Profesional](https://decaprofesional.es/).
 
 ## Asesoramiento jurídico para empresas de transporte
 

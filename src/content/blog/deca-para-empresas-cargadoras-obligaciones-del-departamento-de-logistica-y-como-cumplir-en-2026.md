@@ -23,7 +23,7 @@ Desde el **5 de octubre de 2026**, el documento de control administrativo exigib
 
 > **Resumen rápido:** si tu empresa contrata directamente el transporte con la empresa que lo realiza materialmente, normalmente tendrá la consideración de cargador contractual. El cargador contractual y el transportista efectivo están obligados a formalizar el documento de control y ambos pueden responder si no se genera o no se lleva a bordo.
 
-[**COMPROBAR SI MI EMPRESA ESTÁ OBLIGADA A HACER EL DECA**](https://www.decaprofesional.es/)
+[**COMPROBAR SI MI EMPRESA ESTÁ OBLIGADA A HACER EL DECA**](https://decaprofesional.es/)
 
 ## ¿Por qué el DECA afecta a las empresas cargadoras?
 
@@ -236,15 +236,17 @@ Si alguna respuesta es negativa, existe un punto del procedimiento que conviene 
 
 ## Cómo puede ayudar DECA Profesional a una empresa cargadora
 
-[DECA Profesional](https://www.decaprofesional.es/) permite crear, compartir y conservar el Documento Electrónico de Control Administrativo desde una cuenta de empresa.
+[DECA Profesional](https://decaprofesional.es/) permite crear, compartir y conservar el Documento Electrónico de Control Administrativo desde una cuenta de empresa.
 
 El departamento de logística puede guardar sus datos habituales, empresas, transportistas, vehículos y lugares de carga o descarga; duplicar documentos; trabajar con varios usuarios; enviar el DECA al conductor y consultar el histórico desde un mismo panel.
 
 Para empresas con un mayor volumen de expediciones, también puede estudiarse una integración con su ERP o TMS mediante API, adaptada a su operativa.
 
-La plataforma cuenta con revisión jurídica especializada en transporte y un canal de asistencia para resolver incidencias relacionadas con el documento. Durante su fase de lanzamiento, puede utilizarse gratuitamente y sin compromiso hasta el 31 de diciembre de 2026.
+La plataforma cuenta con revisión jurídica especializada en transporte y un canal de asistencia para resolver incidencias relacionadas con el documento. Puedes crear tus **3 primeros DeCA gratis, sin tarjeta**, y después elegir un plan desde 19,99 € al mes + IVA, sin permanencia ([ver planes y precios](https://decaprofesional.es/precios)).
 
-[**CREAR UNA CUENTA DE EMPRESA GRATIS**](https://www.decaprofesional.es/)
+Si quieres ver cómo se organiza el día a día de un cargador o expedidor, DeCA Profesional lo explica en su página de [DeCA para cargadores y expedidores](https://decaprofesional.es/deca-cargadores).
+
+[**CREAR UNA CUENTA DE EMPRESA GRATIS**](https://decaprofesional.es/crear)
 
 Si tu empresa no tiene claro si actúa como cargador contractual, cómo debe coordinarse con sus agencias o transportistas o qué procedimiento debería implantar, **Praetoria División Jurídica puede revisar jurídicamente su operativa de contratación y documentación del transporte**.
 

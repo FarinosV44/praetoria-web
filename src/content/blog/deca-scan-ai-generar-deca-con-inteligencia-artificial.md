@@ -10,7 +10,7 @@ intencion: "Generar el DeCA automáticamente con IA a partir de la documentació
 imagen: deca-fotografiar-documento
 ---
 
-**La información del DeCA casi siempre existe ya en algún papel.** Está en la orden de transporte que envía el cargador, en el CMR o en el albarán. Copiarla a mano en un formulario lleva tiempo y es la forma más habitual de equivocarse en un NIF, una matrícula o un peso. **DECA Scan AI**, la nueva función de [DeCA Profesional](https://www.decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=blog_deca_scan), lee esos documentos con inteligencia artificial y prepara el DeCA para que solo tengas que revisarlo.
+**La información del DeCA casi siempre existe ya en algún papel.** Está en la orden de transporte que envía el cargador, en el CMR o en el albarán. Copiarla a mano en un formulario lleva tiempo y es la forma más habitual de equivocarse en un NIF, una matrícula o un peso. **DECA Scan AI**, la nueva función de [DeCA Profesional](https://decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=blog_deca_scan), lee esos documentos con inteligencia artificial y prepara el DeCA para que solo tengas que revisarlo.
 
 ## Qué hace DECA Scan AI
 
@@ -81,7 +81,7 @@ DECA Scan AI encaja en ese flujo: el documento leído se convierte en un DeCA qu
 
 ## Cómo empezar
 
-1. Crea tu cuenta en [DeCA Profesional](https://www.decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=blog_deca_scan).
+1. Crea tu cuenta en [DeCA Profesional](https://decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=blog_deca_scan).
 2. Sube la orden de transporte, el CMR o el albarán del próximo servicio a DECA Scan AI.
 3. Revisa los datos marcados, completa lo que falte y genera el DeCA.
 
@@ -89,7 +89,7 @@ Si todavía tienes dudas sobre quién debe emitir el DeCA o qué datos debe llev
 
 ## Fuentes y transparencia
 
-- [DeCA Profesional: funciones, DECA Scan AI y planes](https://www.decaprofesional.es/)
+- [DeCA Profesional: funciones, DECA Scan AI y planes](https://decaprofesional.es/)
 - [Canigo: DeCA por WhatsApp con un agente de IA](https://canigo.ai/blog/deca-transporte-agente-ia-whatsapp)
 - [DecaDoc](https://decadoc.es/)
 - [miDeCApro](https://midecapro.com/)

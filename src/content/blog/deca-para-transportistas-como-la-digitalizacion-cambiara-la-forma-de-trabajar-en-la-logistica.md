@@ -171,7 +171,7 @@ Por eso creemos que una plataforma de DECA debe construirse desde tres perspecti
 - **Logística**, para adaptarse a la velocidad y a las incidencias de una operación real.
 - **Derecho**, para interpretar correctamente las obligaciones y responsabilidades de cada participante.
 
-En [DECA Profesional](https://www.decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=articulo_deca_transportista) se unen profesionales conocedores de la operativa logística y abogados vinculados al sector del transporte.
+En [DECA Profesional](https://decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=articulo_deca_transportista) se unen profesionales conocedores de la operativa logística y abogados vinculados al sector del transporte.
 
 Esta combinación permite que la plataforma no se limite a crear un PDF. Su diseño tiene en cuenta quién es el cargador contractual, quién es el transportista efectivo, qué sucede cuando hay subcontratación, cómo deben documentarse las modificaciones y qué necesitará mostrar el conductor durante una inspección.
 
@@ -214,6 +214,6 @@ En **DECA Profesional** puedes generar, compartir y conservar el Documento Elect
 
 ### Prepara hoy tu empresa para el DECA digital
 
-[Crea tu DECA en DECA Profesional](https://www.decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=articulo_deca_transportista).
+[Crea tu DECA en DECA Profesional](https://decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=articulo_deca_transportista).
 
 Y si necesitas revisar contratos, órdenes de carga, responsabilidades o procedimientos de subcontratación, contacta con [Praetoria División Jurídica](/contacto/).

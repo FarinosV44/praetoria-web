@@ -1,9 +1,9 @@
 ---
 title: "Precios del software DeCA 2026: cuánto cuesta y qué plan elegir"
-seoTitle: "Precios software DeCA 2026 | DeCA Profesional gratis hasta diciembre"
-description: "Consulta los precios del software DeCA Profesional y elige el plan que mejor se adapta al volumen de documentos y usuarios de tu empresa."
+seoTitle: "Precios de DeCA Profesional 2026: planes desde 19,99 €/mes"
+description: "Cuánto cuesta DeCA Profesional: Starter 19,99 €, Professional 49,99 € y Business 89,99 € al mes + IVA. Qué incluye cada plan y cómo probarlo con 3 DeCA gratis."
 date: 2026-09-30
-updated: 2026-10-23
+updated: 2026-10-25
 category: transporte
 deca: herramienta
 wpId: 3073
@@ -29,7 +29,7 @@ En este artículo explicamos los precios actuales de [DeCA Profesional](https://
 
 Todos los planes permiten generar el mismo documento DeCA con PDF nativo, código QR y URL de descarga directa. Las diferencias principales están en el volumen mensual, el número de usuarios y determinadas funciones avanzadas para equipos con mayor actividad.
 
-**No existe permanencia** y la facturación es mensual.
+**No existe permanencia** y la facturación es mensual. Antes de contratar, puedes crear tus **3 primeros DeCA gratis**, sin tarjeta.
 
 [**Ver todos los planes y precios de DeCA Profesional**](https://decaprofesional.es/precios)
 
@@ -61,7 +61,7 @@ El plan **Starter** está orientado a autónomos y pequeñas empresas con un vol
 
 Por **19,99 € al mes + IVA** permite generar hasta **100 DeCA mensuales** y trabajar con hasta **3 usuarios**.
 
-Incluye las funciones esenciales para generar, custodiar y consultar los documentos, además de guardar datos habituales para no tener que introducirlos nuevamente en cada transporte.
+Incluye las funciones esenciales para generar, custodiar y consultar los documentos, además de guardar datos habituales para no tener que introducirlos nuevamente en cada transporte. También incluye **3 documentos al mes con DECA Scan AI**, que prepara el DeCA a partir de una foto o un PDF de la orden de transporte, el CMR o el albarán.
 
 [Consultar el plan Starter](https://decaprofesional.es/precios)
 
@@ -71,7 +71,9 @@ El plan **Professional** está pensado para empresas con un volumen mayor de ope
 
 Su precio es de **49,99 € al mes + IVA**, con hasta **300 DeCA mensuales** y **10 usuarios**.
 
-A las funciones de Starter añade herramientas dirigidas a trabajar con historiales más grandes y equipos con mayor actividad, como búsquedas avanzadas, vistas guardadas y exportación del histórico.
+A las funciones de Starter añade herramientas dirigidas a trabajar con historiales más grandes y equipos con mayor actividad, como filtros avanzados y búsquedas guardadas, DeCA con el logotipo de la empresa y **20 documentos al mes con DECA Scan AI**.
+
+También incorpora la **orden de carga digital**: con los mismos datos del DeCA, la empresa envía el encargo con su logotipo, su precio y sus condiciones, y el transportista completa las matrículas mediante un enlace. Si necesitas conectarlo con tu ERP o TMS, puedes añadir la **API Lite** por 39,95 € al mes + IVA.
 
 [Consultar el plan Professional](https://decaprofesional.es/precios)
 
@@ -81,7 +83,7 @@ El plan **Business** está pensado para empresas que gestionan una operativa má
 
 Su precio es de **89,99 € al mes + IVA**, con hasta **1.000 DeCA mensuales** y **30 usuarios**.
 
-También permite contratar la **API de DeCA Profesional** para integrar la generación de documentos con un ERP, TMS u otro software de gestión. La API tiene actualmente un coste adicional de **49,95 € al mes + IVA**.
+Incluye **200 documentos al mes con DECA Scan AI** y soporte telefónico, y permite contratar la **API Advanced** para integrar la generación de documentos con un ERP, TMS u otro software de gestión, con avisos automáticos y envío del DeCA al conductor. La API Advanced tiene un coste adicional de **49,95 € al mes + IVA**.
 
 [Consultar el plan Business y la API](https://decaprofesional.es/precios)
 
@@ -131,7 +133,7 @@ Cuando el volumen es superior, puede solicitarse una ampliación adaptada a las 
 
 El coste de un software DeCA no debería analizarse únicamente como una cuota mensual. Para una empresa que realiza decenas o cientos de transportes, guardar empresas, vehículos, rutas y lugares habituales y disponer de todo el histórico en un único entorno puede reducir considerablemente el trabajo administrativo.
 
-DeCA Profesional permite comenzar con una cuenta gratuita y elegir posteriormente el plan adecuado al volumen de actividad.
+DeCA Profesional permite comenzar con una cuenta gratuita, crear los 3 primeros DeCA sin coste y elegir posteriormente el plan adecuado al volumen de actividad.
 
 **Si tu empresa necesita empezar a trabajar con el DeCA, puedes hacerlo directamente desde DeCA Profesional:**
 
@@ -153,7 +155,7 @@ No. Los planes se ofrecen con facturación mensual y sin permanencia.
 
 ### ¿Puedo probar DeCA Profesional gratis?
 
-Sí. Las empresas registradas antes del 5 de octubre de 2026 mantienen el acceso gratuito hasta el 31 de diciembre de 2026. Para altas posteriores, DeCA Profesional permite crear un primer DeCA gratis antes de contratar un plan.
+Sí. Cualquier empresa puede crear sus 3 primeros DeCA gratis, sin tarjeta, antes de contratar un plan. Las empresas que se registraron antes del 5 de octubre de 2026 mantienen además el acceso gratuito de la promoción de lanzamiento hasta el 31 de diciembre de 2026.
 
 ### ¿Corregir un DeCA consume otra unidad?
 

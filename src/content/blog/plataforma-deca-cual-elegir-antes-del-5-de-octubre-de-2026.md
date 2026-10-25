@@ -1,14 +1,14 @@
 ---
-title: "Plataforma DECA: ¿cuál elegir antes del 5 de octubre de 2026?"
+title: "Plataforma DECA: ¿cuál elegir en 2026?"
 seoTitle: "Mejor plataforma DECA 2026: cuál elegir"
 description: "Comparamos las opciones para generar el DECA en 2026 y explicamos qué plataforma elegir según precio, facilidad, soporte y utilidad."
 date: 2026-09-09
-updated: 2026-10-23
+updated: 2026-10-25
 category: transporte
 deca: guia
 tags: ["documento de control digital", "generar DECA", "plataforma DECA gratis", "software DECA"]
 wpId: 2997
-intencion: "Elegir plataforma para el DeCA antes del 5 de octubre de 2026"
+intencion: "Elegir plataforma para el DeCA en 2026"
 imagen: logistica-comparar-ordenador
 ---
 
@@ -53,9 +53,9 @@ DECA Profesional no obliga a sustituir el programa de facturación ni a implanta
 
 Este enfoque reduce la curva de aprendizaje y facilita que una agencia pueda invitar a sus transportistas o que un autónomo empiece a utilizar la herramienta sin un proyecto informático previo.
 
-### 2. Es gratuita hasta el 31 de diciembre de 2026
+### 2. Se puede probar gratis y sin permanencia
 
-Durante la fase de lanzamiento, el uso de **DECA Profesional es gratuito hasta final de 2026 y sin compromiso de permanencia**. Esto permite probar la plataforma en portes reales, formar al equipo y llegar al 5 de octubre con el procedimiento ya asumido.
+**DECA Profesional permite crear los 3 primeros DeCA gratis, sin tarjeta**, y después elegir un plan desde 19,99 € al mes + IVA, sin permanencia. Esto permite probarla en portes reales y formar al equipo antes de decidir.
 
 Frente a soluciones que requieren solicitar una demostración o contratar un paquete completo, poder comenzar sin coste reduce una de las principales barreras de adaptación.
 
@@ -91,7 +91,7 @@ Su combinación de facilidad, acceso gratuito en el periodo de adaptación y opc
 
 > **Recomendación práctica:** no esperes al 5 de octubre. Registra la empresa, crea varios documentos de prueba y establece por escrito quién generará el DECA en cada operación.
 
-[**Crear una cuenta gratis en DECA Profesional**](https://www.decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=comparativa_plataforma_deca)
+[**Crear una cuenta gratis en DECA Profesional**](https://decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=comparativa_plataforma_deca)
 
 ## Preguntas frecuentes sobre plataformas DECA
 
@@ -109,7 +109,7 @@ Sí. Una plataforma especializada permite gestionar el DECA de forma independien
 
 ### ¿DECA Profesional es gratis?
 
-Sí, su uso es gratuito hasta el 31 de diciembre de 2026 durante la fase de lanzamiento. Conviene consultar en la propia plataforma las condiciones aplicables después de esa fecha.
+Puedes crear tus 3 primeros DeCA gratis, sin tarjeta. Después, los planes empiezan en 19,99 € al mes + IVA, sin permanencia. Las condiciones actualizadas están en [la página de precios de DeCA Profesional](https://decaprofesional.es/precios).
 
 ### ¿Tengo que aceptar recibir ofertas de cargas?
 

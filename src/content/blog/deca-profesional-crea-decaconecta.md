@@ -3,7 +3,7 @@ title: "Praetoria recomienda DeCA Profesional y presenta DeCA Conecta"
 seoTitle: "Praetoria recomienda DeCA Profesional y presenta DeCA Conecta"
 description: "PRAETORIA ABOGADOS recomienda DeCA Profesional para cumplir el DECA y descubrir DeCA Conecta, con ofertas de carga para reducir kilómetros en vacío."
 date: 2026-09-13
-updated: 2026-09-13
+updated: 2026-10-25
 category: transporte
 deca: herramienta
 wpId: 3033
@@ -13,7 +13,7 @@ imagen: deca-conecta
 
 **Praetoria División Jurídica, despacho jurídico especializado en transporte y logística, recomienda DeCA Profesional** como solución para que cargadores, agencias de transporte y transportistas efectivos puedan prepararse para la obligatoriedad del documento electrónico de control administrativo.
 
-La colaboración no se limita a facilitar el cumplimiento legal. [**DeCA Profesional**](https://www.decaprofesional.es/) ha creado además **DeCA Conecta**, una funcionalidad que permite aprovechar la trazabilidad de los transportes para ofrecer oportunidades de carga compatibles y ayudar a reducir kilómetros en vacío.
+La colaboración no se limita a facilitar el cumplimiento legal. [**DeCA Profesional**](https://decaprofesional.es/) ha creado además **DeCA Conecta**, una funcionalidad que permite aprovechar la trazabilidad de los transportes para ofrecer oportunidades de carga compatibles y ayudar a reducir kilómetros en vacío.
 
 ## ¿Qué es el DECA en el transporte de mercancías?
 
@@ -52,6 +52,8 @@ De esta manera, la obligación de documentar correctamente el transporte puede t
 
 ## DeCA Profesional gratis hasta el 31 de diciembre de 2026
 
+> **Actualización (25 de octubre de 2026):** la promoción de lanzamiento se aplica a las empresas que se registraron antes del 5 de octubre de 2026, que mantienen el acceso gratuito hasta el 31 de diciembre. Las nuevas altas pueden crear sus 3 primeros DeCA gratis, sin tarjeta, y después elegir un plan ([ver precios](https://decaprofesional.es/precios)).
+
 Durante su fase de lanzamiento, **DeCA Profesional se ofrece gratuitamente hasta el 31 de diciembre de 2026**. La finalidad es que las empresas y los transportistas puedan probar la plataforma, familiarizarse con su funcionamiento y comprobar su utilidad real antes de asumir una suscripción.
 
 La promoción incluye el acceso a DeCA Conecta. Recibir ofertas continúa siendo opcional y no obliga al usuario a aceptar ninguna propuesta.
@@ -60,9 +62,9 @@ PROMOCIÓN DE LANZAMIENTO
 
 Cumple el DECA y descubre DeCA Conecta
 
-Prueba gratuitamente la plataforma hasta el 31 de diciembre de 2026.
+Crea tus 3 primeros DeCA gratis, sin tarjeta.
 
-[PROBAR DECA PROFESIONAL GRATIS](https://www.decaprofesional.es/)
+[PROBAR DECA PROFESIONAL GRATIS](https://decaprofesional.es/crear)
 
 ## Respaldo jurídico especializado en transporte y logística
 

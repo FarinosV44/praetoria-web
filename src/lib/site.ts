@@ -21,7 +21,7 @@ export const site = {
   linkedin: 'https://www.linkedin.com/in/juan-farin%C3%B3s-ib%C3%A1%C3%B1ez-81b0a892/',
   googleReviews:
     'https://www.google.com/maps/search/?api=1&query=Juan%20Jos%C3%A9%20Farin%C3%B3s%20Ib%C3%A1%C3%B1ez%20Abogado%20El%20Puig%20Valencia',
-  decaUrl: 'https://www.decaprofesional.es/',
+  decaUrl: 'https://decaprofesional.es/',
 };
 
 /**
