@@ -31,7 +31,7 @@ const imagenSchema = z
     alto: z.number().int().positive().optional(),
     variantes: z.array(z.number().int().positive()).optional(),
     avif: z.boolean().optional(),
-    composicion: z.enum(['escritorio', 'movil-doble', 'ficha']).optional(),
+    composicion: z.enum(['escritorio', 'movil-doble', 'ficha', 'logo']).optional(),
     origen,
   })
   .superRefine((img, ctx) => {
@@ -80,9 +80,9 @@ export function creditoDe(img: Imagen): string {
     case 'unsplash':
       return `Foto: ${img.origen.autor ?? 'autor pendiente'} en Unsplash`;
     case 'deca':
-      return 'Captura real de DeCA Profesional (datos de demostración)';
+      return img.composicion === 'logo' ? 'Logotipo de DeCA Profesional' : 'Captura real de DeCA Profesional (datos de demostración)';
     case 'praetoria':
-      return 'Instalaciones de Praetoria en El Puig';
+      return 'Oficinas de Praetoria en el centro de Valencia';
     case 'ia':
       return img.origen.personalizada ? 'Recreación visual con IA a partir de fotografías autorizadas' : 'Escena ilustrativa generada con IA';
   }

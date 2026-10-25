@@ -275,7 +275,7 @@
       "estado": "publicada",
       "escena": "Instalaciones reales del despacho (solo en «El despacho»)",
       "archivo": "v2/despacho-salas-reuniones",
-      "alt": "Salas de reuniones acristaladas del despacho en El Puig",
+      "alt": "Salas de reuniones acristaladas en las oficinas del despacho en el centro de Valencia",
       "foco": "50% 50%",
       "ancho": 1600,
       "alto": 1056,
@@ -295,7 +295,7 @@
       "estado": "publicada",
       "escena": "Instalaciones reales del despacho (solo en «El despacho»)",
       "archivo": "v2/despacho-atencion-cliente",
-      "alt": "Espacio de atención a clientes del despacho en El Puig",
+      "alt": "Espacio de atención a clientes en las oficinas del despacho en el centro de Valencia",
       "foco": "50% 50%",
       "ancho": 1600,
       "alto": 1056,
@@ -1312,6 +1312,30 @@
         "perfil": "https://unsplash.com/@jonasleupe",
         "licencia": "Licencia Unsplash (uso comercial gratuito)"
       },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "deca-logo",
+      "estado": "publicada",
+      "escena": "Producto DeCA: logotipo de DeCA Profesional (noticias de la plataforma)",
+      "archivo": "ed/deca-logo",
+      "alt": "Logotipo de DeCA Profesional",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "deca",
+        "archivos": [
+          "fotos/deca/logo-deca-profesional.png"
+        ]
+      },
+      "composicion": "logo",
       "ancho": 1600,
       "alto": 1000,
       "variantes": [

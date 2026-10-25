@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { CtaBand } from '@/components/CtaBand';
 import { ContactosArea } from '@/components/ContactosArea';
-import { Icon, LineIcon } from '@/components/Icon';
+import { LineIcon } from '@/components/Icon';
 import { JsonLd } from '@/components/JsonLd';
 import { areas, laboral, site } from '@/lib/site';
 import { iconoArea, metodo } from '@/lib/iconos';
@@ -49,7 +49,7 @@ export default function DespachoPage() {
                 después analizamos las opciones y diseñamos la estrategia jurídica para defender tus intereses.
               </p>
             </div>
-            <Composicion icono="edificio" etiqueta="Abogados en Valencia" titulo="Empresas, autónomos, familias y particulares" texto="Atención presencial en El Puig de Santa María y, cuando el asunto lo permite, por teléfono o videollamada." />
+            <Composicion icono="edificio" etiqueta="Abogados en Valencia" titulo="Empresas, autónomos, familias y particulares" texto="Atención presencial en nuestras oficinas del centro de Valencia y en El Puig de Santa María y, cuando el asunto lo permite, por teléfono o videollamada." />
           </div>
         </div>
       </section>
@@ -122,19 +122,16 @@ export default function DespachoPage() {
           <div className="seccion-cabecera">
             <p className="antetitulo">Nuestro espacio</p>
             <h2>Un espacio sobrio y confidencial</h2>
-            <p className="lede">Salas privadas para reuniones y consultas confidenciales.</p>
+            <p className="lede">
+              Salas privadas para reuniones y consultas confidenciales en nuestras oficinas multidisciplinares de 300 m² en el centro de
+              Valencia.
+            </p>
           </div>
           <div className="galeria galeria--dos">
             {instalaciones.map((img) => (
               <Foto key={img.id} img={img} sizes="(min-width: 960px) 36vw, 92vw" className="photo" />
             ))}
           </div>
-          <address className="addr">
-            <Icon name="pin" />
-            <span>
-              {site.address.street}, {site.address.postalCode} {site.address.locality} ({site.address.region})
-            </span>
-          </address>
         </div>
       </section>
 
@@ -145,7 +142,7 @@ export default function DespachoPage() {
             <div><dt>Titular</dt><dd>{site.legalName}, CIF {site.cif}</dd></div>
             <div><dt>Letrado responsable</dt><dd>{site.lawyer}, {site.college}, n.º {site.collegeNumber}</dd></div>
             <div><dt>Área laboral</dt><dd>{laboral.name}, {laboral.role.toLowerCase()}</dd></div>
-            <div><dt>Domicilio</dt><dd>{site.address.street}, {site.address.postalCode} {site.address.locality}</dd></div>
+            <div><dt>Domicilio social</dt><dd>{site.address.street}, {site.address.postalCode} {site.address.locality}</dd></div>
             <div>
               <dt>Perfiles</dt>
               <dd>

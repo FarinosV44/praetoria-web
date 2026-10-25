@@ -76,6 +76,17 @@ def composicion_deca(img):
         x = (W - a.width - b.width - gap) // 2
         con_sombra(lienzo, a, x, (H - a.height) // 2 - 10, 34)
         con_sombra(lienzo, b, x + a.width + gap, (H - b.height) // 2 + 10, 34)
+    elif tipo == 'logo':
+        # Logotipo propio sobre fondo blanco: se recorta a su contenido y se centra, sin sombra
+        pieza = Image.open(RAIZ / img['origen']['archivos'][0]).convert('RGBA')
+        caja = pieza.getchannel('A').point(lambda v: 255 if v > 8 else 0).getbbox() or pieza.getbbox()
+        rgb = Image.new('RGB', pieza.size, (255, 255, 255))
+        rgb.paste(pieza, mask=pieza.getchannel('A'))
+        gris = ImageOps.invert(rgb.convert('L')).point(lambda v: 255 if v > 24 else 0)
+        caja = gris.getbbox() or caja
+        logo = escalar(rgb.crop(caja), 1080, 400, max_escala=3)
+        lienzo = Image.new('RGB', (W, H), (255, 255, 255))
+        lienzo.paste(logo, ((W - logo.width) // 2, (H - logo.height) // 2))
     else:
         p = escalar(piezas[0], 1300 if tipo == 'escritorio' else 760, 820)
         con_sombra(lienzo, p, (W - p.width) // 2, (H - p.height) // 2 - 8, 14)
