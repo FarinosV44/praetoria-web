@@ -1,0 +1,525 @@
+{
+ "nota": "Generado por scripts/servicios/matriz.mjs a partir de src/lib/servicios.ts. Modelo para el futuro portal; la web pública no almacena documentos.",
+ "servicios": [
+  {
+   "id": "transporte-portes-impagados",
+   "area": "transporte",
+   "nombre": "Reclamación de portes impagados",
+   "documentos": [
+    {
+     "id": "transporte-portes-impagados-1",
+     "label": "Orden de carga o encargo del transporte",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "transporte-portes-impagados-2",
+     "label": "CMR o carta de porte, mejor firmada en destino",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "transporte-portes-impagados-3",
+     "label": "Albaranes u otra prueba de entrega",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "transporte-portes-impagados-4",
+     "label": "Factura o facturas pendientes",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "transporte-portes-impagados-5",
+     "label": "Comunicaciones: correos, mensajes y avisos de pago",
+     "sensible": false,
+     "obligatorio": false
+    }
+   ]
+  },
+  {
+   "id": "transporte-mercancias",
+   "area": "transporte",
+   "nombre": "Pérdida, avería y retraso de mercancías",
+   "documentos": [
+    {
+     "id": "transporte-mercancias-1",
+     "label": "CMR o carta de porte, con las reservas anotadas",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "transporte-mercancias-2",
+     "label": "Fotografías y, si existe, informe pericial",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "transporte-mercancias-3",
+     "label": "Orden de carga y factura de la mercancía",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "transporte-mercancias-4",
+     "label": "Póliza de seguro y comunicaciones con la aseguradora",
+     "sensible": false,
+     "obligatorio": false
+    }
+   ]
+  },
+  {
+   "id": "laboral-despidos",
+   "area": "laboral",
+   "nombre": "Despidos e impugnación",
+   "documentos": [
+    {
+     "id": "laboral-despidos-1",
+     "label": "Carta de despido o comunicación recibida",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "laboral-despidos-2",
+     "label": "Contrato y, si las hay, prórrogas o modificaciones",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "laboral-despidos-3",
+     "label": "Últimas nóminas",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "laboral-despidos-4",
+     "label": "Finiquito o liquidación ofrecida, firmada o no",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "laboral-despidos-5",
+     "label": "Informe de vida laboral",
+     "sensible": false,
+     "obligatorio": false
+    }
+   ]
+  },
+  {
+   "id": "laboral-cantidades",
+   "area": "laboral",
+   "nombre": "Salarios y finiquitos",
+   "documentos": [
+    {
+     "id": "laboral-cantidades-1",
+     "label": "Contrato de trabajo",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "laboral-cantidades-2",
+     "label": "Nóminas del periodo reclamado",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "laboral-cantidades-3",
+     "label": "Finiquito o liquidación",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "laboral-cantidades-4",
+     "label": "Registro de jornada u otra prueba de las horas, si se reclaman",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "laboral-cantidades-5",
+     "label": "Comunicaciones con la empresa",
+     "sensible": false,
+     "obligatorio": false
+    }
+   ]
+  },
+  {
+   "id": "laboral-incapacidad",
+   "area": "laboral",
+   "nombre": "Incapacidad permanente",
+   "documentos": [
+    {
+     "id": "laboral-incapacidad-1",
+     "label": "Resolución del INSS o de la mutua, si la hay",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "laboral-incapacidad-2",
+     "label": "Informe de vida laboral",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "laboral-incapacidad-3",
+     "label": "Descripción de tu puesto y de tus tareas habituales",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "laboral-incapacidad-4",
+     "label": "Informes médicos: solo cuando te los pidamos, y por un canal seguro",
+     "sensible": true,
+     "obligatorio": false
+    }
+   ]
+  },
+  {
+   "id": "laboral-altas",
+   "area": "laboral",
+   "nombre": "Altas médicas y prestaciones",
+   "documentos": [
+    {
+     "id": "laboral-altas-1",
+     "label": "Parte o resolución de alta",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "laboral-altas-2",
+     "label": "Comunicaciones de la mutua o del INSS",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "laboral-altas-3",
+     "label": "Nóminas recientes",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "laboral-altas-4",
+     "label": "Informes médicos: solo cuando te los pidamos, y por un canal seguro",
+     "sensible": true,
+     "obligatorio": false
+    }
+   ]
+  },
+  {
+   "id": "laboral-accidentes",
+   "area": "laboral",
+   "nombre": "Accidentes laborales y responsabilidad empresarial",
+   "documentos": [
+    {
+     "id": "laboral-accidentes-1",
+     "label": "Parte de accidente de trabajo, si se emitió",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "laboral-accidentes-2",
+     "label": "Datos de testigos y fotografías del lugar, si las hay",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "laboral-accidentes-3",
+     "label": "Resoluciones de la mutua o del INSS",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "laboral-accidentes-4",
+     "label": "Nóminas anteriores al accidente",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "laboral-accidentes-5",
+     "label": "Informes médicos: solo cuando te los pidamos, y por un canal seguro",
+     "sensible": true,
+     "obligatorio": false
+    }
+   ]
+  },
+  {
+   "id": "laboral-acoso",
+   "area": "laboral",
+   "nombre": "Acoso y vulneración de derechos",
+   "documentos": [
+    {
+     "id": "laboral-acoso-1",
+     "label": "Comunicaciones, correos o mensajes relacionados",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "laboral-acoso-2",
+     "label": "Datos de posibles testigos",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "laboral-acoso-3",
+     "label": "Denuncias internas y respuestas de la empresa",
+     "sensible": false,
+     "obligatorio": false
+    }
+   ]
+  },
+  {
+   "id": "laboral-condiciones",
+   "area": "laboral",
+   "nombre": "Modificaciones de condiciones y conflictos laborales",
+   "documentos": [
+    {
+     "id": "laboral-condiciones-1",
+     "label": "Comunicación escrita del cambio",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "laboral-condiciones-2",
+     "label": "Contrato y nóminas",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "laboral-condiciones-3",
+     "label": "Comunicaciones con la empresa",
+     "sensible": false,
+     "obligatorio": false
+    }
+   ]
+  },
+  {
+   "id": "mercantil-reclamaciones",
+   "area": "mercantil",
+   "nombre": "Reclamaciones entre empresas",
+   "documentos": [
+    {
+     "id": "mercantil-reclamaciones-1",
+     "label": "Contrato o condiciones pactadas",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "mercantil-reclamaciones-2",
+     "label": "Pedidos, albaranes y facturas",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "mercantil-reclamaciones-3",
+     "label": "Comunicaciones con la otra empresa",
+     "sensible": false,
+     "obligatorio": false
+    }
+   ]
+  },
+  {
+   "id": "penal-detenido",
+   "area": "penal",
+   "nombre": "Asistencia al detenido",
+   "documentos": [
+    {
+     "id": "penal-detenido-1",
+     "label": "Nombre completo de la persona detenida",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "penal-detenido-2",
+     "label": "Lugar de la detención y dependencia policial, si se conoce",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "penal-detenido-3",
+     "label": "Hora aproximada de la detención",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "penal-detenido-4",
+     "label": "Cualquier citación o documento que se haya entregado",
+     "sensible": false,
+     "obligatorio": false
+    }
+   ]
+  },
+  {
+   "id": "penal-citacion",
+   "area": "penal",
+   "nombre": "Citaciones y juicios rápidos",
+   "documentos": [
+    {
+     "id": "penal-citacion-1",
+     "label": "La citación recibida (cédula o diligencia)",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "penal-citacion-2",
+     "label": "Atestado o denuncia, si te lo han entregado",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "penal-citacion-3",
+     "label": "Datos de testigos y pruebas que tengas",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "penal-citacion-4",
+     "label": "Resoluciones anteriores del mismo asunto",
+     "sensible": false,
+     "obligatorio": false
+    }
+   ]
+  },
+  {
+   "id": "penal-seguridad-vial",
+   "area": "penal",
+   "nombre": "Alcoholemia y seguridad vial",
+   "documentos": [
+    {
+     "id": "penal-seguridad-vial-1",
+     "label": "Citación judicial",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "penal-seguridad-vial-2",
+     "label": "Copia del atestado o de las diligencias que te entregaron",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "penal-seguridad-vial-3",
+     "label": "Tiques del etilómetro",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "penal-seguridad-vial-4",
+     "label": "Permiso de conducir",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "penal-seguridad-vial-5",
+     "label": "Si conduces por trabajo, contrato o actividad",
+     "sensible": false,
+     "obligatorio": false
+    }
+   ]
+  },
+  {
+   "id": "penal-lesiones",
+   "area": "penal",
+   "nombre": "Lesiones y agresiones",
+   "documentos": [
+    {
+     "id": "penal-lesiones-1",
+     "label": "Partes médicos y de urgencias",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "penal-lesiones-2",
+     "label": "Informes médicos posteriores (no los envíes por el formulario)",
+     "sensible": true,
+     "obligatorio": false
+    },
+    {
+     "id": "penal-lesiones-3",
+     "label": "Denuncia o citación",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "penal-lesiones-4",
+     "label": "Fotografías, mensajes o vídeos",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "penal-lesiones-5",
+     "label": "Datos de testigos",
+     "sensible": false,
+     "obligatorio": false
+    }
+   ]
+  },
+  {
+   "id": "penal-hurto-robo",
+   "area": "penal",
+   "nombre": "Hurto y robo",
+   "documentos": [
+    {
+     "id": "penal-hurto-robo-1",
+     "label": "Citación o atestado",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "penal-hurto-robo-2",
+     "label": "Denuncia presentada, si eres la persona perjudicada",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "penal-hurto-robo-3",
+     "label": "Facturas o justificantes del valor de lo sustraído",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "penal-hurto-robo-4",
+     "label": "Grabaciones o datos de testigos",
+     "sensible": false,
+     "obligatorio": false
+    }
+   ]
+  },
+  {
+   "id": "penal-estafas",
+   "area": "penal",
+   "nombre": "Estafas",
+   "documentos": [
+    {
+     "id": "penal-estafas-1",
+     "label": "Justificantes de pagos o transferencias",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "penal-estafas-2",
+     "label": "Mensajes, correos, anuncios o capturas",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "penal-estafas-3",
+     "label": "Denuncia presentada, si existe",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "penal-estafas-4",
+     "label": "Comunicaciones con el banco o la plataforma",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "penal-estafas-5",
+     "label": "Citación, si te investigan",
+     "sensible": false,
+     "obligatorio": false
+    }
+   ]
+  }
+ ]
+}

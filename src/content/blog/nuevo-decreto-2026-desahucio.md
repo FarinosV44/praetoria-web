@@ -7,6 +7,8 @@ updated: 2026-10-23
 category: civil-vivienda
 tags: ["abogado inmobiliario", "alquiler españa", "desahucio", "ley vivienda", "propietarios"]
 wpId: 2749
+intencion: "Qué cambia para el propietario con el decreto de 2026 sobre la suspensión de desahucios"
+imagen: civil-entrega-llaves
 ---
 
 ---
@@ -43,7 +45,7 @@ En la práctica: **la vulnerabilidad del inquilino no debería bloquear tu lanza
 
 En muchos casos, sí: si tu procedimiento estaba suspendido por esta normativa y **encajas como propietario de 2 o menos viviendas**, puede plantearse la **solicitud de continuación/reanudación** conforme al nuevo régimen. (La viabilidad exacta depende del tipo de procedimiento, estado procesal y documentación ya aportada).
 
-## 5) Qué hacemos en Praetoria División Jurídica (Valencia / El Puig)
+## 5) Qué hacemos en Praetoria División Jurídica (Valencia)
 
 En Praetoria trabajamos este tipo de asuntos con un enfoque muy práctico:
 

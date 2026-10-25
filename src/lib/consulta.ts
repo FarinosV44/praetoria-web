@@ -3,7 +3,9 @@
 // Importaciones relativas con extensión: Node ejecuta este archivo directamente en la función y en las pruebas.
 // Sin dependencias (ni zod): este módulo también va al navegador y su peso cuenta (presupuesto de #4).
 import { site, laboral } from './site.ts';
-import { INCIDENCIAS, servicioPorId } from './servicios.ts';
+import { INCIDENCIAS, PROBLEMAS_LABORALES } from './servicios-listas.ts';
+import { servicioPorId } from './servicios-indice.ts';
+import { DOCUMENTOS, ORGANISMOS } from './cuestionario-hacienda.ts';
 
 export const AREAS = [
   { id: 'transporte', label: 'Transporte y logística' },
@@ -13,6 +15,7 @@ export const AREAS = [
   { id: 'civil', label: 'Civil, herencias y vivienda' },
   { id: 'familia', label: 'Familia y divorcio' },
   { id: 'arte', label: 'Arte y patrimonio' },
+  { id: 'penal', label: 'Penal' },
   { id: 'no-se', label: 'No sé qué área corresponde' },
 ] as const;
 export type AreaId = (typeof AREAS)[number]['id'];
@@ -38,9 +41,31 @@ export const IMPORTES = [
   { id: 'mas-15000', label: 'Más de 15.000 €' },
   { id: 'no-se', label: 'No lo sé o no aplica' },
 ] as const;
-export { INCIDENCIAS };
+export { INCIDENCIAS, PROBLEMAS_LABORALES };
 
-export const LIMITES = { nombre: 100, email: 254, telefono: 20, mensaje: 2000, mensajeMin: 20 } as const;
+/** Datos breves de laboral (#7). «representa» es obligatorio en laboral: permite revisar conflictos de intereses. */
+export const REPRESENTA = [
+  { id: 'trabajador', label: 'Soy la persona trabajadora' },
+  { id: 'empresa', label: 'Consulto en nombre de una empresa' },
+  { id: 'otro', label: 'Consulto por otra persona' },
+] as const;
+export const SITUACIONES = [
+  { id: 'activo', label: 'Sigo trabajando en la empresa' },
+  { id: 'baja', label: 'Estoy de baja médica' },
+  { id: 'fuera', label: 'Ya no trabajo en la empresa' },
+  { id: 'otra', label: 'Otra situación' },
+] as const;
+/** Áreas en las que se pide una fecha relevante (solo para priorizar a mano) */
+export const AREAS_CON_FECHA = ['transporte', 'laboral', 'hacienda', 'penal'] as const;
+/** Áreas en las que la fecha puede ser futura (fecha de una citación o de un juicio, #32) */
+export const AREAS_FECHA_FUTURA = ['penal'] as const;
+/** Áreas que admiten el resumen de un cuestionario (divorcio; notificación de Hacienda, también si se deriva a Laboral) */
+export const AREAS_CON_CUESTIONARIO = ['familia', 'hacienda', 'laboral'] as const;
+/** Áreas en las que se ofrece elegir el asunto (servicio) en el formulario (#8) */
+export const AREAS_CON_ASUNTO = ['mercantil', 'civil', 'familia', 'arte', 'penal'] as const;
+export { DOCUMENTOS, ORGANISMOS };
+
+export const LIMITES = { nombre: 100, email: 254, telefono: 20, mensaje: 2000, mensajeMin: 20, cuestionario: 1500 } as const;
 /** Un envío hecho en menos de este tiempo desde que se cargó el formulario se trata como automático. */
 export const TIEMPO_MINIMO_MS = 3000;
 
@@ -51,16 +76,27 @@ export function responsable(area: AreaId) {
     : { nombre: site.lawyer, telefono: site.phone };
 }
 
-const fechaValida = (v: string, ahora: number) => {
+export const fechaValida = (v: string, ahora: number, futura = false) => {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(v)) return false;
   const t = Date.parse(v + 'T00:00:00Z');
-  // Fecha real (no 2026-02-31), desde 2000 y como mucho mañana (margen por zona horaria)
-  return Number.isFinite(t) && new Date(t).toISOString().slice(0, 10) === v && v >= '2000-01-01' && t <= ahora + 86_400_000;
+  // Fecha real (no 2026-02-31), desde 2000 y como mucho mañana (margen por zona horaria);
+  // si puede ser futura (una citación), como mucho dentro de dos años
+  const max = ahora + (futura ? 731 : 1) * 86_400_000;
+  return Number.isFinite(t) && new Date(t).toISOString().slice(0, 10) === v && v >= '2000-01-01' && t <= max;
 };
-const telefonoValido = (v: string) => /^\+?\d{9,15}$/.test(v.replace(/[\s().-]/g, ''));
+// Atribución: rutas internas y valores de campaña cortos y seguros; lo demás se descarta sin error (nunca bloquea una consulta)
+const ruta = (v: unknown) => {
+  const s = limpia(v).split(/[?#]/)[0] ?? '';
+  return /^\/[a-z0-9\-/._%]{0,199}$/i.test(s) ? s : '';
+};
+const utm = (v: unknown) => {
+  const s = limpia(v).toLowerCase();
+  return /^[a-z0-9_\-.]{1,60}$/.test(s) ? s : '';
+};
+export const telefonoValido = (v: string) => /^\+?\d{9,15}$/.test(v.replace(/[\s().-]/g, ''));
 const emailValido = (v: string) => /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$/.test(v);
 // Quita caracteres de control (salvo saltos de línea y tabuladores) y espacios sobrantes
-const limpia = (v: unknown) => String(v ?? '').replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '').trim();
+export const limpia = (v: unknown) => String(v ?? '').replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '').trim();
 
 export type Consulta = {
   nombre: string;
@@ -77,8 +113,26 @@ export type Consulta = {
   papel: string;
   incidencia: string;
   importe: string;
-  /** Fecha relevante (AAAA-MM-DD): factura, entrega o incidencia. Solo para priorizar; no se calculan plazos */
+  /** Fecha relevante (AAAA-MM-DD): transporte, factura/entrega/incidencia; laboral, comunicación o efectos. Solo para priorizar; no se calculan plazos */
   fecha: string;
+  /** Laboral (vacíos en otras áreas) */
+  representa: string;
+  problema: string;
+  situacion: string;
+  /** Resumen de un cuestionario (divorcio o Hacienda), si la persona decide enviarlo */
+  cuestionario: string;
+  /** Hacienda y SS: organismo (obligatorio en esa área) y documento */
+  organismo: string;
+  documento: string;
+  /** Respuesta a la pregunta mínima del servicio elegido */
+  detalle: string;
+  /** Atribución (#9). origen: página de la web desde la que se llegó al formulario (funcional).
+   *  landing y utm_*: primera página y campaña de la visita, solo si se aceptó la analítica. Saneados; si no cumplen, se descartan. */
+  origen: string;
+  landing: string;
+  utm_source: string;
+  utm_medium: string;
+  utm_campaign: string;
 };
 export type ErroresConsulta = Partial<Record<keyof Consulta, string>>;
 
@@ -98,9 +152,25 @@ export function validarConsulta(raw: Record<string, unknown>, ahora = Date.now()
     incidencia: limpia(raw.incidencia),
     importe: limpia(raw.importe),
     fecha: limpia(raw.fecha),
+    representa: limpia(raw.representa),
+    problema: limpia(raw.problema),
+    situacion: limpia(raw.situacion),
+    cuestionario: limpia(raw.cuestionario),
+    organismo: limpia(raw.organismo),
+    documento: limpia(raw.documento),
+    detalle: limpia(raw.detalle),
+    origen: ruta(raw.origen),
+    landing: ruta(raw.landing),
+    utm_source: utm(raw.utm_source),
+    utm_medium: utm(raw.utm_medium),
+    utm_campaign: utm(raw.utm_campaign),
   };
-  // Los datos de transporte solo tienen sentido en esa área: en otra se descartan
-  if (d.area !== 'transporte') d.papel = d.incidencia = d.importe = d.fecha = '';
+  // Los datos de un área solo tienen sentido en ella: en otra se descartan
+  if (d.area !== 'transporte') d.papel = d.incidencia = d.importe = '';
+  if (d.area !== 'laboral') d.representa = d.problema = d.situacion = '';
+  if (!(AREAS_CON_CUESTIONARIO as readonly string[]).includes(d.area)) d.cuestionario = '';
+  if (d.area !== 'hacienda') d.organismo = d.documento = '';
+  if (!(AREAS_CON_FECHA as readonly string[]).includes(d.area)) d.fecha = '';
   const e: ErroresConsulta = {};
   const max = (k: 'nombre' | 'email' | 'telefono' | 'mensaje') => {
     if (d[k].length > LIMITES[k]) e[k] = `Máximo ${LIMITES[k]} caracteres.`;
@@ -130,7 +200,20 @@ export function validarConsulta(raw: Record<string, unknown>, ahora = Date.now()
   if (d.papel && !PAPELES.some((x) => x.id === d.papel)) e.papel = 'Elige una opción de la lista.';
   if (d.incidencia && !INCIDENCIAS.some((x) => x.id === d.incidencia)) e.incidencia = 'Elige una opción de la lista.';
   if (d.importe && !IMPORTES.some((x) => x.id === d.importe)) e.importe = 'Elige una opción de la lista.';
-  if (d.fecha && !fechaValida(d.fecha, ahora)) e.fecha = 'Revisa la fecha: debe ser una fecha real y no posterior a hoy.';
+  if (d.area === 'laboral' && !REPRESENTA.some((x) => x.id === d.representa)) e.representa = 'Indica si eres la persona trabajadora o consultas por una empresa u otra persona.';
+  if (d.cuestionario.length > LIMITES.cuestionario) e.cuestionario = 'El resumen del cuestionario es demasiado largo.';
+  if (d.area === 'hacienda' && !ORGANISMOS.some((x) => x.id === d.organismo)) e.organismo = 'Indica quién envía la notificación (o «No lo sé»).';
+  if (d.documento && !DOCUMENTOS.some((x) => x.id === d.documento)) e.documento = 'Elige una opción de la lista.';
+  if (d.detalle) {
+    const opciones = servicioPorId(d.servicio)?.preguntaMinima?.opciones;
+    if (!opciones) d.detalle = '';
+    else if (!opciones.includes(d.detalle)) e.detalle = 'Elige una de las opciones.';
+  }
+  if (d.problema && !PROBLEMAS_LABORALES.some((x) => x.id === d.problema)) e.problema = 'Elige una opción de la lista.';
+  if (d.situacion && !SITUACIONES.some((x) => x.id === d.situacion)) e.situacion = 'Elige una opción de la lista.';
+  const futura = (AREAS_FECHA_FUTURA as readonly string[]).includes(d.area);
+  if (d.fecha && !fechaValida(d.fecha, ahora, futura))
+    e.fecha = futura ? 'Revisa la fecha: debe ser una fecha real.' : 'Revisa la fecha: debe ser una fecha real y no posterior a hoy.';
 
   return Object.keys(e).length ? { ok: false, errores: e } : { ok: true, data: d as Consulta };
 }

@@ -19,7 +19,8 @@ Principio: la publicación tiene que poder deshacerse en minutos. Por eso WordPr
 - [ ] Conectar `FarinosV44/praetoria-web` en Netlify. `netlify.toml` ya contiene build, cabeceras y `SITE_INDEXABLE=false` en todos los contextos.
 - [ ] Abrir un deploy preview y ejecutar `node scripts/seo/probar-preview.mjs https://<preview>.netlify.app`. Debe terminar con 0 fallos. Comprueba las 223 URLs antiguas, la cabecera `X-Robots-Tag: noindex`, el 404 real y la caché de `/media/`.
 - [ ] Revisar a mano en el preview: portada, un área, un artículo, Hacienda, divorcio y contacto, en móvil y escritorio.
-- [ ] Probar el formulario de contacto en el preview con datos ficticios y confirmar que llega el aviso (issue #3).
+- [ ] Probar el formulario de contacto y la solicitud de llamada en el preview con datos ficticios y confirmar que llegan los avisos (issues #3 y #33). Requiere el sitio público: con la visibilidad privada, Netlify Forms rechaza la entrega (401).
+- [ ] `npm run check:produccion`: sin textos pendientes de revisión jurídica, o decisión expresa de publicar con Penal en `noindex`.
 - [ ] **Copia de seguridad de WordPress**: archivos y base de datos desde Hostinger (o un plugin como UpdraftPlus), descargada fuera del servidor. Anotar la fecha.
 - [ ] **Copia de la zona DNS actual**: captura o export de todos los registros (A, AAAA, CNAME, MX, TXT, SPF, DKIM, DMARC, CAA). Guardarla con este documento.
 - [ ] Identificar qué registros sirven al correo (`juanfarinos@icav.es` es del colegio, pero puede haber otros buzones o verificaciones de Google, Microsoft o Mailchimp en TXT). **Ninguno de ellos se toca.**
@@ -29,6 +30,7 @@ Principio: la publicación tiene que poder deshacerse en minutos. Por eso WordPr
 
 Elegir un día laborable por la mañana, con alguien disponible durante unas horas.
 
+0. [ ] En Netlify, *Build & deploy → Branches*: cambiar la rama de producción de `publicacion/fase-1` a `main` (después de fusionar).
 1. [ ] En Netlify, *Domain management*: añadir `praetoriaabogados.es` como dominio principal y `www.praetoriaabogados.es` como alias, que redirigirá al principal.
 2. [ ] En Netlify, *Environment variables*, contexto **Production**: `SITE_INDEXABLE = true`. Lanzar un nuevo deploy de producción. Comprobar en el resultado que `robots.txt` incluye la línea `Sitemap:` y que las páginas ya no llevan `noindex`.
 3. [ ] En Hostinger, cambiar **solo** el registro A del dominio raíz y el CNAME de `www` a los valores que indique Netlify. No modificar MX, TXT ni otros registros.

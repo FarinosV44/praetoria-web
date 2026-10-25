@@ -7,6 +7,8 @@ updated: 2026-08-20
 category: extranjeria
 tags: ["abogado extranjería", "extranjería españa", "papeles españa", "permiso trabajo", "residencia españa"]
 wpId: 2743
+intencion: "Quién puede obtener la residencia en España en 2026 y cómo"
+imagen: extranjeria-pasaporte
 ---
 
 En los últimos meses, la Administración está **endureciendo los controles** sobre permisos de residencia, trabajo y renovaciones en España. Cada vez son más frecuentes los **requerimientos, denegaciones y archivos de expedientes** por errores que antes pasaban desapercibidos.

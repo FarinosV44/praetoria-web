@@ -45,14 +45,14 @@ La validación en el navegador es accesible:
 Todos se configuran en `src/lib/site.ts`:
 
 - **General**: 607 527 719 (`tel:+34607527719`, WhatsApp `34607527719`) y `juanfarinos@icav.es`. Coincide con el teléfono publicado en decaprofesional.es/contacto, según la consulta del 23/10 que recoge la issue. Ningún enlace de la web usa otro número.
-- **Laboral**: Lucía López, experta en Derecho Laboral, 649 181 290 (`tel:+34649181290`). **Solo llamadas**: no hay autorización para su WhatsApp ni un correo propio. Aparece en contacto y en el equipo, y será la persona responsable de las consultas de Laboral. Su página de área llega con #7.
+- **Área laboral**: 649 181 290 (`tel:+34649181290`, WhatsApp `34649181290`). **Llamadas y WhatsApp** (autorizado en #28; antes, solo llamadas). Sin correo propio. Atiende Lucía López, que figura como responsable interna de las consultas laborales.
 - **Mensajes predefinidos de WhatsApp**: centralizados en `mensajes`. Todos mencionan a Praetoria y el servicio jurídico, y ninguno el soporte de DeCA.
 
 Corrección: el artículo sobre DeCA Conecta remitía a `info@praetoriaabogados.es` para consultas jurídicas. Se ha sustituido por `juanfarinos@icav.es`, el correo confirmado. **Si `info@` es un buzón real y atendido, puede volver a ponerse.**
 
 ## Pruebas
 
-- `netlify/functions/consulta.test.mts` (11 pruebas):
+- `netlify/consulta.test.mts` (12 pruebas; fuera de `netlify/functions/` para que Netlify no la despliegue como función):
   - entrega correcta con área y responsable, y Laboral asignada a Lucía López;
   - llamada o WhatsApp sin teléfono, correo ausente o inválido;
   - área sin elegir, privacidad sin aceptar, mensaje corto, campos largos y cuerpo excesivo;
@@ -73,9 +73,22 @@ Corrección: el artículo sobre DeCA Conecta remitía a `info@praetoriaabogados.
 ## Pendiente de accesos a Netlify (no comprobado)
 
 - [ ] **Detección del formulario**: tras el primer despliegue, *Forms* debe mostrar el formulario «contacto» con sus campos, detectados en `__forms.html`.
-- [ ] **Entrega desde la función**: enviar una consulta ficticia desde el deploy preview y verla en *Forms → contacto*. Entre la función y Netlify Forms está todo probado en local salvo esto: que Netlify Forms acepte el POST de la función a `/__forms.html` del propio sitio. Si no lo aceptara, la alternativa es que la función envíe el correo directamente con un proveedor (requiere su clave) o guarde la consulta en Netlify Blobs.
-- [ ] **Aviso por correo**: *Forms → Form notifications → Email notification* a `juanfarinos@icav.es`. Para que las consultas de Laboral le lleguen a Lucía López hace falta una dirección suya, que no se ha facilitado. Hasta entonces llegan al correo general, con el campo «responsable» indicándolo.
+- [ ] **Detección activada**: en sitios nuevos de Netlify viene desactivada (*Forms → Enable form detection*); activarla y volver a desplegar.
+- [ ] **Entrega desde la función**: la función entrega al mismo despliegue que atiende la petición (no a `process.env.URL`, que antes del cambio de DNS apuntaría a WordPress). enviar una consulta ficticia desde el deploy preview y verla en *Forms → contacto*. Entre la función y Netlify Forms está todo probado en local salvo esto: que Netlify Forms acepte el POST de la función a `/__forms.html` del propio sitio. Si no lo aceptara, la alternativa es que la función envíe el correo directamente con un proveedor (requiere su clave) o guarde la consulta en Netlify Blobs.
+- [ ] **Aviso por correo, por área**: las consultas laborales se registran en el formulario `contacto-laboral` y el resto en `contacto` (`formularioDe` en la función). En *Forms → Form notifications*, un aviso por formulario: `contacto` → `juanfarinos@icav.es`; `contacto-laboral` → correo de Lucía López (falta la dirección) y, si se quiere, copia a `juanfarinos@icav.es`.
 - [ ] Revisar en Netlify el filtro antispam y, si con el tráfico real entrara spam, valorar añadir reCAPTCHA de Netlify.
 - [ ] Prueba de teléfonos en un móvil real: `tel:+34607527719` y `tel:+34649181290`.
 
 Las consultas solo se envían a Netlify Forms. El campo trampa de Netlify sigue activo, por si alguien envía directamente a `__forms.html` sin pasar por la función; en ese caso se salta la validación del servidor, pero no el filtro antispam de Netlify.
+
+## Solicitud de llamada (#33)
+
+`/que-me-llame-un-abogado/` envía a `POST /api/llamada` (`netlify/functions/llamada.mts`, reglas en `src/lib/llamada.ts`).
+Campos: nombre y teléfono (obligatorios), área, motivo (lista cerrada), fecha de la citación o del plazo (puede ser
+futura, hasta dos años), localidad, forma segura de contacto (sin mensajes; con discreción si otra persona ve el
+teléfono), horario y una descripción breve opcional. Se entrega a Netlify Forms en `llamada-urgente` o, si es laboral,
+`llamada-urgente-laboral`, con el campo `prioridad: URGENTE`. Igual que en las consultas: campo trampa y tiempo mínimo,
+un solo envío a la vez con el mismo id en los reintentos, y confirmación en pantalla solo cuando Netlify Forms ha
+aceptado la entrega. Aviso fijo: «Solicitud de contacto prioritario, sujeta a disponibilidad. El envío no confirma
+asistencia ni suspende plazos». Nunca se promete atención inmediata ni un plazo de respuesta; para un peligro, 112.
+Pruebas: `netlify/llamada.test.mts` y `tests/e2e/penal.spec.ts`.
