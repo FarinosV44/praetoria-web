@@ -5,8 +5,8 @@
 // reintento si falla la red o la entrega, y confirmación solo cuando el servidor la acepta.
 import Link from 'next/link';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
-import { AREAS, AREAS_CON_ASUNTO, AREAS_CON_CUESTIONARIO, DOCUMENTOS, IMPORTES, INCIDENCIAS, LIMITES, ORGANISMOS, PAPELES, PREFERENCIAS, PROBLEMAS_LABORALES, REPRESENTA, SITUACIONES, responsable, validarConsulta, type AreaId, type ErroresConsulta } from '@/lib/consulta';
-import { laboral, site } from '@/lib/site';
+import { AREAS, AREAS_CON_ASUNTO, AREAS_CON_CUESTIONARIO, DOCUMENTOS, IMPORTES, INCIDENCIAS, LIMITES, ORGANISMOS, PAPELES, PREFERENCIAS, PROBLEMAS_LABORALES, REPRESENTA, SITUACIONES, validarConsulta, type AreaId, type ErroresConsulta } from '@/lib/consulta';
+import { canalDe, contactos } from '@/lib/site';
 import { servicioPorId, serviciosDe } from '@/lib/servicios-indice';
 import type { ServicioArea } from '@/lib/servicios';
 import { leerRespuestasDivorcio, resumenDivorcio } from '@/lib/cuestionario-divorcio';
@@ -168,7 +168,7 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
   };
 
   if (estado.tipo === 'enviada') {
-    const r = responsable(estado.area);
+    const c = canalDe(estado.area);
     return (
       <div ref={exitoRef} className="form-ok" tabIndex={-1} role="status">
         <h2>Hemos recibido tu consulta</h2>
@@ -178,14 +178,9 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
           </p>
         )}
         <p>
-          La revisará {r.nombre}. Te responderemos por el medio que has indicado lo antes posible. Si tu asunto tiene un plazo que vence en
-          los próximos días, llama al{' '}
-          {estado.area === 'laboral' ? (
-            <a href={`tel:${laboral.phoneIntl}`}>{laboral.phone}</a>
-          ) : (
-            <a href={`tel:${site.phoneIntl}`}>{site.phone}</a>
-          )}{' '}
-          para revisarlo con prioridad.
+          La revisará {c.id === 'laboral' ? 'el área laboral del despacho' : 'el despacho'}. Te responderemos por el medio que has indicado lo
+          antes posible. Si tu asunto tiene un plazo que vence en los próximos días, llama al <a href={`tel:${c.phoneIntl}`}>{c.phone}</a> (
+          {c.etiqueta.toLowerCase()}) para revisarlo con prioridad.
         </p>
       </div>
     );
@@ -197,7 +192,6 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
   const enviando = estado.tipo === 'enviando';
   const telObligatorio = preferencia === 'llamada' || preferencia === 'whatsapp';
   const emailObligatorio = preferencia === 'correo';
-  const resp = area ? responsable(area as AreaId) : null;
   const preguntaMinima = servicio ? servicioPorId(servicio)?.preguntaMinima : undefined;
 
   return (
@@ -342,9 +336,9 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
           </fieldset>
         )}
         <FieldError k="servicio" msg={errores.servicio} />
-        {resp && area === 'laboral' && (
+        {area === 'laboral' && (
           <p className="small muted">
-            Los asuntos laborales los atiende {resp.nombre}, experta en Derecho Laboral ({resp.telefono}).
+            Los asuntos laborales los atiende el área laboral del despacho ({contactos.laboral.phone}, llamadas y WhatsApp).
           </p>
         )}
       </div>
@@ -507,6 +501,18 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
         </fieldset>
       )}
 
+      {area === 'penal' && (
+        <div className="field">
+          <label htmlFor="fecha">Fecha de la citación, del juicio o de los hechos (opcional)</label>
+          <input id="fecha" name="fecha" type="date" min="2000-01-01" {...a11y('fecha')} aria-describedby={err('fecha') ? 'err-fecha fecha-ayuda' : 'fecha-ayuda'} />
+          <p className="small muted" id="fecha-ayuda">
+            Si tienes una citación, indica la fecha para revisar antes tu consulta. Enviar el formulario no suspende ni aplaza ninguna citación. Si es para hoy o mañana,
+            llama al despacho.
+          </p>
+          <FieldError k="fecha" msg={errores.fecha} />
+        </div>
+      )}
+
       <div className="field">
         <label htmlFor="mensaje">¿Qué ha pasado y qué te gustaría conseguir?</label>
         <textarea ref={mensajeRef} id="mensaje" name="mensaje" required minLength={LIMITES.mensajeMin} maxLength={LIMITES.mensaje} {...a11y('mensaje')} />
@@ -560,7 +566,7 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
 
       {estado.tipo === 'error' && (
         <p className="form-fail" role="alert">
-          {estado.mensaje} También puedes llamarnos al <a href={`tel:${site.phoneIntl}`}>{site.phone}</a>.
+          {estado.mensaje} También puedes llamar al <a href={`tel:${canalDe(area).phoneIntl}`}>{canalDe(area).phone}</a> ({canalDe(area).etiqueta.toLowerCase()}).
         </p>
       )}
 

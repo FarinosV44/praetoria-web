@@ -57,7 +57,7 @@ test('aceptado: eventos del embudo sin datos personales, una conversión y atrib
   await recorrido(page, 'Aceptar');
   const evs = await eventos(page);
   expect(de(evs, 'phone_click')[0]?.p).toMatchObject({ destino: 'laboral', landing: '/impugnar-despido/', ubicacion: 'cabecera_pagina' });
-  expect(de(evs, 'whatsapp_click')[0]?.p).toMatchObject({ destino: 'general', ubicacion: 'banda_final' });
+  expect(de(evs, 'whatsapp_click')[0]?.p).toMatchObject({ destino: 'laboral', ubicacion: 'banda_final' });
   expect(de(evs, 'cta_click')[0]?.p).toMatchObject({ destino: 'formulario', servicio: 'laboral-despidos', area: 'laboral', landing: '/impugnar-despido/' });
   expect(de(evs, 'form_start')).toHaveLength(1);
   expect(de(evs, 'form_success')).toHaveLength(1);
@@ -71,7 +71,7 @@ test('aceptado: eventos del embudo sin datos personales, una conversión y atrib
 
   // Ver un área o un servicio genera service_view (navegación interna, ya con consentimiento)
   await page.locator('.crumbs a[href="/"]').click();
-  await page.locator('.page-home .directory a[href="/abogado-laboralista-valencia/"]').click();
+  await page.locator('.page-home .area-card--destacada h3 a[href="/abogado-laboralista-valencia/"]').click();
   await expect(page).toHaveURL(/abogado-laboralista-valencia/);
   await expect.poll(async () => de(await eventos(page), 'service_view').at(-1)?.p).toMatchObject({ tipo_pagina: 'area', area: 'laboral' });
 });

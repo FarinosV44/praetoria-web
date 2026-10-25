@@ -6,7 +6,7 @@ Un servicio es algo concreto que el despacho hace, con un siguiente paso. Las p�
 
 **Texto ampliado** (qué revisamos, proceso, documentación, preguntas y normas citadas): lo redacta la web a partir de lo ya publicado y de fuentes oficiales, y queda *pendiente de revisión* hasta que el despacho lo valide (`revision: 'revisado'`).
 
-Total: 48 servicios.
+Total: 55 servicios.
 
 ## Transporte y logística (10)
 
@@ -42,7 +42,7 @@ Total: 48 servicios.
 | Requerimientos, liquidaciones y sanciones de Hacienda ([página](/abogado-hacienda-y-seguridad-social-en-valencia/)) | `hacienda-requerimientos` | [Hacienda me pide justificar ingresos: qué hacer](/hacienda-me-pide-justificar-ingresos/)<br>[¿Has recibido una carta, requerimiento, liquidación, sanción o reclamación de deuda de Hacienda o de la Seguridad Social?](/has-recibido-una-carta-requerimiento-liquidacion-sancion-o-reclamacion-de-deuda-de-hacienda-o-de-la-seguridad-social/) | [Revisar qué he recibido](/abogado-hacienda-y-seguridad-social-en-valencia/#diagnostico) | — |
 | Deudas, apremios y embargos de la Seguridad Social ([página](/abogado-hacienda-y-seguridad-social-en-valencia/)) | `hacienda-seguridad-social` | — | [Revisar qué he recibido](/abogado-hacienda-y-seguridad-social-en-valencia/#diagnostico) | — |
 | Derivación de responsabilidad al administrador ([página](/abogado-hacienda-y-seguridad-social-en-valencia/)) | `hacienda-derivacion` | — | [Consultar sobre esto](/contacto/?servicio=hacienda-derivacion) | — |
-| Devolución de ingresos indebidos | `hacienda-devoluciones` | [🚗 Cómo recuperar el impuesto de matriculación: quién puede reclamar y cuánto dinero puedes recuperar](/reclamar-devolucion-impuesto-de-matriculacion/) | [Consultar sobre esto](/contacto/?servicio=hacienda-devoluciones) | — |
+| Devolución de ingresos indebidos | `hacienda-devoluciones` | [Cómo recuperar el impuesto de matriculación: quién puede reclamar y cuánto](/reclamar-devolucion-impuesto-de-matriculacion/) | [Consultar sobre esto](/contacto/?servicio=hacienda-devoluciones) | — |
 
 ## Laboral (7)
 
@@ -63,7 +63,7 @@ Total: 48 servicios.
 | Reclamaciones de cantidad | `civil-reclamaciones` | — | [Consultar sobre esto](/contacto/?servicio=civil-reclamaciones) | — |
 | Responsabilidad civil | `civil-responsabilidad` | — | [Consultar sobre esto](/contacto/?servicio=civil-responsabilidad) | — |
 | Contratos civiles y privados | `civil-contratos` | — | [Consultar sobre esto](/contacto/?servicio=civil-contratos) | — |
-| Herencias, testamentos y sucesiones | `civil-herencias` | [HERENCIA ¿QUE HACER?](/herencia-que-hacer/) | [Consultar una herencia](/contacto/?servicio=civil-herencias) | — |
+| Herencias, testamentos y sucesiones | `civil-herencias` | [Herencia: qué hacer paso a paso](/herencia-que-hacer/) | [Consultar una herencia](/contacto/?servicio=civil-herencias) | — |
 | Vivienda, alquileres, desahucios y conflictos vecinales | `civil-vivienda` | [Demanda por alquiler: qué hacer paso a paso si te han demandado (guía clara)](/demanda-contrato-alquiler-que-hacer/)<br>[Problemas de ocupación y alquiler en Valencia: qué puede hacer el propietario paso a paso](/ocupacion-alquiler-valencia/)<br>[Nuevo decreto desahucio 2026: cuándo ya no se suspende y qué pueden hacer los propietarios](/nuevo-decreto-2026-desahucio/)<br>[Nuevo registro de alquiler turístico 2026: qué es y cómo afecta a propietarios](/registro-alquiler-turistico-2026/) | [Consultar un problema de vivienda](/contacto/?servicio=civil-vivienda) | — |
 | Recursos ante el Tribunal Supremo | `civil-casacion` | [Cómo abordar un recurso de casación civil (y no fracasar en el intento)](/como-abordar-un-recurso-de-casacion-civil-y-no-fracasar-en-el-intento/) | [Consultar sobre esto](/contacto/?servicio=civil-casacion) | — |
 
@@ -90,3 +90,15 @@ Total: 48 servicios.
 | Defensa de derechos | `arte-derechos` | — | [Consultar sobre esto](/contacto/?servicio=arte-derechos) | — |
 | Relación con museos | `arte-museos` | — | [Consultar sobre esto](/contacto/?servicio=arte-museos) | — |
 | Atribución, conservación y exportación de obra | `arte-atribucion` | — | [Consultar sobre esto](/contacto/?servicio=arte-atribucion) | — |
+
+## Penal (7)
+
+| Servicio | id | Artículos relacionados | Siguiente paso | Texto ampliado |
+| --- | --- | --- | --- | --- |
+| Asistencia al detenido ([página](/asistencia-al-detenido/)) | `penal-detenido` | — | [Consultar una detención](/contacto/?servicio=penal-detenido) | **pendiente de revisión** |
+| Citaciones y juicios rápidos ([página](/citacion-juzgado-juicio-rapido/)) | `penal-citacion` | — | [Revisar mi citación](/contacto/?servicio=penal-citacion) | **pendiente de revisión** |
+| Alcoholemia y seguridad vial ([página](/alcoholemia-y-seguridad-vial/)) | `penal-seguridad-vial` | — | [Consultar mi caso de tráfico](/contacto/?servicio=penal-seguridad-vial) | **pendiente de revisión** |
+| Lesiones y agresiones ([página](/lesiones-y-agresiones/)) | `penal-lesiones` | — | [Consultar unas lesiones](/contacto/?servicio=penal-lesiones) | **pendiente de revisión** |
+| Hurto y robo ([página](/hurto-y-robo/)) | `penal-hurto-robo` | — | [Consultar un hurto o un robo](/contacto/?servicio=penal-hurto-robo) | **pendiente de revisión** |
+| Estafas ([página](/estafas/)) | `penal-estafas` | — | [Consultar una estafa](/contacto/?servicio=penal-estafas) | **pendiente de revisión** |
+| Amenazas, coacciones y violencia en el entorno familiar | `penal-violencia-amenazas` | — | [Consultar con discreción](/contacto/?servicio=penal-violencia-amenazas) | **pendiente de revisión** |

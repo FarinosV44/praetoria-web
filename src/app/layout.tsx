@@ -8,10 +8,13 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { CookieConsent } from '@/components/CookieConsent';
 import { Medicion } from '@/components/Medicion';
-import { Icon } from '@/components/Icon';
+import { QuickBar } from '@/components/QuickBar';
+import { getPosts } from '@/lib/content';
+import { servicios } from '@/lib/servicios';
+import { areas } from '@/lib/site';
 import { JsonLd } from '@/components/JsonLd';
 import { legalServiceLd } from '@/lib/seo';
-import { site, whatsapp } from '@/lib/site';
+import { site } from '@/lib/site';
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -27,6 +30,13 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = { width: 'device-width', initialScale: 1 };
 
+// Rutas donde el contacto contextual es el del área laboral (#28): el área, sus servicios y sus artículos
+const rutasLaborales = [
+  ...areas.filter((a) => a.id === 'laboral').map((a) => `/${a.slug}/`),
+  ...servicios.filter((s) => s.area === 'laboral' && s.pagina).map((s) => s.pagina!),
+  ...getPosts().filter((p) => p.category === 'laboral').map((p) => `/${p.slug}/`),
+];
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     // El idioma del documento se ajusta en el build para los artículos en francés y árabe (scripts/postbuild.mjs)
@@ -41,14 +51,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Header />
         <main id="contenido">{children}</main>
         <Footer />
-        <nav className="quickbar" aria-label="Contacto rápido" lang="es">
-          <a href={`tel:${site.phoneIntl}`}>
-            <Icon name="phone" /> Llamar
-          </a>
-          <a href={whatsapp()}>
-            <Icon name="whatsapp" /> WhatsApp
-          </a>
-        </nav>
+        <QuickBar rutasLaborales={rutasLaborales} />
         <CookieConsent />
         <Medicion />
       </body>

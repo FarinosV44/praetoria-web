@@ -1,4 +1,50 @@
 // Iconos en línea (sin dependencias externas)
+// Familia de iconos de línea (#28): rejilla de 24, trazo 1.75, extremos redondeados. Sin mazos ni balanzas.
+// Decorativos por defecto (aria-hidden); la acción siempre lleva texto visible.
+const LINEA: Record<string, string> = {
+  ruta: 'M3 17h2.5a2.5 2.5 0 0 0 0-5H5a2.5 2.5 0 0 1 0-5h9 M14 7l3-3 M14 7l3 3 M17 17h4 M5 20a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z M19 20a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z',
+  camion: 'M2 6h11v9H2z M13 9h4l3 3v3h-7 M6 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M17 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z',
+  maletin: 'M3 8h18v11H3z M8 8V5h8v3 M3 13h18 M11 13v2h2v-2',
+  trabajo: 'M4 7h16v13H4z M9 7V4h6v3 M12 11.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M8 17c.6-2 2.1-3 4-3s3.4 1 4 3',
+  hacienda: 'M3 10 12 4l9 6 M5 10v8 M10 10v8 M14 10v8 M19 10v8 M3 20h18',
+  vivienda: 'M3 11 12 4l9 7 M5 10v10h14V10 M10 20v-5h4v5',
+  familia: 'M8 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z M16 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z M3 20v-3a5 5 0 0 1 10 0 M11 20v-3a5 5 0 0 1 10 0 M12 14a2 2 0 1 0 0-4',
+  arte: 'M4 4h16v16H4z M4 15l4-4 4 4 3-3 5 5 M15.5 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z',
+  objetivo: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z M12 12h.01 M16 8l4-4 M17 4h3v3',
+  analisis: 'M10.5 17a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13Z M15.5 15.5 21 21 M7.5 12l2-2 1.5 1.5L14 8.5',
+  estrategia: 'M5 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M19 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M7 17h5a3 3 0 0 0 3-3v-1a3 3 0 0 1 3-3 M4 5l3 3 M7 5 4 8 M17 15l3 3 M20 15l-3 3',
+  negociar: 'M3 10l4-4 4 2 3-2 7 6 M3 10l6 6 2-1 2 2 2-1 2 1 3-3 M11 8l-3 3 1.5 1.5L13 10',
+  acompanar: 'M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z M8.5 12l2.5 2.5 4.5-5',
+  documento: 'M6 3h8l4 4v14H6z M14 3v4h4 M9 12h6 M9 16h6',
+  reloj: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z M12 7v5l3 2',
+  euro: 'M18 7a7 7 0 1 0 0 10 M4 10h9 M4 14h9',
+  edificio: 'M5 21V4h10v17 M15 9h4v12 M8 8h1 M11 8h1 M8 12h1 M11 12h1 M8 16h1 M11 16h1 M3 21h18',
+  flecha: 'M5 12h14 M13 6l6 6-6 6',
+  check: 'M5 12.5 10 17.5 19 7',
+  correo: 'M3 5h18v14H3z M3 7l9 6 9-6',
+};
+export type LineIcon = keyof typeof LINEA;
+
+/** Icono de línea de la familia de Praetoria. `label` solo si el icono transmite información por sí solo. */
+export function LineIcon({ name, label, className }: { name: LineIcon; label?: string; className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className ? `licon ${className}` : 'licon'}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...(label ? { role: 'img', 'aria-label': label } : { 'aria-hidden': true, focusable: 'false' })}
+    >
+      {LINEA[name]!.split(' M').map((d, i) => (
+        <path key={i} d={i === 0 ? d : `M${d}`} />
+      ))}
+    </svg>
+  );
+}
+
 export type IconName = 'whatsapp' | 'phone' | 'mail' | 'pin' | 'linkedin' | 'chevron';
 
 export function Icon({ name }: { name: IconName }) {

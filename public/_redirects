@@ -28,10 +28,15 @@
 # Etiquetas de WordPress: con un solo artículo -> ese artículo; con varios -> la categoría nueva
 # que reúne la mayoría de ellos; si están repartidos -> el blog. Las etiquetas sin artículos se dejan en 404.
 /tag/الإقامة-في-إسبانيا/*                                              /residencia-trabajo-espana-arabe/                  301
+/tag/%D8%A7%D9%84%D8%A5%D9%82%D8%A7%D9%85%D8%A9-%D9%81%D9%8A-%D8%A5%D8%B3%D8%A8%D8%A7%D9%86%D9%8A%D8%A7/* /residencia-trabajo-espana-arabe/                  301
 /tag/الهجرة-إلى-إسبانيا/*                                              /residencia-trabajo-espana-arabe/                  301
+/tag/%D8%A7%D9%84%D9%87%D8%AC%D8%B1%D8%A9-%D8%A5%D9%84%D9%89-%D8%A5%D8%B3%D8%A8%D8%A7%D9%86%D9%8A%D8%A7/* /residencia-trabajo-espana-arabe/                  301
 /tag/تصريح-العمل-إسبانيا/*                                             /residencia-trabajo-espana-arabe/                  301
+/tag/%D8%AA%D8%B5%D8%B1%D9%8A%D8%AD-%D8%A7%D9%84%D8%B9%D9%85%D9%84-%D8%A5%D8%B3%D8%A8%D8%A7%D9%86%D9%8A%D8%A7/* /residencia-trabajo-espana-arabe/                  301
 /tag/محامي-إسبانيا/*                                                   /residencia-trabajo-espana-arabe/                  301
+/tag/%D9%85%D8%AD%D8%A7%D9%85%D9%8A-%D8%A5%D8%B3%D8%A8%D8%A7%D9%86%D9%8A%D8%A7/* /residencia-trabajo-espana-arabe/                  301
 /tag/محامي-فالنسيا/*                                                   /residencia-trabajo-espana-arabe/                  301
+/tag/%D9%85%D8%AD%D8%A7%D9%85%D9%8A-%D9%81%D8%A7%D9%84%D9%86%D8%B3%D9%8A%D8%A7/* /residencia-trabajo-espana-arabe/                  301
 /tag/abogado-alquiler/*                                                /demanda-contrato-alquiler-que-hacer/              301
 /tag/abogado-barato/*                                                  /cuanto-cuesta-abogado-espana/                     301
 /tag/abogado-extranjeria/*                                             /blog/categoria/extranjeria/                       301
@@ -112,13 +117,6 @@
 /page/*                                                                /blog/                                             301
 
 # Imágenes de WordPress migradas (enlazadas desde buscadores de imágenes o redes)
-/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.27.02.jpeg /media/juan-jose-farinos.webp                      301
-/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.27.02-1024x768.jpeg /media/juan-jose-farinos.webp                      301
-/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.27.02-768x576.jpeg /media/juan-jose-farinos.webp                      301
-/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.27.02-300x225.jpeg /media/juan-jose-farinos.webp                      301
-/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.27.02-768x1024.jpeg /media/juan-jose-farinos.webp                      301
-/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.27.02-225x300.jpeg /media/juan-jose-farinos.webp                      301
-/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.27.02-150x150.jpeg /media/juan-jose-farinos.webp                      301
 /wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.17-1.jpeg /media/despacho-puestos-trabajo.webp               301
 /wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.17-1-1024x768.jpeg /media/despacho-puestos-trabajo.webp               301
 /wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.17-1-768x576.jpeg /media/despacho-puestos-trabajo.webp               301
@@ -168,13 +166,13 @@
 /wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-5-768x1024.jpeg /media/despacho-planta-abierta.webp                301
 /wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-5-225x300.jpeg /media/despacho-planta-abierta.webp                301
 /wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-5-150x150.jpeg /media/despacho-planta-abierta.webp                301
-/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-6.jpeg /media/despacho-sala-reunion.webp                  301
-/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-6-1024x768.jpeg /media/despacho-sala-reunion.webp                  301
-/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-6-768x576.jpeg /media/despacho-sala-reunion.webp                  301
-/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-6-300x225.jpeg /media/despacho-sala-reunion.webp                  301
-/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-6-768x1024.jpeg /media/despacho-sala-reunion.webp                  301
-/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-6-225x300.jpeg /media/despacho-sala-reunion.webp                  301
-/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-6-150x150.jpeg /media/despacho-sala-reunion.webp                  301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-6.jpeg /media/v2/despacho-cristales-planta.webp           301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-6-1024x768.jpeg /media/v2/despacho-cristales-planta.webp           301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-6-768x576.jpeg /media/v2/despacho-cristales-planta.webp           301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-6-300x225.jpeg /media/v2/despacho-cristales-planta.webp           301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-6-768x1024.jpeg /media/v2/despacho-cristales-planta.webp           301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-6-225x300.jpeg /media/v2/despacho-cristales-planta.webp           301
+/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.07.18-6-150x150.jpeg /media/v2/despacho-cristales-planta.webp           301
 /wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.24.33.jpeg /media/trabajo-portatil.webp                       301
 /wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.24.33-1024x768.jpeg /media/trabajo-portatil.webp                       301
 /wp-content/uploads/2025/10/WhatsApp-Image-2025-09-29-at-14.24.33-768x576.jpeg /media/trabajo-portatil.webp                       301

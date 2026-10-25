@@ -6,6 +6,8 @@ date: 2026-04-15
 updated: 2026-10-23
 category: transporte
 wpId: 2803
+intencion: "Cobrar un porte impagado reclamando al cargador principal mediante la acción directa"
+imagen: portes-impagados
 ---
 
 
