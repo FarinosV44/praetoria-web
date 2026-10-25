@@ -12,6 +12,7 @@ import { servicioPorId } from '@/lib/servicios-indice';
 import { canalDe } from '@/lib/site';
 import { paginaOrigen } from '@/lib/atribucion';
 import { medir } from '@/lib/medicion';
+import { apiUrl } from '@/lib/api';
 
 type Estado = { tipo: 'editando' } | { tipo: 'enviando' } | { tipo: 'error' } | { tipo: 'enviada'; area: string };
 
@@ -80,7 +81,7 @@ export function LlamadaForm() {
     setEstado({ tipo: 'enviando' });
     enCurso.current = true;
     try {
-      const res = await fetch('/api/llamada', {
+      const res = await fetch(apiUrl('/api/llamada'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(raw),
@@ -130,7 +131,7 @@ export function LlamadaForm() {
   const enviando = estado.tipo === 'enviando';
 
   return (
-    <form ref={formRef} className="form form--llamada" name="llamada-urgente" method="POST" action="/api/llamada" noValidate onSubmit={onSubmit} aria-busy={enviando}>
+    <form ref={formRef} className="form form--llamada" name="llamada-urgente" method="POST" action={apiUrl('/api/llamada')} noValidate onSubmit={onSubmit} aria-busy={enviando}>
       <p className="aviso-llamada">
         <strong>{AVISO_LLAMADA}</strong>
       </p>

@@ -12,6 +12,7 @@
 // No acepta adjuntos ni guarda nada por su cuenta.
 import { pareceAutomatico, responsable, validarConsulta, AREAS, PREFERENCIAS, PAPELES, INCIDENCIAS, IMPORTES, REPRESENTA, PROBLEMAS_LABORALES, SITUACIONES, ORGANISMOS, DOCUMENTOS } from '../../src/lib/consulta.ts';
 import { site } from '../../src/lib/site.ts';
+import { conCors, gracias, preflight } from '../../src/lib/cors.ts';
 import { servicioPorId } from '../../src/lib/servicios.ts';
 
 const MAX_BYTES = 12_000;
@@ -24,6 +25,11 @@ const json = (status: number, body: object) =>
 const seeOther = (location: string) => new Response(null, { status: 303, headers: { Location: location } });
 
 export default async function consulta(req: Request, context?: Ctx): Promise<Response> {
+  if (req.method === 'OPTIONS') return preflight(req);
+  return conCors(req, await atender(req, context));
+}
+
+async function atender(req: Request, context?: Ctx): Promise<Response> {
   if (req.method !== 'POST') return json(405, { ok: false, error: 'metodo' });
 
   const len = Number(req.headers.get('content-length') ?? 0);
@@ -43,7 +49,7 @@ export default async function consulta(req: Request, context?: Ctx): Promise<Res
 
   // Sin JavaScript no hay marca de tiempo: solo se exige el campo trampa vacío
   const automatico = isJson ? pareceAutomatico(fields) : String(fields['empresa-web'] ?? '').trim() !== '';
-  if (automatico) return isJson ? json(200, { ok: true }) : seeOther('/gracias/');
+  if (automatico) return isJson ? json(200, { ok: true }) : seeOther(gracias(req));
 
   if (!isJson && !fields.id) fields.id = crypto.randomUUID();
   const v = validarConsulta(fields);
@@ -104,7 +110,7 @@ export default async function consulta(req: Request, context?: Ctx): Promise<Res
   }
 
   console.log('consulta: recibida', c.id, c.area);
-  return isJson ? json(200, { ok: true, id: c.id }) : seeOther('/gracias/');
+  return isJson ? json(200, { ok: true, id: c.id }) : seeOther(gracias(req));
 }
 
 export const config = { path: '/api/consulta' };

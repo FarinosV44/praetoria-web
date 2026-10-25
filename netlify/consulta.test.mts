@@ -216,3 +216,34 @@ test('pregunta mínima del servicio: se entrega con su pregunta; opción ajena, 
 test('solo acepta POST', async () => {
   assert.equal((await handler(new Request('https://x/api/consulta'), recorder())).status, 405);
 });
+
+test('CORS: la web en Hostinger puede enviar (preflight y cabeceras) y sin JavaScript vuelve a su /gracias/', async () => {
+  const pre = await handler(new Request('https://ejemplo.netlify.app/api/consulta', { method: 'OPTIONS', headers: { Origin: 'https://praetoriaabogados.es' } }));
+  assert.equal(pre.status, 204);
+  assert.equal(pre.headers.get('access-control-allow-origin'), 'https://praetoriaabogados.es');
+  const r = recorder();
+  const res = await handler(
+    new Request('https://ejemplo.netlify.app/api/consulta', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Origin: 'https://www.praetoriaabogados.es' },
+      body: JSON.stringify(base()),
+    }),
+    r,
+  );
+  assert.equal(res.status, 200);
+  assert.equal(res.headers.get('access-control-allow-origin'), 'https://www.praetoriaabogados.es');
+  // Un origen ajeno no recibe permiso CORS
+  const ajeno = await handler(new Request('https://ejemplo.netlify.app/api/consulta', { method: 'OPTIONS', headers: { Origin: 'https://otra-web.example' } }));
+  assert.equal(ajeno.headers.get('access-control-allow-origin'), null);
+  // Sin JavaScript (formulario clásico) desde Hostinger: vuelve a la /gracias/ de la web de origen
+  const clasico = await handler(
+    new Request('https://ejemplo.netlify.app/api/consulta', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded', Origin: 'https://praetoriaabogados.es' },
+      body: new URLSearchParams({ ...base(), privacidad: 'on', t: '' } as unknown as Record<string, string>).toString(),
+    }),
+    recorder(),
+  );
+  assert.equal(clasico.status, 303);
+  assert.equal(clasico.headers.get('location'), 'https://praetoriaabogados.es/gracias/');
+});

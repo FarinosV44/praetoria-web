@@ -13,6 +13,7 @@ import { leerRespuestasDivorcio, resumenDivorcio } from '@/lib/cuestionario-divo
 import { leerRespuestasHacienda, resumenHacienda } from '@/lib/cuestionario-hacienda';
 import { leerAtribucion, paginaOrigen } from '@/lib/atribucion';
 import { medir } from '@/lib/medicion';
+import { apiUrl } from '@/lib/api';
 
 type Estado = { tipo: 'editando' } | { tipo: 'enviando' } | { tipo: 'error'; mensaje: string } | { tipo: 'enviada'; area: AreaId; asunto?: string };
 
@@ -134,7 +135,7 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
     setEstado({ tipo: 'enviando' });
     enCurso.current = true;
     try {
-      const res = await fetch('/api/consulta', {
+      const res = await fetch(apiUrl('/api/consulta'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(raw),
@@ -200,7 +201,7 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
       className="form"
       name="contacto"
       method="POST"
-      action="/api/consulta"
+      action={apiUrl('/api/consulta')}
       noValidate
       onSubmit={onSubmit}
       aria-busy={enviando}

@@ -27,6 +27,8 @@ jobs:
         run: npm run lint
 
       - name: Build de preview (no indexable)
+        env:
+          SITE_INDEXABLE: 'false'
         run: npm run build
       - name: Calidad del sitio, migración SEO y pruebas unitarias
         run: npm run check

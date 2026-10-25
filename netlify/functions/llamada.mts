@@ -8,6 +8,7 @@
 import { pareceAutomatico, responsable, AREAS } from '../../src/lib/consulta.ts';
 import { CONTACTO_SEGURO, MOTIVOS, formularioLlamada, validarLlamada } from '../../src/lib/llamada.ts';
 import { site } from '../../src/lib/site.ts';
+import { conCors, gracias, preflight } from '../../src/lib/cors.ts';
 import { servicioPorId } from '../../src/lib/servicios.ts';
 
 const MAX_BYTES = 6_000;
@@ -25,6 +26,11 @@ const html = (status: number, titulo: string, cuerpo: string) =>
 const esc = (s: string) => s.replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[ch]!);
 
 export default async function llamada(req: Request, context?: Ctx): Promise<Response> {
+  if (req.method === 'OPTIONS') return preflight(req);
+  return conCors(req, await atender(req, context));
+}
+
+async function atender(req: Request, context?: Ctx): Promise<Response> {
   if (req.method !== 'POST') return json(405, { ok: false, error: 'metodo' });
   const len = Number(req.headers.get('content-length') ?? 0);
   if (len > MAX_BYTES) return json(413, { ok: false, error: 'tamano' });
@@ -41,7 +47,7 @@ export default async function llamada(req: Request, context?: Ctx): Promise<Resp
   if (!fields || typeof fields !== 'object') return json(400, { ok: false, error: 'formato' });
 
   const automatico = isJson ? pareceAutomatico(fields) : String(fields['empresa-web'] ?? '').trim() !== '';
-  if (automatico) return isJson ? json(200, { ok: true }) : seeOther('/gracias/');
+  if (automatico) return isJson ? json(200, { ok: true }) : seeOther(gracias(req));
 
   if (!isJson && !fields.id) fields.id = crypto.randomUUID();
   const v = validarLlamada(fields);
@@ -91,7 +97,7 @@ export default async function llamada(req: Request, context?: Ctx): Promise<Resp
       : html(502, 'No hemos podido recibir tu solicitud', `<p>Ha fallado la entrega. Inténtalo de nuevo o, si es urgente, llama al ${site.phone}.</p>`);
   }
   console.log('llamada: recibida', c.id, c.area, c.motivo);
-  return isJson ? json(200, { ok: true, id: c.id }) : seeOther('/gracias/');
+  return isJson ? json(200, { ok: true, id: c.id }) : seeOther(gracias(req));
 }
 
 export const config = { path: '/api/llamada' };
