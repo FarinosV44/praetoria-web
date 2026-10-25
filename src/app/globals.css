@@ -2384,3 +2384,8 @@
 .direct__urgente p {
   margin: 0 0 0.75rem;
 }
+
+/* Captura de producto dentro de un artículo */
+.prose .figura-captura { margin: 1.5rem 0; }
+.prose .figura-captura img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: var(--radius); }
+.prose .figura-captura figcaption { margin-top: 6px; font-size: 0.8rem; color: var(--muted); }

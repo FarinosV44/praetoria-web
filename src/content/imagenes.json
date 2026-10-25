@@ -1394,6 +1394,31 @@
         1600
       ],
       "avif": true
+    },
+    {
+      "id": "deca-fotografiar-documento",
+      "estado": "publicada",
+      "escena": "Producto DeCA: alguien fotografía con el móvil la documentación de un envío",
+      "archivo": "ed/movil-fotografia-etiqueta-envio",
+      "alt": "Una persona fotografía con el móvil la etiqueta de un paquete de envío para leer sus datos",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "pexels",
+        "id": "7363196",
+        "autor": "RDNE Stock project",
+        "url": "https://www.pexels.com/photo/7363196/",
+        "perfil": "https://www.pexels.com/@rdne/",
+        "licencia": "Licencia Pexels (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
     }
   ]
 }

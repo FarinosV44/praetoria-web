@@ -130,7 +130,8 @@ function validarImagen(p: Post) {
   const img = registro.find((i) => i.id === p.imagen);
   if (!img) throw new Error(`${donde}: la imagen «${p.imagen}» no existe en src/content/imagenes.json`);
   // DeCA: los artículos de producto llevan capturas reales; las guías legales, una imagen de contexto
-  if (p.deca === 'herramienta' && img.origen.tipo !== 'deca') throw new Error(`${donde}: un artículo de producto DeCA usa capturas reales de DeCA Profesional`);
+  // Producto DeCA: captura real de DeCA Profesional o una fotografía descriptiva del uso (25/10/2026, decisión del propietario); nunca IA
+  if (p.deca === 'herramienta' && !['deca', 'unsplash', 'pexels'].includes(img.origen.tipo)) throw new Error(`${donde}: un artículo de producto DeCA usa una captura real de DeCA Profesional o una fotografía descriptiva`);
   if (p.deca !== 'herramienta' && img.origen.tipo === 'deca') throw new Error(`${donde}: las capturas de DeCA solo van en artículos de producto (deca: herramienta)`);
   if (img.origen.tipo === 'praetoria') throw new Error(`${donde}: las fotos de las instalaciones solo se usan en «El despacho»`);
 }

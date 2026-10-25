@@ -13,6 +13,15 @@ const origen = z.discriminatedUnion('tipo', [
     perfil: z.string().url().optional(),
     licencia: z.string().optional(),
   }),
+  /** Fotografía de Pexels (licencia Pexels: uso comercial gratuito, sin atribución obligatoria; se acredita igualmente) */
+  z.object({
+    tipo: z.literal('pexels'),
+    id: z.string().min(3),
+    autor: z.string(),
+    url: z.string().url(),
+    perfil: z.string().url().optional(),
+    licencia: z.string().optional(),
+  }),
   z.object({ tipo: z.literal('deca'), archivos: z.array(z.string()).min(1) }),
   z.object({ tipo: z.literal('praetoria'), original: z.string() }),
   /** Generada con IA (#28 §8). personalizada = recreación a partir de fotografías autorizadas por el titular. */
@@ -79,6 +88,8 @@ export function creditoDe(img: Imagen): string {
   switch (img.origen.tipo) {
     case 'unsplash':
       return `Foto: ${img.origen.autor ?? 'autor pendiente'} en Unsplash`;
+    case 'pexels':
+      return `Foto: ${img.origen.autor} en Pexels`;
     case 'deca':
       return img.composicion === 'logo' ? 'Logotipo de DeCA Profesional' : 'Captura real de DeCA Profesional (datos de demostración)';
     case 'praetoria':

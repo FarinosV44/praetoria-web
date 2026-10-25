@@ -7,7 +7,7 @@ category: transporte
 deca: herramienta
 tags: ["deca", "inteligencia artificial", "software deca", "generar deca"]
 intencion: "Generar el DeCA automáticamente con IA a partir de la documentación del transporte"
-imagen: deca-scan
+imagen: deca-fotografiar-documento
 ---
 
 **La información del DeCA casi siempre existe ya en algún papel.** Está en la orden de transporte que envía el cargador, en el CMR o en el albarán. Copiarla a mano en un formulario lleva tiempo y es la forma más habitual de equivocarse en un NIF, una matrícula o un peso. **DECA Scan AI**, la nueva función de [DeCA Profesional](https://www.decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=blog_deca_scan), lee esos documentos con inteligencia artificial y prepara el DeCA para que solo tengas que revisarlo.
@@ -24,6 +24,11 @@ Subes una foto o un PDF de la **orden de transporte, el CMR o el albarán** y DE
 Puedes subir **hasta cinco documentos del mismo transporte** a la vez, por ejemplo la orden del cargador y el albarán, y la herramienta combina la información.
 
 ## La IA propone; tú decides
+
+<figure class="figura-captura">
+  <img src="/media/ed/deca-scan-captura-1200.webp" width="1200" height="750" loading="lazy" alt="Pantalla de revisión de DECA Scan AI: la orden de transporte a la izquierda y los datos extraídos del cargador y del transportista a la derecha">
+  <figcaption>Pantalla de revisión de DECA Scan AI (captura real con datos de demostración).</figcaption>
+</figure>
 
 La pantalla de revisión pone el documento original junto a cada dato extraído. Cada campo indica de dónde sale y permite **verlo en el documento** con un clic. Un contador resume cuántos datos se han extraído, cuántos están por confirmar, cuántos entran en conflicto entre documentos y cuántos faltan.
 
@@ -90,6 +95,6 @@ Si todavía tienes dudas sobre quién debe emitir el DeCA o qué datos debe llev
 - [miDeCApro](https://midecapro.com/)
 - [DecaNube](https://decanube.es/)
 
-La imagen es una captura real de DeCA Profesional con datos de demostración.
+La fotografía de cabecera es de RDNE Stock project en Pexels; la captura de la pantalla de revisión es real, con datos de demostración.
 
 **Nota de transparencia:** DeCA Profesional es un proyecto impulsado por Praetoria, S.L. La comparativa resume la información pública de cada plataforma en la fecha indicada; no es una prueba independiente ni una certificación, y las funciones y precios pueden cambiar.
