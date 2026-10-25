@@ -7,7 +7,7 @@ import { JsonLd } from '@/components/JsonLd';
 import { areas, laboral, site } from '@/lib/site';
 import { iconoArea, metodo } from '@/lib/iconos';
 import { buildMetadata } from '@/lib/seo';
-import { creditoDe, imagen } from '@/lib/imagenes';
+import { imagen } from '@/lib/imagenes';
 import { Composicion, Foto } from '@/components/Foto';
 
 export const metadata = buildMetadata({
@@ -76,8 +76,8 @@ export default function DespachoPage() {
           <div className="intro-lateral">
             {estrategia && (
               <figure className="foto-secundaria">
+                {/* Sin pie de foto por decisión del propietario (25/10/2026); la procedencia consta en docs/IMAGENES.md */}
                 <Foto img={estrategia} sizes="(min-width: 960px) 340px, 92vw" ancho={800} />
-                <figcaption>{creditoDe(estrategia)}</figcaption>
               </figure>
             )}
           <aside className="metodo-mini" aria-label="Cómo trabajamos">
