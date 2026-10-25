@@ -17,7 +17,12 @@ if (hostinger) {
   console.log('Build para Hostinger: indexable, formularios hacia', env.NEXT_PUBLIC_API_ORIGIN);
 }
 const run = (cmd, args) => execFileSync(cmd, args, { stdio: 'inherit', env });
-run(process.execPath, [new URL('../node_modules/next/dist/bin/next', import.meta.url).pathname, 'build']);
+// Hostinger: su entorno de build hace que Turbopack falle al procesar CSS de fontsource
+// con `creating new process / node process exited before we could connect`.
+// Usar Webpack solo allí evita ese camino de compilación sin modificar el build de Netlify.
+const nextBuildArgs = ['build', ...(hostinger ? ['--webpack'] : [])];
+if (hostinger) console.log('Hostinger: compilando Next.js con Webpack (Turbopack desactivado)');
+run(process.execPath, [new URL('../node_modules/next/dist/bin/next', import.meta.url).pathname, ...nextBuildArgs]);
 run(process.execPath, [new URL('./postbuild.mjs', import.meta.url).pathname, 'out']);
 if (hostinger) {
   run(process.execPath, [new URL('./hostinger/htaccess.mjs', import.meta.url).pathname, 'out']);
