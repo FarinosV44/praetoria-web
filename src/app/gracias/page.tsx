@@ -18,7 +18,7 @@ export default function GraciasPage() {
           <p className="lede">Te responderemos lo antes posible por el medio que hayas indicado. Si tu asunto tiene un plazo que vence en los próximos días, llámanos o escríbenos por WhatsApp para que lo revisemos con prioridad.</p>
           <div className="actions">
             <a className="btn btn--red" href={whatsapp(mensajes.plazoProximo)}>Escribir por WhatsApp</a>
-            <a className="btn btn--ghost" href={`tel:${site.phoneIntl}`}>Llamar al {site.phone}</a>
+            <a className="btn btn--ghost" href={`tel:${site.phoneIntl}`}>Llamar al despacho: {site.phone}</a>
             <Link className="btn btn--ghost" href="/">Volver al inicio</Link>
           </div>
         </div>

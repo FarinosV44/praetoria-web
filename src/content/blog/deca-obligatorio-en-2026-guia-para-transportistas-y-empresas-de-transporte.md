@@ -7,6 +7,8 @@ updated: 2026-09-09
 category: transporte
 deca: guia
 wpId: 2872
+intencion: "Organizar el DeCA en el día a día de una empresa transportista"
+imagen: logistica-camion-muelle
 ---
 
 El 5 de octubre de 2026 cambia la forma de documentar buena parte del transporte público de mercancías por carretera en España. A partir de esa fecha, el documento de control administrativo deberá generarse en formato electrónico: el denominado Documento Electrónico de Control Administrativo o [DECA](https://www.decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=blog_deca).
