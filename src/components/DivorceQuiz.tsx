@@ -1,59 +1,20 @@
 'use client';
 
-// Comprobación orientativa del divorcio en cinco preguntas. No envía nada: prepara un mensaje de WhatsApp.
+// Comprobación orientativa del divorcio en cinco preguntas. No envía nada por sí sola: prepara un mensaje de WhatsApp
+// o pasa las respuestas al formulario de contacto (#7). Las respuestas se conservan en la sesión al volver a la página.
+import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { site, whatsapp } from '@/lib/site';
+import { mensajes, site, whatsapp } from '@/lib/site';
+import {
+  guardarRespuestasDivorcio,
+  isSimpleCase,
+  leerRespuestasDivorcio,
+  preguntasDivorcio,
+  type RespuestasDivorcio as Answers,
+} from '@/lib/cuestionario-divorcio';
 import { Icon } from './Icon';
 
-const questions = [
-  {
-    id: 'necesidad',
-    q: '¿Qué necesitas?',
-    options: [
-      'Quiero divorciarme o separarme',
-      'Quiero modificar unas medidas anteriores',
-      'Tengo problemas con el cumplimiento de un convenio o sentencia',
-      'Necesito regular medidas de hijos sin estar casado/a',
-      'No lo tengo claro',
-    ],
-  },
-  {
-    id: 'acuerdo',
-    q: '¿Existe acuerdo con la otra parte?',
-    options: ['Sí, estamos completamente de acuerdo', 'Hay acuerdo en algunas cuestiones', 'No hay acuerdo', 'Todavía no lo hemos hablado'],
-  },
-  { id: 'hijos', q: '¿Tenéis hijos en común?', options: ['No', 'Sí, mayores e independientes', 'Sí, menores o dependientes'] },
-  {
-    id: 'bienes',
-    q: '¿Hay vivienda, bienes o deudas que deban regularse?',
-    options: ['No', 'Sí, pero ya sabemos cómo repartirlos', 'Sí, y no existe acuerdo', 'No estoy seguro/a'],
-  },
-  {
-    id: 'urgente',
-    q: '¿Hay alguna cuestión urgente?',
-    options: [
-      'No, nada urgente',
-      'Custodia o régimen de visitas',
-      'Impago de pensión',
-      'Vivienda familiar',
-      'Traslado de residencia o cambio de colegio',
-      'Medidas provisionales o situación especialmente conflictiva',
-    ],
-  },
-];
-
-type Answers = Record<string, string>;
-
-/** El precio cerrado solo aplica al caso sencillo: mutuo acuerdo completo, sin hijos menores, sin bienes y sin urgencias. */
-export function isSimpleCase(a: Answers) {
-  return (
-    a.necesidad === 'Quiero divorciarme o separarme' &&
-    a.acuerdo === 'Sí, estamos completamente de acuerdo' &&
-    (a.hijos === 'No' || a.hijos === 'Sí, mayores e independientes') &&
-    a.bienes === 'No' &&
-    a.urgente === 'No, nada urgente'
-  );
-}
+const questions = preguntasDivorcio;
 
 export function DivorceQuiz() {
   const [step, setStep] = useState(0);
@@ -75,15 +36,27 @@ export function DivorceQuiz() {
     moved.current = true;
   };
 
+  // Recuperar las respuestas de esta sesión (p. ej. al volver desde el formulario)
+  useEffect(() => {
+    const prev = leerRespuestasDivorcio();
+    /* eslint-disable react-hooks/set-state-in-effect -- sessionStorage solo existe en el navegador (exportación estática) */
+    if (prev) {
+      setAnswers(prev);
+      setStep(questions.length);
+    }
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, []);
+
   const choose = (id: string, value: string, i: number) => {
-    setAnswers((a) => ({ ...a, [id]: value }));
+    setAnswers((a) => {
+      const next = { ...a, [id]: value };
+      if (i === questions.length - 1) guardarRespuestasDivorcio(next);
+      return next;
+    });
     setStep(i + 1);
     markMoved();
   };
 
-  const text =
-    'Hola, he hecho la comprobación de divorcio en vuestra web:\n' +
-    questions.map((q) => `- ${q.q} ${answers[q.id] ?? ''}`).join('\n');
 
   return (
     <form ref={formRef} className="quiz" id="quiz" onSubmit={(e) => e.preventDefault()}>
@@ -130,8 +103,12 @@ export function DivorceQuiz() {
           </p>
         </div>
         <div className="actions">
-          <a className="btn btn--red" href={done ? `https://wa.me/${site.phoneIntl.replace('+', '')}?text=${encodeURIComponent(text)}` : whatsapp('Hola, quiero hablar sobre mi caso de divorcio/familia.')}>
-            <Icon name="whatsapp" /> Enviar mis respuestas por WhatsApp
+          {/* Las respuestas solo viajan con el formulario (sessionStorage), nunca en la URL de WhatsApp (#28) */}
+          <Link className="btn btn--red" href="/contacto/?servicio=familia-divorcio&cuestionario=divorcio">
+            Enviarlas con el formulario
+          </Link>
+          <a className="btn btn--ghost" href={whatsapp(mensajes.divorcio)}>
+            <Icon name="whatsapp" /> Consultar por WhatsApp
           </a>
           <a className="btn btn--ghost" href={`tel:${site.phoneIntl}`}>
             <Icon name="phone" /> Llamar
@@ -141,6 +118,7 @@ export function DivorceQuiz() {
             className="btn btn--ghost"
             onClick={() => {
               setAnswers({});
+              guardarRespuestasDivorcio(null);
               setStep(0);
               markMoved();
             }}

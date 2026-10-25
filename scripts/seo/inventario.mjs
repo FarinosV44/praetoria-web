@@ -167,7 +167,10 @@ for (const p of htmlPages) {
   }
   if (m.canonical && m.canonical !== SITE + p) errors.push(`Canonical incorrecta en ${p}: ${m.canonical}`);
   if (!indexable && !/noindex/.test(m.robots)) errors.push(`Build no indexable pero ${p} no lleva noindex (SITE_INDEXABLE != true)`);
-  if (indexable && /noindex/.test(m.robots)) errors.push(`Build de producción con noindex en ${p}`);
+  // Pendiente de revisión jurídica (#32): noindex a propósito; la puerta `matriz.mjs --produccion` impide publicar así
+  const pendiente = /<meta name="revision-juridica" content="pendiente-noindex"/.test(htmlFor(p));
+  if (indexable && /noindex/.test(m.robots) && !pendiente) errors.push(`Build de producción con noindex en ${p}`);
+  if (pendiente && !/noindex/.test(m.robots)) errors.push(`${p} está pendiente de revisión y no lleva noindex`);
 }
 const robotsTxt = files.has('/robots.txt') ? readFileSync(join(outDir, 'robots.txt'), 'utf8') : '';
 if (indexable && !/Sitemap:/.test(robotsTxt)) errors.push('robots.txt de producción sin línea Sitemap');

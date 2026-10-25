@@ -8,6 +8,8 @@ category: transporte
 deca: guia
 tags: ["transporte internacional"]
 wpId: 2994
+intencion: "Entender cómo cambia el trabajo del transportista con el DeCA digital"
+imagen: logistica-cabina-tableta
 ---
 
 

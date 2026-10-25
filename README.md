@@ -64,8 +64,12 @@ npm run dev          # http://localhost:3000
 npm run typecheck    # TypeScript estricto
 npm run lint         # ESLint con las reglas de Next
 npm run build        # genera la web estática en out/
-npm run check        # tras build: enlaces internos, migración SEO y pruebas
+npm run check        # tras build: calidad del sitio, migración SEO y pruebas unitarias
+npm run test:e2e     # tras build: pruebas en navegador (Playwright)
+npm run test:e2e:ga  # build normal + build con Analytics y todas las pruebas en navegador
 ```
+
+Qué comprueba cada cosa está en [`docs/CALIDAD.md`](docs/CALIDAD.md).
 
 ## Publicación
 
@@ -83,5 +87,5 @@ El inventario de las URLs de WordPress, con su destino, las redirecciones y su v
 
 ## Formularios
 
-- **Contacto** (`/contacto/`): lo gestiona Netlify Forms (incluye filtro antispam). Los envíos se ven en el panel de Netlify y llegan por correo si configuras el aviso del paso 3.
+- **Contacto** (`/contacto/`): la función `/api/consulta` valida cada consulta en servidor y la entrega a Netlify Forms, que la guarda y avisa por correo. Detalle, pruebas y pendientes en [`docs/CONSULTAS.md`](docs/CONSULTAS.md).
 - **Hacienda** y **divorcio**: los cuestionarios funcionan dentro del navegador del visitante y preparan un resumen que él mismo envía por WhatsApp o correo. No guardan datos en ningún servidor.

@@ -1,13 +1,20 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
+// Fuentes alojadas en la propia web (antes, Google Fonts): más rápidas y sin enviar datos a terceros
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource-variable/source-serif-4/opsz.css';
 import './globals.css';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { CookieConsent } from '@/components/CookieConsent';
-import { Icon } from '@/components/Icon';
+import { Medicion } from '@/components/Medicion';
+import { QuickBar } from '@/components/QuickBar';
+import { getPosts } from '@/lib/content';
+import { servicios } from '@/lib/servicios';
+import { areas } from '@/lib/site';
 import { JsonLd } from '@/components/JsonLd';
 import { legalServiceLd } from '@/lib/seo';
-import { site, whatsapp } from '@/lib/site';
+import { site } from '@/lib/site';
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -23,36 +30,30 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = { width: 'device-width', initialScale: 1 };
 
+// Rutas donde el contacto contextual es el del área laboral (#28): el área, sus servicios y sus artículos
+const rutasLaborales = [
+  ...areas.filter((a) => a.id === 'laboral').map((a) => `/${a.slug}/`),
+  ...servicios.filter((s) => s.area === 'laboral' && s.pagina).map((s) => s.pagina!),
+  ...getPosts().filter((p) => p.category === 'laboral').map((p) => `/${p.slug}/`),
+];
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     // El idioma del documento se ajusta en el build para los artículos en francés y árabe (scripts/postbuild.mjs)
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        {/* eslint-disable-next-line @next/next/no-page-custom-font -- fuentes de la marca; next/font descargaría en el build */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400&display=swap"
-          rel="stylesheet"
-        />
         <JsonLd data={legalServiceLd} />
       </head>
       <body className="site-root">
-        <a className="skip" href="#contenido">
+        <a className="skip" href="#contenido" lang="es">
           Saltar al contenido
         </a>
         <Header />
         <main id="contenido">{children}</main>
         <Footer />
-        <nav className="quickbar" aria-label="Contacto rápido">
-          <a href={`tel:${site.phoneIntl}`}>
-            <Icon name="phone" /> Llamar
-          </a>
-          <a href={whatsapp('Hola, quiero consultar mi caso con Praetoria.')}>
-            <Icon name="whatsapp" /> WhatsApp
-          </a>
-        </nav>
+        <QuickBar rutasLaborales={rutasLaborales} />
         <CookieConsent />
+        <Medicion />
       </body>
     </html>
   );

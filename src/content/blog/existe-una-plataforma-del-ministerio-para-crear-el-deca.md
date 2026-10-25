@@ -7,6 +7,8 @@ updated: 2026-10-23
 category: transporte
 deca: guia
 wpId: 3067
+intencion: "Saber si el Ministerio ofrece una plataforma para crear el DeCA y sus límites"
+imagenPendiente: "Contexto oficial del transporte por carretera (control en carretera o sede administrativa), sin logotipos ni texto inventado"
 ---
 
 

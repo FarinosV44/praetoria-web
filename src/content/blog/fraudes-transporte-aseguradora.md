@@ -7,6 +7,8 @@ updated: 2026-09-08
 category: transporte
 tags: ["aseguradoras", "fraude transporte", "logística legal", "reclamaciones transporte", "transporte internacional"]
 wpId: 2745
+intencion: "Reclamar a la aseguradora un fraude o robo en el transporte"
+imagen: transporte-embalaje-danado
 ---
 
 En los últimos meses se han multiplicado los **fraudes en el sector del [transporte](/logistica-y-transporte-internacional/)**, especialmente los casos de **suplantación de identidad de empresas transportistas**, uso de documentos falsos y desaparición de la mercancía durante el trayecto.
