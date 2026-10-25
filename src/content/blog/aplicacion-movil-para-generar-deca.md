@@ -1,7 +1,7 @@
 ---
 title: "Aplicación móvil para generar el DeCA"
-seoTitle: "Aplicación móvil para generar DeCA | Conductores y transportistas"
-description: "Genera y corrige el DeCA desde el móvil. Descubre cómo dar acceso a tus conductores para gestionar sus portes y llevar el QR listo para una inspección"
+seoTitle: "App para hacer el DECA desde el móvil: guía para conductores"
+description: "Genera, corrige y enseña el DECA desde el móvil. Cómo dar acceso a tus conductores, llevar el QR listo para una inspección y qué hacer si cambia un dato."
 date: 2026-09-26
 updated: 2026-10-23
 category: transporte

@@ -1,7 +1,7 @@
 ---
 title: "¿Existe una plataforma del Ministerio para crear el DECA?"
-seoTitle: "¿Hay una plataforma del Ministerio para crear el DECA?"
-description: "¿Existe una plataforma oficial del Ministerio para generar el DECA? Explicamos qué exige la normativa y cómo elegir una solución jurídicamente segura."
+seoTitle: "DECA del Ministerio: la app gratuita de SIMPLE y sus límites"
+description: "Sí, el Ministerio tiene una aplicación gratuita para crear el DECA dentro de SIMPLE. Dónde está, si es obligatorio usarla y cuándo compensa una plataforma profesional."
 date: 2026-09-18
 updated: 2026-10-23
 category: transporte

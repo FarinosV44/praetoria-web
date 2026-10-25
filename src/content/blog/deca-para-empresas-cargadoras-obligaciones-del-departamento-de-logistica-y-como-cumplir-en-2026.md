@@ -1,9 +1,9 @@
 ---
 title: "DECA para empresas cargadoras: obligaciones del departamento de logística y cómo cumplir en 2026"
-seoTitle: "DECA para empresas cargadoras: obligaciones y guía 2026"
-description: "¿Tu empresa contrata transportes? Cuándo actúa como cargador contractual, quién debe generar el DECA y cómo organizar su cumplimiento desde octubre de 2026."
+seoTitle: "DECA para cargadores: quién lo genera y cómo cumplir en 2026"
+description: "Si contratas transportes, puedes ser el cargador contractual. Quién debe generar el DECA, qué revisa una inspección y cómo organizar logística para cumplir."
 date: 2026-09-17
-updated: 2026-10-23
+updated: 2026-10-25
 category: transporte
 deca: guia
 tags: ["reclamaciones transporte", "transporte internacional"]
@@ -19,7 +19,7 @@ imagen: logistica-albaran
 
 El DECA no es una obligación exclusiva de los transportistas. Una empresa fabricante, distribuidora, importadora, exportadora o comercializadora que contrata transportes por carretera puede ocupar la posición de **cargador contractual** y asumir responsabilidades directas sobre la formalización y el contenido del documento.
 
-A partir del **5 de octubre de 2026**, el documento de control administrativo exigible en los transportes públicos de mercancías por carretera deberá generarse necesariamente en formato digital. Por tanto, los departamentos de logística no deberían limitarse a preguntar al transportista si dispone de una aplicación. Deben identificar cuándo su empresa es cargadora contractual, establecer quién confeccionará el DECA y crear un procedimiento que garantice que el documento existe, contiene los datos correctos y llega al conductor antes de que comience el transporte.
+Desde el **5 de octubre de 2026**, el documento de control administrativo exigible en los transportes públicos de mercancías por carretera debe generarse necesariamente en formato digital. Por tanto, los departamentos de logística no deberían limitarse a preguntar al transportista si dispone de una aplicación. Deben identificar cuándo su empresa es cargadora contractual, establecer quién confeccionará el DECA y crear un procedimiento que garantice que el documento existe, contiene los datos correctos y llega al conductor antes de que comience el transporte.
 
 > **Resumen rápido:** si tu empresa contrata directamente el transporte con la empresa que lo realiza materialmente, normalmente tendrá la consideración de cargador contractual. El cargador contractual y el transportista efectivo están obligados a formalizar el documento de control y ambos pueden responder si no se genera o no se lleva a bordo.
 
@@ -216,7 +216,7 @@ Esta cláusula debe adaptarse al sistema real de contratación de la empresa. No
 
 ## Checklist DECA para responsables de logística
 
-Antes del 5 de octubre de 2026, la empresa debería poder responder afirmativamente a estas preguntas:
+Con el DECA ya exigible, la empresa debería poder responder afirmativamente a estas preguntas:
 
 - ¿Hemos identificado cuándo somos cargador contractual?
 - ¿Sabemos quiénes son nuestros transportistas efectivos habituales?

@@ -1,7 +1,7 @@
 ---
 title: "¿Quién debe hacer el DeCA: el cargador o el transportista? ¿Qué ocurre en una inspección y qué pasa si cada parte utiliza una plataforma diferente?"
-seoTitle: "¿Quién debe hacer el DeCA: cargador o transportista? Inspecciones, conservación"
-description: "¿Quién debe generar el DeCA, el cargador o el transportista? Responsabilidades, inspecciones, conservación durante un año y qué ocurre si cada parte usa una plataforma."
+seoTitle: "¿Quién hace el DECA: el cargador o el transportista?"
+description: "Quién debe generar el DECA, qué pasa en una inspección si falta o tiene errores, cuánto tiempo hay que conservarlo y qué ocurre si cada parte usa una plataforma distinta."
 date: 2026-10-03
 updated: 2026-10-03
 category: transporte
