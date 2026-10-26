@@ -15,6 +15,8 @@ imagen: logistica-cabina-tableta
 
 El **DECA para transportistas** no es simplemente la sustitución de un documento en papel por un archivo digital. Su implantación supone un cambio más profundo en la forma de organizar, documentar y controlar los transportes de mercancías por carretera.
 
+> **Resumen rápido:** desde el **5 de octubre de 2026**, el DECA debe formalizarse en formato digital: se genera antes del inicio del servicio como fichero nativo digital, con código QR y dirección web única, y se facilita al conductor, que puede mostrarlo desde el móvil en una inspección. La responsabilidad de formalizarlo corresponde al **cargador contractual y al transportista efectivo**, por lo que ambos deben comprobar que existe y refleja el transporte real.
+
 A partir del **5 de octubre de 2026**, el Documento de Control Administrativo deberá formalizarse necesariamente en formato digital. Transportistas, agencias y cargadores tendrán que adaptar sus procedimientos para generar el documento antes del comienzo del servicio, facilitarlo al conductor y mantenerlo disponible ante una posible inspección.
 
 La obligación puede parecer un nuevo trámite, pero también abre una oportunidad: utilizar la digitalización para reducir errores, mejorar la trazabilidad y organizar una operativa que todavía depende, en muchas empresas, de papeles, correos electrónicos, fotografías y mensajes dispersos.

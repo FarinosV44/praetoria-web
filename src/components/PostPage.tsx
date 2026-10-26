@@ -61,6 +61,16 @@ export function PostPage({ post }: { post: Post }) {
     <div className="page-post">
       {post.revision === 'pendiente' && <RevisionPendiente indexable={false} />}
       <JsonLd data={articleLd} />
+      {post.preguntas.length >= 2 && (
+        <JsonLd
+          data={{
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            inLanguage: post.lang,
+            mainEntity: post.preguntas.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+          }}
+        />
+      )}
       <article lang={post.lang !== 'es' ? post.lang : undefined} dir={post.lang === 'ar' ? 'rtl' : undefined}>
         <header className="post-head">
           <div className="wrap post-columna">

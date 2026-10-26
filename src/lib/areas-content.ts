@@ -270,7 +270,7 @@ export const areaContent: AreaContent[] = [
     group: 'particulares',
     title: 'Abogados de familia en Valencia | Divorcios, custodia y pensiones',
     description:
-      'Asesoría en derecho de familia: divorcios, custodias, herencias y protección familiar. Soluciones claras, estratégicas y orientadas a acuerdos duraderos en Valencia.',
+      'Abogados de familia en Valencia: divorcio de mutuo acuerdo por 399 € en total, divorcios contenciosos, custodia, pensiones y modificación de medidas. Acuerdos duraderos y defensa firme en juicio.',
     h1: 'Abogados de familia y divorcio en Valencia',
     lede: 'Detrás de cada caso hay vínculos personales y decisiones que marcan años. Combinamos rigor técnico con un trato cercano y discreto.',
     intro: [

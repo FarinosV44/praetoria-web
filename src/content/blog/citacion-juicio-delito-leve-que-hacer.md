@@ -11,6 +11,8 @@ revision: pendiente
 
 Recibir una citación del juzgado preocupa aunque el asunto sea menor. Un juicio por delito leve es el procedimiento previsto para las infracciones penales de menor gravedad, y se celebra de forma más sencilla que otros juicios.
 
+> **Resumen rápido:** si te citan a un juicio por delito leve, revisa en qué condición se te cita (denunciante, perjudicado o investigado), el juzgado y la fecha. Reúne documentos, mensajes, fotografías y datos de testigos, ordenados por fechas, y si no puedes acudir, comunícalo y justifícalo antes al juzgado. Ir con abogado **no siempre es obligatorio**, pero conviene consultarlo si hay lesiones, una indemnización en juego o antecedentes.
+
 ## Qué dice la citación
 
 Fíjate en tres cosas: en qué condición se te cita (como denunciante, como perjudicado o como investigado), el juzgado y la fecha. La citación del investigado va acompañada de la denuncia o la querella presentada, y te indica que debes acudir con los medios de prueba de que quieras valerte.

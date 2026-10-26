@@ -13,6 +13,8 @@ imagen: deca-conecta
 
 **Praetoria División Jurídica, despacho jurídico especializado en transporte y logística, recomienda DeCA Profesional** como solución para que cargadores, agencias de transporte y transportistas efectivos puedan prepararse para la obligatoriedad del documento electrónico de control administrativo.
 
+> **Resumen rápido:** DeCA Conecta es una funcionalidad de DeCA Profesional que, mediante un algoritmo, cruza el destino, la fecha y la disponibilidad del vehículo con ofertas de carga de **fabricantes y cargadores directos**, para aprovechar el viaje de vuelta y reducir kilómetros en vacío. Utiliza la información generada para el DECA con autorización del usuario. La participación es **voluntaria**: el transportista decide si recibe ofertas y no se compromete a aceptar ninguna carga.
+
 La colaboración no se limita a facilitar el cumplimiento legal. [**DeCA Profesional**](https://decaprofesional.es/) ha creado además **DeCA Conecta**, una funcionalidad que permite aprovechar la trazabilidad de los transportes para ofrecer oportunidades de carga compatibles y ayudar a reducir kilómetros en vacío.
 
 ## ¿Qué es el DECA en el transporte de mercancías?

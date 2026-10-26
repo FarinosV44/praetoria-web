@@ -13,6 +13,8 @@ imagen: transporte-facturas
 
 El sector del [transporte](/logistica-y-transporte-internacional/) es uno de los más expuestos a los impagos. Por eso el problema del impago transporte preocupa a muchas empresas del sector. Además, puede afectar considerablemente la rentabilidad de empresas y autónomos.
 
+> **Resumen rápido:** para reclamar una factura de transporte impagada, reúne el **CMR firmado**, la orden de carga, la factura y las comunicaciones, reclama de forma formal y actúa rápido. No siempre debes reclamar solo a quien te contrató: con la **acción directa en transporte** puedes dirigirte también contra el cargador, el destinatario o los intermediarios. Además de la factura, puedes reclamar intereses por demora, costes de recobro y daños derivados del impago.
+
 Cargas realizadas, mercancía entregada… y facturas que nunca se pagan. En muchos casos, estas situaciones ponen en riesgo la estabilidad financiera.
 
 Si trabajas como transportista, agencia o intermediario, seguramente ya lo has vivido. Experimentar situaciones de impago relacionadas con el transporte es desafortunadamente muy común en el sector.

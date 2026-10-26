@@ -15,6 +15,8 @@ imagen: deca-equipo
 
 La implantación del Documento Electrónico de Control Administrativo (DeCA) obliga a muchas empresas de transporte, cargadores, agencias y operadores a elegir una herramienta con la que generar, conservar y presentar correctamente sus documentos.
 
+> **Resumen rápido:** DeCA Profesional tiene tres planes con facturación mensual y **sin permanencia**: Starter, 19,99 € (hasta 100 DeCA y 3 usuarios); Professional, 49,99 € (hasta 300 DeCA y 10 usuarios), y Business, 89,99 € (hasta 1.000 DeCA y 30 usuarios), todos al mes + IVA. Antes de contratar se pueden crear los **3 primeros DeCA gratis**, sin tarjeta. Las correcciones, las anulaciones y los DeCA importados no consumen unidades adicionales.
+
 Una de las dudas más habituales es sencilla: **¿cuánto cuesta un software DeCA y qué plan necesita realmente cada empresa?**
 
 En este artículo explicamos los precios actuales de [DeCA Profesional](https://decaprofesional.es/), qué incluye cada modalidad y qué debe valorar una empresa antes de contratar una plataforma.

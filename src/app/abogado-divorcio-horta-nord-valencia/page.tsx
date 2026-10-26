@@ -7,9 +7,9 @@ import { CtaBand } from '@/components/CtaBand';
 import { DivorceQuiz } from '@/components/DivorceQuiz';
 
 export const metadata = buildMetadata({
-  title: "Abogados de divorcio en Valencia y l'Horta Nord",
+  title: 'Divorcio de mutuo acuerdo en Valencia por 399 €',
   description:
-    "Abogados de separación y divorcio en Valencia y l'Horta Nord. Mutuo acuerdo desde 199,50 € por cónyuge. Custodia y modificación de medidas.",
+    "Divorcio de mutuo acuerdo en Valencia y l'Horta Nord por 399 € en total (199,50 € por cónyuge), con abogado, procurador e IVA. Pasos, documentos, custodia y modificación de medidas.",
   path: '/abogado-divorcio-horta-nord-valencia/',
 });
 
@@ -29,6 +29,14 @@ const faq = [
   {
     q: '¿Cuánto tarda un divorcio de mutuo acuerdo?',
     a: 'El plazo depende de la carga de trabajo de cada juzgado y de la documentación disponible. No podemos garantizar una fecha exacta, pero al ser un procedimiento sin oposición entre las partes, suele resolverse con más agilidad que uno contencioso.',
+  },
+  {
+    q: '¿Hay que ir al juzgado en un divorcio de mutuo acuerdo?',
+    a: 'Normalmente solo para la ratificación: cada cónyuge confirma ante el juzgado, por separado, que mantiene la petición de divorcio y el convenio regulador. No hay juicio. El resto lo tramitan el abogado y el procurador.',
+  },
+  {
+    q: '¿Se puede hacer el divorcio ante notario?',
+    a: 'Sí, si es de mutuo acuerdo y no hay hijos menores no emancipados ni hijos mayores con medidas de apoyo atribuidas a los padres. También en ese caso es obligatorio que intervenga un abogado. El precio de 399 € corresponde a la vía judicial y no incluye los aranceles del notario.',
   },
   {
     q: '¿Qué ocurre si tenemos hijos menores?',
@@ -68,7 +76,7 @@ export default function DivorcioPage() {
           <Breadcrumbs items={[{ label: 'Familia y divorcio', href: '/familia/' }, { label: 'Divorcio' }]} />
           <div className="split">
             <div>
-              <h1>Abogados de divorcio en Valencia y l&apos;Horta Nord</h1>
+              <h1>Divorcio de mutuo acuerdo en Valencia y l&apos;Horta Nord</h1>
               <p className="lede">
                 Acuerdo cuando es posible, estrategia cuando hace falta. Resolvemos divorcios de mutuo acuerdo con un precio
                 cerrado y defendemos con rigor los asuntos complejos de custodia, pensiones, vivienda familiar y patrimonio.
@@ -167,6 +175,52 @@ export default function DivorcioPage() {
       <section className="section section--stone">
         <div className="wrap split">
           <div>
+            <h2>Pasos de un divorcio de mutuo acuerdo en Valencia</h2>
+            <ol className="process">
+              <li>
+                <strong>Comprobar los requisitos.</strong> Deben haber pasado al menos tres meses desde la boda y ambos cónyuges
+                tienen que estar de acuerdo en pedir el divorcio y en todas sus consecuencias.
+              </li>
+              <li>
+                <strong>Redactar el convenio regulador.</strong> Recoge lo pactado: hijos, uso de la vivienda, pensiones y, en
+                su caso, el reparto de bienes.
+              </li>
+              <li>
+                <strong>Presentar la demanda.</strong> Abogado y procurador presentan la demanda conjunta con el convenio en el
+                juzgado de familia que corresponda al domicilio.
+              </li>
+              <li>
+                <strong>Ratificarse.</strong> Cada cónyuge confirma ante el juzgado, por separado, que mantiene su petición y el
+                convenio.
+              </li>
+              <li>
+                <strong>Sentencia.</strong> Si hay hijos menores, el Ministerio Fiscal informa antes. El juez aprueba el convenio
+                salvo que perjudique a los hijos o gravemente a uno de los cónyuges, y la sentencia se inscribe en el Registro
+                Civil.
+              </li>
+            </ol>
+          </div>
+          <div>
+            <h3>Documentación que necesitáis</h3>
+            <ul className="plain">
+              <li>DNI o NIE de ambos cónyuges</li>
+              <li>Certificado literal de matrimonio</li>
+              <li>Certificados de nacimiento de los hijos, si los hay</li>
+              <li>Certificado de empadronamiento</li>
+              <li>Escrituras o datos de la vivienda y de los bienes y deudas comunes, si hay que repartirlos</li>
+              <li>Datos de ingresos, si se fija una pensión</li>
+            </ul>
+            <p className="small muted">
+              Sin hijos menores no emancipados ni hijos mayores con medidas de apoyo atribuidas a los padres, el divorcio de mutuo acuerdo también puede
+              hacerse ante notario, siempre con abogado.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap split">
+          <div>
             <h2>Cuando el divorcio necesita estrategia</h2>
             <div className="prose">
               <p>Un precio competitivo en el caso sencillo no significa renunciar a la capacidad técnica que exige un asunto difícil.</p>
@@ -200,7 +254,7 @@ export default function DivorcioPage() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section section--stone">
         <div className="wrap">
           <h2>Cómo trabajamos</h2>
           <ol className="process">
@@ -217,7 +271,7 @@ export default function DivorcioPage() {
         </div>
       </section>
 
-      <section className="section section--stone">
+      <section className="section">
         <div className="wrap narrow">
           <Faq items={faq} />
         </div>

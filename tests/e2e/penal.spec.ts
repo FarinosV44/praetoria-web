@@ -16,8 +16,7 @@ test('Penal: accesible desde Particulares, con recorridos y sin aviso de revisi�
   await expect(page.locator('.area-head').getByRole('link', { name: 'Que me llame un abogado' })).toHaveAttribute('href', '/que-me-llame-un-abogado/?area=penal');
 });
 
-test('páginas penales: indexables, en el sitemap, fuentes del BOE y qué no puede esperar', async ({ page, request }) => {
-  const sitemap = await (await request.get('/sitemap.xml')).text();
+test('páginas penales: sin aviso de revisión, fuentes del BOE y qué no puede esperar', async ({ page }) => {
   for (const ruta of PENAL) {
     await page.goto(ruta);
     await expect(page.locator('meta[name="revision-juridica"]')).toHaveCount(0);

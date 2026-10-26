@@ -14,6 +14,8 @@ imagenPendiente: "Oficina de tráfico de una empresa de transporte: contrato o c
 En el sector del [transporte](/logistica-y-transporte-internacional/), el mayor riesgo no siempre está en la carretera, sino en lo jurídico.  
 Impagos, reclamaciones, daños en mercancía, conflictos con clientes o aseguradoras… muchos de estos problemas no se deben a la operativa, sino a una **mala estructura legal desde el inicio**.
 
+> **Resumen rápido:** la base para proteger legalmente una empresa de transporte son unas **condiciones generales de contratación** bien redactadas, integradas en las órdenes de carga y aceptadas por las partes. La orden de carga debe identificar a las partes, el precio, las condiciones de pago, la referencia a las condiciones generales, las limitaciones de responsabilidad y el procedimiento ante incidencias. Contratos revisados y documentación ordenada ayudan además a defender la cobertura frente a la aseguradora.
+
 La realidad es clara: la mayoría de empresas de transporte trabajan sin una base jurídica sólida, lo que les deja expuestas ante cualquier incidencia.
 
 En Praetoria División Jurídica ayudamos a empresas de transporte y logística a **blindar su actividad**, evitando problemas antes de que aparezcan.

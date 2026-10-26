@@ -14,6 +14,8 @@ imagen: deca-ordenes
 
 En el trabajo diario de un cargador o una agencia de transporte, preparar un servicio suele implicar varias tareas: comunicar el encargo, indicar las condiciones, pedir las matrículas y generar la documentación correspondiente. Cuando cada paso se realiza por una vía diferente, se repiten datos y se multiplican los correos, mensajes y archivos.
 
+> **Resumen rápido:** la orden de carga digital de DeCA Profesional permite preparar el encargo de transporte con los mismos datos del DeCA y obtener **ambos en un único documento o por separado**. Si aún no conoces las matrículas, puedes enviar un enlace al transportista para que las complete desde el móvil, sin crear una cuenta. En el documento conjunto figuran el precio y las condiciones, así que para compartir el DeCA sin esa información conviene la modalidad separada.
+
 La nueva **orden de carga digital de DeCA Profesional** permite conectar esas tareas. El cargador prepara el encargo y puede obtener la orden de carga con el DeCA incorporado en un único documento, o generar ambos por separado, aprovechando la misma información.
 
 Desde **Praetoria División Jurídica** impulsamos una digitalización que resulte útil en la operativa real: avanzar paso a paso, facilitar la colaboración entre empresas y reducir el trabajo repetitivo.

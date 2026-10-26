@@ -12,6 +12,8 @@ imagen: mercantil-socios
 
 Es una consulta mucho más habitual de lo que parece: dos personas crean una empresa juntas, normalmente al 50%, el negocio funciona durante años y, en algún momento, la relación se rompe.
 
+> **Resumen rápido:** en una sociedad al 50 % bloqueada, no vendas, firmes acuerdos ni aceptes una valoración sin conocer tu posición. Reúne escrituras, estatutos, cuentas anuales, préstamos, contratos y pactos, y averigua **cuánto vale realmente la empresa**. El deterioro de la relación no basta para obligar al otro socio a vender, pero pueden existir acciones para impugnar acuerdos, exigir responsabilidad a los administradores o, si concurre causa legal, plantear la disolución, lo que a menudo permite negociar un acuerdo.
+
 Uno quiere continuar y el otro marcharse. Uno considera que trabaja mucho más. Aparecen discrepancias sobre los sueldos, los gastos, la contratación de familiares, el reparto de dividendos o las decisiones comerciales. Se pierde la confianza y cualquier decisión acaba convirtiéndose en una discusión.
 
 El verdadero problema llega cuando ambos tienen el 50% de la sociedad.

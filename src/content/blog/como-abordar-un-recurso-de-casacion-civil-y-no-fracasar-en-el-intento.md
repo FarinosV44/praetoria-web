@@ -12,6 +12,8 @@ imagen: civil-tribunal
 
 El recurso de casación civil es, probablemente, una de las fases más exigentes del proceso judicial. No es una tercera instancia ni una nueva oportunidad para discutir los hechos. Es un recurso extraordinario, técnico y selectivo, donde la mayoría de escritos fracasan antes siquiera de ser admitidos.
 
+> **Resumen rápido:** el recurso de casación civil no es una tercera instancia: el Tribunal Supremo no valora pruebas ni hechos, sino si la norma se ha interpretado y aplicado correctamente. Para que se admita hay que construirlo sobre una cuestión jurídica real y acreditar el **interés casacional**, demostrando que la sentencia recurrida se aparta de la doctrina existente o que el Supremo necesita precisar su criterio. Conviene un motivo claro y preciso, y descartar a tiempo los asuntos sin recorrido.
+
 Por eso, entender cómo abordarlo correctamente marca la diferencia entre perder el tiempo… o tener opciones reales de éxito.
 
 ### 1. La casación no es una apelación

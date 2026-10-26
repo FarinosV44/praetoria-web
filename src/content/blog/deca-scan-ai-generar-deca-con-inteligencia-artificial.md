@@ -12,6 +12,8 @@ imagen: deca-fotografiar-documento
 
 **La información del DeCA casi siempre existe ya en algún papel.** Está en la orden de transporte que envía el cargador, en el CMR o en el albarán. Copiarla a mano en un formulario lleva tiempo y es la forma más habitual de equivocarse en un NIF, una matrícula o un peso. **DECA Scan AI**, la nueva función de [DeCA Profesional](https://decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=blog_deca_scan), lee esos documentos con inteligencia artificial y prepara el DeCA para que solo tengas que revisarlo.
 
+> **Resumen rápido:** DECA Scan AI, función de DeCA Profesional, lee con inteligencia artificial una foto o un PDF de la orden de transporte, el CMR o el albarán (**hasta cinco documentos por transporte**) y prepara el DeCA y la orden de carga con cargador, transportista, lugares, mercancía, peso y matrículas. Los datos dudosos se marcan y **no se emite nada sin tu confirmación**. Está incluido en todos los planes, desde 1 documento al mes en el gratuito hasta 200 en Business.
+
 ## Qué hace DECA Scan AI
 
 Subes una foto o un PDF de la **orden de transporte, el CMR o el albarán** y DECA Scan AI prepara el DeCA y la orden de carga con los datos que encuentra:

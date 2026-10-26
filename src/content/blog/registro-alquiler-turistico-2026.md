@@ -15,6 +15,8 @@ imagen: alquiler-turistico
 El sector de los **apartamentos turísticos y arrendamientos de corta duración** está viviendo un nuevo endurecimiento normativo.  
 Una de las últimas novedades es la obligación de presentar el **depósito del modelo informativo de arrendamientos de corta duración**, un trámite que ya está generando dudas entre propietarios y gestores.
 
+> **Resumen rápido:** el **depósito del modelo informativo de arrendamientos de corta duración** es una nueva obligación dirigida a propietarios que alquilan viviendas por periodos cortos (turístico, temporal o de temporada), para aumentar el control fiscal, identificar propietarios y viviendas y cruzar datos con plataformas digitales. Pueden estar obligados propietarios, titulares, comercializadores y sociedades gestoras, aunque cada caso debe analizarse. Incumplirla puede acarrear **sanciones económicas** y requerimientos de la Agencia Tributaria.
+
 Muchos propietarios no saben si están obligados, cómo se presenta o qué riesgos existen si no se cumple correctamente.
 
 En Praetoria División Jurídica gestionamos **todos los trámites burocráticos y jurídicos de apartamentos turísticos**, incluido este nuevo modelo informativo, para que el propietario no asuma riesgos innecesarios.

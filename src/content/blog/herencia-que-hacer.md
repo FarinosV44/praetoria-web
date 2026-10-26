@@ -12,6 +12,8 @@ imagen: civil-herencia
 
 Cuando alguien entra en tu despacho y te dice “mi padre ha fallecido y no hemos hecho nada de la herencia”, casi nunca viene con todo ordenado. Viene con papeles sueltos, dudas, y muchas veces con una idea equivocada de cómo funciona realmente una herencia.
 
+> **Resumen rápido:** para tramitar una herencia, empieza por el **certificado de defunción y el certificado de últimas voluntades**, que indican si hay testamento y dónde está. Después identifica a todos los herederos: si uno renuncia y tiene hijos, esos hijos pueden ocupar su lugar, y **la renuncia debe hacerse en escritura pública**. Revisa también si los inmuebles están bien inscritos en el Registro. Con todo ordenado, se firma una escritura donde todo queda claro.
+
 Lo primero que hay que entender es que una herencia no es un trámite automático. No pasa sola. No se arregla con el tiempo. Y, sobre todo, no basta con que “la familia esté de acuerdo”. Jurídicamente hay que hacer las cosas bien desde el principio.
 
 Todo empieza siempre igual: certificado de defunción y certificado de últimas voluntades. Con eso sabes si hay testamento y dónde está. Parece sencillo, pero aquí ya hay quien se pierde. Sin testamento, el proceso cambia completamente. Con testamento, hay que interpretarlo bien, y ahí es donde empiezan los matices que la mayoría de la gente no ve.
