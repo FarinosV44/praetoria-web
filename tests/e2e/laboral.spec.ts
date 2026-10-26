@@ -20,7 +20,7 @@ test('Laboral está en la navegación, la portada y el índice de áreas', async
 
 test('la landing laboral contacta con el área laboral (llamada y WhatsApp) sin nombres en los botones', async ({ page }) => {
   await page.goto('/abogado-laboralista-valencia/');
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Abogados laboralistas en Valencia');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Abogado laboralista en Valencia');
   await expect(page.locator('.page-head a[href="tel:+34649181290"]')).toHaveText(/Llamar al área laboral/);
   await expect(page.locator('.page-head a[href^="https://wa.me/34649181290"]')).toHaveText(/WhatsApp del área laboral/);
   await expect(page.locator('.cta a[href="tel:+34649181290"]')).toBeVisible();
