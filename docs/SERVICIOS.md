@@ -54,7 +54,7 @@ Total: 55 servicios.
 | Altas médicas y prestaciones | `laboral-altas` | — | [Consultar sobre esto](/contacto/?servicio=laboral-altas) | revisado |
 | Accidentes laborales y responsabilidad empresarial ([página](/accidente-laboral/)) | `laboral-accidentes` | — | [Consultar mi accidente laboral](/contacto/?servicio=laboral-accidentes) | revisado |
 | Acoso y vulneración de derechos | `laboral-acoso` | — | [Consultar sobre esto](/contacto/?servicio=laboral-acoso) | revisado |
-| Modificaciones de condiciones y conflictos laborales | `laboral-condiciones` | — | [Consultar sobre esto](/contacto/?servicio=laboral-condiciones) | revisado |
+| Modificaciones de condiciones y conflictos laborales | `laboral-condiciones` | [Baja laboral de larga duración: cómo dejar tu empresa con indemnización y derecho a paro](/baja-laboral-de-larga-duracion-como-dejar-tu-empresa-con-indemnizacion-y-derecho-a-paro/) | [Consultar sobre esto](/contacto/?servicio=laboral-condiciones) | revisado |
 
 ## Civil, herencias y vivienda (6)
 

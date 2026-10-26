@@ -5,7 +5,7 @@ const registro = async (page: Page) => (await page.request.get('/__mock-forms/re
 
 const SERVICIOS = [
   { pagina: '/impugnar-despido/', id: 'laboral-despidos', nombre: 'Despidos e impugnación', cta: 'Solicitar revisión de mi despido', problema: 'despido' },
-  { pagina: '/reclamar-salarios-y-finiquito/', id: 'laboral-cantidades', nombre: 'Salarios y finiquitos', cta: 'Reclamar lo que me deben', problema: 'cantidades' },
+  { pagina: '/reclamar-salarios-y-finiquito/', id: 'laboral-cantidades', nombre: 'Salarios y finiquitos', cta: 'Revisar lo que me deben', problema: 'cantidades' },
   { pagina: '/incapacidad-permanente/', id: 'laboral-incapacidad', nombre: 'Incapacidad permanente', cta: 'Revisar mi caso de incapacidad', problema: 'incapacidad' },
   { pagina: '/accidente-laboral/', id: 'laboral-accidentes', nombre: 'Accidentes laborales y responsabilidad empresarial', cta: 'Consultar mi accidente laboral', problema: 'accidente' },
 ];

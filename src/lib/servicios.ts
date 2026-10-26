@@ -357,6 +357,7 @@ export const servicios: Servicio[] = [
     area: 'laboral',
     nombre: 'Modificaciones de condiciones y conflictos laborales',
     resumen: 'Cambios de horario, turnos, funciones o salario, y extinción del contrato por incumplimientos graves de la empresa.',
+    articulos: ['baja-laboral-de-larga-duracion-como-dejar-tu-empresa-con-indemnizacion-y-derecho-a-paro'],
     problemaLaboral: 'condiciones',
     revision: 'revisado',
     revisamos: [
