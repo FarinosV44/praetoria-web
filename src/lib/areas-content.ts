@@ -152,13 +152,14 @@ export const areaContent: AreaContent[] = [
     slug: 'abogado-laboralista-valencia',
     id: 'laboral',
     group: 'particulares',
-    title: 'Abogados laboralistas en Valencia',
+    title: 'Abogado laboralista en Valencia: despidos, finiquitos e incapacidad',
     description:
-      'Despidos, salarios y finiquitos, incapacidad permanente, altas médicas y accidentes laborales. Revisamos tu caso y te explicamos tus opciones antes de actuar.',
-    h1: 'Abogados laboralistas en Valencia',
+      'Abogado laboralista en Valencia para trabajadores y empresas: despidos, salarios y finiquitos, incapacidad permanente, altas médicas y accidentes laborales. Revisamos tu caso antes de actuar.',
+    h1: 'Abogado laboralista en Valencia',
     lede: 'Despidos, cantidades pendientes, incapacidad, altas médicas y accidentes de trabajo. Revisamos tu caso con atención a las fechas, que en lo laboral son cortas, y te explicamos las opciones antes de dar ningún paso.',
     intro: [
       'Los asuntos laborales llegan casi siempre con prisa: una carta de despido, un finiquito que no cuadra, un alta médica con la que no estás de acuerdo o un accidente en el trabajo. En muchos de ellos los plazos para reclamar son de días, así que lo primero que hacemos es revisar las fechas.',
+      'Como abogado laboralista en Valencia, el despacho asesora a trabajadores y empresas en despidos, reclamaciones salariales, incapacidad permanente, altas médicas, accidentes laborales y cambios en las condiciones de trabajo: desde la primera consulta hasta el acto de conciliación y, si no hay acuerdo, el juicio.',
       'El área laboral del despacho tiene su propio teléfono y su propio WhatsApp, y la atiende una experta en Derecho Laboral. Te explicamos qué se puede hacer, el trabajo que supone y los honorarios antes de empezar, y no prometemos resultados ni indemnizaciones: dependen de los hechos y de las pruebas de cada caso.',
     ],
     servicesTitle: 'Qué hacemos en laboral',
