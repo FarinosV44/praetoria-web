@@ -41,6 +41,8 @@ Antes de elegir, recomendamos comprobar al menos estos aspectos:
 | Plataforma documental avanzada | Puede integrar DECA, carta de porte, eCMR, firma y API | Puede ofrecer más funciones de las necesarias | Grandes cargadores y operadores con integraciones |
 | Plataforma especializada como DECA Profesional | Alta rápida, uso sencillo y enfoque directo en el DECA | No pretende sustituir un TMS completo | Autónomos, transportistas, agencias y pymes |
 
+Si lo que quieres es comparar programas concretos y sus tarifas, tenemos una [comparativa de software DeCA con los precios de 12 programas](/software-deca-comparativa-programas-y-precios/).
+
 Las suites integrales pueden ser una buena elección cuando una empresa busca transformar toda su operativa. Sin embargo, **cambiar de TMS únicamente para cumplir con el DECA puede resultar desproporcionado**.
 
 Las plataformas documentales avanzadas son interesantes para organizaciones que necesitan firma electrónica, eCMR, API o integración con varios sistemas. Para una pequeña empresa o un transportista autónomo, esa capacidad puede traducirse en más configuración, formación y coste.

@@ -19,7 +19,7 @@ La implantación del Documento Electrónico de Control Administrativo (DeCA) obl
 
 Una de las dudas más habituales es sencilla: **¿cuánto cuesta un software DeCA y qué plan necesita realmente cada empresa?**
 
-En este artículo explicamos los precios actuales de [DeCA Profesional](https://decaprofesional.es/), qué incluye cada modalidad y qué debe valorar una empresa antes de contratar una plataforma.
+En este artículo explicamos los precios actuales de [DeCA Profesional](https://decaprofesional.es/), qué incluye cada modalidad y qué debe valorar una empresa antes de contratar una plataforma. Si quieres compararlo con otros programas, consulta nuestra [comparativa de software DeCA y sus precios](/software-deca-comparativa-programas-y-precios/).
 
 ## ¿Cuánto cuesta DeCA Profesional?
 
