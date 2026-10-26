@@ -19,6 +19,8 @@ Prestamos asistencia jurídica en **Valencia** en procedimientos frente a Hacien
 
 Trabajamos con una idea sencilla: **una respuesta jurídicamente bien planteada desde el principio puede evitar que un problema administrativo termine convirtiéndose en una deuda, sanción, recargo o procedimiento de apremio mucho más difícil de resolver.**
 
+> **Resumen rápido:** si recibes una carta, requerimiento, liquidación, sanción o reclamación de deuda de Hacienda o de la Seguridad Social, no la ignores: identifica qué procedimiento se ha iniciado, qué se te pide y qué plazo tienes. Una liquidación o sanción no es necesariamente correcta y, en muchos casos, puede recurrirse. Dejar pasar el plazo puede hacer firme la resolución, y esperar a un embargo suele reducir las opciones.
+
 ## Me ha llegado un requerimiento de Hacienda: ¿qué hago?
 
 Lo primero es no ignorarlo.
@@ -194,9 +196,7 @@ Si acabas de recibir una notificación, es el mejor momento para analizarla.
 
 ## Praetoria División Jurídica | Hacienda y Seguridad Social en Valencia
 
-Si tienes un **requerimiento de Hacienda, una inspección, una propuesta de liquidación, una sanción, una reclamación de deuda de Seguridad Social, una providencia de apremio o cualquier otra notificación de la AEAT, TGSS o INSS**, puedes enviárnosla a través del siguiente enlace:
-
-https://praetoriaabogados.es/abogado-hacienda-y-seguridad-social-en-valencia
+Si tienes un **requerimiento de Hacienda, una inspección, una propuesta de liquidación, una sanción, una reclamación de deuda de Seguridad Social, una providencia de apremio o cualquier otra notificación de la AEAT, TGSS o INSS**, puedes enviárnosla a través de nuestra página de [abogados de Hacienda y Seguridad Social en Valencia](/abogado-hacienda-y-seguridad-social-en-valencia/).
 
 **Praetoria División Jurídica**  
 Valencia

@@ -22,6 +22,8 @@ Y la respuesta, aunque no siempre guste, es esta:
 Pero no depende de forma arbitraria.  
 Depende de factores muy concretos que conviene entender antes de tomar una decisión.
 
+> **Resumen rápido:** el coste de un abogado en España depende de la complejidad del caso, la experiencia del abogado, la ciudad y la urgencia. Como orientación, una consulta inicial cuesta entre 50 € y 150 €, un procedimiento civil entre 600 € y 3.000 € y un asunto laboral entre 500 € y 2.500 €. Algunos son más baratos por menor experiencia, menos dedicación u honorarios que no lo incluyen todo.
+
 ---
 
 ## 💸 Cuánto cuesta un abogado en España (precios orientativos)

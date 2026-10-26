@@ -11,6 +11,8 @@ imagen: hacienda-ingresos
 
 Recibir un requerimiento de [Hacienda](/abogado-hacienda-y-seguridad-social-en-valencia/) pidiendo que justifiques ingresos o movimientos de tu cuenta bancaria genera, comprensiblemente, inquietud. No significa por sí solo que exista un problema: es un procedimiento habitual dentro de las comprobaciones que realiza la Agencia Tributaria. Lo importante es entender qué te están pidiendo exactamente y responder con orden, dentro del plazo que figure en tu propia notificación.
 
+> **Resumen rápido:** si Hacienda te pide justificar ingresos, no implica automáticamente una sanción: suele ser un requerimiento de información o una comprobación limitada. Lee la notificación completa, identifica el ejercicio, el impuesto y los movimientos señalados, y responde dentro del plazo indicado aportando documentos como contratos, facturas, extractos o escrituras. Una explicación verbal o genérica no suele bastar.
+
 ## ¿Por qué Hacienda pide justificar ingresos o movimientos bancarios?
 
 La AEAT cruza de forma habitual la información de bancos, plataformas de pago, clientes y otras administraciones con lo declarado en tu IRPF, IVA o Impuesto sobre Sociedades. Cuando detecta una diferencia —un ingreso que no aparece declarado, un movimiento recurrente sin explicación aparente, una transferencia elevada— puede abrir un requerimiento de información o una comprobación limitada para que aclares su origen.

@@ -18,6 +18,8 @@ Durante años, la normativa del llamado “escudo social” ha permitido que, si
 
 La novedad importante (y muy práctica para propietarios) es que el **Real Decreto-ley 2/2026** introduce una excepción clara: **la suspensión extraordinaria no se aplicará cuando el arrendador sea titular de dos o menos viviendas**. En esos casos, el procedimiento **debe continuar**.
 
+> **Resumen rápido:** con el Real Decreto-ley 2/2026, la suspensión extraordinaria del desahucio no se aplica cuando el arrendador es titular de dos o menos viviendas, ni cuando el inquilino no acredita vulnerabilidad o debe prevalecer la del arrendador: el juzgado acuerda continuar el procedimiento. La suspensión se mantiene para hogares vulnerables fuera de esas excepciones. Si tu desahucio estaba suspendido y eres pequeño propietario, en muchos casos puedes pedir su reanudación.
+
 ## 1) ¿Qué cambia exactamente?
 
 Hasta ahora, en muchos procedimientos, si el inquilino se declaraba vulnerable y se cumplían ciertos requisitos, el juzgado podía paralizar el lanzamiento.

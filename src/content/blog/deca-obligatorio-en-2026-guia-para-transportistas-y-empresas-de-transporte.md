@@ -13,9 +13,11 @@ imagen: logistica-camion-muelle
 
 Desde el 5 de octubre de 2026 ha cambiado la forma de documentar buena parte del transporte público de mercancías por carretera en España. Desde esa fecha, el documento de control administrativo debe generarse en formato electrónico: el denominado Documento Electrónico de Control Administrativo o [DECA](https://decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=blog_deca).
 
-En las últimas semanas han aparecido numerosas plataformas, aplicaciones y campañas comerciales alrededor de esta obligación. Algunas ofrecen el servicio gratuitamente; otras lo integran en programas de gestión; y otras recurren a expresiones como “plataforma homologada”, “firma digital obligatoria” o “tecnología blockchain”.
+Con la entrada en vigor de la obligación han aparecido numerosas plataformas, aplicaciones y campañas comerciales alrededor de esta obligación. Algunas ofrecen el servicio gratuitamente; otras lo integran en programas de gestión; y otras recurren a expresiones como “plataforma homologada”, “firma digital obligatoria” o “tecnología blockchain”.
 
 Sin embargo, para una empresa de transporte la cuestión importante no es quién presenta el mensaje más llamativo, sino si el sistema utilizado cumple realmente la normativa, permite trabajar con agilidad y ofrece una respuesta cuando se produce una incidencia, una inspección o un conflicto entre los participantes en el transporte.
+
+> **Resumen rápido:** el DECA es obligatorio desde el 5 de octubre de 2026 en el transporte público de mercancías por carretera sujeto al documento de control, incluido el cabotaje dentro de España. Afecta al cargador contractual y al transportista efectivo. Debe generarse antes del inicio del servicio como PDF nativo digital con código QR de descarga directa, y conservarse al menos un año. El conductor puede llevar una copia impresa con el QR.
 
 ## ¿Qué es el DECA?
 

@@ -73,6 +73,8 @@ const BOE_CE = 'https://www.boe.es/eli/es/c/1978/12/27/(1)/con';
 const BOE_LECRIM = 'https://www.boe.es/eli/es/rd/1882/09/14/(1)/con';
 const BOE_CP = 'https://www.boe.es/eli/es/lo/1995/11/23/10/con';
 const BOE_RGC = 'https://www.boe.es/eli/es/rd/2003/11/21/1428/con';
+const BOE_LOTT = 'https://www.boe.es/eli/es/l/1987/07/30/16/con';
+const BOE_LO1_2025 = 'https://www.boe.es/eli/es/lo/2025/01/02/1/con';
 const BOE_HABEAS = 'https://www.boe.es/eli/es/lo/1984/05/24/6/con';
 const MEDICOS: Documento = { label: 'Informes médicos: solo cuando te los pidamos, y por un canal seguro', sensible: true };
 
@@ -91,7 +93,7 @@ export const servicios: Servicio[] = [
     imagen: 'portes-impagados',
     pagina: '/reclamacion-portes-impagados/',
     incidencia: 'impago',
-    revision: 'pendiente',
+    revision: 'revisado',
     seo: {
       title: 'Reclamación de portes impagados',
       h1: 'Reclamación de portes impagados para transportistas y agencias',
@@ -101,27 +103,31 @@ export const servicios: Servicio[] = [
     destinatario: 'Transportistas, autónomos con vehículo propio, agencias y operadores logísticos con facturas de transporte pendientes de cobro.',
     revisamos: [
       'Quién te contrató y quién es el cargador real: cómo se ha estructurado la cadena de subcontratación.',
-      'Si cabe la acción directa: el transportista que realizó el porte puede reclamar la parte impagada al cargador principal y a quienes le preceden en la cadena.',
+      'Si cabe la acción directa: cuando quien contrató el porte no paga, el transportista que lo realizó efectivamente puede reclamar la parte impagada al cargador principal y a quienes le preceden en la cadena de subcontratación.',
       'La documentación que acredita el encargo, el transporte y la entrega.',
       'Qué se puede reclamar además de la factura, como los intereses de demora y los costes de cobro.',
       'Las fechas del caso, porque las acciones derivadas del transporte prescriben en plazos cortos.',
+      'La cuantía: en las controversias de transporte de hasta 15.000 euros se presume, salvo rechazo expreso previo, el sometimiento a la Junta Arbitral del Transporte (artículo 38 de la Ley de Ordenación de los Transportes Terrestres).',
     ],
     proceso: [
       'Revisamos la documentación y la cadena de contratación.',
       'Te explicamos a quién conviene reclamar, por qué vía, el trabajo necesario y los honorarios.',
-      'Enviamos un requerimiento formal de pago.',
-      'Si no hay pago, preparamos la reclamación judicial del importe, los intereses y, en su caso, las costas.',
+      'Enviamos un requerimiento de pago fehaciente con una propuesta de negociación, de forma que sirva también como el intento de solución extrajudicial (MASC) que la Ley Orgánica 1/2025 exige antes de acudir a los tribunales.',
+      'Si no hay acuerdo, presentamos la reclamación ante la Junta Arbitral del Transporte o el juzgado, según corresponda, por el importe, los intereses y, en su caso, las costas.',
     ],
     documentacion: ['Orden de carga o encargo del transporte', 'CMR o carta de porte, mejor firmada en destino', 'Albaranes u otra prueba de entrega', 'Factura o facturas pendientes', 'Comunicaciones: correos, mensajes y avisos de pago'],
     faqs: [
       { q: 'Mi cliente es una agencia que no me paga. ¿Puedo reclamar al cargador?', a: 'Puede ser posible. La disposición adicional sexta de la Ley 9/2013 reconoce al transportista que realizó el porte una acción directa por la parte impagada frente al cargador principal y los demás intervinientes anteriores en la cadena de subcontratación. Hay que estudiar cómo se contrató el transporte y qué documentación existe.' },
       { q: '¿Cuánto tiempo tengo para reclamar?', a: 'Con carácter general, las acciones derivadas del contrato de transporte terrestre prescriben en un año (artículo 79 de la Ley 15/2009), con supuestos especiales y causas de suspensión. El plazo de tu caso depende de sus fechas y documentos: conviene revisarlo cuanto antes.' },
       { q: '¿Qué puedo reclamar además de la factura?', a: 'Según el caso, los intereses de demora y los costes de cobro. Lo valoramos al revisar la documentación.' },
+      { q: '¿Tengo que intentar negociar antes de demandar?', a: 'En general, sí. Desde el 3 de abril de 2025, para presentar una demanda civil o mercantil, incluido el procedimiento monitorio según el criterio mayoritario de los juzgados, hay que acreditar un intento previo de solución extrajudicial (MASC). Preparamos el requerimiento de forma que sirva para ese requisito.' },
       { q: 'No tengo el CMR firmado. ¿Puedo reclamar igualmente?', a: 'La reclamación es más difícil, pero otras pruebas, como órdenes de carga, albaranes, correos o mensajes, pueden ayudar a acreditar el servicio y la entrega. Lo revisamos contigo.' },
     ],
     fuentes: [
       { label: 'Ley 15/2009, del contrato de transporte terrestre de mercancías (art. 79, prescripción)', href: `${BOE_LCTTM}#a79` },
       { label: 'Ley 9/2013, que modifica la Ley de Ordenación de los Transportes Terrestres (disposición adicional sexta, acción directa)', href: BOE_L9_2013 },
+      { label: 'Ley 16/1987, de Ordenación de los Transportes Terrestres (art. 38, Juntas Arbitrales del Transporte)', href: `${BOE_LOTT}#a38` },
+      { label: 'Ley Orgánica 1/2025, de medidas en materia de eficiencia del Servicio Público de Justicia (requisito de procedibilidad)', href: BOE_LO1_2025 },
     ],
   },
   {
@@ -130,17 +136,21 @@ export const servicios: Servicio[] = [
     nombre: 'Pérdida, avería y retraso de mercancías',
     resumen: 'Análisis de responsabilidades, limitaciones indemnizatorias, reservas, prueba del daño y reclamaciones derivadas del transporte.',
     incidencia: 'mercancia',
-    revision: 'pendiente',
+    revision: 'revisado',
     revisamos: [
-      'Si se hicieron reservas por escrito y a tiempo: en la entrega, o en 7 días naturales si el daño no era aparente; para el retraso, en 21 días desde la entrega.',
+      'Si se hicieron reservas por escrito y a tiempo: en la entrega, o en 7 días naturales si el daño no era aparente; para el retraso, en 21 días desde la entrega (no son necesarias si la mercancía se examinó conjuntamente).',
       'Quién responde en la cadena: cargador, agencia, transportista efectivo o aseguradora.',
       'El límite de indemnización aplicable y si hay motivos para superarlo.',
-      'Si el transporte fue internacional y se rige por el Convenio CMR.',
+      'Si el transporte fue internacional y se rige por el Convenio CMR, que tiene sus propios plazos de reserva, límites de indemnización y prescripción.',
+      'Los plazos: la acción prescribe, con carácter general, en un año desde la entrega, y antes de demandar hay que intentar una solución extrajudicial (MASC); hasta 15.000 euros puede corresponder a la Junta Arbitral del Transporte.',
     ],
     documentacion: ['CMR o carta de porte, con las reservas anotadas', 'Fotografías y, si existe, informe pericial', 'Orden de carga y factura de la mercancía', 'Póliza de seguro y comunicaciones con la aseguradora'],
     fuentes: [
       { label: 'Ley 15/2009, art. 57 (límite de indemnización)', href: `${BOE_LCTTM}#a57` },
       { label: 'Ley 15/2009, art. 60 (reservas por pérdidas, averías o retraso)', href: `${BOE_LCTTM}#a60` },
+      { label: 'Ley 15/2009, art. 79 (prescripción)', href: `${BOE_LCTTM}#a79` },
+      { label: 'Ley 16/1987, de Ordenación de los Transportes Terrestres (art. 38, Juntas Arbitrales del Transporte)', href: `${BOE_LOTT}#a38` },
+      { label: 'Ley Orgánica 1/2025, de medidas en materia de eficiencia del Servicio Público de Justicia (requisito de procedibilidad)', href: BOE_LO1_2025 },
     ],
   },
   { id: 'transporte-cmr-internacional', area: 'transporte', nombre: 'Convenio CMR y transporte internacional', resumen: 'Transporte internacional por carretera: documentación CMR, jurisdicción, plazos y responsabilidad del porteador.' },
@@ -149,7 +159,7 @@ export const servicios: Servicio[] = [
   { id: 'transporte-prevencion', area: 'transporte', nombre: 'Prevención de riesgos contractuales', resumen: 'Revisión de procedimientos, condiciones generales, órdenes de carga y comunicaciones para reducir problemas antes de que se produzcan.', articulos: ['como-proteger-legalmente-tu-empresa-de-transporte-contratos-condiciones-y-claves-para-evitar-problemas'] },
   { id: 'transporte-gerencia', area: 'transporte', nombre: 'Apoyo jurídico para gerencia', resumen: 'Asesoramiento puntual o continuado para tomar decisiones comerciales y operativas con mayor seguridad jurídica.' },
 
-  // Laboral (#7). Atiende Lucía López. Textos ampliados pendientes de revisión del despacho. -------------
+  // Laboral (#7). Atiende Lucía López. Textos ampliados revisados el 26/10/2026 contra la normativa vigente. ---
   {
     id: 'laboral-despidos',
     area: 'laboral',
@@ -160,7 +170,7 @@ export const servicios: Servicio[] = [
     imagen: 'despidos',
     pagina: '/impugnar-despido/',
     problemaLaboral: 'despido',
-    revision: 'pendiente',
+    revision: 'revisado',
     seo: {
       title: 'Impugnar un despido: revisión de la carta y el finiquito',
       h1: 'Impugnar un despido: revisamos tu carta y tu finiquito',
@@ -172,7 +182,7 @@ export const servicios: Servicio[] = [
       'La carta: el tipo de despido, los hechos o las causas que se alegan y la fecha de efectos.',
       'El finiquito y, si la hay, la indemnización ofrecida: si se han liquidado bien salario, vacaciones y pagas.',
       'Si el despido podría ser procedente, improcedente o nulo, y qué consecuencias tendría cada caso.',
-      'Las fechas: la acción contra el despido caduca a los veinte días hábiles, aunque la solicitud de conciliación interrumpe el plazo.',
+      'Las fechas: la acción contra el despido caduca a los veinte días hábiles. Presentar la solicitud de conciliación suspende ese plazo, pero no lo reinicia.',
     ],
     proceso: [
       'Revisamos la carta, el finiquito y tu situación.',
@@ -183,7 +193,7 @@ export const servicios: Servicio[] = [
     documentacion: ['Carta de despido o comunicación recibida', 'Contrato y, si las hay, prórrogas o modificaciones', 'Últimas nóminas', 'Finiquito o liquidación ofrecida, firmada o no', 'Informe de vida laboral'],
     faqs: [
       { q: '¿Tengo que firmar la carta de despido?', a: 'Firmar solo acredita que la has recibido. Puedes escribir «no conforme» junto a tu firma para dejar constancia de que no estás de acuerdo.' },
-      { q: '¿Cuánto tiempo tengo para reclamar?', a: 'La acción contra el despido caduca a los veinte días hábiles siguientes (artículo 59.3 del Estatuto de los Trabajadores), y la solicitud de conciliación interrumpe ese plazo. El cómputo depende de tu caso: consulta cuanto antes. La web no lo calcula de forma automática.' },
+      { q: '¿Cuánto tiempo tengo para reclamar?', a: 'La acción contra el despido caduca a los veinte días hábiles siguientes al despido (artículo 59.3 del Estatuto de los Trabajadores). La solicitud de conciliación suspende el plazo, que se reanuda después del acto de conciliación o, si no se celebra, a los quince días hábiles de presentarla (artículo 65.1 de la Ley Reguladora de la Jurisdicción Social). El cómputo depende de tu caso: consulta cuanto antes.' },
       { q: '¿Qué diferencia hay entre finiquito e indemnización?', a: 'El finiquito liquida lo que ya se te debía: salario de los últimos días, vacaciones no disfrutadas y partes proporcionales de pagas. La indemnización compensa la extinción del contrato y depende del tipo de despido. Son conceptos distintos.' },
       { q: 'Ya he firmado el finiquito. ¿Puedo reclamar?', a: 'Depende de lo que hayas firmado y de cómo lo hayas hecho. Firmar el finiquito no siempre impide reclamar, pero conviene revisarlo cuanto antes.' },
     ],
@@ -197,11 +207,11 @@ export const servicios: Servicio[] = [
     area: 'laboral',
     nombre: 'Salarios y finiquitos',
     resumen: 'Reclamación de salarios, horas, pagas o finiquitos que no se han pagado o se han calculado mal.',
-    cta: 'Reclamar lo que me deben',
+    cta: 'Revisar lo que me deben',
     imagen: 'salarios-finiquito',
     pagina: '/reclamar-salarios-y-finiquito/',
     problemaLaboral: 'cantidades',
-    revision: 'pendiente',
+    revision: 'revisado',
     seo: {
       title: 'Reclamar salarios atrasados o un finiquito mal calculado',
       h1: 'Reclamar salarios, horas o un finiquito mal calculado',
@@ -240,7 +250,7 @@ export const servicios: Servicio[] = [
     cta: 'Revisar mi caso de incapacidad',
     pagina: '/incapacidad-permanente/',
     problemaLaboral: 'incapacidad',
-    revision: 'pendiente',
+    revision: 'revisado',
     alcance: 'Las deudas, cotizaciones, apremios y embargos de la Seguridad Social se tratan en Hacienda y Seguridad Social.',
     seo: {
       title: 'Abogado de incapacidad permanente',
@@ -253,21 +263,24 @@ export const servicios: Servicio[] = [
       'En qué fase estás: baja, solicitud, resolución del INSS o reclamación previa.',
       'Qué grado podría corresponder (parcial, total, absoluta o gran incapacidad) según tu profesión habitual y tus limitaciones.',
       'Si la resolución está motivada y qué plazo de reclamación indica.',
-      'Cómo afecta a tu contrato y a tu relación con la empresa.',
+      'Cómo afecta a tu contrato: desde la Ley 2/2025, la incapacidad permanente ya no extingue el contrato automáticamente, y tienes diez días naturales desde la notificación para comunicar por escrito si quieres mantener la relación laboral.',
     ],
     proceso: [
       'Revisamos la resolución o tu situación y la documentación disponible.',
       'Te explicamos las opciones, el trabajo y los honorarios.',
-      'Preparamos la solicitud o la reclamación previa ante la Seguridad Social.',
+      'Preparamos la solicitud o la reclamación previa ante el INSS.',
       'Si se desestima, presentamos la demanda ante el juzgado de lo social.',
     ],
-    documentacion: ['Resolución del INSS o de la mutua, si la hay', 'Informe de vida laboral', 'Descripción de tu puesto y de tus tareas habituales', MEDICOS],
+    documentacion: ['Resolución del INSS y, si lo tienes, dictamen-propuesta del Equipo de Valoración de Incapacidades (EVI)', 'Informe de vida laboral', 'Descripción de tu puesto y de tus tareas habituales', MEDICOS],
     faqs: [
       { q: '¿Qué grados de incapacidad permanente existen?', a: 'Parcial, total, absoluta y gran incapacidad (artículo 194 de la Ley General de la Seguridad Social). El grado depende de cómo afectan tus limitaciones a tu profesión habitual o a cualquier trabajo.' },
-      { q: 'Me han denegado la incapacidad. ¿Puedo reclamar?', a: 'Normalmente cabe una reclamación previa y, después, la demanda. El plazo figura en la propia resolución: no esperes para revisarla.' },
+      { q: 'Me han denegado la incapacidad. ¿Puedo reclamar?', a: 'Cabe reclamación previa ante el INSS, con carácter general en el plazo de treinta días desde la notificación (artículo 71 de la Ley Reguladora de la Jurisdicción Social), y después demanda. Comprueba el plazo que indica tu resolución y no esperes para revisarla.' },
       { q: '¿Tengo que enviar mis informes médicos por el formulario?', a: 'No. No los incluyas en el formulario ni en el mensaje. Si hacen falta, te los pediremos por un canal seguro.' },
     ],
-    fuentes: [{ label: 'Ley General de la Seguridad Social, art. 194 (grados de incapacidad permanente)', href: `${BOE_LGSS}#a194` }],
+    fuentes: [
+      { label: 'Ley General de la Seguridad Social, art. 194 (grados de incapacidad permanente)', href: `${BOE_LGSS}#a194` },
+      { label: 'Estatuto de los Trabajadores, art. 49.1.n) (extinción por incapacidad permanente)', href: `${BOE_ET}#a49` },
+    ],
   },
   {
     id: 'laboral-altas',
@@ -275,12 +288,12 @@ export const servicios: Servicio[] = [
     nombre: 'Altas médicas y prestaciones',
     resumen: 'Disconformidad con un alta médica, prestaciones por incapacidad temporal y su efecto sobre el contrato.',
     problemaLaboral: 'incapacidad',
-    revision: 'pendiente',
+    revision: 'revisado',
     alcance: 'La incapacidad permanente tiene su propio servicio. Las deudas y cotizaciones de la Seguridad Social se tratan en Hacienda y Seguridad Social.',
     revisamos: [
       'La fecha del alta y quién la ha emitido: servicio público de salud, INSS o mutua.',
       'Si cabe manifestar disconformidad o reclamar, y en qué plazo, que suele ser muy breve.',
-      'Qué ocurre con tu puesto y tu salario mientras se resuelve.',
+      'Qué ocurre con tu puesto y tu salario mientras se resuelve: salvo en los supuestos en que la disconformidad prorroga la baja, el alta obliga a reincorporarte al trabajo aunque la impugnes.',
       'Las prestaciones afectadas y si se han calculado bien.',
     ],
     documentacion: ['Parte o resolución de alta', 'Comunicaciones de la mutua o del INSS', 'Nóminas recientes', MEDICOS],
@@ -293,7 +306,7 @@ export const servicios: Servicio[] = [
     cta: 'Consultar mi accidente laboral',
     pagina: '/accidente-laboral/',
     problemaLaboral: 'accidente',
-    revision: 'pendiente',
+    revision: 'revisado',
     seo: {
       title: 'Abogado de accidentes laborales',
       h1: 'Accidente laboral: prestaciones, recargo e indemnización',
@@ -313,9 +326,9 @@ export const servicios: Servicio[] = [
       'Iniciamos las reclamaciones ante la Seguridad Social, la mutua o la empresa.',
       'Si es necesario, acudimos al juzgado de lo social.',
     ],
-    documentacion: ['Parte de accidente de trabajo, si se emitió', 'Datos de testigos y fotografías del lugar, si las hay', 'Resoluciones de la mutua o del INSS', 'Nóminas anteriores al accidente', MEDICOS],
+    documentacion: ['Parte de accidente de trabajo, si se emitió', 'Datos de testigos y fotografías del lugar, si los hay', 'Resoluciones de la mutua o del INSS', 'Nóminas anteriores al accidente', MEDICOS],
     faqs: [
-      { q: '¿Qué es el recargo de prestaciones?', a: 'Si el accidente se debe a la falta de medidas de seguridad, las prestaciones se incrementan entre un 30 % y un 50 % a cargo de la empresa (artículo 164 de la Ley General de la Seguridad Social).' },
+      { q: '¿Qué es el recargo de prestaciones?', a: 'Si el accidente de trabajo o la enfermedad profesional se debe a la falta de medidas de seguridad, las prestaciones económicas se incrementan entre un 30 % y un 50 %, según la gravedad de la falta, a cargo de la empresa (artículo 164 de la Ley General de la Seguridad Social).' },
       { q: '¿Un accidente de camino al trabajo es accidente laboral?', a: 'El accidente al ir o volver del trabajo («in itinere») puede tener la consideración de accidente de trabajo. Depende del trayecto y de las circunstancias.' },
       { q: 'Además de las prestaciones, ¿puedo pedir una indemnización?', a: 'En algunos casos sí, por los daños y perjuicios que las prestaciones no cubren. Hay que estudiar la responsabilidad de la empresa y los daños sufridos.' },
     ],
@@ -330,11 +343,12 @@ export const servicios: Servicio[] = [
     nombre: 'Acoso y vulneración de derechos',
     resumen: 'Acoso laboral, discriminación y vulneración de derechos fundamentales en el trabajo: medidas, reclamación y, en su caso, extinción del contrato.',
     problemaLaboral: 'acoso',
-    revision: 'pendiente',
+    revision: 'revisado',
     revisamos: [
       'Los hechos, desde cuándo ocurren y qué pruebas existen.',
       'Si la empresa conocía la situación y qué medidas tomó o debió tomar.',
       'Las vías posibles: denuncia interna, Inspección de Trabajo, demanda de tutela de derechos fundamentales o extinción del contrato.',
+      'Antes de dejar de ir al trabajo: salvo que el juzgado acuerde medidas cautelares, en la extinción del contrato por incumplimiento de la empresa normalmente hay que seguir trabajando mientras se tramita.',
     ],
     documentacion: ['Comunicaciones, correos o mensajes relacionados', 'Datos de posibles testigos', 'Denuncias internas y respuestas de la empresa'],
   },
@@ -342,14 +356,14 @@ export const servicios: Servicio[] = [
     id: 'laboral-condiciones',
     area: 'laboral',
     nombre: 'Modificaciones de condiciones y conflictos laborales',
-    resumen: 'Cambios de horario, funciones, salario o centro de trabajo, y extinción del contrato por incumplimientos graves de la empresa.',
+    resumen: 'Cambios de horario, turnos, funciones o salario, y extinción del contrato por incumplimientos graves de la empresa.',
     articulos: ['baja-laboral-de-larga-duracion-como-dejar-tu-empresa-con-indemnizacion-y-derecho-a-paro'],
     problemaLaboral: 'condiciones',
-    revision: 'pendiente',
+    revision: 'revisado',
     revisamos: [
       'Si el cambio es una modificación sustancial de condiciones y si se ha seguido el procedimiento.',
-      'Las opciones: aceptar, impugnar o, en algunos casos, extinguir el contrato con indemnización.',
-      'Las fechas: la impugnación de una modificación sustancial también caduca a los veinte días hábiles.',
+      'Las opciones: aceptar, impugnar o, si el cambio te perjudica y afecta a jornada, horario, turnos, salario o funciones, extinguir el contrato con una indemnización de veinte días por año, con un máximo de nueve meses (artículo 41.3 del Estatuto de los Trabajadores). Si la empresa no ha seguido el procedimiento y el cambio menoscaba tu dignidad, puede caber la extinción del artículo 50, con la indemnización del despido improcedente.',
+      'Las fechas: la impugnación de una modificación sustancial caduca a los veinte días hábiles desde su notificación. No exige conciliación previa, por lo que la demanda debe presentarse dentro de ese plazo.',
     ],
     documentacion: ['Comunicación escrita del cambio', 'Contrato y nóminas', 'Comunicaciones con la empresa'],
     fuentes: [
@@ -370,12 +384,13 @@ export const servicios: Servicio[] = [
     nombre: 'Reclamaciones entre empresas',
     resumen: 'Facturas impagadas e incumplimientos de contrato con clientes, proveedores o socios comerciales.',
     alcance: 'Los portes y servicios de transporte impagados se tratan en Transporte y logística, con su propia vía de reclamación.',
-    revision: 'pendiente',
+    revision: 'revisado',
     preguntaMinima: { label: '¿Quién reclama?', opciones: ['Mi empresa reclama a otra', 'Reclaman a mi empresa'] },
     revisamos: [
       'El contrato, los pedidos, las facturas y las comunicaciones que acreditan la deuda o el incumplimiento.',
       'Si la reclamación es de transporte: en ese caso se trata en su área, porque tiene reglas propias.',
-      'La vía más adecuada: requerimiento, negociación, procedimiento monitorio o demanda.',
+      'La vía más adecuada: negociación o requerimiento fehaciente, que sirve como el intento de solución extrajudicial (MASC) exigido antes de demandar, y después procedimiento monitorio, juicio cambiario o demanda.',
+      'Si reclaman a tu empresa: si la deuda existe, si ha prescrito y cómo responder al requerimiento o a la demanda.',
     ],
     documentacion: ['Contrato o condiciones pactadas', 'Pedidos, albaranes y facturas', 'Comunicaciones con la otra empresa'],
   },
@@ -415,8 +430,8 @@ export const servicios: Servicio[] = [
 
   // Penal (#32) -------------------------------------------------------------------------------
   // Texto redactado a partir de la Constitución, la LECrim, el Código Penal y el Reglamento General de Circulación
-  // (versiones consolidadas del BOE consultadas el 24/10/2026). Pendiente de revisión jurídica del despacho:
-  // mientras lo esté, las páginas llevan noindex, quedan fuera del sitemap y la previsualización lo avisa.
+  // (versiones consolidadas del BOE consultadas el 24/10/2026). Revisado el 26/10/2026, incluida la LO 1/2026
+  // de multirreincidencia: indexable y en el sitemap.
   {
     id: 'penal-detenido',
     area: 'penal',
@@ -424,8 +439,8 @@ export const servicios: Servicio[] = [
     resumen: 'Detención propia o de un familiar: derechos, abogado de confianza, declaración y puesta a disposición judicial.',
     cta: 'Consultar una detención',
     pagina: '/asistencia-al-detenido/',
-    revision: 'pendiente',
-    indexable: false,
+    revision: 'revisado',
+    indexable: true,
     seo: {
       title: 'Abogado para un detenido en Valencia: derechos y primeros pasos',
       h1: 'Asistencia al detenido: derechos y primeros pasos',
@@ -446,8 +461,8 @@ export const servicios: Servicio[] = [
       'Preparamos la comparecencia ante el juzgado y los pasos siguientes.',
     ],
     urgencia: [
-      'La detención no puede durar más del tiempo estrictamente necesario ni, como máximo, setenta y dos horas.',
-      'La persona detenida puede designar un abogado de confianza; si no lo hace, se le asigna uno de oficio.',
+      'La detención no puede durar más del tiempo estrictamente necesario ni, como máximo, setenta y dos horas. Hay reglas especiales para menores de edad y para algunos delitos graves.',
+      'La persona detenida puede designar un abogado de confianza; si no lo hace, se le asigna uno de oficio, salvo en los supuestos excepcionales de incomunicación.',
       'Lo que se declare en dependencias policiales puede condicionar el resto del procedimiento.',
     ],
     documentacion: ['Nombre completo de la persona detenida', 'Lugar de la detención y dependencia policial, si se conoce', 'Hora aproximada de la detención', 'Cualquier citación o documento que se haya entregado'],
@@ -455,7 +470,7 @@ export const servicios: Servicio[] = [
       { q: '¿Qué derechos tiene una persona detenida?', a: 'Entre otros, a guardar silencio o declarar solo ante el juez, a no declarar contra sí misma, a designar abogado y ser asistida sin demora injustificada, a acceder a los elementos esenciales para impugnar la detención, a comunicar la detención a un familiar, a un intérprete gratuito si no entiende el idioma y a ser reconocida por un médico (artículo 520 de la Ley de Enjuiciamiento Criminal).' },
       { q: '¿Cuánto tiempo puede durar la detención?', a: 'El tiempo estrictamente necesario para las averiguaciones y, como máximo, setenta y dos horas; después, la persona debe ser puesta en libertad o a disposición judicial (artículo 17.2 de la Constitución).' },
       { q: '¿Puede la familia elegir el abogado?', a: 'La familia puede contactar con un abogado y facilitarle los datos, pero la designación corresponde a la persona detenida. Te explicamos cómo hacerlo en tu caso.' },
-      { q: '¿Qué es el habeas corpus?', a: 'Un procedimiento para que un juez revise de inmediato una detención que se considera ilegal. Pueden pedirlo la persona privada de libertad, su familia cercana, su abogado, el Ministerio Fiscal o el Defensor del Pueblo, y el juez resuelve en veinticuatro horas desde que lo admite (Ley Orgánica 6/1984).' },
+      { q: '¿Qué es el habeas corpus?', a: 'Un procedimiento para que un juez revise de inmediato una detención que se considera ilegal. Pueden pedirlo la persona privada de libertad, su familia cercana, su abogado, el Ministerio Fiscal o el Defensor del Pueblo, y, desde que acuerda iniciarlo, el juez debe resolver en un plazo de veinticuatro horas (artículos 6 y 7 de la Ley Orgánica 6/1984).' },
     ],
     relacionados: ['penal-citacion', 'penal-seguridad-vial'],
     fuentes: [
@@ -471,8 +486,8 @@ export const servicios: Servicio[] = [
     resumen: 'Citación como investigado, juicio rápido ante el juzgado de guardia o juicio por delito leve.',
     cta: 'Revisar mi citación',
     pagina: '/citacion-juzgado-juicio-rapido/',
-    revision: 'pendiente',
-    indexable: false,
+    revision: 'revisado',
+    indexable: true,
     seo: {
       title: 'Citación del juzgado o juicio rápido: qué hacer y cómo preparar la defensa',
       h1: 'Me han citado al juzgado: citaciones y juicios rápidos',
@@ -483,7 +498,7 @@ export const servicios: Servicio[] = [
     revisamos: [
       'Qué tipo de citación es, quién la emite, en qué calidad se te cita y para qué fecha.',
       'Si se trata de un juicio rápido, de diligencias previas o de un juicio por delito leve, porque cada uno tiene reglas distintas.',
-      'Si la conformidad es posible y conveniente, o si conviene defender otra versión de los hechos.',
+      'Si la conformidad es posible y conveniente, o si conviene ir a juicio y defender tu posición.',
       'Qué pruebas, testigos o documentos conviene llevar.',
     ],
     proceso: [
@@ -500,9 +515,9 @@ export const servicios: Servicio[] = [
     documentacion: ['La citación recibida (cédula o diligencia)', 'Atestado o denuncia, si te lo han entregado', 'Datos de testigos y pruebas que tengas', 'Resoluciones anteriores del mismo asunto'],
     faqs: [
       { q: '¿Qué es un juicio rápido?', a: 'Un procedimiento para delitos castigados con prisión de hasta cinco años, u otras penas de hasta diez años, que empieza con un atestado policial y la detención o citación ante el juzgado de guardia, en los casos que prevé el artículo 795 de la Ley de Enjuiciamiento Criminal.' },
-      { q: '¿Qué supone conformarse en el juzgado de guardia?', a: 'Si se cumplen los requisitos del artículo 801 de la Ley de Enjuiciamiento Criminal, se dicta sentencia de conformidad con la pena solicitada reducida en un tercio. Es una decisión con consecuencias: conviene tomarla con un abogado y conociendo las actuaciones.' },
+      { q: '¿Qué supone conformarse en el juzgado de guardia?', a: 'Si se cumplen los requisitos del artículo 801 de la Ley de Enjuiciamiento Criminal (entre otros, que el delito tenga una pena de hasta tres años de prisión y que la pena pedida no supere ese límite), se dicta sentencia de conformidad con la pena solicitada reducida en un tercio. Es una decisión con consecuencias: conviene tomarla con un abogado y conociendo las actuaciones.' },
       { q: '¿Necesito abogado para un juicio por delito leve?', a: 'No siempre es obligatorio: la citación informa de que puedes acudir asistido de abogado si lo deseas. Si el delito leve lleva pena de multa con un máximo de seis meses o más, se aplican las reglas generales de defensa (artículo 967 de la Ley de Enjuiciamiento Criminal).' },
-      { q: '¿Y si me citan como investigado?', a: 'Ser investigado no significa que se te acuse: es la condición que permite ejercer el derecho de defensa desde el principio. Tienes derecho a no declarar y a hacerlo asistido de abogado.' },
+      { q: '¿Y si me citan como investigado?', a: 'Ser investigado no significa que se te acuse: es la condición que permite ejercer el derecho de defensa desde el principio. Tienes derecho a no declarar y, si declaras ante el juez, lo harás siempre asistido de abogado.' },
     ],
     relacionados: ['penal-detenido', 'penal-seguridad-vial', 'penal-lesiones'],
     fuentes: [
@@ -519,8 +534,8 @@ export const servicios: Servicio[] = [
     cta: 'Consultar mi caso de tráfico',
     imagen: 'penal-seguridad-vial',
     pagina: '/alcoholemia-y-seguridad-vial/',
-    revision: 'pendiente',
-    indexable: false,
+    revision: 'revisado',
+    indexable: true,
     seo: {
       title: 'Abogado de alcoholemia y delitos de tráfico en Valencia',
       h1: 'Alcoholemia y delitos contra la seguridad vial',
@@ -532,7 +547,7 @@ export const servicios: Servicio[] = [
       'Si los hechos son una infracción administrativa o un delito: no todo positivo es delito.',
       'Cómo se hicieron las pruebas: el etilómetro, las dos mediciones y la información que se te dio.',
       'Las consecuencias para tu permiso de conducir y, si conduces por trabajo, para tu actividad.',
-      'Si conviene la conformidad en el juicio rápido o defender otra versión.',
+      'Si conviene la conformidad en el juicio rápido o ir a juicio y defender tu posición.',
     ],
     proceso: [
       'Revisamos la citación, el atestado y los tiques de las pruebas.',
@@ -541,14 +556,15 @@ export const servicios: Servicio[] = [
       'Te orientamos sobre el permiso y los pasos posteriores.',
     ],
     urgencia: [
-      'La mayoría de estos casos se tramitan como juicio rápido, con citación ante el juzgado de guardia en pocos días.',
-      'La pena incluye siempre la privación del derecho a conducir, de uno a cuatro años en los supuestos del artículo 379.',
+      'Con frecuencia, estos casos se tramitan como juicio rápido (artículo 795 de la Ley de Enjuiciamiento Criminal), con citación ante el juzgado de guardia en pocos días.',
+      'La pena incluye siempre la privación del derecho a conducir, de más de uno y hasta cuatro años en los supuestos del artículo 379.',
+      'Si la privación supera dos años, el permiso pierde su vigencia y hay que obtenerlo de nuevo (artículo 47 del Código Penal).',
     ],
     documentacion: ['Citación judicial', 'Copia del atestado o de las diligencias que te entregaron', 'Tiques del etilómetro', 'Permiso de conducir', 'Si conduces por trabajo, contrato o actividad'],
     faqs: [
       { q: '¿Cuándo es delito una alcoholemia?', a: 'Es delito conducir bajo la influencia del alcohol o las drogas y, en todo caso, con una tasa de alcohol en aire espirado superior a 0,60 mg/l o en sangre superior a 1,2 g/l (artículo 379.2 del Código Penal). Por debajo de esa tasa puede ser también delito si hay influencia en la conducción, o infracción administrativa.' },
       { q: '¿Cuáles son los límites administrativos?', a: 'Con carácter general, 0,25 mg/l en aire espirado (0,5 g/l en sangre). Para conductores profesionales de determinados vehículos y durante los dos primeros años de permiso, 0,15 mg/l (0,3 g/l en sangre), según el artículo 20 del Reglamento General de Circulación.' },
-      { q: '¿Qué pasa si me niego a hacer la prueba?', a: 'Negarse a las pruebas legalmente establecidas cuando lo requiere un agente es un delito propio (artículo 383 del Código Penal), con pena de prisión de seis meses a un año y privación del derecho a conducir de uno a cuatro años.' },
+      { q: '¿Qué pasa si me niego a hacer la prueba?', a: 'Negarse a las pruebas legalmente establecidas cuando lo requiere un agente es un delito propio (artículo 383 del Código Penal), con pena de prisión de seis meses a un año y privación del derecho a conducir de más de uno y hasta cuatro años.' },
       { q: '¿Y el exceso de velocidad?', a: 'Es delito superar en más de 60 km/h la velocidad permitida en vía urbana, o en más de 80 km/h en vía interurbana (artículo 379.1 del Código Penal).' },
     ],
     relacionados: ['penal-citacion', 'penal-lesiones'],
@@ -566,8 +582,8 @@ export const servicios: Servicio[] = [
     cta: 'Consultar unas lesiones',
     imagen: 'penal-lesiones',
     pagina: '/lesiones-y-agresiones/',
-    revision: 'pendiente',
-    indexable: false,
+    revision: 'revisado',
+    indexable: true,
     seo: {
       title: 'Abogado de lesiones y agresiones en Valencia: denuncia y defensa',
       h1: 'Lesiones y agresiones: denuncia y defensa',
@@ -590,12 +606,12 @@ export const servicios: Servicio[] = [
     urgencia: [
       'Si has sufrido una agresión, acude primero a un centro sanitario: el parte médico es una prueba importante.',
       'Algunas lesiones leves solo se persiguen mediante denuncia de la persona agraviada.',
-      'Las imágenes de cámaras se conservan poco tiempo: si existen, conviene identificarlas cuanto antes.',
+      'Las imágenes de cámaras se conservan poco tiempo (por lo general, como máximo un mes; artículo 22.3 de la Ley Orgánica 3/2018): si existen, conviene identificarlas cuanto antes.',
     ],
     documentacion: ['Partes médicos y de urgencias', { label: 'Informes médicos posteriores (no los envíes por el formulario)', sensible: true }, 'Denuncia o citación', 'Fotografías, mensajes o vídeos', 'Datos de testigos'],
     faqs: [
       { q: '¿Cuándo son delito unas lesiones?', a: 'Cuando la lesión necesita objetivamente, además de una primera asistencia, tratamiento médico o quirúrgico; la simple vigilancia o seguimiento no se considera tratamiento (artículo 147.1 del Código Penal). Las de menor entidad son delito leve, y también lo es golpear o maltratar de obra sin causar lesión (artículo 147.2 y 3).' },
-      { q: '¿Necesito denunciar para que se investigue?', a: 'En los delitos leves de lesiones del artículo 147.2 y 3, sí: solo se persiguen mediante denuncia de la persona agraviada o de su representante legal (artículo 147.4 del Código Penal).' },
+      { q: '¿Necesito denunciar para que se investigue?', a: 'En los delitos leves de lesiones del artículo 147.2 y 3, sí: solo se persiguen mediante denuncia de la persona agraviada o de su representante legal (artículo 147.4 del Código Penal). Si los hechos se producen en la pareja o en el ámbito familiar, se aplican otros preceptos (artículo 153 del Código Penal) y no hace falta la denuncia de la víctima para investigarlos.' },
       { q: '¿Puedo reclamar una indemnización?', a: 'La responsabilidad civil derivada del delito se puede reclamar en el propio procedimiento penal. Depende de las lesiones, del tiempo de curación y de las secuelas, y conviene valorarla con los informes médicos.' },
       { q: '¿Y si la agresión es de mi pareja o expareja?', a: 'La violencia en la pareja o en la familia tiene un tratamiento específico. Si estás en peligro, llama al 112. Para orientación especializada, el 016 atiende de forma gratuita a víctimas de violencia contra las mujeres.' },
     ],
@@ -610,8 +626,8 @@ export const servicios: Servicio[] = [
     cta: 'Consultar un hurto o un robo',
     imagen: 'penal-hurtos',
     pagina: '/hurto-y-robo/',
-    revision: 'pendiente',
-    indexable: false,
+    revision: 'revisado',
+    indexable: true,
     seo: {
       title: 'Abogado de hurto y robo en Valencia: diferencias y defensa',
       h1: 'Hurto y robo: diferencias, penas y defensa',
@@ -621,7 +637,7 @@ export const servicios: Servicio[] = [
     destinatario: 'Personas investigadas por hurto o robo, y personas o comercios perjudicados.',
     revisamos: [
       'Si los hechos son hurto, robo con fuerza o robo con violencia o intimidación: las penas son muy distintas.',
-      'El valor de lo sustraído, que separa el delito leve del delito de hurto.',
+      'El valor de lo sustraído, que separa el delito leve de hurto del delito menos grave.',
       'Si hay antecedentes que puedan agravar la pena.',
       'Las pruebas: grabaciones, testigos, el atestado y la recuperación de los objetos.',
     ],
@@ -637,8 +653,8 @@ export const servicios: Servicio[] = [
     ],
     documentacion: ['Citación o atestado', 'Denuncia presentada, si eres la persona perjudicada', 'Facturas o justificantes del valor de lo sustraído', 'Grabaciones o datos de testigos'],
     faqs: [
-      { q: '¿Qué diferencia hay entre hurto y robo?', a: 'En el hurto se toma una cosa ajena sin la voluntad de su dueño y sin fuerza ni violencia. En el robo se emplea fuerza en las cosas para acceder al lugar donde están, o violencia o intimidación sobre las personas (artículos 234 y 237 del Código Penal).' },
-      { q: '¿Qué importancia tienen los 400 euros?', a: 'Si lo sustraído supera 400 euros, el hurto se castiga con prisión de seis a dieciocho meses; si no los supera, con multa de uno a tres meses, salvo que concurran las circunstancias del artículo 235. Hay una regla especial cuando existen tres condenas anteriores por delitos de este tipo (artículo 234 del Código Penal).' },
+      { q: '¿Qué diferencia hay entre hurto y robo?', a: 'En el hurto se toma, con ánimo de lucro, una cosa mueble ajena sin la voluntad de su dueño y sin fuerza ni violencia. En el robo se emplea fuerza en las cosas para acceder al lugar donde están, o violencia o intimidación sobre las personas (artículos 234 y 237 del Código Penal). El robo no tiene umbral de 400 euros: es delito cualquiera que sea el valor.' },
+      { q: '¿Qué importancia tienen los 400 euros?', a: 'Si lo sustraído supera 400 euros, el hurto se castiga con prisión de seis a dieciocho meses; si no los supera, con multa de uno a tres meses, salvo que concurra alguna circunstancia del artículo 235 (por ejemplo, desde abril de 2026, que lo sustraído sea un teléfono móvil u otro dispositivo con datos personales). Además, si la persona ya ha sido condenada por al menos tres delitos de la misma naturaleza, uno de ellos leve, se aplica la pena de prisión aunque no se superen los 400 euros (artículo 234.2 del Código Penal, reformado por la Ley Orgánica 1/2026).' },
       { q: '¿Qué penas tiene el robo?', a: 'El robo con fuerza en las cosas, de uno a tres años de prisión (artículo 240); el robo con violencia o intimidación, de dos a cinco años, y más si se comete en casa habitada (artículo 242 del Código Penal).' },
     ],
     relacionados: ['penal-citacion', 'penal-detenido'],
@@ -647,6 +663,8 @@ export const servicios: Servicio[] = [
       { label: 'Código Penal, art. 237 (robo)', href: `${BOE_CP}#a237` },
       { label: 'Código Penal, art. 240 (robo con fuerza en las cosas)', href: `${BOE_CP}#a240` },
       { label: 'Código Penal, art. 242 (robo con violencia o intimidación)', href: `${BOE_CP}#a242` },
+      { label: 'Código Penal, art. 235 (hurto agravado)', href: `${BOE_CP}#a235` },
+      { label: 'Ley Orgánica 1/2026, de 8 de abril, de multirreincidencia', href: 'https://www.boe.es/boe/dias/2026/04/09/pdfs/BOE-A-2026-7966.pdf' },
     ],
   },
   {
@@ -657,8 +675,8 @@ export const servicios: Servicio[] = [
     cta: 'Consultar una estafa',
     imagen: 'penal-estafas',
     pagina: '/estafas/',
-    revision: 'pendiente',
-    indexable: false,
+    revision: 'revisado',
+    indexable: true,
     seo: {
       title: 'Abogado de estafas en Valencia: denunciar un fraude o defenderte',
       h1: 'Estafas y fraudes: denunciar o defenderte',
@@ -685,7 +703,7 @@ export const servicios: Servicio[] = [
     ],
     documentacion: ['Justificantes de pagos o transferencias', 'Mensajes, correos, anuncios o capturas', 'Denuncia presentada, si existe', 'Comunicaciones con el banco o la plataforma', 'Citación, si te investigan'],
     faqs: [
-      { q: '¿Qué es exactamente una estafa?', a: 'Utilizar un engaño bastante para producir error en otra persona e inducirla a realizar un acto de disposición en perjuicio propio o ajeno, con ánimo de lucro (artículo 248 del Código Penal). Se castiga con prisión de seis meses a tres años; si la cuantía no supera 400 euros, con multa de uno a tres meses, salvo que concurran las circunstancias del artículo 250.' },
+      { q: '¿Qué es exactamente una estafa?', a: 'Utilizar un engaño bastante para producir error en otra persona e inducirla a realizar un acto de disposición en perjuicio propio o ajeno, con ánimo de lucro (artículo 248 del Código Penal). Se castiga con prisión de seis meses a tres años; si la cuantía no supera 400 euros, con multa de uno a tres meses, salvo que concurran las circunstancias del artículo 250. Desde abril de 2026, si la persona ya ha sido condenada por al menos tres estafas, una de ellas leve, se aplica la pena de prisión aunque no se superen los 400 euros (Ley Orgánica 1/2026).' },
       { q: '¿Y los fraudes por internet o con tarjeta?', a: 'También son estafa la manipulación informática para conseguir una transferencia no consentida y el uso de tarjetas o de sus datos para operar en perjuicio de su titular (artículo 249 del Código Penal).' },
       { q: '¿Todo impago es una estafa?', a: 'No. Que alguien no pague o no cumpla un contrato no es, por sí solo, una estafa: hace falta un engaño previo y bastante. Muchos casos se resuelven mejor por la vía civil, y te lo diremos si es así.' },
     ],
@@ -693,6 +711,7 @@ export const servicios: Servicio[] = [
     fuentes: [
       { label: 'Código Penal, art. 248 (estafa)', href: `${BOE_CP}#a248` },
       { label: 'Código Penal, art. 249 (otras modalidades de estafa)', href: `${BOE_CP}#a249` },
+      { label: 'Ley Orgánica 1/2026, de 8 de abril, de multirreincidencia', href: 'https://www.boe.es/boe/dias/2026/04/09/pdfs/BOE-A-2026-7966.pdf' },
     ],
   },
   {
@@ -701,14 +720,14 @@ export const servicios: Servicio[] = [
     nombre: 'Amenazas, coacciones y violencia en el entorno familiar',
     resumen: 'Orientación y asistencia a víctimas y a personas denunciadas, con la discreción que exige cada caso.',
     cta: 'Consultar con discreción',
-    revision: 'pendiente',
+    revision: 'revisado',
     revisamos: [
       'Qué ha ocurrido, desde cuándo y si existe un riesgo actual.',
       'Qué pruebas hay: mensajes, testigos, partes médicos o denuncias anteriores.',
       'Si hay medidas de protección vigentes, o si conviene solicitarlas.',
       'El canal de contacto seguro: si otra persona puede ver tus mensajes o tu teléfono, indícalo.',
     ],
-    alcance: 'Si estás en peligro, llama al 112. El 016 ofrece información y asesoramiento gratuitos a víctimas de violencia contra las mujeres. Antes de aceptar un asunto revisamos que no exista un conflicto de intereses.',
+    alcance: 'Si estás en peligro, llama al 112. El 016 ofrece información y asesoramiento gratuitos a víctimas de violencia contra las mujeres. Las víctimas de violencia de género tienen derecho a asistencia jurídica gratuita especializada, con independencia de sus recursos (artículo 2.g de la Ley 1/1996). Antes de aceptar un asunto revisamos que no exista un conflicto de intereses.',
   },
 ];
 

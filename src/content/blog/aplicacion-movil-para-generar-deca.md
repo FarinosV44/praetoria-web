@@ -17,6 +17,8 @@ imagen: deca-movil
 
 Esa es la idea que estamos desarrollando en **[DeCA Profesional](https://decaprofesional.es/)**: combinar el trabajo de la oficina con una forma sencilla de operar desde el teléfono del conductor. La plataforma ya funciona en el navegador del móvil y permite generar, consultar y corregir documentos con una cuenta de empresa. El **acceso específico de conductor, limitado a los DeCA de la matrícula asignada**, está previsto como mejora y se anunciará cuando esté disponible.
 
+> **Resumen rápido:** sí, el DeCA se puede generar desde el móvil: DeCA Profesional funciona en el navegador del teléfono, sin descargar una aplicación, y genera un PDF digital con código QR. Debe generarse antes del inicio efectivo del servicio y entregarse al conductor, que puede mostrarlo en el móvil o en una copia impresa con QR. El acceso específico de conductor por matrícula todavía no está disponible.
+
 ## ¿Por qué es útil que el chófer pueda hacer el DeCA desde el móvil?
 
 Imaginemos una ruta habitual. La oficina conoce el cliente y el destino, pero al llegar a cargar se confirma el vehículo que hará el viaje, se concreta el lugar de entrega o cambia algún dato de la mercancía. El conductor puede revisar la información allí mismo y comunicar o introducir la corrección desde su teléfono, según los permisos que le haya dado su empresa.

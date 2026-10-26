@@ -64,6 +64,18 @@ export default function HomePage() {
       return true;
     })
     .slice(0, 4);
+
+  // Guías con más tráfico orgánico (Search Console, ago-oct 2026): la portada les transmite autoridad (DinoRANK, enlazado interno)
+  const MAS_CONSULTADAS = [
+    'deca-para-empresas-cargadoras-obligaciones-del-departamento-de-logistica-y-como-cumplir-en-2026',
+    'deca-con-varios-lugares-de-carga-y-descarga-que-dice-la-ley-y-como-hacerlo-correctamente',
+    'quien-debe-hacer-el-deca-el-cargador-o-el-transportista-que-ocurre-en-una-inspeccion-y-que-pasa-si-cada-parte-utiliza-una-plataforma-diferente',
+    'deca-y-subcontratacion-que-debe-hacer-realmente-una-agencia-de-transporte',
+    'reclamar-devolucion-impuesto-de-matriculacion',
+    'hacienda-me-pide-justificar-ingresos',
+  ];
+  const todos = getPosts();
+  const masConsultadas = MAS_CONSULTADAS.map((s) => todos.find((p) => p.slug === s)).filter((p): p is NonNullable<typeof p> => !!p);
   const laboralArea = areas.find((a) => a.id === 'laboral')!;
   const resto = areas.filter((a) => a.id !== 'laboral');
   // Trabajo jurídico con personas, no oficinas vacías (#28). Pendiente => portada solo tipográfica.
@@ -236,10 +248,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section">
+      {masConsultadas.length > 0 && (
+        <section className="section">
+          <div className="wrap">
+            <div className="head-row">
+              <h2>Guías más consultadas</h2>
+              <Link href="/blog/">Todos los artículos</Link>
+            </div>
+            <PostList posts={masConsultadas} />
+          </div>
+        </section>
+      )}
+
+      <section className="section section--stone">
         <div className="wrap">
           <div className="head-row">
-            <h2>Guías del despacho</h2>
+            <h2>Últimas guías del despacho</h2>
             <Link href="/blog/">Todos los artículos</Link>
           </div>
           <PostList posts={latest} />

@@ -11,6 +11,8 @@ intencion: "Qué hacer si te han demandado por un contrato de alquiler"
 imagen: civil-alquiler
 ---
 
+> **Resumen rápido:** si te han demandado por un alquiler, no ignores la notificación: el plazo para contestar puede empezar a correr y no responder puede permitir que la otra parte obtenga lo que pide. Lee qué se reclama, revisa si hay defectos en el procedimiento o el contrato y reúne el contrato, los justificantes de pago y las comunicaciones. Después, decide si negociar o preparar la contestación a la demanda.
+
 ### 1. No ignores la notificación
 
 Cuando recibes un burofax, acta de requerimiento o citación judicial por una demanda de arrendamiento, lo primero es **no dejarlo pasar**. El plazo para contestar puede iniciarse desde ese momento, y no responder puede suponer que la otra parte obtenga lo que pide por defecto.
@@ -49,7 +51,7 @@ Antes de acudir al despacho, conviene que aportes:
 
 ### 6. ¿Cuánto puede durar el proceso? ¿Qué costes tiene?
 
-El procedimiento por arrendamiento puede variar según la comunidad autónoma y el juzgado, pero suele tener plazos relativamente rápidos (meses, no años) si la demanda está bien planteada. [Lawants+1](https://www.lawants.com/en/court-process-spain/?utm_source=chatgpt.com)  
+El procedimiento por arrendamiento puede variar según la comunidad autónoma y el juzgado, pero suele tener plazos relativamente rápidos (meses, no años) si la demanda está bien planteada.  
 Respecto a costes: la demanda, la contestación, los posibles peritos, costas judiciales… pueden sumarse. Negociar anteriormente puede reducir tiempo, costes y estrés.
 
 ### 7. Por qué elegir Praetoria para este tipo de asuntos

@@ -350,8 +350,8 @@ export const areaContent: AreaContent[] = [
     whatsappText: mensajes.penal,
     ctaServicios: 'Consultar sobre esto',
     urgente: true,
-    revision: 'pendiente',
-    indexable: false,
+    revision: 'revisado',
+    indexable: true,
     recorridos: [
       {
         titulo: 'Me han detenido o han detenido a un familiar',

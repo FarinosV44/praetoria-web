@@ -18,6 +18,8 @@ imagenPendiente: "Contexto oficial del transporte por carretera (control en carr
 
 La existencia de esta herramienta pública no obliga a utilizarla. Las empresas pueden elegir una aplicación que cumpla la normativa y se adapte a su forma de trabajar. Para quienes necesitan generar, compartir y organizar documentación de manera habitual, [DeCA Profesional ofrece una plataforma de gestión de documentos de transporte](https://decaprofesional.es/).
 
+> **Resumen rápido:** sí, el Ministerio de Transportes y Movilidad Sostenible ofrece gratis el módulo DeCA de SIMPLE, que emite el documento en PDF con código QR y cuyo autorregistro no requiere certificado digital. No es obligatorio usarlo: la Resolución de 5 de junio de 2026 fija requisitos, pero no impone un proveedor concreto. Lo que determina la validez es que el documento cumpla esos requisitos.
+
 ## Dónde está la aplicación gratuita del DeCA del Ministerio
 
 El acceso está disponible en [la aplicación DeCA del Ministerio](https://apps.fomento.gob.es/deca/login).

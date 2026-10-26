@@ -21,6 +21,8 @@ Aunque sea una de las partes quien genere el documento, después hay que poder l
 
 El verdadero problema, por tanto, no es únicamente **quién genera el DeCA**, sino **cómo conserva cada empresa toda la documentación correspondiente a su actividad**.
 
+> **Resumen rápido:** el DeCA no es responsabilidad exclusiva del cargador contractual ni del transportista efectivo: puede generarlo una de las partes, sin crear dos documentos para el mismo transporte. En una inspección, el conductor debe poder presentar el documento y su código QR. Usar plataformas distintas no es un problema en sí, pero en mercancías ambas partes deben conservar el DeCA durante al menos un año, por lo que conviene guardar una copia propia.
+
 ## ¿Quién debe hacer el DeCA?
 
 En los transportes sujetos al Documento Electrónico de Control Administrativo intervienen especialmente dos figuras:
@@ -127,7 +129,7 @@ Decir que “el DeCA lo hizo el cliente” o que “lo tiene el transportista”
 
 Además, la utilidad de conservar los documentos no desaparece cuando termina el transporte.
 
-En mercancías, cargador contractual y transportista efectivo deben conservar el DeCA durante al menos un año. La propia guía de DeCA Profesional recuerda esta obligación y recomienda centralizar la copia para no depender posteriormente de recordar quién generó cada documento. Guia\_usuarios\_DeCA\_externo
+En mercancías, cargador contractual y transportista efectivo deben conservar el DeCA durante al menos un año. La propia guía de DeCA Profesional recuerda esta obligación y recomienda centralizar la copia para no depender posteriormente de recordar quién generó cada documento.
 
 ## El riesgo de tener los DeCA repartidos entre muchas plataformas
 
@@ -155,7 +157,7 @@ No es necesario que ambas cosas dependan siempre del mismo proveedor.
 
 ## Una solución práctica: guardar también los DeCA que ha generado otra empresa
 
-Precisamente para solucionar este problema, **[DeCA Profesional](https://decaprofesional.es/?utm_source=chatgpt.com)** permite almacenar también DeCA que hayan sido generados fuera de la plataforma.
+Precisamente para solucionar este problema, **[DeCA Profesional](https://decaprofesional.es/)** permite almacenar también DeCA que hayan sido generados fuera de la plataforma.
 
 La función **“Añadir DeCA externo”** permite incorporar al Historial el PDF que una empresa haya recibido de un cliente, cargador, transportista u otra plataforma.
 
@@ -165,7 +167,7 @@ El funcionamiento es sencillo:
 
 **Historial → Añadir DeCA externo → seleccionar PDF → guardar.**
 
-El documento queda identificado como **“Externo”**, de modo que se distingue claramente de los DeCA generados directamente en DeCA Profesional. Guia\_usuarios\_DeCA\_externo
+El documento queda identificado como **“Externo”**, de modo que se distingue claramente de los DeCA generados directamente en DeCA Profesional.
 
 ## Todos tus DeCA en un único historial
 
@@ -184,7 +186,7 @@ Por ejemplo, un transportista realiza diez servicios:
 - cinco cargadores le piden que genere él el DeCA;
 - los otros cinco se lo entregan ya realizado.
 
-Los primeros cinco quedan automáticamente en su Historial porque los ha generado en **[DeCA Profesional](https://decaprofesional.es/?utm_source=chatgpt.com)**.
+Los primeros cinco quedan automáticamente en su Historial porque los ha generado en **[DeCA Profesional](https://decaprofesional.es/)**.
 
 Los otros cinco puede incorporarlos como DeCA externos.
 
@@ -194,7 +196,7 @@ Resultado:
 
 La misma lógica funciona para un cargador que trabaja con numerosos transportistas.
 
-La guía práctica de DeCA Profesional recoge precisamente este ejemplo y plantea el Historial como un archivo único de la operativa, independientemente de quién haya generado originalmente cada documento. Guia\_usuarios\_DeCA\_externo
+La guía práctica de DeCA Profesional recoge precisamente este ejemplo y plantea el Historial como un archivo único de la operativa, independientemente de quién haya generado originalmente cada documento.
 
 ## ¿Hay que volver a rellenar todos los datos del DeCA externo?
 
@@ -216,7 +218,7 @@ Pero estos campos pueden utilizarse únicamente como información de búsqueda.
 
 Si la empresa tiene prisa, puede simplemente subir el PDF y conservarlo.
 
-Si quiere disponer de una búsqueda más completa, puede añadir los datos que conozca. Guia\_usuarios\_DeCA\_externo
+Si quiere disponer de una búsqueda más completa, puede añadir los datos que conozca.
 
 ## ¿DeCA Profesional modifica el documento externo?
 
@@ -230,7 +232,7 @@ La finalidad es **archivarlo y organizarlo**, no modificarlo ni presentarlo como
 
 Por tanto, incorporar un PDF externo al Historial tampoco convierte automáticamente en válido un documento que originalmente no cumpliera los requisitos legales.
 
-La propia guía de usuario lo explica de forma expresa: la función sirve como sistema de archivo y organización de la copia recibida y **no modifica el PDF original ni convierte un documento incorrecto en válido**. Guia\_usuarios\_DeCA\_externo
+La propia guía de usuario lo explica de forma expresa: la función sirve como sistema de archivo y organización de la copia recibida y **no modifica el PDF original ni convierte un documento incorrecto en válido**.
 
 ## ¿Por qué interesa tener una copia propia aunque el DeCA lo haya hecho otro?
 
@@ -260,7 +262,7 @@ Con esa regla, la empresa deja de preocuparse de quién generó cada documento c
 
 También puede utilizar una referencia interna para relacionarlo con su propio número de expediente, viaje u operación.
 
-La guía recomienda precisamente guardar el documento externo cuando se recibe, utilizar referencias internas cuando sea necesario y revisar periódicamente que los portes realizados tengan localizado su correspondiente DeCA. Guia\_usuarios\_DeCA\_externo
+La guía recomienda precisamente guardar el documento externo cuando se recibe, utilizar referencias internas cuando sea necesario y revisar periódicamente que los portes realizados tengan localizado su correspondiente DeCA.
 
 ## DeCA Profesional no es solo un generador de documentos
 
@@ -279,7 +281,7 @@ Para una empresa que realiza transportes diariamente también resulta importante
 - trabajar con varios usuarios;
 - y centralizar también los documentos recibidos de otras empresas.
 
-Por eso **[DeCA Profesional](https://decaprofesional.es/?utm_source=chatgpt.com)** puede utilizarse como centro documental de la operativa DeCA de la empresa.
+Por eso **[DeCA Profesional](https://decaprofesional.es/)** puede utilizarse como centro documental de la operativa DeCA de la empresa.
 
 Los documentos generados directamente y los documentos externos permanecen diferenciados, pero pueden consultarse desde un mismo Historial.
 
@@ -315,15 +317,15 @@ El verdadero problema puede aparecer cuando, después de cientos o miles de tran
 
 Centralizar los documentos desde el principio permite convertir esta obligación en un proceso organizado.
 
-Con **[DeCA Profesional](https://decaprofesional.es/?utm_source=chatgpt.com)** una empresa puede generar sus propios DeCA y, al mismo tiempo, incorporar los que haya recibido de terceros.
+Con **[DeCA Profesional](https://decaprofesional.es/)** una empresa puede generar sus propios DeCA y, al mismo tiempo, incorporar los que haya recibido de terceros.
 
 Así, la lógica es sencilla:
 
 **Tus DeCA generados + tus DeCA recibidos = un único historial.**
 
-Puedes consultar más información sobre el funcionamiento de la plataforma en **[DeCA Profesional](https://decaprofesional.es/?utm_source=chatgpt.com)**.
+Puedes consultar más información sobre el funcionamiento de la plataforma en **[DeCA Profesional](https://decaprofesional.es/)**.
 
-También puedes consultar sus **[planes y precios](https://decaprofesional.es/precios?utm_source=chatgpt.com)** o **[crear una cuenta](https://decaprofesional.es/registro)** para empezar a organizar los DeCA de tu empresa.
+También puedes consultar sus **[planes y precios](https://decaprofesional.es/precios)** o **[crear una cuenta](https://decaprofesional.es/registro)** para empezar a organizar los DeCA de tu empresa.
 
 ---
 

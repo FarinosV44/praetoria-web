@@ -16,7 +16,7 @@ test('el área de transporte ofrece tres recorridos y el de impagos lleva a su p
   for (const h of ['Qué revisamos', 'Cómo trabajamos', 'Qué documentación ayuda', 'Preguntas frecuentes', 'Para leer antes', 'Normas citadas']) {
     await expect(page.getByRole('heading', { level: 2, name: h })).toBeVisible();
   }
-  await expect(page.locator('.service-page__sources a[href^="https://www.boe.es/"]')).toHaveCount(2);
+  await expect(page.locator('.service-page__sources a[href^="https://www.boe.es/"]')).toHaveCount(4);
 });
 
 test('guía → servicio → consulta: llega con servicio, incidencia y datos de transporte', async ({ page }) => {
@@ -77,5 +77,5 @@ test('el servicio de mercancías muestra qué revisamos y sus normas', async ({ 
   const sv = page.locator('#transporte-mercancias');
   await sv.getByText('Qué revisamos y qué documentación ayuda').click();
   await expect(sv.getByText(/reservas por escrito/)).toBeVisible();
-  await expect(sv.locator('a[href*="boe.es"]')).toHaveCount(2);
+  await expect(sv.locator('a[href*="boe.es"]')).toHaveCount(5);
 });

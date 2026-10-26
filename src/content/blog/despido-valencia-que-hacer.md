@@ -17,6 +17,8 @@ Pero lo que muchas personas no saben es que **las primeras horas son clave**.
 
 👉 Lo que hagas (o no hagas) puede cambiar completamente el resultado en casos de despido Valencia.
 
+> **Resumen rápido:** si te despiden en Valencia, firma la carta de despido como «no conforme», para dejar constancia de que la recibes pero no estás de acuerdo. Guarda toda la documentación, revisa el finiquito y no tomes decisiones precipitadas. Tienes 20 días hábiles para impugnar el despido; si se pasa el plazo, pierdes el derecho a reclamar. Consulta con un abogado cuanto antes.
+
 ---
 
 ## ⚠️ El error más grave: firmar sin entender

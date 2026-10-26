@@ -15,8 +15,8 @@ Total: 55 servicios.
 | Redacción y revisión de órdenes de carga | `transporte-ordenes-carga` | — | [Revisar mis órdenes de carga](/contacto/?servicio=transporte-ordenes-carga) | — |
 | Contratos de transporte y logística | `transporte-contratos` | — | [Consultar sobre esto](/contacto/?servicio=transporte-contratos) | — |
 | DECA y subcontratación | `transporte-deca-subcontratacion` | [Sanciones del DeCA: guía legal para transportistas y cargadores](/deca-obligatorio-en-2026-guia-legal-para-transportistas-y-cargadores/)<br>[DECA para agencias de transporte: subcontratación, obligaciones y sanciones](/deca-y-subcontratacion-que-debe-hacer-realmente-una-agencia-de-transporte/) | [Consultar sobre esto](/contacto/?servicio=transporte-deca-subcontratacion) | — |
-| Reclamación de portes impagados ([página](/reclamacion-portes-impagados/)) | `transporte-portes-impagados` | [Acción directa en el transporte: cómo reclamar al cargador cuando no te paga tu cliente](/accion-directa-en-el-transporte-como-reclamar-al-cargador-cuando-no-te-paga-tu-cliente/)<br>[Impagos en el transporte: cómo reclamar una factura y no perder el dinero](/impagos-transporte-reclamar-factura/) | [Reclamar un porte impagado](/contacto/?servicio=transporte-portes-impagados) | **pendiente de revisión** |
-| Pérdida, avería y retraso de mercancías | `transporte-mercancias` | — | [Consultar sobre esto](/contacto/?servicio=transporte-mercancias) | **pendiente de revisión** |
+| Reclamación de portes impagados ([página](/reclamacion-portes-impagados/)) | `transporte-portes-impagados` | [Acción directa en el transporte: cómo reclamar al cargador cuando no te paga tu cliente](/accion-directa-en-el-transporte-como-reclamar-al-cargador-cuando-no-te-paga-tu-cliente/)<br>[Impagos en el transporte: cómo reclamar una factura y no perder el dinero](/impagos-transporte-reclamar-factura/) | [Reclamar un porte impagado](/contacto/?servicio=transporte-portes-impagados) | revisado |
+| Pérdida, avería y retraso de mercancías | `transporte-mercancias` | — | [Consultar sobre esto](/contacto/?servicio=transporte-mercancias) | revisado |
 | Convenio CMR y transporte internacional | `transporte-cmr-internacional` | — | [Consultar sobre esto](/contacto/?servicio=transporte-cmr-internacional) | — |
 | Reclamaciones frente a aseguradoras | `transporte-aseguradoras` | [Fraudes en transporte: cómo reclamar cuando la aseguradora no quiere pagar](/fraudes-transporte-aseguradora/) | [Consultar sobre esto](/contacto/?servicio=transporte-aseguradoras) | — |
 | Conflictos entre cargadores, agencias y transportistas | `transporte-conflictos-cadena` | — | [Consultar sobre esto](/contacto/?servicio=transporte-conflictos-cadena) | — |
@@ -32,7 +32,7 @@ Total: 55 servicios.
 | Conflictos societarios | `mercantil-conflictos-socios` | [Problemas con mi socio: qué hacer cuando una empresa al 50% se convierte en un conflicto](/problemas-con-mi-socio-que-hacer-cuando-una-empresa-al-50-se-convierte-en-un-conflicto/) | [Consultar un conflicto con mi socio](/contacto/?servicio=mercantil-conflictos-socios) | — |
 | Reestructuraciones empresariales | `mercantil-reestructuraciones` | — | [Consultar sobre esto](/contacto/?servicio=mercantil-reestructuraciones) | — |
 | Contratos mercantiles nacionales e internacionales | `mercantil-contratos` | — | [Consultar sobre esto](/contacto/?servicio=mercantil-contratos) | — |
-| Reclamaciones entre empresas | `mercantil-reclamaciones` | — | [Consultar sobre esto](/contacto/?servicio=mercantil-reclamaciones) | **pendiente de revisión** |
+| Reclamaciones entre empresas | `mercantil-reclamaciones` | — | [Consultar sobre esto](/contacto/?servicio=mercantil-reclamaciones) | revisado |
 | Asesoramiento a administradores | `mercantil-administradores` | — | [Consultar sobre esto](/contacto/?servicio=mercantil-administradores) | — |
 
 ## Hacienda y Seguridad Social (4)
@@ -42,19 +42,19 @@ Total: 55 servicios.
 | Requerimientos, liquidaciones y sanciones de Hacienda ([página](/abogado-hacienda-y-seguridad-social-en-valencia/)) | `hacienda-requerimientos` | [Hacienda me pide justificar ingresos: qué hacer](/hacienda-me-pide-justificar-ingresos/)<br>[¿Has recibido una carta, requerimiento, liquidación, sanción o reclamación de deuda de Hacienda o de la Seguridad Social?](/has-recibido-una-carta-requerimiento-liquidacion-sancion-o-reclamacion-de-deuda-de-hacienda-o-de-la-seguridad-social/) | [Revisar qué he recibido](/abogado-hacienda-y-seguridad-social-en-valencia/#diagnostico) | — |
 | Deudas, apremios y embargos de la Seguridad Social ([página](/abogado-hacienda-y-seguridad-social-en-valencia/)) | `hacienda-seguridad-social` | — | [Revisar qué he recibido](/abogado-hacienda-y-seguridad-social-en-valencia/#diagnostico) | — |
 | Derivación de responsabilidad al administrador ([página](/abogado-hacienda-y-seguridad-social-en-valencia/)) | `hacienda-derivacion` | — | [Consultar sobre esto](/contacto/?servicio=hacienda-derivacion) | — |
-| Devolución de ingresos indebidos | `hacienda-devoluciones` | [Cómo recuperar el impuesto de matriculación: quién puede reclamar y cuánto](/reclamar-devolucion-impuesto-de-matriculacion/) | [Consultar sobre esto](/contacto/?servicio=hacienda-devoluciones) | — |
+| Devolución de ingresos indebidos | `hacienda-devoluciones` | [Cómo reclamar la devolución del impuesto de matriculación: casos, pasos y plazos](/reclamar-devolucion-impuesto-de-matriculacion/) | [Consultar sobre esto](/contacto/?servicio=hacienda-devoluciones) | — |
 
 ## Laboral (7)
 
 | Servicio | id | Artículos relacionados | Siguiente paso | Texto ampliado |
 | --- | --- | --- | --- | --- |
-| Despidos e impugnación ([página](/impugnar-despido/)) | `laboral-despidos` | [Despido en Valencia: qué hacer en las primeras 48 horas para no perder tus derechos](/despido-valencia-que-hacer/) | [Solicitar revisión de mi despido](/contacto/?servicio=laboral-despidos) | **pendiente de revisión** |
-| Salarios y finiquitos ([página](/reclamar-salarios-y-finiquito/)) | `laboral-cantidades` | — | [Reclamar lo que me deben](/contacto/?servicio=laboral-cantidades) | **pendiente de revisión** |
-| Incapacidad permanente ([página](/incapacidad-permanente/)) | `laboral-incapacidad` | — | [Revisar mi caso de incapacidad](/contacto/?servicio=laboral-incapacidad) | **pendiente de revisión** |
-| Altas médicas y prestaciones | `laboral-altas` | — | [Consultar sobre esto](/contacto/?servicio=laboral-altas) | **pendiente de revisión** |
-| Accidentes laborales y responsabilidad empresarial ([página](/accidente-laboral/)) | `laboral-accidentes` | — | [Consultar mi accidente laboral](/contacto/?servicio=laboral-accidentes) | **pendiente de revisión** |
-| Acoso y vulneración de derechos | `laboral-acoso` | — | [Consultar sobre esto](/contacto/?servicio=laboral-acoso) | **pendiente de revisión** |
-| Modificaciones de condiciones y conflictos laborales | `laboral-condiciones` | [Baja laboral de larga duración: cómo dejar tu empresa con indemnización y derecho a paro](/baja-laboral-de-larga-duracion-como-dejar-tu-empresa-con-indemnizacion-y-derecho-a-paro/) | [Consultar sobre esto](/contacto/?servicio=laboral-condiciones) | **pendiente de revisión** |
+| Despidos e impugnación ([página](/impugnar-despido/)) | `laboral-despidos` | [Despido en Valencia: qué hacer en las primeras 48 horas para no perder tus derechos](/despido-valencia-que-hacer/) | [Solicitar revisión de mi despido](/contacto/?servicio=laboral-despidos) | revisado |
+| Salarios y finiquitos ([página](/reclamar-salarios-y-finiquito/)) | `laboral-cantidades` | — | [Revisar lo que me deben](/contacto/?servicio=laboral-cantidades) | revisado |
+| Incapacidad permanente ([página](/incapacidad-permanente/)) | `laboral-incapacidad` | — | [Revisar mi caso de incapacidad](/contacto/?servicio=laboral-incapacidad) | revisado |
+| Altas médicas y prestaciones | `laboral-altas` | — | [Consultar sobre esto](/contacto/?servicio=laboral-altas) | revisado |
+| Accidentes laborales y responsabilidad empresarial ([página](/accidente-laboral/)) | `laboral-accidentes` | — | [Consultar mi accidente laboral](/contacto/?servicio=laboral-accidentes) | revisado |
+| Acoso y vulneración de derechos | `laboral-acoso` | — | [Consultar sobre esto](/contacto/?servicio=laboral-acoso) | revisado |
+| Modificaciones de condiciones y conflictos laborales | `laboral-condiciones` | [Baja laboral de larga duración: cómo dejar tu empresa con indemnización y derecho a paro](/baja-laboral-de-larga-duracion-como-dejar-tu-empresa-con-indemnizacion-y-derecho-a-paro/) | [Consultar sobre esto](/contacto/?servicio=laboral-condiciones) | revisado |
 
 ## Civil, herencias y vivienda (6)
 
@@ -95,10 +95,10 @@ Total: 55 servicios.
 
 | Servicio | id | Artículos relacionados | Siguiente paso | Texto ampliado |
 | --- | --- | --- | --- | --- |
-| Asistencia al detenido ([página](/asistencia-al-detenido/)) | `penal-detenido` | — | [Consultar una detención](/contacto/?servicio=penal-detenido) | **pendiente de revisión** |
-| Citaciones y juicios rápidos ([página](/citacion-juzgado-juicio-rapido/)) | `penal-citacion` | — | [Revisar mi citación](/contacto/?servicio=penal-citacion) | **pendiente de revisión** |
-| Alcoholemia y seguridad vial ([página](/alcoholemia-y-seguridad-vial/)) | `penal-seguridad-vial` | — | [Consultar mi caso de tráfico](/contacto/?servicio=penal-seguridad-vial) | **pendiente de revisión** |
-| Lesiones y agresiones ([página](/lesiones-y-agresiones/)) | `penal-lesiones` | — | [Consultar unas lesiones](/contacto/?servicio=penal-lesiones) | **pendiente de revisión** |
-| Hurto y robo ([página](/hurto-y-robo/)) | `penal-hurto-robo` | — | [Consultar un hurto o un robo](/contacto/?servicio=penal-hurto-robo) | **pendiente de revisión** |
-| Estafas ([página](/estafas/)) | `penal-estafas` | — | [Consultar una estafa](/contacto/?servicio=penal-estafas) | **pendiente de revisión** |
-| Amenazas, coacciones y violencia en el entorno familiar | `penal-violencia-amenazas` | — | [Consultar con discreción](/contacto/?servicio=penal-violencia-amenazas) | **pendiente de revisión** |
+| Asistencia al detenido ([página](/asistencia-al-detenido/)) | `penal-detenido` | — | [Consultar una detención](/contacto/?servicio=penal-detenido) | revisado |
+| Citaciones y juicios rápidos ([página](/citacion-juzgado-juicio-rapido/)) | `penal-citacion` | — | [Revisar mi citación](/contacto/?servicio=penal-citacion) | revisado |
+| Alcoholemia y seguridad vial ([página](/alcoholemia-y-seguridad-vial/)) | `penal-seguridad-vial` | — | [Consultar mi caso de tráfico](/contacto/?servicio=penal-seguridad-vial) | revisado |
+| Lesiones y agresiones ([página](/lesiones-y-agresiones/)) | `penal-lesiones` | — | [Consultar unas lesiones](/contacto/?servicio=penal-lesiones) | revisado |
+| Hurto y robo ([página](/hurto-y-robo/)) | `penal-hurto-robo` | — | [Consultar un hurto o un robo](/contacto/?servicio=penal-hurto-robo) | revisado |
+| Estafas ([página](/estafas/)) | `penal-estafas` | — | [Consultar una estafa](/contacto/?servicio=penal-estafas) | revisado |
+| Amenazas, coacciones y violencia en el entorno familiar | `penal-violencia-amenazas` | — | [Consultar con discreción](/contacto/?servicio=penal-violencia-amenazas) | revisado |

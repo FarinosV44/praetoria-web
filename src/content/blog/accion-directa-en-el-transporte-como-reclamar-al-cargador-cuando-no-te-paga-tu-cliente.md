@@ -17,6 +17,8 @@ En muchos casos, el deudor directo (tu cliente) desaparece, entra en insolvencia
 
 Esta permite reclamar directamente al cargador, aunque no hayas contratado con él.
 
+> **Resumen rápido:** si tu cliente no te paga un porte, la acción directa te permite reclamar el precio del transporte directamente al cargador, aunque no hayas contratado con él. Puedes usarla si realizaste el transporte, había un precio pactado, la mercancía se entregó y no has cobrado. Necesitarás la carta de porte, la factura y la prueba de entrega; el primer paso es un requerimiento formal de pago y, si no paga, la demanda.
+
 ## ¿Qué es la acción directa en el transporte?
 
 La acción directa es un mecanismo legal que permite al transportista reclamar el precio del transporte directamente al cargador, saltando al intermediario (operador, agencia, etc.) y evitando los riesgos de insolvencia de este.

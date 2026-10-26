@@ -150,7 +150,7 @@
    "documentos": [
     {
      "id": "laboral-incapacidad-1",
-     "label": "Resolución del INSS o de la mutua, si la hay",
+     "label": "Resolución del INSS y, si lo tienes, dictamen-propuesta del Equipo de Valoración de Incapacidades (EVI)",
      "sensible": false,
      "obligatorio": false
     },
@@ -218,7 +218,7 @@
     },
     {
      "id": "laboral-accidentes-2",
-     "label": "Datos de testigos y fotografías del lugar, si las hay",
+     "label": "Datos de testigos y fotografías del lugar, si los hay",
      "sensible": false,
      "obligatorio": false
     },

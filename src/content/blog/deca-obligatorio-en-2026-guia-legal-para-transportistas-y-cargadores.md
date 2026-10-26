@@ -12,15 +12,17 @@ intencion: "Conocer las obligaciones legales y sanciones del DeCA para cargador 
 imagen: logistica-revision-recinto
 ---
 
-El 5 de octubre de 2026 cambiará la forma de documentar miles de transportes de mercancías por carretera en España. Desde esa fecha, el documento de control administrativo deberá generarse necesariamente en formato digital.
+Desde el 5 de octubre de 2026 ha cambiado la forma de documentar miles de transportes de mercancías por carretera en España: el documento de control administrativo debe generarse necesariamente en formato digital.
 
-En los últimos meses han aparecido numerosas noticias y ofertas comerciales sobre el denominado [DeCA](https://decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=blog_deca). La mayoría se limita a repetir tres ideas: que será obligatorio, que desaparecerá el papel y que las empresas deberán contratar una plataforma.
+En los últimos meses han aparecido numerosas noticias y ofertas comerciales sobre el denominado [DeCA](https://decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=blog_deca). La mayoría se limita a repetir tres ideas: que es obligatorio, que desaparece el papel y que las empresas deben contratar una plataforma.
 
 La realidad jurídica es bastante más compleja.
 
-El DeCA no es un documento completamente nuevo, no siempre necesita firma electrónica y la normativa tampoco obliga a contratar una plataforma concreta. Además, aunque debe generarse digitalmente, el conductor podrá seguir llevando una copia impresa con su código QR.
+El DeCA no es un documento completamente nuevo, no siempre necesita firma electrónica y la normativa tampoco obliga a contratar una plataforma concreta. Además, aunque debe generarse digitalmente, el conductor puede seguir llevando una copia impresa con su código QR.
 
 En esta guía explicamos qué exige realmente la normativa, quién responde cuando intervienen agencias y transportistas subcontratados y qué debería comprobar una empresa antes de elegir un proveedor tecnológico.
+
+> **Resumen rápido:** desde el 5 de octubre de 2026 el documento de control debe generarse en formato digital, y su carencia, falta de cumplimentación o la ausencia de datos esenciales puede constituir una infracción grave. Las obligaciones recaen sobre el cargador contractual, que puede ser una agencia, y el transportista efectivo. También hay riesgo si el DeCA se genera tarde, el QR no descarga el PDF, es un escaneo o no se conserva un año.
 
 ## ¿Qué es el DeCA de transporte?
 
@@ -37,7 +39,7 @@ Su finalidad es que la Inspección de Transporte pueda comprobar, entre otros as
 - Qué vehículo se utiliza.
 - Si el servicio se encuentra correctamente documentado.
 
-La principal novedad es que el documento deberá generarse electrónicamente y cumplir unos requisitos técnicos que garanticen su integridad, disponibilidad y trazabilidad.
+La principal novedad es que el documento debe generarse electrónicamente y cumplir unos requisitos técnicos que garanticen su integridad, disponibilidad y trazabilidad.
 
 ## ¿Desde cuándo es obligatorio el DeCA digital?
 
@@ -67,7 +69,7 @@ Para una visión práctica de qué debe contener el documento y cómo organizarl
 
 ## El papel no desaparece completamente
 
-Una de las afirmaciones más repetidas es que el papel desaparecerá por completo el 5 de octubre. No es exactamente así.
+Una de las afirmaciones más repetidas es que el papel desapareció por completo el 5 de octubre. No es exactamente así.
 
 Lo que exige la norma es que el DeCA se genere de forma nativamente digital. Por tanto, no será válido:
 
@@ -294,7 +296,7 @@ Ante un expediente sancionador deberá analizarse quién era el sujeto responsab
 
 ## La batalla comercial entre proveedores de DeCA
 
-La proximidad de la fecha límite ha provocado una carrera comercial entre plataformas tecnológicas, bolsas de cargas, consultoras, desarrolladores de TMS y empresas de documentación electrónica.
+La entrada en vigor de la obligación ha provocado una carrera comercial entre plataformas tecnológicas, bolsas de cargas, consultoras, desarrolladores de TMS y empresas de documentación electrónica.
 
 El transportista puede acabar creyendo que la ley le obliga a contratar una marca concreta. No es así.
 
@@ -339,7 +341,7 @@ Recomendamos realizar una prueba completa con tu operativa real:
 11. Comprobar quién puede actuar durante noches y festivos.
 12. Entregar instrucciones sencillas a tráfico, administración y conductores.
 
-No conviene esperar al 5 de octubre para descubrir que el QR conduce a una pantalla de acceso, que el conductor no sabe mostrar el fichero o que nadie puede modificar una matrícula fuera del horario de oficina.
+No conviene esperar a una inspección para descubrir que el QR conduce a una pantalla de acceso, que el conductor no sabe mostrar el fichero o que nadie puede modificar una matrícula fuera del horario de oficina.
 
 ## DeCA Profesional: una solución respaldada por experiencia jurídica y logística
 
