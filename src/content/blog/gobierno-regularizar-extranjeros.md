@@ -14,6 +14,8 @@ imagen: extranjeria-valencia
 
 En los últimos meses, el debate sobre la **regularización extraordinaria de más de 500.000 extranjeros en España** ha cobrado fuerza. La propuesta busca dar una solución legal a miles de personas que llevan años viviendo y trabajando en el país sin una situación administrativa estable.
 
+> **Resumen rápido:** la regularización extraordinaria de más de **500.000 extranjeros** en España es una propuesta cuyos detalles dependerán del texto legal que se apruebe. Podrían beneficiarse quienes llevan varios años residiendo en España, acreditan arraigo social o laboral, tienen oferta de empleo o medios económicos, o familiares residentes legales. El proceso **no es automático**: conviene preparar el expediente con antelación, acreditando bien la permanencia y legalizando los antecedentes.
+
 Si finalmente se aprueba esta medida o se amplían los mecanismos actuales de arraigo, será una **oportunidad histórica para regularizar la situación en España**.
 
 Pero atención: estos procesos no son automáticos. Requieren cumplir requisitos concretos y presentar el expediente correctamente desde el primer momento.

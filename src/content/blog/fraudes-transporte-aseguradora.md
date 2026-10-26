@@ -13,6 +13,8 @@ imagen: transporte-embalaje-danado
 
 En los últimos meses se han multiplicado los **fraudes en el sector del [transporte](/logistica-y-transporte-internacional/)**, especialmente los casos de **suplantación de identidad de empresas transportistas**, uso de documentos falsos y desaparición de la mercancía durante el trayecto.
 
+> **Resumen rápido:** si sufres un fraude en el transporte, como la suplantación de una empresa transportista que retira la carga y la hace desaparecer, la aseguradora no puede rechazar el siniestro de forma automática: **la suplantación no elimina por sí sola la responsabilidad en el transporte**. En un caso reciente, un tribunal obligó a **Zurich** a hacerse cargo de las indemnizaciones pese a que alegaba fraude y falta de cobertura. Conviene analizar la póliza y la viabilidad de la reclamación.
+
 Ante este escenario, muchas aseguradoras están optando por una estrategia cada vez más habitual: **rechazar el siniestro** alegando fraude, inexistencia de cobertura o falta de diligencia del asegurado, incluso cuando la responsabilidad en el transporte está jurídicamente clara.
 
 ### Suplantaciones de identidad: un fraude cada vez más frecuente

@@ -69,7 +69,7 @@ const landingSchema = z.object({
 const legalSchema = z.object({ title: z.string(), description: z.string(), updated: z.string() });
 
 export type Encabezado = { id: string; texto: string };
-export type Post = z.infer<typeof postSchema> & { slug: string; category: CategoryKey; html: string; indice: Encabezado[]; palabras: number };
+export type Post = z.infer<typeof postSchema> & { slug: string; category: CategoryKey; html: string; indice: Encabezado[]; preguntas: { q: string; a: string }[]; palabras: number };
 export type LegalPage = z.infer<typeof legalSchema> & { slug: string; html: string };
 export type Landing = z.infer<typeof landingSchema> & { slug: string; html: string };
 
@@ -95,6 +95,30 @@ function rehypeTablas() {
 /** Índice del artículo: los H2 con su ancla (rehype-slug ya les ha dado id). */
 function indiceDe(html: string): Encabezado[] {
   return [...html.matchAll(/<h2 id="([^"]+)">([\s\S]*?)<\/h2>/g)].map((m) => ({ id: m[1]!, texto: m[2]!.replace(/<[^>]+>/g, '').trim() }));
+}
+
+const textoPlano = (html: string) =>
+  html
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#x27;|&#39;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/\s+/g, ' ')
+    .replace(/\s+([.,;:)])/g, '$1')
+    .trim();
+
+/** Preguntas frecuentes del artículo: los H3 bajo el H2 «Preguntas frecuentes», con su respuesta (marcado FAQPage). */
+function faqDe(html: string): { q: string; a: string }[] {
+  const inicio = html.search(/<h2 id="[^"]*">\s*Preguntas frecuentes/i);
+  if (inicio < 0) return [];
+  const resto = html.slice(inicio).replace(/^<h2[\s\S]*?<\/h2>/, '');
+  const seccion = resto.split(/<h2[\s>]/)[0]!;
+  return [...seccion.matchAll(/<h3[^>]*>([\s\S]*?)<\/h3>([\s\S]*?)(?=<h3[\s>]|$)/g)]
+    .map((m) => ({ q: textoPlano(m[1]!), a: textoPlano(m[2]!) }))
+    .filter((f) => f.q && f.a);
 }
 
 const processor = unified()
@@ -140,7 +164,7 @@ function validarImagen(p: Post) {
 function todosLosPosts(): Post[] {
   postsCache ??= (readDir('blog', postSchema) as Post[])
     .filter((p) => !p.draft)
-    .map((p) => ({ ...p, indice: indiceDe(p.html), palabras: p.html.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length }))
+    .map((p) => ({ ...p, indice: indiceDe(p.html), preguntas: faqDe(p.html), palabras: p.html.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length }))
     .sort((a, b) => b.date.valueOf() - a.date.valueOf());
   postsCache.forEach(validarImagen);
   return postsCache;

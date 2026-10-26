@@ -12,6 +12,8 @@ imagen: laboral-baja-documentos
 
 Estar de baja médica durante meses genera una situación de incertidumbre que muchas personas no saben cómo gestionar. La duda es frecuente: **¿puedo marcharme de la empresa sin perder mis derechos?** La respuesta es sí, pero no de cualquier forma.
 
+> **Resumen rápido:** si estás de baja de larga duración y quieres dejar la empresa, no presentes una baja voluntaria: perderías la indemnización y el paro. La vía legal es solicitar la extinción del contrato por incumplimiento grave de la empresa (**artículo 50 del Estatuto de los Trabajadores**), con una indemnización equivalente al despido improcedente, **33 días por año trabajado**, y manteniendo el derecho a paro. En muchos casos se consigue una salida pactada sin juicio.
+
 Si estás en una situación de baja de larga duración y quieres salir de la empresa, existe una vía legal para hacerlo **con indemnización y derecho a prestación por desempleo**, siempre que se plantee correctamente.
 
 ## El error más común: irse voluntariamente

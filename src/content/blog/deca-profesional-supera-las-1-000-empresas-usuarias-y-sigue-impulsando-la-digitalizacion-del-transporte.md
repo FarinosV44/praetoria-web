@@ -14,6 +14,8 @@ imagen: deca-logo
 
 **Más de mil empresas ya utilizan DeCA Profesional. Un hito que celebramos con agradecimiento y con un compromiso claro: seguir desarrollando una plataforma cada vez más completa, cercana al sector y preparada para acompañar la evolución de la documentación digital del transporte.**
 
+> **Resumen rápido:** DeCA Profesional, la plataforma de documentación digital del transporte, ha superado las **1.000 empresas usuarias**. Entre sus funciones figuran los datos y rutas habituales, los borradores, la gestión de equipos, el acceso del conductor y la centralización de documentos propios y externos, con auditoría y revisión jurídica por abogados. Su visión de futuro incluye avanzar hacia el **CMR electrónico (e-CMR) y el albarán digital**.
+
 La digitalización del transporte se construye en el trabajo diario: cuando una oficina de tráfico prepara un envío, cuando un transportista recibe la documentación o cuando un conductor necesita consultar desde su móvil los datos de un servicio.
 
 En **DeCA Profesional** trabajamos para que todas esas tareas sean más sencillas, estén mejor conectadas y requieran menos gestiones repetitivas. Hoy, tras superar las **1.000 empresas usuarias**, seguimos creciendo y mejorando el producto junto a quienes lo utilizan.

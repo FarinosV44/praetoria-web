@@ -13,6 +13,8 @@ imagen: abogado-explica-caso
 
 Quien acude a un abogado suele hacerlo con prisa, con preocupación o con las dos cosas. Necesita entender dónde está y qué puede hacer. Por eso, más que una promesa, lo que debe llevarse de la primera conversación es **información clara para decidir**.
 
+> **Resumen rápido:** antes de encargarle tu caso, un abogado debe darte una valoración honesta de su viabilidad, explicarte los riesgos y los plazos que no pueden esperar e informarte de sus honorarios por escrito, mediante la hoja de encargo o un medio equivalente. Así lo exige el **artículo 48 del Estatuto General de la Abogacía Española**, que también le obliga a mantenerte informado del estado del asunto. Desconfía de cualquier garantía de resultado.
+
 La mayoría de los profesionales trabajan así. Aun así, conviene saber qué esperar de esa conversación, porque es la mejor forma de comprobar que estás en buenas manos y de evitar sorpresas más adelante.
 
 ## Lo que un abogado debe transmitirte

@@ -13,6 +13,8 @@ imagen: familia-filiacion
 
 Cada vez es más frecuente que familias formadas por parejas del mismo sexo se encuentren con un problema jurídico importante: uno de los progenitores no figura legalmente como tal en el país de origen del menor.
 
+> **Resumen rápido:** si tu hijo nació en el extranjero y el certificado de nacimiento solo recoge a un progenitor, el Registro Civil español reproduce esa misma situación. Hay dos vías: la filiación directa, más incierta y con mayor riesgo de rechazo, y la **adopción por integración** del hijo del cónyuge o pareja, la más eficaz en la mayoría de los casos, que da reconocimiento como madre o padre y plena patria potestad. Inscribir antes el nacimiento en España es recomendable, pero no siempre automático.
+
 Esto ocurre especialmente en nacimientos en el extranjero, donde la legislación no reconoce del mismo modo la filiación en parejas del mismo sexo. La consecuencia es clara: **en España solo uno de los progenitores tiene reconocimiento legal**, lo que genera inseguridad jurídica en cuestiones tan básicas como la patria potestad, decisiones médicas o derechos hereditarios.
 
 En Praetoria abordamos este tipo de situaciones con un enfoque claro, eficaz y seguro. A continuación, te explicamos qué opciones existen y cuál es la mejor estrategia.

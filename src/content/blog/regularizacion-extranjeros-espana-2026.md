@@ -13,6 +13,8 @@ imagen: extranjeria-pasaporte
 
 En los últimos meses, la Administración está **endureciendo los controles** sobre permisos de residencia, trabajo y renovaciones en España. Cada vez son más frecuentes los **requerimientos, denegaciones y archivos de expedientes** por errores que antes pasaban desapercibidos.
 
+> **Resumen rápido:** la Administración está endureciendo los controles sobre residencia, trabajo y renovaciones, sobre todo en **arraigo social, arraigo laboral**, renovaciones y permisos de trabajo. Las denegaciones suelen deberse a errores en la presentación electrónica (Mercurio), contratos que no cumplen los nuevos criterios, falta de pruebas de permanencia, respuestas fuera de plazo o solicitudes mal encuadradas. Conviene elegir bien el tipo de residencia y revisar el expediente antes de presentarlo: una denegación puede **retrasar meses** una nueva solicitud.
+
 Esto está afectando especialmente a solicitudes de **arraigo social, arraigo laboral, renovaciones y permisos de trabajo**, tanto en Valencia como en el resto del país.
 
 ### ¿Por qué están aumentando las denegaciones?

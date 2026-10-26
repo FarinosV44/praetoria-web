@@ -14,6 +14,8 @@ imagen: civil-cerradura
 
 En los últimos meses, **Valencia está registrando un aumento claro de conflictos relacionados con alquileres, impagos y ocupaciones**. La combinación de subida de precios, escasez de vivienda y cambios normativos está generando una situación cada vez más tensa entre propietarios e inquilinos.
 
+> **Resumen rápido:** ante un inquilino que no paga o una vivienda ocupada en Valencia, el propietario no debe esperar «a ver si se soluciona»: retrasarse acumula deuda y los errores formales pueden retrasar meses el lanzamiento. Antes de demandar conviene analizar el tipo de contrato, el número de viviendas del propietario, la situación real del ocupante y el estado de las notificaciones previas, y valorar si cabe negociar. En muchos casos **existe una vía legal eficaz** si se plantea bien desde el inicio.
+
 Muchos propietarios se encuentran con **impagos prolongados, contratos bloqueados o viviendas ocupadas**, sin saber exactamente qué pasos pueden dar ni cuándo es el momento adecuado para actuar legalmente.
 
 ## El problema: esperar demasiado empeora la situación
