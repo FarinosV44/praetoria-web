@@ -1,0 +1,72 @@
+@import 'tailwindcss';
+
+/* Área de clientes de Praetoria: mismos tokens que la web pública (grafito, piedra y el rojo del
+   logotipo), con una interfaz más tranquila y pensada primero para el móvil. */
+@theme {
+  --color-ink: #22262a;
+  --color-ink-2: #3a4047;
+  --color-muted: #5e656c;
+  --color-paper: #ffffff;
+  --color-stone: #eeece8;
+  --color-stone-2: #e3e0da;
+  --color-line: #d6d2cb;
+  --color-red: #b3242a;
+  --color-red-dark: #8e1c21;
+  --color-red-tint: #f6e7e7;
+  --color-ok: #2f6b3b;
+  --color-ok-tint: #e6f0e7;
+  --color-info: #2c5378;
+  --color-info-tint: #e5edf5;
+  --color-warn: #8a5300;
+  --color-warn-tint: #fbefdc;
+  --font-sans: 'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Source Serif 4 Variable', 'Source Serif 4', Georgia, serif;
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body { background: var(--color-stone); color: var(--color-ink); font-family: var(--font-sans); font-size: 1rem; line-height: 1.55; }
+  h1, h2, h3 { line-height: 1.2; letter-spacing: -0.01em; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--color-red); outline-offset: 2px; }
+}
+
+@layer components {
+  .wrap { width: min(100% - 32px, 1080px); margin-inline: auto; }
+  .card { background: var(--color-paper); border: 1px solid var(--color-line); border-radius: 10px; padding: 20px; }
+  .card + .card { margin-top: 16px; }
+  .titulo { font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.1rem); font-weight: 650; }
+  .subtitulo { font-size: 1.15rem; font-weight: 650; margin-bottom: 8px; }
+  .ayuda { color: var(--color-muted); font-size: 0.95rem; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 0 18px;
+    border-radius: 8px; font-weight: 600; border: 1px solid transparent; cursor: pointer; text-decoration: none; }
+  .btn-primario { background: var(--color-red); color: #fff; }
+  .btn-primario:hover { background: var(--color-red-dark); }
+  .btn-secundario { background: var(--color-paper); color: var(--color-ink); border-color: var(--color-line); }
+  .btn-secundario:hover { border-color: var(--color-ink-2); }
+  .btn-texto { background: none; border: 0; color: var(--color-red); text-decoration: underline; padding: 0; min-height: 0; font-weight: 600; cursor: pointer; }
+  .btn[disabled] { opacity: .55; cursor: not-allowed; }
+  .campo { display: grid; gap: 6px; margin-bottom: 16px; }
+  .campo label, .etiqueta { font-weight: 600; }
+  .campo input, .campo select, .campo textarea { width: 100%; min-height: 46px; padding: 10px 12px; border: 1px solid var(--color-line);
+    border-radius: 8px; background: #fff; font: inherit; }
+  .campo textarea { min-height: 120px; }
+  .campo input:focus, .campo select:focus, .campo textarea:focus { border-color: var(--color-ink-2); }
+  .error { background: var(--color-red-tint); color: var(--color-red-dark); border-radius: 8px; padding: 10px 12px; }
+  .exito { background: var(--color-ok-tint); color: var(--color-ok); border-radius: 8px; padding: 10px 12px; }
+  .nota { background: var(--color-info-tint); color: var(--color-info); border-radius: 8px; padding: 10px 12px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 3px 10px; font-size: .85rem; font-weight: 600; white-space: nowrap; }
+  .chip-neutro { background: var(--color-stone); color: var(--color-ink-2); }
+  .chip-info { background: var(--color-info-tint); color: var(--color-info); }
+  .chip-ok { background: var(--color-ok-tint); color: var(--color-ok); }
+  .chip-aviso { background: var(--color-warn-tint); color: var(--color-warn); }
+  .lista { display: grid; gap: 12px; }
+  .fila { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
+  .progreso { height: 8px; background: var(--color-stone-2); border-radius: 999px; overflow: hidden; }
+  .progreso > span { display: block; height: 100%; background: var(--color-ink-2); }
+  .zona-subida { border: 2px dashed var(--color-line); border-radius: 10px; padding: 16px; text-align: center; }
+  .zona-subida.activa { border-color: var(--color-red); background: var(--color-red-tint); }
+  .tabla { width: 100%; border-collapse: collapse; font-size: .95rem; }
+  .tabla th, .tabla td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--color-line); vertical-align: top; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
