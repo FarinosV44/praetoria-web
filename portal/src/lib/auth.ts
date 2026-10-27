@@ -5,6 +5,7 @@ import { twoFactor } from 'better-auth/plugins';
 import { poolAuth } from './db';
 import { env } from './env';
 import { enviarCorreo, plantillasCorreo } from './email';
+import { VERSION_PRIVACIDAD } from './textos';
 
 export const auth = betterAuth({
   appName: 'Praetoria · Área de clientes',
@@ -13,6 +14,23 @@ export const auth = betterAuth({
   trustedOrigins: [env.origin],
   database: poolAuth(),
   telemetry: { enabled: false },
+  user: {
+    additionalFields: {
+      privacidadVersion: { type: 'string', required: true, input: true },
+      privacidadAceptadaAt: { type: 'date', required: false, input: false },
+    },
+  },
+  databaseHooks: {
+    user: {
+      create: {
+        // El registro solo prospera si se acepta la versión vigente de la información de privacidad.
+        before: async (u) => {
+          if ((u as { privacidadVersion?: string }).privacidadVersion !== VERSION_PRIVACIDAD) return false;
+          return { data: { ...u, privacidadAceptadaAt: new Date() } };
+        },
+      },
+    },
+  },
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: true,

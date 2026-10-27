@@ -28,6 +28,9 @@ const seguridad = [
 
 const config: NextConfig = {
   poweredByHeader: false,
+  trailingSlash: true,
+  skipTrailingSlashRedirect: true,
+  outputFileTracingRoot: import.meta.dirname,
   serverExternalPackages: ['pg'],
   experimental: { serverActions: { bodySizeLimit: '1mb' } },
   async headers() {

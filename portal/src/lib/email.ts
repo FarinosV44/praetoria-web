@@ -4,7 +4,7 @@ import { env } from './env';
 
 // Los correos NUNCA incluyen detalles del asunto ni documentos adjuntos: solo un aviso neutro
 // y el enlace al portal, donde la información se consulta tras iniciar sesión.
-let transporte: nodemailer.Transporter | undefined;
+let transporte: ReturnType<typeof nodemailer.createTransport> | undefined;
 function t() {
   const s = env.smtp;
   transporte ??= nodemailer.createTransport({
@@ -32,13 +32,5 @@ export const plantillasCorreo = {
   cuentaExistente: (url: string) => ({
     asunto: 'Intento de registro con tu correo',
     texto: `Hola:\n\nAlguien ha intentado crear una cuenta en el área de clientes con este correo, que ya está registrado. Si fuiste tú, entra aquí:\n\n${url}\n\nSi no recuerdas la contraseña, puedes restablecerla desde esa misma página.${pie}`,
-  }),
-  novedades: (url: string) => ({
-    asunto: 'Tienes novedades en tu área de clientes',
-    texto: `Hola:\n\nHay novedades en tu área de clientes de Praetoria Abogados. Por confidencialidad, no incluimos los detalles en este correo. Puedes consultarlas iniciando sesión:\n\n${url}${pie}`,
-  }),
-  avisoInterno: (url: string) => ({
-    asunto: '[Portal] Nueva actividad pendiente de revisar',
-    texto: `Hay actividad nueva en el portal de clientes pendiente de revisión.\n\n${url}${pie}`,
   }),
 };

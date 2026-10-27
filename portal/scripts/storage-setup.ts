@@ -16,3 +16,4 @@ if (g.ok) {
   if (!r.ok) { console.error('No se pudo crear el bucket', r.status, await r.text()); process.exit(1); }
   console.log(`bucket ${bucket} creado (privado)`);
 }
+export {};
