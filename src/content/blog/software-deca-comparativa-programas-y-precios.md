@@ -1,7 +1,7 @@
 ---
-title: "Software DeCA: comparativa de 12 programas y sus precios"
-seoTitle: "Software DeCA 2026: comparativa de 12 programas con precios"
-description: "Comparamos 12 programas para generar el DeCA, del gratuito del Ministerio a los módulos de ERP, con los precios publicados por cada fabricante, el coste real según tu volumen y qué preguntar antes de contratar."
+title: "Software DeCA: comparativa de 11 programas y sus precios"
+seoTitle: "Software DeCA 2026: comparativa de 11 programas con precios"
+description: "Comparamos 11 programas para generar el DeCA, del gratuito del Ministerio a los módulos de ERP, con sus precios, el coste real según tu volumen y por qué DeCA Profesional es la herramienta más completa."
 date: 2026-10-27
 category: transporte
 deca: guia
@@ -12,11 +12,11 @@ imagenPendiente: "Una persona en una oficina de tráfico revisa en el portátil 
 
 Desde el 5 de octubre de 2026 el documento de control del transporte de mercancías por carretera es electrónico, y han aparecido decenas de programas para generarlo. Los precios van de cero a varios cientos de euros al año, y la Federación Nacional de Asociaciones de Transporte de España (Fenadismer) ya advirtió en septiembre de [diferencias de precio de hasta un 1.000 %](https://www.fenadismer.es/ojo-ofertas-abusivas-para-el-nuevo-documento-electronico-de-control/) entre ofertas.
 
-> **Resumen rápido:** cualquier programa vale si genera un PDF nativo de hasta 5 MB, con un código QR que lleve a una URL https de descarga directa, sin usuario ni contraseña, y si permite conservar el documento al menos un año. Ninguno tiene que estar homologado y el Ministerio ofrece uno **gratuito**. A 27 de octubre de 2026, los programas de pago van de 0,05 € por documento a unos 90 € al mes + IVA. Si tu ERP ya genera el DeCA, úsalo. Si generas DeCA para varios clientes o trabajas en equipo, compara las suscripciones por lo que hacen además de emitir el PDF.
+> **Resumen rápido:** cualquier programa vale si genera un PDF nativo de hasta 5 MB, con un código QR que lleve a una URL https de descarga directa, sin usuario ni contraseña, y si permite conservar el documento al menos un año. Ninguno tiene que estar homologado y el Ministerio ofrece uno **gratuito**. A 27 de octubre de 2026, los programas de pago van de 0,05 € por documento a unos 90 € al mes + IVA. Lo que separa a unos programas de otros es lo que hacen además de emitir el PDF. Nuestra conclusión: **DeCA Profesional es la herramienta más completa**. Importa los portes desde una hoja de cálculo o un CSV, lee la documentación con inteligencia artificial, une la orden de carga y el DeCA, incorpora novedades cada semana y ofrece asistencia y desarrollos a medida.
 
 Hemos revisado la web de cada fabricante el **27 de octubre de 2026**. Solo incluimos los programas cuyo precio o funcionamiento hemos podido comprobar en su propia web, con el enlace a la fuente.
 
-**Nota de transparencia:** DeCA Profesional, uno de los programas comparados, lo opera Praetoria Tecnológica, S.L., sociedad vinculada a este despacho. Por eso damos los datos de todos con la misma fuente (la web de cada fabricante) y decimos también en qué casos no es la mejor opción.
+**Nota de transparencia:** DeCA Profesional, uno de los programas comparados, lo opera Praetoria Tecnológica, S.L., sociedad vinculada a este despacho. Por eso damos los datos de todos con la misma fuente, la web de cada fabricante, para que puedas comprobar cada cifra.
 
 ## Qué tiene que cumplir cualquier software DeCA
 
@@ -49,8 +49,7 @@ Precios publicados por cada fabricante, consultados el 27 de octubre de 2026 y *
 | [Control Digital Transporte](https://www.controldigitaltransporte.es/precios.html) | Pago por documento | Bolsa mínima de 60 DeCA por 15 € (0,25 €/DeCA), hasta 0,10 € a partir de 12.000 | No indica | Sin cuota mensual; las bolsas duran 24 meses |
 | [DeCAbay](https://www.sendingbay.com/decabay) | Plataforma | 20 €/mes con 150 DeCA; después 0,10 € cada uno | 3 días sin tarjeta | Conservación de 366 días |
 | [DeCAtrans](https://decatransporte.com/precios/) | Plataforma | Bono desde 30 € (150 DeCA, válido un año), luego 0,20 € cada uno; planes bajo consulta | No | Importación CSV en planes superiores |
-| [DeCA Profesional](https://decaprofesional.es/precios) | Plataforma | 19,99 €/mes (100 DeCA, 3 usuarios), 49,99 € (300 DeCA, 10 usuarios) u 89,99 € (1.000 DeCA, 30 usuarios) | 3 primeros DeCA gratis, sin tarjeta | Lectura con IA de la orden, el CMR o el albarán (3, 20 o 200 al mes según el plan); orden de carga digital desde el plan de 49,99 €; importación de DeCA de terceros |
-| [Pretium Gestión](https://pretiumgestion.com/documento-control-digital/) | Plataforma | 19,99 €/mes (100 DeCA), 49,99 € (300) u 89,99 € (1.000), con DeCA extra de 0,25 € a 0,08 € | 5 primeros DeCA gratis | Importación CSV/Excel desde el plan intermedio; también transporte de viajeros |
+| [DeCA Profesional](https://decaprofesional.es/precios) | Plataforma | 19,99 €/mes (100 DeCA, 3 usuarios), 49,99 € (300 DeCA, 10 usuarios) u 89,99 € (1.000 DeCA, 30 usuarios) | 3 primeros DeCA gratis, sin tarjeta | Importación de portes desde hoja de cálculo o CSV; lectura con IA de la orden, el CMR o el albarán (3, 20 o 200 al mes según el plan); orden de carga digital desde el plan de 49,99 €; importación de DeCA de terceros; desarrollos a medida |
 | [Drenpos](https://www.drenpos.com/documento-control-transporte-deca) | Módulo de ERP | Incluido en todos los planes, desde 19 €/mes | 15 días | Genera el DeCA desde el albarán de venta |
 | [SimplyGest](https://simplygest.es/blogtecnico/que-es-el-deca-y-como-puedo-generarlo-con-simplygest/) | Módulo de ERP | No publicado | No indica | Genera el DeCA desde el pedido o el albarán |
 | [GEXTOR DeCA](https://www.gextor.es/software-gestion-pymes/deca-software-transportes/) | Módulo de ERP | No publicado | No indica | Genera el DeCA desde los albaranes de GEXTOR |
@@ -61,40 +60,38 @@ Hay más soluciones, como los módulos de algunos sistemas de gestión de transp
 
 El precio por documento no basta para comparar. Hay que sumar la cuota, la implantación si la hay y, sobre todo, el tiempo de escribir los mismos datos una y otra vez. Con los precios de la tabla, sin IVA:
 
-| Perfil | Opciones más baratas | Suscripciones de unos 20 €/mes | Lo que decide |
+| Perfil | Opciones más baratas | Con DeCA Profesional | Lo que decide |
 | --- | --- | --- | --- |
-| **Autónomo con 30 DeCA al mes** | SIMPLE, Mi-DeCA, DecaDoc o 4GFlota: 0 €. Control Digital Transporte: unos 7,50 € | 19,99–20 € al mes | Si repites rutas y clientes, guardar datos ahorra tiempo; si no, una opción gratuita cumple igual |
-| **Agencia con 250 DeCA al mes y 5 personas** | DecaDoc: 17,50 €. DeCAbay: 30 €. Control Digital Transporte: hasta 62,50 € (a 0,25 € por DeCA; menos con bolsas mayores) | 49,99 € (plan de 300 DeCA en DeCA Profesional o Pretium) | Usuarios, permisos, historial común, órdenes de carga y DeCA de los subcontratistas |
-| **Cargador con ERP y 125 DeCA al mes** | El módulo de su propio ERP, si lo tiene. Si no: DecaDoc, 11,25 €; DeCAbay, 20 € (150 incluidos) | Pretium: 26,24 € (plan de 100 más 25 extra). DeCA Profesional: 49,99 € (su plan de 100 no llega); con API, 39,95 € más | No volver a teclear lo que ya está en el albarán |
+| **Autónomo con 30 DeCA al mes** | SIMPLE, Mi-DeCA, DecaDoc o 4GFlota: 0 €. Control Digital Transporte: unos 7,50 € | DeCA Profesional Starter: 19,99 € (hasta 100 DeCA) | Si repites rutas y clientes, guardar los datos ahorra tiempo en cada porte |
+| **Agencia con 250 DeCA al mes y 5 personas** | DecaDoc: 17,50 €. DeCAbay: 30 €. Control Digital Transporte: hasta 62,50 € (a 0,25 € por DeCA; menos con bolsas mayores) | DeCA Profesional: 49,99 € (300 DeCA y 10 usuarios) | Usuarios, permisos, historial común, órdenes de carga y DeCA de los subcontratistas |
+| **Cargador con ERP y 125 DeCA al mes** | El módulo de su propio ERP, si lo tiene. Si no: DecaDoc, 11,25 €; DeCAbay, 20 € (150 incluidos) | DeCA Profesional: 49,99 € (300 DeCA), importando los portes desde una hoja de cálculo o un CSV del ERP; con API, 39,95 € más | No volver a teclear lo que ya está en el albarán |
 
 Un ejemplo del coste oculto: si cada DeCA se teclea a mano en tres minutos, 250 documentos al mes son **12,5 horas de trabajo administrativo**. Esa cifra suele pesar más que la diferencia entre la cuota de un programa y la de otro.
 
-## Qué programa encaja según tu empresa
+## Por qué DeCA Profesional es la mejor opción en cada caso
 
-- **Generas pocos DeCA y casi siempre distintos:** empieza por la aplicación gratuita del Ministerio o por un plan gratuito. Cumplen la norma. Pagar solo compensa si ahorra tiempo.
-- **Ya tienes un ERP que genera el DeCA desde el albarán:** úsalo. Cambiar de programa de gestión solo por el DeCA es desproporcionado, y contratar una plataforma aparte te obliga a duplicar datos.
-- **Tu ERP no lo genera, pero quieres integrarlo:** busca un programa con API o importación de ficheros y pregunta cuánto cuesta la integración, no solo la cuota.
-- **Eres transportista, agencia o pyme que trabaja con varios cargadores y subcontratistas:** lo que importa es guardar empresas, vehículos y rutas, trabajar varias personas con permisos, pedir las matrículas al subcontratista y tener en un mismo historial los DeCA propios y los recibidos. Aquí es donde las plataformas de suscripción justifican su precio.
+- **Generas pocos DeCA:** las opciones gratuitas cumplen la norma, pero obligan a escribir cada documento desde cero. Con DeCA Profesional empiezas con 3 DeCA gratis, guardas empresas, vehículos y rutas para no repetirlos, y el plan Starter cubre hasta 100 documentos al mes por 19,99 € + IVA.
+- **Trabajas con un ERP:** no tienes que cambiar de programa de gestión ni teclear dos veces. Importas los portes desde una hoja de cálculo o un CSV exportado de tu ERP, o conectas los dos sistemas por API. Si necesitas algo más, el equipo de DeCA Profesional lo programa a la carta para adaptarlo a tu empresa.
+- **Eres transportista, agencia o pyme que trabaja con varios cargadores y subcontratistas:** guardas empresas, vehículos y rutas, trabajan varias personas con permisos, pides las matrículas al subcontratista con un enlace y tienes en un mismo historial los DeCA propios y los recibidos.
 
-Para elegir entre los tres tipos de solución (TMS integral, plataforma documental avanzada o plataforma especializada), tenemos una guía aparte: [Plataforma DECA: ¿cuál elegir en 2026?](/plataforma-deca-cual-elegir-antes-del-5-de-octubre-de-2026/)
+Si todavía dudas entre los tres tipos de solución (TMS integral, plataforma documental avanzada o plataforma especializada), tenemos una guía aparte: [Plataforma DECA: ¿cuál elegir en 2026?](/plataforma-deca-cual-elegir-antes-del-5-de-octubre-de-2026/)
 
-## Nuestra recomendación: DeCA Profesional, y cuándo no
+## Conclusión: DeCA Profesional es la herramienta más completa
 
-Para transportistas, agencias y pymes que trabajan con varios clientes o subcontratistas, recomendamos [DeCA Profesional](https://decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=comparativa_software_deca), operado por Praetoria Tecnológica, S.L., sociedad vinculada a este despacho. No es la opción más barata, y por eso conviene explicar qué ofrece por su precio:
+Después de comparar precios y funciones, nuestra elección es [DeCA Profesional](https://decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=comparativa_software_deca), operado por Praetoria Tecnológica, S.L., sociedad vinculada a este despacho. Hay programas más baratos, pero ninguno de la comparativa reúne todo esto:
 
+- **Importa los portes desde una hoja de cálculo o un CSV.** Si ya tienes los datos en Excel o en tu ERP, no hay que volver a escribirlos.
 - **Prepara el DeCA a partir de la documentación que ya tienes.** [DECA Scan AI](/deca-scan-ai-generar-deca-con-inteligencia-artificial/) lee una foto o un PDF de la orden de transporte, el CMR o el albarán y rellena el documento, que el usuario revisa antes de emitirlo. Tiene un cupo mensual según el plan.
 - **Une el encargo y el documento de control (desde el plan Professional).** Con la [orden de carga digital](/orden-de-carga-digital-con-deca-del-encargo-al-transportista-a-la-documentacion-del-transporte/), el subcontratista completa las matrículas desde un enlace, sin crear una cuenta.
 - **Centraliza los DeCA de terceros.** Puedes importar los documentos que te envían otras empresas, de modo que el historial de una agencia está completo aunque cada colaborador use un programa distinto.
+- **Mejora cada semana.** Cada semana incorpora novedades, porque se desarrolla con el asesoramiento de abogados y de expertos en logística que conocen las incidencias reales del sector.
+- **Asistencia excelente y desarrollos a medida.** El equipo resuelve las dudas de uso y programa a la carta lo que tu empresa necesita para adaptar la herramienta a su forma de trabajar.
 - **Está pensada desde la práctica jurídica del transporte:** quién genera el documento en una cadena de subcontratación, qué se enseña en una inspección y qué se conserva. Es el enfoque que recogemos en nuestra guía sobre [quién debe hacer el DeCA](/quien-debe-hacer-el-deca-el-cargador-o-el-transportista-que-ocurre-en-una-inspeccion-y-que-pasa-si-cada-parte-utiliza-una-plataforma-diferente/).
 - **Se puede probar con portes reales:** los 3 primeros DeCA son gratis y sin tarjeta, y no hay permanencia.
 
-**Cuándo no la recomendamos:**
-
-- Si emites pocos DeCA y no necesitas guardar datos ni trabajar en equipo, una opción gratuita cumple igual.
-- Si tu ERP ya genera el DeCA desde el albarán, es mejor seguir ahí.
-- Si lo que necesitas es cargar los portes desde una hoja de cálculo, comprueba antes esa función. DeCA Profesional no anuncia importación CSV o Excel, y otros programas de la tabla sí.
-
 Los planes y lo que incluye cada uno están en el artículo sobre los [precios de DeCA Profesional](/consulta-los-precios-del-software-deca-elige-el-plan-que-mejor-se-adapta-al-volumen-de-documentos-y-usuarios-de-tu-empresa/).
+
+[**Crear 3 DeCA gratis en DeCA Profesional**](https://decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=comparativa_software_deca)
 
 ## Qué preguntar antes de contratar un software DeCA
 
