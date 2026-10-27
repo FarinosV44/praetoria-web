@@ -97,7 +97,7 @@ def composicion_deca(img):
 def fotografia(img):
     o = img['origen']
     nombre = f"pexels-{o['id']}" if o['tipo'] == 'pexels' else o.get('id')
-    src = RAIZ / (o['original'] if o['tipo'] == 'ia' else f"fotos/editorial/{nombre}.jpg")
+    src = RAIZ / (o['original'] if o['tipo'] in ('ia', 'prensa') else f"fotos/editorial/{nombre}.jpg")
     if not src.exists():
         return None
     im = ImageOps.exif_transpose(Image.open(src)).convert('RGB')

@@ -26,6 +26,8 @@ const origen = z.discriminatedUnion('tipo', [
   z.object({ tipo: z.literal('praetoria'), original: z.string() }),
   /** Generada con IA (#28 §8). personalizada = recreación a partir de fotografías autorizadas por el titular. */
   z.object({ tipo: z.literal('ia'), original: z.string(), personalizada: z.boolean(), nota: z.string().min(20) }),
+  /** Imagen de prensa de un organismo público, publicada con su crédito a petición del titular (27/10/2026). */
+  z.object({ tipo: z.literal('prensa'), original: z.string(), fuente: z.string().min(5), nota: z.string().min(20) }),
 ]);
 
 const imagenSchema = z
@@ -96,5 +98,7 @@ export function creditoDe(img: Imagen): string {
       return 'Oficinas de Praetoria en el centro de Valencia';
     case 'ia':
       return img.origen.personalizada ? 'Recreación visual con IA a partir de fotografías autorizadas' : 'Escena ilustrativa generada con IA';
+    case 'prensa':
+      return `Imagen: ${img.origen.fuente}`;
   }
 }

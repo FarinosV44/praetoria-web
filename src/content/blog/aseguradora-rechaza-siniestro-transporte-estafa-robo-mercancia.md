@@ -7,14 +7,14 @@ category: transporte
 deca: guia
 tags: ["aseguradoras", "rehúse de siniestro", "robo de mercancía", "estafa en transporte", "seguro de transporte", "transporte internacional"]
 intencion: "Reclamar a la aseguradora que ha rehusado cubrir un robo o una estafa de mercancía en el transporte"
-imagenPendiente: "Un camión de lona aparcado de noche en un área de servicio, sin matrículas ni logotipos legibles"
+imagen: transporte-control-guardia-civil
 ---
 
 Las estafas en el transporte de mercancías se han multiplicado: falsos transportistas que suplantan a empresas reales, cargas que se recogen con documentación aparentemente correcta y nunca llegan a destino, robos en ruta y apropiaciones de mercancía por quien la tenía que entregar. Y con ellas se ha extendido una respuesta casi automática de muchas aseguradoras: **la carta de rehúse**.
 
-La compañía comunica que el siniestro no está cubierto porque se trata de una estafa, porque no se verificó al transportista o porque hay que esperar a lo que diga la causa penal. Y el asegurado, o el perjudicado, se queda con la pérdida y con una sola salida: reclamar en los tribunales.
+La compañía comunica que el siniestro no está cubierto porque se trata de una estafa, porque no se verificó al transportista o porque hay que esperar a lo que diga la causa penal. Y el asegurado, o el perjudicado, se queda con la pérdida y, si la compañía no rectifica, con la vía judicial como salida principal.
 
-> **Resumen rápido:** una carta de rehúse no es una sentencia. Muchas negativas se apoyan en exclusiones que no son válidas si no se destacaron en la póliza y se aceptaron por escrito (artículo 3 de la Ley de Contrato de Seguro), o en una lectura de la póliza que la vacía de contenido. Si la aseguradora no paga sin causa justificada, debe además intereses de demora del interés legal incrementado en un 50 %, y nunca inferiores al 20 % pasados dos años (artículo 20). Hay plazos de prescripción cortos, sobre todo en transporte: conviene revisar la póliza y la documentación en cuanto llega el rehúse.
+> **Resumen rápido:** una carta de rehúse no es una sentencia. Muchas negativas se apoyan en exclusiones que no son válidas si no se destacaron en la póliza y se aceptaron por escrito (artículo 3 de la Ley de Contrato de Seguro), o en una lectura de la póliza que la vacía de contenido. Si la aseguradora no paga sin causa justificada, debe además intereses de demora equivalentes al interés legal del dinero incrementado en un 50 %, y nunca inferiores al 20 % pasados dos años (artículo 20). Hay plazos de prescripción cortos, sobre todo en transporte: conviene revisar la póliza y la documentación en cuanto llega el rehúse.
 
 ## Por qué las aseguradoras rechazan estos siniestros
 
@@ -39,27 +39,29 @@ La Ley 50/1980, de Contrato de Seguro, exige que las **cláusulas limitativas de
 
 Por eso, lo primero es pedir **la póliza completa**: condiciones generales, particulares y especiales, con las firmas.
 
+Ojo: el seguro de mercancías transportadas tiene legalmente la consideración de **gran riesgo**, y en esos contratos la Ley de Contrato de Seguro no es imperativa (artículo 44). Las aseguradoras lo invocan para defender cláusulas que no se firmaron. Habrá que analizar cómo se negoció la póliza y la jurisprudencia aplicable a cada tipo de seguro: no es lo mismo el seguro de mercancías del cargador que el de responsabilidad civil del transportista.
+
 ### La estafa como forma de pérdida de la mercancía
 
-Para el cargador o para el destinatario, la mercancía se ha perdido, igual que si se hubiera robado del remolque. Si la póliza cubre la pérdida o el robo y la exclusión de fraude no es válida, o no encaja con lo que realmente ocurrió, la aseguradora debe responder. La existencia de una suplantación **no elimina por sí sola la responsabilidad en el transporte**, como explicamos en nuestro artículo sobre [fraudes en transporte y aseguradoras](/fraudes-transporte-aseguradora/).
+Para el cargador o para el destinatario, la mercancía se ha perdido, igual que si se hubiera robado del remolque. Si la póliza cubre la pérdida o el robo y la exclusión de fraude no es válida, o no encaja con lo que realmente ocurrió, la aseguradora, en principio, debe responder. También se discute a menudo qué significa «robo» en la póliza: las compañías suelen leerlo en el sentido estricto del Código Penal para dejar fuera la estafa, y esa lectura no siempre se sostiene. La existencia de una suplantación **no elimina por sí sola la responsabilidad en el transporte**, como explicamos en nuestro artículo sobre [fraudes en transporte y aseguradoras](/fraudes-transporte-aseguradora/).
 
 ### Esperar a la causa penal no siempre es obligatorio
 
-Que haya una denuncia por estafa no paraliza automáticamente la reclamación civil. La Ley de Enjuiciamiento Civil solo permite suspender el pleito civil por prejudicialidad penal en supuestos concretos (artículo 40), cuando lo que se decida en el proceso penal pueda ser determinante para resolver el civil. En muchos casos, la cobertura de la póliza se puede discutir sin esperar a saber quién fue el autor de la estafa.
+Que haya una denuncia por estafa no paraliza automáticamente la reclamación civil. La Ley de Enjuiciamiento Civil solo permite suspender el pleito civil por prejudicialidad penal en supuestos concretos (artículo 40), cuando lo que se decida en el proceso penal pueda ser determinante para resolver el civil, y aun así la suspensión solo se acuerda cuando el pleito civil está pendiente únicamente de sentencia. En muchos casos, la cobertura de la póliza se puede discutir sin esperar a saber quién fue el autor de la estafa.
 
 ### La comunicación tardía no hace perder la cobertura
 
-El asegurado debe comunicar el siniestro en el plazo de siete días desde que lo conoce, salvo que la póliza fije uno más amplio. Si no lo hace, la aseguradora puede reclamar los daños que le cause el retraso, pero, salvo excepciones, **no queda liberada de pagar** (artículo 16 de la Ley de Contrato de Seguro).
+El asegurado debe comunicar el siniestro en el plazo de siete días desde que lo conoce, salvo que la póliza fije uno más amplio. Si no lo hace, la aseguradora puede reclamar los daños que le cause el retraso, pero **no queda liberada de pagar**, y tampoco puede reclamar esos daños si conoció el siniestro por otro medio. Solo se pierde la indemnización si se incumple con dolo o culpa grave el deber de informar sobre las circunstancias del siniestro (artículo 16 de la Ley de Contrato de Seguro).
 
 ### Los límites de responsabilidad del porteador tienen excepciones
 
-En transporte nacional, la responsabilidad del porteador por pérdida de la mercancía está limitada por kilo en la Ley 15/2009, del contrato de transporte terrestre de mercancías. En transporte internacional, el **Convenio CMR** la limita a 8,33 derechos especiales de giro por kilo (artículo 23). Pero esos límites **no se aplican si hay dolo o una infracción consciente y voluntaria** del porteador o de sus auxiliares (artículo 29 del CMR y artículo 62 de la Ley 15/2009). Cuando quien se apropia de la carga es el propio porteador o alguien de su cadena, la discusión cambia por completo.
+En transporte nacional, la responsabilidad del porteador por pérdida de la mercancía está limitada a un tercio del IPREM/día por kilo de peso bruto (artículo 57 de la Ley 15/2009, del contrato de transporte terrestre de mercancías). En transporte internacional, el **Convenio CMR** la limita a 8,33 derechos especiales de giro por kilo (artículo 23). Pero esos límites **no se aplican si hay dolo**: en transporte nacional, dolo o infracción consciente y voluntaria del deber jurídico asumido (artículo 62 de la Ley 15/2009); en el CMR, dolo o falta equiparable al dolo según la ley del tribunal (artículo 29). Cuando quien se apropia de la carga es el propio porteador o alguien de su cadena, la discusión cambia por completo.
 
 ## Los intereses de demora: el argumento que cambia la negociación
 
 La aseguradora que no paga en plazo sin una causa justificada debe pagar **intereses de demora** especialmente altos (artículo 20 de la Ley de Contrato de Seguro):
 
-- Se devengan desde la fecha del siniestro si la aseguradora no paga en los tres meses siguientes.
+- Se devengan desde la fecha del siniestro si la aseguradora no paga en los tres meses siguientes, o no abona el importe mínimo en los 40 días siguientes a la declaración. Si el siniestro se comunicó fuera de plazo, se cuentan desde la comunicación.
 - Son el **interés legal del dinero incrementado en un 50 %**.
 - Pasados dos años desde el siniestro, **no pueden ser inferiores al 20 % anual**.
 - Solo se excluyen si la falta de pago se debe a una causa justificada o no imputable a la aseguradora, y los tribunales interpretan esa excepción de forma restrictiva.
@@ -71,8 +73,8 @@ En un rehúse injustificado, estos intereses pueden suponer una parte muy releva
 | Acción | Plazo | Norma |
 | --- | --- | --- |
 | Reclamar a la aseguradora por el contrato de seguro de daños | 2 años | Artículo 23 de la Ley de Contrato de Seguro |
-| Reclamar al porteador en transporte nacional | 1 año, o 3 si hay dolo o infracción equiparable | Artículo 79 de la Ley 15/2009 |
-| Reclamar al porteador en transporte internacional (CMR) | 1 año, o 3 si hay dolo o falta equivalente | Artículo 32 del Convenio CMR |
+| Reclamar al porteador en transporte nacional | 1 año, o 2 si hay dolo o infracción consciente y voluntaria del deber jurídico asumido | Artículo 79 de la Ley 15/2009 |
+| Reclamar al porteador en transporte internacional (CMR) | 1 año, o 3 si hay dolo o falta equiparable | Artículo 32 del Convenio CMR |
 
 Los plazos se cuentan de forma distinta en cada caso y pueden interrumpirse o suspenderse con una reclamación por escrito. Lo prudente es actuar en las primeras semanas tras el rehúse.
 
@@ -91,8 +93,8 @@ Los plazos se cuentan de forma distinta en cada caso y pueden interrumpirse o su
 Muchas estafas y robos de mercancía son internacionales: la carga se recoge en España y desaparece en otro país, el falso transportista usa datos de una empresa extranjera o la aseguradora tiene su sede fuera. En esos casos hay que decidir **dónde se reclama** y **cómo se coordinan** los distintos procedimientos:
 
 - **El Convenio CMR** permite demandar, entre otros, ante los tribunales del país del domicilio del demandado o del lugar de carga o de entrega (artículo 31).
-- **En materia de seguros**, el Reglamento (UE) 1215/2012 (Bruselas I bis) protege al tomador, al asegurado y al beneficiario, que pueden demandar a la aseguradora ante los tribunales de su propio domicilio (artículo 11).
-- **Si ya hay procedimientos en otros países**, civiles o penales, hay que coordinarlos: el mismo reglamento regula los procesos idénticos y conexos abiertos en distintos Estados miembros (artículos 29 y 30), y la prueba obtenida en una causa penal extranjera puede ser decisiva en el pleito civil español.
+- **En materia de seguros**, el Reglamento (UE) 1215/2012 (Bruselas I bis) protege al tomador, al asegurado y al beneficiario, que pueden, en principio, demandar a la aseguradora domiciliada en un Estado miembro ante los tribunales de su propio domicilio (artículo 11). En el seguro de mercancías, que es un gran riesgo, la póliza puede contener una cláusula de sumisión válida frente al tomador (artículos 15 y 16), por lo que hay que revisarla.
+- **Si ya hay procedimientos en otros países**, civiles o penales, hay que coordinarlos: el reglamento regula los procesos civiles idénticos y conexos abiertos en distintos Estados miembros (artículos 29 y 30), en transporte CMR rige además la regla propia del artículo 31.2 del Convenio, y la prueba obtenida en una causa penal extranjera puede ser decisiva en el pleito civil español.
 
 Una mala elección del foro o una falta de coordinación entre países puede costar el pleito, aunque el fondo sea favorable.
 
@@ -113,7 +115,7 @@ La mejor defensa frente a un rehúse empieza antes del siniestro:
 - **Verifica al transportista** antes de entregarle la carga: autorización de transporte, datos de contacto contrastados por otra vía y vehículo que coincide con el anunciado.
 - **Revisa tu póliza** y negocia que las obligaciones de verificación sean claras y estén aceptadas por escrito.
 - **Documenta cada porte**: una orden de carga y un documento de control generados en una plataforma con trazabilidad permiten acreditar quién contrató el transporte, con qué vehículo y cuándo. Herramientas como [DeCA Profesional](https://decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=aseguradoras_rehuse) registran el DeCA y la orden de carga digital con su historial.
-- **Cuidado con la subcontratación en cadena**: cuantos más eslabones, más difícil es controlar quién recoge la mercancía. Lo explicamos en nuestra guía sobre [el DECA para agencias de transporte](/deca-y-subcontratacion-que-debe-hacer-realmente-una-agencia-de-transporte/).
+- **Cuidado con la subcontratación en cadena**: cuantos más eslabones, más difícil es controlar quién recoge la mercancía. Lo explicamos en nuestra guía sobre [el DeCA para agencias de transporte](/deca-y-subcontratacion-que-debe-hacer-realmente-una-agencia-de-transporte/).
 
 ## Preguntas frecuentes
 
@@ -131,7 +133,7 @@ Si no paga sin causa justificada, el interés legal del dinero incrementado en u
 
 ### ¿Cuánto tiempo tengo para reclamar a la aseguradora?
 
-Dos años en los seguros de daños. Frente al porteador, un año (tres si hay dolo), tanto en transporte nacional como en el internacional sujeto al CMR.
+Dos años en los seguros de daños. Frente al porteador, un año con carácter general; si hay dolo, dos años en transporte nacional (Ley 15/2009) y tres en el internacional sujeto al CMR.
 
 ### ¿Puedo reclamar directamente a la aseguradora del transportista?
 
@@ -139,12 +141,12 @@ Sí, si el transportista tiene un seguro de responsabilidad civil que cubre el d
 
 ### ¿Dónde se reclama si la mercancía desapareció en otro país?
 
-Depende del tipo de acción. El Convenio CMR permite demandar, entre otros lugares, en el país de carga o de entrega, y el Reglamento Bruselas I bis permite al asegurado demandar a su aseguradora en su propio domicilio. Si hay procedimientos abiertos en otros países, hay que coordinarlos.
+Depende del tipo de acción. El Convenio CMR permite demandar, entre otros lugares, en el país de carga o de entrega, y el Reglamento Bruselas I bis permite, en principio, al asegurado demandar a su aseguradora domiciliada en la Unión Europea en su propio domicilio, salvo que la póliza contenga una cláusula de sumisión válida. Si hay procedimientos abiertos en otros países, hay que coordinarlos.
 
 ## Fuentes
 
-- [Ley 50/1980, de 8 de octubre, de Contrato de Seguro](https://www.boe.es/buscar/act.php?id=BOE-A-1980-22501), artículos 3, 16, 20, 23 y 76.
-- [Ley 15/2009, de 11 de noviembre, del contrato de transporte terrestre de mercancías](https://www.boe.es/buscar/act.php?id=BOE-A-2009-18742), artículos 62 y 79.
+- [Ley 50/1980, de 8 de octubre, de Contrato de Seguro](https://www.boe.es/buscar/act.php?id=BOE-A-1980-22501), artículos 3, 16, 20, 23, 44 y 76.
+- [Ley 15/2009, de 11 de noviembre, del contrato de transporte terrestre de mercancías](https://www.boe.es/buscar/act.php?id=BOE-A-2009-18742), artículos 57, 62 y 79.
 - [Ley de Enjuiciamiento Civil](https://www.boe.es/buscar/act.php?id=BOE-A-2000-323), artículo 40.
-- [Convenio relativo al contrato de transporte internacional de mercancías por carretera (CMR)](https://www.boe.es/buscar/doc.php?id=BOE-A-1974-1201), artículos 23, 29, 31 y 32.
-- [Reglamento (UE) 1215/2012 (Bruselas I bis)](https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32012R1215), artículos 11, 29 y 30.
+- [Convenio relativo al contrato de transporte internacional de mercancías por carretera (CMR)](https://www.boe.es/buscar/doc.php?id=BOE-A-1974-753) y su Protocolo de 1978, artículos 23, 29, 31 y 32.
+- [Reglamento (UE) 1215/2012 (Bruselas I bis)](https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32012R1215), artículos 11, 15, 16, 29 y 30.
