@@ -72,6 +72,8 @@ En **Praetoria División Jurídica** intervenimos en:
 
 Analizamos el caso, la póliza y la viabilidad real de la reclamación antes de iniciar cualquier acción.
 
+Si ya has recibido la carta de rehúse, en nuestra guía [la aseguradora rechaza el siniestro de transporte por estafa o robo](/aseguradora-rechaza-siniestro-transporte-estafa-robo-mercancia/) explicamos cómo se rebaten los motivos habituales, los intereses de demora y los plazos.
+
 ---
 
 ### ¿Tu aseguradora se niega a pagar un siniestro de transporte?
