@@ -1419,6 +1419,29 @@
         1600
       ],
       "avif": true
+    },
+    {
+      "id": "transporte-control-guardia-civil",
+      "estado": "publicada",
+      "escena": "Estafas y robos de mercancía: control policial nocturno a un camión",
+      "archivo": "ed/control-nocturno-camion",
+      "alt": "Control nocturno de la Guardia Civil y la Policía Nacional a un camión, con varias personas detenidas sentadas en el arcén",
+      "foco": "50% 45%",
+      "origen": {
+        "tipo": "prensa",
+        "original": "fotos/prensa/guardia-civil-policia-camion-detenidos.jpg",
+        "fuente": "Guardia Civil y Policía Nacional (Ministerio del Interior)",
+        "nota": "Fotografía de prensa aportada por el titular el 27/10/2026, publicada con el crédito de los cuerpos que la difundieron"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
     }
   ]
 }
