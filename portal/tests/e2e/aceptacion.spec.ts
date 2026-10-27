@@ -73,7 +73,7 @@ test('1. Cliente A se registra desde el móvil, verifica el correo e inicia una 
 
   // 3. El panel indica que falta el contrato
   await p.goto('/inicio/');
-  await expect(p.getByText('Nos faltan un documento para estudiar tu asunto.')).toBeVisible();
+  await expect(p.getByText('Nos falta un documento para estudiar tu asunto.')).toBeVisible();
   await p.goto('/documentacion/');
   await expect(p.getByText('Contrato de trabajo')).toBeVisible();
   await ctx.close();

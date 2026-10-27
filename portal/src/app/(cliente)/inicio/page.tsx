@@ -12,7 +12,7 @@ function siguientePaso(s: ResumenSolicitud): { texto: string; href: string; boto
   if (s.estado === 'borrador') return { texto: 'Tu solicitud está a medias. Termínala y envíala cuando quieras.', href: `/solicitudes/${s.id}/editar/?paso=${s.paso}`, boton: 'Continuar la solicitud' };
   if (['no_aceptada', 'archivada'].includes(s.estado)) return null;
   if (s.subsanar > 0) return { texto: `Hay ${s.subsanar === 1 ? 'un documento' : `${s.subsanar} documentos`} que debes volver a enviar.`, href: `/solicitudes/${s.id}/#documentacion`, boton: 'Ver qué falta' };
-  if (s.pendientes_oblig > 0) return { texto: `Nos faltan ${s.pendientes_oblig === 1 ? 'un documento' : `${s.pendientes_oblig} documentos`} para estudiar tu asunto.`, href: `/solicitudes/${s.id}/#documentacion`, boton: 'Subir documentación' };
+  if (s.pendientes_oblig > 0) return { texto: `${s.pendientes_oblig === 1 ? 'Nos falta un documento' : `Nos faltan ${s.pendientes_oblig} documentos`} para estudiar tu asunto.`, href: `/solicitudes/${s.id}/#documentacion`, boton: 'Subir documentación' };
   return null;
 }
 
