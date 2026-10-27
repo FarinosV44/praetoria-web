@@ -1,0 +1,53 @@
+{
+  "name": "praetoria-portal",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "next dev -p 3100",
+    "build": "next build",
+    "start": "next start -p 3100",
+    "typecheck": "tsc --noEmit",
+    "db:migrate": "node --env-file-if-exists=.env.local --experimental-strip-types scripts/migrate.ts",
+    "db:seed": "node --experimental-strip-types scripts/seed.ts",
+    "personal:alta": "node --experimental-strip-types scripts/personal-alta.ts",
+    "notificaciones:enviar": "node --experimental-strip-types scripts/notificaciones.ts",
+    "recordatorios": "node --experimental-strip-types scripts/recordatorios.ts",
+    "test": "node --experimental-strip-types --test 'tests/unit/**/*.test.ts' 'tests/db/**/*.test.ts'",
+    "test:e2e": "playwright test"
+  },
+  "engines": {
+    "node": ">=22.12"
+  },
+  "dependencies": {
+    "@fontsource-variable/archivo": "^5.3.0",
+    "@fontsource-variable/source-serif-4": "^5.3.1",
+    "@supabase/storage-js": "^2.118.0",
+    "better-auth": "^1.7.14",
+    "file-type": "^22.2.0",
+    "next": "^16.4.3",
+    "nodemailer": "^10.2.1",
+    "pg": "^8.23.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "server-only": "^0.0.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/mailparser": "^3.9.0",
+    "@types/node": "^26.6.5",
+    "@types/nodemailer": "^8.0.2",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/smtp-server": "^3.5.13",
+    "mailparser": "^3.12.4",
+    "otpauth": "^9.5.2",
+    "postcss": "^8.5.32",
+    "smtp-server": "^3.21.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3"
+  }
+}
