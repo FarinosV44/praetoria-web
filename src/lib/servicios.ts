@@ -414,7 +414,7 @@ export const servicios: Servicio[] = [
   { id: 'familia-asesoramiento-previo', area: 'familia', nombre: 'Asesoramiento previo', resumen: 'Antes de tomar cualquier decisión, tanto si estás dudando como si ya lo tienes claro.' },
   { id: 'familia-convenio', area: 'familia', nombre: 'Convenios reguladores', resumen: 'Redacción y negociación.' },
   { id: 'familia-divorcio', area: 'familia', nombre: 'Divorcios y separaciones', resumen: 'De mutuo acuerdo y contenciosos.', pagina: '/abogado-divorcio-horta-nord-valencia/', siguientePaso: { label: 'Comprobar si mi divorcio entra en el precio cerrado', href: '/abogado-divorcio-horta-nord-valencia/#comprobar' } },
-  { id: 'familia-custodia', area: 'familia', nombre: 'Custodia, visitas y pensiones', preguntaMinima: { label: '¿Hay ya una sentencia o un convenio?', opciones: ['Sí', 'No', 'No lo sé'] } },
+  { id: 'familia-custodia', area: 'familia', nombre: 'Custodia, visitas y pensiones', articulos: ['gastos-ordinarios-y-extraordinarios-hijos-divorcio'], preguntaMinima: { label: '¿Hay ya una sentencia o un convenio?', opciones: ['Sí', 'No', 'No lo sé'] } },
   { id: 'familia-modificacion-medidas', area: 'familia', nombre: 'Modificación de medidas y ejecución de sentencias', pagina: '/abogado-divorcio-horta-nord-valencia/' },
   { id: 'familia-patrimonio', area: 'familia', nombre: 'Protección del patrimonio familiar', articulos: ['reservas-empresa-gananciales-divorcio-tribunal-supremo'] },
   { id: 'familia-filiacion', area: 'familia', nombre: 'Filiación y reconocimiento de la maternidad o paternidad', articulos: ['puede-mi-pareja-ser-reconocida-legalmente-como-madre-en-espana-si-mi-hijo-ha-nacido-en-el-extranjero'] },
