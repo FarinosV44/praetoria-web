@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 
-// Recorrido real: formulario -> función /api/consulta (la de producción) -> registro que sustituye a Netlify Forms.
+// Recorrido real: formulario -> recepción /api/consulta (public/api/consulta.php, la de producción) -> registro que sustituye al correo.
 const registro = async (page: Page) => (await page.request.get('/__mock-forms/registro')).json();
 
 test.beforeEach(async ({ page }) => {
@@ -82,7 +82,7 @@ test('fallo de red: avisa, conserva los datos y el reintento entrega una sola ve
   expect(await registro(page)).toHaveLength(1);
 });
 
-test('si falla la entrega a Netlify Forms no se muestra éxito', async ({ page }) => {
+test('si falla el envío del aviso no se muestra éxito', async ({ page }) => {
   await page.request.post('/__mock-forms/fallar?n=1');
   await rellenar(page);
   await esperarTiempoMinimo(page);

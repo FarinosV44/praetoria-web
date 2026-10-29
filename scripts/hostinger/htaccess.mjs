@@ -68,10 +68,18 @@ AddDefaultCharset utf-8
   ExpiresByType text/javascript "access plus 1 year"
 </IfModule>
 
+# Formularios: piezas internas de la recepción (public/api), nunca accesibles directamente
+<FilesMatch "^(comun|catalogo)\\.php$">
+  Require all denied
+</FilesMatch>
+
 RewriteEngine On
 # www → dominio principal (una sola versión indexable)
 RewriteCond %{HTTP_HOST} ^www\\.${esc(DOMINIO)}$ [NC]
 RewriteRule ^(.*)$ https://${DOMINIO}/$1 [R=301,L,NE]
+
+# Recepción de formularios en el propio Hostinger (public/api/*.php): las URL públicas no llevan extensión
+RewriteRule ^api/(consulta|llamada)/?$ api/$1.php [L]
 
 # Redirecciones de la migración desde WordPress (docs/seo/inventario-urls.csv)
 `;

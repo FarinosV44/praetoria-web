@@ -44,7 +44,7 @@ async function recorrido(page: Page, eleccion: 'Aceptar' | 'Rechazar') {
   await page.getByLabel(/^Teléfono/).fill('600 000 000');
   await page.getByLabel(/política de privacidad/).check();
   await page.waitForTimeout(3100);
-  // Primer intento: Netlify Forms falla -> no hay conversión. Reintento: una sola conversión.
+  // Primer intento: la entrega falla -> no hay conversión. Reintento: una sola conversión.
   await page.request.post('/__mock-forms/fallar?n=1');
   await page.getByRole('button', { name: 'Enviar mi consulta' }).click();
   await expect(page.getByRole('button', { name: 'Reintentar el envío' })).toBeVisible();

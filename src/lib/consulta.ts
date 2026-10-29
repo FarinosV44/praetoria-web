@@ -1,6 +1,6 @@
-// Modelo y validación de una consulta. Lo usan el formulario (navegador) y la función
-// netlify/functions/consulta.mts (servidor): las mismas reglas en los dos lados.
-// Importaciones relativas con extensión: Node ejecuta este archivo directamente en la función y en las pruebas.
+// Modelo y validación de una consulta. Lo usan el formulario (navegador) y, con las mismas reglas,
+// la recepción en Hostinger (public/api/consulta.php, con las listas de scripts/formularios/catalogo.mjs).
+// Importaciones relativas con extensión: Node ejecuta este archivo directamente en los scripts y en las pruebas.
 // Sin dependencias (ni zod): este módulo también va al navegador y su peso cuenta (presupuesto de #4).
 import { site, laboral } from './site.ts';
 import { INCIDENCIAS, PROBLEMAS_LABORALES } from './servicios-listas.ts';

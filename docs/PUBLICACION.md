@@ -1,5 +1,7 @@
 # Publicación de la web pública (Fase 1)
 
+> **29/10/2026:** se deja de usar Netlify. Web y formularios en Hostinger desde `main` (`docs/HOSTINGER.md`, `docs/CONSULTAS.md`). Lo que sigue sobre Netlify es histórico.
+>
 > **25/10/2026, 19:45:** la web se sirve en Hostinger desde `main` (ver `docs/HOSTINGER.md`); los formularios siguen en Netlify.
 >
 > **25/10/2026, 19:00:** el propietario autoriza la publicación. Pila de PR #19 → #35 fusionada en `main`; producción indexable (`SITE_INDEXABLE=true` en `netlify.toml`). Pendiente del propietario: rama de producción de Netlify a `main`, visibilidad pública, dominio en Netlify, copia de WordPress y DNS en Hostinger (`docs/seo/LANZAMIENTO.md`).

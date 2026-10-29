@@ -1,5 +1,5 @@
-// Solicitud de llamada / contacto prioritario (#33). La usan el formulario (navegador) y la función
-// netlify/functions/llamada.mts (servidor): las mismas reglas en los dos lados. Sin dependencias.
+// Solicitud de llamada / contacto prioritario (#33). La usan el formulario (navegador) y la recepción
+// en Hostinger (public/api/llamada.php): las mismas reglas en los dos lados. Sin dependencias.
 // No promete disponibilidad: es una petición prioritaria que el despacho atiende según disponibilidad.
 import { AREAS, fechaValida, limpia, telefonoValido, type AreaId } from './consulta.ts';
 import { servicioPorId } from './servicios-indice.ts';
@@ -87,5 +87,5 @@ export function validarLlamada(raw: Record<string, unknown>, ahora = Date.now())
   return Object.keys(e).length ? { ok: false, errores: e } : { ok: true, data: d as Llamada };
 }
 
-/** Formulario de Netlify Forms que recibe la solicitud: el área laboral tiene el suyo, como en las consultas. */
+/** Canal de la solicitud (aparece en el aviso): el área laboral tiene el suyo, como en las consultas. */
 export const formularioLlamada = (area: string) => (area === 'laboral' ? 'llamada-urgente-laboral' : 'llamada-urgente');
