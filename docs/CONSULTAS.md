@@ -2,17 +2,25 @@
 
 ## Recorrido de una consulta
 
+Desde el 29/10/2026 todo funciona en Hostinger, sin Netlify: la web y la recepción de formularios salen del mismo
+repositorio y de la misma publicación (`main`).
+
 ```
-Formulario /contacto/ ──POST JSON──▶ /api/consulta (netlify/functions/consulta.mts)
-   │  validación en el navegador          │ 1. validación en servidor (mismas reglas: src/lib/consulta.ts)
-   │  (mismas reglas)                     │ 2. antispam: campo trampa + mínimo 3 s desde que se cargó
+Formulario /contacto/ ──POST JSON──▶ /api/consulta (public/api/consulta.php; .htaccess quita la extensión)
+   │  validación en el navegador          │ 1. validación en servidor (mismas reglas: src/lib/consulta.ts,
+   │  (mismas reglas)                     │    listas en public/api/catalogo.php, generado desde ellas)
+   │                                      │ 2. antispam: campo trampa + mínimo 3 s desde que se cargó
    │                                      │ 3. asigna responsable por área
    │                                      ▼
-   │                          Netlify Forms, formulario «contacto» (definido en public/__forms.html)
-   │                                      │  guarda la consulta, aplica su filtro antispam (Akismet)
-   │                                      │  y envía el aviso por correo configurado en Netlify
-   ◀── 200 {ok, id} solo si Netlify Forms aceptó la entrega · 422 errores por campo · 502 fallo de entrega
+   │                          Correo a juanfarinos@icav.es (site.email) con mail() de Hostinger,
+   │                          remitente web@praetoriaabogados.es y «Responder a» el correo de quien consulta.
+   │                          Copia de seguridad en ~/consultas-web/AAAA-MM.jsonl (fuera de public_html).
+   ◀── 200 {ok, id} solo si el correo se aceptó para su envío · 422 errores por campo · 502 fallo de entrega
 ```
+
+El asunto del correo indica el área (y «Lucía López» en Laboral). Las solicitudes de llamada llegan con el asunto
+«URGENTE · Solicitud de llamada». Para cambiar el destinatario, se cambia `email` en `src/lib/site.ts` y se regenera
+el catálogo (`node scripts/formularios/catalogo.mjs`; `npm run check` falla si no está al día).
 
 Sin JavaScript, el mismo formulario se envía de forma clásica a `/api/consulta`. Si todo va bien redirige a `/gracias/`; si hay errores, muestra una página con la lista para volver atrás sin perder lo escrito.
 
@@ -36,7 +44,7 @@ La validación en el navegador es accesible:
 - Cada campo con error lleva `aria-invalid` y su mensaje enlazado con `aria-describedby`.
 - Las etiquetas indican cuándo un campo pasa a ser obligatorio.
 
-**No se muestra éxito antes de tiempo**. La confirmación aparece en la propia página solo cuando la función responde que Netlify Forms aceptó la entrega. Si falla la red o la entrega, se avisa, se conservan los datos y el botón pasa a «Reintentar el envío». Un doble clic no duplica el envío, y los reintentos de una misma consulta llevan el mismo identificador.
+**No se muestra éxito antes de tiempo**. La confirmación aparece en la propia página solo cuando el servidor responde que ha aceptado el envío del aviso. Si falla la red o la entrega, se avisa, se conservan los datos y el botón pasa a «Reintentar el envío». Un doble clic no duplica el envío, y los reintentos de una misma consulta llevan el mismo identificador.
 
 **`/gracias/`** solo se usa en el envío sin JavaScript, tiene `noindex` y no se considera conversión: la medición de #9 se basará en la respuesta del servidor, no en visitar esa página.
 
@@ -52,43 +60,35 @@ Corrección: el artículo sobre DeCA Conecta remitía a `info@praetoriaabogados.
 
 ## Pruebas
 
-- `netlify/consulta.test.mts` (12 pruebas; fuera de `netlify/functions/` para que Netlify no la despliegue como función):
+- `scripts/formularios/php.test.mjs` (11 pruebas, ejecutan los `.php` reales con PHP de línea de órdenes; el correo se
+  sustituye por un registro local con `PRAETORIA_ENTREGA_URL`):
   - entrega correcta con área y responsable, y Laboral asignada a Lucía López;
-  - llamada o WhatsApp sin teléfono, correo ausente o inválido;
-  - área sin elegir, privacidad sin aceptar, mensaje corto, campos largos y cuerpo excesivo;
-  - campo trampa y envío rápido, que no se entregan;
-  - fallo de Netlify Forms o de la red, que responde 502;
+  - llamada o WhatsApp sin teléfono, correo ausente o inválido, área sin elegir, privacidad, mensaje corto y campos largos;
+  - cuerpo excesivo (413), campo trampa y envío rápido, que no se entregan;
+  - fallo de la entrega, que responde 502;
   - formulario clásico sin JavaScript, con redirección a `/gracias/` y página de errores;
-  - solo se acepta el método POST.
-- `tests/e2e/contacto.spec.ts` (8 pruebas en navegador): usan **la función real**, servida por `scripts/qa/serve.mjs`, contra un registro local que hace de Netlify Forms y puede simular fallos. Cubren:
-  - área sin preelegir y obligatoria;
-  - llamada sin teléfono;
-  - WhatsApp sin teléfono y correo inválido;
-  - envío correcto con doble clic, que se registra una sola vez y se confirma sin salir de la página;
-  - el aviso y la asignación de Laboral a Lucía López;
-  - fallo de red con reintento que entrega una sola vez;
-  - fallo de la entrega, sin mensaje de éxito;
-  - envío sin JavaScript.
+  - servicio, datos de transporte, fecha y atribución;
+  - solicitud de llamada, y que `comun.php` y `catalogo.php` no hacen nada por sí solos.
+- `tests/e2e/contacto.spec.ts` (8 pruebas en navegador): usan **la recepción real** (`out/api/*.php`), servida por
+  `scripts/qa/serve.mjs` con PHP, contra un registro local que sustituye al correo y puede simular fallos.
 
-## Pendiente de accesos a Netlify (no comprobado)
+## Pendiente en Hostinger (tras publicar)
 
-- [ ] **Detección del formulario**: tras el primer despliegue, *Forms* debe mostrar el formulario «contacto» con sus campos, detectados en `__forms.html`.
-- [ ] **Detección activada**: en sitios nuevos de Netlify viene desactivada (*Forms → Enable form detection*); activarla y volver a desplegar.
-- [ ] **Entrega desde la función**: la función entrega al mismo despliegue que atiende la petición (no a `process.env.URL`, que antes del cambio de DNS apuntaría a WordPress). enviar una consulta ficticia desde el deploy preview y verla en *Forms → contacto*. Entre la función y Netlify Forms está todo probado en local salvo esto: que Netlify Forms acepte el POST de la función a `/__forms.html` del propio sitio. Si no lo aceptara, la alternativa es que la función envíe el correo directamente con un proveedor (requiere su clave) o guarde la consulta en Netlify Blobs.
-- [ ] **Aviso por correo, por área**: las consultas laborales se registran en el formulario `contacto-laboral` y el resto en `contacto` (`formularioDe` en la función). En *Forms → Form notifications*, un aviso por formulario: `contacto` → `juanfarinos@icav.es`; `contacto-laboral` → correo de Lucía López (falta la dirección) y, si se quiere, copia a `juanfarinos@icav.es`.
-- [ ] Revisar en Netlify el filtro antispam y, si con el tráfico real entrara spam, valorar añadir reCAPTCHA de Netlify.
+- [ ] Enviar una consulta de prueba desde praetoriaabogados.es y comprobar que llega a `juanfarinos@icav.es`
+  (mirar también la carpeta de spam la primera vez).
+- [ ] Si los avisos llegaran a spam o no llegaran: crear el buzón `web@praetoriaabogados.es` en Hostinger (o cambiar
+  `REMITENTE_LOCAL` en `public/api/comun.php` por uno existente) y revisar que el SPF del dominio incluya Hostinger.
+- [ ] Comprobar que existe `~/consultas-web/` en el alojamiento tras la primera consulta (copia de seguridad).
 - [ ] Prueba de teléfonos en un móvil real: `tel:+34607527719` y `tel:+34649181290`.
-
-Las consultas solo se envían a Netlify Forms. El campo trampa de Netlify sigue activo, por si alguien envía directamente a `__forms.html` sin pasar por la función; en ese caso se salta la validación del servidor, pero no el filtro antispam de Netlify.
 
 ## Solicitud de llamada (#33)
 
-`/que-me-llame-un-abogado/` envía a `POST /api/llamada` (`netlify/functions/llamada.mts`, reglas en `src/lib/llamada.ts`).
+`/que-me-llame-un-abogado/` envía a `POST /api/llamada` (`public/api/llamada.php`, reglas en `src/lib/llamada.ts`).
 Campos: nombre y teléfono (obligatorios), área, motivo (lista cerrada), fecha de la citación o del plazo (puede ser
 futura, hasta dos años), localidad, forma segura de contacto (sin mensajes; con discreción si otra persona ve el
-teléfono), horario y una descripción breve opcional. Se entrega a Netlify Forms en `llamada-urgente` o, si es laboral,
-`llamada-urgente-laboral`, con el campo `prioridad: URGENTE`. Igual que en las consultas: campo trampa y tiempo mínimo,
-un solo envío a la vez con el mismo id en los reintentos, y confirmación en pantalla solo cuando Netlify Forms ha
-aceptado la entrega. Aviso fijo: «Solicitud de contacto prioritario, sujeta a disponibilidad. El envío no confirma
+teléfono), horario y una descripción breve opcional. Se envía por correo con el asunto «URGENTE · Solicitud de llamada»
+(y «Lucía López» si es laboral) y el campo `prioridad: URGENTE`. Igual que en las consultas: campo trampa y tiempo mínimo,
+un solo envío a la vez con el mismo id en los reintentos, y confirmación en pantalla solo cuando el servidor ha
+aceptado el envío. Aviso fijo: «Solicitud de contacto prioritario, sujeta a disponibilidad. El envío no confirma
 asistencia ni suspende plazos». Nunca se promete atención inmediata ni un plazo de respuesta; para un peligro, 112.
-Pruebas: `netlify/llamada.test.mts` y `tests/e2e/penal.spec.ts`.
+Pruebas: `scripts/formularios/php.test.mjs` y `tests/e2e/penal.spec.ts`.

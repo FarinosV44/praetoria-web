@@ -1,21 +1,18 @@
 // Build de la web: next build + postbuild (out/). Lo usan Netlify, Hostinger y los builds locales.
 //
 // Indexabilidad (SITE_INDEXABLE):
-// - Netlify la fija siempre en netlify.toml (producción true; previsualizaciones false).
-// - Si no viene fijada y no es Netlify, es el build de Hostinger desde `main`: web publicada en
-//   praetoriaabogados.es, indexable, y los formularios envían a las funciones de Netlify
-//   (NEXT_PUBLIC_API_ORIGIN), que entregan en Netlify Forms y avisan por correo.
-// - Para un build local de pruebas: SITE_INDEXABLE=false npm run build.
+// - Si no viene fijada, es el build de Hostinger desde `main`: web publicada en praetoriaabogados.es e indexable.
+//   Los formularios envían a /api/consulta y /api/llamada del propio dominio (public/api/*.php, docs/CONSULTAS.md).
+// - La CI y los builds locales de prueba la fijan: SITE_INDEXABLE=false npm run build.
 import { execFileSync } from 'node:child_process';
 import { cpSync, rmSync } from 'node:fs';
 
 const env = { ...process.env };
-const hostinger = env.SITE_INDEXABLE === undefined && env.NETLIFY !== 'true';
+const hostinger = env.SITE_INDEXABLE === undefined;
 if (hostinger) {
   env.SITE_INDEXABLE = 'true';
-  env.NEXT_PUBLIC_API_ORIGIN ??= 'https://eclectic-sopapillas-6aabb3.netlify.app';
   env.NEXT_BUILD_CPUS ??= '1';
-  console.log('Build para Hostinger: indexable, formularios hacia', env.NEXT_PUBLIC_API_ORIGIN);
+  console.log('Build para Hostinger: indexable, formularios en el propio dominio (/api/*.php)');
 }
 // Webpack en lugar de Turbopack: en Hostinger, Turbopack no puede arrancar su proceso auxiliar de PostCSS
 // («node process exited before we could connect to it»). Mismo resultado, sin ese proceso.

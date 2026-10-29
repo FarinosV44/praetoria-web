@@ -58,10 +58,8 @@ test.describe('resumen de Hacienda', () => {
   });
 });
 
-test('el formulario de contacto envía a la función y Netlify Forms tiene su definición', async ({ page, request }) => {
+test('el formulario de contacto envía a la recepción del propio dominio y sus piezas internas no se sirven', async ({ page, request }) => {
   await page.goto('/contacto/');
   await expect(page.locator('form[name="contacto"]')).toHaveAttribute('action', '/api/consulta');
-  const def = await (await request.get('/__forms.html')).text();
-  expect(def).toContain('name="contacto" data-netlify="true" netlify-honeypot="empresa-web"');
-  for (const campo of ['id', 'nombre', 'email', 'telefono', 'area', 'responsable', 'preferencia', 'mensaje', 'privacidad']) expect(def).toContain(`name="${campo}"`);
+  for (const pieza of ['/api/comun.php', '/api/catalogo.php']) expect((await request.get(pieza)).status()).toBe(404);
 });

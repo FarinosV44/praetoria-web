@@ -73,13 +73,10 @@ Qué comprueba cada cosa está en [`docs/CALIDAD.md`](docs/CALIDAD.md).
 
 ## Publicación
 
-**La web no está publicada.** WordPress sigue en producción. El procedimiento completo, con la copia de seguridad, el cambio de DNS sin tocar el correo, la vuelta atrás y el seguimiento a 7, 14 y 30 días, está en [`docs/seo/LANZAMIENTO.md`](docs/seo/LANZAMIENTO.md).
+La web está publicada en **praetoriaabogados.es**, servida por **Hostinger**, que compila la rama `main` en cada `push`
+(`docs/HOSTINGER.md`). No se usa Netlify. Cada PR se comprueba con la CI de GitHub antes de fusionarla.
 
-Ningún build es indexable salvo que se active expresamente con la variable `SITE_INDEXABLE=true`, y eso solo se hace en producción el día del cambio. Los deploy previews y la dirección provisional `*.netlify.app` llevan `noindex` y así no compiten con WordPress en Google.
-
-Para el formulario de contacto: en Netlify, *Site configuration → Forms → Form notifications*, añade un aviso por correo a `juanfarinos@icav.es` para el formulario **contacto**.
-
-Google Analytics es opcional: *Environment variables* → `NEXT_PUBLIC_GA_ID = G-XXXXXXX`. Con la variable puesta aparece el aviso de cookies, y Analytics solo se carga si el visitante acepta.
+Google Analytics es opcional: variable de entorno `NEXT_PUBLIC_GA_ID = G-XXXXXXX` en el build. Con la variable puesta aparece el aviso de cookies, y Analytics solo se carga si el visitante acepta.
 
 ## Migración SEO
 
@@ -87,5 +84,5 @@ El inventario de las URLs de WordPress, con su destino, las redirecciones y su v
 
 ## Formularios
 
-- **Contacto** (`/contacto/`): la función `/api/consulta` valida cada consulta en servidor y la entrega a Netlify Forms, que la guarda y avisa por correo. Detalle, pruebas y pendientes en [`docs/CONSULTAS.md`](docs/CONSULTAS.md).
+- **Contacto** (`/contacto/`) y **solicitud de llamada**: `/api/consulta` y `/api/llamada` (`public/api/*.php`, en el propio Hostinger) validan cada envío en servidor y lo mandan por correo a juanfarinos@icav.es. Detalle, pruebas y pendientes en [`docs/CONSULTAS.md`](docs/CONSULTAS.md).
 - **Hacienda** y **divorcio**: los cuestionarios funcionan dentro del navegador del visitante y preparan un resumen que él mismo envía por WhatsApp o correo. No guardan datos en ningún servidor.

@@ -26,8 +26,8 @@ const err = (page, msg) => errors.push(`${page}: ${msg}`);
 const walk = (d) => readdirSync(d).flatMap((f) => (statSync(join(d, f)).isDirectory() ? walk(join(d, f)) : [join(d, f)]));
 const files = walk(dir).map((f) => f.slice(dir.length).split('\\').join('/'));
 const fileSet = new Set(files);
-// Archivos HTML de sistema que no son páginas: la definición de Netlify Forms
-const SYSTEM = new Set(['/__forms.html']);
+// Archivos HTML de sistema que no son páginas (ninguno desde que los formularios se reciben en Hostinger)
+const SYSTEM = new Set([]);
 const pages = files.filter((f) => f.endsWith('.html') && !SYSTEM.has(f));
 const pageOf = (f) => (f.endsWith('/index.html') ? f.slice(0, -'index.html'.length) : f);
 const read = (f) => readFileSync(join(dir, f), 'utf8');
