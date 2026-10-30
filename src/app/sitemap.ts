@@ -18,6 +18,7 @@ const STATIC = [
   '/que-me-llame-un-abogado/',
   '/abogado-hacienda-y-seguridad-social-en-valencia/',
   '/abogado-divorcio-horta-nord-valencia/',
+  '/calculadora-indemnizacion-despido/',
   '/aviso-legal/',
   '/politica-de-privacidad/',
   '/politica-de-cookies/',

@@ -178,6 +178,7 @@ export const areaContent: AreaContent[] = [
         enlaces: [
           { label: 'Cómo lo revisamos', href: '/impugnar-despido/' },
           { label: 'Qué hacer las primeras 48 horas', href: '/despido-valencia-que-hacer/' },
+          { label: 'Calcular mi indemnización', href: '/calculadora-indemnizacion-despido/' },
         ],
       },
       {

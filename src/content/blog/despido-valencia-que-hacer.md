@@ -86,6 +86,8 @@ Dependiendo del caso:
 - Finiquito correcto
 - Readmisión
 
+Puedes estimar cuánto te corresponde con nuestra [calculadora de indemnización por despido](/calculadora-indemnizacion-despido/).
+
 👉 Cada detalle importa.
 
 ---
