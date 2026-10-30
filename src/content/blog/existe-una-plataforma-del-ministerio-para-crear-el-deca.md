@@ -42,7 +42,7 @@ La herramienta gratuita es una opción que puede resultar adecuada para tu empre
 
 Por ejemplo, una agencia puede repetir cada semana las mismas rutas con distintos transportistas. Una empresa cargadora puede recibir documentos emitidos por sus proveedores. Un equipo de tráfico puede necesitar consultar el historial compartido y corregir un dato durante el servicio.
 
-En estos casos, el tiempo dedicado a introducir datos, buscar archivos y coordinar personas también forma parte del coste de gestión.
+En estos casos, el tiempo dedicado a introducir datos, buscar archivos y coordinar personas también forma parte del coste de gestión. Para comparar las opciones privadas, consulta nuestra guía sobre qué [plataforma DECA elegir](/plataforma-deca-cual-elegir-antes-del-5-de-octubre-de-2026/), la [comparativa de software DeCA con precios](/software-deca-comparativa-programas-y-precios/) y, si tus conductores trabajan desde el teléfono, la guía sobre la [app para hacer el DECA desde el móvil](/aplicacion-movil-para-generar-deca/).
 
 ## Qué aporta DeCA Profesional a la gestión diaria
 
