@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import { Icon, LineIcon } from './Icon';
 import { contactos, mensajes, whatsapp, type CanalId } from '@/lib/site';
 
@@ -9,6 +10,7 @@ export function CtaBand({
   whatsappText,
   href = '/contacto/',
   canal = 'general',
+  marca,
 }: {
   title?: string;
   text?: string;
@@ -16,12 +18,15 @@ export function CtaBand({
   /** Destino del formulario: /contacto/ o /contacto/?servicio=… para conservar el asunto */
   href?: string;
   canal?: CanalId;
+  /** Marca de una división (p. ej. el sello de Praetoria Fine Art) sobre el título */
+  marca?: ReactNode;
 }) {
   const c = contactos[canal];
   return (
     <section className="section section--ink cta">
       <div className="wrap cta__inner">
         <div>
+          {marca}
           <h2>{title}</h2>
           <p className="cta__text">{text}</p>
         </div>

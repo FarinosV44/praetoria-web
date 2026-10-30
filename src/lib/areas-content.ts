@@ -321,15 +321,26 @@ export const areaContent: AreaContent[] = [
     slug: 'arte-y-patrimonio',
     id: 'arte',
     group: 'particulares',
-    title: 'Abogados de arte y patrimonio en Valencia | Obras y colecciones',
+    title: 'Abogados de arte y patrimonio en Valencia | Praetoria Fine Art',
     description:
-      'Asesoramiento jurídico en Valencia sobre arte, patrimonio cultural y protección de obras, colecciones y bienes históricos: autenticidad, propiedad, sucesiones y compraventas.',
+      'Praetoria Fine Art, la división de arte de Praetoria Abogados: compraventa y cesión de obras, herencias con colecciones, procedencia, atribución y exportación de bienes culturales.',
     h1: 'Asesoramiento jurídico en arte y patrimonio',
     lede: 'Las obras de arte no son solo objetos. Son valor, historia y legado, y también un conflicto potencial si no se gestionan bien.',
     intro: [
-      'Herencias que incluyen colecciones, compras internacionales, cesiones a museos, atribuciones discutidas, movimientos transfronterizos o ventas privadas: todo esto requiere conocimiento jurídico, pero también sensibilidad, formación específica y experiencia directa.',
-      'El área la dirige un abogado con formación en Derecho y en Historia del Arte. Asesoramos a particulares, coleccionistas, inversores, herederos, galeristas e instituciones para que tomen decisiones bien fundadas y acordes al valor cultural y económico de cada pieza.',
+      'Praetoria Fine Art es la división de Praetoria Abogados dedicada al arte y al patrimonio cultural. Herencias que incluyen colecciones, compras internacionales, cesiones a museos, atribuciones discutidas, movimientos transfronterizos o ventas privadas: todo esto requiere conocimiento jurídico, pero también sensibilidad, formación específica y experiencia directa.',
+      'La división la dirige un abogado con formación en Derecho y en Historia del Arte. Asesoramos a particulares, coleccionistas, inversores, herederos, galeristas e instituciones para que tomen decisiones bien fundadas y acordes al valor cultural y económico de cada pieza, con la discreción que exige este mercado.',
     ],
+    audience: {
+      title: 'A quién asesoramos',
+      items: [
+        'Coleccionistas e inversores en arte',
+        'Herederos de colecciones o de obra de un artista',
+        'Artistas y sus herederos',
+        'Galerías, anticuarios y marchantes',
+        'Fundaciones, museos y comisarios',
+        'Empresas y family offices con patrimonio artístico',
+      ],
+    },
     servicesTitle: 'Qué hacemos en arte y patrimonio',
     closing:
       'Aquí el derecho no es solo un marco legal: es una herramienta para preservar, proteger y transmitir patrimonio con seguridad, criterio y visión a largo plazo.',

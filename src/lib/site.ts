@@ -49,7 +49,7 @@ export const mensajes = {
   familia: 'Hola, Praetoria. Quiero consultar con un abogado un asunto de familia.',
   divorcio: 'Hola, Praetoria. Quiero hablar con un abogado sobre mi caso de divorcio.',
   modificacionMedidas: 'Hola, Praetoria. Quiero consultar con un abogado una modificación de medidas.',
-  arte: 'Hola, Praetoria. Quiero consultar con un abogado un asunto de arte y patrimonio.',
+  arte: 'Hola, Praetoria Fine Art. Quiero consultar con un abogado un asunto de arte y patrimonio.',
   laboral: 'Hola, Praetoria. Quiero consultar un asunto laboral con el área laboral del despacho.',
   penal: 'Hola, Praetoria. Quiero consultar con un abogado un asunto penal.',
   elPuig: 'Hola, Praetoria. Necesito información sobre vuestros servicios jurídicos en El Puig.',
@@ -157,7 +157,7 @@ export const areas: AreaRef[] = [
     id: 'arte',
     slug: 'arte-y-patrimonio',
     name: 'Arte y patrimonio',
-    short: 'Compraventa y cesión de obras, herencias con colecciones y atribución.',
+    short: 'Praetoria Fine Art: compraventa y cesión de obras, herencias con colecciones, procedencia y atribución.',
     group: 'particulares',
   },
 ];

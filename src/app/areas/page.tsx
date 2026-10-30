@@ -5,6 +5,7 @@ import { areaContent } from '@/lib/areas-content';
 import { areasDe, groups } from '@/lib/site';
 import { iconoArea } from '@/lib/iconos';
 import { LineIcon } from '@/components/Icon';
+import { FineArtSello } from '@/components/FineArt';
 import { buildMetadata } from '@/lib/seo';
 
 export const metadata = buildMetadata({
@@ -37,6 +38,11 @@ export default function AreasPage() {
                   <h3 className="h-icono"><LineIcon name={iconoArea[a.id]} /><Link href={`/${a.slug}/`}>{a.name}</Link></h3>
                   <div>
                     <p>{bySlug[a.slug]?.lede ?? a.short}</p>
+                    {a.id === 'arte' && (
+                      <Link className="fine-art-boton" href={`/${a.slug}/`} aria-label="Praetoria Fine Art, división de arte y patrimonio">
+                        <FineArtSello />
+                      </Link>
+                    )}
                     <p className="more"><Link href={`/${a.slug}/`}>Ver {a.name.toLowerCase()}</Link></p>
                   </div>
                 </li>
