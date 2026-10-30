@@ -1,7 +1,7 @@
 ---
 title: "DECA con varios lugares de carga y descarga: qué dice la ley y cómo hacerlo correctamente"
-seoTitle: "DECA con varios lugares de carga y descarga: guía legal"
-description: "Descubre cómo crear un DECA con varios lugares de carga y descarga, qué exige la ley y cómo hacerlo fácilmente con DECAProfesional."
+seoTitle: "DECA con varias cargas y descargas: cómo hacerlo bien"
+description: "¿Un mismo camión con varias recogidas o entregas? Cuándo vale un solo DECA, qué datos poner en cada parada y los errores que más problemas dan en una inspección."
 date: 2026-09-12
 updated: 2026-10-23
 category: transporte

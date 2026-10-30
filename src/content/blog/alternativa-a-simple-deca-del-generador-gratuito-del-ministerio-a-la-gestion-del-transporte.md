@@ -1,7 +1,7 @@
 ---
 title: "Alternativa a SIMPLE DeCA: del generador gratuito del Ministerio a la gestión del transporte"
-seoTitle: "Alternativa a SIMPLE DeCA: cuándo elegir DeCA Profesional"
-description: "¿Usas el DeCA gratis del Ministerio? Descubre cuándo compensa DeCA Profesional: gestión documental, datos reutilizables y orden de carga digital."
+seoTitle: "SIMPLE DeCA vs DeCA Profesional: diferencias y cuál elegir"
+description: "Comparamos la app gratuita del Ministerio (SIMPLE) con DeCA Profesional: qué hace cada una, qué le falta a la gratuita y cuándo compensa pasar a una plataforma."
 date: 2026-10-12
 updated: 2026-10-23
 category: transporte

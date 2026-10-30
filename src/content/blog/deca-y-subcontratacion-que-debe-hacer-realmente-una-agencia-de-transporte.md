@@ -1,7 +1,7 @@
 ---
 title: "DECA para agencias de transporte: subcontratación, obligaciones y sanciones"
-seoTitle: "DECA para agencias de transporte: subcontratación y sanciones"
-description: "Cuándo una agencia de transporte debe hacer el DECA, qué hacer si subcontrata, de qué datos responde, qué sanciones hay y cómo protegerse con sus órdenes de carga."
+seoTitle: "DECA en agencias: quién responde al subcontratar"
+description: "Si eres agencia y subcontratas, puedes ser el cargador contractual del DECA. De qué datos respondes, qué sanciones hay y cómo protegerte en la orden de carga."
 date: 2026-09-07
 updated: 2026-10-25
 category: transporte

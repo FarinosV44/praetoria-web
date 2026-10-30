@@ -25,7 +25,8 @@ type MetaInput = {
 };
 
 export function pageTitle(title: string) {
-  return title.includes('Praetoria') ? title : `${title} | ${site.name}`;
+  // Sufijo de marca corto: deja sitio en el resultado de Google al título de cada página
+  return title.includes('Praetoria') ? title : `${title} | Praetoria Abogados`;
 }
 
 export function buildMetadata({ title, description, path, image: imagenOg,  type = 'website', noindex, revisionPendiente, published, modified, locale = 'es_ES' }: MetaInput): Metadata {

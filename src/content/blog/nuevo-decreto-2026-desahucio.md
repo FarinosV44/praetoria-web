@@ -1,7 +1,7 @@
 ---
 title: "Nuevo decreto desahucio 2026: cuándo ya no se suspende y qué pueden hacer los propietarios"
-seoTitle: "Nuevo decreto desahucio 2026: qué cambia para propietarios"
-description: "Te explicamos cuándo ya no se suspende el desahucio en 2026 y qué pueden hacer los propietarios ante impagos."
+seoTitle: "Decreto de desahucios 2026: cuándo ya no se suspende"
+description: "Qué cambia en 2026 para los propietarios: cuándo ya no se suspende el desahucio y qué puedes hacer si tu inquilino no paga."
 date: 2026-02-12
 updated: 2026-10-23
 category: civil-vivienda

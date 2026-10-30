@@ -1,7 +1,7 @@
 ---
 title: "Cuánto cuesta un abogado en España (y por qué algunos son mucho más baratos)"
-seoTitle: "Cuánto cuesta un abogado en España y qué incluye"
-description: "¿Cuánto cuesta un abogado en España? Te explicamos precios reales, qué incluyen y por qué algunos son mucho más baratos."
+seoTitle: "Cuánto cuesta un abogado en España: precios reales"
+description: "Cuánto cuesta un abogado en España según el asunto, qué incluye el presupuesto y por qué algunos son mucho más baratos."
 date: 2026-03-27
 updated: 2026-04-22
 category: elegir-abogado

@@ -1,7 +1,7 @@
 ---
 title: "Sanciones del DeCA: guía legal para transportistas y cargadores"
-seoTitle: "Sanciones del DeCA: multas, responsables y cómo evitarlas"
-description: "Qué sanciones puede acarrear un DeCA inexistente o incorrecto, quién responde (cargador, transportista o agencia), qué errores técnicos se sancionan y cómo recurrir."
+seoTitle: "Multas del DeCA: cuánto son, quién paga y cómo evitarlas"
+description: "No llevar el DeCA o llevarlo mal es infracción grave, con multas desde 401 €. Quién responde (cargador, agencia o transportista), qué errores se sancionan y cómo recurrir."
 date: 2026-09-06
 updated: 2026-10-30
 category: transporte
