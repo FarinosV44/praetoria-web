@@ -70,6 +70,49 @@
    ]
   },
   {
+   "id": "transporte-cmr-internacional",
+   "area": "transporte",
+   "nombre": "Convenio CMR y transporte internacional",
+   "documentos": [
+    {
+     "id": "transporte-cmr-internacional-1",
+     "label": "CMR con las reservas anotadas",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "transporte-cmr-internacional-2",
+     "label": "Orden de carga o contrato de transporte",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "transporte-cmr-internacional-3",
+     "label": "Facturas de la mercancía y del porte",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "transporte-cmr-internacional-4",
+     "label": "Fotografías, informe pericial o acta de entrega",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "transporte-cmr-internacional-5",
+     "label": "Póliza de seguro y carta de rechazo, si la hay",
+     "sensible": false,
+     "obligatorio": false
+    },
+    {
+     "id": "transporte-cmr-internacional-6",
+     "label": "Correos y mensajes con el cliente y los porteadores",
+     "sensible": false,
+     "obligatorio": false
+    }
+   ]
+  },
+  {
    "id": "laboral-despidos",
    "area": "laboral",
    "nombre": "Despidos e impugnación",

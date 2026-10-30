@@ -39,7 +39,8 @@ export const indiceServicios: ServicioIndice[] = [
   {
     "id": "transporte-cmr-internacional",
     "area": "transporte",
-    "nombre": "Convenio CMR y transporte internacional"
+    "nombre": "Convenio CMR y transporte internacional",
+    "incidencia": "mercancia"
   },
   {
     "id": "transporte-aseguradoras",
