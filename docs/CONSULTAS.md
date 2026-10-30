@@ -14,7 +14,7 @@ Formulario /contacto/ ──POST JSON──▶ /api/consulta (public/api/consult
    │                                      ▼
    │                          Correo a info@praetoriaabogados.es (site.email) por la API de Resend (dominio autenticado),
    │                          o con mail() de Hostinger si no hay clave o Resend falla; remitente
-   │                          web@praetoriaabogados.es y «Responder a» el correo de quien consulta.
+   │                          info@praetoriaabogados.es y «Responder a» el correo de quien consulta.
    │                          Copia de seguridad en ~/consultas-web/AAAA-MM.jsonl (fuera de public_html).
    ◀── 200 {ok, id} solo si el correo se aceptó para su envío · 422 errores por campo · 502 fallo de entrega
 ```

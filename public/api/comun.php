@@ -13,7 +13,7 @@
 if (!defined('PRAETORIA_FORMULARIOS')) { http_response_code(404); exit; }
 
 date_default_timezone_set('Europe/Madrid');
-const REMITENTE_LOCAL = 'web'; // web@<dominio>: remitente técnico de los avisos
+const REMITENTE_LOCAL = 'info'; // info@<dominio>: buzón real del despacho en Hostinger (un remitente inexistente no se entrega)
 
 function catalogo(): array {
   static $c = null;
