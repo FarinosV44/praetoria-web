@@ -6,7 +6,7 @@ date: 2026-10-27
 category: familia
 tags: ["pensión de alimentos", "gastos extraordinarios", "divorcio", "custodia", "mediación"]
 intencion: "Saber qué gastos de los hijos están incluidos en la pensión de alimentos y cuáles se pagan a medias"
-imagenPendiente: "Una mochila escolar con libros y una calculadora sobre una mesa de cocina, sin rostros ni texto legible"
+imagen: familia-gastos-colegio
 ---
 
 Es la discusión más habitual entre padres separados, y casi nunca por grandes cantidades: los libros de septiembre, la excursión al museo, el campamento de verano, la ortodoncia o las clases de inglés. ¿Están incluidos en la pensión de alimentos o hay que pagarlos a medias?

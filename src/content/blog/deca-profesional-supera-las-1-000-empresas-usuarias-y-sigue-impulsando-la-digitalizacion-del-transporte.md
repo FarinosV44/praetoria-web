@@ -8,7 +8,7 @@ category: transporte
 deca: herramienta
 wpId: 3090
 intencion: "Noticia: implantación de DeCA Profesional en empresas de transporte"
-imagen: deca-logo
+imagen: logistica-flota-aparcada
 ---
 
 

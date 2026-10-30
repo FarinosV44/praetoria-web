@@ -6,7 +6,7 @@ date: 2026-10-30
 category: laboral
 tags: ["carta de despido", "modelo carta de despido", "carta de despido objetivo", "carta de despido disciplinario", "despido improcedente", "abogado laboralista valencia"]
 intencion: "Saber qué requisitos tiene una carta de despido, si la mía es válida y ver un modelo"
-imagenPendiente: "Una carta impresa y un bolígrafo sobre una mesa de oficina, con una persona leyendo de fondo desenfocada; sin texto legible ni logotipos"
+imagen: laboral-carta-despido
 ---
 
 La carta de despido es el documento que más pesa en un juicio por despido: la empresa solo puede defender en el juzgado los hechos y las causas que puso por escrito. Por eso una carta vaga, sin fecha o sin la indemnización puesta a disposición convierte en improcedente un despido que, con una carta bien hecha, habría sido procedente.

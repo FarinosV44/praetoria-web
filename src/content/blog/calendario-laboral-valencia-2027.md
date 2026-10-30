@@ -6,7 +6,7 @@ date: 2026-10-26
 category: laboral
 tags: ["calendario laboral", "festivos Valencia"]
 intencion: "Saber qué días son festivos en Valencia ciudad en 2027 y qué puentes hay"
-imagenPendiente: "Calendario de pared o de mesa en una oficina de Valencia, sin fechas ni texto legible"
+imagen: laboral-calendario
 ---
 
 En 2027 los trabajadores de Valencia ciudad tienen **14 días festivos**: los 12 que fija la Generalitat para toda la Comunitat Valenciana y los 2 festivos locales que ha aprobado el Ayuntamiento.

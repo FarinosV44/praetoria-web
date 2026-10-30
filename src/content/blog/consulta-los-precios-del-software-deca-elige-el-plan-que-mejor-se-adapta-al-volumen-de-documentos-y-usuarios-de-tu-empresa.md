@@ -8,7 +8,7 @@ category: transporte
 deca: herramienta
 wpId: 3073
 intencion: "Conocer el precio de DeCA Profesional y elegir plan"
-imagen: deca-equipo
+imagen: oficina-equipo-pantallas
 ---
 
 

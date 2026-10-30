@@ -7,7 +7,7 @@ category: transporte
 deca: herramienta
 tags: ["deca", "inteligencia artificial", "software deca", "generar deca"]
 intencion: "Generar el DeCA automáticamente con IA a partir de la documentación del transporte"
-imagen: deca-fotografiar-documento
+imagen: logistica-movil-documentos
 ---
 
 **La información del DeCA casi siempre existe ya en algún papel.** Está en la orden de transporte que envía el cargador, en el CMR o en el albarán. Copiarla a mano en un formulario lleva tiempo y es la forma más habitual de equivocarse en un NIF, una matrícula o un peso. **DECA Scan AI**, la nueva función de [DeCA Profesional](https://decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=blog_deca_scan), lee esos documentos con inteligencia artificial y prepara el DeCA para que solo tengas que revisarlo.

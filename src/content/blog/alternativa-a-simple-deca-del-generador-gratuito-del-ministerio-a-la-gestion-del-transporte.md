@@ -8,7 +8,7 @@ category: transporte
 deca: herramienta
 wpId: 3088
 intencion: "Comparar SIMPLE DeCA del Ministerio con una herramienta de gestión del DeCA"
-imagen: deca-panel
+imagen: logistica-panel-datos
 ---
 
 

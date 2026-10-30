@@ -7,7 +7,7 @@ category: transporte
 deca: guia
 tags: ["morosidad transporte", "sanciones LOTT", "plazo de pago 60 días", "recurso multa transporte", "cargadores"]
 intencion: "Recurrir una multa de Transportes por pagar el porte más allá de 60 días"
-imagenPendiente: "Una mesa de oficina de tráfico con facturas, albaranes y una calculadora, sin texto legible ni logotipos"
+imagen: transporte-facturas-calculadora
 ---
 
 Cada vez más empresas reciben una carta de la Dirección General de Transporte por Carretera y Ferrocarril, o de la consejería de su comunidad autónoma, pidiendo las facturas de un mes, los contratos y los justificantes bancarios de pago a sus transportistas. Unas semanas después llega el acuerdo de inicio de un expediente sancionador: **pagaste el porte más allá de los 60 días**.
