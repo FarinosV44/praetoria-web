@@ -747,6 +747,15 @@
   .page-divorcio .ticks { list-style: none; padding: 0; margin: 1.4em 0 0; display: grid; gap: 6px; }
   .page-divorcio .ticks li { padding-left: 22px; position: relative; }
   .page-divorcio .ticks li::before { content: ''; position: absolute; left: 2px; top: 0.45em; width: 9px; height: 5px; border-left: 2px solid var(--red); border-bottom: 2px solid var(--red); transform: rotate(-45deg); }
+  .page-calculadora .calc { display: grid; gap: 24px; }
+  .page-calculadora .calc__form { padding: 24px; border: 1px solid var(--line); border-top: 3px solid var(--ink); }
+  .page-calculadora .calc__fila { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .page-calculadora .calc__error { color: var(--red); font-weight: 600; margin: 0; }
+  .page-calculadora .calc__resultado:not(:empty) { padding: 24px; border: 1px solid var(--line); border-top: 3px solid var(--red); }
+  .page-calculadora .calc__etiqueta { font-weight: 700; margin: 0; }
+  .page-calculadora .calc__importe { font-size: clamp(2.6rem, 2rem + 3vw, 4rem); font-weight: 800; line-height: 1; margin: 6px 0 12px; color: var(--red); font-variant-numeric: tabular-nums; }
+  .page-calculadora .calc__tramos { margin: 12px 0; padding-left: 1.2em; list-style: disc; }
+  .page-calculadora .calc .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
   .page-divorcio .price { border: 2px solid var(--ink); padding: 28px; align-self: center; }
   .page-divorcio .price__label { font-weight: 700; margin: 0; }
   .page-divorcio .price__big { font-size: clamp(3.4rem, 2.5rem + 4vw, 5.5rem); font-weight: 800; font-variation-settings: 'wdth' 75; line-height: 1; margin: 6px 0 4px; color: var(--red); }
