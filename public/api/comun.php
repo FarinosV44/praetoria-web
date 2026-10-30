@@ -4,9 +4,10 @@
 // (src/lib/consulta.ts y src/lib/llamada.ts); las listas y los contactos llegan de catalogo.php, generado desde ellos.
 //
 // Entrega:
-//  - Producción: correo con mail() de Hostinger a la dirección del despacho (site.email), con «Responder a»
-//    el correo de quien consulta. Además se guarda una copia en una carpeta fuera de la web
-//    (../consultas-web/ junto a public_html), por si un correo no llegara.
+//  - Producción: correo a la dirección del despacho (site.email), con «Responder a» el correo de quien consulta.
+//    Por la API de Resend si hay clave en la configuración privada (configuracion()); si no, con mail() de Hostinger.
+//    Además se guarda una copia en una carpeta fuera de la web (../consultas-web/ junto a public_html),
+//    por si un correo no llegara.
 //  - Pruebas: si existe la variable PRAETORIA_ENTREGA_URL, se envía allí en lugar de por correo
 //    (scripts/qa/serve.mjs la usa para el registro de las pruebas en navegador).
 if (!defined('PRAETORIA_FORMULARIOS')) { http_response_code(404); exit; }
@@ -295,13 +296,55 @@ function entregar(string $formulario, string $asunto, array $datos, string $resp
   }
   $c = catalogo();
   $remitente = REMITENTE_LOCAL . '@' . $c['despacho']['dominio'];
+  $de = 'Web ' . $c['despacho']['nombre'];
+  $responder = ($responder_a !== '' && filter_var($responder_a, FILTER_VALIDATE_EMAIL)) ? $responder_a : '';
+
+  // Con clave de Resend (configuración privada fuera de la web), se envía por su API: el dominio está
+  // autenticado (SPF y DKIM) y el correo llega. Si Resend falla, se intenta con mail() como respaldo.
+  $clave = configuracion()['resend_api_key'] ?? '';
+  if ($clave !== '' && enviar_resend($clave, "$de <$remitente>", $c['despacho']['email'], sin_saltos($asunto), cuerpo_correo($datos), $responder, $formulario)) return true;
+
   $cabeceras = [
-    'From' => mb_encode_mimeheader('Web ' . $c['despacho']['nombre'], 'UTF-8') . " <$remitente>",
+    'From' => mb_encode_mimeheader($de, 'UTF-8') . " <$remitente>",
     'MIME-Version' => '1.0',
     'Content-Type' => 'text/plain; charset=UTF-8',
     'Content-Transfer-Encoding' => '8bit',
     'X-Formulario' => $formulario,
   ];
-  if ($responder_a !== '' && filter_var($responder_a, FILTER_VALIDATE_EMAIL)) $cabeceras['Reply-To'] = $responder_a;
+  if ($responder !== '') $cabeceras['Reply-To'] = $responder;
   return mail($c['despacho']['email'], mb_encode_mimeheader(sin_saltos($asunto), 'UTF-8'), cuerpo_correo($datos), $cabeceras, '-f' . $remitente);
+}
+
+/**
+ * Configuración privada: un archivo PHP fuera de la carpeta pública, que no está en el repositorio
+ * (el repositorio es público). En Hostinger: junto a public_html, en praetoria-config.php:
+ *   <?php return ['resend_api_key' => 're_...'];
+ * PRAETORIA_CONFIG permite indicar otra ruta (pruebas).
+ */
+function configuracion(): array {
+  static $conf = null;
+  if ($conf !== null) return $conf;
+  $ruta = getenv('PRAETORIA_CONFIG') ?: dirname(rtrim((string) ($_SERVER['DOCUMENT_ROOT'] ?? __DIR__ . '/..'), '/')) . '/praetoria-config.php';
+  $leida = is_file($ruta) ? (include $ruta) : [];
+  return $conf = is_array($leida) ? $leida : [];
+}
+
+/** Envío por la API de Resend (https://resend.com/docs/api-reference/emails/send-email). true si la acepta. */
+function enviar_resend(string $clave, string $de, string $para, string $asunto, string $texto, string $responder, string $formulario): bool {
+  $cuerpo = ['from' => $de, 'to' => [$para], 'subject' => $asunto, 'text' => $texto, 'tags' => [['name' => 'formulario', 'value' => str_replace('-', '_', $formulario)]]];
+  if ($responder !== '') $cuerpo['reply_to'] = $responder;
+  $ch = curl_init(getenv('PRAETORIA_RESEND_URL') ?: 'https://api.resend.com/emails');
+  curl_setopt_array($ch, [
+    CURLOPT_POST => true,
+    CURLOPT_HTTPHEADER => ['Authorization: Bearer ' . $clave, 'Content-Type: application/json'],
+    CURLOPT_POSTFIELDS => json_encode($cuerpo, JSON_UNESCAPED_UNICODE),
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_TIMEOUT => 10,
+  ]);
+  $respuesta = curl_exec($ch);
+  $codigo = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+  curl_close($ch);
+  if ($codigo >= 200 && $codigo < 300) return true;
+  error_log("formularios: Resend respondió $codigo " . substr((string) $respuesta, 0, 300));
+  return false;
 }

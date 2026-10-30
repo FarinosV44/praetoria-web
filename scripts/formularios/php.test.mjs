@@ -5,6 +5,9 @@ import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn, spawnSync } from 'node:child_process';
 import { createServer } from 'node:http';
+import { mkdtempSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const PHP = process.env.PHP_BIN || 'php';
@@ -32,12 +35,12 @@ before(async () => {
 after(() => servidor?.close());
 
 /** Ejecuta el endpoint y devuelve { status, headers, body, json() } */
-function post(archivo, datos, { tipo = 'application/json', entrega = destino } = {}) {
+function post(archivo, datos, { tipo = 'application/json', entrega = destino, env = {}, args = [] } = {}) {
   const cuerpo = tipo === 'application/json' ? JSON.stringify(datos) : new URLSearchParams(datos).toString();
   return new Promise((resolve, reject) => {
-    const hijo = spawn(PHP, [API + archivo], {
-      env: { ...process.env, REQUEST_METHOD: 'POST', CONTENT_TYPE: tipo, CONTENT_LENGTH: String(Buffer.byteLength(cuerpo)), PRAETORIA_ENTREGA_URL: entrega },
-    });
+    const entorno = { ...process.env, REQUEST_METHOD: 'POST', CONTENT_TYPE: tipo, CONTENT_LENGTH: String(Buffer.byteLength(cuerpo)), PRAETORIA_ENTREGA_URL: entrega, ...env };
+    if (!entorno.PRAETORIA_ENTREGA_URL) delete entorno.PRAETORIA_ENTREGA_URL;
+    const hijo = spawn(PHP, [...args, API + archivo], { env: entorno });
     const salida = [];
     hijo.stdout.on('data', (c) => salida.push(c));
     hijo.on('error', reject);
@@ -169,4 +172,50 @@ t('las piezas internas no se ejecutan por sí solas', async () => {
     const r = spawnSync(PHP, [API + archivo]);
     assert.equal(r.stdout.toString(), '', archivo);
   }
+});
+
+/** Simula la API de Resend: guarda lo recibido y responde con el código indicado. */
+async function conResend(codigo, fn) {
+  const recibidos = [];
+  const srv = createServer((req, res) => {
+    const partes = [];
+    req.on('data', (c) => partes.push(c));
+    req.on('end', () => {
+      recibidos.push({ auth: req.headers.authorization, cuerpo: JSON.parse(Buffer.concat(partes).toString()) });
+      res.writeHead(codigo, { 'Content-Type': 'application/json' });
+      res.end(codigo === 200 ? '{"id":"x"}' : '{"message":"error"}');
+    });
+  });
+  await new Promise((r) => srv.listen(0, '127.0.0.1', r));
+  const dir = mkdtempSync(join(tmpdir(), 'praetoria-conf-'));
+  const conf = join(dir, 'praetoria-config.php');
+  writeFileSync(conf, "<?php return ['resend_api_key' => 're_prueba'];\n");
+  try {
+    await fn({ recibidos, env: { PRAETORIA_ENTREGA_URL: '', PRAETORIA_CONFIG: conf, PRAETORIA_RESEND_URL: `http://127.0.0.1:${srv.address().port}/emails` } });
+  } finally {
+    srv.close();
+  }
+}
+
+t('con clave de Resend: envía por su API al despacho, con asunto, «Responder a» y el texto de la consulta', async () => {
+  await conResend(200, async ({ recibidos, env }) => {
+    const r = await consulta({ ...base(), area: 'laboral', representa: 'trabajador' }, { env });
+    assert.equal(r.status, 200);
+    assert.equal(recibidos.length, 1);
+    const { auth, cuerpo } = recibidos[0];
+    assert.equal(auth, 'Bearer re_prueba');
+    assert.deepEqual(cuerpo.to, ['juanfarinos@icav.es']);
+    assert.match(cuerpo.from, /<web@praetoriaabogados\.es>$/);
+    assert.match(cuerpo.subject, /^Nueva consulta web · Laboral \(Lucía López\) · Persona de prueba$/);
+    assert.equal(cuerpo.reply_to, 'prueba@example.com');
+    assert.match(cuerpo.text, /Responsable: Lucía López \(649 181 290\)/);
+  });
+});
+
+t('si Resend falla y mail() también, 502: no se da por recibida', async () => {
+  await conResend(500, async ({ recibidos, env }) => {
+    const r = await consulta(base(), { env, args: ['-d', 'sendmail_path=/bin/false'] });
+    assert.equal(recibidos.length, 1);
+    assert.equal(r.status, 502);
+  });
 });
