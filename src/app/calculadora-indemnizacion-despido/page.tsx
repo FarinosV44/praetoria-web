@@ -123,7 +123,10 @@ export default function CalculadoraDespidoPage() {
             </li>
           </ul>
           <p>
-            Si te acaban de despedir, lee también qué hacer en las primeras horas en nuestra guía sobre el{' '}
+            ¿No sabes qué tipo de despido es el tuyo? Lo explicamos en la guía de{' '}
+            <Link href="/tipos-de-despido/">tipos de despido</Link>, y en la de{' '}
+            <Link href="/carta-de-despido-requisitos-modelo/">carta de despido</Link> los defectos que la hacen improcedente. Si te
+            acaban de despedir, lee también qué hacer en las primeras horas en nuestra guía sobre el{' '}
             <Link href="/despido-valencia-que-hacer/">despido en Valencia</Link>, y cómo trabajamos en{' '}
             <Link href="/impugnar-despido/">impugnación de despidos</Link>.
           </p>

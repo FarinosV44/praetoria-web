@@ -73,7 +73,7 @@ Es fundamental saber qué tipo de despido tienes. Por ejemplo, el despido Valenc
 - Improcedente
 - Nulo
 
-👉 Cada uno tiene consecuencias muy diferentes.
+👉 Cada uno tiene consecuencias muy diferentes. Las explicamos con detalle en la guía de [tipos de despido](/tipos-de-despido/), y en la de [carta de despido](/carta-de-despido-requisitos-modelo/) cómo revisar si la tuya cumple los requisitos.
 
 ---
 
