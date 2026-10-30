@@ -1,0 +1,18 @@
+name: tmp-fotos
+on:
+  push:
+    branches: [tmp/fotos-proxy]
+    paths: [tmp-fotos/lista.txt, tmp-fotos/grandes.txt]
+permissions:
+  contents: write
+jobs:
+  bajar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          mkdir -p tmp-fotos/mini tmp-fotos/grandes
+          while IFS='|' read -r id ph; do [ -n "$id" ] && curl -sfL "https://images.unsplash.com/$ph?w=420&q=60&fm=jpg" -o "tmp-fotos/mini/$id.jpg" || true; done < tmp-fotos/lista.txt
+          if [ -f tmp-fotos/grandes.txt ]; then while IFS='|' read -r id ph; do [ -n "$id" ] && curl -sfL "https://images.unsplash.com/$ph?w=2400&q=85&fm=jpg" -o "tmp-fotos/grandes/$id.jpg" || true; done < tmp-fotos/grandes.txt; fi
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tmp-fotos && git commit -m "tmp: fotos descargadas" && git push
