@@ -18,7 +18,7 @@ test('calculadora de despido: improcedente con contrato anterior a 2012, objetiv
 
   await page.fill('input[name=salario]', '');
   await page.getByRole('button', { name: 'Calcular indemnización' }).click();
-  await expect(page.getByRole('alert')).toHaveText('Indica el salario bruto anual.');
+  await expect(page.locator('.calc__error[role=alert]')).toHaveText('Indica el salario bruto anual.');
 });
 
 test('la calculadora está enlazada desde el área laboral', async ({ page }) => {
