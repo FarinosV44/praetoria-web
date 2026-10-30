@@ -13,6 +13,8 @@ import { serviciosDe } from '@/lib/servicios';
 import { imagen } from '@/lib/imagenes';
 import { Composicion, Foto } from './Foto';
 import { RevisionPendiente } from './RevisionPendiente';
+import { FineArtLogo, FineArtSello, fineArt, fineArtLd } from './FineArt';
+import { JsonLd } from './JsonLd';
 
 export function AreaPage({ area }: { area: AreaContent }) {
   const group = groups[area.group];
@@ -24,18 +26,24 @@ export function AreaPage({ area }: { area: AreaContent }) {
   const others = all.filter((p) => !p.deca);
   const canal = canalDe(area.id);
   const foto = imagen(area.imagen);
+  const esArte = area.id === 'arte';
 
   return (
-    <div className="area-page">
+    <div className={esArte ? 'area-page area-page--fine-art' : 'area-page'}>
+      {esArte && <JsonLd data={fineArtLd(`/${area.slug}/`)} />}
       {area.revision === 'pendiente' && <RevisionPendiente indexable={area.indexable !== false} />}
       <section className="page-head area-head">
         <div className="wrap">
           <Breadcrumbs items={[{ label: group.title, href: group.href }, { label: area.h1 }]} />
           <div className="area-head__grid">
             <div className="area-head__texto">
-              <p className="antetitulo">
-                <LineIcon name={iconoArea[area.id]} /> {area.id === 'laboral' ? 'Área laboral' : group.title}
-              </p>
+              {esArte ? (
+                <FineArtLogo />
+              ) : (
+                <p className="antetitulo">
+                  <LineIcon name={iconoArea[area.id]} /> {area.id === 'laboral' ? 'Área laboral' : group.title}
+                </p>
+              )}
               <h1>{area.h1}</h1>
               <p className="lede">{area.lede}</p>
               <p className="objetivo-nota">
@@ -197,7 +205,18 @@ export function AreaPage({ area }: { area: AreaContent }) {
         </div>
       </section>
 
-      <CtaBand whatsappText={area.whatsappText} href={`/contacto/?area=${area.id}`} canal={canal.id} />
+      {esArte ? (
+        <CtaBand
+          marca={<FineArtSello className="cta__sello" />}
+          title={`Habla con ${fineArt.nombre}`}
+          text="Cuéntanos qué obra o qué colección te preocupa y qué quieres conseguir. Te explicamos las opciones, el trabajo y los honorarios antes de empezar, con la confidencialidad que exige cada pieza."
+          whatsappText={area.whatsappText}
+          href={`/contacto/?area=${area.id}`}
+          canal={canal.id}
+        />
+      ) : (
+        <CtaBand whatsappText={area.whatsappText} href={`/contacto/?area=${area.id}`} canal={canal.id} />
+      )}
 
     </div>
 

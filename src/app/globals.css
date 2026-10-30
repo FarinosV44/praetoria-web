@@ -2411,3 +2411,23 @@
 .prose .figura-captura { margin: 1.5rem 0; }
 .prose .figura-captura img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: var(--radius); }
 .prose .figura-captura figcaption { margin-top: 6px; font-size: 0.8rem; color: var(--muted); }
+
+/* Praetoria Fine Art (división de arte y patrimonio): logotipo rojo en sus páginas, sello blanco sobre rojo en botones y complementos. */
+@layer components {
+  .fine-art-logo { margin: 0 0 18px; }
+  .fine-art-logo img { display: block; width: min(300px, 72vw); height: auto; }
+  .fine-art-logo__descriptor {
+    margin: 10px 0 0;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .fine-art-sello { display: inline-block; line-height: 0; }
+  .fine-art-sello img { display: block; width: 100%; height: auto; }
+  .cta__sello { width: 168px; margin: 0 0 18px; border-radius: 2px; box-shadow: 0 0 0 1px rgb(255 255 255 / 0.18); }
+  .fine-art-boton { display: inline-block; width: 150px; margin: 4px 0 10px; border-radius: 2px; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .fine-art-boton:hover, .fine-art-boton:focus-visible { transform: translateY(-1px); box-shadow: 0 6px 16px rgb(140 20 24 / 0.25); }
+  .area-page--fine-art .area-head { border-top: 4px solid var(--red); }
+}
