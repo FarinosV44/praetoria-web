@@ -12,8 +12,9 @@ Formulario /contacto/ ──POST JSON──▶ /api/consulta (public/api/consult
    │                                      │ 2. antispam: campo trampa + mínimo 3 s desde que se cargó
    │                                      │ 3. asigna responsable por área
    │                                      ▼
-   │                          Correo a juanfarinos@icav.es (site.email) con mail() de Hostinger,
-   │                          remitente web@praetoriaabogados.es y «Responder a» el correo de quien consulta.
+   │                          Correo a juanfarinos@icav.es (site.email) por la API de Resend (dominio autenticado),
+   │                          o con mail() de Hostinger si no hay clave o Resend falla; remitente
+   │                          web@praetoriaabogados.es y «Responder a» el correo de quien consulta.
    │                          Copia de seguridad en ~/consultas-web/AAAA-MM.jsonl (fuera de public_html).
    ◀── 200 {ok, id} solo si el correo se aceptó para su envío · 422 errores por campo · 502 fallo de entrega
 ```
@@ -60,7 +61,7 @@ Corrección: el artículo sobre DeCA Conecta remitía a `info@praetoriaabogados.
 
 ## Pruebas
 
-- `scripts/formularios/php.test.mjs` (11 pruebas, ejecutan los `.php` reales con PHP de línea de órdenes; el correo se
+- `scripts/formularios/php.test.mjs` (13 pruebas, incluido el envío por Resend contra una API simulada, ejecutan los `.php` reales con PHP de línea de órdenes; el correo se
   sustituye por un registro local con `PRAETORIA_ENTREGA_URL`):
   - entrega correcta con área y responsable, y Laboral asignada a Lucía López;
   - llamada o WhatsApp sin teléfono, correo ausente o inválido, área sin elegir, privacidad, mensaje corto y campos largos;
@@ -72,13 +73,27 @@ Corrección: el artículo sobre DeCA Conecta remitía a `info@praetoriaabogados.
 - `tests/e2e/contacto.spec.ts` (8 pruebas en navegador): usan **la recepción real** (`out/api/*.php`), servida por
   `scripts/qa/serve.mjs` con PHP, contra un registro local que sustituye al correo y puede simular fallos.
 
-## Pendiente en Hostinger (tras publicar)
+## Envío por Resend (30/10/2026)
 
-- [ ] Enviar una consulta de prueba desde praetoriaabogados.es y comprobar que llega a `juanfarinos@icav.es`
-  (mirar también la carpeta de spam la primera vez).
-- [ ] Si los avisos llegaran a spam o no llegaran: crear el buzón `web@praetoriaabogados.es` en Hostinger (o cambiar
-  `REMITENTE_LOCAL` en `public/api/comun.php` por uno existente) y revisar que el SPF del dominio incluya Hostinger.
-- [ ] Comprobar que existe `~/consultas-web/` en el alojamiento tras la primera consulta (copia de seguridad).
+Con `mail()` de Hostinger los avisos no llegaban a `juanfarinos@icav.es` (Hostinger aceptaba el envío, pero el correo
+no se entregaba: el dominio no autoriza a ese servidor). Por eso el envío va por **Resend** cuando hay clave:
+
+1. Cuenta en resend.com (plan gratuito: 3.000 correos al mes, 100 al día).
+2. *Domains → Add domain*: `praetoriaabogados.es`. Añadir en la zona DNS de Hostinger los registros que indique
+   Resend (DKIM y los de envío en el subdominio `send`). No se tocan los registros MX ni el correo existente.
+3. *API Keys → Create*: permiso solo de envío (*Sending access*), limitado a ese dominio.
+4. En el Administrador de archivos de Hostinger, **junto a `public_html`** (no dentro), crear `praetoria-config.php`:
+   ```php
+   <?php return ['resend_api_key' => 're_...'];
+   ```
+   No va al repositorio (es público; está en `.gitignore`). Las publicaciones desde GitHub no lo borran.
+5. Enviar una consulta de prueba. Los envíos se ven en Resend → *Emails*.
+
+Si la clave falta o Resend falla, se intenta con `mail()`; si los dos fallan, la web responde 502 y ofrece reintentar.
+Cada consulta queda además en `~/consultas-web/AAAA-MM.jsonl`.
+
+## Pendiente
+
 - [ ] Prueba de teléfonos en un móvil real: `tel:+34607527719` y `tel:+34649181290`.
 
 ## Solicitud de llamada (#33)

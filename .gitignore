@@ -11,3 +11,6 @@ next-env.d.ts
 out-ga/
 test-results/
 playwright-report/
+
+# Configuración privada de los formularios (clave de Resend): nunca en el repositorio, que es público
+praetoria-config.php
