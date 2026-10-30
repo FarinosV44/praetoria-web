@@ -42,10 +42,10 @@ export const areaContent: AreaContent[] = [
     slug: 'logistica-y-transporte-internacional',
     id: 'transporte',
     group: 'empresas',
-    title: 'Abogados de transporte y logística en Valencia',
+    title: 'Abogados de transporte internacional y logística en Valencia',
     description:
-      'Abogados de transporte en Valencia para agencias, transportistas y cargadores: impagos, daños en la mercancía, CMR, seguros, DeCA, contratos y subcontratación.',
-    h1: 'Abogados de transporte y logística en Valencia',
+      'Abogados de transporte nacional e internacional en Valencia: impagos, daños en la mercancía, Convenio CMR, aseguradoras, DeCA y litigios en España y en el extranjero.',
+    h1: 'Abogados de transporte internacional y logística en Valencia',
     lede: 'Impagos, daños, reservas en el CMR, aseguradoras, subcontratación y órdenes de carga: respuesta jurídica práctica, basada en cómo funciona de verdad el sector.',
     intro: [
       'Los problemas del transporte no esperan. Conocemos ese entorno de cerca: cómo funciona un operador, una agencia, una ruta de exportación, una reclamación ante un cargador o un siniestro ante el seguro. Por eso intervenimos en los puntos críticos: contratos, reclamaciones, conflictos entre partes y prevención de riesgos.',
@@ -94,6 +94,15 @@ export const areaContent: AreaContent[] = [
         enlaces: [
           { label: 'Ver el servicio', href: '#transporte-deca-subcontratacion' },
           { label: 'Guías sobre el DeCA', href: '#deca' },
+        ],
+      },
+      {
+        titulo: 'Un problema en un transporte internacional',
+        icono: 'camion',
+        texto: 'Convenio CMR, límites de indemnización, ante qué tribunal reclamar y procedimientos coordinados en varios países.',
+        enlaces: [
+          { label: 'Qué revisamos', href: '#transporte-cmr-internacional' },
+          { label: 'Consultar mi caso', href: '/contacto/?servicio=transporte-cmr-internacional' },
         ],
       },
     ],

@@ -3,13 +3,16 @@ import { expect, test } from '@playwright/test';
 // #6: recorrido guía → servicio → consulta en transporte, con el servicio conservado hasta la recepción.
 const registro = async (page: import('@playwright/test').Page) => (await page.request.get('/__mock-forms/registro')).json();
 
-test('el área de transporte ofrece tres recorridos y el de impagos lleva a su página de servicio', async ({ page }) => {
+test('el área de transporte ofrece cuatro recorridos y el de impagos lleva a su página de servicio', async ({ page }) => {
   await page.goto('/logistica-y-transporte-internacional/');
   const recorridos = page.locator('.journey');
-  await expect(recorridos).toHaveCount(3);
+  await expect(recorridos).toHaveCount(4);
   await expect(recorridos.nth(0)).toContainText('No me pagan un porte');
   await expect(recorridos.nth(1)).toContainText('mercancía');
   await expect(recorridos.nth(2)).toContainText('DeCA');
+  await expect(recorridos.nth(3)).toContainText('transporte internacional');
+  await expect(recorridos.nth(3).locator('a[href="#transporte-cmr-internacional"]')).toHaveCount(1);
+  await expect(page.locator('#transporte-cmr-internacional')).toHaveCount(1);
   await recorridos.nth(0).getByRole('link', { name: 'Cómo lo reclamamos' }).click();
   await expect(page).toHaveURL(/\/reclamacion-portes-impagados\/$/);
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Reclamación de portes impagados');
