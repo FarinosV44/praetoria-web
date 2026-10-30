@@ -6,7 +6,7 @@ date: 2026-10-27
 category: familia
 tags: ["divorcio", "gananciales", "liquidación de gananciales", "reservas", "empresa familiar"]
 intencion: "Saber si los beneficios no repartidos de la empresa de un cónyuge se reparten al liquidar los gananciales"
-imagenPendiente: "Dos alianzas sobre unos documentos o unas cuentas, sin texto legible ni logotipos"
+imagen: familia-alianzas
 ---
 
 Es una de las discusiones más frecuentes cuando se divorcia un matrimonio en gananciales y uno de los dos es socio de una empresa: durante años la sociedad ganó dinero, pero no repartió dividendos y lo fue acumulando en reservas. ¿Tiene el otro cónyuge derecho a la mitad de esas reservas?

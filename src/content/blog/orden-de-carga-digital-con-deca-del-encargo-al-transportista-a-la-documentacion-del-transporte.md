@@ -8,7 +8,7 @@ category: transporte
 deca: herramienta
 wpId: 3086
 intencion: "Crear la orden de carga digital con el DeCA incorporado"
-imagen: deca-ordenes
+imagen: logistica-carga-remolque
 ---
 
 

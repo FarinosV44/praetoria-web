@@ -7,7 +7,7 @@ category: transporte
 deca: herramienta
 tags: ["DeCA", "soporte DeCA", "inspección de transporte", "sanciones DeCA", "DeCA Profesional"]
 intencion: "Saber qué hacer y a quién acudir si el DeCA falla o te sancionan"
-imagen: deca-historial
+imagen: soporte-auriculares
 ---
 
 Generar el DeCA es sencillo. Lo difícil llega cuando algo sale mal: un camión parado en un control con un QR que no abre, una matrícula que cambia cuando el conductor ya ha salido, un subcontratista que da por hecho que el documento lo hacía otro o una propuesta de sanción que llega semanas después. En ese momento la pregunta deja de ser qué programa es más barato y pasa a ser **quién te ayuda a resolverlo**.

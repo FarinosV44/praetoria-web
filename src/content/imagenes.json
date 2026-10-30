@@ -1200,16 +1200,16 @@
     {
       "id": "penal",
       "estado": "publicada",
-      "escena": "Penal: conversación confidencial con el abogado",
-      "archivo": "ed/conversacion-confidencial-dos-personas",
-      "alt": "Dos hombres conversan en voz baja sentados a una mesa junto a un ventanal",
-      "foco": "50% 50%",
+      "escena": "Penal: edificio institucional, sin personas",
+      "archivo": "ed/escalinata-columnas",
+      "alt": "Escalinata de piedra entre columnas clásicas de un edificio institucional",
+      "foco": "50% 55%",
       "origen": {
         "tipo": "unsplash",
-        "id": "W3Jl3jREpDY",
-        "autor": "LinkedIn Sales Solutions",
-        "url": "https://unsplash.com/photos/W3Jl3jREpDY",
-        "perfil": "https://unsplash.com/@linkedinsalesnavigator",
+        "id": "_NChq9Wlyds",
+        "autor": "Nhan Hoang",
+        "url": "https://unsplash.com/photos/_NChq9Wlyds",
+        "perfil": "https://unsplash.com/@httnhan",
         "licencia": "Licencia Unsplash (uso comercial gratuito)"
       },
       "ancho": 1600,
@@ -1432,6 +1432,406 @@
         "original": "fotos/prensa/guardia-civil-policia-camion-detenidos.jpg",
         "fuente": "Guardia Civil y Policía Nacional (Ministerio del Interior)",
         "nota": "Fotografía de prensa aportada por el titular el 27/10/2026, publicada con el crédito de los cuerpos que la difundieron"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "laboral-calendario",
+      "estado": "publicada",
+      "escena": "Calendario laboral: un calendario de mesa en la oficina",
+      "archivo": "ed/calendario-mesa-oficina",
+      "alt": "Un calendario de mesa abierto sobre un escritorio de madera, junto a un jarrón",
+      "foco": "50% 55%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "rjEyCqESNTk",
+        "autor": "Swello",
+        "url": "https://unsplash.com/photos/rjEyCqESNTk",
+        "perfil": "https://unsplash.com/@getswello",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "laboral-carta-despido",
+      "estado": "publicada",
+      "escena": "Carta de despido: redacción y revisión del documento",
+      "archivo": "ed/escritura-documento-mesa",
+      "alt": "Una persona escribe a mano sobre unos folios en una mesa de oficina",
+      "foco": "50% 55%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "OQMZwNd3ThU",
+        "autor": "Scott Graham",
+        "url": "https://unsplash.com/photos/OQMZwNd3ThU",
+        "perfil": "https://unsplash.com/@amstram",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "transporte-contrato-firma",
+      "estado": "publicada",
+      "escena": "Contratos y condiciones del transporte: firma del documento",
+      "archivo": "ed/firma-contrato-mesa",
+      "alt": "Una mano firma con bolígrafo un documento sobre una mesa de madera",
+      "foco": "55% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "GJao3ZTX9gU",
+        "autor": "Cytonn Photography",
+        "url": "https://unsplash.com/photos/GJao3ZTX9gU",
+        "perfil": "https://unsplash.com/@cytonn_photography",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "transporte-camion-carretera",
+      "estado": "publicada",
+      "escena": "Transporte por carretera: un camión en ruta",
+      "archivo": "ed/camion-carretera-nave",
+      "alt": "Un camión de carretera circula junto a una nave logística en un día nublado",
+      "foco": "55% 55%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "N5EPfCrEuy8",
+        "autor": "Zieben VH",
+        "url": "https://unsplash.com/photos/N5EPfCrEuy8",
+        "perfil": "https://unsplash.com/@zieben_vh",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "familia-gastos-colegio",
+      "estado": "publicada",
+      "escena": "Gastos de los hijos: material escolar en casa",
+      "archivo": "ed/material-escolar-mesa",
+      "alt": "Material escolar, una fiambrera y una mochila sobre una mesa naranja",
+      "foco": "45% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "1yRdOY4_Z78",
+        "autor": "The Design Lady",
+        "url": "https://unsplash.com/photos/1yRdOY4_Z78",
+        "perfil": "https://unsplash.com/@sarah35",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "transporte-facturas-calculadora",
+      "estado": "publicada",
+      "escena": "Facturas de transporte y plazos de pago",
+      "archivo": "ed/facturas-calculadora-mesa",
+      "alt": "Una persona revisa facturas y formularios sobre una mesa, con una calculadora y un bolígrafo",
+      "foco": "50% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "xoU52jUVUXA",
+        "autor": "Kelly Sikkema",
+        "url": "https://unsplash.com/photos/xoU52jUVUXA",
+        "perfil": "https://unsplash.com/@kellysikkema",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "familia-alianzas",
+      "estado": "publicada",
+      "escena": "Matrimonio y régimen económico: dos alianzas",
+      "archivo": "ed/alianzas-diccionario",
+      "alt": "Dos alianzas doradas sobre las páginas de un diccionario abierto",
+      "foco": "45% 40%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "YeJWDWeIZho",
+        "autor": "Sandy Millar",
+        "url": "https://unsplash.com/photos/YeJWDWeIZho",
+        "perfil": "https://unsplash.com/@sandym10",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "logistica-comparar-tarifas",
+      "estado": "publicada",
+      "escena": "Comparar programas y tarifas en una hoja de cálculo",
+      "archivo": "ed/portatil-hoja-calculo-oficina",
+      "alt": "Unas manos trabajan en un portátil con una hoja de cálculo, en una oficina",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "9fZuqBYlV1w",
+        "autor": "Gorilla ROI Data Connector",
+        "url": "https://unsplash.com/photos/9fZuqBYlV1w",
+        "perfil": "https://unsplash.com/@gorillaroi",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "logistica-panel-datos",
+      "estado": "publicada",
+      "escena": "Gestión digital del transporte: panel de datos",
+      "archivo": "ed/portatil-panel-graficas",
+      "alt": "Un portátil muestra un panel con gráficas sobre una mesa de cristal",
+      "foco": "50% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "hpjSkU2UYSU",
+        "autor": "Carlos Muza",
+        "url": "https://unsplash.com/photos/hpjSkU2UYSU",
+        "perfil": "https://unsplash.com/@kmuza",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "logistica-cabina-tableta-ruta",
+      "estado": "publicada",
+      "escena": "Conductor con una tableta en la cabina",
+      "archivo": "ed/cabina-tableta-conductor",
+      "alt": "Un conductor consulta una tableta en la cabina de su vehículo, sin que se le vea la cara",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "B296qZ-Yihw",
+        "autor": "Chris Cordes",
+        "url": "https://unsplash.com/photos/B296qZ-Yihw",
+        "perfil": "https://unsplash.com/@4x4_touring",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "oficina-equipo-pantallas",
+      "estado": "publicada",
+      "escena": "Equipo de oficina trabajando con varios usuarios",
+      "archivo": "ed/oficina-equipo-pantallas",
+      "alt": "Varias personas trabajan de espaldas frente a sus pantallas en una oficina",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "Fa9b57hffnM",
+        "autor": "Compagnons",
+        "url": "https://unsplash.com/photos/Fa9b57hffnM",
+        "perfil": "https://unsplash.com/@sigmund",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "soporte-auriculares",
+      "estado": "publicada",
+      "escena": "Soporte y asistencia: auriculares junto al portátil",
+      "archivo": "ed/auriculares-soporte-portatil",
+      "alt": "Unos auriculares con micrófono junto a un portátil sobre una mesa",
+      "foco": "55% 55%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "BeVGrXEktIk",
+        "autor": "Petr Macháček",
+        "url": "https://unsplash.com/photos/BeVGrXEktIk",
+        "perfil": "https://unsplash.com/@machec",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "logistica-camiones-aerea",
+      "estado": "publicada",
+      "escena": "Red de transporte: camiones y remolques vistos desde el aire",
+      "archivo": "ed/camiones-aparcados-aerea",
+      "alt": "Vista aérea de camiones y remolques aparcados en un área logística",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "kGoPcmpPT7c",
+        "autor": "Marcin Jozwiak",
+        "url": "https://unsplash.com/photos/kGoPcmpPT7c",
+        "perfil": "https://unsplash.com/@marcinjozwiak",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "logistica-flota-aparcada",
+      "estado": "publicada",
+      "escena": "Empresas de transporte: flota de camiones aparcada",
+      "archivo": "ed/flota-camiones-bn",
+      "alt": "Fotografía en blanco y negro de varios camiones aparcados en una explanada",
+      "foco": "50% 55%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "Vz3HZLrkPBE",
+        "autor": "Vadim Shuyskiy",
+        "url": "https://unsplash.com/photos/Vz3HZLrkPBE",
+        "perfil": "https://unsplash.com/@13shu",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "logistica-movil-documentos",
+      "estado": "publicada",
+      "escena": "Fotografiar un documento con el móvil",
+      "archivo": "ed/movil-sobre-documentos",
+      "alt": "Una mano sostiene un móvil sobre unos documentos impresos",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "TDfvoPFVYaE",
+        "autor": "Akshar Dave",
+        "url": "https://unsplash.com/photos/TDfvoPFVYaE",
+        "perfil": "https://unsplash.com/@akshar_dave",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "logistica-carga-remolque",
+      "estado": "publicada",
+      "escena": "Carga de un remolque con carretilla elevadora",
+      "archivo": "ed/carga-remolque-carretilla",
+      "alt": "Una carretilla elevadora carga palés al fondo de un remolque abierto",
+      "foco": "50% 60%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "GAdkOpqbTfo",
+        "autor": "Elevate",
+        "url": "https://unsplash.com/photos/GAdkOpqbTfo",
+        "perfil": "https://unsplash.com/@elevatebeer",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
       },
       "ancho": 1600,
       "alto": 1000,

@@ -9,7 +9,7 @@ deca: herramienta
 tags: ["transporte internacional"]
 wpId: 3071
 intencion: "Generar y enseñar el DeCA desde el móvil"
-imagen: deca-movil
+imagen: logistica-cabina-tableta-ruta
 ---
 
 

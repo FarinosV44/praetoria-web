@@ -39,10 +39,11 @@ test('artículo de guía DeCA: imagen de contexto, índice y bloque DeCA con el 
   expect(post.image[0].url).toMatch(/\/media\/ed\/.+\.webp$/);
 });
 
-test('artículo de producto DeCA: captura real de DeCA Profesional', async ({ page }) => {
+test('artículo de producto DeCA: fotografía de contexto con crédito, no una captura de pantalla', async ({ page }) => {
   await page.goto('/aplicacion-movil-para-generar-deca/');
-  await expect(page.locator('.post-figura img')).toHaveAttribute('src', /\/media\/ed\/deca-/);
-  await expect(page.locator('.post-figura figcaption')).toContainText('DeCA Profesional');
+  await expect(page.locator('.post-figura img')).toHaveAttribute('src', /\/media\/ed\//);
+  await expect(page.locator('.post-figura img')).not.toHaveAttribute('src', /\/media\/ed\/deca-/);
+  await expect(page.locator('.post-figura figcaption')).toContainText('Unsplash');
 });
 
 test('artículos sin relación con DeCA no muestran el bloque DeCA', async ({ page }) => {

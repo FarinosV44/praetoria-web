@@ -7,7 +7,7 @@ updated: 2026-10-23
 category: transporte
 wpId: 2805
 intencion: "Proteger una empresa de transporte con contratos y condiciones bien redactados"
-imagenPendiente: "Oficina de tráfico de una empresa de transporte: contrato o condiciones generales sobre la mesa, sin texto legible"
+imagen: transporte-contrato-firma
 ---
 
 

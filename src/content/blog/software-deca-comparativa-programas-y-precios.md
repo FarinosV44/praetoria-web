@@ -7,7 +7,7 @@ category: transporte
 deca: guia
 tags: ["software DeCA", "programa DeCA", "precio DeCA", "documento de control electrónico"]
 intencion: "Comparar programas para el DeCA por precio y funciones antes de contratar uno"
-imagenPendiente: "Una persona en una oficina de tráfico revisa en el portátil varias tarifas, con un camión desenfocado al fondo por la ventana; sin logotipos ni texto legible"
+imagen: logistica-comparar-tarifas
 ---
 
 Desde el 5 de octubre de 2026 el documento de control del transporte de mercancías por carretera es electrónico, y han aparecido decenas de programas para generarlo. Los precios van de cero a varios cientos de euros al año, y la Federación Nacional de Asociaciones de Transporte de España (Fenadismer) ya advirtió en septiembre de [diferencias de precio de hasta un 1.000 %](https://www.fenadismer.es/ojo-ofertas-abusivas-para-el-nuevo-documento-electronico-de-control/) entre ofertas.
