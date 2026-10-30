@@ -23,7 +23,7 @@ Principio: la publicación tiene que poder deshacerse en minutos. Por eso WordPr
 - [ ] `npm run check:produccion`: sin textos pendientes de revisión jurídica, o decisión expresa de publicar con Penal en `noindex`.
 - [ ] **Copia de seguridad de WordPress**: archivos y base de datos desde Hostinger (o un plugin como UpdraftPlus), descargada fuera del servidor. Anotar la fecha.
 - [ ] **Copia de la zona DNS actual**: captura o export de todos los registros (A, AAAA, CNAME, MX, TXT, SPF, DKIM, DMARC, CAA). Guardarla con este documento.
-- [ ] Identificar qué registros sirven al correo (`juanfarinos@icav.es` es del colegio, pero puede haber otros buzones o verificaciones de Google, Microsoft o Mailchimp en TXT). **Ninguno de ellos se toca.**
+- [ ] Identificar qué registros sirven al correo (`info@praetoriaabogados.es` es del colegio, pero puede haber otros buzones o verificaciones de Google, Microsoft o Mailchimp en TXT). **Ninguno de ellos se toca.**
 - [ ] Bajar el TTL de los registros A y CNAME de `praetoriaabogados.es` y `www` a 300 segundos, al menos 24 horas antes del cambio.
 
 ## 2. Día del cambio

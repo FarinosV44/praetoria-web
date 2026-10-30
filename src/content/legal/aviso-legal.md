@@ -8,7 +8,7 @@ updated: agosto de 2026
 
 En cumplimiento del deber de información del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se facilitan los siguientes datos: el titular de este sitio web es **PRAETORIA SL** (en adelante, «Praetoria División Jurídica» o «el Titular»), con CIF B21810452 y domicilio social en Calle Pintor Francisco Ribalta, 4A, 46540, El Puig de Santa María (Valencia).
 
-Actúa como administrador de la sociedad y responsable del ejercicio profesional **Juan José Farinós Ibáñez**, abogado colegiado ejerciente en el Ilustre Colegio de Abogados de Valencia (ICAV) con el número de colegiado 13981. Puede contactar con el Titular a través del correo electrónico [juanfarinos@icav.es](mailto:juanfarinos@icav.es) o del teléfono 607 527 719.
+Actúa como administrador de la sociedad y responsable del ejercicio profesional **Juan José Farinós Ibáñez**, abogado colegiado ejerciente en el Ilustre Colegio de Abogados de Valencia (ICAV) con el número de colegiado 13981. Puede contactar con el Titular a través del correo electrónico [info@praetoriaabogados.es](mailto:info@praetoriaabogados.es) o del teléfono 607 527 719.
 
 ## Objeto
 

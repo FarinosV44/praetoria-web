@@ -84,5 +84,5 @@ El inventario de las URLs de WordPress, con su destino, las redirecciones y su v
 
 ## Formularios
 
-- **Contacto** (`/contacto/`) y **solicitud de llamada**: `/api/consulta` y `/api/llamada` (`public/api/*.php`, en el propio Hostinger) validan cada envío en servidor y lo mandan por correo a juanfarinos@icav.es. Detalle, pruebas y pendientes en [`docs/CONSULTAS.md`](docs/CONSULTAS.md).
+- **Contacto** (`/contacto/`) y **solicitud de llamada**: `/api/consulta` y `/api/llamada` (`public/api/*.php`, en el propio Hostinger) validan cada envío en servidor y lo mandan por correo a info@praetoriaabogados.es. Detalle, pruebas y pendientes en [`docs/CONSULTAS.md`](docs/CONSULTAS.md).
 - **Hacienda** y **divorcio**: los cuestionarios funcionan dentro del navegador del visitante y preparan un resumen que él mismo envía por WhatsApp o correo. No guardan datos en ningún servidor.

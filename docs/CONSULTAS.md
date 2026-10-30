@@ -12,7 +12,7 @@ Formulario /contacto/ ──POST JSON──▶ /api/consulta (public/api/consult
    │                                      │ 2. antispam: campo trampa + mínimo 3 s desde que se cargó
    │                                      │ 3. asigna responsable por área
    │                                      ▼
-   │                          Correo a juanfarinos@icav.es (site.email) por la API de Resend (dominio autenticado),
+   │                          Correo a info@praetoriaabogados.es (site.email) por la API de Resend (dominio autenticado),
    │                          o con mail() de Hostinger si no hay clave o Resend falla; remitente
    │                          web@praetoriaabogados.es y «Responder a» el correo de quien consulta.
    │                          Copia de seguridad en ~/consultas-web/AAAA-MM.jsonl (fuera de public_html).
@@ -53,11 +53,11 @@ La validación en el navegador es accesible:
 
 Todos se configuran en `src/lib/site.ts`:
 
-- **General**: 607 527 719 (`tel:+34607527719`, WhatsApp `34607527719`) y `juanfarinos@icav.es`. Coincide con el teléfono publicado en decaprofesional.es/contacto, según la consulta del 23/10 que recoge la issue. Ningún enlace de la web usa otro número.
+- **General**: 607 527 719 (`tel:+34607527719`, WhatsApp `34607527719`) y `info@praetoriaabogados.es`. Coincide con el teléfono publicado en decaprofesional.es/contacto, según la consulta del 23/10 que recoge la issue. Ningún enlace de la web usa otro número.
 - **Área laboral**: 649 181 290 (`tel:+34649181290`, WhatsApp `34649181290`). **Llamadas y WhatsApp** (autorizado en #28; antes, solo llamadas). Sin correo propio. Atiende Lucía López, que figura como responsable interna de las consultas laborales.
 - **Mensajes predefinidos de WhatsApp**: centralizados en `mensajes`. Todos mencionan a Praetoria y el servicio jurídico, y ninguno el soporte de DeCA.
 
-Corrección: el artículo sobre DeCA Conecta remitía a `info@praetoriaabogados.es` para consultas jurídicas. Se ha sustituido por `juanfarinos@icav.es`, el correo confirmado. **Si `info@` es un buzón real y atendido, puede volver a ponerse.**
+Correo de contacto: `info@praetoriaabogados.es` desde el 30/10/2026 (antes `juanfarinos@icav.es`), por decisión del propietario. Es también el destino de los avisos de los formularios.
 
 ## Pruebas
 
@@ -75,7 +75,7 @@ Corrección: el artículo sobre DeCA Conecta remitía a `info@praetoriaabogados.
 
 ## Envío por Resend (30/10/2026)
 
-Con `mail()` de Hostinger los avisos no llegaban a `juanfarinos@icav.es` (Hostinger aceptaba el envío, pero el correo
+Con `mail()` de Hostinger los avisos no llegaban a `juanfarinos@icav.es`, el destino de entonces (Hostinger aceptaba el envío, pero el correo
 no se entregaba: el dominio no autoriza a ese servidor). Por eso el envío va por **Resend** cuando hay clave:
 
 1. Cuenta en resend.com (plan gratuito: 3.000 correos al mes, 100 al día).

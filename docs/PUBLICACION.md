@@ -32,7 +32,7 @@ decisión de publicación; no la toma.
   documentación se suben con `[skip netlify]`. El día de la publicación se cambia la rama de producción a `main`.
 - **Visibilidad privada** (decisión del propietario): solo la ve el equipo de Netlify con la sesión iniciada.
 - Formularios detectados: `contacto`, `contacto-laboral`, `llamada-urgente` y `llamada-urgente-laboral`. Avisos por
-  correo a `juanfarinos@icav.es` en los dos de consulta, con asunto «[Praetoria web] Consulta - ATENCION GENERAL» y
+  correo a `info@praetoriaabogados.es` en los dos de consulta, con asunto «[Praetoria web] Consulta - ATENCION GENERAL» y
   «[Praetoria web] Consulta - AREA LABORAL»; en los dos de llamada, «[Praetoria web] URGENTE - Solicitud de llamada» y
   «… - AREA LABORAL» (configurados el 24/10 con autorización del propietario).
 
@@ -132,7 +132,7 @@ despliegue que atiende la petición (prueba en `consulta.test.mts`).
 | --- | --- | --- | --- |
 | C1 | Conectar `FarinosV44/praetoria-web` a Netlify (cuenta del despacho), elegir plan (apartado 1) y activar *Branch deploys* para `publicacion/fase-1` | Netlify | 10 min |
 | C2 | Activar la detección de formularios (*Forms → Enable form detection*; en sitios nuevos viene desactivada) y volver a desplegar | Netlify | 2 min |
-| C3 | Avisos por correo: `contacto` → `juanfarinos@icav.es`; `contacto-laboral` → correo de Lucía López (**falta la dirección**) y, si quieres, copia a `juanfarinos@icav.es` | Netlify → Forms → Notifications | 5 min |
+| C3 | Avisos por correo: `contacto` → `info@praetoriaabogados.es`; `contacto-laboral` → correo de Lucía López (**falta la dirección**) y, si quieres, copia a `info@praetoriaabogados.es` | Netlify → Forms → Notifications | 5 min |
 | C3 bis | ~~Avisos de `llamada-urgente` y `llamada-urgente-laboral`~~: hechos (asunto con «URGENTE»). Cuando se conozca el correo laboral, cambiar también el de `llamada-urgente-laboral` | Netlify → Forms → Notifications | 2 min |
 | C4 | Revisar la previsualización y aprobar contenido, privacidad (A4) y publicación | Navegador | — |
 | C5 | Copia de WordPress (archivos y base de datos) y de la zona DNS; bajar TTL a 300 s 24 h antes | Hostinger | 30 min |
@@ -158,7 +158,7 @@ tocado la facturación ni las protecciones.
 | Build de producción con `SITE_INDEXABLE=true`: `robots.txt` con `Sitemap:`, 71 URLs en el sitemap, canonical a `https://praetoriaabogados.es/…`; `noindex` en `/gracias/`, 404, `__forms.html` y las 7 páginas de Penal pendientes de revisión; sin aviso de revisión; sin los ejemplos de #34 | OK |
 | Accesibilidad automática (axe) en 81 páginas (sitemap, Penal y solicitud de llamada), móvil y escritorio: errores graves o críticos | 0 |
 | Desbordamiento horizontal en móvil (412 px) en esas 81 páginas | 0 |
-| Teléfonos, WhatsApp y correo en toda la web | Solo 607 527 719 (general), 649 181 290 (laboral) y juanfarinos@icav.es |
+| Teléfonos, WhatsApp y correo en toda la web | Solo 607 527 719 (general), 649 181 290 (laboral) y info@praetoriaabogados.es |
 | Lighthouse móvil (simulación) | Accesibilidad 100; rendimiento 81–93; CLS ≤ 0,05 |
 
 **Sin comprobar todavía** (necesita Netlify): entrega real a Netlify Forms, avisos por correo, cabeceras reales,

@@ -76,7 +76,7 @@ Están centralizados en `src/lib/site.ts` → `contactos` y `canalDe(area)`.
 | --- | --- | --- |
 | Atención jurídica general | 607 527 719 · `tel:+34607527719` · `wa.me/34607527719` | «Contactar con el despacho», «Llamar al despacho», «Consultar por WhatsApp», «Solicitar una valoración» |
 | Área laboral | 649 181 290 · `tel:+34649181290` · `wa.me/34649181290` | «Llamar al área laboral», «WhatsApp del área laboral», «Enviar consulta laboral» |
-| Correo general | juanfarinos@icav.es | — |
+| Correo general | info@praetoriaabogados.es | — |
 
 - **Llamadas y WhatsApp del área laboral:** autorizados en #28. Sustituye la restricción de «solo llamadas».
 - **Dónde se aplica:**
