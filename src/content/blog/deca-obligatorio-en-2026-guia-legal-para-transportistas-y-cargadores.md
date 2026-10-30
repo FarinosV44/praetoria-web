@@ -1,99 +1,44 @@
 ---
 title: "Sanciones del DeCA: guía legal para transportistas y cargadores"
-seoTitle: "Sanciones del DeCA: qué riesgos asumen cargador y transportista"
-description: "Qué sanciones puede acarrear un DeCA inexistente o incorrecto, quién responde (cargador, transportista o agencia) y cómo comprobar que tu proveedor cumple."
+seoTitle: "Sanciones del DeCA: multas, responsables y cómo evitarlas"
+description: "Qué sanciones puede acarrear un DeCA inexistente o incorrecto, quién responde (cargador, transportista o agencia), qué errores técnicos se sancionan y cómo recurrir."
 date: 2026-09-06
-updated: 2026-10-25
+updated: 2026-10-30
 category: transporte
 deca: guia
-tags: ["transporte internacional"]
+tags: ["sanciones DeCA", "inspección de transporte", "transporte por carretera"]
 wpId: 2875
-intencion: "Conocer las obligaciones legales y sanciones del DeCA para cargador y transportista"
+intencion: "Conocer las sanciones del DeCA, quién responde y cómo evitarlas o recurrirlas"
 imagen: logistica-revision-recinto
 ---
 
-Desde el 5 de octubre de 2026 ha cambiado la forma de documentar miles de transportes de mercancías por carretera en España: el documento de control administrativo debe generarse necesariamente en formato digital.
+Desde el 5 de octubre de 2026 el documento de control administrativo del transporte de mercancías por carretera debe generarse en formato digital. Con la obligación han llegado también las inspecciones y las primeras dudas serias: ¿qué multa corresponde si el DeCA falta o está mal hecho?, ¿quién la paga cuando hay una agencia o un transportista subcontratado?, ¿basta con tener una plataforma?
 
-En los últimos meses han aparecido numerosas noticias y ofertas comerciales sobre el denominado [DeCA](https://decaprofesional.es/?utm_source=praetoria&utm_medium=referral&utm_campaign=blog_deca). La mayoría se limita a repetir tres ideas: que es obligatorio, que desaparece el papel y que las empresas deben contratar una plataforma.
+Esta guía se centra en el riesgo sancionador: qué se sanciona, quién responde, qué errores técnicos convierten un DeCA en inválido y cómo se actúa ante un expediente. Si lo que necesitas es saber si tu empresa está obligada y cómo organizar el documento en el día a día, empieza por nuestra guía sobre [quién está obligado al DECA y cómo cumplir](/deca-obligatorio-en-2026-guia-para-transportistas-y-empresas-de-transporte/).
 
-La realidad jurídica es bastante más compleja.
+> **Resumen rápido:** la carencia del documento de control, su falta de cumplimentación o la ausencia de datos esenciales puede constituir una infracción grave de la legislación de transportes, con multas a partir de 401 euros. Responden el cargador contractual, que puede ser una agencia, y el transportista efectivo. También hay riesgo si el DeCA se genera tarde, el QR no descarga el PDF, es un escaneo, identifica mal al transportista efectivo o no se conserva un año.
 
-El DeCA no es un documento completamente nuevo, no siempre necesita firma electrónica y la normativa tampoco obliga a contratar una plataforma concreta. Además, aunque debe generarse digitalmente, el conductor puede seguir llevando una copia impresa con su código QR.
+## ¿Qué sanciones puede provocar un DeCA incorrecto?
 
-En esta guía explicamos qué exige realmente la normativa, quién responde cuando intervienen agencias y transportistas subcontratados y qué debería comprobar una empresa antes de elegir un proveedor tecnológico.
+La carencia, falta de cumplimentación o ausencia de datos esenciales en el documento de control puede constituir una **infracción grave** conforme a la legislación de transportes (artículo 141.17 de la Ley de Ordenación de los Transportes Terrestres), con multas a partir de 401 euros.
 
-> **Resumen rápido:** desde el 5 de octubre de 2026 el documento de control debe generarse en formato digital, y su carencia, falta de cumplimentación o la ausencia de datos esenciales puede constituir una infracción grave. Las obligaciones recaen sobre el cargador contractual, que puede ser una agencia, y el transportista efectivo. También hay riesgo si el DeCA se genera tarde, el QR no descarga el PDF, es un escaneo o no se conserva un año.
+El riesgo no se limita a no llevar ningún documento. También puede existir responsabilidad si:
 
-## ¿Qué es el DeCA de transporte?
+- El DeCA se genera después de comenzar el servicio.
+- Faltan datos obligatorios.
+- Se identifica incorrectamente al transportista efectivo.
+- El código QR no funciona.
+- El enlace exige autenticación.
+- El PDF no puede descargarse durante la inspección.
+- Se presenta como DeCA un documento escaneado.
+- Los cambios se realizan únicamente mediante anotaciones manuscritas.
+- No se conserva durante el plazo exigido.
 
-El DeCA es el Documento Electrónico de Control Administrativo exigible en determinados transportes públicos de mercancías por carretera.
+Ante un expediente sancionador deberá analizarse quién era el sujeto responsable, qué obligación se incumplió, qué pruebas existen y si la Administración ha descrito y acreditado correctamente los hechos.
 
-No crea una obligación documental completamente nueva. Es la evolución digital del documento de control regulado desde hace años por la Orden FOM/2861/2012.
+## Los errores técnicos que se sancionan
 
-Su finalidad es que la Inspección de Transporte pueda comprobar, entre otros aspectos:
-
-- Quién contrata el transporte.
-- Quién lo realiza efectivamente.
-- Qué mercancía se transporta.
-- Cuál es su origen y destino.
-- Qué vehículo se utiliza.
-- Si el servicio se encuentra correctamente documentado.
-
-La principal novedad es que el documento debe generarse electrónicamente y cumplir unos requisitos técnicos que garanticen su integridad, disponibilidad y trazabilidad.
-
-## ¿Desde cuándo es obligatorio el DeCA digital?
-
-La fecha clave es el **5 de octubre de 2026**.
-
-La Ley 9/2025, de Movilidad Sostenible, estableció que el documento de control administrativo debía ser necesariamente digital diez meses después de la entrada en vigor de la ley.
-
-Posteriormente, la Resolución de 5 de junio de 2026 de la Dirección General de Transporte por Carretera y Ferrocarril concretó las características que deben reunir tanto el documento como las aplicaciones utilizadas para generarlo.
-
-Desde el 5 de octubre de 2026 ya no es válido confeccionar el documento exclusivamente en papel.
-
-## ¿A qué transportes se aplica?
-
-El DeCA afecta principalmente a:
-
-- Transportes públicos interiores de mercancías por carretera.
-- Operaciones de cabotaje realizadas en territorio español.
-- Cargadores contractuales.
-- Agencias y operadores de transporte que contratan en nombre propio.
-- Transportistas efectivos que ejecutan materialmente el servicio.
-
-Por el contrario, los transportes internacionales que discurran parcialmente por España utilizarán la documentación establecida en los convenios internacionales aplicables, como la carta de porte CMR.
-
-También deben tenerse en cuenta las excepciones previstas en la Orden FOM/2861/2012 para determinados tipos de transporte.
-
-Para una visión práctica de qué debe contener el documento y cómo organizarlo en el día a día, consulta la [guía del DECA obligatorio para transportistas](/deca-obligatorio-en-2026-guia-para-transportistas-y-empresas-de-transporte/).
-
-## El papel no desaparece completamente
-
-Una de las afirmaciones más repetidas es que el papel desapareció por completo el 5 de octubre. No es exactamente así.
-
-Lo que exige la norma es que el DeCA se genere de forma nativamente digital. Por tanto, no será válido:
-
-- Crear el documento a mano y escanearlo.
-- Fotografiar una hoja de transporte.
-- Convertir una imagen en PDF.
-- Cumplimentar un documento en papel después de iniciarse el viaje.
-- Utilizar como original un PDF obtenido mediante el escaneo de un documento físico.
-
-Sin embargo, una vez generado correctamente el DeCA digital, el conductor podrá llevarlo de cualquiera de estas formas:
-
-- Como copia electrónica en un teléfono móvil o dispositivo.
-- Como copia impresa en papel con su código QR.
-- Mediante el código QR en un fichero independiente.
-
-Por tanto, el documento original debe ser digital, pero el conductor sí puede presentar una copia impresa que permita acceder al fichero electrónico.
-
-Esta posibilidad puede ser útil como sistema de contingencia ante problemas de batería, averías del teléfono o dificultades operativas del conductor.
-
-## ¿Qué requisitos debe cumplir un DeCA válido?
-
-No cualquier PDF con un código QR puede considerarse un DeCA válido.
-
-El documento y la plataforma que lo genere deben cumplir, entre otros, los siguientes requisitos:
+No cualquier PDF con un código QR es un DeCA válido. Estos son los requisitos de la Resolución de 5 de junio de 2026 cuyo incumplimiento puede acabar en sanción:
 
 ### 1. Creación anterior al inicio del transporte
 
@@ -190,73 +135,7 @@ El problema del DeCA no es únicamente informático. Es también un problema con
 
 Si eres una agencia, revisa también [qué debe hacer una agencia de transporte con el DECA al subcontratar](/deca-y-subcontratacion-que-debe-hacer-realmente-una-agencia-de-transporte/).
 
-## ¿Qué datos debe contener?
-
-El documento deberá recoger los datos exigidos por la Orden FOM/2861/2012, entre ellos:
-
-- Nombre o denominación social y NIF del cargador contractual.
-- Nombre o denominación social y NIF del transportista efectivo.
-- Lugar de origen del envío.
-- Lugar de destino.
-- Naturaleza de la mercancía.
-- Peso de la mercancía.
-- Fecha de realización del transporte.
-- Matrícula del vehículo o vehículos utilizados.
-- Las observaciones, reservas o datos que resulten legalmente necesarios.
-
-La identificación del cargador contractual y del transportista efectivo debe aparecer de forma clara y diferenciada, incluso cuando se emplee como DeCA el formato de otro documento de transporte.
-
-## ¿Es obligatorio firmar electrónicamente el DeCA?
-
-No como regla general.
-
-La Resolución de 5 de junio de 2026 aclara que la firma no es necesaria para la validez administrativa ordinaria del documento de control.
-
-No debe confundirse el DeCA con:
-
-- La carta de porte.
-- El contrato de transporte.
-- El albarán de entrega.
-- La prueba de recepción de la mercancía.
-- La aceptación de reservas por daños, faltas o retrasos.
-
-Si el mismo documento se utiliza también con una finalidad contractual y se incorporan firmas, deberá emplearse como mínimo una firma electrónica avanzada conforme al Reglamento eIDAS.
-
-Una plataforma puede generar un DeCA administrativamente correcto y, sin embargo, no proporcionar pruebas suficientes para reclamar un porte, acreditar una reserva o defender una incidencia con la mercancía.
-
-## ¿Puede utilizarse una carta de porte o un CMR como DeCA?
-
-La norma permite utilizar formatos correspondientes a otros documentos de transporte, siempre que se cumplan todos los requisitos del DeCA.
-
-Pueden emplearse, entre otros:
-
-- Cartas de porte.
-- Documentos utilizados en transporte ADR.
-- Documentos de identificación para traslados de residuos.
-- Documentación SANDACH.
-- Otros formatos utilizados para documentar servicios de transporte.
-
-Pero cambiar el nombre de una carta de porte o añadirle un QR no la convierte automáticamente en un DeCA.
-
-El fichero debe ser nativo digital, incorporar los datos obligatorios, cumplir los requisitos técnicos y diferenciar claramente al cargador contractual del transportista efectivo.
-
-## ¿Puede agrupar varios envíos un mismo DeCA?
-
-Sí, pero no siempre.
-
-Podrán agruparse varios servicios en un mismo documento cuando el cargador contractual y el transportista efectivo sean los mismos en todos los envíos.
-
-En ese caso deberán identificarse claramente, para cada expedición:
-
-- Su origen.
-- Su destino.
-- La naturaleza de la mercancía.
-- El peso transportado.
-- Cualquier otro dato que sea diferente.
-
-Si cambia el transportista efectivo, no debería utilizarse indiscriminadamente el mismo documento para todos los servicios.
-
-## ¿Qué pasa si cambia una matrícula o algún dato durante el viaje?
+## Correcciones durante el viaje: el error más frecuente
 
 Las modificaciones no pueden realizarse escribiendo a mano sobre una copia impresa. Las anotaciones manuscritas no modifican válidamente el DeCA.
 
@@ -276,25 +155,9 @@ El fichero anterior deberá conservarse para acreditar la trazabilidad de la mod
 
 En ambos supuestos, el documento actualizado debe entregarse al conductor.
 
-## ¿Qué sanciones puede provocar un DeCA incorrecto?
+Para el resto de dudas prácticas (qué datos debe contener, si hace falta firma, si sirve una carta de porte o un CMR, o si se pueden agrupar envíos), consulta la [guía del DECA obligatorio](/deca-obligatorio-en-2026-guia-para-transportistas-y-empresas-de-transporte/).
 
-La carencia, falta de cumplimentación o ausencia de datos esenciales en el documento de control puede constituir una infracción grave conforme a la legislación de transportes.
-
-El riesgo no se limita a no llevar ningún documento. También puede existir responsabilidad si:
-
-- El DeCA se genera después de comenzar el servicio.
-- Faltan datos obligatorios.
-- Se identifica incorrectamente al transportista efectivo.
-- El código QR no funciona.
-- El enlace exige autenticación.
-- El PDF no puede descargarse durante la inspección.
-- Se presenta como DeCA un documento escaneado.
-- Los cambios se realizan únicamente mediante anotaciones manuscritas.
-- No se conserva durante el plazo exigido.
-
-Ante un expediente sancionador deberá analizarse quién era el sujeto responsable, qué obligación se incumplió, qué pruebas existen y si la Administración ha descrito y acreditado correctamente los hechos.
-
-## La batalla comercial entre proveedores de DeCA
+## Qué exigir al proveedor para no cargar con su error
 
 La entrada en vigor de la obligación ha provocado una carrera comercial entre plataformas tecnológicas, bolsas de cargas, consultoras, desarrolladores de TMS y empresas de documentación electrónica.
 
@@ -379,39 +242,31 @@ En Praetoria División Jurídica asesoramos a transportistas, agencias, operador
 
 Si tu empresa necesita revisar su funcionamiento o ha recibido una inspección o un expediente sancionador relacionado con el documento de control, puedes contactar con nuestros [abogados de transporte y logística](/logistica-y-transporte-internacional/).
 
-## Preguntas frecuentes sobre el DeCA
+## Preguntas frecuentes sobre las sanciones del DeCA
 
-### ¿Desde cuándo es obligatorio el DeCA?
+### ¿Qué multa corresponde por no llevar el DeCA o llevarlo incompleto?
 
-El documento de control administrativo debe generarse obligatoriamente en formato digital desde el 5 de octubre de 2026.
+La carencia del documento de control, su falta de cumplimentación o la ausencia de datos esenciales puede constituir una infracción grave de la Ley de Ordenación de los Transportes Terrestres, con multas a partir de 401 euros.
 
-### ¿Puede el conductor llevar el DeCA impreso?
+### ¿Quién paga la multa si el DeCA lo tenía que hacer la agencia?
 
-Sí. El documento original debe generarse digitalmente, pero el conductor puede llevar una copia impresa con el código QR correspondiente.
+Según el Ministerio, el cargador contractual y el transportista efectivo responden de que el documento vaya a bordo, salvo que el cargador pruebe que lo emitió. El reparto interno de tareas entre las empresas no excluye la responsabilidad frente a la Administración, aunque puede servir para reclamar después a quien incumplió.
 
-### ¿Es obligatorio firmarlo?
+### ¿Me pueden sancionar si el QR no descarga el documento?
 
-No para su función administrativa ordinaria. Si también se utiliza con finalidad contractual y se incorporan firmas, deberán cumplirse los requisitos de firma electrónica aplicables.
+Sí. Un QR que lleva a una pantalla de acceso o que no descarga el PDF no cumple los requisitos de la Resolución de 5 de junio de 2026, y el documento puede considerarse inexistente o defectuoso.
 
 ### ¿Sirve un documento en papel posteriormente escaneado?
 
 No. El PDF debe generarse de forma nativamente digital a partir de datos estructurados.
 
-### ¿Cuánto tiempo debe conservarse?
-
-El cargador contractual y el transportista efectivo deberán conservarlo o poder descargarlo durante al menos un año.
-
-### ¿Es necesario contratar una plataforma determinada?
-
-No. La normativa no impone una marca o proveedor concreto. El sistema elegido debe cumplir todos los requisitos técnicos y legales.
-
-### ¿Se aplica a los transportes internacionales?
-
-Los transportes internacionales se documentan conforme a los convenios internacionales aplicables. El DeCA se exige principalmente para transportes interiores y operaciones de cabotaje en España.
-
 ### ¿Puede modificarse durante el transporte?
 
 Sí, pero debe modificarse electrónicamente conservando la trazabilidad. No son válidas las simples anotaciones manuscritas realizadas sobre una copia en papel.
+
+### ¿Se puede recurrir una sanción del DeCA?
+
+Sí. Conviene revisar quién era realmente el sujeto obligado, si el documento existía y se emitió a tiempo, y si la Administración ha acreditado correctamente los hechos. El historial de la plataforma, con fechas de creación y modificación, es una prueba clave.
 
 ### Fuentes normativas
 

@@ -1,13 +1,13 @@
 ---
-title: "DECA obligatorio en 2026: guía para transportistas y empresas de transporte"
-seoTitle: "DECA obligatorio: qué es, a quién afecta y cómo cumplirlo"
-description: "El DECA es obligatorio desde el 5 de octubre de 2026. Qué debe contener, a quién afecta, si sirve el papel, cuánto conservarlo y cómo elegir plataforma."
+title: "DECA obligatorio en 2026: quién está obligado y cómo cumplir"
+seoTitle: "DECA obligatorio 2026: quién está obligado y cómo cumplirlo"
+description: "El DECA es obligatorio desde el 5 de octubre de 2026. Quién está obligado, qué transportes afecta, qué debe contener, si sirve el papel, cuánto conservarlo y cómo cumplir."
 date: 2026-09-06
-updated: 2026-10-25
+updated: 2026-10-30
 category: transporte
 deca: guia
 wpId: 2872
-intencion: "Organizar el DeCA en el día a día de una empresa transportista"
+intencion: "Saber si el DECA es obligatorio para mi empresa, desde cuándo y cómo cumplirlo"
 imagen: logistica-camion-muelle
 ---
 
@@ -31,7 +31,7 @@ La [Ley 9/2025, de Movilidad Sostenible](https://www.boe.es/buscar/act.php?id=BO
 
 Las características técnicas fueron concretadas posteriormente por la [Resolución de 5 de junio de 2026 de la Dirección General de Transporte por Carretera y Ferrocarril](https://www.boe.es/buscar/act.php?id=BOE-A-2026-12784).
 
-## ¿A quién afecta el DECA obligatorio?
+## ¿Quién está obligado al DECA?
 
 La obligación afecta principalmente al transporte público de mercancías por carretera de ámbito interior, incluidos los transportes de cabotaje realizados dentro de España.
 
@@ -44,7 +44,7 @@ Esta distinción no es puramente formal. La [Orden FOM/2861/2012](https://www.bo
 
 El cargador contractual responde, entre otros aspectos, de la identificación del cargador y del transportista efectivo, del origen y destino y de la naturaleza y peso de la mercancía. El transportista efectivo responde de otros datos operativos, como la fecha del transporte, la matrícula o determinadas autorizaciones especiales.
 
-Por tanto, el DECA no es solamente “un papel convertido en PDF”. También deja constancia de quién intervino en la operación y de qué información aportó cada parte.
+Por tanto, el DECA no es solamente “un papel convertido en PDF”. También deja constancia de quién intervino en la operación y de qué información aportó cada parte. Qué multas puede acarrear un DECA inexistente o incorrecto, y quién las paga, lo explicamos en la guía sobre las [sanciones del DeCA](/deca-obligatorio-en-2026-guia-legal-para-transportistas-y-cargadores/).
 
 ## ¿Qué debe contener un DECA?
 

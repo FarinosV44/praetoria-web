@@ -87,7 +87,7 @@ DECA Scan AI encaja en ese flujo: el documento leído se convierte en un DeCA qu
 2. Sube la orden de transporte, el CMR o el albarán del próximo servicio a DECA Scan AI.
 3. Revisa los datos marcados, completa lo que falte y genera el DeCA.
 
-Si todavía tienes dudas sobre quién debe emitir el DeCA o qué datos debe llevar, empieza por nuestra [guía legal del DeCA](/deca-obligatorio-en-2026-guia-legal-para-transportistas-y-cargadores/) y por cómo [elegir plataforma de DeCA](/plataforma-deca-cual-elegir-antes-del-5-de-octubre-de-2026/).
+Si todavía tienes dudas sobre quién debe emitir el DeCA o qué datos debe llevar, empieza por nuestra [guía del DeCA obligatorio](/deca-obligatorio-en-2026-guia-para-transportistas-y-empresas-de-transporte/) y por cómo [elegir plataforma de DeCA](/plataforma-deca-cual-elegir-antes-del-5-de-octubre-de-2026/).
 
 ## Fuentes y transparencia
 
