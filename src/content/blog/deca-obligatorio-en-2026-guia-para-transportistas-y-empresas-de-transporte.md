@@ -1,7 +1,7 @@
 ---
 title: "DECA obligatorio en 2026: quién está obligado y cómo cumplir"
-seoTitle: "DECA obligatorio 2026: quién está obligado y cómo cumplirlo"
-description: "El DECA es obligatorio desde el 5 de octubre de 2026. Quién está obligado, qué transportes afecta, qué debe contener, si sirve el papel, cuánto conservarlo y cómo cumplir."
+seoTitle: "DECA obligatorio 2026: ¿te afecta? Quién está obligado"
+description: "Desde el 5 de octubre de 2026 el DECA es digital y obligatorio. Comprueba si te afecta, qué debe incluir, si vale el papel, cuánto conservarlo y cómo cumplir."
 date: 2026-09-06
 updated: 2026-10-30
 category: transporte

@@ -1,7 +1,7 @@
 ---
 title: "DECA para el transporte de mercancías: guía práctica para empresas de transporte y logística"
-seoTitle: "DECA transporte de mercancías 2026: guía para empresa"
-description: "Guía del DECA para empresas de transporte y logística: obligados, datos, QR, inspecciones, subcontratación y cómo cumplir desde octubre de 2026."
+seoTitle: "DECA en el transporte de mercancías: guía práctica 2026"
+description: "Lo que una empresa de transporte necesita saber del DECA: quién lo hace, los ocho datos obligatorios, el QR, las inspecciones y la subcontratación."
 date: 2026-09-10
 updated: 2026-10-25
 category: transporte
