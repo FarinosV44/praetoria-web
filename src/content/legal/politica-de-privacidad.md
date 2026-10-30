@@ -8,7 +8,7 @@ De conformidad con el Reglamento (UE) 2016/679, General de Protección de Datos 
 
 ## Responsable del tratamiento
 
-PRAETORIA SL, CIF B21810452, con domicilio social en Calle Pintor Francisco Ribalta, 4A, 46540, El Puig de Santa María (Valencia), actuando como administrador y responsable del ejercicio profesional Juan José Farinós Ibáñez, abogado colegiado ICAV número 13981. Correo de contacto: [juanfarinos@icav.es](mailto:juanfarinos@icav.es).
+PRAETORIA SL, CIF B21810452, con domicilio social en Calle Pintor Francisco Ribalta, 4A, 46540, El Puig de Santa María (Valencia), actuando como administrador y responsable del ejercicio profesional Juan José Farinós Ibáñez, abogado colegiado ICAV número 13981. Correo de contacto: [info@praetoriaabogados.es](mailto:info@praetoriaabogados.es).
 
 ## Finalidad del tratamiento
 
@@ -34,7 +34,7 @@ No se cederán datos a terceros salvo obligación legal. Podrán tener acceso a 
 
 ## Derechos de los interesados
 
-El usuario puede ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad dirigiéndose por escrito al Titular en [juanfarinos@icav.es](mailto:juanfarinos@icav.es). Asimismo, tiene derecho a presentar una reclamación ante la Agencia Española de Protección de Datos ([www.aepd.es](https://www.aepd.es)).
+El usuario puede ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad dirigiéndose por escrito al Titular en [info@praetoriaabogados.es](mailto:info@praetoriaabogados.es). Asimismo, tiene derecho a presentar una reclamación ante la Agencia Española de Protección de Datos ([www.aepd.es](https://www.aepd.es)).
 
 ## Medidas de seguridad
 

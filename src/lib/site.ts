@@ -10,7 +10,7 @@ export const site = {
   collegeNumber: '13.981',
   phone: '607 527 719',
   phoneIntl: '+34607527719',
-  email: 'juanfarinos@icav.es',
+  email: 'info@praetoriaabogados.es',
   address: {
     street: 'C/ Pintor Francisco Ribalta, 4A',
     postalCode: '46540',

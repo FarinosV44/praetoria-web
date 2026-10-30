@@ -8,7 +8,7 @@ comprobación de cada PR la hace la CI de GitHub (`.github/workflows/ci.yml`).
 | --- | --- |
 | Web estática (`out/`) | Hostinger (LiteSpeed/Apache). Configuración: comando `npm run build`, carpeta `out` (también se copia a `dist/`), Node 22 |
 | Redirecciones de la migración, www → dominio, 404 y cabeceras | `out/.htaccess`, generado por `scripts/hostinger/htaccess.mjs` desde `out/_redirects` |
-| Consultas y solicitudes de llamada | `public/api/consulta.php` y `llamada.php` en el propio dominio (`/api/consulta`, `/api/llamada`), que validan y envían el aviso por correo a juanfarinos@icav.es. Detalle en [`CONSULTAS.md`](CONSULTAS.md) |
+| Consultas y solicitudes de llamada | `public/api/consulta.php` y `llamada.php` en el propio dominio (`/api/consulta`, `/api/llamada`), que validan y envían el aviso por correo a info@praetoriaabogados.es. Detalle en [`CONSULTAS.md`](CONSULTAS.md) |
 | Comprobación de las PR | CI de GitHub (build, pruebas unitarias y PHP, pruebas en navegador) |
 
 `npm run build` (`scripts/build.mjs`) detecta el build de Hostinger: si `SITE_INDEXABLE` no viene fijada,

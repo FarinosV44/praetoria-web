@@ -204,8 +204,8 @@ t('con clave de Resend: envía por su API al despacho, con asunto, «Responder a
     assert.equal(recibidos.length, 1);
     const { auth, cuerpo } = recibidos[0];
     assert.equal(auth, 'Bearer re_prueba');
-    assert.deepEqual(cuerpo.to, ['juanfarinos@icav.es']);
-    assert.match(cuerpo.from, /<web@praetoriaabogados\.es>$/);
+    assert.deepEqual(cuerpo.to, ['info@praetoriaabogados.es']);
+    assert.match(cuerpo.from, /<info@praetoriaabogados\.es>$/);
     assert.match(cuerpo.subject, /^Nueva consulta web · Laboral \(Lucía López\) · Persona de prueba$/);
     assert.equal(cuerpo.reply_to, 'prueba@example.com');
     assert.match(cuerpo.text, /Responsable: Lucía López \(649 181 290\)/);
