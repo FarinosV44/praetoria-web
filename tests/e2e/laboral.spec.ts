@@ -21,9 +21,9 @@ test('Laboral está en la navegación, la portada y el índice de áreas', async
 test('la landing laboral contacta con el área laboral (llamada y WhatsApp) sin nombres en los botones', async ({ page }) => {
   await page.goto('/abogado-laboralista-valencia/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Abogado laboralista en Valencia');
-  await expect(page.locator('.page-head a[href="tel:+34649181290"]')).toHaveText(/Llamar al área laboral/);
+  await expect(page.locator('.page-head a[href="tel:+34960382362"]')).toHaveText(/Llamar al área laboral/);
   await expect(page.locator('.page-head a[href^="https://wa.me/34649181290"]')).toHaveText(/WhatsApp del área laboral/);
-  await expect(page.locator('.cta a[href="tel:+34649181290"]')).toBeVisible();
+  await expect(page.locator('.cta a[href="tel:+34960382362"]')).toBeVisible();
   await expect(page.locator('.cta a[href^="https://wa.me/34649181290"]')).toBeVisible();
   // En las páginas laborales, ningún botón lleva al número general salvo el pie
   expect(await page.locator('main a[href*="607527719"]').count()).toBe(0);
@@ -42,7 +42,7 @@ for (const s of SERVICIOS) {
     for (const h of ['Qué revisamos', 'Cómo trabajamos', 'Qué documentación ayuda', 'Preguntas frecuentes', 'Normas citadas']) {
       await expect(page.getByRole('heading', { level: 2, name: h })).toBeVisible();
     }
-    await expect(page.locator('.page-head a[href="tel:+34649181290"]')).toBeVisible();
+    await expect(page.locator('.page-head a[href="tel:+34960382362"]')).toBeVisible();
     await page.locator('.page-head').getByRole('link', { name: s.cta }).click();
     await expect(page).toHaveURL(new RegExp(`/contacto/\\?servicio=${s.id}$`));
     await expect(page.locator('#servicio')).toContainText(s.nombre);
@@ -62,7 +62,7 @@ for (const s of SERVICIOS) {
     await page.getByLabel(/Fecha en que te lo comunicaron/).fill('2026-10-20');
     await page.getByRole('button', { name: 'Enviar mi consulta' }).click();
     await expect(page.getByText('La revisará el área laboral')).toBeVisible();
-    await expect(page.locator('.form-ok a[href="tel:+34649181290"]')).toBeVisible();
+    await expect(page.locator('.form-ok a[href="tel:+34960382362"]')).toBeVisible();
     const r = await registro(page);
     expect(r).toHaveLength(1);
     expect(r[0]).toMatchObject({ area: 'Laboral', servicio: s.nombre, representa: 'Soy la persona trabajadora', situacion: 'Ya no trabajo en la empresa', fecha: '2026-10-20', responsable: 'Lucía López (649 181 290)' });

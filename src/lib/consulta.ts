@@ -72,8 +72,8 @@ export const TIEMPO_MINIMO_MS = 3000;
 /** Contacto responsable según el área: Laboral lo atiende Lucía López; el resto, el contacto general. */
 export function responsable(area: AreaId) {
   return area === 'laboral'
-    ? { nombre: laboral.name, telefono: laboral.phone }
-    : { nombre: site.lawyer, telefono: site.phone };
+    ? { nombre: laboral.name, telefono: laboral.movil }
+    : { nombre: site.lawyer, telefono: site.movil };
 }
 
 export const fechaValida = (v: string, ahora: number, futura = false) => {

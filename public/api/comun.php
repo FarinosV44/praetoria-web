@@ -134,7 +134,7 @@ function responsable(string $area): string {
   $c = catalogo();
   return $area === 'laboral'
     ? "{$c['laboral']['nombre']} ({$c['laboral']['telefono']})"
-    : "{$c['despacho']['abogado']} ({$c['despacho']['telefono']})";
+    : "{$c['despacho']['abogado']} ({$c['despacho']['movil']})";
 }
 
 /** Valida una consulta del formulario de contacto. Mismas reglas que validarConsulta (src/lib/consulta.ts). */

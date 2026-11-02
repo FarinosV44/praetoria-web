@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { Icon, LineIcon } from '@/components/Icon';
 import { LlamadaForm } from '@/components/LlamadaForm';
-import { contactos } from '@/lib/site';
+import { contactos, centralita } from '@/lib/site';
 import { buildMetadata } from '@/lib/seo';
 
 // «Que me llame un abogado» (#33): solicitud de contacto prioritario. Sin promesas de disponibilidad ni de plazos de respuesta.
@@ -38,7 +38,7 @@ export default function LlamadaPage() {
             <h2>Si no puede esperar</h2>
             <div className="direct__grupo">
               <p className="direct__area">
-                <LineIcon name="edificio" /> {contactos.general.etiqueta}
+                <LineIcon name="edificio" /> Teléfono del despacho
               </p>
               <ul>
                 <li>
@@ -51,22 +51,7 @@ export default function LlamadaPage() {
                   </a>
                 </li>
               </ul>
-            </div>
-            <div className="direct__grupo">
-              <p className="direct__area">
-                <LineIcon name="trabajo" /> {contactos.laboral.etiqueta}
-              </p>
-              <ul>
-                <li>
-                  <a href={`tel:${contactos.laboral.phoneIntl}`}>
-                    <Icon name="phone" />
-                    <span>
-                      <strong>{contactos.laboral.phone}</strong>
-                      {contactos.laboral.llamar}
-                    </span>
-                  </a>
-                </li>
-              </ul>
+              <p className="small muted">{centralita}</p>
             </div>
             <p className="small">
               <strong>Si estás en peligro o presencias un delito que se está cometiendo, llama al 112.</strong>

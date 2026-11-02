@@ -484,7 +484,8 @@ return json_decode(<<<'JSON'
  "despacho": {
   "nombre": "Praetoria División Jurídica",
   "abogado": "Juan José Farinós Ibáñez",
-  "telefono": "607 527 719",
+  "telefono": "960 382 362",
+  "movil": "607 527 719",
   "email": "info@praetoriaabogados.es",
   "dominio": "praetoriaabogados.es"
  },

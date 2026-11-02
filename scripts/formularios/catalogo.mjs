@@ -38,8 +38,8 @@ const datos = {
   limitesLlamada: { ...LIMITES_LLAMADA },
   tiempoMinimoMs: TIEMPO_MINIMO_MS,
   servicios,
-  despacho: { nombre: site.name, abogado: site.lawyer, telefono: site.phone, email: site.email, dominio: new URL(site.url).hostname },
-  laboral: { nombre: laboral.name, telefono: laboral.phone },
+  despacho: { nombre: site.name, abogado: site.lawyer, telefono: site.phone, movil: site.movil, email: site.email, dominio: new URL(site.url).hostname },
+  laboral: { nombre: laboral.name, telefono: laboral.movil },
 };
 
 // JSON dentro de un nowdoc: PHP no interpreta nada de su contenido

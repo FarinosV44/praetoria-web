@@ -63,26 +63,22 @@ export function Footer() {
         <div className="col">
           <p className="col__title">Contacto</p>
           <ul className="contact">
-            <li className="contact__area">{contactos.general.etiqueta}</li>
+            <li className="contact__area">Teléfono del despacho</li>
             <li>
               <a href={`tel:${contactos.general.phoneIntl}`}>
                 <Icon name="phone" /> {contactos.general.phone}
               </a>
             </li>
+            <li className="small">Laboral y consultas generales</li>
+            <li className="contact__area">WhatsApp</li>
             <li>
               <a href={whatsapp(mensajes.general)}>
-                <Icon name="whatsapp" /> {contactos.general.escribir}
-              </a>
-            </li>
-            <li className="contact__area">{contactos.laboral.etiqueta}</li>
-            <li>
-              <a href={`tel:${contactos.laboral.phoneIntl}`}>
-                <Icon name="phone" /> {contactos.laboral.phone}
+                <Icon name="whatsapp" /> {contactos.general.etiqueta}
               </a>
             </li>
             <li>
               <a href={whatsapp(mensajes.laboral, 'laboral')}>
-                <Icon name="whatsapp" /> {contactos.laboral.escribir}
+                <Icon name="whatsapp" /> {contactos.laboral.etiqueta}
               </a>
             </li>
             <li className="contact__area">Correo general</li>
