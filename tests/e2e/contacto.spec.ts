@@ -102,3 +102,16 @@ test.describe('sin JavaScript', () => {
     expect(await registro(page)).toHaveLength(1);
   });
 });
+
+test('la web muestra solo la centralita: ningún móvil a la vista y WhatsApp sigue en los móviles', async ({ page }) => {
+  for (const ruta of ['/', '/contacto/', '/abogado-laboralista-valencia/', '/que-me-llame-un-abogado/', '/aviso-legal/']) {
+    await page.goto(ruta);
+    const texto = await page.locator('body').innerText();
+    expect(texto, ruta).not.toMatch(/607\s?527\s?719|649\s?181\s?290/);
+    expect(await page.locator('a[href^="tel:"]:not([href="tel:+34960382362"])').count(), ruta).toBe(0);
+  }
+  await page.goto('/contacto/');
+  await expect(page.locator('footer')).toContainText('960 382 362');
+  await expect(page.locator('main a[href^="https://wa.me/34607527719"]').first()).toBeAttached();
+  await expect(page.locator('main a[href^="https://wa.me/34649181290"]').first()).toBeAttached();
+});

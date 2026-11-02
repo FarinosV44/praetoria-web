@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { Icon, LineIcon } from '@/components/Icon';
 import { ContactForm } from '@/components/ContactForm';
-import { contactos, laboral, mensajes, site, whatsapp } from '@/lib/site';
+import { centralita, contactos, laboral, mensajes, site, whatsapp } from '@/lib/site';
 import { buildMetadata } from '@/lib/seo';
 
 export const metadata = buildMetadata({
@@ -45,7 +45,7 @@ export default function ContactoPage() {
             <h2>Contactos del despacho</h2>
             <div className="direct__grupo">
               <p className="direct__area">
-                <LineIcon name="edificio" /> {contactos.general.etiqueta}
+                <LineIcon name="edificio" /> Teléfono del despacho
               </p>
               <ul>
                 <li>
@@ -53,15 +53,23 @@ export default function ContactoPage() {
                     <Icon name="phone" />
                     <span>
                       <strong>{contactos.general.phone}</strong>
-                      {contactos.general.llamar}
+                      Área laboral y atención jurídica general
                     </span>
                   </a>
                 </li>
+              </ul>
+              <p className="small muted">{centralita}</p>
+            </div>
+            <div className="direct__grupo">
+              <p className="direct__area">
+                <LineIcon name="edificio" /> {contactos.general.etiqueta}
+              </p>
+              <ul>
                 <li>
                   <a href={whatsapp(mensajes.general)}>
                     <Icon name="whatsapp" />
                     <span>
-                      <strong>{contactos.general.escribir}</strong>Al mismo número
+                      <strong>{contactos.general.escribir}</strong>Mensajes escritos, sin llamada
                     </span>
                   </a>
                 </li>
@@ -73,19 +81,10 @@ export default function ContactoPage() {
               </p>
               <ul>
                 <li>
-                  <a href={`tel:${contactos.laboral.phoneIntl}`}>
-                    <Icon name="phone" />
-                    <span>
-                      <strong>{contactos.laboral.phone}</strong>
-                      {contactos.laboral.llamar}
-                    </span>
-                  </a>
-                </li>
-                <li>
                   <a href={whatsapp(mensajes.laboral, 'laboral')}>
                     <Icon name="whatsapp" />
                     <span>
-                      <strong>{contactos.laboral.escribir}</strong>Al mismo número
+                      <strong>{contactos.laboral.escribir}</strong>Mensajes escritos, sin llamada
                     </span>
                   </a>
                 </li>

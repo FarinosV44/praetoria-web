@@ -75,8 +75,7 @@ export const legalServiceLd = {
   // Mercado atendido (#28): Valencia. La dirección real (El Puig de Santa María) se mantiene en address.
   areaServed: ['Valencia', 'Provincia de Valencia', 'España'],
   contactPoint: [
-    { '@type': 'ContactPoint', name: contactos.general.etiqueta, telephone: contactos.general.phoneIntl, contactType: 'customer service', availableLanguage: 'es' },
-    { '@type': 'ContactPoint', name: contactos.laboral.etiqueta, telephone: contactos.laboral.phoneIntl, contactType: 'customer service', availableLanguage: 'es' },
+    { '@type': 'ContactPoint', name: 'Centralita del despacho (área laboral y atención jurídica general)', telephone: contactos.general.phoneIntl, contactType: 'customer service', availableLanguage: 'es' },
   ],
   founder: {
     '@type': 'Person',

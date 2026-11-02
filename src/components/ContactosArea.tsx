@@ -6,7 +6,7 @@ const MAPS = 'https://www.google.com/maps/dir/?api=1&destination=Calle%20Pintor%
 
 /**
  * Contactos del despacho por área (#28). Los números aparecen aquí, etiquetados por área, y no como reclamo del hero.
- * Laboral va al número del área laboral (llamadas y WhatsApp); todo lo demás, a la atención jurídica general.
+ * Las llamadas van a la centralita, cuya locución separa laboral y general; WhatsApp, al móvil de cada área.
  */
 export function ContactosArea({ primero = 'general' }: { primero?: 'general' | 'laboral' }) {
   const general = (
@@ -18,6 +18,7 @@ export function ContactosArea({ primero = 'general' }: { primero?: 'general' | '
       <p className="contacto-card__numero">
         <a href={`tel:${contactos.general.phoneIntl}`}>{contactos.general.phone}</a>
       </p>
+      <p className="contacto-card__desc small muted">Centralita del despacho: en la locución, elige la consulta jurídica general. Fuera de horario te indica cuándo llamar.</p>
       <div className="contacto-card__acciones">
         <a className="btn btn--red" href={`tel:${contactos.general.phoneIntl}`}>
           <Icon name="phone" /> {contactos.general.llamar}
@@ -39,6 +40,7 @@ export function ContactosArea({ primero = 'general' }: { primero?: 'general' | '
       <p className="contacto-card__numero">
         <a href={`tel:${contactos.laboral.phoneIntl}`}>{contactos.laboral.phone}</a>
       </p>
+      <p className="contacto-card__desc small muted">Centralita del despacho: en la locución, elige el área laboral. Fuera de horario te indica cuándo llamar.</p>
       <div className="contacto-card__acciones">
         <a className="btn btn--red" href={`tel:${contactos.laboral.phoneIntl}`}>
           <Icon name="phone" /> {contactos.laboral.llamar}

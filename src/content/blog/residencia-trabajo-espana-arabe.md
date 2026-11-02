@@ -126,6 +126,6 @@ imagen: extranjeria-pasaporte
 
 📍 فالنسيا  
 🌐 [www.praetoriaabogados.es](/)  
-📞 +34 607 527 719
+📞 +34 960 382 362
 
 نرافقك للحصول على الإقامة بطريقة قانونية، آمنة وسريعة.

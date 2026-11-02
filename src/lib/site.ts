@@ -8,8 +8,13 @@ export const site = {
   lawyer: 'Juan José Farinós Ibáñez',
   college: 'Ilustre Colegio de Abogados de Valencia (ICAV)',
   collegeNumber: '13.981',
-  phone: '607 527 719',
-  phoneIntl: '+34607527719',
+  /** Centralita del despacho (Netelip): una locución pasa la llamada al área laboral o a la atención jurídica general,
+   *  y fuera de horario informa del horario. Es el único teléfono que se muestra en la web. */
+  phone: '960 382 362',
+  phoneIntl: '+34960382362',
+  /** Móvil del letrado: solo para WhatsApp y para el aviso interno de las consultas; nunca se muestra en la web. */
+  movil: '607 527 719',
+  whatsappIntl: '+34607527719',
   email: 'info@praetoriaabogados.es',
   address: {
     street: 'C/ Pintor Francisco Ribalta, 4A',
@@ -32,9 +37,13 @@ export const site = {
 export const laboral = {
   name: 'Lucía López',
   role: 'Experta en Derecho Laboral',
-  phone: '649 181 290',
-  phoneIntl: '+34649181290',
+  /** Móvil del área laboral: solo para WhatsApp y para el aviso interno de las consultas; nunca se muestra en la web. */
+  movil: '649 181 290',
+  whatsappIntl: '+34649181290',
 };
+
+/** Cómo funciona la centralita, para explicarlo junto al número. */
+export const centralita = 'Al llamar, una locución te pasa con el área laboral o con la atención jurídica general. Fuera de horario te indica cuándo puedes llamar.';
 
 /**
  * Mensajes predefinidos de WhatsApp (#3): siempre dirigidos a Praetoria y al servicio jurídico,
@@ -57,8 +66,8 @@ export const mensajes = {
 } as const;
 
 /**
- * Canales de contacto del despacho por área (#28). Los botones nombran el canal, no a la persona,
- * y el número se muestra en zonas secundarias (contacto, pie, barra móvil), etiquetado por área.
+ * Canales de contacto del despacho por área (#28). Los botones nombran el canal, no a la persona.
+ * Las llamadas van siempre a la centralita (la locución separa laboral y general); WhatsApp, al móvil de cada área.
  */
 export type CanalId = 'general' | 'laboral';
 export const contactos = {
@@ -67,6 +76,7 @@ export const contactos = {
     etiqueta: 'Atención jurídica general',
     phone: site.phone,
     phoneIntl: site.phoneIntl,
+    whatsappIntl: site.whatsappIntl,
     llamar: 'Llamar al despacho',
     escribir: 'Consultar por WhatsApp',
     consulta: 'Solicitar una valoración',
@@ -74,8 +84,9 @@ export const contactos = {
   laboral: {
     id: 'laboral' as CanalId,
     etiqueta: 'Área laboral',
-    phone: laboral.phone,
-    phoneIntl: laboral.phoneIntl,
+    phone: site.phone,
+    phoneIntl: site.phoneIntl,
+    whatsappIntl: laboral.whatsappIntl,
     llamar: 'Llamar al área laboral',
     escribir: 'WhatsApp del área laboral',
     consulta: 'Enviar consulta laboral',
@@ -84,7 +95,7 @@ export const contactos = {
 export const canalDe = (area?: string | null) => (area === 'laboral' ? contactos.laboral : contactos.general);
 
 export const whatsapp = (text: string = mensajes.general, canal: CanalId = 'general') =>
-  `https://wa.me/${contactos[canal].phoneIntl.replace('+', '')}?text=${encodeURIComponent(text)}`;
+  `https://wa.me/${contactos[canal].whatsappIntl.replace('+', '')}?text=${encodeURIComponent(text)}`;
 
 export const deca = (campaign: string) =>
   `${site.decaUrl}?utm_source=praetoria&utm_medium=referral&utm_campaign=${campaign}`;

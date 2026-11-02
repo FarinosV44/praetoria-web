@@ -59,9 +59,11 @@ export function Medicion() {
         const sv = servicioPorId(q.get('servicio') ?? '');
         medir('cta_click', { destino: 'formulario', servicio: sv?.id, area: sv?.area ?? q.get('area') ?? undefined, landing, ubicacion });
       } else if (href.startsWith('https://wa.me/')) {
-        medir('whatsapp_click', { destino: href.includes(laboral.phoneIntl.slice(1)) ? 'laboral' : 'general', landing, ubicacion });
+        medir('whatsapp_click', { destino: href.includes(laboral.whatsappIntl.slice(1)) ? 'laboral' : 'general', landing, ubicacion });
       } else if (href.startsWith('tel:')) {
-        medir('phone_click', { destino: href.includes(laboral.phoneIntl.slice(1)) ? 'laboral' : 'general', landing, ubicacion });
+        // Un único número (centralita): el destino lo indica el canal del enlace, no el número.
+        const canal = (a.closest('[data-canal]') as HTMLElement | null)?.dataset.canal;
+        medir('phone_click', { destino: canal === 'laboral' || /laboral/i.test(a.textContent ?? '') ? 'laboral' : 'general', landing, ubicacion });
       }
     };
     document.addEventListener('click', onClick);

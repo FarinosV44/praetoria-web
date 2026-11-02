@@ -32,7 +32,7 @@ async function recorrido(page: Page, eleccion: 'Aceptar' | 'Rechazar') {
   await page.goto('/impugnar-despido/?utm_source=Google&utm_medium=cpc&utm_campaign=prueba&email=ana@example.com');
   await page.getByRole('dialog', { name: 'Aviso de cookies' }).getByRole('button', { name: eleccion }).click();
   await sinNavegarFuera(page);
-  await page.locator('.page-head a[href="tel:+34649181290"]').click();
+  await page.locator('.page-head a[href="tel:+34960382362"]').click();
   await page.locator('.cta a[href^="https://wa.me/"]').click();
   await page.locator('.page-head').getByRole('link', { name: 'Solicitar revisión de mi despido' }).click();
   await expect(page).toHaveURL(/\/contacto\/\?servicio=laboral-despidos$/);

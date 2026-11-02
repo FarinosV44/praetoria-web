@@ -339,7 +339,7 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
         <FieldError k="servicio" msg={errores.servicio} />
         {area === 'laboral' && (
           <p className="small muted">
-            Los asuntos laborales los atiende el área laboral del despacho ({contactos.laboral.phone}, llamadas y WhatsApp).
+            Los asuntos laborales los atiende el área laboral del despacho: llamadas al {contactos.laboral.phone} (la locución te pasa con el área laboral) y WhatsApp del área laboral.
           </p>
         )}
       </div>
