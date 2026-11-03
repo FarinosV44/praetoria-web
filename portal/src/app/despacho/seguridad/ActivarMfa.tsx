@@ -18,6 +18,8 @@ export function ActivarMfa() {
     const code = String(new FormData(e.currentTarget).get('codigo')).replace(/\s/g, '');
     const r = await authClient.twoFactor.verifyTotp({ code });
     if (r.error) { setError('El código no es correcto. Comprueba la hora del móvil y vuelve a probar.'); return; }
+    // Auditoría A2: cualquier otra sesión abierta antes de activar el doble factor deja de valer.
+    await authClient.revokeOtherSessions();
     window.location.href = '/despacho/';
   }
   if (!datos) return (

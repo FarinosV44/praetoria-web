@@ -51,7 +51,9 @@ export const auth = betterAuth({
   emailVerification: {
     sendOnSignUp: true,
     sendOnSignIn: true,
-    autoSignInAfterVerification: true,
+    // Auditoría M1: verificar el correo no abre sesión. Así quien se registró con un correo ajeno
+    // no comparte cuenta con su titular: este tendrá que entrar (o restablecer) con su propia contraseña.
+    autoSignInAfterVerification: false,
     expiresIn: 3600,
     sendVerificationEmail: async ({ user, url }) => {
       const m = plantillasCorreo.verificacion(url);
@@ -79,6 +81,9 @@ export const auth = betterAuth({
   advanced: {
     cookiePrefix: 'praetoria-portal',
     useSecureCookies: env.origin.startsWith('https://'),
+    // Auditoría A3: IP real del cliente según el proxy de confianza (Netlify), para que el límite de
+    // intentos sea por persona y no un contador común que bloquee a todos.
+    ipAddress: { ipAddressHeaders: [env.cabeceraIp] },
     database: { generateId: 'uuid' },
   },
   plugins: [twoFactor({ issuer: 'Praetoria Abogados' }), nextCookies()],

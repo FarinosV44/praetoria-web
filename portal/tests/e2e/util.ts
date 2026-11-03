@@ -42,11 +42,15 @@ export async function registrar(page: Page, nombre: string, email: string, clave
   return antes;
 }
 
-export async function verificarYCompletar(page: Page, email: string, previos: number) {
+export async function verificarYCompletar(page: Page, email: string, previos: number, clave: string) {
   const c = await esperarCorreo(email, /Confirma tu correo/, previos);
   expect(c.attachments).toBe(0);
   await page.goto(enlace(c.text));
+  // Verificar no abre sesión (auditoría M1): hay que entrar con la contraseña propia.
   await expect(page.getByText('Correo confirmado')).toBeVisible();
+  await expect(page).toHaveURL(/\/entrar\//);
+  await entrar(page, email, clave);
+  await expect(page.getByText('Tu cuenta ya está activa')).toBeVisible();
   await page.getByText('Yo, como particular').click();
   await page.getByRole('button', { name: 'Continuar' }).click();
   await expect(page).toHaveURL(/\/inicio\/$/);

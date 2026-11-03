@@ -20,7 +20,7 @@ export function FormRegistro() {
       email: String(f.get('email')).trim().toLowerCase(),
       password: String(f.get('clave')),
       privacidadVersion: VERSION_PRIVACIDAD,
-      callbackURL: '/bienvenida/',
+      callbackURL: '/entrar/?verificado=1',
     });
     if (r.error && r.error.status !== 422 && r.error.code !== 'USER_ALREADY_EXISTS') {
       setEstado('inicio');

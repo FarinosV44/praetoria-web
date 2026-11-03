@@ -13,7 +13,7 @@ export default async function Bienvenida() {
   if (u.tienePerfil) redirect('/inicio/');
   return (
     <div className="card">
-      <p className="exito mb-4" role="status">Correo confirmado. Tu cuenta ya está activa.</p>
+      <p className="exito mb-4" role="status">Tu cuenta ya está activa.</p>
       <h1 className="titulo mb-2">Hola, {u.nombre.split(' ')[0]}</h1>
       <p className="ayuda mb-5">Solo un dato más para empezar. El resto te lo pediremos cuando haga falta.</p>
       <FormPerfil accion={crearPerfil} />

@@ -39,7 +39,7 @@ test('1. Cliente A se registra desde el móvil, verifica el correo e inicia una 
   // Sin verificar no puede entrar
   await entrar(p, A.email, A.clave);
   await expect(p.getByText('Antes de entrar tienes que confirmar tu correo')).toBeVisible();
-  await verificarYCompletar(p, A.email, previos);
+  await verificarYCompletar(p, A.email, previos, A.clave);
 
   await p.getByRole('link', { name: 'Iniciar una solicitud' }).click();
   await p.getByRole('button', { name: 'Empezar' }).click();
@@ -106,12 +106,23 @@ test('3. La letrada activa el doble factor, revisa, pide subsanación y un docum
   const p = await ctx.newPage();
   await entrarLetrada(p);
   await expect(p).toHaveURL(/\/despacho\/seguridad\/$/);
+  // Sin doble factor, el personal tampoco puede usar la API de documentos (auditoría A1).
+  const sinMfa = await p.request.get(`/api/documentos/${estado.solicitud}`);
+  expect(sinMfa.status()).toBe(403);
+  // Una segunda sesión abierta antes de activar el doble factor deja de valer después (auditoría A2).
+  const otra = await browser.newContext();
+  const p2 = await otra.newPage();
+  await entrar(p2, LETRADA.email, LETRADA.clave);
+  await expect(p2).toHaveURL(/\/despacho\/seguridad\/$/);
   await p.getByLabel('Confirma tu contraseña').fill(LETRADA.clave);
   await p.getByRole('button', { name: 'Continuar' }).click();
   estado.totp = (await p.locator('[data-secreto]').getAttribute('data-secreto'))!;
   await p.getByLabel(/Escribe el código de seis cifras/).fill(new TOTP({ secret: estado.totp }).generate());
   await p.getByRole('button', { name: 'Activar' }).click();
   await expect(p).toHaveURL(/\/despacho\/$/);
+  await p2.goto('/despacho/');
+  await expect(p2).toHaveURL(/\/entrar\//);
+  await otra.close();
 
   await expect(p.getByRole('link', { name: /^SOL-/ }).first()).toBeVisible();
   await p.goto(`/despacho/solicitudes/${estado.solicitud}/`);
@@ -231,7 +242,7 @@ test('6. Cliente B no accede a nada de A: interfaz, API, almacenamiento ni ident
   await registrar(p, 'Intruso', A.email, 'otra-clave-cualquiera');
   await esperarCorreo(A.email, /Intento de registro/);
   const previos = await registrar(p, B.nombre, B.email, B.clave);
-  await verificarYCompletar(p, B.email, previos);
+  await verificarYCompletar(p, B.email, previos, B.clave);
 
   await expect(p.getByText('Iniciar una solicitud')).toBeVisible();
   for (const ruta of [`/solicitudes/${estado.solicitud}/`, `/expedientes/${estado.expediente}/`, `/solicitudes/${estado.solicitud}/editar/`]) {

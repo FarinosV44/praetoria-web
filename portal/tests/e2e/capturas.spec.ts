@@ -13,7 +13,7 @@ test('capturas móvil', async ({ browser }) => {
   await p.goto('/entrar/'); await p.screenshot({ path: `${dir}/01-entrar.png`, fullPage: true });
   const n = await registrar(p, 'Carmen Ficticia', email, 'clave-capturas-123');
   await p.screenshot({ path: `${dir}/02-registro-hecho.png`, fullPage: true });
-  await verificarYCompletar(p, email, n);
+  await verificarYCompletar(p, email, n, 'clave-capturas-123');
   await p.screenshot({ path: `${dir}/03-inicio-vacio.png`, fullPage: true });
   await p.getByRole('link', { name: 'Iniciar una solicitud' }).click();
   await p.getByRole('button', { name: 'Empezar' }).click();

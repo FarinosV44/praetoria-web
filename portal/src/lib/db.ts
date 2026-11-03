@@ -18,7 +18,8 @@ export function poolAuth(): Pool {
     connectionString: env.dbAuth,
     max: 5,
     application_name: 'portal-auth',
-    options: '-c search_path=identidad',
+    // El search_path de portal_auth lo fija el propio rol (migración 0006): el pooler de Supabase no aplica
+    // parámetros de arranque de la conexión.
   });
   return g.__poolAuth;
 }

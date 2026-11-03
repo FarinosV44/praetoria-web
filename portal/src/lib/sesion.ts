@@ -37,6 +37,19 @@ export async function requerirPersonal(opciones?: { sinMfa?: boolean }): Promise
   return u;
 }
 
+/**
+ * Rutas API y acciones fuera de /despacho: si quien llama es personal del despacho y el doble factor es
+ * obligatorio, exige que lo tenga activado. Sin esto, una contraseña de personal sin TOTP bastaría para
+ * descargar o subir documentos y escribir mensajes por la API (auditoría A1).
+ */
+export async function personalSinMfa(userId: string, twoFactorEnabled: boolean | null | undefined): Promise<boolean> {
+  if (!env.staffMfa || twoFactorEnabled) return false;
+  return comoUsuario(userId, async (tx) => {
+    const p = await tx.query('select 1 from portal.personal where user_id = $1 and activo', [userId]);
+    return (p.rowCount ?? 0) > 0;
+  });
+}
+
 /** Comprobación de origen para rutas API que modifican datos (defensa CSRF adicional a SameSite). */
 export async function origenValido(): Promise<boolean> {
   const h = await headers();

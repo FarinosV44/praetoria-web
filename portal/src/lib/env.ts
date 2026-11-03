@@ -25,5 +25,9 @@ export const env = {
     };
   },
   get staffMfa() { return process.env.STAFF_MFA_REQUIRED !== 'false'; },
+  /** Si es true, un documento solo se puede descargar o validar cuando el antivirus lo ha marcado como limpio. */
+  get antivirusObligatorio() { return process.env.ANTIVIRUS_REQUIRED === 'true'; },
+  /** Cabecera con la IP real del cliente que pone el proxy de confianza (Netlify: x-nf-client-connection-ip). */
+  get cabeceraIp() { return process.env.TRUSTED_IP_HEADER || 'x-nf-client-connection-ip'; },
   get uploadMaxBytes() { return Number(process.env.UPLOAD_MAX_MB || 20) * 1024 * 1024; },
 };

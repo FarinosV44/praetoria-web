@@ -15,7 +15,8 @@ export function FormEntrar() {
     const r = await authClient.signIn.email({
       email: String(f.get('email')).trim().toLowerCase(),
       password: String(f.get('clave')),
-      callbackURL: '/',
+      // Solo se usa en el enlace de verificación que se reenvía al intentar entrar sin haber confirmado el correo.
+      callbackURL: '/entrar/?verificado=1',
     });
     setEnviando(false);
     if (r.error) {

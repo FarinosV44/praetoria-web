@@ -7,6 +7,7 @@ import { UUID } from '@/lib/datos';
 import { env } from '@/lib/env';
 import { detectarTipo, nombreSeguro, pdfSospechoso, TIPOS } from '@/lib/archivos';
 import { borrarObjetoHuerfano, guardarObjeto } from '@/lib/storage';
+import { personalSinMfa } from '@/lib/sesion';
 
 export const runtime = 'nodejs';
 
@@ -19,6 +20,7 @@ export async function POST(req: Request) {
   if (h.get('origin') !== env.origin) return fallo(403, 'Origen no permitido.');
   const sesion = await auth.api.getSession({ headers: h });
   if (!sesion) return fallo(401, 'Tu sesión ha caducado. Vuelve a entrar.');
+  if (await personalSinMfa(sesion.user.id, sesion.user.twoFactorEnabled)) return fallo(403, 'Activa el doble factor antes de continuar.');
   const largo = Number(h.get('content-length') || 0);
   if (largo > env.uploadMaxBytes + 64 * 1024) return fallo(413, `El archivo supera el máximo de ${env.uploadMaxBytes / 1024 / 1024} MB.`);
 

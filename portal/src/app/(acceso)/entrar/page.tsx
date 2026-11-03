@@ -4,9 +4,11 @@ import { FormEntrar } from './FormEntrar';
 
 export const metadata: Metadata = { title: 'Entrar' };
 
-export default function Entrar() {
+export default async function Entrar({ searchParams }: { searchParams: Promise<{ verificado?: string }> }) {
+  const { verificado } = await searchParams;
   return (
     <div className="card">
+      {verificado === '1' ? <p className="exito mb-4" role="status">Correo confirmado. Entra con tu contraseña para continuar.</p> : null}
       <h1 className="titulo mb-2">Área de clientes</h1>
       <p className="ayuda mb-5">Entra para consultar tus solicitudes, enviar documentos y hablar con el despacho.</p>
       <FormEntrar />
