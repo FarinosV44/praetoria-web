@@ -198,7 +198,7 @@ export const servicios: Servicio[] = [
     area: 'laboral',
     nombre: 'Despidos e impugnación',
     resumen: 'Revisión de la carta y del finiquito, conciliación e impugnación del despido disciplinario, objetivo o colectivo.',
-    articulos: ['despido-valencia-que-hacer'],
+    articulos: ['despido-valencia-que-hacer', 'tipos-de-despido', 'carta-de-despido-requisitos-modelo'],
     cta: 'Solicitar revisión de mi despido',
     imagen: 'despidos',
     pagina: '/impugnar-despido/',
