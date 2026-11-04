@@ -42,7 +42,7 @@ export const areaContent: AreaContent[] = [
     slug: 'logistica-y-transporte-internacional',
     id: 'transporte',
     group: 'empresas',
-    title: 'Abogados de transporte internacional y logística en Valencia',
+    title: 'Abogados de transporte y logística en Valencia',
     description:
       'Abogados de transporte nacional e internacional en Valencia: impagos, daños en la mercancía, Convenio CMR, aseguradoras, DeCA y litigios en España y en el extranjero.',
     h1: 'Abogados de transporte internacional y logística en Valencia',
@@ -111,7 +111,7 @@ export const areaContent: AreaContent[] = [
     slug: 'derecho-mercantil',
     id: 'mercantil',
     group: 'empresas',
-    title: 'Abogados de derecho mercantil en Valencia | Contratos, sociedades y reclamaciones',
+    title: 'Abogado mercantil en Valencia: sociedades y contratos',
     description:
       'Asesoría en derecho mercantil: contratos, sociedades, reclamaciones comerciales y conflictos entre empresas. Soluciones jurídicas claras para negocios y autónomos en Valencia.',
     h1: 'Abogados de derecho mercantil en Valencia',
@@ -161,9 +161,9 @@ export const areaContent: AreaContent[] = [
     slug: 'abogado-laboralista-valencia',
     id: 'laboral',
     group: 'particulares',
-    title: 'Abogado laboralista en Valencia: despidos, finiquitos e incapacidad',
+    title: 'Abogado laboralista en Valencia: despidos y finiquitos',
     description:
-      'Abogado laboralista en Valencia para trabajadores y empresas: despidos, salarios y finiquitos, incapacidad permanente, altas médicas y accidentes laborales. Revisamos tu caso antes de actuar.',
+      'Abogado laboralista en Valencia para trabajadores y empresas: despidos, salarios y finiquitos, incapacidad y accidentes laborales. Revisamos tu caso antes de actuar.',
     h1: 'Abogado laboralista en Valencia',
     lede: 'Despidos, cantidades pendientes, incapacidad, altas médicas y accidentes de trabajo. Revisamos tu caso con atención a las fechas, que en lo laboral son cortas, y te explicamos las opciones antes de dar ningún paso.',
     intro: [
