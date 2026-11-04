@@ -1,7 +1,6 @@
 # Cómo entrar en el panel del despacho (superadministrador)
 
-Dirección: `https://portal.praetoriaabogados.es/` cuando se apruebe el dominio; mientras tanto, la dirección
-`*.hostingersite.com` del entorno de pruebas. Todo lo que hay en pruebas es ficticio.
+Dirección: `https://praetoriaabogados.es/admin/` cuando se apruebe el cambio; mientras tanto, `/admin/` en el sitio de pruebas `*.hostingersite.com`. Todo lo que hay en pruebas es ficticio.
 
 ## 1. Alta de tu cuenta (una sola vez)
 1. El administrador técnico genera una **invitación de un solo uso, válida 72 horas**:

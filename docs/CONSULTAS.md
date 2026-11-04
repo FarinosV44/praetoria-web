@@ -1,3 +1,5 @@
+> **Aplicación única:** la recepción pasa de `public/api/*.php` a `src/app/api/{consulta,llamada}` y `src/lib/recepcion.ts`, con las mismas reglas (`src/lib/consulta.ts` y `llamada.ts`). La clave de Resend pasa de `praetoria-config.php` a la variable `RESEND_API_KEY`, y desaparece el respaldo con `mail()`, que no entregaba. Las pruebas están en `src/lib/recepcion.test.mts`.
+
 # Recepción de consultas (#3)
 
 ## Recorrido de una consulta

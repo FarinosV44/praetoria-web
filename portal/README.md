@@ -1,3 +1,5 @@
+> **Aplicación única:** el código del portal vive ahora en `src/app/(portal)` y `src/portal`; aquí quedan las migraciones (`db`), los scripts y las pruebas. Las órdenes se ejecutan desde la raíz: `npm run db:migrate`, `npm run portal:test`, `npm run portal:e2e`. Variables en `.env.local` de la raíz. Ver `docs/portal/DESPLIEGUE-HOSTINGER.md`.
+
 # Área de clientes de Praetoria Abogados (`portal/`)
 
 Aplicación privada separada de la web pública. Arquitectura y decisiones: `docs/adr/0001-portal-del-cliente.md`.

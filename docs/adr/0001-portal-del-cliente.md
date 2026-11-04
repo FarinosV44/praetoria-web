@@ -1,6 +1,6 @@
 # ADR 0001 · Portal del cliente como aplicación privada separada
 
-- **Estado:** aceptado por el propietario el 04/11/2026: better-auth, Supabase en Fráncfort (`eu-central-1`) y Node.js en Hostinger para la aplicación en `portal.praetoriaabogados.es` (sustituye a Netlify; ver `docs/portal/DESPLIEGUE-HOSTINGER.md`). Publicación para clientes reales y cambios de DNS: pendientes de su autorización.
+- **Estado:** aceptado por el propietario el 04/11/2026: better-auth, Supabase en Fráncfort (`eu-central-1`) y, por decisión del 04/11/2026, una sola aplicación Node.js en Hostinger con la web pública y el portal en `praetoriaabogados.es/admin` (sustituye a la app separada y a Netlify; ver `docs/portal/DESPLIEGUE-HOSTINGER.md`). Publicación para clientes reales y cambios de DNS: pendientes de su autorización.
 - **Fecha:** 27/10/2026
 - **Issues:** #1, #12, #16, #56, #57, #49, #15, #55
 
