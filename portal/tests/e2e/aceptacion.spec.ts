@@ -132,7 +132,7 @@ test('3. La letrada activa el doble factor, revisa, pide subsanación y un docum
 
   // Abre el documento: se descarga desde el almacenamiento privado tras comprobar permisos
   const foto = p.locator('[data-documento="foto-nomina-agosto.jpg"]');
-  const href = await foto.getByRole('link').getAttribute('href');
+  const href = await foto.getByRole('link').first().getAttribute('href');
   estado.doc = href!.match(/documentos\/([0-9a-f-]{36})/)![1];
   const descarga = await p.request.get(href!);
   expect(descarga.status()).toBe(200);

@@ -65,9 +65,11 @@ export default async function DetalleDespacho({ params, searchParams }: { params
 
           <section className="card" id="documentacion">
             <h2 className="subtitulo">Documentación</h2>
+            <datalist id="carpetas">{[...new Set([...d.reqs.map((r) => r.carpeta), 'Documentación del cliente', 'Identificación y encargo', 'Prueba', 'Contraparte', 'Escritos y actuaciones', 'Notificaciones y resoluciones', 'Comunicaciones', 'Economía'])].map((c) => <option key={c} value={c} />)}</datalist>
             <ul className="grid gap-4">
-              {d.reqs.map((r) => (
+              {d.reqs.map((r, i) => (
                 <li key={r.id} className="card" style={{ margin: 0 }} data-requisito={r.titulo}>
+                  {i === 0 || d.reqs[i - 1]!.carpeta !== r.carpeta ? <p className="chip chip-neutro mb-2">📁 {r.carpeta}</p> : null}
                   <div className="fila"><strong>{r.titulo}{r.obligatorio ? '' : ' (opcional)'}{r.solicitado_por ? ' · añadido por el despacho' : ''}</strong><ChipRequisito estado={r.estado} /></div>
                   <p className="ayuda">{r.explicacion}</p>
                   {r.comentario ? <p className="nota mt-2 text-sm">Visible al cliente: {r.comentario}</p> : null}
@@ -76,7 +78,8 @@ export default async function DetalleDespacho({ params, searchParams }: { params
                       {r.documentos.map((doc) => (
                         <li key={doc.id} className="grid gap-2" style={{ borderTop: '1px solid var(--color-line)', paddingTop: 8 }} data-documento={doc.nombre_original}>
                           <div className="fila text-sm">
-                            <a href={`/api/documentos/${doc.id}/`} className="font-semibold">{doc.nombre_original}</a>
+                            <span><a href={`/api/documentos/${doc.id}/?ver=1`} target="_blank" rel="noopener" className="font-semibold">{doc.nombre_original}</a>
+                              {' · '}<a href={`/api/documentos/${doc.id}/?descargar=1`} className="text-sm">Descargar</a></span>
                             <span>v{doc.version} · {tamano(doc.tamano)} · {fecha(doc.subido_at)} · <strong>{estadoDocumento[doc.estado]}</strong></span>
                           </div>
                           {doc.analisis === 'no_analizado' ? <p className="ayuda text-xs">Sin análisis antivirus (no configurado en este entorno).</p> : null}
@@ -95,6 +98,12 @@ export default async function DetalleDespacho({ params, searchParams }: { params
                       ))}
                     </ul>
                   ) : <p className="ayuda mt-2 text-sm">Sin documentos aportados.</p>}
+                  <form action={A.moverCarpeta} className="flex gap-2 mt-3 text-sm items-center">
+                    <H /><input type="hidden" name="requisito" value={r.id} />
+                    <label htmlFor={`c-${r.id}`} className="ayuda">Carpeta</label>
+                    <input id={`c-${r.id}`} name="carpeta" defaultValue={r.carpeta} maxLength={80} list="carpetas" className="border rounded-md px-2 py-1 flex-1 min-w-0" />
+                    <button className="btn btn-secundario" style={{ minHeight: 32 }}>Mover</button>
+                  </form>
                   <details className="mt-3">
                     <summary className="text-sm font-semibold cursor-pointer">Cambiar estado de este documento</summary>
                     <form action={A.estadoRequisito} className="grid gap-2 mt-2">
@@ -119,6 +128,7 @@ export default async function DetalleDespacho({ params, searchParams }: { params
                   <div className="campo"><label htmlFor="nr-t">Documento</label><input id="nr-t" name="titulo" required maxLength={160} /></div>
                   <div className="campo"><label htmlFor="nr-e">Por qué lo necesitamos (lo verá el cliente)</label><textarea id="nr-e" name="explicacion" required maxLength={600} rows={2} /></div>
                   <label className="flex gap-2"><input type="checkbox" name="obligatorio" defaultChecked /> Obligatorio</label>
+                  <div className="campo"><label htmlFor="nr-c">Carpeta</label><input id="nr-c" name="carpeta" list="carpetas" maxLength={80} defaultValue="Documentación del cliente" /></div>
                   <label className="flex gap-2"><input type="checkbox" name="multiple" /> Admite varios archivos</label>
                   <button className="btn btn-primario">Pedir documento</button>
                 </form>

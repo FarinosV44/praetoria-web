@@ -14,7 +14,9 @@
     "notificaciones:enviar": "node --env-file-if-exists=.env.local --experimental-strip-types scripts/notificaciones.ts",
     "recordatorios": "node --env-file-if-exists=.env.local --experimental-strip-types scripts/recordatorios.ts",
     "test": "node --env-file-if-exists=.env.local --experimental-strip-types --test-concurrency=1 --test 'tests/db/**/*.test.ts'",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "agenda:avisos": "node --env-file-if-exists=.env.local --experimental-strip-types scripts/agenda.ts",
+    "personal:invitar": "node --env-file-if-exists=.env.local --experimental-strip-types scripts/personal-invitar.ts"
   },
   "engines": {
     "node": ">=22.12"
@@ -24,6 +26,7 @@
     "@fontsource-variable/source-serif-4": "^5.3.1",
     "@supabase/storage-js": "^2.118.0",
     "@types/qrcode": "^1.5.6",
+    "@types/web-push": "^3.6.4",
     "better-auth": "^1.7.14",
     "file-type": "^22.2.0",
     "next": "^16.4.3",
@@ -33,9 +36,11 @@
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "server-only": "^0.0.1",
+    "web-push": "^3.6.7",
     "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@netlify/functions": "^6.0.3",
     "@playwright/test": "^1.64.1",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/mailparser": "^3.9.0",

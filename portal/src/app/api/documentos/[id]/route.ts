@@ -11,7 +11,7 @@ export const runtime = 'nodejs';
 
 // Descarga autenticada. La RLS decide si el documento existe para este usuario: a otra persona le
 // responde 404 igual que a un identificador inexistente. Cada descarga queda registrada.
-export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const sesion = await auth.api.getSession({ headers: await headers() });
   if (!sesion) return new Response('No autorizado', { status: 401 });
@@ -31,6 +31,10 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   if ('bloqueado' in doc) return new Response(doc.bloqueado === 'infectado' ? 'Archivo bloqueado por seguridad' : 'Archivo en análisis de seguridad', { status: 409 });
   const blob = await leerObjeto(doc.storage_key);
   const imagen = doc.mime.startsWith('image/') && doc.mime !== 'image/heic' && doc.mime !== 'image/heif';
+  // «Ver» (?ver=1): PDF e imágenes se abren en el navegador; el resto siempre se descarga. Los PDF con
+  // código activo ya se rechazan al subirlos; aun así, el PDF se sirve sin permitir scripts de la página.
+  const ver = new URL(req.url).searchParams.get('ver') === '1' && (imagen || doc.mime === 'application/pdf');
+  const enLinea = imagen || ver;
   // La extensión del nombre siempre corresponde al tipo detectado, no a la que puso el cliente (auditoría M4).
   const base = doc.nombre_original.replace(/\.[A-Za-z0-9]{1,5}$/, '');
   const nombre = encodeURIComponent(`${base}.${extensionDe(doc.mime)}`);
@@ -38,10 +42,12 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     headers: {
       'content-type': doc.mime,
       'content-length': String(blob.size),
-      'content-disposition': `${imagen ? 'inline' : 'attachment'}; filename*=UTF-8''${nombre}`,
+      'content-disposition': `${enLinea && new URL(req.url).searchParams.get('descargar') !== '1' ? 'inline' : 'attachment'}; filename*=UTF-8''${nombre}`,
       'cache-control': 'private, no-store',
       'x-content-type-options': 'nosniff',
-      'content-security-policy': "default-src 'none'; img-src 'self'; style-src 'unsafe-inline'; sandbox",
+      'content-security-policy': doc.mime === 'application/pdf' && ver
+        ? "default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'; frame-ancestors 'none'"
+        : "default-src 'none'; img-src 'self'; style-src 'unsafe-inline'; sandbox",
     },
   });
 }

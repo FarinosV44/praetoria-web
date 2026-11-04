@@ -5,7 +5,10 @@ export async function register() {
   const seg = Number(process.env.NOTIFICADOR_INTERVALO_SEG || 0);
   if (!seg) return;
   const { Pool } = await import('pg');
-  const { enviarAvisosPendientes } = await import('./lib/avisos-core');
+  const { enviarAvisosPendientes, procesarAgenda } = await import('./lib/avisos-core');
   const pool = new Pool({ connectionString: process.env.DATABASE_URL_APP, max: 1 });
-  setInterval(() => { enviarAvisosPendientes({ pool }).catch((e) => console.error('avisos:', e.message)); }, seg * 1000);
+  setInterval(() => {
+    procesarAgenda(pool).catch((e) => console.error('agenda:', e.message));
+    enviarAvisosPendientes({ pool }).catch((e) => console.error('avisos:', e.message));
+  }, seg * 1000);
 }

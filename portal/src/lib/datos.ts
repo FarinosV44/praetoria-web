@@ -41,18 +41,18 @@ export async function resumenSolicitud(tx: Tx, id: string): Promise<ResumenSolic
 
 export type Requisito = {
   id: string; titulo: string; explicacion: string; ejemplo: string | null; obligatorio: boolean; multiple: boolean; sensible: boolean;
-  estado: string; comentario: string | null; orden: number; solicitado_por: string | null;
+  estado: string; comentario: string | null; orden: number; solicitado_por: string | null; carpeta: string;
   documentos: { id: string; version: number; nombre_original: string; mime: string; tamano: number; subido_at: Date; estado: string; motivo: string | null; sustituye_a: string | null; analisis: string; del_despacho: boolean }[];
 };
 
 export async function requisitos(tx: Tx, solicitudId: string): Promise<Requisito[]> {
   const r = await tx.query(`
-    select q.id, q.titulo, q.explicacion, q.ejemplo, q.obligatorio, q.multiple, q.sensible, q.estado, q.comentario, q.orden, q.solicitado_por,
+    select q.id, q.titulo, q.explicacion, q.ejemplo, q.obligatorio, q.multiple, q.sensible, q.estado, q.comentario, q.orden, q.solicitado_por, q.carpeta,
       coalesce((select json_agg(json_build_object('id', d.id, 'version', d.version, 'nombre_original', d.nombre_original, 'mime', d.mime,
         'tamano', d.tamano, 'subido_at', d.subido_at, 'estado', d.estado, 'motivo', d.motivo, 'sustituye_a', d.sustituye_a,
         'analisis', d.analisis, 'del_despacho', d.subido_por <> d.cliente_id) order by d.version desc)
         from portal.documentos d where d.requisito_id = q.id), '[]') documentos
-    from portal.requisitos q where q.solicitud_id = $1 order by q.orden, q.created_at`, [solicitudId]);
+    from portal.requisitos q where q.solicitud_id = $1 order by q.carpeta, q.orden, q.created_at`, [solicitudId]);
   return r.rows;
 }
 

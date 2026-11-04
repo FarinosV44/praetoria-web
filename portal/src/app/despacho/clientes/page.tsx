@@ -26,7 +26,7 @@ export default async function Clientes() {
           <tbody>
             {filas.map((c) => (
               <tr key={c.id}>
-                <td>{c.ultima ? <Link href={`/despacho/solicitudes/${c.ultima}/`}>{c.name}</Link> : c.name}</td>
+                <td><Link href={`/despacho/clientes/${c.id}/`} className="font-semibold">{c.name}</Link></td>
                 <td>{c.email}{c.verificado ? '' : <span className="chip chip-aviso ml-2">Sin verificar</span>}</td>
                 <td>{c.tipo === 'empresa' ? `Empresa: ${c.empresa}` : c.tipo ? 'Particular' : <span className="ayuda">Perfil sin completar</span>}</td>
                 <td className="text-sm">{fecha(c.alta)}</td>

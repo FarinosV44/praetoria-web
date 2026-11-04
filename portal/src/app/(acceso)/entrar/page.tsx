@@ -4,11 +4,12 @@ import { FormEntrar } from './FormEntrar';
 
 export const metadata: Metadata = { title: 'Entrar' };
 
-export default async function Entrar({ searchParams }: { searchParams: Promise<{ verificado?: string }> }) {
-  const { verificado } = await searchParams;
+export default async function Entrar({ searchParams }: { searchParams: Promise<{ verificado?: string; activada?: string }> }) {
+  const { verificado, activada } = await searchParams;
   return (
     <div className="card">
       {verificado === '1' ? <p className="exito mb-4" role="status">Correo confirmado. Entra con tu contraseña para continuar.</p> : null}
+      {activada === '1' ? <p className="exito mb-4" role="status">Cuenta activada. Entra con tu correo y tu contraseña; después te pediremos activar el doble factor.</p> : null}
       <h1 className="titulo mb-2">Área de clientes</h1>
       <p className="ayuda mb-5">Entra para consultar tus solicitudes, enviar documentos y hablar con el despacho.</p>
       <FormEntrar />

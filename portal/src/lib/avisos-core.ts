@@ -2,6 +2,7 @@
 // (cron). Nunca incluye datos del asunto ni adjuntos: solo un aviso y el enlace al portal.
 import pg from 'pg';
 import nodemailer from 'nodemailer';
+import { enviarPush, type Suscripcion } from './push-core.ts';
 
 type Aviso = { id: string; destino: 'cliente' | 'despacho'; tipo: 'novedades' | 'recordatorio' | 'aviso_interno'; email: string | null };
 
@@ -59,6 +60,63 @@ export async function programarRecordatorios(pool: pg.Pool, dias = 3) {
     await c.query('begin');
     await c.query("select set_config('app.proceso', 'notificador', true)");
     const r = await c.query<{ n: number }>('select portal.programar_recordatorios($1) n', [dias]);
+    await c.query('commit');
+    return r.rows[0]?.n ?? 0;
+  } catch (e) { await c.query('rollback'); throw e; } finally { c.release(); }
+}
+
+/**
+ * Motor de avisos de la agenda: toma los avisos vencidos (con reserva para no duplicar), los entrega por
+ * push a todos los dispositivos activos del profesional y los deja en su bandeja interna, que es el canal
+ * que nunca falla. Cada intento queda registrado en entregas_push.
+ */
+export async function procesarAgenda(pool: pg.Pool, limite = 50) {
+  const tomar = await pool.connect();
+  let avisos: { aviso_id: string; user_id: string; evento_id: string }[] = [];
+  try {
+    await tomar.query('begin');
+    await tomar.query("select set_config('app.proceso', 'notificador', true)");
+    avisos = (await tomar.query('select * from portal.tomar_avisos_agenda($1)', [limite])).rows;
+    await tomar.query('commit');
+  } catch (e) { await tomar.query('rollback').catch(() => {}); throw e; } finally { tomar.release(); }
+
+  let entregados = 0;
+  for (const a of avisos) {
+    const c = await pool.connect();
+    try {
+      await c.query('begin');
+      await c.query("select set_config('app.proceso', 'notificador', true)");
+      const subs = (await c.query<Suscripcion>('select * from portal.suscripciones_de($1)', [a.user_id])).rows;
+      const canales: string[] = ['interno'];
+      for (const s of subs) {
+        const r = await enviarPush(s, '/despacho/avisos/', a.aviso_id);
+        await c.query('select portal.registrar_entrega($1, $2, $3, $4)', [a.aviso_id, s.id, r.ok ? 'ok' : (r.error ?? 'error'), r.status]);
+        if (r.ok && !canales.includes('push')) canales.push('push');
+      }
+      if (!subs.length) await c.query(`select portal.registrar_entrega($1, null, 'sin dispositivos: solo bandeja interna', null)`, [a.aviso_id]);
+      await c.query('select portal.cerrar_aviso($1, true, $2, null)', [a.aviso_id, canales.join('+')]);
+      await c.query('commit');
+      entregados++;
+    } catch (e) {
+      await c.query('rollback').catch(() => {});
+      const k = await pool.connect();
+      try {
+        await k.query('begin');
+        await k.query("select set_config('app.proceso', 'notificador', true)");
+        await k.query('select portal.cerrar_aviso($1, false, null, $2)', [a.aviso_id, (e as Error).message]);
+        await k.query('commit');
+      } catch { await k.query('rollback').catch(() => {}); } finally { k.release(); }
+    } finally { c.release(); }
+  }
+  return { tomados: avisos.length, entregados };
+}
+
+export async function replanificarRecurrentes(pool: pg.Pool) {
+  const c = await pool.connect();
+  try {
+    await c.query('begin');
+    await c.query("select set_config('app.proceso', 'notificador', true)");
+    const r = await c.query<{ n: number }>('select portal.agenda_replanificar_recurrentes() n');
     await c.query('commit');
     return r.rows[0]?.n ?? 0;
   } catch (e) { await c.query('rollback'); throw e; } finally { c.release(); }

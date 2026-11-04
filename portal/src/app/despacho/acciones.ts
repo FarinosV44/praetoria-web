@@ -117,9 +117,10 @@ export async function anadirRequisito(f: FormData) {
   await ejecutar(f, async (tx, sid) => {
     const titulo = txt(f, 'titulo', 160), explicacion = txt(f, 'explicacion', 600);
     if (titulo.length < 3 || explicacion.length < 3) throw new Error('Escribe qué documento necesitas y por qué.');
-    await tx.query(`insert into portal.requisitos (solicitud_id, titulo, explicacion, obligatorio, multiple, orden)
-      values ($1, $2, $3, $4, $5, (select coalesce(max(orden), 0) + 10 from portal.requisitos where solicitud_id = $1))`,
-      [sid, titulo, explicacion, f.get('obligatorio') === 'on', f.get('multiple') === 'on']);
+    const carpeta = txt(f, 'carpeta', 80) || 'Documentación del cliente';
+    await tx.query(`insert into portal.requisitos (solicitud_id, titulo, explicacion, obligatorio, multiple, carpeta, orden)
+      values ($1, $2, $3, $4, $5, $6, (select coalesce(max(orden), 0) + 10 from portal.requisitos where solicitud_id = $1))`,
+      [sid, titulo, explicacion, f.get('obligatorio') === 'on', f.get('multiple') === 'on', carpeta.length >= 2 ? carpeta : 'Documentación del cliente']);
     return 'Documento solicitado al cliente.';
   });
 }
@@ -130,5 +131,15 @@ export async function notaInterna(f: FormData) {
     if (!t) throw new Error('Escribe la nota.');
     await tx.query('insert into portal.notas_internas (solicitud_id, autor_id, texto) values ($1, $2, $3)', [sid, uid, t]);
     return 'Nota interna guardada (no la ve el cliente).';
+  });
+}
+
+export async function moverCarpeta(f: FormData) {
+  await ejecutar(f, async (tx, sid) => {
+    const req = String(f.get('requisito')), carpeta = txt(f, 'carpeta', 80);
+    if (!UUID.test(req) || carpeta.length < 2) throw new Error('Escribe el nombre de la carpeta.');
+    const r = await tx.query('update portal.requisitos set carpeta = $2 where id = $1 and solicitud_id = $3', [req, carpeta, sid]);
+    if (!r.rowCount) throw new Error('Documento no encontrado.');
+    return `Movido a la carpeta «${carpeta}».`;
   });
 }
