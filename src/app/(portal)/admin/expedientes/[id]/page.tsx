@@ -134,6 +134,7 @@ export default async function Expediente({ params }: { params: Promise<{ id: str
             {c.proxima ? <span>⏰ {c.proxima_titulo}: {fechaHora(c.proxima)}</span> : null}
             {!c.cuenta_activa ? <span className="chip chip-aviso">El cliente aún no ha activado su acceso</span> : null}
             <Link href={`/admin/solicitudes/${id}/`}>Ficha completa</Link>
+            {env.iaClave ? <Link href={`/admin/expedientes/${id}/asistente/`} className="font-semibold">✨ Asistente IA</Link> : null}
           </p>
           <div className="mt-1 text-sm"><EstadoCliente solicitud={id} actual={c.estado_visible} /></div>
           <div className="mt-1"><EquipoAsunto solicitud={id} miembros={d.equipo.miembros} gestiona={d.equipo.gestiona} /></div>
