@@ -13,7 +13,7 @@ self.addEventListener('push', (event) => {
   const url = typeof d.url === 'string' && d.url.startsWith('/') ? d.url : '/admin/avisos/';
   event.waitUntil(self.registration.showNotification(titulo, {
     body: cuerpo,
-    icon: '/iconos/icono-192.png',
+    icon: '/icon-192.png',
     badge: '/iconos/insignia-96.png',
     tag: typeof d.tag === 'string' ? d.tag : undefined,
     data: { url },
