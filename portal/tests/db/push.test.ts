@@ -55,7 +55,7 @@ test('un aviso vencido llega cifrado y neutro al dispositivo, una sola vez', asy
   for (let i = 0; i < 2; i++) {
     // Asíncrono: el servidor de push de la prueba vive en este mismo proceso.
     const codigo = await new Promise<number>((ok) => {
-      const p = spawn(process.execPath, ['--experimental-strip-types', 'scripts/agenda.ts'], { env, stdio: 'ignore' });
+      const p = spawn(process.execPath, ['--experimental-strip-types', 'portal/scripts/agenda.ts'], { env, stdio: 'ignore' });
       p.on('exit', (c) => ok(c ?? 1));
     });
     assert.equal(codigo, 0);

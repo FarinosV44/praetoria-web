@@ -114,7 +114,7 @@ test('4. Agenda: vista judicial con avisos una semana, 24 h y 1 h antes; el moto
 });
 
 test('5. App instalable: manifiesto, iconos y service worker sin caché de contenido privado', async ({ page: p, request }) => {
-  const m = await (await request.get('/manifest.webmanifest')).json();
+  const m = await (await request.get('/admin/manifest.webmanifest')).json();
   expect(m.name).toBe('Praetoria Abogados');
   expect(m.display).toBe('standalone');
   expect(m.icons.some((i: { purpose: string }) => i.purpose === 'maskable')).toBeTruthy();

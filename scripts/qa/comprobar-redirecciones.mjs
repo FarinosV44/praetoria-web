@@ -28,6 +28,11 @@ for (const linea of readFileSync('public/_redirects', 'utf8').split('\n')) {
     continue;
   }
   const sinBarra = desde.replace(/\/$/, '');
+  // Un archivo no lleva barra final: la regla se aplica directamente
+  if (sinBarra.split('/').pop().includes('.')) {
+    await comprobar(sinBarra, estado, dest);
+    continue;
+  }
   await comprobar(`${sinBarra}/`, estado, dest);
   // Sin barra, primero la redirección de Next a la URL con barra (308), que luego aplica la regla
   await comprobar(sinBarra, 308, `${sinBarra}/`);

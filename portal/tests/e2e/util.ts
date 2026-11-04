@@ -26,7 +26,7 @@ export const enlace = (texto: string) => texto.match(/https?:\/\/\S+/)![0];
 
 /** Ejecuta el proceso real de envío de avisos (el mismo que el cron), sin esperar a la agrupación. */
 export function enviarAvisos() {
-  execFileSync(process.execPath, ['--env-file=.env.local', '--experimental-strip-types', 'scripts/notificaciones.ts', '--ya'], { cwd: join(import.meta.dirname, '..', '..') });
+  execFileSync(process.execPath, ['--env-file=../.env.local', '--experimental-strip-types', 'scripts/notificaciones.ts', '--ya'], { cwd: join(import.meta.dirname, '..', '..') });
 }
 
 export async function registrar(page: Page, nombre: string, email: string, clave: string) {

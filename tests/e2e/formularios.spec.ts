@@ -60,6 +60,6 @@ test.describe('resumen de Hacienda', () => {
 
 test('el formulario de contacto envía a la recepción del propio dominio y sus piezas internas no se sirven', async ({ page, request }) => {
   await page.goto('/contacto/');
-  await expect(page.locator('form[name="contacto"]')).toHaveAttribute('action', '/api/consulta');
+  await expect(page.locator('form[name="contacto"]')).toHaveAttribute('action', '/api/consulta/');
   for (const pieza of ['/api/comun.php', '/api/catalogo.php']) expect((await request.get(pieza)).status()).toBe(404);
 });
