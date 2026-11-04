@@ -18,7 +18,7 @@ export default async function Clientes() {
     order by us."createdAt" desc limit 300`)).rows);
   return (
     <div className="grid gap-5">
-      <h1 className="titulo">Clientes registrados</h1>
+      <div className="fila"><h1 className="titulo">Clientes registrados</h1><Link href="/admin/clientes/nuevo/" className="btn btn-primario">+ Nuevo cliente</Link></div>
       <p className="ayuda">Registrarse no supone una relación profesional: solo las solicitudes aceptadas abren expediente.</p>
       <div className="card overflow-x-auto">
         <table className="tabla">

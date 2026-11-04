@@ -40,6 +40,8 @@ export function textoEvento(tipo: string, d: Record<string, unknown>): string {
     case 'responsable_asignado': return 'Responsable asignado';
     case 'conflictos_revisados': return 'Revisión de conflictos de intereses registrada';
     case 'documento_descargado': return 'Documento descargado';
+    case 'documento_compartido': return `El despacho ha compartido un documento: «${d.archivo}»`;
+    case 'documento_analizado': return 'Análisis antivirus registrado';
     default: return tipo;
   }
 }

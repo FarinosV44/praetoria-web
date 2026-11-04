@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { DetalleCliente } from '@/portal/components/DetalleCliente';
 import { comoUsuario } from '@/portal/lib/db';
-import { eventos, mensajes, requisitos, resumenSolicitud, UUID } from '@/portal/lib/datos';
+import { docsAsunto, eventos, mensajes, requisitos, resumenSolicitud, UUID } from '@/portal/lib/datos';
 import { env } from '@/portal/lib/env';
 import { requerirCliente } from '@/portal/lib/sesion';
 
@@ -17,7 +17,7 @@ export default async function Expediente({ params }: { params: Promise<{ id: str
     if (!e.rowCount) return null;
     const sid = e.rows[0].solicitud_id as string;
     const s = await resumenSolicitud(tx, sid);
-    return s ? { s, reqs: await requisitos(tx, sid), msgs: await mensajes(tx, sid), evs: await eventos(tx, sid) } : null;
+    return s ? { s, reqs: await requisitos(tx, sid), msgs: await mensajes(tx, sid), evs: await eventos(tx, sid), docs: await docsAsunto(tx, sid) } : null;
   });
   if (!d) notFound();
   return <DetalleCliente {...d} maxMb={env.uploadMaxBytes / 1024 / 1024} />;

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ChipSolicitud } from '@/portal/components/ui';
 import { comoUsuario } from '@/portal/lib/db';
+import { recientes } from '@/portal/lib/expediente';
 import { requerirPersonal } from '@/portal/lib/sesion';
 import { fecha } from '@/portal/lib/textos';
 
@@ -21,7 +22,7 @@ export default async function Bandeja({ searchParams }: { searchParams: Promise<
   const u = await requerirPersonal();
   const v = ((await searchParams).vista ?? 'nuevas') as Vista;
   const vista = vistas[v] ?? vistas.nuevas;
-  const { filas, cuentas } = await comoUsuario(u.id, async (tx) => {
+  const { filas, cuentas, rec } = await comoUsuario(u.id, async (tx) => {
     const base = `with x as (
       select s.*, t.nombre tipo_nombre, us.name cliente_nombre, us.email cliente_email, e.referencia expediente_ref, p.nombre_visible responsable,
         (select count(*) from portal.documentos d where d.solicitud_id = s.id and d.estado = 'pendiente')::int por_revisar,
@@ -34,10 +35,22 @@ export default async function Bandeja({ searchParams }: { searchParams: Promise<
     const filas = (await tx.query(`${base} select * from x s where ${vista.where} order by s.urgencia = 'urgente' desc, s.enviada_at limit 200`)).rows;
     const cuentas: Record<string, number> = {};
     for (const [k, def] of Object.entries(vistas)) cuentas[k] = (await tx.query(`${base} select count(*)::int n from x s where ${def.where}`)).rows[0].n;
-    return { filas, cuentas };
+    return { filas, cuentas, rec: await recientes(tx, u.id) };
   });
   return (
     <div className="grid gap-5">
+      <section className="grid gap-3">
+        <form action="/admin/buscar/" className="flex gap-2">
+          <input name="q" type="search" placeholder="Buscar cliente, NIF, referencia, asunto o documento" aria-label="Buscar" className="border rounded-md p-3 flex-1 min-w-0" />
+          <button className="btn btn-primario">Buscar</button>
+          <Link href="/admin/clientes/nuevo/" className="btn btn-secundario">+ Cliente</Link>
+        </form>
+        {rec.length ? (
+          <div className="flex flex-wrap gap-2" aria-label="Expedientes recientes">
+            {rec.map((r) => <Link key={r.id} href={`/admin/expedientes/${r.id}/`} className="chip chip-neutro no-underline">{r.cliente} · {r.titulo}</Link>)}
+          </div>
+        ) : null}
+      </section>
       <h1 className="titulo">Bandeja</h1>
       <nav aria-label="Vistas" className="flex flex-wrap gap-2">
         {Object.entries(vistas).map(([k, d]) => (
@@ -54,7 +67,7 @@ export default async function Bandeja({ searchParams }: { searchParams: Promise<
             <tbody>
               {filas.map((s) => (
                 <tr key={s.id}>
-                  <td><Link href={`/admin/solicitudes/${s.id}/`} className="font-semibold">{s.expediente_ref ?? s.referencia}</Link>{s.urgencia === 'urgente' ? <> <span className="chip chip-aviso">Urgente</span></> : null}</td>
+                  <td><Link href={`/admin/expedientes/${s.id}/`} className="font-semibold">{s.expediente_ref ?? s.referencia}</Link>{s.urgencia === 'urgente' ? <> <span className="chip chip-aviso">Urgente</span></> : null}</td>
                   <td>{s.cliente_nombre}<br /><span className="ayuda">{s.cliente_email}</span></td>
                   <td>{s.tipo_nombre}</td>
                   <td><ChipSolicitud estado={s.estado} /></td>

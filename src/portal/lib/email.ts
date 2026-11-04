@@ -29,6 +29,10 @@ export const plantillasCorreo = {
     asunto: 'Restablece tu contraseña del área de clientes',
     texto: `Hola:\n\nHemos recibido una petición para restablecer la contraseña de tu cuenta. Usa este enlace (caduca en una hora):\n\n${url}\n\nSi no lo has pedido tú, ignora este mensaje: tu contraseña no cambiará.${pie}`,
   }),
+  invitacionCliente: (url: string) => ({
+    asunto: 'Tu acceso al área de clientes de Praetoria Abogados',
+    texto: `Hola:\n\nPraetoria Abogados te ha dado acceso a su área privada de clientes, donde podrás consultar tu asunto, ver la documentación que te compartamos y enviarnos documentos de forma segura.\n\nPara activar tu acceso y elegir tu contraseña, abre este enlace (caduca en 7 días y solo sirve una vez):\n\n${url}\n\nSi no esperabas este mensaje, ignóralo.${pie}`,
+  }),
   cuentaExistente: (url: string) => ({
     asunto: 'Intento de registro con tu correo',
     texto: `Hola:\n\nAlguien ha intentado crear una cuenta en el área de clientes con este correo, que ya está registrado. Si fuiste tú, entra aquí:\n\n${url}\n\nSi no recuerdas la contraseña, puedes restablecerla desde esa misma página.${pie}`,

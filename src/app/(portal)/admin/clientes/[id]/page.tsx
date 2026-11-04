@@ -6,6 +6,9 @@ import { comoUsuario } from '@/portal/lib/db';
 import { UUID } from '@/portal/lib/datos';
 import { requerirPersonal } from '@/portal/lib/sesion';
 import { estadoDocumento, fecha } from '@/portal/lib/textos';
+import { Reinvitar } from '@/portal/components/AltaCliente';
+import { FichaDatos } from '@/portal/components/FichaDatos';
+import { abrirExpediente } from '../acciones';
 
 export const metadata: Metadata = { title: 'Ficha de cliente' };
 
@@ -15,7 +18,8 @@ export default async function FichaCliente({ params }: { params: Promise<{ id: s
   const { id } = await params;
   if (!UUID.test(id)) notFound();
   const d = await comoUsuario(u.id, async (tx) => {
-    const c = (await tx.query(`select us.id, us.name, us.email, us."emailVerified" verificado, us."createdAt" alta, pf.tipo, pf.empresa, pf.cargo, pf.telefono
+    const c = (await tx.query(`select us.id, us.name, us.email, us."emailVerified" verificado, us."createdAt" alta, pf.tipo, pf.empresa, pf.cargo, pf.telefono,
+        pf.nif, pf.direccion, pf.codigo_postal, pf.localidad, pf.provincia
       from identidad."user" us left join portal.perfiles pf on pf.user_id = us.id
       where us.id = $1 and not exists (select 1 from portal.personal p where p.user_id = us.id)`, [id])).rows[0];
     if (!c) return null;
@@ -26,8 +30,11 @@ export default async function FichaCliente({ params }: { params: Promise<{ id: s
       from portal.solicitudes s left join portal.tipos_asunto t on t.id = s.tipo_asunto_id left join portal.expedientes x on x.solicitud_id = s.id
       left join portal.personal p on p.user_id = s.responsable_id
       where s.cliente_id = $1 order by coalesce(s.enviada_at, s.created_at) desc`, [id])).rows;
-    const docs = (await tx.query(`select d.id, d.nombre_original, d.version, d.tamano, d.subido_at, d.estado, d.mime, r.titulo requisito, r.carpeta, r.estado req_estado, d.solicitud_id
-      from portal.documentos d join portal.requisitos r on r.id = d.requisito_id where d.cliente_id = $1 order by r.carpeta, r.titulo, d.version desc`, [id])).rows;
+    const docs = (await tx.query(`select d.id, d.nombre_original, d.version, d.tamano, d.subido_at, d.estado, d.mime, coalesce(r.titulo, d.nombre_original) requisito,
+        coalesce(r.carpeta, d.carpeta, 'Documentación') carpeta, coalesce(r.estado::text, case when d.visible_cliente then 'recibido' else 'no_aplicable' end) req_estado,
+        d.solicitud_id, d.visible_cliente, d.requisito_id
+      from portal.documentos d left join portal.requisitos r on r.id = d.requisito_id where d.cliente_id = $1
+      order by coalesce(r.carpeta, d.carpeta), coalesce(r.titulo, d.nombre_original), d.version desc`, [id])).rows;
     return { c, asuntos, docs };
   });
   if (!d) notFound();
@@ -39,6 +46,23 @@ export default async function FichaCliente({ params }: { params: Promise<{ id: s
         <h1 className="titulo">{c.name}</h1>
         <p className="ayuda">{c.email}{c.telefono ? ` · ${c.telefono}` : ''} · {c.tipo === 'empresa' ? `Empresa: ${c.empresa}${c.cargo ? ` (${c.cargo})` : ''}` : 'Particular'} · alta {fecha(c.alta)}{c.verificado ? '' : ' · correo sin verificar'}</p>
       </div>
+      <section className="card grid gap-3">
+        <h2 className="subtitulo" style={{ marginBottom: 0 }}>Acceso al área de clientes</h2>
+        {c.verificado ? <p><span className="chip chip-ok">Acceso activo</span> El cliente entra con su correo y su propia contraseña.</p>
+          : <><p className="ayuda">Todavía no ha activado su acceso.</p><Reinvitar cliente={c.id} /></>}
+      </section>
+      <section className="card">
+        <form action={abrirExpediente} className="flex flex-wrap gap-2 items-center">
+          <input type="hidden" name="cliente" value={c.id} />
+          <label htmlFor="nuevo-exp" className="etiqueta">Abrir expediente</label>
+          <input id="nuevo-exp" name="titulo" required minLength={3} maxLength={200} placeholder="Título del asunto" className="border rounded-md p-2 flex-1 min-w-[200px]" />
+          <button className="btn btn-primario" style={{ minHeight: 40 }}>Abrir</button>
+        </form>
+      </section>
+      <section className="card">
+        <h2 className="subtitulo">Datos de contacto y facturación</h2>
+        <FichaDatos cliente={c.id} v={{ telefono: c.telefono, nif: c.nif, empresa: c.empresa, direccion: c.direccion, codigo_postal: c.codigo_postal, localidad: c.localidad, provincia: c.provincia }} />
+      </section>
       <section className="card overflow-x-auto">
         <h2 className="subtitulo">Asuntos ({d.asuntos.length})</h2>
         {d.asuntos.length === 0 ? <p className="ayuda">Este cliente aún no ha iniciado ninguna solicitud.</p> : (
@@ -46,7 +70,7 @@ export default async function FichaCliente({ params }: { params: Promise<{ id: s
             <thead><tr><th>Referencia</th><th>Asunto</th><th>Estado</th><th>Documentación</th><th>Responsable</th></tr></thead>
             <tbody>{d.asuntos.map((a) => (
               <tr key={a.id}>
-                <td>{a.estado === 'borrador' ? a.referencia : <Link href={`/admin/solicitudes/${a.id}/`} className="font-semibold">{a.exp_ref ?? a.referencia}</Link>}</td>
+                <td>{a.estado === 'borrador' ? a.referencia : <Link href={`/admin/expedientes/${a.id}/`} className="font-semibold">{a.exp_ref ?? a.referencia}</Link>}</td>
                 <td>{a.exp_titulo ?? a.tipo ?? '—'}</td>
                 <td><ChipSolicitud estado={a.estado} /></td>
                 <td className="text-sm">{a.estado === 'borrador' ? 'Borrador del cliente' : `${a.por_revisar} por revisar · ${a.faltan} faltan`}</td>
@@ -70,7 +94,8 @@ export default async function FichaCliente({ params }: { params: Promise<{ id: s
                     <span className="ayuda"> · {x.requisito} · v{x.version} · {tamano(Number(x.tamano))} · {fecha(x.subido_at)}</span>
                   </span>
                   <span className="flex gap-2 items-center"><span className="text-sm">{estadoDocumento[x.estado]}</span><ChipRequisito estado={x.req_estado} />
-                    <Link href={`/admin/solicitudes/${x.solicitud_id}/#documentacion`} className="text-sm">Revisar</Link></span>
+                    {x.requisito_id ? <Link href={`/admin/solicitudes/${x.solicitud_id}/#documentacion`} className="text-sm">Revisar</Link> : null}
+                    <Link href={`/admin/expedientes/${x.solicitud_id}/`} className="text-sm">Abrir</Link></span>
                 </div>
               </li>
             ))}
