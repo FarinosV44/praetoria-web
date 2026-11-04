@@ -8,8 +8,8 @@ import { createHash, randomBytes } from 'node:crypto';
 
 const arg = (n: string) => process.argv.find((a) => a.startsWith(`--${n}=`))?.slice(n.length + 3);
 const email = arg('email')?.toLowerCase(), nombre = arg('nombre'), rol = arg('rol') ?? 'abogado';
-if (!email || !nombre || !['abogado', 'apoyo', 'administrador'].includes(rol)) {
-  console.error('Uso: --email= --nombre= --rol=abogado|apoyo|administrador'); process.exit(1);
+if (!email || !nombre || !['abogado', 'apoyo', 'administrador', 'facturacion', 'lectura'].includes(rol)) {
+  console.error('Uso: --email= --nombre= --rol=abogado|apoyo|administrador|facturacion|lectura'); process.exit(1);
 }
 const origen = process.env.PORTAL_ORIGIN;
 if (!origen) { console.error('Falta PORTAL_ORIGIN'); process.exit(1); }

@@ -27,6 +27,7 @@ export default async function DespachoLayout({ children }: { children: React.Rea
           <Link href="/admin/avisos/">Avisos{avisos ? ` (${avisos})` : ''}</Link>
           <Link href="/admin/plantillas/">Plantillas</Link>
           <Link href="/admin/app/">App móvil</Link>
+          {u.personal!.rol === 'administrador' ? <Link href="/admin/equipo/">Equipo</Link> : null}
           <Link href="/admin/seguridad/">Seguridad</Link>
         </nav>
       </header>
