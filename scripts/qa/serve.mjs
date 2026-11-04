@@ -29,7 +29,7 @@ const readBody = (req) =>
 
 createServer(async (req, res) => {
   const url = new URL(req.url, `http://localhost:${port}`);
-  const path = decodeURIComponent(url.pathname).replace(/^(/api/(?:consulta|llamada))/$/, '$1');
+  const path = decodeURIComponent(url.pathname).replace(/^(\/api\/(?:consulta|llamada))\/$/, '$1');
 
   if (path.startsWith('/__mock-forms')) {
     if (path === '/__mock-forms/registro') {
