@@ -166,7 +166,7 @@ test('3. La clienta activa su acceso y ve solo lo compartido; responde y adjunta
   await expect(p).toHaveURL(/\/inicio\/$/);
   await p.goto('/expedientes/');
   await p.getByRole('link', { name: 'Reclamación de salarios ficticia' }).click();
-  await expect(p.getByText('Estamos estudiando tu documentación')).toBeVisible();
+  await expect(p.getByText('Estamos estudiando tu documentación').first()).toBeVisible();
   await expect(p.locator('[data-doc-cliente="informe-clienta.pdf"]')).toContainText('Compartido por el despacho');
   await expect(p.getByText('borrador-demanda.pdf')).toHaveCount(0);
   await expect(p.getByText('tres nóminas')).toHaveCount(0);

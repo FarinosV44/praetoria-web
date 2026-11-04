@@ -134,6 +134,7 @@ export function Compositor({ solicitudId, maxMb }: { solicitudId: string; maxMb:
             <input id="tarea-fecha" name="fecha" type="date" defaultValue={manana()} className="border rounded-md p-2" required />
             <label className="sr-only" htmlFor="tarea-hora">Hora</label>
             <input id="tarea-hora" name="hora" type="time" className="border rounded-md p-2" aria-label="Hora (opcional)" />
+            <input name="para" list="personal-equipo" aria-label="Para (opcional)" placeholder="Para: yo" className="border rounded-md p-2 w-36" />
             <label className="flex gap-1 items-center"><input type="checkbox" name="plazo" value="1" /> Es un plazo (pendiente de verificar)</label>
           </div>
         ) : null}

@@ -37,6 +37,13 @@ export async function requerirPersonal(opciones?: { sinMfa?: boolean }): Promise
   return u;
 }
 
+/** Gestión del equipo: solo superadministración (la base de datos lo vuelve a comprobar). */
+export async function requerirGlobal(): Promise<Usuario> {
+  const u = await requerirPersonal();
+  if (u.personal!.rol !== 'administrador') redirect('/admin/');
+  return u;
+}
+
 /**
  * Rutas API y acciones fuera de /admin: si quien llama es personal del despacho y el doble factor es
  * obligatorio, exige que lo tenga activado. Sin esto, una contraseña de personal sin TOTP bastaría para

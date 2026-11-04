@@ -1,6 +1,6 @@
 'use client';
 import { useActionState, useState } from 'react';
-import { compartirDocumento, completarTarea, estadoCliente, moverDocumento, type Resultado } from '@/app/(portal)/admin/expedientes/acciones';
+import { compartirDocumento, completarTarea, equipoAsunto, estadoCliente, moverDocumento, reasignarTarea, type Resultado } from '@/app/(portal)/admin/expedientes/acciones';
 
 /** Compartir un documento privado con el cliente: requiere un segundo clic de confirmación. */
 export function Compartir({ documento, solicitud }: { documento: string; solicitud: string }) {
@@ -61,14 +61,67 @@ export function EstadoCliente({ solicitud, actual }: { solicitud: string; actual
   );
 }
 
+/** Completar con una línea de resultado o siguiente paso, que queda en la cronología. */
 export function Completar({ tarea, solicitud }: { tarea: string; solicitud: string }) {
-  const [estado, accion] = useActionState<Resultado, FormData>(completarTarea, {});
+  const [abierto, setAbierto] = useState(false);
+  const [estado, accion, pendiente] = useActionState<Resultado, FormData>(completarTarea, {});
   if (estado.ok) return <span className="chip chip-ok">Completada</span>;
+  if (!abierto) return <button key="abrir" type="button" className="btn-texto" onClick={() => setAbierto(true)}>Marcar hecha</button>;
   return (
-    <form action={accion} className="inline">
+    <form action={accion} className="flex gap-2 items-center w-full mt-1">
       <input type="hidden" name="tarea" value={tarea} /><input type="hidden" name="solicitud" value={solicitud} />
-      <button className="btn-texto">Marcar hecha</button>
+      <input name="resultado" maxLength={2000} autoFocus aria-label="Resultado o siguiente paso" placeholder="Resultado o siguiente paso (opcional)" className="border rounded px-2 py-1 text-sm flex-1 min-w-0" />
+      <button key="hecha" className="btn-texto" disabled={pendiente}>Hecha</button>
       {estado.error ? <span className="text-xs" role="alert"> {estado.error}</span> : null}
     </form>
+  );
+}
+
+export function Reasignar({ tarea, solicitud }: { tarea: string; solicitud: string }) {
+  const [abierto, setAbierto] = useState(false);
+  const [estado, accion, pendiente] = useActionState<Resultado, FormData>(reasignarTarea, {});
+  if (estado.ok) return <span className="chip chip-ok">Reasignada</span>;
+  if (!abierto) return <button key="abrir" type="button" className="btn-texto" style={{ color: 'var(--color-muted)' }} onClick={() => setAbierto(true)}>Reasignar</button>;
+  return (
+    <form action={accion} className="inline-flex gap-1 items-center">
+      <input type="hidden" name="tarea" value={tarea} /><input type="hidden" name="solicitud" value={solicitud} />
+      <input name="para" list="personal-equipo" autoFocus aria-label="Reasignar a" placeholder="Nombre" className="border rounded px-1 text-sm" />
+      <button key="ok" className="btn-texto" disabled={pendiente}>Encargar</button>
+      {estado.error ? <span className="text-xs" role="alert"> {estado.error}</span> : null}
+    </form>
+  );
+}
+
+type Miembro = { id: string; nombre: string; papel: string };
+/** Equipo del asunto en la cabecera: chips con el responsable y quien colabora; añadir se hace escribiendo el nombre. */
+export function EquipoAsunto({ solicitud, miembros, gestiona }: { solicitud: string; miembros: Miembro[]; gestiona: boolean }) {
+  const [abierto, setAbierto] = useState(false);
+  const [estado, accion, pendiente] = useActionState<Resultado, FormData>(equipoAsunto, {});
+  const boton = (m: Miembro, accionNombre: string, texto: string) => (
+    <form action={accion} className="inline">
+      <input type="hidden" name="solicitud" value={solicitud} /><input type="hidden" name="persona" value={m.id} /><input type="hidden" name="accion" value={accionNombre} />
+      <button className="btn-texto text-xs" disabled={pendiente} title={`${texto}: ${m.nombre}`}>{texto}</button>
+    </form>
+  );
+  return (
+    <div className="flex flex-wrap gap-2 items-center text-sm" aria-label="Equipo del asunto">
+      <span className="ayuda">Equipo:</span>
+      {miembros.length === 0 ? <em className="ayuda">sin responsable</em> : null}
+      {miembros.map((m) => (
+        <span key={m.id} className={`chip ${m.papel === 'responsable' ? 'chip-info' : 'chip-neutro'} inline-flex gap-1 items-center`} data-miembro={m.nombre}>
+          {m.nombre}{m.papel === 'responsable' ? ' · responsable' : m.papel === 'suplente' ? ' · suplente' : ''}
+          {gestiona && m.papel !== 'responsable' ? <>{boton(m, 'responsable', 'Hacer responsable')}{boton(m, 'quitar', 'Quitar')}</> : null}
+        </span>
+      ))}
+      {gestiona ? (abierto ? (
+        <form action={accion} className="inline-flex gap-1 items-center" onSubmit={() => setAbierto(false)}>
+          <input type="hidden" name="solicitud" value={solicitud} /><input type="hidden" name="accion" value="asignar" />
+          <input name="nombre" list="personal-equipo" autoFocus aria-label="Añadir al asunto" placeholder="Nombre" className="border rounded px-1 text-sm" />
+          <button key="anadir" className="btn-texto">Añadir</button>
+        </form>
+      ) : <button key="abrir" type="button" className="btn-texto" onClick={() => setAbierto(true)}>+ Persona</button>) : null}
+      {estado.error ? <span className="text-xs" role="alert">{estado.error}</span> : null}
+      {estado.ok ? <span className="text-xs" role="status">{estado.ok}</span> : null}
+    </div>
   );
 }

@@ -13,7 +13,8 @@ export type Entrada =
   | { clase: 'evento'; id: string; at: Date; autor: string | null; tipo: string; detalle: Record<string, unknown>; visible: boolean };
 
 const EVENTOS_EN_CRONOLOGIA = ['solicitud_enviada', 'estado_solicitud', 'estado_visible', 'expediente_abierto', 'documento_compartido',
-  'documento_solicitado', 'requisito_actualizado', 'documento_revisado', 'conflictos_revisados', 'responsable_asignado'];
+  'documento_solicitado', 'requisito_actualizado', 'documento_revisado', 'conflictos_revisados', 'responsable_asignado',
+  'asignacion', 'asignacion_retirada', 'tarea_encargada', 'tarea_reasignada', 'tarea_completada'];
 
 export async function cronologia(tx: Tx, sid: string, limite = 400): Promise<Entrada[]> {
   const r = await tx.query(`
@@ -40,7 +41,10 @@ export async function cronologia(tx: Tx, sid: string, limite = 400): Promise<Ent
       union all
       select 'evento', v.id::text, v.happened_at,
         (select coalesce(p.nombre_visible, u.name) from identidad."user" u left join portal.personal p on p.user_id = u.id where u.id = v.actor_id),
-        jsonb_build_object('tipo', v.tipo, 'detalle', v.detalle, 'visible', v.visible_cliente)
+        jsonb_build_object('tipo', v.tipo, 'visible', v.visible_cliente, 'detalle', v.detalle || jsonb_strip_nulls(jsonb_build_object(
+          'nombre_empleado', (select nombre_visible from portal.personal where user_id::text = v.detalle->>'empleado'),
+          'nombre_a', (select nombre_visible from portal.personal where user_id::text = v.detalle->>'a'),
+          'nombre_responsable', (select nombre_visible from portal.personal where user_id::text = v.detalle->>'responsable'))))
         from portal.eventos v where v.solicitud_id = $1 and v.tipo = any($2)
     ) x order by at desc limit $3`, [sid, EVENTOS_EN_CRONOLOGIA, limite]);
   return r.rows.reverse().map((f) => {

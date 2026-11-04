@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { ChipSolicitud } from '@/portal/components/ui';
 import { comoUsuario } from '@/portal/lib/db';
 import { recientes } from '@/portal/lib/expediente';
+import { miTrabajo } from '@/portal/lib/equipo';
+import { MiTrabajo } from '@/portal/components/MiTrabajo';
 import { requerirPersonal } from '@/portal/lib/sesion';
 import { fecha } from '@/portal/lib/textos';
 
@@ -22,7 +24,7 @@ export default async function Bandeja({ searchParams }: { searchParams: Promise<
   const u = await requerirPersonal();
   const v = ((await searchParams).vista ?? 'nuevas') as Vista;
   const vista = vistas[v] ?? vistas.nuevas;
-  const { filas, cuentas, rec } = await comoUsuario(u.id, async (tx) => {
+  const { filas, cuentas, rec, trabajo } = await comoUsuario(u.id, async (tx) => {
     const base = `with x as (
       select s.*, t.nombre tipo_nombre, us.name cliente_nombre, us.email cliente_email, e.referencia expediente_ref, p.nombre_visible responsable,
         (select count(*) from portal.documentos d where d.solicitud_id = s.id and d.estado = 'pendiente')::int por_revisar,
@@ -35,7 +37,7 @@ export default async function Bandeja({ searchParams }: { searchParams: Promise<
     const filas = (await tx.query(`${base} select * from x s where ${vista.where} order by s.urgencia = 'urgente' desc, s.enviada_at limit 200`)).rows;
     const cuentas: Record<string, number> = {};
     for (const [k, def] of Object.entries(vistas)) cuentas[k] = (await tx.query(`${base} select count(*)::int n from x s where ${def.where}`)).rows[0].n;
-    return { filas, cuentas, rec: await recientes(tx, u.id) };
+    return { filas, cuentas, rec: await recientes(tx, u.id), trabajo: await miTrabajo(tx, u.id) };
   });
   return (
     <div className="grid gap-5">
@@ -51,6 +53,7 @@ export default async function Bandeja({ searchParams }: { searchParams: Promise<
           </div>
         ) : null}
       </section>
+      <MiTrabajo d={trabajo} />
       <h1 className="titulo">Bandeja</h1>
       <nav aria-label="Vistas" className="flex flex-wrap gap-2">
         {Object.entries(vistas).map(([k, d]) => (

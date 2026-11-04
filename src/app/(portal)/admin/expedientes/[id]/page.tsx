@@ -2,12 +2,13 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Compositor } from '@/portal/components/Compositor';
-import { Carpeta, Compartir, Completar, EstadoCliente } from '@/portal/components/ExpedienteAcciones';
+import { Carpeta, Compartir, Completar, EquipoAsunto, EstadoCliente, Reasignar } from '@/portal/components/ExpedienteAcciones';
 import { ChipSolicitud, tamano } from '@/portal/components/ui';
 import { comoUsuario } from '@/portal/lib/db';
 import { UUID } from '@/portal/lib/datos';
 import { env } from '@/portal/lib/env';
 import { cabecera, cronologia, recientes, type Entrada } from '@/portal/lib/expediente';
+import { equipoAsunto, personalActivo, relevo, type Relevo } from '@/portal/lib/equipo';
 import { fechaHora, TIPO_ETIQUETA } from '@/portal/lib/agenda';
 import { requerirPersonal } from '@/portal/lib/sesion';
 import { textoEvento } from '@/portal/lib/textos';
@@ -41,9 +42,10 @@ function Item({ e, sid }: { e: Entrada; sid: string }) {
   if (e.clase === 'tarea') {
     return (
       <li className="burbuja burbuja-tarea" data-clase="tarea" data-tarea={e.titulo}>
-        <p className="meta">{e.tipo === 'plazo' ? (e.verificado ? 'Plazo verificado' : 'Plazo pendiente de verificar') : TIPO_ETIQUETA[e.tipo] ?? 'Tarea'} · {e.autor} · {hora(e.at)}</p>
+        <p className="meta">{e.tipo === 'plazo' ? (e.verificado ? 'Plazo verificado' : 'Plazo pendiente de verificar') : TIPO_ETIQUETA[e.tipo] ?? 'Tarea'} · responsable: {e.autor} · {hora(e.at)}</p>
         <p className="fila"><span><strong>{e.titulo}</strong> · {fechaHora(e.inicio)}</span>
-          {e.estado === 'pendiente' ? <Completar tarea={e.id} solicitud={sid} /> : <span className="chip chip-neutro">{e.estado === 'completado' ? 'Hecha' : 'Cancelada'}</span>}</p>
+          {e.estado === 'pendiente' ? <span className="flex gap-3 items-center"><Reasignar tarea={e.id} solicitud={sid} /><Completar tarea={e.id} solicitud={sid} /></span>
+            : <span className="chip chip-neutro">{e.estado === 'completado' ? 'Hecha' : 'Cancelada'}</span>}</p>
         <p className="text-xs"><Link href={`/admin/agenda/${e.id}/`}>Avisos y detalles</Link></p>
       </li>
     );
@@ -66,6 +68,24 @@ function Item({ e, sid }: { e: Entrada; sid: string }) {
   );
 }
 
+/** Relevo (#81): resumen operativo con lo registrado en el expediente, para retomarlo sin explicaciones externas. */
+function Continuar({ r }: { r: Relevo }) {
+  return (
+    <details className="mt-2 text-sm" data-relevo>
+      <summary className="font-semibold cursor-pointer">Continuar este asunto</summary>
+      <dl className="grid gap-1 mt-2" style={{ gridTemplateColumns: 'max-content 1fr', columnGap: '1rem' }}>
+        <dt className="ayuda">Último movimiento</dt><dd>{r.ultimo ? `${fechaHora(r.ultimo.at)} · ${r.ultimo.texto}` : 'Sin movimientos'}</dd>
+        <dt className="ayuda">Situación publicada</dt><dd>{r.estado_visible ?? <em>sin publicar</em>}</dd>
+        <dt className="ayuda">Última nota interna</dt><dd>{r.ultima_nota ? `${r.ultima_nota.autor}: ${r.ultima_nota.texto}` : '—'}</dd>
+        <dt className="ayuda">Qué hay que hacer</dt><dd>{r.tareas.length ? <ul>{r.tareas.map((t, i) => <li key={i}>{t.vencida ? '⚠️ ' : ''}{t.titulo} · {t.responsable} · {fechaHora(t.inicio)}</li>)}</ul> : 'No hay tareas pendientes'}</dd>
+        <dt className="ayuda">Plazos</dt><dd>{r.plazos.length ? <ul>{r.plazos.map((p, i) => <li key={i}>{p.titulo} · {fechaHora(p.inicio)} · {p.verificado ? 'verificado' : <strong>pendiente de verificar</strong>}</li>)}</ul> : 'Ninguno registrado'}</dd>
+        <dt className="ayuda">Documentación</dt><dd>{r.faltan.length ? `Faltan: ${r.faltan.join(', ')}` : 'No falta nada solicitado'}{r.por_revisar ? ` · ${r.por_revisar} por revisar` : ''}</dd>
+        <dt className="ayuda">Bloqueos</dt><dd>{r.sin_responder ? `Mensaje del cliente sin contestar (${fechaHora(r.sin_responder.at)}): «${r.sin_responder.texto}»` : 'Ninguno detectado'}</dd>
+      </dl>
+    </details>
+  );
+}
+
 export default async function Expediente({ params }: { params: Promise<{ id: string }> }) {
   const u = await requerirPersonal();
   const { id } = await params;
@@ -75,7 +95,7 @@ export default async function Expediente({ params }: { params: Promise<{ id: str
     if (!c) return null;
     const [entradas, rec, carpetas] = [await cronologia(tx, id), await recientes(tx, u.id),
       (await tx.query(`select distinct coalesce(q.carpeta, d.carpeta) c from portal.documentos d left join portal.requisitos q on q.id = d.requisito_id where d.solicitud_id = $1`, [id])).rows.map((r) => r.c as string)];
-    return { c, entradas, rec, carpetas };
+    return { c, entradas, rec, carpetas, equipo: await equipoAsunto(tx, id), relevo: await relevo(tx, id), personal: await personalActivo(tx) };
   });
   if (!d) notFound();
   const { c } = d;
@@ -109,6 +129,8 @@ export default async function Expediente({ params }: { params: Promise<{ id: str
             <Link href={`/admin/solicitudes/${id}/`}>Ficha completa</Link>
           </p>
           <div className="mt-1 text-sm"><EstadoCliente solicitud={id} actual={c.estado_visible} /></div>
+          <div className="mt-1"><EquipoAsunto solicitud={id} miembros={d.equipo.miembros} gestiona={d.equipo.gestiona} /></div>
+          <Continuar r={d.relevo} />
         </header>
 
         <ol className="cronologia" aria-label="Cronología del expediente">
@@ -119,6 +141,7 @@ export default async function Expediente({ params }: { params: Promise<{ id: str
             return [nuevoDia ? <li className="dia" key={`d-${k}`}>{k}</li> : null, <Item key={`${e.clase}-${e.id}`} e={e} sid={id} />];
           })}
         </ol>
+        <datalist id="personal-equipo">{d.personal.map((p) => <option key={p.id} value={p.nombre} />)}</datalist>
         <datalist id="carpetas-expediente">{[...new Set([...d.carpetas, 'Documentación del despacho', 'Escritos', 'Prueba', 'Comunicaciones', 'Resoluciones', 'Economía'])].map((x) => <option key={x} value={x} />)}</datalist>
         <Compositor solicitudId={id} maxMb={env.uploadMaxBytes / 1024 / 1024} />
       </section>
