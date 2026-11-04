@@ -1,14 +1,13 @@
 // Genera todos los iconos a partir de los originales en SVG:
 //   node scripts/marca/generar-favicons.mjs
-// - Monograma PA (public/favicon.svg, monograma-16.svg): hasta 48 px, donde el nombre completo no se lee.
-// - Nombre completo PRAETORIA / ABOGADOS (completo*.svg): a partir de 96 px.
+// - PRAE / TORIA (public/favicon.svg): hasta 48 px, donde ABOGADOS no se leería.
+// - PRAE / TORIA / ABOGADOS (completo*.svg): a partir de 96 px.
 import { writeFileSync } from 'node:fs';
 import sharp from 'sharp';
 
 const F = 'scripts/marca/fuentes';
 const png = (svg, size) =>
-  // El monograma de 16 px se rasteriza 1:1 para conservar su ajuste a la retícula.
-  sharp(svg, { density: svg.endsWith('monograma-16.svg') ? 72 : 288 })
+  sharp(svg, { density: 288 })
     .resize(size, size)
     .png({ compressionLevel: 9 })
     .toBuffer();
@@ -30,9 +29,9 @@ for (const [destino, origen, size] of SALIDAS) {
   writeFileSync(destino, origen.includes('completo-') ? await sharp(datos).flatten({ background: '#fff' }).png({ compressionLevel: 9 }).toBuffer() : datos);
 }
 
-// favicon.ico con PNG dentro: 16 (dibujado para esa retícula), 32 y 48.
+// favicon.ico con PNG dentro: 16, 32 y 48.
 const marcos = [
-  [16, await png(`${F}/monograma-16.svg`, 16)],
+  [16, await png('public/favicon.svg', 16)],
   [32, await png('public/favicon.svg', 32)],
   [48, await png('public/favicon.svg', 48)],
 ];
