@@ -9,12 +9,13 @@ export type Entrada =
   | { clase: 'mensaje'; id: string; at: Date; autor: string; texto: string; del_despacho: boolean }
   | { clase: 'documento'; id: string; at: Date; autor: string; nombre: string; carpeta: string; version: number; visible: boolean;
       estado: string; mime: string; tamano: number; analisis: string; del_despacho: boolean; origen: string }
-  | { clase: 'tarea'; id: string; at: Date; autor: string; titulo: string; inicio: Date; estado: string; tipo: string; verificado: boolean }
+  | { clase: 'tarea'; id: string; at: Date; autor: string; titulo: string; inicio: Date; estado: string; tipo: string; verificado: boolean;
+      sugerida: boolean; fuente: string | null; documento: { id: string; nombre: string } | null }
   | { clase: 'evento'; id: string; at: Date; autor: string | null; tipo: string; detalle: Record<string, unknown>; visible: boolean };
 
 const EVENTOS_EN_CRONOLOGIA = ['solicitud_enviada', 'estado_solicitud', 'estado_visible', 'expediente_abierto', 'documento_compartido',
   'documento_solicitado', 'requisito_actualizado', 'documento_revisado', 'conflictos_revisados', 'responsable_asignado',
-  'asignacion', 'asignacion_retirada', 'tarea_encargada', 'tarea_reasignada', 'tarea_completada'];
+  'asignacion', 'asignacion_retirada', 'tarea_encargada', 'tarea_reasignada', 'tarea_completada', 'tarea_reprogramada', 'plazo_verificado'];
 
 export async function cronologia(tx: Tx, sid: string, limite = 400): Promise<Entrada[]> {
   const r = await tx.query(`
@@ -36,7 +37,9 @@ export async function cronologia(tx: Tx, sid: string, limite = 400): Promise<Ent
         from portal.documentos d left join portal.requisitos q on q.id = d.requisito_id where d.solicitud_id = $1
       union all
       select 'tarea', e.id::text, e.created_at, (select nombre_visible from portal.personal where user_id = e.propietario_id),
-        jsonb_build_object('titulo', e.titulo, 'inicio', e.inicio, 'estado', e.estado, 'tipo', e.tipo, 'verificado', e.plazo_verificado_at is not null)
+        jsonb_build_object('titulo', e.titulo, 'inicio', e.inicio, 'estado', e.estado, 'tipo', e.tipo, 'verificado', e.plazo_verificado_at is not null,
+          'sugerida', e.origen_fecha = 'sugerida', 'fuente', e.plazo_fuente, 'doc_id', e.documento_id,
+          'doc_nombre', (select nombre_original from portal.documentos where id = e.documento_id))
         from portal.agenda_eventos e where e.solicitud_id = $1
       union all
       select 'evento', v.id::text, v.happened_at,
@@ -56,7 +59,8 @@ export async function cronologia(tx: Tx, sid: string, limite = 400): Promise<Ent
         version: Number(d.version), visible: !!d.visible, estado: String(d.estado), mime: String(d.mime), tamano: Number(d.tamano), analisis: String(d.analisis),
         del_despacho: !!d.del_despacho, origen: String(d.origen) };
       case 'tarea': return { clase: 'tarea', id: f.id, at: f.at, autor: f.autor, titulo: String(d.titulo), inicio: new Date(String(d.inicio)),
-        estado: String(d.estado), tipo: String(d.tipo), verificado: !!d.verificado };
+        estado: String(d.estado), tipo: String(d.tipo), verificado: !!d.verificado, sugerida: !!d.sugerida, fuente: (d.fuente as string) || null,
+        documento: d.doc_id && d.doc_nombre ? { id: String(d.doc_id), nombre: String(d.doc_nombre) } : null };
       default: return { clase: 'evento', id: f.id, at: f.at, autor: f.autor, tipo: String(d.tipo), detalle: (d.detalle ?? {}) as Record<string, unknown>, visible: !!d.visible };
     }
   });

@@ -2,14 +2,14 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Compositor } from '@/portal/components/Compositor';
-import { Carpeta, Compartir, Completar, EquipoAsunto, EstadoCliente, Reasignar } from '@/portal/components/ExpedienteAcciones';
+import { Carpeta, Compartir, Completar, EquipoAsunto, EstadoCliente, Reasignar, Reprogramar, VerificarPlazo } from '@/portal/components/ExpedienteAcciones';
 import { ChipSolicitud, tamano } from '@/portal/components/ui';
 import { comoUsuario } from '@/portal/lib/db';
 import { UUID } from '@/portal/lib/datos';
 import { env } from '@/portal/lib/env';
 import { cabecera, cronologia, recientes, type Entrada } from '@/portal/lib/expediente';
 import { equipoAsunto, personalActivo, relevo, type Relevo } from '@/portal/lib/equipo';
-import { fechaHora, TIPO_ETIQUETA } from '@/portal/lib/agenda';
+import { fechaHora, partesMadrid, TIPO_ETIQUETA } from '@/portal/lib/agenda';
 import { requerirPersonal } from '@/portal/lib/sesion';
 import { textoEvento } from '@/portal/lib/textos';
 
@@ -42,11 +42,18 @@ function Item({ e, sid }: { e: Entrada; sid: string }) {
   if (e.clase === 'tarea') {
     return (
       <li className="burbuja burbuja-tarea" data-clase="tarea" data-tarea={e.titulo}>
-        <p className="meta">{e.tipo === 'plazo' ? (e.verificado ? 'Plazo verificado' : 'Plazo pendiente de verificar') : TIPO_ETIQUETA[e.tipo] ?? 'Tarea'} · responsable: {e.autor} · {hora(e.at)}</p>
+        <p className="meta">{e.tipo === 'plazo' ? (e.verificado ? 'Plazo verificado' : e.sugerida ? 'Fecha sugerida (sin validar)' : 'Plazo pendiente de verificar') : TIPO_ETIQUETA[e.tipo] ?? 'Tarea'} · responsable: {e.autor} · {hora(e.at)}</p>
         <p className="fila"><span><strong>{e.titulo}</strong> · {fechaHora(e.inicio)}</span>
           {e.estado === 'pendiente' ? <span className="flex gap-3 items-center"><Reasignar tarea={e.id} solicitud={sid} /><Completar tarea={e.id} solicitud={sid} /></span>
             : <span className="chip chip-neutro">{e.estado === 'completado' ? 'Hecha' : 'Cancelada'}</span>}</p>
-        <p className="text-xs"><Link href={`/admin/agenda/${e.id}/`}>Avisos y detalles</Link></p>
+        {e.documento || e.fuente ? <p className="text-xs">Origen: {e.documento ? <a href={`/api/documentos/${e.documento.id}/?ver=1`} target="_blank" rel="noopener">📄 {e.documento.nombre}</a> : e.fuente}</p> : null}
+        {e.estado === 'pendiente' ? (
+          <p className="flex flex-wrap gap-3 items-center text-xs mt-1">
+            {e.tipo === 'plazo' && !e.verificado ? <VerificarPlazo tarea={e.id} solicitud={sid} /> : null}
+            <Reprogramar tarea={e.id} solicitud={sid} fecha={partesMadrid(e.inicio).fecha} />
+            <Link href={`/admin/agenda/${e.id}/`}>Avisos y detalles</Link>
+          </p>
+        ) : <p className="text-xs"><Link href={`/admin/agenda/${e.id}/`}>Avisos y detalles</Link></p>}
       </li>
     );
   }
@@ -141,6 +148,7 @@ export default async function Expediente({ params }: { params: Promise<{ id: str
             return [nuevoDia ? <li className="dia" key={`d-${k}`}>{k}</li> : null, <Item key={`${e.clase}-${e.id}`} e={e} sid={id} />];
           })}
         </ol>
+        <datalist id="documentos-expediente">{[...new Set(d.entradas.filter((x) => x.clase === 'documento').map((x) => (x as { nombre: string }).nombre))].map((n) => <option key={n} value={n} />)}</datalist>
         <datalist id="personal-equipo">{d.personal.map((p) => <option key={p.id} value={p.nombre} />)}</datalist>
         <datalist id="carpetas-expediente">{[...new Set([...d.carpetas, 'Documentación del despacho', 'Escritos', 'Prueba', 'Comunicaciones', 'Resoluciones', 'Economía'])].map((x) => <option key={x} value={x} />)}</datalist>
         <Compositor solicitudId={id} maxMb={env.uploadMaxBytes / 1024 / 1024} />

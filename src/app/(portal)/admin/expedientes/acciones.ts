@@ -38,9 +38,14 @@ export async function guardarEntrada(_: Resultado, f: FormData): Promise<Resulta
         const tipo = f.get('plazo') === '1' ? 'plazo' : 'tarea';
         const para = String(f.get('para') ?? '').trim();
         const responsable = para ? await persona(tx, para) : u.id;
-        await tx.query(`insert into portal.agenda_eventos (propietario_id, titulo, tipo, inicio, todo_el_dia, solicitud_id, avisos_min)
-          values ($1, $2, $3, ($4 || ' ' || $5)::timestamp at time zone 'Europe/Madrid', $6, $7, $8)`,
-          [responsable, texto.slice(0, 200), tipo, fecha, conHora ? hora : '09:00', !conHora, sid, conHora ? [60] : [0]]);
+        // Origen: si coincide con un documento del asunto, se enlaza; si no, queda como texto (p. ej. «Notificación LexNET 3/11»).
+        const origen = String(f.get('origen') ?? '').trim().slice(0, 300);
+        const doc = origen ? (await tx.query(`select id from portal.documentos where solicitud_id = $1 and nombre_original = $2 order by version desc limit 1`, [sid, origen])).rows[0]?.id ?? null : null;
+        // Un plazo avisa con una semana, un día y una hora de antelación; una tarea, a su hora o a las 9.
+        const avisos = tipo === 'plazo' ? [10080, 1440, 60] : conHora ? [60] : [0];
+        await tx.query(`insert into portal.agenda_eventos (propietario_id, titulo, tipo, inicio, todo_el_dia, solicitud_id, avisos_min, documento_id, plazo_fuente)
+          values ($1, $2, $3, ($4 || ' ' || $5)::timestamp at time zone 'Europe/Madrid', $6, $7, $8, $9, $10)`,
+          [responsable, texto.slice(0, 200), tipo, fecha, conHora ? hora : '09:00', !conHora, sid, avisos, doc, doc ? null : origen || null]);
       } else {
         const fuente = ['texto_aportado', 'llamada', 'reunion'].includes(String(f.get('fuente'))) ? String(f.get('fuente')) : 'nota';
         await tx.query('insert into portal.notas_internas (solicitud_id, autor_id, texto, fuente) values ($1, $2, $3, $4)', [sid, u.id, texto, fuente]);
@@ -129,4 +134,29 @@ export async function equipoAsunto(_: Resultado, f: FormData): Promise<Resultado
   } catch (e) { return { error: breve(e, 'No se ha podido cambiar el equipo.') }; }
   revalidatePath(`/admin/expedientes/${sid}/`);
   return { ok: accion === 'responsable' ? 'Nuevo responsable asignado.' : accion === 'quitar' ? 'Ya no está en el asunto.' : 'Incorporado al asunto.', n: Date.now() };
+}
+
+/** Verificar un plazo: el profesional confirma que ha comprobado el cómputo (queda su nombre y la hora). */
+export async function verificarPlazo(_: Resultado, f: FormData): Promise<Resultado> {
+  const u = await requerirPersonal();
+  const id = String(f.get('tarea')), sid = String(f.get('solicitud'));
+  if (!UUID.test(id) || !UUID.test(sid) || f.get('comprobado') !== '1') return { error: 'Confirma que has comprobado el cómputo.' };
+  const r = await comoUsuario(u.id, (tx) => tx.query(`update portal.agenda_eventos set plazo_verificado_at = now(), origen_fecha = 'manual'
+    where id = $1 and solicitud_id = $2 and tipo = 'plazo' and estado = 'pendiente' and plazo_verificado_at is null`, [id, sid]));
+  if (!r.rowCount) return { error: 'No se puede verificar este plazo.' };
+  revalidatePath(`/admin/expedientes/${sid}/`);
+  return { ok: 'Plazo verificado.', n: Date.now() };
+}
+
+/** Cambiar la fecha desde el hilo: cancela los avisos viejos, anula la verificación y queda en la cronología. */
+export async function reprogramarTarea(_: Resultado, f: FormData): Promise<Resultado> {
+  const u = await requerirPersonal();
+  const id = String(f.get('tarea')), sid = String(f.get('solicitud')), fecha = String(f.get('fecha') ?? ''), hora = String(f.get('hora') ?? '');
+  if (!UUID.test(id) || !UUID.test(sid) || !/^\d{4}-\d{2}-\d{2}$/.test(fecha)) return { error: 'Indica la nueva fecha.' };
+  const conHora = /^\d{2}:\d{2}$/.test(hora);
+  const r = await comoUsuario(u.id, (tx) => tx.query(`update portal.agenda_eventos set inicio = ($3 || ' ' || $4)::timestamp at time zone 'Europe/Madrid', todo_el_dia = $5
+    where id = $1 and solicitud_id = $2 and estado = 'pendiente'`, [id, sid, fecha, conHora ? hora : '09:00', !conHora]));
+  if (!r.rowCount) return { error: 'No puedes cambiar esta fecha.' };
+  revalidatePath(`/admin/expedientes/${sid}/`);
+  return { ok: 'Fecha cambiada.', n: Date.now() };
 }
