@@ -69,6 +69,15 @@ createServer(async (req, res) => {
     res.writeHead(r.status, r.headers);
     return res.end(r.body);
   }
+  // Navegación interna de Next, como en el servidor real
+  if (req.headers.rsc) {
+    const rsc = join(dir, normalize(path).replace(/^(..[/\])+/, ''), 'index.rsc');
+    if (existsSync(rsc)) {
+      res.writeHead(200, { 'Content-Type': 'text/x-component' });
+      return res.end(readFileSync(rsc));
+    }
+  }
+
   const safe = normalize(path).replace(/^(\.\.[/\\])+/, '');
   let file = join(dir, safe);
   if (existsSync(file) && statSync(file).isDirectory()) {

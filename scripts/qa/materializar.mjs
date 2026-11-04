@@ -27,6 +27,8 @@ for (const f of walk(APP)) {
   else if (r === '_global-error.html' || r === '_not-found.body') continue;
   else if (r === 'index.html') escribir(join(dir, 'index.html'), readFileSync(f));
   else if (r.endsWith('.html')) escribir(join(dir, r.slice(0, -5), 'index.html'), readFileSync(f));
+  // Datos de la navegación interna de Next: sin ellos, cada enlace sería una recarga completa
+  else if (r.endsWith('.rsc')) { escribir(join(dir, r === 'index.rsc' ? 'index.rsc' : join(r.slice(0, -4), 'index.rsc')), readFileSync(f)); continue; }
   else if (r.endsWith('.body')) escribir(join(dir, r.slice(0, -5)), readFileSync(f));
   else continue;
   paginas++;
