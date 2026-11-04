@@ -29,7 +29,8 @@ for (const linea of readFileSync('public/_redirects', 'utf8').split('\n')) {
   }
   const sinBarra = desde.replace(/\/$/, '');
   await comprobar(`${sinBarra}/`, estado, dest);
-  await comprobar(sinBarra, estado, dest);
+  // Sin barra, primero la redirección de Next a la URL con barra (308), que luego aplica la regla
+  await comprobar(sinBarra, 308, `${sinBarra}/`);
 }
 
 console.log(`Redirecciones comprobadas: ${comprobadas}. Fallos: ${fallos.length}.`);

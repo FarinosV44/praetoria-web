@@ -14,7 +14,7 @@ const ADMIN = { email: `superadmin.${sufijo}@ejemplo.test`, clave: `clave-supera
 const estado: { enlace?: string; totp?: string } = {};
 test.describe.configure({ mode: 'serial' });
 
-const node = (args: string[]) => execFileSync(process.execPath, ['--env-file=.env.local', '--experimental-strip-types', ...args], { cwd: raiz, encoding: 'utf8' });
+const node = (args: string[]) => execFileSync(process.execPath, ['--env-file=../.env.local', '--experimental-strip-types', ...args], { cwd: raiz, encoding: 'utf8' });
 
 async function entrarAdmin(p: Page) {
   await entrar(p, ADMIN.email, ADMIN.clave);

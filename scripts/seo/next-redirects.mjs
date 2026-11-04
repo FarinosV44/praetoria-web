@@ -9,7 +9,6 @@ export function aRedireccionesNext(texto) {
     const t = linea.trim();
     if (!t || t.startsWith('#')) continue;
     const [desde, hacia, estado = '301'] = t.split(/\s+/);
-    if (desde.includes('%')) continue; // duplicado codificado: Next compara la ruta ya decodificada
     const statusCode = Number(estado.replace('!', ''));
     if (statusCode !== 301 && statusCode !== 302) continue;
 

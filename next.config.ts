@@ -44,8 +44,6 @@ const cabecerasPortal = [
 
 const nextConfig: NextConfig = {
   trailingSlash: true,
-  // La barra final de las páginas la añade la regla de redirects(): las API de autenticación no deben redirigirse.
-  skipTrailingSlashRedirect: true,
   images: { unoptimized: true },
   poweredByHeader: false,
   reactStrictMode: true,
@@ -61,8 +59,6 @@ const nextConfig: NextConfig = {
       { source: '/:path*', has: [{ type: 'host', value: 'www.praetoriaabogados.es' }], destination: 'https://praetoriaabogados.es/:path*', statusCode: 301 },
       // Redirecciones de la migración desde WordPress (docs/seo/inventario-urls.csv)
       ...aRedireccionesNext(readFileSync('public/_redirects', 'utf8')),
-      // Barra final en las páginas, como hasta ahora. No en /api ni en archivos.
-      { source: '/:path((?!api/|_next/)[^.]*[^/.])', destination: '/:path/', statusCode: 301 },
     ];
   },
   async headers() {

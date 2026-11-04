@@ -79,6 +79,8 @@ export const auth = betterAuth({
     },
   },
   advanced: {
+    // Next redirige a la URL con barra final, también en las API
+    skipTrailingSlashes: true,
     cookiePrefix: 'praetoria-portal',
     useSecureCookies: env.origin.startsWith('https://'),
     // Auditoría A3: IP real del cliente según el proxy de confianza del alojamiento, para que el límite de
