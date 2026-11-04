@@ -1,8 +1,14 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { areas } from '@/lib/site';
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource-variable/source-serif-4/opsz.css';
+import './(web)/web.css';
+import { MarcoWeb } from '@/components/MarcoWeb';
+import { metadataWeb } from '@/lib/metadata-web';
 
 export const metadata: Metadata = {
+  ...metadataWeb,
   title: { absolute: 'Página no encontrada | Praetoria División Jurídica' },
   description: 'La página que buscas no existe o ha cambiado de dirección.',
   robots: { index: false, follow: true },
@@ -10,6 +16,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
+    <MarcoWeb>
     <section className="section">
       <div className="wrap">
         <h1>Esta página no existe</h1>
@@ -32,5 +39,6 @@ export default function NotFound() {
         </ul>
       </div>
     </section>
+    </MarcoWeb>
   );
 }

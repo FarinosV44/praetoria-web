@@ -27,7 +27,7 @@ const posts = new Map(
 // Rutas propias de la app (para validar `pagina` y `siguientePaso`)
 const rutaExiste = (href) => {
   const p = href.split('#')[0].replace(/^\/|\/$/g, '');
-  return p === '' || existsSync(join('src/app', p)) || posts.has(p);
+  return p === '' || existsSync(join('src/app/(web)', p)) || posts.has(p);
 };
 
 const vistos = new Set();

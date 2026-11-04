@@ -137,7 +137,7 @@ for (const p of locs) if (!indexable.includes(p)) errors.push(`el sitemap incluy
 const blogDir = join(srcRoot, 'src/content/blog');
 if (existsSync(blogDir)) {
   const rss = fileSet.has('/rss.xml') ? read('/rss.xml') : '';
-  const appDirs = readdirSync(join(srcRoot, 'src/app')).filter((d) => statSync(join(srcRoot, 'src/app', d)).isDirectory() && !/^[[(_]/.test(d));
+  const appDirs = readdirSync(join(srcRoot, 'src/app/(web)')).filter((d) => statSync(join(srcRoot, 'src/app/(web)', d)).isDirectory() && !/^[[(_]/.test(d));
   for (const md of readdirSync(blogDir).filter((x) => x.endsWith('.md'))) {
     const slug = md.slice(0, -3);
     const fm = readFileSync(join(blogDir, md), 'utf8').split('---')[1] ?? '';
@@ -146,7 +146,7 @@ if (existsSync(blogDir)) {
       if (locs.includes(`/${slug}/`)) errors.push(`borrador en el sitemap: /${slug}/`);
       if (rss.includes(`/${slug}/`)) errors.push(`borrador en el RSS: /${slug}/`);
     }
-    if (appDirs.includes(slug)) errors.push(`colisión de ruta: el artículo «${slug}» tiene el mismo slug que src/app/${slug}/`);
+    if (appDirs.includes(slug)) errors.push(`colisión de ruta: el artículo «${slug}» tiene el mismo slug que src/app/(web)/${slug}/`);
   }
 }
 

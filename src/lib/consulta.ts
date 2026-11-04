@@ -1,5 +1,5 @@
 // Modelo y validación de una consulta. Lo usan el formulario (navegador) y, con las mismas reglas,
-// la recepción en Hostinger (public/api/consulta.php, con las listas de scripts/formularios/catalogo.mjs).
+// la recepción en servidor (src/lib/recepcion.ts).
 // Importaciones relativas con extensión: Node ejecuta este archivo directamente en los scripts y en las pruebas.
 // Sin dependencias (ni zod): este módulo también va al navegador y su peso cuenta (presupuesto de #4).
 import { site, laboral } from './site.ts';

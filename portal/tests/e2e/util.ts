@@ -26,7 +26,7 @@ export const enlace = (texto: string) => texto.match(/https?:\/\/\S+/)![0];
 
 /** Ejecuta el proceso real de envío de avisos (el mismo que el cron), sin esperar a la agrupación. */
 export function enviarAvisos() {
-  execFileSync(process.execPath, ['--env-file=.env.local', '--experimental-strip-types', 'scripts/notificaciones.ts', '--ya'], { cwd: join(import.meta.dirname, '..', '..') });
+  execFileSync(process.execPath, ['--env-file=../.env.local', '--experimental-strip-types', 'scripts/notificaciones.ts', '--ya'], { cwd: join(import.meta.dirname, '..', '..') });
 }
 
 export async function registrar(page: Page, nombre: string, email: string, clave: string) {
@@ -57,6 +57,9 @@ export async function verificarYCompletar(page: Page, email: string, previos: nu
 }
 
 export async function entrar(page: Page, email: string, clave: string) {
+  // Cada persona entra desde su propia IP (cabecera del proxy de confianza, TRUSTED_IP_HEADER en .env.local): así el
+  // límite de intentos por IP se comporta como en producción y no se comparte entre pruebas.
+  await page.setExtraHTTPHeaders({ 'x-forwarded-for': `10.${Math.floor(Math.random() * 250)}.${Math.floor(Math.random() * 250)}.${Math.floor(Math.random() * 250) + 1}` });
   await page.goto('/entrar/');
   await page.getByLabel('Correo electrónico').fill(email);
   await page.getByLabel('Contraseña', { exact: true }).fill(clave);

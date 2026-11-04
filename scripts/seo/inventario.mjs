@@ -8,12 +8,13 @@
 // - Comprueba el sitemap nuevo, las canonical y la indexabilidad según SITE_INDEXABLE.
 // - Con --write escribe docs/seo/inventario-urls.csv.
 // Sale con código 1 si hay errores, para que la CI falle.
+import { fileURLToPath } from 'node:url';
 import { readFileSync, readdirSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { listOutput, readRedirects, resolve, servesFile } from './redirects-lib.mjs';
 import { createEngine } from './netlify-engine.mjs';
 
-const root = new URL('../../', import.meta.url).pathname;
+const root = fileURLToPath(new URL('../../', import.meta.url));
 const args = process.argv.slice(2);
 const outDir = join(root, args.find((a) => !a.startsWith('--')) || 'out');
 const write = args.includes('--write');

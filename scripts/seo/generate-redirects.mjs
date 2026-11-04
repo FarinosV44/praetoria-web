@@ -3,10 +3,11 @@
 //
 // Criterio: cada redirección apunta a un destino equivalente. Lo que no tiene equivalente
 // (rutas internas de WordPress, autores inexistentes, imágenes de banco no migradas) se deja en 404.
+import { fileURLToPath } from 'node:url';
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-const root = new URL('../../', import.meta.url).pathname;
+const root = fileURLToPath(new URL('../../', import.meta.url));
 const wp = JSON.parse(readFileSync(join(root, 'docs/seo/fuentes/wordpress-export-2026-10-23.json'), 'utf8'));
 const blogDir = join(root, 'src/content/blog');
 

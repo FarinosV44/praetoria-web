@@ -60,7 +60,7 @@ test('no inventa revisores y exige revisor para aprobar', () => {
 
 test('detecta colisiones de URL con páginas existentes', () => {
   const r = run(variante((t) => t.replace('slug: juicio-rapido-alcoholemia-valencia', 'slug: contacto')));
-  assert.match(r.out, /ya lo usa src\/app\/contacto\//);
+  assert.match(r.out, /ya lo usa src\/app\/\(web\)\/contacto\//);
 });
 
 test('imagen: del registro o pendiente con su escena, nunca una cualquiera', () => {

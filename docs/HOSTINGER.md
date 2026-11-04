@@ -1,3 +1,5 @@
+> **Pendiente de cambio:** al fusionar la aplicación única, esta guía queda sustituida por `docs/portal/DESPLIEGUE-HOSTINGER.md`. Hasta entonces describe la web estática que sigue publicada.
+
 # Publicación en Hostinger desde GitHub (`main`)
 
 Desde el 25/10/2026, praetoriaabogados.es lo sirve Hostinger, que compila la rama `main` de este repositorio

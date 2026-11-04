@@ -5,7 +5,7 @@
 # esta copia de objetos es imprescindible. Guarda el resultado cifrado y fuera del servidor.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-set -a; [ -f .env.local ] && . ./.env.local; set +a
+set -a; [ -f ../.env.local ] && . ../.env.local; set +a
 DEST=${1:?Indica el directorio de destino}
 SELLO=$(date -u +%Y%m%dT%H%M%SZ)
 mkdir -p "$DEST"

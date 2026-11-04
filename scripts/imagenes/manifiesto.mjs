@@ -2,11 +2,12 @@
 //   node scripts/imagenes/manifiesto.mjs --check   comprueba el registro (lo usa `npm run check`)
 //   node scripts/imagenes/manifiesto.mjs --write   además regenera docs/IMAGENES.md y docs/BLOG-MATRIZ.md
 // Fuente única: src/content/imagenes.json + cabeceras de src/content/blog/*.md + src/lib/servicios.ts (artículos).
+import { fileURLToPath } from 'node:url';
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import matter from 'gray-matter';
 
-const raiz = new URL('../../', import.meta.url).pathname;
+const raiz = fileURLToPath(new URL('../../', import.meta.url));
 const { imagenes } = JSON.parse(readFileSync(join(raiz, 'src/content/imagenes.json'), 'utf8'));
 const errores = [];
 const err = (m) => errores.push(m);
@@ -38,7 +39,7 @@ const fuentes = (d) => readdirSync(d, { withFileTypes: true }).flatMap((e) => (e
 const instalaciones = imagenes.filter((i) => i.origen.tipo === 'praetoria').map((i) => i.id);
 for (const f of fuentes(join(raiz, 'src'))) {
   const rel = f.slice(raiz.length);
-  if (rel === 'src/content/imagenes.json' || rel === 'src/app/el-despacho/page.tsx') continue;
+  if (rel === 'src/content/imagenes.json' || rel === 'src/app/(web)/el-despacho/page.tsx') continue;
   const t = readFileSync(f, 'utf8');
   if (/media\/(v2\/)?(despacho-|detalle-madera)/.test(t)) err(`${rel}: usa una foto de las instalaciones fuera de «El despacho»`);
   for (const id of instalaciones) if (t.includes(`'${id}'`) || t.includes(`"${id}"`)) err(`${rel}: usa «${id}» fuera de «El despacho»`);
@@ -51,7 +52,7 @@ if (personalizadas.length > 2) err(`hay ${personalizadas.length} recreaciones pe
 for (const img of personalizadas) {
   const usos = fuentesSrc.filter((f) => new RegExp(`['"]${img.id}['"]|^imagen: ${img.id}$`, 'm').test(readFileSync(f, 'utf8')));
   if (usos.length > 1) err(`${img.id}: recreación personalizada usada en ${usos.length} sitios (máximo uno)`);
-  if (usos.some((f) => f.endsWith('src/app/page.tsx'))) err(`${img.id}: no va en la portada`);
+  if (usos.some((f) => f.endsWith('src/app/(web)/page.tsx'))) err(`${img.id}: no va en la portada`);
 }
 
 // 3. Blog: cada artículo declara imagen o pendiente; matriz editorial

@@ -1,4 +1,4 @@
-// Ajustes sobre la exportación estática de Next (out/) antes de publicar.
+// Ajustes sobre el HTML generado: en la copia out/ y en lo que sirve el servidor (.next/server/app).
 //   node scripts/postbuild.mjs out
 // 1. Quita /404/ y /_not-found/: Next los genera como páginas y Netlify las serviría con 200 (soft 404).
 //    Netlify usa out/404.html para cualquier ruta inexistente, con código 404.
@@ -10,13 +10,14 @@
 import { rmSync, existsSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
 const dir = process.argv[2] || 'out';
-for (const d of ['404', '_not-found']) {
+const esCopia = !dir.includes('.next');
+for (const d of esCopia ? ['404', '_not-found'] : []) {
   const p = join(dir, d);
   if (existsSync(p)) rmSync(p, { recursive: true });
 }
-if (!existsSync(join(dir, '404.html'))) throw new Error('Falta out/404.html');
 
 const LOCALES = { es: 'es_ES', fr: 'fr_FR', ar: 'ar_AR' };
 const walk = (d) => readdirSync(d).flatMap((f) => (statSync(join(d, f)).isDirectory() ? walk(join(d, f)) : [join(d, f)]));
@@ -35,4 +36,4 @@ for (const f of walk(dir).filter((x) => x.endsWith('.html'))) {
   langs++;
 }
 console.log(`Idioma del documento ajustado en ${langs} páginas (francés/árabe).`);
-execFileSync(process.execPath, [new URL('./seo/indexabilidad.mjs', import.meta.url).pathname, dir], { stdio: 'inherit' });
+execFileSync(process.execPath, [fileURLToPath(new URL('./seo/indexabilidad.mjs', import.meta.url)), dir], { stdio: 'inherit' });

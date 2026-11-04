@@ -14,7 +14,7 @@ STORAGE_SRC=${STORAGE_SRC:-/tmp/claude-0/stack/storage}
 STORAGE_DATA=${STORAGE_DATA:-/var/lib/praetoria-storage}
 NODE24=${NODE24:-/tmp/claude-0/stack/node24/node_modules/node/bin/node}
 LOGS=.dev/logs; mkdir -p "$LOGS"
-set -a; . ./.env.local; set +a
+set -a; . ../.env.local; set +a
 
 pg_up() {
   if ! "$PG_BIN/pg_isready" -h 127.0.0.1 -p 54322 -q; then
@@ -43,15 +43,15 @@ smtp_up() {
 stop_all() { fuser -k 5050/tcp 2525/tcp >/dev/null 2>&1 || true; }
 
 case "${1:-start}" in
-  start) pg_up; storage_up; smtp_up; node --env-file=.env.local --experimental-strip-types scripts/storage-setup.ts; echo "pila local lista" ;;
+  start) pg_up; storage_up; smtp_up; node --env-file=../.env.local --experimental-strip-types scripts/storage-setup.ts; echo "pila local lista" ;;
   stop) stop_all ;;
   reset)
     stop_all; pg_up
     ./scripts/reset-db.sh
     rm -rf "${STORAGE_DATA:?}"/* .dev/correo
     storage_up                       # crea el esquema storage
-    node --env-file=.env.local --experimental-strip-types scripts/migrate.ts
+    node --env-file=../.env.local --experimental-strip-types scripts/migrate.ts
     smtp_up
-    node --env-file=.env.local --experimental-strip-types scripts/storage-setup.ts
+    node --env-file=../.env.local --experimental-strip-types scripts/storage-setup.ts
     echo "pila local reiniciada" ;;
 esac
