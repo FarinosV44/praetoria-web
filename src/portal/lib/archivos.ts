@@ -2,7 +2,7 @@ import { inflateSync } from 'node:zlib';
 import { fileTypeFromBuffer } from 'file-type';
 
 // Validación del contenido REAL del archivo (firma binaria), no de la extensión ni del tipo que
-// declara el navegador. Solo se admiten PDF e imágenes habituales de móvil y ordenador.
+// declara el navegador. Solo se admiten PDF, Word (DOCX sin macros) e imágenes habituales de móvil y ordenador.
 export const TIPOS = {
   'application/pdf': 'PDF',
   'image/jpeg': 'JPG',
@@ -10,7 +10,9 @@ export const TIPOS = {
   'image/webp': 'WEBP',
   'image/heic': 'HEIC',
   'image/heif': 'HEIF',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'DOCX',
 } as const;
+export const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
 export type Mime = keyof typeof TIPOS;
 
 export async function detectarTipo(datos: Uint8Array): Promise<Mime | null> {
@@ -18,6 +20,8 @@ export async function detectarTipo(datos: Uint8Array): Promise<Mime | null> {
   if (!t) return null;
   const m = t.mime === 'image/heic-sequence' ? 'image/heic' : t.mime === 'image/heif-sequence' ? 'image/heif' : t.mime;
   if (!(m in TIPOS)) return null;
+  // DOCX sin macros: un documento con vbaProject (macros) no se admite aunque se llame .docx.
+  if (m === DOCX && Buffer.from(datos).toString('latin1').includes('vbaProject')) return null;
   // Políglotas (auditoría M4): una imagen que lleva un PDF en su primer kilobyte la abriría un lector de PDF.
   if (m !== 'application/pdf' && Buffer.from(datos.subarray(0, 1024)).toString('latin1').includes('%PDF')) return null;
   return m as Mime;
@@ -25,6 +29,7 @@ export async function detectarTipo(datos: Uint8Array): Promise<Mime | null> {
 
 const EXTENSIONES: Record<Mime, string> = {
   'application/pdf': 'pdf', 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp', 'image/heic': 'heic', 'image/heif': 'heif',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'docx',
 };
 /** Extensión que corresponde al tipo detectado (la del nombre que pone el cliente no cuenta). */
 export const extensionDe = (mime: string) => EXTENSIONES[mime as Mime] ?? 'bin';

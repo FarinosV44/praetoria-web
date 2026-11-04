@@ -3,9 +3,10 @@ import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 type Item = { clave: string; archivo: File; progreso: number; estado: 'subiendo' | 'ok' | 'error'; error?: string };
-const ACEPTA = 'application/pdf,image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif';
+const ACEPTA = 'application/pdf,image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif,.docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document';
 
-export function Subidor({ requisitoId, multiple, maxMb, titulo }: { requisitoId: string; multiple: boolean; maxMb: number; titulo: string }) {
+// Destino: un documento solicitado (requisitoId) o el asunto entero (solicitudId), p. ej. adjuntos en la conversación.
+export function Subidor({ requisitoId, solicitudId, multiple, maxMb, titulo }: { requisitoId?: string; solicitudId?: string; multiple: boolean; maxMb: number; titulo: string }) {
   const [items, setItems] = useState<Item[]>([]);
   const [arrastre, setArrastre] = useState(false);
   const archivoRef = useRef<HTMLInputElement>(null);
@@ -22,7 +23,8 @@ export function Subidor({ requisitoId, multiple, maxMb, titulo }: { requisitoId:
     }
     setItems((xs) => [...xs.filter((x) => x.clave !== clave), { clave, archivo, progreso: 0, estado: 'subiendo' }]);
     const fd = new FormData();
-    fd.append('requisito', requisitoId);
+    if (requisitoId) fd.append('requisito', requisitoId);
+    else if (solicitudId) fd.append('solicitud', solicitudId);
     fd.append('archivo', archivo, archivo.name);
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '/api/documentos/');

@@ -4,7 +4,8 @@ if (!url || !key) { console.error('Faltan STORAGE_URL o STORAGE_SERVICE_KEY'); p
 const h = { authorization: `Bearer ${key}`, apikey: key, 'content-type': 'application/json' };
 const max = Number(process.env.UPLOAD_MAX_MB || 20) * 1024 * 1024;
 const cuerpo = { id: bucket, name: bucket, public: false, file_size_limit: max,
-  allowed_mime_types: ['application/pdf', 'image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif'] };
+  allowed_mime_types: ['application/pdf', 'image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'] };
 const g = await fetch(`${url}/bucket/${bucket}`, { headers: h });
 if (g.ok) {
   const b = await g.json();

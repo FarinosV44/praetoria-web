@@ -47,7 +47,7 @@ const nextConfig: NextConfig = {
   images: { unoptimized: true },
   poweredByHeader: false,
   reactStrictMode: true,
-  serverExternalPackages: ['pg'],
+  serverExternalPackages: ['pg', 'unpdf', 'mammoth'],
   experimental: {
     serverActions: { bodySizeLimit: '1mb' },
     // En Hostinger el número de procesos está limitado: un solo proceso de generación (lo fija scripts/build.mjs)

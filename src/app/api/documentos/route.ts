@@ -26,9 +26,13 @@ export async function POST(req: Request) {
 
   let form: FormData;
   try { form = await req.formData(); } catch { return fallo(400, 'No hemos recibido el archivo completo. Inténtalo de nuevo.'); }
+  // Destino: un documento solicitado (requisito) o, sin él, el asunto (solicitud) con una carpeta.
   const requisitoId = String(form.get('requisito') ?? '');
+  const solicitudId = String(form.get('solicitud') ?? '');
+  const carpeta = String(form.get('carpeta') ?? '').trim().slice(0, 80);
+  const origen = ['archivo', 'portapapeles', 'foto'].includes(String(form.get('origen'))) ? String(form.get('origen')) : 'archivo';
   const archivo = form.get('archivo');
-  if (!UUID.test(requisitoId) || !(archivo instanceof File)) return fallo(400, 'Falta el archivo.');
+  if (!(UUID.test(requisitoId) || UUID.test(solicitudId)) || !(archivo instanceof File)) return fallo(400, 'Falta el archivo.');
   if (archivo.size === 0) return fallo(400, 'El archivo está vacío.');
   if (archivo.size > env.uploadMaxBytes) return fallo(413, `El archivo supera el máximo de ${env.uploadMaxBytes / 1024 / 1024} MB.`);
 
@@ -44,13 +48,17 @@ export async function POST(req: Request) {
   let clave = '';
   try {
     const r = await comoUsuario(sesion.user.id, async (tx) => {
-      const q = await tx.query('select solicitud_id from portal.requisitos where id = $1', [requisitoId]);
+      // La RLS decide si el asunto o el requisito existen para este usuario.
+      const q = UUID.test(requisitoId)
+        ? await tx.query('select solicitud_id from portal.requisitos where id = $1', [requisitoId])
+        : await tx.query('select id solicitud_id from portal.solicitudes where id = $1', [solicitudId]);
       if (!q.rowCount) throw Object.assign(new Error('No encontrado'), { http: 404 });
       clave = `${q.rows[0].solicitud_id}/${id}`;
       const ins = await tx.query(
-        `insert into portal.documentos (id, requisito_id, solicitud_id, cliente_id, version, storage_key, nombre_original, mime, tamano, sha256, subido_por)
-         values ($1, $2, $3, $4, 0, $5, $6, $7, $8, $9, $4) returning version`,
-        [id, requisitoId, q.rows[0].solicitud_id, sesion.user.id, clave, nombreSeguro(archivo.name), mime, datos.byteLength, sha256]);
+        `insert into portal.documentos (id, requisito_id, solicitud_id, cliente_id, version, storage_key, nombre_original, mime, tamano, sha256, subido_por, carpeta, origen)
+         values ($1, $2, $3, $4, 0, $5, $6, $7, $8, $9, $4, nullif($10, ''), $11) returning version`,
+        [id, UUID.test(requisitoId) ? requisitoId : null, q.rows[0].solicitud_id, sesion.user.id, clave, nombreSeguro(archivo.name), mime, datos.byteLength, sha256,
+          carpeta, origen]);
       await guardarObjeto(clave, datos, mime);
       return ins.rows[0].version as number;
     });

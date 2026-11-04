@@ -69,4 +69,30 @@
   .tabla { width: 100%; border-collapse: collapse; font-size: .95rem; }
   .tabla th, .tabla td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--color-line); vertical-align: top; }
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* Expediente conversacional (#78): cronología central tipo chat y compositor siempre visible */
+  .expediente { display: grid; gap: 20px; grid-template-columns: 1fr; }
+  @media (min-width: 1000px) { .expediente { grid-template-columns: 240px minmax(0, 1fr); } }
+  .expediente-lateral { display: none; }
+  @media (min-width: 1000px) { .expediente-lateral { display: block; position: sticky; top: 16px; align-self: start; max-height: calc(100dvh - 32px); overflow-y: auto; } }
+  .expediente-lateral a.activo { background: var(--color-ink); color: #fff; }
+  .expediente-lateral a.activo .ayuda { color: #ddd; }
+  .expediente-central { max-width: 860px; width: 100%; margin-inline: auto; display: flex; flex-direction: column; gap: 12px; }
+  .expediente-cabecera { background: var(--color-paper); border: 1px solid var(--color-line); border-radius: 10px; padding: 12px 16px; }
+  .cronologia { display: flex; flex-direction: column; gap: 10px; padding-bottom: 8px; }
+  .cronologia .dia { text-align: center; font-size: .8rem; color: var(--color-muted); text-transform: capitalize; margin-top: 8px; }
+  .evento-linea { text-align: center; font-size: .82rem; color: var(--color-muted); }
+  .burbuja { border-radius: 12px; padding: 10px 14px; max-width: 92%; border: 1px solid var(--color-line); background: var(--color-paper); }
+  .burbuja .meta { font-size: .78rem; color: var(--color-muted); margin-bottom: 4px; }
+  .burbuja-interna { background: #f7f3ea; border-color: #e6dcc6; align-self: flex-start; }
+  .burbuja-cliente-saliente { background: var(--color-ink); color: #fff; border-color: var(--color-ink); align-self: flex-end; }
+  .burbuja-cliente-saliente .meta { color: #cfd3d6; }
+  .burbuja-cliente-entrante { align-self: flex-start; border-left: 4px solid var(--color-info); }
+  .burbuja-documento { align-self: flex-start; width: 92%; }
+  .burbuja-tarea { align-self: flex-start; border-left: 4px solid var(--color-warn); width: 92%; }
+  .compositor { position: sticky; bottom: 0; background: linear-gradient(to top, var(--color-stone) 85%, transparent); padding: 12px 0 8px; }
+  .caja-compositor { background: var(--color-paper); border: 1px solid var(--color-line); border-radius: 14px; padding: 10px 12px; box-shadow: 0 2px 12px rgb(0 0 0 / .06); }
+  .caja-compositor textarea { width: 100%; border: 0; outline: none; resize: vertical; font: inherit; min-height: 72px; background: transparent; }
+  .soltar-aqui { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: rgb(179 36 42 / .12);
+    border: 3px dashed var(--color-red); font-weight: 700; font-size: 1.2rem; color: var(--color-red-dark); pointer-events: none; }
 }

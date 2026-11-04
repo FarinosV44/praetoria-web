@@ -3,11 +3,11 @@ import { ChipRequisito, ChipSolicitud, Progreso, tamano } from '@/portal/compone
 import { Subidor } from '@/portal/components/Subidor';
 import { Mensajes } from '@/portal/components/Mensajes';
 import { enviarMensaje } from '@/app/(portal)/(cliente)/mensajes/acciones';
-import type { Evento, Mensaje, Requisito, ResumenSolicitud } from '@/portal/lib/datos';
+import type { DocAsunto, Evento, Mensaje, Requisito, ResumenSolicitud } from '@/portal/lib/datos';
 import { estadoDocumento, estadoSolicitud, fecha, textoEvento } from '@/portal/lib/textos';
 
-export function DetalleCliente({ s, reqs, msgs, evs, maxMb, enviada }: {
-  s: ResumenSolicitud; reqs: Requisito[]; msgs: Mensaje[]; evs: Evento[]; maxMb: number; enviada?: boolean;
+export function DetalleCliente({ s, reqs, msgs, evs, docs = [], maxMb, enviada }: {
+  s: ResumenSolicitud; reqs: Requisito[]; msgs: Mensaje[]; evs: Evento[]; docs?: DocAsunto[]; maxMb: number; enviada?: boolean;
 }) {
   const admite = ['enviada', 'en_revision', 'aceptada'].includes(s.estado);
   const visibles = reqs.filter((r) => r.estado !== 'no_aplicable');
@@ -26,7 +26,7 @@ export function DetalleCliente({ s, reqs, msgs, evs, maxMb, enviada }: {
         {s.estado === 'no_aceptada' && s.motivo_no_aceptada ? <p className="nota mt-3">{s.motivo_no_aceptada}</p> : null}
       </section>
 
-      {s.estado !== 'borrador' ? (
+      {s.estado !== 'borrador' ? (visibles.length === 0 ? null : (
         <section className="card" id="documentacion" aria-labelledby="t-docs">
           <h2 id="t-docs" className="subtitulo">Documentación que necesitamos para estudiar tu asunto</h2>
           {visibles.length ? <div className="mb-4"><Progreso hechos={s.aportados} total={s.total} etiqueta="Documentación aportada" /></div> : null}
@@ -64,15 +64,37 @@ export function DetalleCliente({ s, reqs, msgs, evs, maxMb, enviada }: {
             })}
           </ul>
         </section>
-      ) : (
+      )) : (
         <p className="card"><Link href={`/solicitudes/${s.id}/editar/`}>Continúa tu solicitud</Link> para enviarla al despacho.</p>
       )}
 
       {s.estado !== 'borrador' ? (
-        <section className="card" id="mensajes" aria-labelledby="t-msg">
-          <h2 id="t-msg" className="subtitulo">Mensajes con el despacho</h2>
-          <Mensajes mensajes={msgs} solicitudId={s.id} accion={enviarMensaje} propio="cliente" />
-        </section>
+        <>
+          {docs.length ? (
+            <section className="card" id="documentos-asunto" aria-labelledby="t-docas">
+              <h2 id="t-docas" className="subtitulo">Documentos de tu asunto</h2>
+              <ul className="grid gap-2">
+                {docs.map((d) => (
+                  <li key={d.id} className="fila text-sm" data-doc-cliente={d.nombre_original}>
+                    <span><a href={`/api/documentos/${d.id}/?ver=1`} target="_blank" rel="noopener" className="font-semibold">{d.nombre_original}</a>
+                      <span className="ayuda"> · {d.del_despacho ? 'Compartido por el despacho' : 'Enviado por ti'} · {fecha(d.subido_at)}</span></span>
+                    <a href={`/api/documentos/${d.id}/?descargar=1`}>Descargar</a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+          <section className="card" id="mensajes" aria-labelledby="t-msg">
+            <h2 id="t-msg" className="subtitulo">Mensajes con el despacho</h2>
+            <Mensajes mensajes={msgs} solicitudId={s.id} accion={enviarMensaje} propio="cliente" />
+            {admite ? (
+              <div className="mt-4">
+                <p className="etiqueta mb-2">Enviar un documento al despacho</p>
+                <Subidor solicitudId={s.id} multiple maxMb={maxMb} titulo="tu asunto" />
+              </div>
+            ) : null}
+          </section>
+        </>
       ) : null}
 
       {evs.length ? (

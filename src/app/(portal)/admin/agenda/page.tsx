@@ -13,6 +13,8 @@ const vistas = {
   semana: { t: 'Próximos 7 días', w: `e.estado = 'pendiente' and e.inicio >= date_trunc('day', now() at time zone 'Europe/Madrid') at time zone 'Europe/Madrid' and e.inicio < now() + interval '7 days'` },
   mes: { t: 'Próximos 31 días', w: `e.estado = 'pendiente' and e.inicio >= date_trunc('day', now() at time zone 'Europe/Madrid') at time zone 'Europe/Madrid' and e.inicio < now() + interval '31 days'` },
   vencidos: { t: 'Vencidos sin completar', w: `e.estado = 'pendiente' and e.repeticion = 'ninguna' and e.inicio < date_trunc('day', now() at time zone 'Europe/Madrid') at time zone 'Europe/Madrid'` },
+  verificar: { t: 'Plazos sin verificar', w: `e.estado = 'pendiente' and e.tipo = 'plazo' and e.plazo_verificado_at is null` },
+  sin_responsable: { t: 'Responsable sin acceso', w: `e.estado = 'pendiente' and not exists (select 1 from portal.personal p where p.user_id = e.propietario_id and p.activo)` },
   todos: { t: 'Todos', w: `true` },
 } as const;
 type Vista = keyof typeof vistas;

@@ -85,3 +85,12 @@ export async function vistaPreviaPlantilla(tx: Tx, tipo: string) {
     join portal.plantillas p on p.id = i.plantilla_id where p.tipo_asunto_id = $1 and p.activa and i.activo order by i.orden`, [tipo]);
   return r.rows as { titulo: string; explicacion: string; obligatorio: boolean }[];
 }
+
+export type DocAsunto = { id: string; nombre_original: string; version: number; tamano: number; subido_at: Date; carpeta: string; del_despacho: boolean; estado: string };
+/** Documentos del asunto que no responden a un documento solicitado (compartidos por el despacho o aportados libremente). */
+export async function docsAsunto(tx: Tx, solicitudId: string): Promise<DocAsunto[]> {
+  const r = await tx.query(`select d.id, d.nombre_original, d.version, d.tamano, d.subido_at, coalesce(d.carpeta, 'Documentación') carpeta,
+      d.subido_por <> d.cliente_id del_despacho, d.estado
+    from portal.documentos d where d.solicitud_id = $1 and d.requisito_id is null order by d.subido_at desc`, [solicitudId]);
+  return r.rows;
+}

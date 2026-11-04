@@ -27,6 +27,8 @@ async function como<T>(uid: string, fn: (c: pg.PoolClient) => Promise<T>): Promi
 async function usuario(nombre: string): Promise<string> {
   const r = await admin.query(`insert into identidad."user" (name, email, "emailVerified") values ($1, $2, true) returning id`,
     [nombre, `${nombre.toLowerCase()}.${sufijo}@ejemplo.test`]);
+  // Cuenta activada (con contraseña): los avisos al cliente solo se envían a cuentas activas.
+  await admin.query(`insert into identidad.account ("accountId", "providerId", "userId", password, "updatedAt") values ($1::text, 'credential', $1::uuid, 'x', now())`, [r.rows[0].id]);
   return r.rows[0].id;
 }
 

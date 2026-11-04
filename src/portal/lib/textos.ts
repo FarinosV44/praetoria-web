@@ -37,9 +37,18 @@ export function textoEvento(tipo: string, d: Record<string, unknown>): string {
     case 'documento_revisado': return `Documento de ${t} revisado: ${estadoDocumento[String(d.a)] ?? d.a}`;
     case 'mensaje': return d.del_despacho ? 'Mensaje del despacho' : 'Mensaje del cliente';
     case 'expediente_abierto': return 'Expediente abierto';
-    case 'responsable_asignado': return 'Responsable asignado';
+    case 'responsable_asignado': return d.nombre_responsable ? `Responsable: ${d.nombre_responsable}` : 'Responsable asignado';
+    case 'asignacion': return `${d.nombre_empleado ?? 'Un profesional'} se incorpora al asunto${d.papel === 'suplente' ? ' como suplente' : ''}`;
+    case 'asignacion_retirada': return `${d.nombre_empleado ?? 'Un profesional'} deja el asunto`;
+    case 'tarea_encargada': return `Tarea «${d.tarea}» encargada a ${d.nombre_a ?? 'otro profesional'}`;
+    case 'tarea_reasignada': return `Tarea «${d.tarea}» reasignada a ${d.nombre_a ?? 'otro profesional'}`;
+    case 'tarea_reprogramada': return `«${d.tarea}» pasa del ${fecha(String(d.desde))} al ${fecha(String(d.hasta))}${d.verificacion_anulada ? ' — hay que volver a verificar el plazo' : ''}`;
+    case 'plazo_verificado': return `Plazo «${d.tarea}» verificado para el ${fecha(String(d.fecha))}`;
+    case 'tarea_completada': return `Tarea «${d.tarea}» hecha${d.resultado ? ` — ${d.resultado}` : ''}`;
     case 'conflictos_revisados': return 'Revisión de conflictos de intereses registrada';
     case 'documento_descargado': return 'Documento descargado';
+    case 'documento_compartido': return `El despacho ha compartido un documento: «${d.archivo}»`;
+    case 'documento_analizado': return 'Análisis antivirus registrado';
     default: return tipo;
   }
 }
