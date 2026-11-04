@@ -95,7 +95,7 @@ export const servicios: Servicio[] = [
     incidencia: 'impago',
     revision: 'revisado',
     seo: {
-      title: 'Reclamación de portes impagados',
+      title: 'Abogado para reclamar portes impagados',
       h1: 'Reclamación de portes impagados para transportistas y agencias',
       description: 'Has hecho el porte y no te pagan. Revisamos la cadena de contratación y la documentación, y reclamamos al cliente o, si procede, al cargador.',
     },
@@ -205,7 +205,7 @@ export const servicios: Servicio[] = [
     problemaLaboral: 'despido',
     revision: 'revisado',
     seo: {
-      title: 'Impugnar un despido: revisión de la carta y el finiquito',
+      title: 'Abogado de despido en Valencia: impugnar y reclamar',
       h1: 'Impugnar un despido: revisamos tu carta y tu finiquito',
       description: 'Te han despedido y no sabes si firmar ni qué reclamar. Revisamos la carta, el finiquito y las fechas, y te explicamos tus opciones antes de actuar.',
     },
@@ -286,7 +286,7 @@ export const servicios: Servicio[] = [
     revision: 'revisado',
     alcance: 'Las deudas, cotizaciones, apremios y embargos de la Seguridad Social se tratan en Hacienda y Seguridad Social.',
     seo: {
-      title: 'Abogado de incapacidad permanente',
+      title: 'Abogado de incapacidad permanente en Valencia',
       h1: 'Incapacidad permanente: solicitud, revisión y reclamación',
       description: '¿Te han denegado la incapacidad permanente o te la han reconocido en un grado inferior? Revisamos la resolución y te explicamos cómo reclamar.',
     },
@@ -341,7 +341,7 @@ export const servicios: Servicio[] = [
     problemaLaboral: 'accidente',
     revision: 'revisado',
     seo: {
-      title: 'Abogado de accidentes laborales',
+      title: 'Abogado de accidentes laborales en Valencia',
       h1: 'Accidente laboral: prestaciones, recargo e indemnización',
       description: 'Has sufrido un accidente de trabajo o una enfermedad profesional. Revisamos la calificación, las prestaciones y la responsabilidad de la empresa.',
     },
