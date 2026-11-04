@@ -28,7 +28,7 @@ async function entrarLetrada(p: Page) {
     await expect(p).toHaveURL(/\/entrar\/codigo\/$/);
     await p.getByLabel('Código').fill(new TOTP({ secret: estado.totp }).generate());
     await p.getByRole('button', { name: 'Verificar' }).click();
-    await expect(p).toHaveURL(/\/despacho\/$/);
+    await expect(p).toHaveURL(/\/admin\/$/);
   }
 }
 
@@ -105,7 +105,7 @@ test('3. La letrada activa el doble factor, revisa, pide subsanación y un docum
   const ctx = await browser.newContext();
   const p = await ctx.newPage();
   await entrarLetrada(p);
-  await expect(p).toHaveURL(/\/despacho\/seguridad\/$/);
+  await expect(p).toHaveURL(/\/admin\/seguridad\/$/);
   // Sin doble factor, el personal tampoco puede usar la API de documentos (auditoría A1).
   const sinMfa = await p.request.get(`/api/documentos/${estado.solicitud}`);
   expect(sinMfa.status()).toBe(403);
@@ -113,19 +113,19 @@ test('3. La letrada activa el doble factor, revisa, pide subsanación y un docum
   const otra = await browser.newContext();
   const p2 = await otra.newPage();
   await entrar(p2, LETRADA.email, LETRADA.clave);
-  await expect(p2).toHaveURL(/\/despacho\/seguridad\/$/);
+  await expect(p2).toHaveURL(/\/admin\/seguridad\/$/);
   await p.getByLabel('Confirma tu contraseña').fill(LETRADA.clave);
   await p.getByRole('button', { name: 'Continuar' }).click();
   estado.totp = (await p.locator('[data-secreto]').getAttribute('data-secreto'))!;
   await p.getByLabel(/Escribe el código de seis cifras/).fill(new TOTP({ secret: estado.totp }).generate());
   await p.getByRole('button', { name: 'Activar' }).click();
-  await expect(p).toHaveURL(/\/despacho\/$/);
-  await p2.goto('/despacho/');
+  await expect(p).toHaveURL(/\/admin\/$/);
+  await p2.goto('/admin/');
   await expect(p2).toHaveURL(/\/entrar\//);
   await otra.close();
 
   await expect(p.getByRole('link', { name: /^SOL-/ }).first()).toBeVisible();
-  await p.goto(`/despacho/solicitudes/${estado.solicitud}/`);
+  await p.goto(`/admin/solicitudes/${estado.solicitud}/`);
   await expect(p.getByText('Empresa Ficticia de Pruebas, S.L.')).toBeVisible();
   await p.getByRole('button', { name: 'Marcar en revisión' }).click();
   await expect(p.getByText('Solicitud marcada en revisión.')).toBeVisible();
@@ -192,9 +192,9 @@ test('5. La letrada valida todo, revisa conflictos y convierte la solicitud en e
   const ctx = await browser.newContext();
   const p = await ctx.newPage();
   await entrarLetrada(p);
-  await p.goto(`/despacho/?vista=validar`);
+  await p.goto(`/admin/?vista=validar`);
   await expect(p.getByRole('link', { name: /^SOL-/ }).first()).toBeVisible();
-  await p.goto(`/despacho/solicitudes/${estado.solicitud}/`);
+  await p.goto(`/admin/solicitudes/${estado.solicitud}/`);
   await expect(p.getByText('Ya he subido la nómina legible')).toBeVisible();
   for (const nombre of ['nomina-septiembre.pdf', 'nomina-agosto-legible.pdf', 'contrato.pdf', 'certificado.pdf']) {
     await p.locator(`[data-documento="${nombre}"]`).getByRole('button', { name: 'Validar documento' }).click();
@@ -249,15 +249,15 @@ test('6. Cliente B no accede a nada de A: interfaz, API, almacenamiento ni ident
     const r = await p.goto(ruta);
     expect(r!.status(), ruta).toBe(404);
   }
-  for (const ruta of ['/despacho/', `/despacho/solicitudes/${estado.solicitud}/`]) {
+  for (const ruta of ['/admin/', `/admin/solicitudes/${estado.solicitud}/`]) {
     await p.goto(ruta);
-    await expect(p).not.toHaveURL(/despacho/);
+    await expect(p).not.toHaveURL(/admin/);
   }
   expect((await p.request.get(`/api/documentos/${estado.doc}/`)).status()).toBe(404);
   // Subida a un requisito de A con un identificador conocido
   const reqA = await (async () => {
     const lc = await browser.newContext(); const l = await lc.newPage(); await entrarLetrada(l);
-    await l.goto(`/despacho/solicitudes/${estado.solicitud}/`);
+    await l.goto(`/admin/solicitudes/${estado.solicitud}/`);
     const v = await l.locator('[data-requisito="Contrato de trabajo"] input[name="requisito"]').first().getAttribute('value');
     await lc.close(); return v!;
   })();

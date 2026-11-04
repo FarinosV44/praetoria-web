@@ -26,6 +26,11 @@ for (const f of walk(dir).filter((f) => f.endsWith('.html'))) {
   writeFileSync(f, html);
   n++;
 }
+// En lo que sirve el servidor, la cabecera y robots.txt salen de next.config.ts y de src/app/robots.txt.
+if (dir.includes('.next')) {
+  console.log('No indexable: noindex en ' + n + ' páginas del servidor.');
+  process.exit(0);
+}
 const headersFile = join(dir, '_headers');
 const prev = existsSync(headersFile) ? readFileSync(headersFile, 'utf8') : '';
 writeFileSync(headersFile, prev + '\n# Añadido por scripts/seo/indexabilidad.mjs: build no indexable\n/*\n  X-Robots-Tag: noindex, nofollow\n');

@@ -8,6 +8,17 @@ on:
 permissions:
   contents: read
 
+# Valores ficticios: el build carga el módulo de autenticación del portal, que no se conecta a nada al compilar.
+env:
+  PORTAL_ORIGIN: http://localhost:3100
+  DATABASE_URL_APP: postgresql://ci:ci@127.0.0.1:5432/ci
+  DATABASE_URL_AUTH: postgresql://ci:ci@127.0.0.1:5432/ci
+  BETTER_AUTH_SECRET: valor-ficticio-solo-para-compilar-en-la-ci-000000
+  TRUSTED_IP_HEADER: x-forwarded-for
+  STORAGE_URL: http://127.0.0.1:5050
+  STORAGE_SERVICE_KEY: ficticia
+  SMTP_HOST: 127.0.0.1
+
 jobs:
   build-y-comprobaciones:
     # Imagen fija: ubuntu-latest cambiará a Ubuntu 26 y podría alterar la CI sin cambios en el repo

@@ -1,27 +1,26 @@
-// Build de la web: next build + postbuild (out/). Lo usan Netlify, Hostinger y los builds locales.
+// Build de la aplicación (web pública y portal): next build + idioma e indexabilidad + copia estática para comprobaciones.
 //
 // Indexabilidad (SITE_INDEXABLE):
-// - Si no viene fijada, es el build de Hostinger desde `main`: web publicada en praetoriaabogados.es e indexable.
-//   Los formularios envían a /api/consulta y /api/llamada del propio dominio (public/api/*.php, docs/CONSULTAS.md).
+// - Si no viene fijada, es el build de Hostinger: indexable. Un sitio de pruebas debe fijar SITE_INDEXABLE=false.
 // - La CI y los builds locales de prueba la fijan: SITE_INDEXABLE=false npm run build.
 import { execFileSync } from 'node:child_process';
-import { cpSync, rmSync } from 'node:fs';
+import { existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 
 const env = { ...process.env };
-const hostinger = env.SITE_INDEXABLE === undefined;
-if (hostinger) {
+if (env.SITE_INDEXABLE === undefined) {
   env.SITE_INDEXABLE = 'true';
   env.NEXT_BUILD_CPUS ??= '1';
-  console.log('Build para Hostinger: indexable, formularios en el propio dominio (/api/*.php)');
+  console.log('Build para Hostinger: indexable');
 }
 // Webpack en lugar de Turbopack: en Hostinger, Turbopack no puede arrancar su proceso auxiliar de PostCSS
 // («node process exited before we could connect to it»). Mismo resultado, sin ese proceso.
-const run = (cmd, args) => execFileSync(cmd, args, { stdio: 'inherit', env });
-run(process.execPath, [new URL('../node_modules/next/dist/bin/next', import.meta.url).pathname, 'build', '--webpack']);
-run(process.execPath, [new URL('./postbuild.mjs', import.meta.url).pathname, 'out']);
-if (hostinger) {
-  run(process.execPath, [new URL('./hostinger/htaccess.mjs', import.meta.url).pathname, 'out']);
-  // Copia en dist/ por si el despliegue de Hostinger sigue configurado con la carpeta de la web anterior (Astro)
-  rmSync('dist', { recursive: true, force: true });
-  cpSync('out', 'dist', { recursive: true });
+const ruta = (r) => fileURLToPath(new URL(r, import.meta.url));
+const run = (script, ...args) => execFileSync(process.execPath, [script, ...args], { stdio: 'inherit', env });
+
+run(ruta('../node_modules/next/dist/bin/next'), 'build', '--webpack');
+// Primero la copia para las comprobaciones; luego los ajustes de HTML, también en lo que sirve el servidor.
+run(ruta('./qa/materializar.mjs'), 'out');
+for (const dir of ['out', '.next/server/app', '.next/standalone/.next/server/app']) {
+  if (existsSync(dir)) run(ruta('./postbuild.mjs'), dir);
 }

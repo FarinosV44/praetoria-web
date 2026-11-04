@@ -21,7 +21,7 @@ async function entrarAdmin(p: Page) {
   await expect(p).toHaveURL(/\/entrar\/codigo\/$/);
   await p.getByLabel('Código').fill(new TOTP({ secret: estado.totp! }).generate());
   await p.getByRole('button', { name: 'Verificar' }).click();
-  await expect(p).toHaveURL(/\/despacho\/$/);
+  await expect(p).toHaveURL(/\/admin\/$/);
 }
 
 test('1. La invitación crea la cuenta del superadministrador, de un solo uso', async ({ page: p }) => {
@@ -38,15 +38,15 @@ test('1. La invitación crea la cuenta del superadministrador, de un solo uso', 
 
 test('2. Primer acceso: obliga a activar el doble factor', async ({ page: p }) => {
   await entrar(p, ADMIN.email, ADMIN.clave);
-  await expect(p).toHaveURL(/\/despacho\/seguridad\/$/);
-  await p.goto('/despacho/clientes/');
-  await expect(p).toHaveURL(/\/despacho\/seguridad\/$/);
+  await expect(p).toHaveURL(/\/admin\/seguridad\/$/);
+  await p.goto('/admin/clientes/');
+  await expect(p).toHaveURL(/\/admin\/seguridad\/$/);
   await p.getByLabel('Confirma tu contraseña').fill(ADMIN.clave);
   await p.getByRole('button', { name: 'Continuar' }).click();
   estado.totp = (await p.locator('[data-secreto]').getAttribute('data-secreto'))!;
   await p.getByLabel(/Escribe el código de seis cifras/).fill(new TOTP({ secret: estado.totp }).generate());
   await p.getByRole('button', { name: 'Activar' }).click();
-  await expect(p).toHaveURL(/\/despacho\/$/);
+  await expect(p).toHaveURL(/\/admin\/$/);
 });
 
 test('3. Ficha del cliente: asuntos y documentos por carpeta, que se abren y descargan', async ({ page: p }) => {
@@ -74,7 +74,7 @@ test('3. Ficha del cliente: asuntos y documentos por carpeta, que se abren y des
 
 test('4. Agenda: vista judicial con avisos una semana, 24 h y 1 h antes; el motor entrega el aviso vencido', async ({ page: p }) => {
   await entrarAdmin(p);
-  await p.goto('/despacho/agenda/');
+  await p.goto('/admin/agenda/');
   await p.locator('details', { hasText: 'Nuevo evento' }).evaluate((d) => { (d as HTMLDetailsElement).open = true; });
   await p.getByLabel('Qué', { exact: true }).fill('Vista judicial ficticia');
   await p.getByLabel('Tipo', { exact: true }).selectOption('vista');
@@ -92,7 +92,7 @@ test('4. Agenda: vista judicial con avisos una semana, 24 h y 1 h antes; el moto
   await expect(p.getByText(/1 hora antes · Programado/)).toBeVisible();
 
   // «Llamar al cliente» dentro de 50 minutos con aviso 1 h antes → aviso ya vencido
-  await p.goto('/despacho/agenda/');
+  await p.goto('/admin/agenda/');
   await p.locator('details', { hasText: 'Nuevo evento' }).evaluate((d) => { (d as HTMLDetailsElement).open = true; });
   await p.getByLabel('Qué', { exact: true }).fill('Llamar al cliente ficticio');
   await p.getByLabel('Tipo', { exact: true }).selectOption('llamada');
@@ -104,7 +104,7 @@ test('4. Agenda: vista judicial con avisos una semana, 24 h y 1 h antes; el moto
   await p.getByRole('button', { name: 'Guardar y programar avisos' }).click();
   await expect(p.getByRole('status')).toContainText('Evento creado');
   node(['scripts/agenda.ts']);
-  await p.goto('/despacho/avisos/');
+  await p.goto('/admin/avisos/');
   const aviso = p.locator('[data-aviso="Llamar al cliente ficticio"]');
   await expect(aviso).toBeVisible();
   await expect(p.getByRole('link', { name: /Avisos \(1\)/ })).toBeVisible();
@@ -123,13 +123,13 @@ test('5. App instalable: manifiesto, iconos y service worker sin caché de conte
   expect(sw).not.toMatch(/addEventListener\('fetch'/);
   expect(sw).toContain('Tienes un aviso pendiente en Praetoria.');
   await entrarAdmin(p);
-  await p.goto('/despacho/app/');
+  await p.goto('/admin/app/');
   await expect(p.getByRole('heading', { name: '1. Instala Praetoria en tu móvil' })).toBeVisible();
 });
 
 test('6. Un cliente no ve la agenda ni registra dispositivos del despacho', async ({ page: p, request }) => {
   const r = await request.post('/api/push/', { headers: { origin: 'http://localhost:3100' }, data: { endpoint: 'https://x.test/1', keys: { p256dh: 'B'.repeat(87), auth: 'a'.repeat(22) } } });
   expect(r.status()).toBe(401);
-  await p.goto('/despacho/agenda/');
+  await p.goto('/admin/agenda/');
   await expect(p).toHaveURL(/\/entrar\/$/);
 });

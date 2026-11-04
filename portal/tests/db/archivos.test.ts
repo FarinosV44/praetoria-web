@@ -2,7 +2,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { deflateSync } from 'node:zlib';
-import { detectarTipo, extensionDe, pdfSospechoso } from '../../src/lib/archivos.ts';
+import { detectarTipo, extensionDe, pdfSospechoso } from '../../../src/portal/lib/archivos.ts';
 
 const b = (s: string) => new Uint8Array(Buffer.from(s, 'latin1'));
 

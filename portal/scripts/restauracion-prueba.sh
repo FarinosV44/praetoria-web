@@ -3,7 +3,7 @@
 # comprueba que los recuentos coinciden con la original y que cada objeto existe en la copia.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-set -a; . ./.env.local; set +a
+set -a; . ../.env.local; set +a
 DEST=${1:?Directorio de copias}; SELLO=${2:?Sello de la copia}
 case "$DATABASE_URL_ADMIN" in *127.0.0.1*|*localhost*) ;; *) echo "Solo en local"; exit 1;; esac
 ( cd "$DEST" && sha256sum -c "copia-$SELLO.sha256" )

@@ -25,7 +25,7 @@ function site(files, { sitemap, blog = {}, appDirs = [] } = {}) {
   writeFileSync(join(out, 'sitemap.xml'), `<urlset>${locs.map((l) => `<url><loc>${SITE}${l}</loc></url>`).join('')}</urlset>`);
   writeFileSync(join(out, 'rss.xml'), '<rss></rss>');
   mkdirSync(join(root, 'src/content/blog'), { recursive: true });
-  for (const d of ['blog', ...appDirs]) mkdirSync(join(root, 'src/app', d), { recursive: true });
+  for (const d of ['blog', ...appDirs]) mkdirSync(join(root, 'src/app/(web)', d), { recursive: true });
   for (const [slug, fm] of Object.entries(blog)) writeFileSync(join(root, 'src/content/blog', slug + '.md'), `---\n${fm}\n---\n\nTexto`);
   return root;
 }

@@ -120,7 +120,7 @@ if (/^#\s/m.test(sinCodigo)) error('cuerpo: no uses «# » (H1); el titular ya e
 if (/\{[^}]*\}/.test(sinCodigo) && /\{\s*[a-z_$][\w$]*\s*\(/i.test(sinCodigo)) error('cuerpo: no admite expresiones de código');
 
 // Rutas que existen hoy: páginas de la app, áreas, artículos, landings y, en este paquete, la propia
-const appDirs = readdirSync(join(ROOT, 'src/app')).filter((d) => statSync(join(ROOT, 'src/app', d)).isDirectory() && !/^[[(_]/.test(d));
+const appDirs = readdirSync(join(ROOT, 'src/app/(web)')).filter((d) => statSync(join(ROOT, 'src/app/(web)', d)).isDirectory() && !/^[[(_]/.test(d));
 const md = (dir) => (existsSync(join(ROOT, dir)) ? readdirSync(join(ROOT, dir)).filter((f) => f.endsWith('.md')).map((f) => f.slice(0, -3)) : []);
 const posts = md('src/content/blog');
 const landings = md('src/content/landings');
@@ -163,7 +163,7 @@ if (!fuentes.length) aviso('sin fuentes: si el contenido afirma plazos, importes
 
 // 6. Colisiones de URL ----------------------------------------------------------------------------------
 const existe = (dir) => existsSync(join(destino, dir, `${slug}.md`));
-const enUso = [appDirs.includes(slug) && `src/app/${slug}/`, areaSlugs.includes(slug) && 'una página de área', tipo === 'landing' && posts.includes(slug) && 'un artículo', tipo === 'articulo' && landings.includes(slug) && 'una landing'].filter(Boolean);
+const enUso = [appDirs.includes(slug) && `src/app/(web)/${slug}/`, areaSlugs.includes(slug) && 'una página de área', tipo === 'landing' && posts.includes(slug) && 'un artículo', tipo === 'articulo' && landings.includes(slug) && 'una landing'].filter(Boolean);
 if (enUso.length) error(`slug «${slug}» ya lo usa ${enUso.join(' y ')}`);
 const carpeta = tipo === 'landing' ? 'src/content/landings' : 'src/content/blog';
 let fechaOriginal = '';

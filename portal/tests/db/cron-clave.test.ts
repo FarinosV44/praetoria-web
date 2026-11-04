@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { claveCronValida } from '../../src/lib/cron-clave.ts';
+import { claveCronValida } from '../../../src/portal/lib/cron-clave.ts';
 
 const buena = 'a'.repeat(32);
 

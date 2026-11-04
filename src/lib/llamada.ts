@@ -1,5 +1,5 @@
 // Solicitud de llamada / contacto prioritario (#33). La usan el formulario (navegador) y la recepción
-// en Hostinger (public/api/llamada.php): las mismas reglas en los dos lados. Sin dependencias.
+// en servidor (src/lib/recepcion.ts): las mismas reglas en los dos lados. Sin dependencias.
 // No promete disponibilidad: es una petición prioritaria que el despacho atiende según disponibilidad.
 import { AREAS, fechaValida, limpia, telefonoValido, type AreaId } from './consulta.ts';
 import { servicioPorId } from './servicios-indice.ts';

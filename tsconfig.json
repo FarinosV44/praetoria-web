@@ -19,5 +19,5 @@
     "paths": { "@/*": ["./src/*"] }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.mts", ".next/types/**/*.ts", ".next/dev/types/**/*.ts"],
-  "exclude": ["node_modules", "out", "dist", "portal"]
+  "exclude": ["node_modules", "out", "out-ga", "dist"]
 }
