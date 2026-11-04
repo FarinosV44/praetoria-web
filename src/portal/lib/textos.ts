@@ -42,6 +42,8 @@ export function textoEvento(tipo: string, d: Record<string, unknown>): string {
     case 'asignacion_retirada': return `${d.nombre_empleado ?? 'Un profesional'} deja el asunto`;
     case 'tarea_encargada': return `Tarea «${d.tarea}» encargada a ${d.nombre_a ?? 'otro profesional'}`;
     case 'tarea_reasignada': return `Tarea «${d.tarea}» reasignada a ${d.nombre_a ?? 'otro profesional'}`;
+    case 'tarea_reprogramada': return `«${d.tarea}» pasa del ${fecha(String(d.desde))} al ${fecha(String(d.hasta))}${d.verificacion_anulada ? ' — hay que volver a verificar el plazo' : ''}`;
+    case 'plazo_verificado': return `Plazo «${d.tarea}» verificado para el ${fecha(String(d.fecha))}`;
     case 'tarea_completada': return `Tarea «${d.tarea}» hecha${d.resultado ? ` — ${d.resultado}` : ''}`;
     case 'conflictos_revisados': return 'Revisión de conflictos de intereses registrada';
     case 'documento_descargado': return 'Documento descargado';

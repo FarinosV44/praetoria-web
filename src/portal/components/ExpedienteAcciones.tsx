@@ -1,6 +1,6 @@
 'use client';
 import { useActionState, useState } from 'react';
-import { compartirDocumento, completarTarea, equipoAsunto, estadoCliente, moverDocumento, reasignarTarea, type Resultado } from '@/app/(portal)/admin/expedientes/acciones';
+import { compartirDocumento, completarTarea, equipoAsunto, estadoCliente, moverDocumento, reasignarTarea, reprogramarTarea, verificarPlazo, type Resultado } from '@/app/(portal)/admin/expedientes/acciones';
 
 /** Compartir un documento privado con el cliente: requiere un segundo clic de confirmación. */
 export function Compartir({ documento, solicitud }: { documento: string; solicitud: string }) {
@@ -123,5 +123,37 @@ export function EquipoAsunto({ solicitud, miembros, gestiona }: { solicitud: str
       {estado.error ? <span className="text-xs" role="alert">{estado.error}</span> : null}
       {estado.ok ? <span className="text-xs" role="status">{estado.ok}</span> : null}
     </div>
+  );
+}
+
+/** Verificar un plazo: dos pasos y una confirmación expresa del cómputo. */
+export function VerificarPlazo({ tarea, solicitud }: { tarea: string; solicitud: string }) {
+  const [abierto, setAbierto] = useState(false);
+  const [estado, accion, pendiente] = useActionState<Resultado, FormData>(verificarPlazo, {});
+  if (estado.ok) return <span className="chip chip-ok">Verificado</span>;
+  if (!abierto) return <button key="abrir" type="button" className="btn-texto" onClick={() => setAbierto(true)}>Verificar plazo</button>;
+  return (
+    <form action={accion} className="flex flex-wrap gap-2 items-center text-sm w-full mt-1">
+      <input type="hidden" name="tarea" value={tarea} /><input type="hidden" name="solicitud" value={solicitud} />
+      <label className="flex gap-1 items-center"><input type="checkbox" name="comprobado" value="1" required /> He comprobado el cómputo y la fecha es correcta</label>
+      <button key="ok" className="btn-texto" disabled={pendiente}>Confirmar verificación</button>
+      <button type="button" className="btn-texto" style={{ color: 'var(--color-muted)' }} onClick={() => setAbierto(false)}>Cancelar</button>
+      {estado.error ? <span className="text-xs" role="alert">{estado.error}</span> : null}
+    </form>
+  );
+}
+
+export function Reprogramar({ tarea, solicitud, fecha }: { tarea: string; solicitud: string; fecha: string }) {
+  const [abierto, setAbierto] = useState(false);
+  const [estado, accion, pendiente] = useActionState<Resultado, FormData>(reprogramarTarea, {});
+  if (!abierto) return <button key="abrir" type="button" className="btn-texto" style={{ color: 'var(--color-muted)' }} onClick={() => setAbierto(true)}>Cambiar fecha</button>;
+  return (
+    <form action={accion} className="inline-flex flex-wrap gap-1 items-center" onSubmit={() => setAbierto(false)}>
+      <input type="hidden" name="tarea" value={tarea} /><input type="hidden" name="solicitud" value={solicitud} />
+      <input name="fecha" type="date" defaultValue={fecha} required aria-label="Nueva fecha" className="border rounded px-1 text-sm" />
+      <input name="hora" type="time" aria-label="Nueva hora (opcional)" className="border rounded px-1 text-sm" />
+      <button key="ok" className="btn-texto" disabled={pendiente}>Cambiar</button>
+      {estado.error ? <span className="text-xs" role="alert">{estado.error}</span> : null}
+    </form>
   );
 }
