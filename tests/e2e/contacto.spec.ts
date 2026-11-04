@@ -73,7 +73,7 @@ test('Laboral: se indica y se asigna al área laboral', async ({ page }) => {
 test('fallo de red: avisa, conserva los datos y el reintento entrega una sola vez', async ({ page }) => {
   await rellenar(page);
   await esperarTiempoMinimo(page);
-  await page.route('**/api/consulta', (r) => r.abort('internetdisconnected'), { times: 1 });
+  await page.route('**/api/consulta/', (r) => r.abort('internetdisconnected'), { times: 1 });
   await page.getByRole('button', { name: 'Enviar mi consulta' }).click();
   await expect(page.locator('.form-fail')).toContainText('No hemos podido recibir tu consulta');
   await expect(page.getByLabel('Nombre')).toHaveValue('Persona de prueba');
