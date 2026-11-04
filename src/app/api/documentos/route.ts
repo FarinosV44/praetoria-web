@@ -18,6 +18,11 @@ const fallo = (status: number, error: string) => NextResponse.json({ ok: false, 
 export async function POST(req: Request) {
   const h = await headers();
   if (h.get('origin') !== env.origin) return fallo(403, 'Origen no permitido.');
+  // Sin el almacenamiento configurado no se acepta nada (antes acababa en un error 500 sin explicación).
+  try { void env.storageUrl; void env.storageKey; } catch {
+    console.error('subida: falta la configuración del almacenamiento (STORAGE_URL / STORAGE_SERVICE_KEY)');
+    return fallo(503, 'El almacenamiento de documentos no está configurado en el servidor. Avisa al administrador.');
+  }
   const sesion = await auth.api.getSession({ headers: h });
   if (!sesion) return fallo(401, 'Tu sesión ha caducado. Vuelve a entrar.');
   if (await personalSinMfa(sesion.user.id, sesion.user.twoFactorEnabled)) return fallo(403, 'Activa el doble factor antes de continuar.');
@@ -64,7 +69,7 @@ export async function POST(req: Request) {
     });
     return NextResponse.json({ ok: true, documento: { id, version: r } }, { headers: { 'cache-control': 'no-store' } });
   } catch (e) {
-    if (clave) await borrarObjetoHuerfano(clave);
+    if (clave) await borrarObjetoHuerfano(clave).catch(() => {});
     const err = e as { http?: number; code?: string; message: string };
     if (err.http === 404) return fallo(404, 'No encontrado.');
     if (err.code === '42501') return fallo(403, err.message.length < 120 ? err.message : 'No puedes subir documentos aquí.');

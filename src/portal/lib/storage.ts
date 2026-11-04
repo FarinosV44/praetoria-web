@@ -22,5 +22,5 @@ export async function leerObjeto(clave: string): Promise<Blob> {
 }
 
 export async function borrarObjetoHuerfano(clave: string) {
-  await s().remove([clave]).catch(() => {});
+  try { await s().remove([clave]); } catch { /* sin almacenamiento o ya borrado: nada que limpiar */ }
 }
