@@ -1842,6 +1842,31 @@
         1600
       ],
       "avif": true
+    },
+    {
+      "id": "seo-local-google-maps",
+      "estado": "publicada",
+      "escena": "SEO local: alguien busca un negocio cercano en Google Maps desde el móvil",
+      "archivo": "ed/busqueda-local-google-maps",
+      "alt": "Una mano sostiene un móvil con Google Maps abierto: la ficha de un comercio cercano con sus reseñas, su horario y los botones para llamar o ir",
+      "foco": "55% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "BJXAxQ1L7dI",
+        "autor": "Henry Perks",
+        "url": "https://unsplash.com/photos/BJXAxQ1L7dI",
+        "perfil": "https://unsplash.com/@hjkp",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
     }
   ]
 }
