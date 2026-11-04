@@ -1,6 +1,6 @@
 # ADR 0001 · Portal del cliente como aplicación privada separada
 
-- **Estado:** aceptado por el propietario el 04/11/2026: better-auth, Supabase en Fráncfort (`eu-central-1`) y Netlify para la aplicación en `portal.praetoriaabogados.es`. Publicación para clientes reales y cambios de DNS: pendientes de su autorización.
+- **Estado:** aceptado por el propietario el 04/11/2026: better-auth, Supabase en Fráncfort (`eu-central-1`) y Node.js en Hostinger para la aplicación en `portal.praetoriaabogados.es` (sustituye a Netlify; ver `docs/portal/DESPLIEGUE-HOSTINGER.md`). Publicación para clientes reales y cambios de DNS: pendientes de su autorización.
 - **Fecha:** 27/10/2026
 - **Issues:** #1, #12, #16, #56, #57, #49, #15, #55
 
@@ -66,7 +66,7 @@ almacenamiento.
   expuestas anteriormente; si el proyecto existente se reutiliza, rotar antes la contraseña de la base de
   datos y las claves `service_role`/secretas.
 - **Aplicación:** cualquier servicio con Node 22 persistente (Netlify con Next en servidor, o un Node de
-  Hostinger) en `portal.praetoriaabogados.es` (staging: `portal-pruebas (subdominio *.netlify.app mientras no se cambie el DNS)`). Requiere un registro DNS que **no
+  Hostinger) en `portal.praetoriaabogados.es` (staging: `portal-pruebas (subdominio *.hostingersite.com mientras no se cambie el DNS)`). Requiere un registro DNS que **no
   se ha tocado**.
 - **SMTP:** proveedor con SPF/DKIM del dominio.
 - Variables: ver `portal/.env.example`. Ninguna es `NEXT_PUBLIC_`.

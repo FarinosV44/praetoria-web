@@ -1,0 +1,27 @@
+import { poolApp } from '@/lib/db';
+import { ejecutarCicloAvisos } from '@/lib/avisos-core';
+import { claveCronValida } from '@/lib/cron-clave';
+
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+const autorizada = (r: Request) => claveCronValida(r.headers.get('x-cron-clave'), process.env.CRON_CLAVE);
+// 404 indistinguible de una ruta inexistente: no se revela que el motor de avisos está aquí.
+const noExiste = () => new Response('Not Found', { status: 404 });
+
+// La llama la tarea cron de Hostinger cada minuto (Hostinger no mantiene procesos ni temporizadores
+// permanentes). Solo devuelve recuentos: nunca datos personales.
+export async function POST(req: Request) {
+  if (!autorizada(req)) return noExiste();
+  const resultado = await ejecutarCicloAvisos(poolApp());
+  console.log(JSON.stringify(resultado));
+  return Response.json(resultado);
+}
+
+// TEMPORAL: para averiguar qué cabecera de IP fija la CDN de Hostinger y poder configurar TRUSTED_IP_HEADER.
+// Se retira en cuanto se haya comprobado en el alojamiento.
+export async function GET(req: Request) {
+  if (!autorizada(req)) return noExiste();
+  const candidatas = ['x-forwarded-for', 'x-real-ip', 'cf-connecting-ip', 'true-client-ip', 'x-client-ip', 'x-hcdn-client-ip', 'forwarded'];
+  return Response.json(Object.fromEntries(candidatas.map((c) => [c, req.headers.get(c)])));
+}

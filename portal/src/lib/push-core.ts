@@ -1,5 +1,5 @@
-// Web Push (estándar VAPID, sin proveedores de pago). Sin 'server-only' para usarlo desde la función
-// programada de Netlify. El contenido es SIEMPRE neutro: nada del cliente ni del asunto en la pantalla de bloqueo.
+// Web Push (estándar VAPID, sin proveedores de pago). Sin 'server-only' para usarlo también desde
+// scripts. El contenido es SIEMPRE neutro: nada del cliente ni del asunto en la pantalla de bloqueo.
 import webpush from 'web-push';
 
 export const MENSAJE_NEUTRO = { title: 'Praetoria', body: 'Tienes un aviso pendiente en Praetoria.' };

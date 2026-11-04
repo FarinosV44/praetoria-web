@@ -121,3 +121,13 @@ export async function replanificarRecurrentes(pool: pg.Pool) {
     return r.rows[0]?.n ?? 0;
   } catch (e) { await c.query('rollback'); throw e; } finally { c.release(); }
 }
+
+/** Un ciclo completo del motor (cada minuto, por cron). A las 06:00 UTC replanifica repeticiones y programa recordatorios. */
+export async function ejecutarCicloAvisos(pool: pg.Pool, ahora = new Date()) {
+  const agenda = await procesarAgenda(pool);
+  const correo = await enviarAvisosPendientes({ pool });
+  const diario = ahora.getUTCHours() === 6 && ahora.getUTCMinutes() === 0
+    ? { replanificados: await replanificarRecurrentes(pool), recordatorios: await programarRecordatorios(pool) }
+    : {};
+  return { agenda, correo, ...diario };
+}

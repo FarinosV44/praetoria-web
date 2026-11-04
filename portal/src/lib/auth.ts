@@ -81,7 +81,7 @@ export const auth = betterAuth({
   advanced: {
     cookiePrefix: 'praetoria-portal',
     useSecureCookies: env.origin.startsWith('https://'),
-    // Auditoría A3: IP real del cliente según el proxy de confianza (Netlify), para que el límite de
+    // Auditoría A3: IP real del cliente según el proxy de confianza del alojamiento, para que el límite de
     // intentos sea por persona y no un contador común que bloquee a todos.
     ipAddress: { ipAddressHeaders: [env.cabeceraIp] },
     database: { generateId: 'uuid' },

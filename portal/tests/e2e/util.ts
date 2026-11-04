@@ -57,9 +57,9 @@ export async function verificarYCompletar(page: Page, email: string, previos: nu
 }
 
 export async function entrar(page: Page, email: string, clave: string) {
-  // Cada persona entra desde su propia IP (cabecera del proxy de confianza, como en Netlify): así el
+  // Cada persona entra desde su propia IP (cabecera del proxy de confianza, TRUSTED_IP_HEADER en .env.local): así el
   // límite de intentos por IP se comporta como en producción y no se comparte entre pruebas.
-  await page.setExtraHTTPHeaders({ 'x-nf-client-connection-ip': `10.${Math.floor(Math.random() * 250)}.${Math.floor(Math.random() * 250)}.${Math.floor(Math.random() * 250) + 1}` });
+  await page.setExtraHTTPHeaders({ 'x-forwarded-for': `10.${Math.floor(Math.random() * 250)}.${Math.floor(Math.random() * 250)}.${Math.floor(Math.random() * 250) + 1}` });
   await page.goto('/entrar/');
   await page.getByLabel('Correo electrónico').fill(email);
   await page.getByLabel('Contraseña', { exact: true }).fill(clave);

@@ -1,11 +1,11 @@
 # Cómo entrar en el panel del despacho (superadministrador)
 
 Dirección: `https://portal.praetoriaabogados.es/` cuando se apruebe el dominio; mientras tanto, la dirección
-`*.netlify.app` del entorno de pruebas. Todo lo que hay en pruebas es ficticio.
+`*.hostingersite.com` del entorno de pruebas. Todo lo que hay en pruebas es ficticio.
 
 ## 1. Alta de tu cuenta (una sola vez)
 1. El administrador técnico genera una **invitación de un solo uso, válida 72 horas**:
-   `npm run personal:invitar -- --email=juanfarinos@icav.es --nombre="Juan José Farinós Ibáñez" --rol=administrador`
+   `npm run personal:invitar -- --email=juanjo@farvertrans.com --nombre="Juan José Farinós Ibáñez" --rol=administrador`
    (en Supabase solo se guarda el resumen SHA-256 del enlace; el enlace en claro se entrega una vez, por canal privado).
 2. Abre el enlace, elige una contraseña de **al menos 14 caracteres** y pulsa «Activar mi cuenta».
 3. Entra con tu correo y tu contraseña. La primera vez el sistema te lleva a **Seguridad**: confirma la contraseña,
