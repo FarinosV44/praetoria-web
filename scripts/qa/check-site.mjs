@@ -108,6 +108,7 @@ for (const f of pages) {
       BreadcrumbList: ['itemListElement'],
       FAQPage: ['mainEntity'],
       Person: ['name'],
+      Service: ['name', 'url', 'provider'],
     }[data['@type']];
     if (!need) err(page, `JSON-LD de tipo no previsto: ${data['@type']}`);
     else for (const k of need) if (data[k] == null || (Array.isArray(data[k]) && !data[k].length)) err(page, `JSON-LD ${data['@type']} sin ${k}`);

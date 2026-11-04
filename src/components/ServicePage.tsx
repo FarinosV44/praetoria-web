@@ -4,11 +4,13 @@ import { areas, canalDe, groups, mensajes, whatsapp } from '@/lib/site';
 import { imagen } from '@/lib/imagenes';
 import { Composicion, Foto } from './Foto';
 import { iconoArea, objetivoArea } from '@/lib/iconos';
+import { serviceLd } from '@/lib/seo';
 import { docLabel, enlaceConsulta, servicioPorId, type Servicio } from '@/lib/servicios';
 import { RevisionPendiente } from './RevisionPendiente';
 import { Breadcrumbs } from './Breadcrumbs';
 import { CtaBand } from './CtaBand';
 import { Faq } from './Faq';
+import { JsonLd } from './JsonLd';
 import { Icon, LineIcon } from './Icon';
 import { PostList } from './PostList';
 
@@ -33,6 +35,7 @@ export function ServicePage({ servicio: s }: { servicio: Servicio }) {
 
   return (
     <div className="service-page">
+      {s.pagina && s.seo && <JsonLd data={serviceLd({ nombre: s.nombre, description: s.seo.description, path: s.pagina })} />}
       {s.revision === 'pendiente' && <RevisionPendiente indexable={s.indexable !== false} />}
       <section className="page-head area-head">
         <div className="wrap">

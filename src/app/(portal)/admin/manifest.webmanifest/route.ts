@@ -15,8 +15,8 @@ const manifiesto = {
   background_color: '#eeece8',
   theme_color: '#22262a',
   icons: [
-    { src: '/iconos/icono-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
-    { src: '/iconos/icono-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+    { src: '/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+    { src: '/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
     { src: '/iconos/icono-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
   ],
 };
