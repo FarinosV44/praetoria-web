@@ -32,5 +32,8 @@ export const env = {
    * una cabecera que el proxy no sobrescriba la falsifica cualquiera y anula el límite de intentos de acceso.
    */
   get cabeceraIp() { return req('TRUSTED_IP_HEADER'); },
+  /** Asistente de IA (#48): opcional. Sin clave, el asistente no se muestra. */
+  get iaClave() { return process.env.ANTHROPIC_API_KEY || null; },
+  get iaModelo() { return process.env.IA_MODELO || 'claude-sonnet-5-5'; },
   get uploadMaxBytes() { return Number(process.env.UPLOAD_MAX_MB || 20) * 1024 * 1024; },
 };
