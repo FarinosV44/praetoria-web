@@ -52,6 +52,9 @@ export function buildMetadata({ title, description, path, image: imagenOg,  type
   };
 }
 
+// Mercado atendido (#28), común al despacho y a sus servicios.
+const areaServed = ['Valencia', 'Provincia de Valencia', 'España'];
+
 export const legalServiceLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
@@ -73,7 +76,7 @@ export const legalServiceLd = {
     addressCountry: site.address.country,
   },
   // Mercado atendido (#28): Valencia. La dirección real (El Puig de Santa María) se mantiene en address.
-  areaServed: ['Valencia', 'Provincia de Valencia', 'España'],
+  areaServed,
   contactPoint: [
     { '@type': 'ContactPoint', name: 'Centralita del despacho (área laboral y atención jurídica general)', telephone: contactos.general.phoneIntl, contactType: 'customer service', availableLanguage: 'es' },
   ],
@@ -82,7 +85,21 @@ export const legalServiceLd = {
     name: site.lawyer,
     jobTitle: 'Abogado',
     memberOf: { '@type': 'Organization', name: site.college },
+    identifier: { '@type': 'PropertyValue', name: 'Número de colegiado (ICAV)', value: site.collegeNumber },
     sameAs: [site.linkedin],
   },
   sameAs: [site.linkedin],
 };
+
+/** Servicio concreto del despacho. Solo datos ya publicados en la página: sin precios, valoraciones ni horarios. */
+export function serviceLd({ nombre, description, path }: { nombre: string; description: string; path: string }) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: nombre,
+    description,
+    url: new URL(path, site.url).href,
+    provider: { '@id': legalServiceLd['@id'] },
+    areaServed,
+  };
+}
