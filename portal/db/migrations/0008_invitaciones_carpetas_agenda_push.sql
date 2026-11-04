@@ -279,3 +279,5 @@ grant execute on function portal.tomar_avisos_agenda(int), portal.suscripciones_
   portal.cerrar_aviso(uuid, boolean, text, text), portal.agenda_replanificar_recurrentes(), portal.posponer_aviso(uuid, int),
   portal.t_agenda_antes(), portal.t_agenda_despues() to portal_app;
 revoke execute on function portal.agenda_planificar(uuid) from public;
+-- Las funciones nuevas no quedan ejecutables por PUBLIC (anon/authenticated de Supabase incluidos).
+revoke execute on all functions in schema portal from public;
