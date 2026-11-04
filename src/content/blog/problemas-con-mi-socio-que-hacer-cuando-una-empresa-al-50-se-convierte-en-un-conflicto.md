@@ -1,6 +1,7 @@
 ---
 title: "Problemas con mi socio: qué hacer cuando una empresa al 50% se convierte en un conflicto"
-description: "Es una consulta mucho más habitual de lo que parece: dos personas crean una empresa juntas, normalmente al 50%, el negocio funciona durante años y, en…"
+seoTitle: "Problemas con mi socio al 50 %: qué hacer"
+description: "Qué hacer cuando un socio al 50 % bloquea la empresa: las opciones para salir del conflicto, explicadas por un despacho de Valencia."
 date: 2026-08-20
 updated: 2026-10-23
 category: mercantil
