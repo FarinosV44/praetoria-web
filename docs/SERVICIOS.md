@@ -6,7 +6,7 @@ Un servicio es algo concreto que el despacho hace, con un siguiente paso. Las p�
 
 **Texto ampliado** (qué revisamos, proceso, documentación, preguntas y normas citadas): lo redacta la web a partir de lo ya publicado y de fuentes oficiales, y queda *pendiente de revisión* hasta que el despacho lo valide (`revision: 'revisado'`).
 
-Total: 55 servicios.
+Total: 56 servicios.
 
 ## Transporte y logística (10)
 
@@ -56,11 +56,12 @@ Total: 55 servicios.
 | Acoso y vulneración de derechos | `laboral-acoso` | — | [Consultar sobre esto](/contacto/?servicio=laboral-acoso) | revisado |
 | Modificaciones de condiciones y conflictos laborales | `laboral-condiciones` | [Baja laboral de larga duración: cómo dejar tu empresa con indemnización y derecho a paro](/baja-laboral-de-larga-duracion-como-dejar-tu-empresa-con-indemnizacion-y-derecho-a-paro/) | [Consultar sobre esto](/contacto/?servicio=laboral-condiciones) | revisado |
 
-## Civil, herencias y vivienda (6)
+## Civil, herencias y vivienda (7)
 
 | Servicio | id | Artículos relacionados | Siguiente paso | Texto ampliado |
 | --- | --- | --- | --- | --- |
 | Reclamaciones de cantidad | `civil-reclamaciones` | — | [Consultar sobre esto](/contacto/?servicio=civil-reclamaciones) | — |
+| Ley de la segunda oportunidad | `civil-segunda-oportunidad` | [Ley de la segunda oportunidad en Valencia: quién puede cancelar sus deudas y cómo hacerlo](/ley-segunda-oportunidad-valencia/) | [Consultar si puedo cancelar mis deudas](/contacto/?servicio=civil-segunda-oportunidad) | — |
 | Responsabilidad civil | `civil-responsabilidad` | — | [Consultar sobre esto](/contacto/?servicio=civil-responsabilidad) | — |
 | Contratos civiles y privados | `civil-contratos` | — | [Consultar sobre esto](/contacto/?servicio=civil-contratos) | — |
 | Herencias, testamentos y sucesiones | `civil-herencias` | [Herencia: qué hacer paso a paso](/herencia-que-hacer/) | [Consultar una herencia](/contacto/?servicio=civil-herencias) | — |
