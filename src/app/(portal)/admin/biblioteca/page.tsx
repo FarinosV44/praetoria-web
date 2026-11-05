@@ -24,7 +24,8 @@ export default async function Biblioteca({ searchParams }: { searchParams: Promi
   return (
     <div className="grid gap-5">
       <div className="fila"><h1 className="titulo">Biblioteca jurídica</h1>
-        {u.personal!.rol === 'administrador' ? <Link href="/admin/biblioteca/catalogo/" className="btn btn-secundario">Catálogo de procedimientos</Link> : null}</div>
+        <span className="flex gap-2"><Link href="/admin/biblioteca/estilos/" className="btn btn-secundario">Estilos</Link>
+        {u.personal!.rol === 'administrador' ? <Link href="/admin/biblioteca/catalogo/" className="btn btn-secundario">Catálogo de procedimientos</Link> : null}</span></div>
       <form className="flex gap-2" role="search">
         {f.materia ? <input type="hidden" name="materia" value={f.materia} /> : null}
         <input name="q" type="search" defaultValue={f.q ?? ''} placeholder="Buscar por contenido, procedimiento, materia o etiqueta (p. ej. «modificación de medidas», «TEAR»)" aria-label="Buscar en la biblioteca" className="border rounded-md p-3 flex-1 min-w-0" />
