@@ -48,7 +48,7 @@ export async function cronologia(tx: Tx, sid: string, limite = 400): Promise<Ent
         jsonb_build_object('escrito', w.escrito_id, 'titulo', es.titulo, 'version', w.version, 'origen', w.origen, 'instruccion', w.instruccion, 'hilo', es.hilo_id,
           'modelos', (select coalesce(jsonb_agg(jsonb_build_object('etiqueta', x->>'etiqueta', 'titulo', x->>'titulo', 'version', (x->>'version')::int)), '[]') from jsonb_array_elements(w.modelos) x),
           'avisos', jsonb_array_length(w.avisos),
-          'pendientes', (select count(*) from regexp_matches(w.texto, '\[PENDIENTE:', 'g')))
+          'pendientes', (length(w.texto) - length(replace(w.texto, '[PENDIENTE:', ''))) / 11)
         from portal.escrito_versiones w join portal.escritos es on es.id = w.escrito_id where w.solicitud_id = $1
       union all
       select 'evento', v.id::text, v.happened_at,
