@@ -11,7 +11,9 @@ export type Entrada =
       estado: string; mime: string; tamano: number; analisis: string; del_despacho: boolean; origen: string }
   | { clase: 'tarea'; id: string; at: Date; autor: string; titulo: string; inicio: Date; estado: string; tipo: string; verificado: boolean;
       sugerida: boolean; fuente: string | null; documento: { id: string; nombre: string } | null }
-  | { clase: 'evento'; id: string; at: Date; autor: string | null; tipo: string; detalle: Record<string, unknown>; visible: boolean };
+  | { clase: 'evento'; id: string; at: Date; autor: string | null; tipo: string; detalle: Record<string, unknown>; visible: boolean }
+  | { clase: 'borrador'; id: string; at: Date; autor: string; escrito: string; titulo: string; version: number; origen: string; instruccion: string | null;
+      modelos: { etiqueta: string; titulo: string; version: number }[]; avisos: number; pendientes: number; hilo: string | null };
 
 const EVENTOS_EN_CRONOLOGIA = ['solicitud_enviada', 'estado_solicitud', 'estado_visible', 'expediente_abierto', 'documento_compartido',
   'documento_solicitado', 'requisito_actualizado', 'documento_revisado', 'conflictos_revisados', 'responsable_asignado',
@@ -42,6 +44,13 @@ export async function cronologia(tx: Tx, sid: string, limite = 400): Promise<Ent
           'doc_nombre', (select nombre_original from portal.documentos where id = e.documento_id))
         from portal.agenda_eventos e where e.solicitud_id = $1
       union all
+      select 'borrador', w.id::text, w.created_at, (select nombre_visible from portal.personal where user_id = w.autor_id),
+        jsonb_build_object('escrito', w.escrito_id, 'titulo', es.titulo, 'version', w.version, 'origen', w.origen, 'instruccion', w.instruccion, 'hilo', es.hilo_id,
+          'modelos', (select coalesce(jsonb_agg(jsonb_build_object('etiqueta', x->>'etiqueta', 'titulo', x->>'titulo', 'version', (x->>'version')::int)), '[]') from jsonb_array_elements(w.modelos) x),
+          'avisos', jsonb_array_length(w.avisos),
+          'pendientes', (length(w.texto) - length(replace(w.texto, '[PENDIENTE:', ''))) / 11)
+        from portal.escrito_versiones w join portal.escritos es on es.id = w.escrito_id where w.solicitud_id = $1
+      union all
       select 'evento', v.id::text, v.happened_at,
         (select coalesce(p.nombre_visible, u.name) from identidad."user" u left join portal.personal p on p.user_id = u.id where u.id = v.actor_id),
         jsonb_build_object('tipo', v.tipo, 'visible', v.visible_cliente, 'detalle', v.detalle || jsonb_strip_nulls(jsonb_build_object(
@@ -61,6 +70,9 @@ export async function cronologia(tx: Tx, sid: string, limite = 400): Promise<Ent
       case 'tarea': return { clase: 'tarea', id: f.id, at: f.at, autor: f.autor, titulo: String(d.titulo), inicio: new Date(String(d.inicio)),
         estado: String(d.estado), tipo: String(d.tipo), verificado: !!d.verificado, sugerida: !!d.sugerida, fuente: (d.fuente as string) || null,
         documento: d.doc_id && d.doc_nombre ? { id: String(d.doc_id), nombre: String(d.doc_nombre) } : null };
+      case 'borrador': return { clase: 'borrador', id: f.id, at: f.at, autor: f.autor, escrito: String(d.escrito), titulo: String(d.titulo), version: Number(d.version),
+        origen: String(d.origen), instruccion: (d.instruccion as string) || null, modelos: (d.modelos ?? []) as { etiqueta: string; titulo: string; version: number }[],
+        avisos: Number(d.avisos), pendientes: Number(d.pendientes), hilo: (d.hilo as string) || null };
       default: return { clase: 'evento', id: f.id, at: f.at, autor: f.autor, tipo: String(d.tipo), detalle: (d.detalle ?? {}) as Record<string, unknown>, visible: !!d.visible };
     }
   });

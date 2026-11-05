@@ -2,9 +2,12 @@
 import { useActionState, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { guardarEntrada, type Resultado } from '@/app/(portal)/admin/expedientes/acciones';
+import { Redactor, type EscritoHilo } from './Redactor';
 
 type Subida = { clave: string; nombre: string; progreso: number; estado: 'subiendo' | 'ok' | 'error'; error?: string; archivo: File; origen: string };
-type Modo = 'nota' | 'cliente' | 'tarea';
+type Modo = 'nota' | 'cliente' | 'tarea' | 'escrito';
+// «Redacta/prepara una demanda…» escrito como nota: se sugiere pasar al redactor con IA (#94), nunca se hace solo.
+const PIDE_ESCRITO = /^\s*(?:redact|prepar|haz|hazme|elabor|escrib)\w*\b[\s\S]{0,80}\b(?:demanda|recurso|escrito|contestaci|alegaci|oposici|querella|denuncia|requerimiento|burofax|reclamaci|papeleta|convenio|personaci)/i;
 const ACEPTA = 'application/pdf,image/*,.heic,.heif,.docx';
 
 const manana = () => {
@@ -14,9 +17,13 @@ const manana = () => {
 
 // Compositor siempre visible del expediente (#78): escribir, pegar, arrastrar y adjuntar sin cambiar de pantalla.
 // Por defecto todo es una NOTA INTERNA; enviar al cliente exige confirmarlo con un segundo clic.
-export function Compositor({ solicitudId, maxMb }: { solicitudId: string; maxMb: number }) {
+export function Compositor({ solicitudId, maxMb, ia = false, escritos = [], abrirEscrito = null }: {
+  solicitudId: string; maxMb: number; ia?: boolean; escritos?: EscritoHilo[]; abrirEscrito?: string | null;
+}) {
   const router = useRouter();
-  const [modo, setModo] = useState<Modo>('nota');
+  const [modo, setModo] = useState<Modo>(ia && abrirEscrito ? 'escrito' : 'nota');
+  const [sugerirIA, setSugerirIA] = useState(false);
+  const [inicialIA, setInicialIA] = useState('');
   const [fuente, setFuente] = useState<'nota' | 'texto_aportado' | 'llamada'>('nota');
   const [confirmar, setConfirmar] = useState(false);
   const [subidas, setSubidas] = useState<Subida[]>([]);
@@ -98,7 +105,7 @@ export function Compositor({ solicitudId, maxMb }: { solicitudId: string; maxMb:
   );
 
   return (
-    <div className="compositor">
+    <div className="compositor" id="compositor">
       {arrastrando ? <div className="soltar-aqui" aria-hidden>Suelta los archivos para guardarlos en el expediente</div> : null}
       {subidas.length ? (
         <ul className="grid gap-1 mb-2 text-sm" aria-live="polite">
@@ -122,6 +129,7 @@ export function Compositor({ solicitudId, maxMb }: { solicitudId: string; maxMb:
           {chip('nota', 'Nota interna')}
           {chip('cliente', 'Mensaje al cliente')}
           {chip('tarea', 'Tarea o plazo')}
+          {ia ? chip('escrito', '✍️ Preparar escrito con IA') : null}
           {modo === 'nota' ? (
             <span className="flex gap-1 text-xs ml-auto">
               {([['nota', 'Nota'], ['texto_aportado', 'Texto pegado'], ['llamada', 'Llamada']] as const).map(([v, t]) => (
@@ -142,9 +150,14 @@ export function Compositor({ solicitudId, maxMb }: { solicitudId: string; maxMb:
             <label className="flex gap-1 items-center"><input type="checkbox" name="plazo" value="1" /> Es un plazo (pendiente de verificar)</label>
           </div>
         ) : null}
+        {modo === 'escrito' ? (
+          <Redactor key={`${abrirEscrito ?? ''}-${inicialIA}`} solicitud={solicitudId} hilo={null} escrito={null} inicial={inicialIA} escritos={escritos} enExpediente
+            inicialSobre={abrirEscrito} />
+        ) : (
         <div className="caja-compositor">
           <label htmlFor="compositor-texto" className="sr-only">Escribe en el expediente</label>
           <textarea id="compositor-texto" ref={textoRef} name="texto" rows={3} maxLength={20000} onPaste={alPegar} onKeyDown={alTeclear}
+            onInput={(e) => setSugerirIA(ia && modo === 'nota' && PIDE_ESCRITO.test(e.currentTarget.value))}
             placeholder={modo === 'cliente' ? 'Mensaje que verá el cliente…' : modo === 'tarea' ? 'Qué hay que hacer (p. ej., Preparar escrito de alegaciones)' : 'Escribe una nota, pega un texto o una captura, o arrastra documentos aquí…'} />
           <div className="fila">
             <span className="flex gap-2 items-center">
@@ -162,6 +175,16 @@ export function Compositor({ solicitudId, maxMb }: { solicitudId: string; maxMb:
             )}
           </div>
         </div>
+        )}
+        {sugerirIA && modo === 'nota' ? (
+          <p className="aviso text-sm flex flex-wrap gap-2 items-center" data-sugerir-ia>
+            ¿Quieres que lo prepare el redactor con los modelos aprobados de la biblioteca?
+            <button type="button" className="btn btn-secundario" style={{ minHeight: 32 }} onClick={() => {
+              setInicialIA(textoRef.current?.value ?? ''); setSugerirIA(false); setModo('escrito');
+            }}>✍️ Preparar escrito con IA</button>
+            <span className="ayuda text-xs">o pulsa Guardar para dejarlo como nota.</span>
+          </p>
+        ) : null}
         {estado.error ? <p className="error text-sm" role="alert">{estado.error}</p> : null}
         {estado.ok ? <p className="exito text-sm" role="status">{estado.ok}</p> : null}
       </form>
