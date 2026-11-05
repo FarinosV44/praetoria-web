@@ -8,7 +8,8 @@ import { requerirPersonal } from '@/portal/lib/sesion';
 import { estadoDocumento, fecha } from '@/portal/lib/textos';
 import { Reinvitar } from '@/portal/components/AltaCliente';
 import { FichaDatos } from '@/portal/components/FichaDatos';
-import { abrirExpediente } from '../acciones';
+import { AbrirExpediente } from '@/portal/components/AbrirExpediente';
+import { personalActivo } from '@/portal/lib/equipo';
 
 export const metadata: Metadata = { title: 'Ficha de cliente' };
 
@@ -35,7 +36,8 @@ export default async function FichaCliente({ params }: { params: Promise<{ id: s
         d.solicitud_id, d.visible_cliente, d.requisito_id
       from portal.documentos d left join portal.requisitos r on r.id = d.requisito_id where d.cliente_id = $1
       order by coalesce(r.carpeta, d.carpeta), coalesce(r.titulo, d.nombre_original), d.version desc`, [id])).rows;
-    return { c, asuntos, docs };
+    const tipos = (await tx.query(`select id, nombre from portal.tipos_asunto where activo order by orden, nombre`)).rows as { id: string; nombre: string }[];
+    return { c, asuntos, docs, tipos, equipo: await personalActivo(tx) };
   });
   if (!d) notFound();
   const { c } = d;
@@ -52,12 +54,9 @@ export default async function FichaCliente({ params }: { params: Promise<{ id: s
           : <><p className="ayuda">Todavía no ha activado su acceso.</p><Reinvitar cliente={c.id} /></>}
       </section>
       <section className="card">
-        <form action={abrirExpediente} className="flex flex-wrap gap-2 items-center">
-          <input type="hidden" name="cliente" value={c.id} />
-          <label htmlFor="nuevo-exp" className="etiqueta">Abrir expediente</label>
-          <input id="nuevo-exp" name="titulo" required minLength={3} maxLength={200} placeholder="Título del asunto" className="border rounded-md p-2 flex-1 min-w-[200px]" />
-          <button className="btn btn-primario" style={{ minHeight: 40 }}>Abrir</button>
-        </form>
+        <h2 className="subtitulo">Abrir un expediente nuevo para este cliente</h2>
+        {u.personal!.rol === 'lectura' || u.personal!.rol === 'facturacion' ? <p className="ayuda">Tu rol no permite abrir expedientes.</p>
+          : <AbrirExpediente cliente={c.id} tipos={d.tipos} equipo={d.equipo} yo={u.id} />}
       </section>
       <section className="card">
         <h2 className="subtitulo">Datos de contacto y facturación</h2>
