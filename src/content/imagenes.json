@@ -1867,6 +1867,31 @@
         1600
       ],
       "avif": true
+    },
+    {
+      "id": "segunda-oportunidad-carta",
+      "estado": "publicada",
+      "escena": "Ley de la segunda oportunidad: una persona en su cocina lee una carta sobre sus deudas",
+      "archivo": "ed/segunda-oportunidad-carta",
+      "alt": "Un hombre sentado a la mesa de su cocina lee con atención una carta, con una taza y un frutero delante",
+      "foco": "62% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "4XBvbznJFno",
+        "autor": "Vitaly Gariev",
+        "url": "https://unsplash.com/photos/4XBvbznJFno",
+        "perfil": "https://unsplash.com/@silverkblack",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
     }
   ]
 }

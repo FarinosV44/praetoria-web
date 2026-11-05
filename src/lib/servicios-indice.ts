@@ -197,6 +197,19 @@ export const indiceServicios: ServicioIndice[] = [
     }
   },
   {
+    "id": "civil-segunda-oportunidad",
+    "area": "civil",
+    "nombre": "Ley de la segunda oportunidad",
+    "preguntaMinima": {
+      "label": "¿Eres particular o autónomo?",
+      "opciones": [
+        "Particular",
+        "Autónomo",
+        "Lo fui (cerré la actividad)"
+      ]
+    }
+  },
+  {
     "id": "civil-responsabilidad",
     "area": "civil",
     "nombre": "Responsabilidad civil",

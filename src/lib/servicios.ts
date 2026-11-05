@@ -437,6 +437,7 @@ export const servicios: Servicio[] = [
 
   // Civil, herencias y vivienda ---------------------------------------------------------------
   { id: 'civil-reclamaciones', area: 'civil', nombre: 'Reclamaciones de cantidad', preguntaMinima: { label: '¿Con quién es el problema?', opciones: ['Una empresa o un banco', 'Un particular', 'Un profesional o autónomo'] } },
+  { id: 'civil-segunda-oportunidad', area: 'civil', nombre: 'Ley de la segunda oportunidad', resumen: 'Estudio de viabilidad y tramitación de la exoneración de deudas para particulares y autónomos.', articulos: ['ley-segunda-oportunidad-valencia'], cta: 'Consultar si puedo cancelar mis deudas', preguntaMinima: { label: '¿Eres particular o autónomo?', opciones: ['Particular', 'Autónomo', 'Lo fui (cerré la actividad)'] } },
   { id: 'civil-responsabilidad', area: 'civil', nombre: 'Responsabilidad civil', preguntaMinima: { label: '¿Con quién es el problema?', opciones: ['Una empresa o un banco', 'Un particular', 'Un profesional o autónomo'] } },
   { id: 'civil-contratos', area: 'civil', nombre: 'Contratos civiles y privados', preguntaMinima: { label: '¿Con quién es el problema?', opciones: ['Una empresa o un banco', 'Un particular', 'Un profesional o autónomo'] } },
   { id: 'civil-herencias', area: 'civil', nombre: 'Herencias, testamentos y sucesiones', articulos: ['herencia-que-hacer'], cta: 'Consultar una herencia', preguntaMinima: { label: '¿Hay testamento?', opciones: ['Sí', 'No', 'No lo sé'] } },
