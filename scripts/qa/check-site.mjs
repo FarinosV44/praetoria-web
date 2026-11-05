@@ -102,16 +102,18 @@ for (const f of pages) {
       err(page, `JSON-LD no válido: ${e.message}`);
       continue;
     }
-    const need = {
+    const campos = {
       LegalService: ['name', 'url', 'telephone', 'address'],
       BlogPosting: ['headline', 'datePublished', 'author', 'mainEntityOfPage'],
       BreadcrumbList: ['itemListElement'],
       FAQPage: ['mainEntity'],
       Person: ['name'],
       Service: ['name', 'url', 'provider'],
-    }[data['@type']];
-    if (!need) err(page, `JSON-LD de tipo no previsto: ${data['@type']}`);
-    else for (const k of need) if (data[k] == null || (Array.isArray(data[k]) && !data[k].length)) err(page, `JSON-LD ${data['@type']} sin ${k}`);
+    };
+    // @type puede ser una lista (LegalService y LocalBusiness): manda el primer tipo previsto
+    const tipo = [data['@type']].flat().find((t) => campos[t]);
+    if (!tipo) err(page, `JSON-LD de tipo no previsto: ${data['@type']}`);
+    else for (const k of campos[tipo]) if (data[k] == null || (Array.isArray(data[k]) && !data[k].length)) err(page, `JSON-LD ${tipo} sin ${k}`);
   }
 
   // 5. Idioma

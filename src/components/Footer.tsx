@@ -47,7 +47,7 @@ export function Footer() {
           <p className="col__title">El despacho</p>
           <ul>
             <li>
-              <Link href="/el-despacho/">Quiénes somos</Link>
+              <Link href="/el-despacho/" rel="about">Sobre nosotros</Link>
             </li>
             <li>
               <Link href="/blog/">Blog</Link>

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/v1/server-card.schema.json",
+  "name": "es.praetoriaabogados/web",
+  "title": "Praetoria Abogados",
+  "version": "1.0.0",
+  "description": "Consulta de solo lectura de los servicios, guías jurídicas y contacto de Praetoria Abogados.",
+  "websiteUrl": "https://praetoriaabogados.es/",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://praetoriaabogados.es/mcp/",
+      "supportedProtocolVersions": ["2025-11-25", "2025-06-18", "2025-03-26"]
+    }
+  ],
+  "serverInfo": { "name": "praetoria-abogados", "title": "Praetoria Abogados", "version": "1.0.0" },
+  "endpoint": "https://praetoriaabogados.es/mcp/",
+  "transport": "streamable-http",
+  "capabilities": { "tools": { "listChanged": false } }
+}

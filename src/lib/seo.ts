@@ -57,7 +57,8 @@ const areaServed = ['Valencia', 'Provincia de Valencia', 'España'];
 
 export const legalServiceLd = {
   '@context': 'https://schema.org',
-  '@type': 'LegalService',
+  // LegalService es un tipo de LocalBusiness; se declaran los dos para quien solo reconoce el tipo general
+  '@type': ['LegalService', 'LocalBusiness'],
   '@id': `${site.url}/#despacho`,
   name: site.name,
   legalName: site.legalName,

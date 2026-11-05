@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { CookieConsent } from '@/components/CookieConsent';
+import { HerramientasAgentes } from '@/components/HerramientasAgentes';
 import { Medicion } from '@/components/Medicion';
 import { QuickBar } from '@/components/QuickBar';
 import { JsonLd } from '@/components/JsonLd';
@@ -31,6 +32,7 @@ export function MarcoWeb({ children }: { children: ReactNode }) {
       <QuickBar rutasLaborales={rutasLaborales} />
       <CookieConsent />
       <Medicion />
+      <HerramientasAgentes />
     </>
   );
 }

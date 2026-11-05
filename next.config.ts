@@ -12,6 +12,11 @@ const RUTAS_PORTAL = [
   'api/auth', 'api/documentos', 'api/push', 'api/interno',
 ];
 
+// Páginas que tienen versión Markdown: todo salvo el portal, las API y los archivos (lo que lleva punto).
+const SIN_MARKDOWN = [...new Set(RUTAS_PORTAL.map((r) => r.split('/')[0])), 'api', 'mcp', '_next', 'media', 'iconos'];
+const PAGINAS_PUBLICAS = `/:ruta((?!(?:${SIN_MARKDOWN.join('|')})(?:/|$))[^.]+)`;
+const PIDE_MARKDOWN = [{ type: 'header' as const, key: 'accept', value: '.*text/markdown.*' }];
+
 const cabecerasWeb = [
   { key: 'X-Content-Type-Options', value: 'nosniff' },
   { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
@@ -61,6 +66,16 @@ const nextConfig: NextConfig = {
       ...aRedireccionesNext(readFileSync('public/_redirects', 'utf8')),
     ];
   },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        { source: '/', has: PIDE_MARKDOWN, destination: '/api/markdown/' },
+        { source: PAGINAS_PUBLICAS, has: PIDE_MARKDOWN, destination: '/api/markdown/:ruta' },
+      ],
+      afterFiles: [],
+      fallback: [],
+    };
+  },
   async headers() {
     const hsts = process.env.NODE_ENV === 'production'
       ? [{ key: 'Strict-Transport-Security', value: 'max-age=63072000' }]
@@ -70,6 +85,7 @@ const nextConfig: NextConfig = {
       { source: '/:path*', headers: [...cabecerasWeb, ...noIndexable] },
       ...RUTAS_PORTAL.map((r) => ({ source: `/${r}/:path*`, headers: [...cabecerasPortal, ...hsts] })),
       { source: '/sw.js', headers: [{ key: 'Cache-Control', value: 'no-cache' }] },
+      { source: '/.well-known/mcp/:path*', headers: [{ key: 'Access-Control-Allow-Origin', value: '*' }] },
     ];
   },
 };

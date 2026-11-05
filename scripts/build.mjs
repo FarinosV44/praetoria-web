@@ -24,3 +24,5 @@ run(ruta('./qa/materializar.mjs'), 'out');
 for (const dir of ['out', '.next/server/app', '.next/standalone/.next/server/app']) {
   if (existsSync(dir)) run(ruta('./postbuild.mjs'), dir);
 }
+// Versión Markdown de las páginas públicas, sobre el HTML ya definitivo
+run(ruta('./agentes/generar.mjs'), 'out', '.next/markdown');
