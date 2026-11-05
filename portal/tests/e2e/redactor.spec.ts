@@ -187,7 +187,7 @@ test('3. La corrección a mano es otra versión y se exporta marcada como BORRAD
   await entrarComo(p, SA);
   await p.goto(`/admin/expedientes/${e.a}/escritos/${e.escrito}/`);
   await p.getByText('Corregir a mano').click();
-  const t = p.getByLabel(/Texto del borrador/);
+  const t = p.locator('#borrador-texto');
   await t.fill(`${await t.inputValue()}\n\nEn Valencia, a la fecha de la firma. [PENDIENTE: firma del letrado]`);
   await p.getByRole('button', { name: 'Guardar como versión nueva' }).click();
   await expect(p).toHaveURL(/\?v=3$/);
