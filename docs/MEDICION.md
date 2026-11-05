@@ -9,7 +9,7 @@ Se usa la integración existente: el aviso de cookies y `NEXT_PUBLIC_GA_ID`, con
   - No se guarda la atribución, y si se rechaza después, se borra.
   - Las consultas funcionan igual con o sin Analytics: lo comprueba una prueba.
 - **Sin datos personales en la analítica.**
-  - Los parámetros pasan por una lista cerrada de claves (`area`, `servicio`, `tipo_pagina`, `ubicacion`, `destino`, `landing`, `origen`).
+  - Los parámetros pasan por una lista cerrada de claves (`area`, `servicio`, `tipo_pagina`, `ubicacion`, `destino`, `landing`, `origen`, `categoria`, `profundidad`, `herramienta`).
   - Los valores deben ser cortos y seguros: minúsculas, sin espacios, `@`, `?` ni `=`.
   - Nombre, correo, teléfono, mensaje y respuestas de los cuestionarios no tienen ninguna vía de llegar a Analytics. Lo comprueban una prueba unitaria y una e2e.
 - **Un clic no es una consulta, y una consulta no es un cliente.**
@@ -27,6 +27,14 @@ Se usa la integración existente: el aviso de cookies y `NEXT_PUBLIC_GA_ID`, con
 | `phone_click` | Clic en un enlace `tel:` | `destino` (`general` o `laboral` para Lucía López), `landing`, `ubicacion` |
 | `form_start` | Primera interacción con el formulario de consulta, **una vez** por carga | `area`, `servicio` (si ya están elegidos) |
 | `form_success` | **Solo** cuando la función confirma que Netlify Forms aceptó la consulta. **Una vez** por consulta (id) | `area`, `servicio` |
+| `page_context` | Al ver cualquier página, también en la que se aceptan las cookies | `tipo_pagina` (`portada`, `area`, `servicio`, `articulo`, `blog`, `contacto`, `legal` u `otra`), `area`, `servicio`, `categoria`, `landing` |
+| `scroll_depth` | Al llegar al 25, 50, 75 y 100 % de la página, una vez por umbral | `profundidad`, `landing` |
+| `outbound_click` | Clic en un enlace a otra web (WhatsApp tiene su propio evento) | `destino` (solo el dominio), `landing`, `ubicacion` |
+| `tool_start` | Primer clic en un cuestionario o en la calculadora, por página. Nunca sus respuestas | `herramienta` (`cuestionario_divorcio`, `triaje_hacienda` o `calculadora_despido`), `landing` |
+
+**Activación.** Sin `NEXT_PUBLIC_GA_ID` en el momento del build no hay aviso de cookies ni medición. En Hostinger se define en las variables de la app y exige volver a compilar. Para ver en los informes de GA4 los parámetros propios, hay que registrarlos como dimensiones personalizadas.
+
+**Sin publicidad.** `allow_google_signals` y `allow_ad_personalization_signals` están desactivados: la política de cookies lo declara, y unir los temas jurídicos que lee una persona a un perfil publicitario sería especialmente sensible.
 
 Valores de `ubicacion`: `cabecera`, `barra_movil`, `cabecera_pagina`, `recorrido`, `lista_servicios`, `lateral_articulo`, `banda_final`, `cuestionario`, `pie` y `contenido`. Permiten comparar qué CTA funciona.
 

@@ -4,6 +4,8 @@
 // - service_view: al ver una página de área o de servicio.
 // - cta_click: clic en un enlace al formulario (/contacto/…), con el servicio o el área del enlace.
 // - whatsapp_click y phone_click: microconversiones separadas, con destino general o laboral (#28). Un clic NO es una consulta ni un cliente.
+// - page_context: tipo de cada página vista (y categoría, en los artículos). scroll_depth: 25, 50, 75 y 100 % de la página.
+// - outbound_click: dominio de un enlace externo. tool_start: primer uso de un cuestionario o de la calculadora, nunca sus respuestas.
 // También anota la ruta anterior (origen de la consulta) y la atribución de la visita, esta solo con consentimiento.
 import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
@@ -11,7 +13,7 @@ import { areas, laboral } from '@/lib/site';
 import { indiceServicios, servicioPorId } from '@/lib/servicios-indice';
 import { anotarRuta, registrarAtribucion } from '@/lib/atribucion';
 import { EVENTO_CONSENTIMIENTO } from '@/lib/consentimiento';
-import { medir } from '@/lib/medicion';
+import { medir, profundidadesNuevas, tipoDePagina } from '@/lib/medicion';
 
 /** Zona de la página donde está el enlace (para comparar CTA), sin textos del usuario */
 const ZONAS: [string, string][] = [
@@ -35,18 +37,63 @@ export function vistaDePagina(path: string) {
   return null;
 }
 
+const HERRAMIENTAS: [string, string][] = [
+  ['.quiz', 'cuestionario_divorcio'],
+  ['.triage', 'triaje_hacienda'],
+  ['.calc', 'calculadora_despido'],
+];
+
+/** Lo que se mide al ver una página: su tipo siempre y, en áreas y servicios, también service_view. */
+function medirVista(path: string) {
+  const vista = vistaDePagina(path);
+  if (vista) {
+    medir('service_view', { ...vista, landing: path });
+    medir('page_context', { ...vista, landing: path });
+    return;
+  }
+  const categoria = document.querySelector<HTMLElement>('article[data-categoria]')?.dataset.categoria;
+  medir('page_context', { tipo_pagina: categoria ? 'articulo' : tipoDePagina(path), categoria, landing: path });
+}
+
 export function Medicion() {
   const path = usePathname();
 
   useEffect(() => {
     anotarRuta(path);
     registrarAtribucion(new URL(location.href));
-    const vista = vistaDePagina(path);
-    if (vista) medir('service_view', { ...vista, landing: path });
+    medirVista(path);
+
+    const vistas = new Set<number>();
+    const herramientas = new Set<string>();
+    const alDesplazar = () => {
+      const recorrido = document.documentElement.scrollHeight - window.innerHeight;
+      if (recorrido <= 0) return;
+      for (const p of profundidadesNuevas(((window.scrollY + 1) / recorrido) * 100, vistas)) {
+        medir('scroll_depth', { profundidad: String(p), landing: path });
+      }
+    };
+    // Solo qué herramienta se usa: el valor de los campos y las respuestas no se leen
+    const alUsar = (e: Event) => {
+      const objetivo = e.target as Element | null;
+      const herramienta = HERRAMIENTAS.find(([sel]) => objetivo?.closest?.(sel))?.[1];
+      if (!herramienta || herramientas.has(herramienta)) return;
+      herramientas.add(herramienta);
+      medir('tool_start', { herramienta, landing: path });
+    };
+    window.addEventListener('scroll', alDesplazar, { passive: true });
+    document.addEventListener('click', alUsar);
+    return () => {
+      window.removeEventListener('scroll', alDesplazar);
+      document.removeEventListener('click', alUsar);
+    };
   }, [path]);
 
   useEffect(() => {
-    const alAceptar = () => registrarAtribucion(new URL(location.href));
+    const alAceptar = (e: Event) => {
+      registrarAtribucion(new URL(location.href));
+      // La página en la que se acepta también cuenta: sin esto se perdería la primera de cada visita
+      if ((e as CustomEvent).detail === 'granted') medirVista(location.pathname);
+    };
     window.addEventListener(EVENTO_CONSENTIMIENTO, alAceptar);
     const onClick = (e: MouseEvent) => {
       const a = (e.target as Element | null)?.closest?.('a[href]');
@@ -64,6 +111,10 @@ export function Medicion() {
         // Un único número (centralita): el destino lo indica el canal del enlace, no el número.
         const canal = (a.closest('[data-canal]') as HTMLElement | null)?.dataset.canal;
         medir('phone_click', { destino: canal === 'laboral' || /laboral/i.test(a.textContent ?? '') ? 'laboral' : 'general', landing, ubicacion });
+      } else if (/^https?:\/\//.test(href)) {
+        // Solo el dominio: la dirección completa podría llevar parámetros
+        const dominio = new URL(href).hostname;
+        if (dominio !== location.hostname) medir('outbound_click', { destino: dominio, landing, ubicacion });
       }
     };
     document.addEventListener('click', onClick);

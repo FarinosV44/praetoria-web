@@ -93,3 +93,41 @@ test('visitar /gracias/ directamente no cuenta como conversión', async ({ page 
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   expect(de(await eventos(page), 'form_success')).toHaveLength(0);
 });
+
+test('aceptado: mide la página en la que se acepta, el desplazamiento, la herramienta y los enlaces externos', async ({ page }) => {
+  await page.route('**/googletagmanager.com/**', (r) => r.abort());
+  await page.goto('/calculadora-indemnizacion-despido/');
+  await page.getByRole('dialog', { name: 'Aviso de cookies' }).getByRole('button', { name: 'Aceptar' }).click();
+  await expect.poll(async () => de(await eventos(page), 'page_context')[0]?.p).toMatchObject({ landing: '/calculadora-indemnizacion-despido/' });
+
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+  await expect.poll(async () => de(await eventos(page), 'scroll_depth').map((e) => e.p.profundidad)).toEqual(['25', '50', '75', '100']);
+
+  const campo = page.locator('.calc input[name="salario"]');
+  await campo.click();
+  await campo.fill('98765');
+  await campo.click();
+  const usos = de(await eventos(page), 'tool_start');
+  expect(usos).toHaveLength(1);
+  expect(usos[0]?.p).toEqual({ herramienta: 'calculadora_despido', landing: '/calculadora-indemnizacion-despido/' });
+  expect(JSON.stringify(await eventos(page))).not.toContain('98765');
+
+  await page.evaluate(() => {
+    const a = Object.assign(document.createElement('a'), { href: 'https://boe.es/ley?persona=ana@example.com' });
+    a.addEventListener('click', (e) => e.preventDefault());
+    document.querySelector('main')!.append(a);
+    a.click();
+  });
+  const fuera = de(await eventos(page), 'outbound_click');
+  expect(fuera[0]?.p).toMatchObject({ destino: 'boe.es' });
+  expect(JSON.stringify(fuera)).not.toContain('ana');
+});
+
+test('rechazado: ni desplazamiento ni herramientas se miden', async ({ page }) => {
+  await page.route('**/googletagmanager.com/**', (r) => r.abort());
+  await page.goto('/calculadora-indemnizacion-despido/');
+  await page.getByRole('dialog', { name: 'Aviso de cookies' }).getByRole('button', { name: 'Rechazar' }).click();
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+  await page.locator('.calc input').first().click();
+  expect(await eventos(page)).toEqual([]);
+});

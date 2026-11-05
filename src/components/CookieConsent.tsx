@@ -22,7 +22,7 @@ function loadGA(id: string) {
     window.dataLayer!.push(arguments);
   };
   window.gtag('js', new Date());
-  window.gtag('config', id, { anonymize_ip: true });
+  window.gtag('config', id, { anonymize_ip: true, allow_google_signals: false, allow_ad_personalization_signals: false });
 }
 
 export function CookieConsent() {
@@ -42,18 +42,20 @@ export function CookieConsent() {
   if (!GA_ID || !open) return null;
 
   const decide = (v: Choice) => {
-    saveChoice(v);
-    setOpen(false);
+    // Primero Analytics: al guardar la elección se mide la página actual, y gtag ya tiene que existir
     if (v === 'granted' && GA_ID) loadGA(GA_ID);
     else borrarAtribucion();
+    saveChoice(v);
+    setOpen(false);
   };
 
   return (
     <div className="consent-root" lang="es">
       <div className="consent" role="dialog" aria-live="polite" aria-label="Aviso de cookies">
         <p>
-          Usamos cookies analíticas de Google Analytics para saber cuántas personas visitan la web. Solo se activan si las
-          aceptas. <Link href="/politica-de-cookies/">Más información</Link>
+          Usamos cookies analíticas de Google Analytics para saber cómo se usa la web: páginas vistas, procedencia de la
+          visita, hasta dónde se lee y qué enlaces, formularios y calculadoras se usan, nunca lo que escribes. Solo se activan
+          si las aceptas. <Link href="/politica-de-cookies/">Más información</Link>
         </p>
         <div className="consent__actions">
           <button type="button" className="btn btn--ghost" onClick={() => decide('denied')}>

@@ -1,7 +1,7 @@
 // node --test src/lib/medicion.test.mts
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { limpiarParametros } from './medicion.ts';
+import { limpiarParametros, profundidadesNuevas, tipoDePagina } from './medicion.ts';
 import { rutaLimpia, utmLimpio } from './atribucion.ts';
 import { validarConsulta } from './consulta.ts';
 
@@ -39,4 +39,25 @@ test('la consulta descarta (sin bloquear) atribución no válida', () => {
     assert.equal(ok.data.utm_campaign, '');
     assert.equal(ok.data.utm_medium, '');
   }
+});
+
+test('cada umbral de desplazamiento se cuenta una sola vez', () => {
+  const vistas = new Set<number>();
+  assert.deepEqual(profundidadesNuevas(10, vistas), []);
+  assert.deepEqual(profundidadesNuevas(60, vistas), [25, 50]);
+  assert.deepEqual(profundidadesNuevas(60, vistas), []);
+  assert.deepEqual(profundidadesNuevas(100, vistas), [75, 100]);
+});
+
+test('los parámetros nuevos pasan por la misma lista cerrada', () => {
+  assert.deepEqual(limpiarParametros({ profundidad: '50', categoria: 'laboral', herramienta: 'calculadora_despido' }), { categoria: 'laboral', profundidad: '50', herramienta: 'calculadora_despido' });
+  assert.deepEqual(limpiarParametros({ herramienta: 'ana@example.com', categoria: 'con espacios', importe: '12000' }), {});
+});
+
+test('tipo de página por su ruta', () => {
+  assert.equal(tipoDePagina('/'), 'portada');
+  assert.equal(tipoDePagina('/blog/categoria/familia/'), 'blog');
+  assert.equal(tipoDePagina('/contacto/'), 'contacto');
+  assert.equal(tipoDePagina('/aviso-legal/'), 'legal');
+  assert.equal(tipoDePagina('/el-despacho/'), 'otra');
 });
