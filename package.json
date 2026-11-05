@@ -32,7 +32,13 @@
     "recordatorios": "node --env-file-if-exists=.env.local --experimental-strip-types portal/scripts/recordatorios.ts",
     "agenda:avisos": "node --env-file-if-exists=.env.local --experimental-strip-types portal/scripts/agenda.ts",
     "portal:test": "node --env-file-if-exists=.env.local --experimental-strip-types --test-concurrency=1 --test 'portal/tests/db/**/*.test.ts'",
-    "portal:e2e": "playwright test -c portal/playwright.config.ts"
+    "portal:e2e": "playwright test -c portal/playwright.config.ts",
+    "seguros:migrate": "node --env-file-if-exists=.env.local --import tsx seguros/scripts/migrate.ts",
+    "seguros:demo": "node --env-file-if-exists=.env.local --import tsx seguros/scripts/demo-sintetica.ts",
+    "seguros:avisos": "node --env-file-if-exists=.env.local --import tsx seguros/scripts/avisos-ejecutar.ts",
+    "seguros:copia": "node --env-file-if-exists=.env.local --import tsx seguros/scripts/copia.ts",
+    "seguros:copia:restaurar": "node --env-file-if-exists=.env.local --import tsx seguros/scripts/copia-restaurar.ts",
+    "seguros:test": "vitest run -c seguros/vitest.config.ts"
   },
   "devDependencies": {
     "@netlify/redirect-matcher": "^0.4.2",
@@ -54,7 +60,9 @@
     "sharp": "^0.35.5",
     "smtp-server": "^3.21.1",
     "tailwindcss": "^4.3.3",
-    "typescript": "^6.0.3"
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "vitest": "^5.1.0"
   },
   "dependencies": {
     "@fontsource-variable/archivo": "^5.3.0",
@@ -64,12 +72,14 @@
     "@types/web-push": "^3.6.4",
     "better-auth": "^1.7.14",
     "docx": "^9.15.2",
+    "fflate": "^0.8.3",
     "file-type": "^22.2.0",
     "gray-matter": "^4.0.3",
     "jszip": "^3.10.2",
     "mammoth": "^1.13.0",
     "next": "^16.4.3",
     "nodemailer": "^10.2.1",
+    "pdfjs-dist": "^6.5.438",
     "pdfmake": "^0.3.13",
     "pg": "^8.23.1",
     "qrcode": "^1.5.4",

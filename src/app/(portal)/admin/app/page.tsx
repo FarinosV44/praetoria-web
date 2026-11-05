@@ -22,6 +22,7 @@ export default async function AppMovil() {
       <section className="card">
         <h2 className="subtitulo">2. Activa los avisos en este dispositivo</h2>
         <p className="ayuda mb-3">En la pantalla de bloqueo solo verás «Tienes un aviso pendiente en Praetoria». El detalle se ve al entrar, con tu contraseña y doble factor.</p>
+        {u.personal!.rol === 'administrador' ? <p className="ayuda mb-3">Estos mismos dispositivos reciben también los avisos de Seguros (vencimientos y plazos de oposición).</p> : null}
         {clave ? <ActivarNotificaciones clavePublica={clave} /> : <p className="error">Las notificaciones push no están configuradas en este entorno (faltan las claves VAPID).</p>}
       </section>
       <section className="card">

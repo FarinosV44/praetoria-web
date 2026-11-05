@@ -77,3 +77,30 @@ jobs:
           name: playwright-trazas
           path: test-results/
           retention-days: 7
+
+  seguros:
+    # Gestor de seguros (/admin/seguros): reglas, permisos, avisos, copias y subidas contra PostgreSQL real,
+    # solo con datos sintéticos.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: polizas
+          POSTGRES_PASSWORD: polizas
+          POSTGRES_DB: polizas_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U polizas" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      SEGUROS_DATABASE_URL_TEST: postgres://polizas:polizas@localhost:5432/polizas_test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Pruebas del gestor de seguros
+        run: npm run seguros:test

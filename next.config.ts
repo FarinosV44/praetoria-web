@@ -11,6 +11,9 @@ const RUTAS_PORTAL = [
   'documentacion', 'documentos', 'expedientes', 'inicio', 'mensajes', 'perfil', 'solicitudes',
   'api/auth', 'api/documentos', 'api/push', 'api/interno',
 ];
+// Gestor de seguros (/admin/seguros va incluido en «admin»). Sus vistas de documentos llevan cabeceras propias
+// (se previsualizan dentro de la ficha, mismo origen), así que no reciben X-Frame-Options: DENY.
+const RUTAS_SEGUROS_API = '/api/seguros/:ruta((?!documentos/|siniestros/archivos/).*)';
 
 // Páginas que tienen versión Markdown: todo salvo el portal, las API y los archivos (lo que lleva punto).
 const SIN_MARKDOWN = [...new Set(RUTAS_PORTAL.map((r) => r.split('/')[0])), 'api', 'mcp', '_next', 'media', 'iconos'];
@@ -52,7 +55,9 @@ const nextConfig: NextConfig = {
   images: { unoptimized: true },
   poweredByHeader: false,
   reactStrictMode: true,
-  serverExternalPackages: ['pg', 'unpdf', 'mammoth', 'pdfmake', 'docx', 'jszip'],
+  serverExternalPackages: ['pg', 'unpdf', 'mammoth', 'pdfmake', 'docx', 'jszip', 'pdfjs-dist'],
+  // Gestor de seguros: pdfjs carga su «worker» de forma dinámica (texto por página para comprobar citas).
+  outputFileTracingIncludes: { '/**': ['./node_modules/pdfjs-dist/legacy/build/pdf.worker.mjs'] },
   experimental: {
     serverActions: { bodySizeLimit: '1mb' },
     // En Hostinger el número de procesos está limitado: un solo proceso de generación (lo fija scripts/build.mjs)
@@ -84,6 +89,8 @@ const nextConfig: NextConfig = {
     return [
       { source: '/:path*', headers: [...cabecerasWeb, ...noIndexable] },
       ...RUTAS_PORTAL.map((r) => ({ source: `/${r}/:path*`, headers: [...cabecerasPortal, ...hsts] })),
+      { source: RUTAS_SEGUROS_API, headers: [...cabecerasPortal, ...hsts] },
+      { source: '/api/seguros/:ruta(documentos|siniestros/archivos)/:path*', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }, ...hsts] },
       { source: '/sw.js', headers: [{ key: 'Cache-Control', value: 'no-cache' }] },
       { source: '/.well-known/mcp/:path*', headers: [{ key: 'Access-Control-Allow-Origin', value: '*' }] },
     ];

@@ -1,0 +1,374 @@
+/*
+ * PRAETORIA gestor de seguros dentro del panel (/admin/seguros). Procede de tokens.css y
+ * globals.css del gestor (FarinosV44/POLIZAS-SEGURO): todos los selectores van bajo .seguros para no alterar el resto del portal.
+ * Paleta y tipografía (#11): solo desde las variables de este bloque.
+ */
+/*
+ * PRAETORIA gestor de seguros — tokens de diseño (#11).
+ * ÚNICA fuente de la paleta y la tipografía. Las pantallas usan estas variables, nunca valores sueltos.
+ * Si cambias un color, actualiza también scripts/marca/generar.mjs y comprueba el contraste
+ * (tabla en docs/MARCA.md; prueba automática en tests/contraste.test.ts).
+ */
+.seguros {
+  /* Paleta de marca */
+  --color-fondo: #F9F9F9;          /* fondo base */
+  --color-oscuro: #28282B;         /* texto y elementos oscuros */
+  --color-acento: #ff4200;         /* acento: acciones principales, selección y detalles */
+
+  /* Derivados neutros */
+  --color-superficie: #FFFFFF;     /* tarjetas y formularios sobre el fondo base */
+  --color-texto: var(--color-oscuro);
+  --color-texto-2: #5E5E63;        /* texto secundario: 6,1:1 sobre el fondo */
+  --color-borde: #E3E3E6;          /* separadores (decorativo) */
+  --color-borde-fuerte: #8E8E93;   /* bordes de campos: 3,1:1 sobre el fondo */
+  --color-hover: #F1F1F2;
+
+  /* Sobre el acento se usa texto negro (6,0:1). El blanco sobre #ff4200 solo da 3,5:1 y no se usa en texto. */
+  --color-sobre-acento: #000000;
+  --color-sobre-oscuro: #F9F9F9;
+
+  /* Estados (siempre acompañados de texto o icono, nunca solo color) */
+  --color-aviso-texto: #A33100;    /* 6,4:1 sobre su fondo */
+  --color-aviso-fondo: #FFF1EB;
+  --color-peligro-texto: #B3261E;  /* 6,5:1 */
+  --color-peligro-fondo: #FDECEC;
+  --color-ok-texto: #1E6B3A;       /* 6,5:1 */
+  --color-ok-fondo: #EAF5EE;
+  --color-info-fondo: #F1F1F2;
+
+  /* Tipografía: Helvetica del sistema; no se sirve ningún archivo de fuente. */
+  --fuente: Helvetica, "Helvetica Neue", Arial, sans-serif;
+  --peso-normal: 400;
+  --peso-medio: 500;
+  --peso-fuerte: 700;
+  --texto-xs: 0.75rem;
+  --texto-s: 0.875rem;
+  --texto-m: 1rem;
+  --texto-l: 1.125rem;
+  --texto-xl: 1.5rem;
+  --texto-xxl: 2rem;
+
+  /* Espaciado y forma */
+  --e-1: 0.25rem;
+  --e-2: 0.5rem;
+  --e-3: 0.75rem;
+  --e-4: 1rem;
+  --e-5: 1.5rem;
+  --e-6: 2rem;
+  --e-7: 3rem;
+  --radio: 10px;
+  --radio-s: 6px;
+  --sombra: 0 1px 2px rgb(40 40 43 / 0.06), 0 1px 1px rgb(40 40 43 / 0.04);
+  --ancho-max: 1180px;
+  --foco: 0 0 0 2px var(--color-fondo), 0 0 0 4px var(--color-acento); /* 3,3:1 sobre el fondo */
+
+  color-scheme: light;
+}
+
+
+
+.seguros *, .seguros *::before, .seguros *::after { box-sizing: border-box; }
+.seguros { -webkit-text-size-adjust: 100%; }
+.seguros {
+  margin: 0;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: var(--fuente);
+  font-size: var(--texto-m);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.seguros h1, .seguros h2, .seguros h3, .seguros h4 { margin: 0; line-height: 1.2; font-weight: var(--peso-fuerte); letter-spacing: -0.01em; }
+.seguros h1 { font-size: var(--texto-xl); }
+.seguros h2 { font-size: var(--texto-l); }
+.seguros h3 { font-size: var(--texto-m); }
+.seguros p { margin: 0; }
+.seguros a { color: inherit; text-underline-offset: 2px; }
+.seguros img, .seguros svg { display: block; }
+.seguros button, .seguros input, .seguros select, .seguros textarea { font: inherit; color: inherit; }
+.seguros :focus-visible { outline: none; box-shadow: var(--foco); border-radius: var(--radio-s); }
+.seguros ::selection { background: color-mix(in srgb, var(--color-acento) 25%, transparent); }
+.seguros .cifra { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.seguros .sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.seguros .secundario { color: var(--color-texto-2); }
+.seguros .pequeno { font-size: var(--texto-s); }
+
+/* ---------------------------------------------------------------- Estructura */
+.seguros .saltar { position: absolute; left: var(--e-4); top: -100px; background: var(--color-oscuro); color: var(--color-sobre-oscuro); padding: var(--e-2) var(--e-3); border-radius: var(--radio-s); z-index: 100; }
+.seguros .saltar:focus { top: var(--e-2); }
+
+.seguros .cabecera { background: var(--color-superficie); border-bottom: 1px solid var(--color-borde); position: sticky; top: 0; z-index: 20; }
+.seguros .cabecera__in { max-width: var(--ancho-max); margin: 0 auto; padding: var(--e-3) var(--e-5); display: flex; align-items: center; gap: var(--e-6); }
+.seguros .cabecera__marca { display: block; flex-shrink: 0; }
+.seguros .cabecera__marca img { height: 34px; width: auto; }
+.seguros .nav { display: flex; gap: var(--e-1); flex: 1; }
+.seguros .nav a { text-decoration: none; padding: var(--e-2) var(--e-3); border-radius: var(--radio-s); color: var(--color-texto-2); font-weight: var(--peso-medio); position: relative; }
+.seguros .nav a:hover { color: var(--color-texto); background: var(--color-hover); }
+.seguros .nav a[aria-current="page"] { color: var(--color-texto); }
+.seguros .nav a[aria-current="page"]::after { content: ""; position: absolute; left: var(--e-3); right: var(--e-3); bottom: -13px; height: 3px; background: var(--color-acento); border-radius: 2px 2px 0 0; }
+.seguros .cabecera__usuario { display: flex; align-items: center; gap: var(--e-3); font-size: var(--texto-s); color: var(--color-texto-2); }
+.seguros .cabecera__usuario form { display: inline; }
+
+.seguros .principal { max-width: var(--ancho-max); margin: 0 auto; padding: var(--e-6) var(--e-5) var(--e-7); }
+.seguros .encabezado { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--e-4); margin-bottom: var(--e-5); flex-wrap: wrap; }
+.seguros .encabezado p { margin-top: var(--e-1); }
+.seguros .migas { font-size: var(--texto-s); color: var(--color-texto-2); margin-bottom: var(--e-2); display: flex; gap: var(--e-2); flex-wrap: wrap; }
+.seguros .migas a { color: var(--color-texto-2); }
+
+/* Barra inferior en móvil (como una app) */
+.seguros .barra-movil { display: none; }
+
+@media (max-width: 760px) {
+  .seguros .cabecera__in { padding: var(--e-3) var(--e-4); gap: var(--e-3); justify-content: space-between; }
+  .seguros .cabecera__marca img { height: 28px; }
+  .seguros .cabecera .nav { display: none; }
+  .seguros .cabecera__usuario .nombre-usuario { display: none; }
+  .seguros .principal { padding: var(--e-5) var(--e-4) calc(88px + env(safe-area-inset-bottom)); }
+  .seguros .barra-movil {
+    display: grid; grid-template-columns: repeat(var(--n, 3), 1fr); position: fixed; inset: auto 0 0 0; z-index: 30;
+    background: var(--color-superficie); border-top: 1px solid var(--color-borde); padding-bottom: env(safe-area-inset-bottom);
+  }
+  .seguros .barra-movil a { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: var(--e-2) 0 var(--e-2); text-decoration: none; font-size: var(--texto-xs); color: var(--color-texto-2); font-weight: var(--peso-medio); border-top: 3px solid transparent; }
+  .seguros .barra-movil a svg { width: 22px; height: 22px; }
+  .seguros .barra-movil a[aria-current="page"] { color: var(--color-texto); border-top-color: var(--color-acento); }
+  .seguros h1 { font-size: 1.375rem; }
+}
+
+/* ---------------------------------------------------------------- Botones */
+.seguros .boton {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--e-2);
+  min-height: 44px; padding: 0 var(--e-4); border-radius: var(--radio-s); border: 1px solid var(--color-borde-fuerte);
+  background: var(--color-superficie); color: var(--color-texto); font-weight: var(--peso-medio); text-decoration: none;
+  cursor: pointer; white-space: nowrap; font-size: var(--texto-m);
+}
+.seguros .boton:hover { background: var(--color-hover); }
+.seguros .boton svg { width: 18px; height: 18px; }
+.seguros .boton--principal { background: var(--color-acento); border-color: var(--color-acento); color: var(--color-sobre-acento); font-weight: var(--peso-fuerte); }
+.seguros .boton--principal:hover { background: color-mix(in srgb, var(--color-acento) 88%, black); border-color: color-mix(in srgb, var(--color-acento) 88%, black); }
+.seguros .boton--oscuro { background: var(--color-oscuro); border-color: var(--color-oscuro); color: var(--color-sobre-oscuro); }
+.seguros .boton--oscuro:hover { background: #3a3a3e; }
+.seguros .boton--sutil { border-color: transparent; background: transparent; }
+.seguros .boton--sutil:hover { background: var(--color-hover); }
+.seguros .boton--peligro { color: var(--color-peligro-texto); border-color: currentColor; }
+.seguros .boton--peligro:hover { background: var(--color-peligro-fondo); }
+.seguros .boton--peq { min-height: 36px; padding: 0 var(--e-3); font-size: var(--texto-s); }
+.seguros .boton[disabled], .seguros .boton[aria-disabled="true"] { opacity: .55; cursor: not-allowed; }
+.seguros .acciones { display: flex; gap: var(--e-3); flex-wrap: wrap; align-items: center; }
+.seguros .enlace { background: none; border: 0; padding: 0; color: var(--color-texto); text-decoration: underline; cursor: pointer; font: inherit; }
+
+/* ---------------------------------------------------------------- Tarjetas y bloques */
+.seguros .tarjeta { background: var(--color-superficie); border: 1px solid var(--color-borde); border-radius: var(--radio); box-shadow: var(--sombra); }
+.seguros .tarjeta--pad { padding: var(--e-5); }
+.seguros .bloque + .bloque { margin-top: var(--e-6); }
+.seguros .bloque__titulo { display: flex; justify-content: space-between; align-items: center; gap: var(--e-3); margin-bottom: var(--e-3); flex-wrap: wrap; }
+.seguros .vacio { text-align: center; padding: var(--e-7) var(--e-5); }
+.seguros .vacio p { color: var(--color-texto-2); margin: var(--e-2) auto var(--e-5); max-width: 46ch; }
+
+.seguros .aviso { border-radius: var(--radio-s); padding: var(--e-3) var(--e-4); font-size: var(--texto-s); display: flex; gap: var(--e-3); align-items: flex-start; }
+.seguros .aviso svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; }
+.seguros .aviso--error { background: var(--color-peligro-fondo); color: var(--color-peligro-texto); }
+.seguros .aviso--ok { background: var(--color-ok-fondo); color: var(--color-ok-texto); }
+.seguros .aviso--atencion { background: var(--color-aviso-fondo); color: var(--color-aviso-texto); }
+.seguros .aviso--info { background: var(--color-info-fondo); color: var(--color-texto); }
+
+/* Etiquetas de estado: color + texto */
+.seguros .estado { display: inline-flex; align-items: center; gap: 4px; font-size: var(--texto-xs); font-weight: var(--peso-fuerte); padding: 2px 8px; border-radius: 999px; white-space: nowrap; letter-spacing: .01em; }
+.seguros .estado::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.seguros .estado--vigente { background: var(--color-ok-fondo); color: var(--color-ok-texto); }
+.seguros .estado--proxima, .seguros .estado--negociacion, .seguros .estado--revisar { background: var(--color-aviso-fondo); color: var(--color-aviso-texto); }
+.seguros .estado--vencida { background: var(--color-peligro-fondo); color: var(--color-peligro-texto); }
+.seguros .estado--sin_fecha, .seguros .estado--anulada, .seguros .estado--sustituida, .seguros .estado--neutro { background: var(--color-info-fondo); color: var(--color-texto-2); }
+
+/* ---------------------------------------------------------------- Resumen del panel */
+.seguros .resumen { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: var(--e-4); margin-bottom: var(--e-5); }
+.seguros .cifra-clave { padding: var(--e-4) var(--e-5); display: flex; flex-direction: column; gap: 2px; text-decoration: none; }
+.seguros a.cifra-clave:hover { border-color: var(--color-borde-fuerte); }
+.seguros .cifra-clave__etq { font-size: var(--texto-s); color: var(--color-texto-2); }
+.seguros .cifra-clave__valor { font-size: var(--texto-xl); font-weight: var(--peso-fuerte); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.seguros .cifra-clave__nota { font-size: var(--texto-xs); color: var(--color-texto-2); }
+.seguros .cifra-clave--principal { border-top: 3px solid var(--color-acento); }
+@media (max-width: 900px) { .seguros .resumen { grid-template-columns: repeat(3, 1fr); gap: var(--e-3); } .seguros .cifra-clave--principal { grid-column: 1 / -1; } }
+@media (max-width: 760px) {
+  .seguros .resumen .cifra-clave:not(.cifra-clave--principal) { padding: var(--e-3); }
+  .seguros .resumen .cifra-clave:not(.cifra-clave--principal) .cifra-clave__valor { font-size: var(--texto-l); }
+  .seguros .resumen .cifra-clave:not(.cifra-clave--principal) .cifra-clave__nota { display: none; }
+  .seguros .resumen .cifra-clave__etq { font-size: var(--texto-xs); line-height: 1.3; }
+}
+
+/* ---------------------------------------------------------------- Filtros */
+.seguros .segmentos { display: inline-flex; background: var(--color-superficie); border: 1px solid var(--color-borde); border-radius: var(--radio-s); padding: 3px; gap: 2px; }
+.seguros .segmentos a { text-decoration: none; padding: 6px var(--e-3); border-radius: 4px; font-size: var(--texto-s); font-weight: var(--peso-medio); color: var(--color-texto-2); }
+.seguros .segmentos a:hover { color: var(--color-texto); background: var(--color-hover); }
+.seguros .segmentos a[aria-current="true"] { background: var(--color-oscuro); color: var(--color-sobre-oscuro); }
+.seguros .filtros { display: flex; gap: var(--e-3); flex-wrap: wrap; align-items: flex-end; margin-bottom: var(--e-4); }
+.seguros .filtros__campos { display: flex; gap: var(--e-3); flex-wrap: wrap; align-items: flex-end; flex: 1; }
+.seguros .filtros label { display: flex; flex-direction: column; gap: 2px; font-size: var(--texto-xs); color: var(--color-texto-2); font-weight: var(--peso-medio); }
+.seguros .filtros select, .seguros .filtros input { min-height: 40px; padding: 0 var(--e-3); border: 1px solid var(--color-borde-fuerte); border-radius: var(--radio-s); background: var(--color-superficie); font-size: var(--texto-s); max-width: 220px; }
+.seguros .filtros input[type="search"] { min-width: 220px; }
+.seguros .filtros-movil { display: none; }
+@media (max-width: 760px) {
+  .seguros .filtros-movil { display: block; margin-bottom: var(--e-4); }
+  .seguros .filtros-movil > summary { padding: var(--e-3) var(--e-4); font-weight: var(--peso-medio); cursor: pointer; min-height: 44px; display: flex; align-items: center; }
+  .seguros .filtros-movil[open] > summary { border-bottom: 1px solid var(--color-borde); }
+  .seguros .filtros-movil .filtros { padding: var(--e-4); margin: 0; }
+  .seguros .filtros { display: block; }
+  .seguros .filtros__campos { display: grid; grid-template-columns: 1fr 1fr; }
+  .seguros .filtros__campos label:has(input[type="search"]) { grid-column: 1 / -1; }
+  .seguros .filtros select, .seguros .filtros input, .seguros .filtros input[type="search"] { max-width: none; min-width: 0; width: 100%; }
+  .seguros .filtros .acciones { margin-top: var(--e-3); }
+  .seguros .segmentos { display: flex; width: 100%; }
+  .seguros .segmentos a { flex: 1; text-align: center; }
+}
+
+/* ---------------------------------------------------------------- Tabla de pólizas (escritorio) */
+.seguros .tabla { width: 100%; border-collapse: collapse; }
+.seguros .tabla th { text-align: left; font-size: var(--texto-xs); text-transform: uppercase; letter-spacing: .06em; color: var(--color-texto-2); font-weight: var(--peso-fuerte); padding: var(--e-3) var(--e-4); border-bottom: 1px solid var(--color-borde); white-space: nowrap; }
+.seguros .tabla td { padding: var(--e-3) var(--e-4); border-bottom: 1px solid var(--color-borde); vertical-align: middle; }
+.seguros .tabla tr:last-child td { border-bottom: 0; }
+.seguros .tabla tbody tr { position: relative; }
+.seguros .tabla tbody tr:hover { background: #FCFCFC; }
+.seguros .tabla .num { text-align: right; }
+.seguros .tabla a.fila-enlace { text-decoration: none; font-weight: var(--peso-fuerte); }
+.seguros .tabla a.fila-enlace::after { content: ""; position: absolute; inset: 0; }
+.seguros .tabla a.fila-enlace:focus-visible { box-shadow: none; }
+.seguros .tabla tr:has(a.fila-enlace:focus-visible) { outline: 2px solid var(--color-acento); outline-offset: -2px; }
+
+.seguros .titular-ramo { display: flex; align-items: center; gap: var(--e-3); }
+.seguros .icono-ramo { width: 36px; height: 36px; border-radius: 8px; background: var(--color-fondo); border: 1px solid var(--color-borde); display: grid; place-items: center; flex-shrink: 0; color: var(--color-oscuro); }
+.seguros .icono-ramo svg { width: 20px; height: 20px; }
+.seguros .linea-2 { font-size: var(--texto-s); color: var(--color-texto-2); }
+.seguros .importe { font-weight: var(--peso-fuerte); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.seguros .vto { font-weight: var(--peso-fuerte); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* ---------------------------------------------------------------- Tarjetas de pólizas (móvil) */
+.seguros .lista-tarjetas { display: none; list-style: none; padding: 0; margin: 0; }
+@media (max-width: 760px) {
+  .seguros .solo-escritorio { display: none !important; }
+  .seguros .lista-tarjetas { display: grid; gap: var(--e-3); }
+}
+.seguros .tpoliza { position: relative; padding: var(--e-4); display: grid; gap: var(--e-3); }
+.seguros .tpoliza__cab { display: flex; gap: var(--e-3); align-items: flex-start; }
+.seguros .tpoliza__cab > div { min-width: 0; flex: 1; }
+.seguros .tpoliza__titular { font-size: var(--texto-xs); text-transform: uppercase; letter-spacing: .06em; font-weight: var(--peso-fuerte); color: var(--color-texto-2); }
+.seguros .tpoliza__nombre { font-weight: var(--peso-fuerte); text-decoration: none; display: block; overflow-wrap: anywhere; }
+.seguros .tpoliza__nombre::after { content: ""; position: absolute; inset: 0; border-radius: var(--radio); }
+.seguros .tpoliza__datos { display: grid; grid-template-columns: 1fr 1fr; gap: var(--e-3); padding-top: var(--e-3); border-top: 1px solid var(--color-borde); }
+.seguros .tpoliza__datos dt { font-size: var(--texto-xs); color: var(--color-texto-2); }
+.seguros .tpoliza__datos dd { margin: 0; }
+
+/* ---------------------------------------------------------------- Formularios */
+.seguros .form { display: grid; gap: var(--e-5); }
+.seguros .form fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: var(--e-4); }
+.seguros .form legend { font-size: var(--texto-l); font-weight: var(--peso-fuerte); margin-bottom: var(--e-3); padding: 0; }
+.seguros .rejilla { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--e-4); }
+.seguros .rejilla-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--e-4); }
+.seguros .ancho-completo { grid-column: 1 / -1; }
+@media (max-width: 760px) { .seguros .rejilla, .seguros .rejilla-3 { grid-template-columns: 1fr; } }
+.seguros .campo { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.seguros .campo > label, .seguros .campo .etiqueta { font-weight: var(--peso-medio); font-size: var(--texto-s); }
+.seguros .campo label[data-requerido]::after { content: " *"; color: var(--color-texto-2); }
+.seguros .campo .ayuda { font-size: var(--texto-xs); color: var(--color-texto-2); }
+.seguros .campo input:not([type="checkbox"]):not([type="radio"]), .seguros .campo select, .seguros .campo textarea {
+  width: 100%; min-height: 44px; padding: var(--e-2) var(--e-3); border: 1px solid var(--color-borde-fuerte);
+  border-radius: var(--radio-s); background: var(--color-superficie); font-size: var(--texto-m);
+}
+.seguros .campo textarea { min-height: 96px; resize: vertical; }
+.seguros .campo input:focus-visible, .seguros .campo select:focus-visible, .seguros .campo textarea:focus-visible { border-color: var(--color-oscuro); }
+.seguros .campo [aria-invalid="true"] { border-color: var(--color-peligro-texto) !important; }
+.seguros .campo .error { color: var(--color-peligro-texto); font-size: var(--texto-s); font-weight: var(--peso-medio); }
+.seguros .casilla { display: flex; gap: var(--e-2); align-items: flex-start; font-size: var(--texto-s); }
+.seguros .casilla input { width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--color-oscuro); flex-shrink: 0; }
+.seguros .radios { display: flex; gap: var(--e-2); flex-wrap: wrap; }
+.seguros .radios label { display: flex; gap: var(--e-2); align-items: center; padding: var(--e-2) var(--e-4); border: 1px solid var(--color-borde-fuerte); border-radius: var(--radio-s); background: var(--color-superficie); cursor: pointer; min-height: 44px; font-weight: var(--peso-medio); }
+.seguros .radios label:has(input:checked) { border-color: var(--color-oscuro); box-shadow: inset 0 0 0 1px var(--color-oscuro), inset 4px 0 0 var(--color-acento); }
+.seguros .radios input { accent-color: var(--color-oscuro); }
+.seguros .pie-form { display: flex; gap: var(--e-3); justify-content: flex-end; padding-top: var(--e-4); border-top: 1px solid var(--color-borde); flex-wrap: wrap; }
+@media (max-width: 760px) { .seguros .pie-form { flex-direction: column-reverse; } .seguros .pie-form .boton { width: 100%; } }
+.seguros details.mas > summary { cursor: pointer; font-weight: var(--peso-medio); list-style: none; display: flex; align-items: center; gap: var(--e-2); }
+.seguros details.mas > summary::-webkit-details-marker { display: none; }
+.seguros details.mas > summary::before { content: "+"; display: inline-grid; place-items: center; width: 20px; height: 20px; border: 1px solid var(--color-borde-fuerte); border-radius: 4px; font-size: 14px; }
+.seguros details.mas[open] > summary::before { content: "−"; }
+.seguros details.mas[open] > summary { margin-bottom: var(--e-4); }
+
+/* ---------------------------------------------------------------- Ficha de póliza */
+.seguros .ficha-cab { display: flex; gap: var(--e-4); align-items: flex-start; justify-content: space-between; flex-wrap: wrap; margin-bottom: var(--e-5); }
+.seguros .ficha-cab .icono-ramo { width: 48px; height: 48px; }
+.seguros .ficha-cab .icono-ramo svg { width: 26px; height: 26px; }
+.seguros .datos-clave { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-bottom: var(--e-5); }
+.seguros .datos-clave > div { padding: var(--e-4) var(--e-5); border-right: 1px solid var(--color-borde); }
+.seguros .datos-clave > div:last-child { border-right: 0; }
+.seguros .datos-clave dt { font-size: var(--texto-s); color: var(--color-texto-2); }
+.seguros .datos-clave dd { margin: 2px 0 0; font-size: var(--texto-l); font-weight: var(--peso-fuerte); font-variant-numeric: tabular-nums; }
+.seguros .datos-clave dd small { display: block; font-size: var(--texto-s); font-weight: var(--peso-normal); color: var(--color-texto-2); }
+@media (max-width: 900px) {
+  .seguros .datos-clave { grid-template-columns: 1fr 1fr; }
+  .seguros .datos-clave > div:nth-child(2) { border-right: 0; }
+  .seguros .datos-clave > div:nth-child(-n+2) { border-bottom: 1px solid var(--color-borde); }
+}
+.seguros .pestanas { display: flex; gap: var(--e-1); border-bottom: 1px solid var(--color-borde); margin-bottom: var(--e-5); overflow-x: auto; scrollbar-width: none; }
+.seguros .pestanas a { text-decoration: none; padding: var(--e-3) var(--e-3); color: var(--color-texto-2); font-weight: var(--peso-medio); white-space: nowrap; border-bottom: 3px solid transparent; margin-bottom: -1px; }
+.seguros .pestanas a:hover { color: var(--color-texto); }
+.seguros .pestanas a[aria-current="page"] { color: var(--color-texto); border-bottom-color: var(--color-acento); }
+.seguros .lista-datos { display: grid; grid-template-columns: minmax(140px, 220px) 1fr; gap: var(--e-3) var(--e-5); margin: 0; }
+.seguros .lista-datos dt { color: var(--color-texto-2); font-size: var(--texto-s); }
+.seguros .lista-datos dd { margin: 0; overflow-wrap: anywhere; }
+@media (max-width: 560px) { .seguros .lista-datos { grid-template-columns: 1fr; gap: 2px; } .seguros .lista-datos dd { margin-bottom: var(--e-3); } }
+.seguros .dos-columnas { display: grid; grid-template-columns: 1.6fr 1fr; gap: var(--e-5); align-items: start; }
+@media (max-width: 900px) { .seguros .dos-columnas { grid-template-columns: 1fr; } }
+.seguros .lista-simple { list-style: none; margin: 0; padding: 0; }
+.seguros .lista-simple > li { padding: var(--e-3) var(--e-4); border-bottom: 1px solid var(--color-borde); display: flex; gap: var(--e-3); align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.seguros .lista-simple > li:last-child { border-bottom: 0; }
+.seguros .pendiente { color: var(--color-texto-2); font-style: italic; font-weight: var(--peso-normal); }
+.seguros .contactos a { font-weight: var(--peso-medio); }
+
+/* ---------------------------------------------------------------- Acceso */
+.seguros .acceso { min-height: 100dvh; display: grid; place-items: center; padding: var(--e-5) var(--e-4); }
+.seguros .acceso__caja { width: 100%; max-width: 400px; }
+.seguros .acceso__logo { width: 260px; max-width: 80%; height: auto; margin: 0 auto var(--e-6); }
+.seguros .acceso .tarjeta { padding: var(--e-6) var(--e-5); }
+.seguros .acceso h1 { font-size: var(--texto-l); margin-bottom: var(--e-5); }
+.seguros .acceso .boton { width: 100%; }
+.seguros .acceso__pie { text-align: center; margin-top: var(--e-5); font-size: var(--texto-s); color: var(--color-texto-2); }
+
+/* ---------------------------------------------------------------- Avisos */
+.seguros .insignia { display: inline-grid; place-items: center; min-width: 18px; height: 18px; padding: 0 5px; margin-left: 6px; border-radius: 999px; background: var(--color-acento); color: var(--color-sobre-acento); font-size: 11px; font-weight: var(--peso-fuerte); line-height: 1; vertical-align: 1px; }
+.seguros .barra-movil .insignia { margin-left: 3px; }
+.seguros .aviso-item { display: grid; grid-template-columns: auto 1fr auto; gap: var(--e-3) var(--e-4); align-items: start; padding: var(--e-4); border-bottom: 1px solid var(--color-borde); }
+.seguros .aviso-item:last-child { border-bottom: 0; }
+.seguros .aviso-item__titulo { font-weight: var(--peso-fuerte); text-decoration: none; }
+.seguros .aviso-item__titulo:hover { text-decoration: underline; }
+.seguros .canales { display: flex; gap: 6px; flex-wrap: wrap; margin-top: var(--e-2); }
+@media (max-width: 760px) { .seguros .aviso-item { grid-template-columns: auto 1fr; } .seguros .aviso-item > .acciones { grid-column: 1 / -1; } }
+.seguros .diagnostico { display: grid; gap: 0; margin: 0; }
+.seguros .diagnostico > div { display: flex; justify-content: space-between; gap: var(--e-4); padding: var(--e-3) 0; border-bottom: 1px solid var(--color-borde); }
+.seguros .diagnostico > div:last-child { border-bottom: 0; }
+.seguros .diagnostico dt { color: var(--color-texto-2); }
+.seguros .diagnostico dd { margin: 0; text-align: right; font-weight: var(--peso-medio); }
+.seguros .pasos { margin: var(--e-3) 0 0; padding-left: 1.25rem; display: grid; gap: var(--e-2); }
+
+/* ---------------------------------------------------------------- Siniestros y análisis */
+.seguros .lista-puntos { margin: var(--e-2) 0 0; padding-left: 1.25rem; display: grid; gap: var(--e-1); }
+.seguros .bloque-cita { padding: var(--e-3) 0; border-top: 1px solid var(--color-borde); display: grid; gap: var(--e-2); }
+.seguros .citas { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--e-2); }
+.seguros .citas blockquote { margin: 0; padding: var(--e-2) var(--e-3); border-left: 3px solid var(--color-acento); background: var(--color-fondo); font-size: var(--texto-s); }
+.seguros .borrador { width: 100%; min-height: 360px; font-family: var(--fuente); font-size: var(--texto-m); line-height: 1.55; padding: var(--e-4); border: 1px solid var(--color-borde-fuerte); border-radius: var(--radio-s); background: var(--color-superficie); }
+.seguros .revision { display: grid; grid-template-columns: 1fr 1fr; gap: var(--e-5); align-items: start; }
+.seguros .revision iframe { width: 100%; height: 80vh; border: 1px solid var(--color-borde); border-radius: var(--radio); background: var(--color-superficie); position: sticky; top: 80px; }
+@media (max-width: 900px) { .seguros .revision { grid-template-columns: 1fr; } .seguros .revision iframe { height: 60vh; position: static; } }
+.seguros .fila-campo { display: grid; grid-template-columns: auto 1fr; gap: var(--e-3); padding: var(--e-3) 0; border-top: 1px solid var(--color-borde); align-items: start; }
+.seguros .fila-campo input[type="checkbox"] { width: 20px; height: 20px; margin-top: 30px; accent-color: var(--color-oscuro); }
+.seguros .comparacion { width: 100%; border-collapse: collapse; font-size: var(--texto-s); }
+.seguros .comparacion th, .seguros .comparacion td { text-align: left; vertical-align: top; padding: var(--e-3); border-bottom: 1px solid var(--color-borde); min-width: 180px; }
+.seguros .comparacion th[scope="row"] { color: var(--color-texto-2); font-weight: var(--peso-medio); min-width: 120px; }
+.seguros .desplazable { overflow-x: auto; }
+
+/* ---------------------------------------------------------------- Integración en el panel del despacho */
+.seguros { border-radius: var(--radio); padding: var(--e-5); margin: calc(-1 * var(--e-2)) 0 0; }
+.seguros-cabecera { display: flex; align-items: center; justify-content: space-between; gap: var(--e-4); flex-wrap: wrap; margin-bottom: var(--e-5); padding-bottom: var(--e-3); border-bottom: 1px solid var(--color-borde); }
+.seguros-cabecera__marca { display: flex; align-items: center; gap: var(--e-3); text-decoration: none; }
+.seguros .nav { flex: 0 1 auto; flex-wrap: wrap; }
+.seguros .nav a[aria-current="page"]::after { bottom: -2px; }
+@media (max-width: 760px) {
+  .seguros { padding: var(--e-4) var(--e-3) calc(88px + env(safe-area-inset-bottom)); margin-inline: calc(-1 * var(--e-2)); }
+  .seguros .seguros-cabecera .nav { display: none; }
+}
