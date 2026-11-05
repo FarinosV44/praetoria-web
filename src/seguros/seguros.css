@@ -1,66 +1,54 @@
 /*
- * PRAETORIA gestor de seguros dentro del panel (/admin/seguros). Procede de tokens.css y
- * globals.css del gestor (FarinosV44/POLIZAS-SEGURO): todos los selectores van bajo .seguros para no alterar el resto del portal.
- * Paleta y tipografía (#11): solo desde las variables de este bloque.
+ * Seguros dentro del panel (/admin/seguros). Procede del gestor (FarinosV44/POLIZAS-SEGURO) con el aspecto
+ * del panel del despacho: todos los selectores van bajo .seguros para no alterar el resto del portal.
  */
 /*
- * PRAETORIA gestor de seguros — tokens de diseño (#11).
- * ÚNICA fuente de la paleta y la tipografía. Las pantallas usan estas variables, nunca valores sueltos.
- * Si cambias un color, actualiza también scripts/marca/generar.mjs y comprueba el contraste
- * (tabla en docs/MARCA.md; prueba automática en tests/contraste.test.ts).
+ * Tokens: los mismos del panel del despacho (src/app/(portal)/portal.css): grafito, piedra y el rojo del
+ * logotipo, tipografía Archivo. Las pantallas de Seguros usan solo estas variables.
  */
 .seguros {
-  /* Paleta de marca */
-  --color-fondo: #F9F9F9;          /* fondo base */
-  --color-oscuro: #28282B;         /* texto y elementos oscuros */
-  --color-acento: #ff4200;         /* acento: acciones principales, selección y detalles */
+  --color-fondo: var(--color-stone);
+  --color-oscuro: var(--color-ink);
+  --color-acento: var(--color-red);
+  --color-superficie: var(--color-paper);
+  --color-texto: var(--color-ink);
+  --color-texto-2: var(--color-muted);
+  --color-borde: var(--color-line);
+  --color-borde-fuerte: #858077;  /* bordes de campo: 3,9:1 sobre blanco, 3,3:1 sobre piedra */
+  --color-hover: #f7f6f3;
+  --color-sobre-acento: #ffffff;   /* blanco sobre #b3242a: 6,4:1 */
+  --color-sobre-oscuro: #ffffff;
+  --color-aviso-texto: var(--color-warn);
+  --color-aviso-fondo: var(--color-warn-tint);
+  --color-peligro-texto: var(--color-red-dark);
+  --color-peligro-fondo: var(--color-red-tint);
+  --color-ok-texto: var(--color-ok);
+  --color-ok-fondo: var(--color-ok-tint);
+  --color-info-fondo: var(--color-info-tint);
 
-  /* Derivados neutros */
-  --color-superficie: #FFFFFF;     /* tarjetas y formularios sobre el fondo base */
-  --color-texto: var(--color-oscuro);
-  --color-texto-2: #5E5E63;        /* texto secundario: 6,1:1 sobre el fondo */
-  --color-borde: #E3E3E6;          /* separadores (decorativo) */
-  --color-borde-fuerte: #8E8E93;   /* bordes de campos: 3,1:1 sobre el fondo */
-  --color-hover: #F1F1F2;
-
-  /* Sobre el acento se usa texto negro (6,0:1). El blanco sobre #ff4200 solo da 3,5:1 y no se usa en texto. */
-  --color-sobre-acento: #000000;
-  --color-sobre-oscuro: #F9F9F9;
-
-  /* Estados (siempre acompañados de texto o icono, nunca solo color) */
-  --color-aviso-texto: #A33100;    /* 6,4:1 sobre su fondo */
-  --color-aviso-fondo: #FFF1EB;
-  --color-peligro-texto: #B3261E;  /* 6,5:1 */
-  --color-peligro-fondo: #FDECEC;
-  --color-ok-texto: #1E6B3A;       /* 6,5:1 */
-  --color-ok-fondo: #EAF5EE;
-  --color-info-fondo: #F1F1F2;
-
-  /* Tipografía: Helvetica del sistema; no se sirve ningún archivo de fuente. */
-  --fuente: Helvetica, "Helvetica Neue", Arial, sans-serif;
+  --fuente: var(--font-sans);
   --peso-normal: 400;
-  --peso-medio: 500;
-  --peso-fuerte: 700;
-  --texto-xs: 0.75rem;
-  --texto-s: 0.875rem;
+  --peso-medio: 600;
+  --peso-fuerte: 650;
+  --texto-xs: 0.78rem;
+  --texto-s: 0.9rem;
   --texto-m: 1rem;
-  --texto-l: 1.125rem;
-  --texto-xl: 1.5rem;
-  --texto-xxl: 2rem;
+  --texto-l: 1.15rem;
+  --texto-xl: 1.4rem;
+  --texto-xxl: clamp(1.5rem, 1.2rem + 1.4vw, 2.1rem);
 
-  /* Espaciado y forma */
   --e-1: 0.25rem;
   --e-2: 0.5rem;
   --e-3: 0.75rem;
   --e-4: 1rem;
-  --e-5: 1.5rem;
+  --e-5: 1.25rem;
   --e-6: 2rem;
   --e-7: 3rem;
   --radio: 10px;
-  --radio-s: 6px;
-  --sombra: 0 1px 2px rgb(40 40 43 / 0.06), 0 1px 1px rgb(40 40 43 / 0.04);
-  --ancho-max: 1180px;
-  --foco: 0 0 0 2px var(--color-fondo), 0 0 0 4px var(--color-acento); /* 3,3:1 sobre el fondo */
+  --radio-s: 8px;
+  --sombra: none;
+  --ancho-max: 1080px;
+  --foco: 0 0 0 3px var(--color-red);
 
   color-scheme: light;
 }
@@ -363,12 +351,28 @@
 .seguros .desplazable { overflow-x: auto; }
 
 /* ---------------------------------------------------------------- Integración en el panel del despacho */
-.seguros { border-radius: var(--radio); padding: var(--e-5); margin: calc(-1 * var(--e-2)) 0 0; }
-.seguros-cabecera { display: flex; align-items: center; justify-content: space-between; gap: var(--e-4); flex-wrap: wrap; margin-bottom: var(--e-5); padding-bottom: var(--e-3); border-bottom: 1px solid var(--color-borde); }
-.seguros-cabecera__marca { display: flex; align-items: center; gap: var(--e-3); text-decoration: none; }
-.seguros .nav { flex: 0 1 auto; flex-wrap: wrap; }
-.seguros .nav a[aria-current="page"]::after { bottom: -2px; }
+/* Mismo lienzo que el resto del panel: sin fondo propio, título como .titulo y pestañas sobrias. */
+.seguros { background: transparent; padding: 0; }
+.seguros-cabecera { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--e-3) var(--e-4); flex-wrap: wrap; margin-bottom: var(--e-5); border-bottom: 1px solid var(--color-borde); }
+.seguros-cabecera__titulo { font-size: var(--texto-xxl); font-weight: 650; padding-bottom: var(--e-3); text-decoration: none; letter-spacing: -0.01em; line-height: 1.2; }
+.seguros .nav { flex: 0 1 auto; flex-wrap: wrap; gap: 0; }
+.seguros .nav a { border-radius: 0; padding: var(--e-3) var(--e-3); color: var(--color-texto-2); font-weight: 600; }
+.seguros .nav a:hover { color: var(--color-texto); background: none; }
+.seguros .nav a[aria-current="page"] { color: var(--color-texto); }
+.seguros .nav a[aria-current="page"]::after { background: var(--color-acento); bottom: -1px; height: 2px; }
+.seguros .radios input { width: auto; min-height: 0; margin: 0; }
+.seguros h1, .seguros h2, .seguros h3 { letter-spacing: -0.01em; }
 @media (max-width: 760px) {
-  .seguros { padding: var(--e-4) var(--e-3) calc(88px + env(safe-area-inset-bottom)); margin-inline: calc(-1 * var(--e-2)); }
+  .seguros { padding-bottom: calc(88px + env(safe-area-inset-bottom)); }
   .seguros .seguros-cabecera .nav { display: none; }
 }
+
+/* Subir pólizas (lectura automática) */
+.seguros .zona-importar { display: grid; gap: var(--e-2); place-items: center; text-align: center; padding: var(--e-6) var(--e-4); border: 2px dashed var(--color-borde); border-radius: var(--radio); background: var(--color-superficie); cursor: pointer; }
+.seguros .zona-importar:hover, .seguros .zona-importar--activa { border-color: var(--color-acento); background: var(--color-peligro-fondo); }
+.seguros .zona-importar:focus-within { box-shadow: var(--foco); }
+.seguros .zona-importar__titulo { font-weight: 650; font-size: var(--texto-l); }
+.seguros .zona-importar__ayuda { color: var(--color-texto-2); font-size: var(--texto-s); max-width: 60ch; }
+.seguros .origen { color: var(--color-texto-2); font-size: var(--texto-xs); }
+.seguros .origen a { color: inherit; }
+.seguros .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

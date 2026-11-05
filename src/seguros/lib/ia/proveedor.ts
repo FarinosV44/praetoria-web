@@ -16,11 +16,22 @@ export type PeticionIA = {
 
 export type RespuestaIA = { datos: unknown; modelo: string; tokensEntrada?: number; tokensSalida?: number };
 
+export type PeticionBusqueda = {
+  sistema: string;
+  texto: string;
+  herramienta: { nombre: string; descripcion: string; esquema: Record<string, unknown> };
+  maxBusquedas?: number;
+};
+/** Resultado de una búsqueda en internet: la salida estructurada y las páginas que de verdad se consultaron. */
+export type RespuestaBusqueda = { datos: unknown; modelo: string; fuentes: { url: string; titulo: string }[] };
+
 export interface ProveedorIA {
   nombre: string;
   modelo: string;
   /** Devuelve la llamada a la herramienta (salida estructurada). */
   pedir(p: PeticionIA): Promise<RespuestaIA>;
+  /** Busca en internet (herramienta de búsqueda del proveedor) y devuelve la salida estructurada con sus fuentes. */
+  buscar?(p: PeticionBusqueda): Promise<RespuestaBusqueda>;
 }
 
 export class ErrorIA extends Error {
@@ -59,6 +70,53 @@ class Anthropic implements ProveedorIA {
     const uso = j.content.find((c) => c.type === 'tool_use' && c.name === p.herramienta.nombre);
     if (!uso) throw new ErrorIA('La IA no devolvió una respuesta estructurada.', true);
     return { datos: uso.input, modelo: j.model, tokensEntrada: j.usage?.input_tokens, tokensSalida: j.usage?.output_tokens };
+  }
+
+  /**
+   * Búsqueda web del propio proveedor (web_search): el modelo busca, lee los resultados y termina llamando a la
+   * herramienta de salida. Se devuelven también las URL que aparecieron en los resultados, para comprobar que
+   * la fuente que cite exista de verdad.
+   */
+  async buscar(p: PeticionBusqueda): Promise<RespuestaBusqueda> {
+    type Bloque = { type: string; name?: string; input?: unknown; content?: unknown };
+    const mensajes: { role: 'user' | 'assistant'; content: unknown }[] = [{ role: 'user', content: p.texto }];
+    const fuentes = new Map<string, string>();
+    for (let vuelta = 0; vuelta < 4; vuelta++) {
+      const r = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', 'x-api-key': this.clave, 'anthropic-version': '2023-06-01' },
+        body: JSON.stringify({
+          model: this.modelo,
+          max_tokens: 4000,
+          system: p.sistema,
+          tools: [
+            { type: 'web_search_20250305', name: 'web_search', max_uses: p.maxBusquedas ?? 4, user_location: { type: 'approximate', country: 'ES', timezone: 'Europe/Madrid' } },
+            { name: p.herramienta.nombre, description: p.herramienta.descripcion, input_schema: p.herramienta.esquema },
+          ],
+          messages: mensajes,
+        }),
+        signal: AbortSignal.timeout(180_000),
+      });
+      if (!r.ok) {
+        const cuerpo = (await r.text()).slice(0, 300);
+        throw new ErrorIA(`La búsqueda en internet respondió ${r.status}: ${cuerpo}`, r.status === 429 || r.status >= 500);
+      }
+      const j = await r.json() as { model: string; stop_reason: string; content: Bloque[] };
+      for (const b of j.content) {
+        if (b.type === 'web_search_tool_result' && Array.isArray(b.content)) {
+          for (const x of b.content as { type: string; url?: string; title?: string }[]) if (x.url) fuentes.set(x.url, x.title ?? x.url);
+        }
+      }
+      const uso = j.content.find((c) => c.type === 'tool_use' && c.name === p.herramienta.nombre);
+      if (uso) return { datos: uso.input, modelo: j.model, fuentes: [...fuentes].map(([url, titulo]) => ({ url, titulo })) };
+      if (j.stop_reason !== 'pause_turn') {
+        // Terminó sin la salida estructurada: se le pide expresamente.
+        mensajes.push({ role: 'assistant', content: j.content }, { role: 'user', content: `Registra ahora el resultado con la herramienta «${p.herramienta.nombre}».` });
+      } else {
+        mensajes.push({ role: 'assistant', content: j.content });
+      }
+    }
+    throw new ErrorIA('La búsqueda en internet no devolvió un resultado estructurado.', true);
   }
 }
 

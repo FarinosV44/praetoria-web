@@ -63,6 +63,8 @@ export type DatosAnualidad = z.infer<typeof esquemaAnualidad>;
 export type Poliza = z.infer<typeof esquemaPoliza> & {
   id: string; titular_nombre: string; titular_tipo: 'empresa' | 'particular'; ramo_nombre: string; ramo_icono: string;
   sustituida_por: string | null; creada_en: Date; actualizada_en: Date; archivada_en: Date | null;
+  siniestros_telefono: string | null; siniestros_email: string | null; siniestros_web: string | null;
+  origen_datos: Record<string, import('../ia/importacion').Origen>;
 };
 
 export type Anualidad = {

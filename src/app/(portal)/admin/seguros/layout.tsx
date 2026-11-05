@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Logo } from '@/seguros/components/logo';
 import { Navegacion } from '@/seguros/components/navegacion';
 import { exigirUsuario } from '@/seguros/lib/auth/servidor';
 import { segurosConfigurado } from '@/seguros/lib/db';
@@ -32,7 +31,7 @@ export default async function LayoutSeguros({ children }: { children: React.Reac
   return (
     <div className="seguros">
       <div className="seguros-cabecera">
-        <Link href="/admin/seguros/" className="seguros-cabecera__marca" aria-label="PRAETORIA gestor de seguros — pólizas"><Logo alto={30} /></Link>
+        <Link href="/admin/seguros/" className="seguros-cabecera__titulo">Seguros</Link>
         <Navegacion avisos={pendientes} />
       </div>
       {children}

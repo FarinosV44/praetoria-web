@@ -55,6 +55,13 @@ test('panel, ficha, documento y avisos dentro de /admin/seguros', async ({ page:
   await p.getByRole('button', { name: 'Comprobar y enviar prueba' }).click();
   await expect(p.getByText(/claves de notificaciones \(VAPID\)/).first()).toBeVisible();
 
+  // Subir pólizas: sin clave de IA en local, se dice que está sin configurar (nunca se simula la lectura)
+  await p.goto('/admin/seguros/');
+  await p.getByRole('link', { name: 'Subir pólizas' }).click();
+  await expect(p.getByRole('heading', { name: 'Subir pólizas' })).toBeVisible();
+  await expect(p.getByText('Lectura automática sin configurar.')).toBeVisible();
+  if (capturas) await p.screenshot({ path: 'docs/portal/capturas/seguros-subir.png', fullPage: true });
+
   const csv = await p.request.get('/api/seguros/exportar/polizas/');
   expect(csv.status()).toBe(200);
   expect(csv.headers()['content-type']).toContain('text/csv');

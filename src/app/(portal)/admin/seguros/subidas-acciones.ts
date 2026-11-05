@@ -4,6 +4,8 @@ import { revalidatePath } from 'next/cache';
 import { unstable_rethrow } from 'next/navigation';
 import { exigirUsuario } from '@/seguros/lib/auth/servidor';
 import { confirmarSubidas, prepararSubidas } from '@/seguros/lib/datos/subidas';
+import { crearImportacion, procesarImportacion } from '@/seguros/lib/ia/importacion';
+import { after } from 'next/server';
 import { Invalido, NoEncontrado } from '@/seguros/lib/errores';
 
 type R<T> = { ok: true; datos: T } | { ok: false; error: string };
@@ -18,14 +20,23 @@ async function seguro<T>(fn: () => Promise<T>): Promise<R<T>> {
   }
 }
 
-export async function accionPrepararSubidas(destino: 'poliza' | 'siniestro', id: string, archivos: { nombre: string; bytes: number }[]) {
+type Destino = 'poliza' | 'siniestro' | 'importacion';
+
+export async function accionPrepararSubidas(destino: Destino, id: string, archivos: { nombre: string; bytes: number }[]) {
   return seguro(async () => prepararSubidas(await exigirUsuario(), destino, id, archivos));
 }
 
-export async function accionConfirmarSubidas(destino: 'poliza' | 'siniestro', id: string, claves: string[], extra: { tipo: string; anualidadId?: string | null }) {
+export async function accionConfirmarSubidas(destino: Destino, id: string, claves: string[], extra: { tipo: string; anualidadId?: string | null }) {
   return seguro(async () => {
     const r = await confirmarSubidas(await exigirUsuario(), destino, id, claves, extra);
-    revalidatePath(destino === 'poliza' ? `/admin/seguros/polizas/${id}` : `/admin/seguros/siniestros/${id}`);
+    // La IA lee el lote después de responder (puede tardar un par de minutos); el cron lo reintenta si se corta.
+    if (destino === 'importacion') after(() => procesarImportacion(id).catch((e) => console.error('[seguros/importacion]', (e as Error).message)));
+    else revalidatePath(destino === 'poliza' ? `/admin/seguros/polizas/${id}` : `/admin/seguros/siniestros/${id}`);
     return r.map((x) => ({ nombre: x.nombre, duplicadoDe: x.duplicadoDe }));
   });
+}
+
+/** Abre una importación (lote de documentos que leerá la IA), opcionalmente para una póliza o un titular. */
+export async function accionCrearImportacion(opciones: { polizaId?: string | null; titularId?: string | null }) {
+  return seguro(async () => crearImportacion(await exigirUsuario(), opciones));
 }
