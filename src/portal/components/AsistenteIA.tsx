@@ -37,7 +37,7 @@ function GuardarNota({ solicitud, mensaje }: { solicitud: string; mensaje: strin
   );
 }
 
-export function AsistenteIA({ solicitud, hilo, mensajes }: { solicitud: string; hilo: string | null; mensajes: MensajeIA[] }) {
+export function AsistenteIA({ solicitud, hilo, mensajes, estilos = [] }: { solicitud: string; hilo: string | null; mensajes: MensajeIA[]; estilos?: { id: string; nombre: string }[] }) {
   const router = useRouter();
   const [r, accion, pendiente] = useActionState<ResultadoIA, FormData>(preguntar, {});
   const texto = useRef<HTMLTextAreaElement>(null);
@@ -60,6 +60,16 @@ export function AsistenteIA({ solicitud, hilo, mensajes }: { solicitud: string; 
                 <button type="button" className="btn-texto text-sm" onClick={() => navigator.clipboard?.writeText(m.texto)}>Copiar</button>
                 <GuardarNota solicitud={solicitud} mensaje={m.id} />
               </p>
+            ) : null}
+            {m.rol === 'asistente' ? (
+              <form method="post" action="/api/escritos/exportar/" className="flex flex-wrap gap-2 items-center text-sm mt-1" data-exportar>
+                <input type="hidden" name="mensaje" value={m.id} />
+                {estilos.length ? estilos.map((e, i) => <label key={e.id} className="flex gap-1 items-center"><input type="radio" name="estilo" value={e.id} defaultChecked={i === 0} /> {e.nombre}</label>)
+                  : <span className="ayuda">Estilo base</span>}
+                <button name="formato" value="docx" className="btn-texto">Descargar Word</button>
+                <button name="formato" value="pdf" className="btn-texto">Descargar PDF</button>
+                <span className="ayuda text-xs">(borrador: revísalo antes de usarlo)</span>
+              </form>
             ) : null}
           </li>
         ))}

@@ -25,6 +25,7 @@ export default async function DespachoLayout({ children }: { children: React.Rea
           <Link href="/admin/clientes/">Clientes</Link>
           <Link href="/admin/agenda/">Agenda</Link>
           <Link href="/admin/avisos/">Avisos{avisos ? ` (${avisos})` : ''}</Link>
+          {u.personal!.rol !== 'facturacion' ? <Link href="/admin/biblioteca/">Biblioteca</Link> : null}
           <Link href="/admin/plantillas/">Plantillas</Link>
           <Link href="/admin/app/">App móvil</Link>
           {u.personal!.rol === 'administrador' ? <Link href="/admin/equipo/">Equipo</Link> : null}

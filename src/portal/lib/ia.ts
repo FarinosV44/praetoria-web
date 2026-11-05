@@ -19,6 +19,23 @@ const POR_FUENTE = 6_000;
 const recorta = (t: string, n: number) => (t.length > n ? `${t.slice(0, n)}… [recortado]` : t);
 const fecha = (d: Date | string) => new Intl.DateTimeFormat('es-ES', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Europe/Madrid' }).format(new Date(d));
 
+/** Texto por páginas de un PDF o DOCX. Las imágenes no se leen (sin OCR). Lo usa también la biblioteca (#92). */
+export async function extraerTexto(datos: Uint8Array, mime: string): Promise<{ paginas: string[]; detalle: string | null }> {
+  if (mime === 'application/pdf') {
+    const { getDocumentProxy, extractText } = await import('unpdf');
+    const { text } = await extractText(await getDocumentProxy(datos.slice()), { mergePages: false }); // copia: pdf.js se queda con el búfer
+    const paginas = (text as string[]).map((t) => t.replace(/\s+\n/g, '\n').trim());
+    return paginas.some((t) => t.length > 20) ? { paginas, detalle: null } : { paginas: [], detalle: 'PDF escaneado o sin texto seleccionable' };
+  }
+  if (mime.startsWith('application/vnd.openxmlformats')) {
+    const mammoth = await import('mammoth');
+    const t = (await mammoth.extractRawText({ buffer: Buffer.from(datos) })).value.trim();
+    // Un DOCX no tiene páginas fijas: se trocea en secciones de unos 3.000 caracteres.
+    return t ? { paginas: t.match(/[\s\S]{1,3000}(?=\s|$)/g) ?? [t], detalle: null } : { paginas: [], detalle: 'documento vacío' };
+  }
+  return { paginas: [], detalle: 'imagen: no se lee su contenido (sin OCR)' };
+}
+
 /** Texto por páginas de un documento; se extrae una vez y se guarda. Las imágenes no se leen (sin OCR). */
 async function textoDocumento(tx: Tx, d: { id: string; solicitud_id: string; storage_key: string; mime: string; analisis: string }) {
   const ya = (await tx.query('select estado, paginas, detalle from portal.documentos_texto where documento_id = $1', [d.id])).rows[0];
@@ -29,18 +46,8 @@ async function textoDocumento(tx: Tx, d: { id: string; solicitud_id: string; sto
   else {
     try {
       const datos = new Uint8Array(await (await leerObjeto(d.storage_key)).arrayBuffer());
-      if (d.mime === 'application/pdf') {
-        const { getDocumentProxy, extractText } = await import('unpdf');
-        const { text } = await extractText(await getDocumentProxy(datos), { mergePages: false });
-        const paginas = (text as string[]).map((t) => t.replace(/\s+\n/g, '\n').trim());
-        r = paginas.some((t) => t.length > 20) ? { estado: 'ok', paginas, detalle: null } : { estado: 'sin_texto', paginas: [], detalle: 'PDF escaneado o sin texto seleccionable' };
-      } else {
-        const mammoth = await import('mammoth');
-        const t = (await mammoth.extractRawText({ buffer: Buffer.from(datos) })).value.trim();
-        // Un DOCX no tiene páginas fijas: se trocea en secciones de unos 3.000 caracteres.
-        const paginas = t ? t.match(/[\s\S]{1,3000}(?=\s|$)/g) ?? [t] : [];
-        r = paginas.length ? { estado: 'ok', paginas, detalle: null } : { estado: 'sin_texto', paginas: [], detalle: 'documento vacío' };
-      }
+      const x = await extraerTexto(datos, d.mime);
+      r = x.paginas.length ? { estado: 'ok', paginas: x.paginas, detalle: null } : { estado: 'sin_texto', paginas: [], detalle: x.detalle };
     } catch {
       r = { estado: 'error', paginas: [], detalle: 'no se ha podido leer el archivo' };
     }
