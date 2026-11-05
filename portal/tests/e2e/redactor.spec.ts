@@ -204,4 +204,8 @@ test('4. Quien no tiene el asunto no ve el borrador ni lo exporta', async ({ pag
   expect((await p.goto(`/admin/expedientes/${e.a}/escritos/${e.escrito}/`))!.status()).toBe(404);
   const r = await p.request.post('/api/escritos/exportar/', { form: { escrito: e.escrito!, version: '1', formato: 'docx' }, headers: { origin: 'http://localhost:3100' } });
   expect(r.status()).toBe(404);
+  // Una página ajena no puede provocar la descarga: ni con su origen ni con «Origin: null» sin Sec-Fetch-Site same-origin.
+  for (const headers of [{ origin: 'https://ajeno.example' }, { origin: 'null', 'sec-fetch-site': 'cross-site' }]) {
+    expect((await p.request.post('/api/escritos/exportar/', { form: { escrito: e.escrito!, version: '1', formato: 'docx' }, headers })).status()).toBe(403);
+  }
 });

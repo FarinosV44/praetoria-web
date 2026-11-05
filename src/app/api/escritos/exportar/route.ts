@@ -13,7 +13,12 @@ export const runtime = 'nodejs';
 // asistente del expediente (con RLS) o del propio texto enviado por el profesional. Sale como BORRADOR.
 export async function POST(req: Request) {
   const h = await headers();
-  if (h.get('origin') !== env.origin) return new Response('Origen no permitido', { status: 403 });
+  // Los botones de descarga son formularios normales y el panel envía «Referrer-Policy: no-referrer», así que el
+  // navegador manda «Origin: null». Se admite solo si el propio navegador declara que la petición es del mismo origen
+  // (Sec-Fetch-Site no lo puede falsear una página ajena).
+  const origen = h.get('origin');
+  const mismo = origen === env.origin || ((origen === null || origen === 'null') && h.get('sec-fetch-site') === 'same-origin');
+  if (!mismo) return new Response('Origen no permitido', { status: 403 });
   const sesion = await auth.api.getSession({ headers: h });
   if (!sesion) return new Response('No autorizado', { status: 401 });
   if (await personalSinMfa(sesion.user.id, sesion.user.twoFactorEnabled)) return new Response('Activa el doble factor', { status: 403 });
