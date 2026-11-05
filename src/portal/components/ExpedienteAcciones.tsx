@@ -1,6 +1,6 @@
 'use client';
 import { useActionState, useState } from 'react';
-import { compartirDocumento, completarTarea, equipoAsunto, estadoCliente, moverDocumento, reasignarTarea, reprogramarTarea, verificarPlazo, type Resultado } from '@/app/(portal)/admin/expedientes/acciones';
+import { compartirDocumento, eliminarDocumento, estadoExpediente, restaurarDocumento, completarTarea, equipoAsunto, estadoCliente, moverDocumento, reasignarTarea, reprogramarTarea, verificarPlazo, type Resultado } from '@/app/(portal)/admin/expedientes/acciones';
 
 /** Compartir un documento privado con el cliente: requiere un segundo clic de confirmación. */
 export function Compartir({ documento, solicitud }: { documento: string; solicitud: string }) {
@@ -153,6 +153,57 @@ export function Reprogramar({ tarea, solicitud, fecha }: { tarea: string; solici
       <input name="fecha" type="date" defaultValue={fecha} required aria-label="Nueva fecha" className="border rounded px-1 text-sm" />
       <input name="hora" type="time" aria-label="Nueva hora (opcional)" className="border rounded px-1 text-sm" />
       <button key="ok" className="btn-texto" disabled={pendiente}>Cambiar</button>
+      {estado.error ? <span className="text-xs" role="alert">{estado.error}</span> : null}
+    </form>
+  );
+}
+
+/** Eliminar un documento: segundo clic con motivo opcional; va a la papelera del expediente durante 30 días. */
+export function Eliminar({ documento, solicitud, nombre }: { documento: string; solicitud: string; nombre: string }) {
+  const [seguro, setSeguro] = useState(false);
+  const [estado, accion, pendiente] = useActionState<Resultado, FormData>(eliminarDocumento, {});
+  if (estado.ok) return <span className="chip chip-neutro">En la papelera</span>;
+  return (
+    <form action={accion} className="inline-flex flex-wrap gap-2 items-center">
+      <input type="hidden" name="documento" value={documento} /><input type="hidden" name="solicitud" value={solicitud} />
+      {seguro ? (
+        <>
+          <input name="motivo" maxLength={300} placeholder="Motivo (opcional)" aria-label={`Motivo para eliminar ${nombre}`} className="border rounded-md p-1 text-xs w-44" />
+          <button key="confirmar" className="btn-texto" style={{ color: 'var(--color-red-dark)' }} disabled={pendiente}>Confirmar: a la papelera</button>
+          <button type="button" className="btn-texto" style={{ color: 'var(--color-muted)' }} onClick={() => setSeguro(false)}>Cancelar</button>
+        </>
+      ) : <button key="eliminar" type="button" className="btn-texto" style={{ color: 'var(--color-muted)' }} onClick={() => setSeguro(true)} aria-label={`Eliminar ${nombre}`}>🗑 Eliminar</button>}
+      {estado.error ? <span className="text-xs" role="alert">{estado.error}</span> : null}
+    </form>
+  );
+}
+
+export function Restaurar({ documento, solicitud }: { documento: string; solicitud: string }) {
+  const [estado, accion, pendiente] = useActionState<Resultado, FormData>(restaurarDocumento, {});
+  if (estado.ok) return <span className="chip chip-ok">Restaurado</span>;
+  return (
+    <form action={accion} className="inline-flex gap-2 items-center">
+      <input type="hidden" name="documento" value={documento} /><input type="hidden" name="solicitud" value={solicitud} />
+      <button className="btn-texto" disabled={pendiente}>Restaurar</button>
+      {estado.error ? <span className="text-xs" role="alert">{estado.error}</span> : null}
+    </form>
+  );
+}
+
+/** Cerrar (con confirmación) o reabrir el expediente. */
+export function CerrarExpediente({ solicitud, cerrado }: { solicitud: string; cerrado: boolean }) {
+  const [seguro, setSeguro] = useState(false);
+  const [estado, accion, pendiente] = useActionState<Resultado, FormData>(estadoExpediente, {});
+  return (
+    <form action={accion} className="inline-flex gap-2 items-center">
+      <input type="hidden" name="solicitud" value={solicitud} /><input type="hidden" name="cerrar" value={cerrado ? '' : '1'} />
+      {cerrado ? <button key="reabrir" className="btn-texto" disabled={pendiente}>Reabrir expediente</button>
+        : seguro ? (
+          <>
+            <button key="confirmar" className="btn-texto" disabled={pendiente}>Confirmar: cerrar el expediente</button>
+            <button type="button" className="btn-texto" style={{ color: 'var(--color-muted)' }} onClick={() => setSeguro(false)}>Cancelar</button>
+          </>
+        ) : <button key="cerrar" type="button" className="btn-texto" onClick={() => setSeguro(true)}>Cerrar expediente</button>}
       {estado.error ? <span className="text-xs" role="alert">{estado.error}</span> : null}
     </form>
   );

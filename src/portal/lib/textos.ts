@@ -37,6 +37,11 @@ export function textoEvento(tipo: string, d: Record<string, unknown>): string {
     case 'documento_revisado': return `Documento de ${t} revisado: ${estadoDocumento[String(d.a)] ?? d.a}`;
     case 'mensaje': return d.del_despacho ? 'Mensaje del despacho' : 'Mensaje del cliente';
     case 'expediente_abierto': return 'Expediente abierto';
+    case 'expediente_cerrado': return 'Expediente cerrado';
+    case 'expediente_reabierto': return 'Expediente reabierto';
+    case 'documento_eliminado': return `Documento «${d.archivo}» enviado a la papelera${d.motivo ? ` (${d.motivo})` : ''}`;
+    case 'documento_restaurado': return `Documento «${d.archivo}» restaurado de la papelera`;
+    case 'documento_purgado': return `Documento «${d.archivo}» borrado definitivamente (más de 30 días en la papelera)`;
     case 'responsable_asignado': return d.nombre_responsable ? `Responsable: ${d.nombre_responsable}` : 'Responsable asignado';
     case 'asignacion': return `${d.nombre_empleado ?? 'Un profesional'} se incorpora al asunto${d.papel === 'suplente' ? ' como suplente' : ''}`;
     case 'asignacion_retirada': return `${d.nombre_empleado ?? 'Un profesional'} deja el asunto`;

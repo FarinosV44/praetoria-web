@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Compositor } from '@/portal/components/Compositor';
-import { Carpeta, Compartir, Completar, EquipoAsunto, EstadoCliente, Reasignar, Reprogramar, VerificarPlazo } from '@/portal/components/ExpedienteAcciones';
+import { Carpeta, CerrarExpediente, Compartir, Eliminar, Restaurar, Completar, EquipoAsunto, EstadoCliente, Reasignar, Reprogramar, VerificarPlazo } from '@/portal/components/ExpedienteAcciones';
 import { ChipSolicitud, tamano } from '@/portal/components/ui';
 import { comoUsuario } from '@/portal/lib/db';
 import { UUID } from '@/portal/lib/datos';
@@ -87,6 +87,7 @@ function Item({ e, sid }: { e: Entrada; sid: string }) {
       <p className="flex flex-wrap gap-3 items-center text-sm mt-1">
         <Carpeta documento={e.id} solicitud={sid} carpeta={e.carpeta} editable={e.del_despacho} />
         {e.visible ? <span className="chip chip-ok">Visible para el cliente</span> : <><span className="chip chip-neutro">🔒 Privado</span><Compartir documento={e.id} solicitud={sid} /></>}
+        <Eliminar documento={e.id} solicitud={sid} nombre={e.nombre} />
         {e.estado === 'pendiente' ? <Link href={`/admin/solicitudes/${sid}/#documentacion`}>Revisar</Link> : null}
         {e.analisis === 'infectado' ? <span className="chip chip-aviso">Bloqueado por antivirus</span> : null}
       </p>
@@ -125,7 +126,10 @@ export default async function Expediente({ params, searchParams }: { params: Pro
     const escritos = (await tx.query(`select e.id, e.titulo, e.hilo_id hilo, v.version, v.modelos from portal.escritos e
       join lateral (select version, modelos from portal.escrito_versiones x where x.escrito_id = e.id order by version desc limit 1) v on true
       where e.solicitud_id = $1 order by e.updated_at desc limit 20`, [id])).rows as { id: string; titulo: string; hilo: string | null; version: number; modelos: { version_id: string; titulo: string; etiqueta: string }[] }[];
-    return { c, entradas, rec, carpetas, escritos, equipo: await equipoAsunto(tx, id), relevo: await relevo(tx, id), personal: await personalActivo(tx) };
+    const papelera = (await tx.query(`select id, nombre, version, eliminado_at, eliminado_por, motivo, purgado_at, greatest(0, 30 - floor(extract(epoch from now() - eliminado_at) / 86400))::int dias
+      from portal.papelera($1) limit 30`, [id])).rows as
+      { id: string; nombre: string; version: number; eliminado_at: Date; eliminado_por: string | null; motivo: string | null; purgado_at: Date | null; dias: number }[];
+    return { c, entradas, rec, carpetas, escritos, papelera, equipo: await equipoAsunto(tx, id), relevo: await relevo(tx, id), personal: await personalActivo(tx) };
   });
   if (!d) notFound();
   const { c } = d;
@@ -149,6 +153,25 @@ export default async function Expediente({ params, searchParams }: { params: Pro
             </ul>
           </>
         ) : null}
+        {d.papelera.length ? (
+          <details className="mt-4 text-sm" data-papelera>
+            <summary className="etiqueta cursor-pointer">🗑 Papelera ({d.papelera.filter((x) => !x.purgado_at).length})</summary>
+            <p className="ayuda text-xs mt-1">Se puede restaurar durante 30 días; después se borra el archivo y queda solo el registro.</p>
+            <ul className="grid gap-2 mt-2">
+              {d.papelera.map((x) => {
+                const dias = x.dias;
+                return (
+                  <li key={x.id} data-en-papelera={x.nombre}>
+                    <span className="block truncate">{x.nombre} · v{x.version}</span>
+                    <span className="ayuda block text-xs">{x.eliminado_por ?? '—'} · {fechaHora(new Date(x.eliminado_at))}{x.motivo ? ` · ${x.motivo}` : ''}</span>
+                    {x.purgado_at ? <span className="ayuda text-xs">Borrado definitivamente</span>
+                      : <span className="flex gap-2 items-center text-xs">{dias} día{dias === 1 ? '' : 's'} para restaurar · <Restaurar documento={x.id} solicitud={id} /></span>}
+                  </li>
+                );
+              })}
+            </ul>
+          </details>
+        ) : null}
       </aside>
 
       <section className="expediente-central">
@@ -158,13 +181,14 @@ export default async function Expediente({ params, searchParams }: { params: Pro
               <p className="ayuda text-sm"><Link href={`/admin/clientes/${c.cliente_id}/`}>{c.cliente}</Link> · {c.expediente_ref ?? c.referencia}{c.responsable ? ` · ${c.responsable}` : ''}</p>
               <h1 className="subtitulo" style={{ marginBottom: 0 }}>{c.titulo}</h1>
             </div>
-            <ChipSolicitud estado={c.estado} />
+            <span className="flex gap-2 items-center">{c.expediente_estado === 'cerrado' ? <span className="chip chip-neutro" data-expediente-cerrado>Expediente cerrado</span> : null}<ChipSolicitud estado={c.estado} /></span>
           </div>
           <p className="text-sm flex flex-wrap gap-x-4 gap-y-1 mt-1">
             <span>📄 {c.docs} documentos{c.por_revisar ? ` · ${c.por_revisar} por revisar` : ''}{c.faltan ? ` · faltan ${c.faltan}` : ''}</span>
             {c.proxima ? <span>⏰ {c.proxima_titulo}: {fechaHora(c.proxima)}</span> : null}
             {!c.cuenta_activa ? <span className="chip chip-aviso">El cliente aún no ha activado su acceso</span> : null}
             <Link href={`/admin/solicitudes/${id}/`}>Ficha completa</Link>
+            {c.expediente_estado ? <CerrarExpediente solicitud={id} cerrado={c.expediente_estado === 'cerrado'} /> : null}
             {env.iaClave ? <Link href={`/admin/expedientes/${id}/asistente/`} className="font-semibold">✨ Asistente IA</Link> : null}
             {env.iaClave ? <Link href={`/admin/expedientes/${id}/asistente/?modo=redactar`} className="font-semibold">✍️ Redactar escrito</Link> : null}
           </p>
