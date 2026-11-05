@@ -56,7 +56,7 @@ export default async function Expedientes({ searchParams }: { searchParams: Prom
 
   return (
     <div className="grid gap-4">
-      <div className="fila"><h1 className="titulo">Expedientes</h1><Link href="/admin/clientes/nuevo/" className="btn btn-primario">+ Nuevo cliente y expediente</Link></div>
+      <div className="fila"><h1 className="titulo">Expedientes</h1><span className="flex gap-2"><Link href="/admin/expedientes/nuevo/" className="btn btn-primario">+ Abrir expediente</Link><Link href="/admin/clientes/nuevo/" className="btn btn-secundario">+ Nuevo cliente</Link></span></div>
       <nav className="flex flex-wrap gap-2 items-center" aria-label="Filtrar expedientes">
         {Object.entries(ESTADOS).map(([k, v]) => (
           <Link key={k} href={enlace({ estado: k })} aria-current={k === estado ? 'page' : undefined} className={`chip ${k === estado ? 'chip-info' : 'chip-neutro'} no-underline`}>

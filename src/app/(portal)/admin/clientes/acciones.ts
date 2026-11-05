@@ -9,7 +9,7 @@ import { enviarCorreo, plantillasCorreo } from '@/portal/lib/email';
 import { env } from '@/portal/lib/env';
 import { requerirPersonal } from '@/portal/lib/sesion';
 
-export type ResultadoAlta = { error?: string; cliente?: string; expediente?: string; enlace?: string; correo?: 'enviado' | 'fallido' | 'no' };
+export type ResultadoAlta = { error?: string; cliente?: string; expediente?: string; enlace?: string; correo?: 'enviado' | 'fallido' | 'no'; existente?: string };
 
 const alta = z.object({
   nombre: z.string().trim().min(2).max(120),
@@ -53,7 +53,13 @@ export async function crearCliente(_: ResultadoAlta, f: FormData): Promise<Resul
     return { ...r, correo: r.enlace ? await enviarInvitacion(d.data.email, r.enlace) : 'no' };
   } catch (e) {
     const m = (e as Error).message;
-    return { error: /Ya existe/.test(m) ? 'Ya hay una cuenta con ese correo. Búscala arriba para abrir su ficha.' : m.length < 140 ? m : 'No se ha podido dar de alta.' };
+    if (/Ya existe/.test(m)) {
+      // Si es un cliente que esta persona puede ver, se ofrece abrirle el expediente directamente.
+      const existente = await comoUsuario(u.id, async (tx) => (await tx.query(`select us.id from identidad."user" us join portal.perfiles pf on pf.user_id = us.id
+        where us.email = $1 and portal.personal_ve_cliente(us.id)`, [d.data.email])).rows[0]?.id as string | undefined).catch(() => undefined);
+      return { error: 'Ya hay un cliente con ese correo.', existente };
+    }
+    return { error: m.length < 140 ? m : 'No se ha podido dar de alta.' };
   } finally {
     revalidatePath('/admin', 'layout');
   }
@@ -73,11 +79,26 @@ export async function reenviarInvitacion(_: ResultadoAlta, f: FormData): Promise
   } catch (e) { return { error: (e as Error).message.slice(0, 140) }; }
 }
 
-export async function abrirExpediente(f: FormData) {
+export type ResultadoAbrir = { error?: string };
+
+/** Abrir un expediente nuevo para un cliente ya dado de alta (desde su ficha o desde Expedientes → Abrir expediente). */
+export async function abrirExpediente(_: ResultadoAbrir, f: FormData): Promise<ResultadoAbrir> {
   const u = await requerirPersonal();
-  const cliente = String(f.get('cliente')), titulo = String(f.get('titulo') ?? '').trim().slice(0, 200);
-  if (!UUID.test(cliente) || titulo.length < 3) redirect(`/admin/clientes/${cliente}/?error=titulo`);
-  const sid = await comoUsuario(u.id, async (tx) => (await tx.query('select portal.abrir_expediente($1, $2, null, $3) id', [cliente, titulo, u.id])).rows[0].id as string);
+  const cliente = String(f.get('cliente') ?? ''), titulo = String(f.get('titulo') ?? '').trim().slice(0, 200);
+  const tipo = String(f.get('tipo') ?? '') || null, resp = String(f.get('responsable') ?? '') || u.id;
+  if (!UUID.test(cliente)) return { error: 'Elige el cliente de la lista.' };
+  if (titulo.length < 3) return { error: 'Escribe el título del asunto (al menos 3 caracteres).' };
+  if (!UUID.test(resp)) return { error: 'Responsable no válido.' };
+  let sid: string;
+  try {
+    sid = await comoUsuario(u.id, async (tx) => (await tx.query('select portal.abrir_expediente($1, $2, $3, $4) id', [cliente, titulo, tipo, resp])).rows[0].id as string);
+  } catch (e) {
+    const m = (e as Error).message;
+    console.error(`abrir expediente rechazado: ${m.slice(0, 80)}`);
+    return { error: /Sin permiso|42501/.test(m) ? 'No tienes permiso para abrir expedientes de este cliente.'
+      : /Cliente inexistente/.test(m) ? 'Este cliente no tiene ficha completa: ábrela y guarda sus datos primero.'
+      : /Tipo de asunto/.test(m) ? 'El tipo de asunto elegido no es válido.' : 'No se ha podido abrir el expediente.' };
+  }
   revalidatePath('/admin', 'layout');
   redirect(`/admin/expedientes/${sid}/`);
 }

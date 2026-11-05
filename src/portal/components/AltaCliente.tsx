@@ -37,7 +37,7 @@ export function FormAltaCliente() {
   }
   return (
     <form action={accion} className="grid gap-1">
-      {estado.error ? <p className="error mb-3" role="alert">{estado.error}</p> : null}
+      {estado.error ? <p className="error mb-3" role="alert">{estado.error}{estado.existente ? <> <a href={`/admin/expedientes/nuevo/?cliente=${estado.existente}`} className="font-semibold">Abrir un expediente para este cliente</a> · <a href={`/admin/clientes/${estado.existente}/`}>Ver su ficha</a></> : null}</p> : null}
       <div className="campo"><label htmlFor="ac-nombre">Nombre y apellidos</label><input id="ac-nombre" name="nombre" required maxLength={120} autoComplete="off" /></div>
       <div className="campo"><label htmlFor="ac-email">Correo electrónico del cliente</label><input id="ac-email" name="email" type="email" required maxLength={254} autoComplete="off" /></div>
       <fieldset className="flex gap-4 mb-3">
