@@ -43,7 +43,7 @@ fuente, recordatorio y póliza vencida (detalle en POLIZAS-SEGURO `docs/AVISOS.m
 
 | Variable | Obligatoria | Valor |
 | --- | --- | --- |
-| `DATABASE_URL_SEGUROS` | Sí | `postgresql://seguros_app.<ref>:<contraseña>@<pooler>:5432/postgres?sslmode=require&uselibpqcompat=true` (pooler de sesión de Supabase, rol `seguros_app`) |
+| `DATABASE_URL_SEGUROS` | Sí | `postgresql://seguros_app.<ref>:<contraseña>@<pooler>:5432/postgres?sslmode=require&uselibpqcompat=true` (rol `seguros_app`). Puerto **5432** (pooler de sesión), no el 6543 de `DATABASE_URL_APP`: el motor de avisos usa un candado de sesión (`pg_try_advisory_lock`) para no ejecutarse dos veces a la vez, y el pooler de transacciones no lo conserva |
 | `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY` | Para push | Las mismas del portal |
 | `STORAGE_URL`, `STORAGE_SERVICE_KEY` | Sí | Las del portal (bucket `seguros-documentos`; otro con `SEGUROS_STORAGE_BUCKET`) |
 | `ANTHROPIC_API_KEY` | Para IA | La del portal; modelo `ANTHROPIC_MODEL` o `IA_MODELO` |
@@ -52,8 +52,8 @@ fuente, recordatorio y póliza vencida (detalle en POLIZAS-SEGURO `docs/AVISOS.m
 
 Sin `DATABASE_URL_SEGUROS`, la página Seguros muestra «Sin configurar» y el cron lo omite.
 
-Migraciones del gestor (con `DATABASE_URL_SEGUROS` en `.env.local`): `npm run seguros:migrate`. La 0005 añade la
-vinculación con el portal; las 0001–0004 ya están aplicadas en Supabase.
+Migraciones del gestor (con `DATABASE_URL_SEGUROS` en `.env.local`): `npm run seguros:migrate`. Las 0001–0005 ya están
+aplicadas en Supabase (la 0005, vinculación con el portal, el 05/11/2026 con autorización del propietario).
 
 **Comprobar**: entrar como superadministración → menú Seguros → «Ajustes › Estado y avisos» muestra la última
 ejecución; «Avisos en el móvil» → «Comprobar y enviar prueba» debe hacer sonar el móvil.
