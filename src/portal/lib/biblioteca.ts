@@ -1,5 +1,8 @@
 import 'server-only';
 import type { Tx } from './db';
+import { PATRONES_IDENTIFICABLES } from './salvaguardas';
+
+export { PATRONES_IDENTIFICABLES };
 
 // Biblioteca jurídica (#92/#93). Todo dentro de comoUsuario(): la RLS decide qué modelos ve cada persona.
 
@@ -15,18 +18,12 @@ export const ESTADOS: Record<string, { t: string; chip: string }> = {
   aprobado: { t: 'Aprobado', chip: 'chip-ok' }, obsoleto: { t: 'Obsoleto · no usar', chip: 'chip-neutro' },
 };
 
+
 /** Posibles datos identificables (aviso para la revisión humana; no sustituye a revisar el documento). */
 export function datosIdentificables(texto: string, nombreArchivo = ''): string[] {
   const avisos: string[] = [];
   const cuenta = (re: RegExp) => (texto.match(re) ?? []).length;
-  const pruebas: [RegExp, string][] = [
-    [/\b\d{8}[A-HJ-NP-TV-Z]\b/g, 'DNI'], [/\b[XYZ]\d{7}[A-HJ-NP-TV-Z]\b/g, 'NIE'], [/\b[ABCDEFGHJNPQRSUVW]\d{7}[0-9A-J]\b/g, 'CIF'],
-    [/\bES\d{2}(?:\s?\d{4}){5}\b/g, 'IBAN'], [/\b[\w.+-]+@[\w-]+\.[\w.-]+\b/g, 'correo electrónico'],
-    [/(?<!\d)(?:\+34\s?)?[6789]\d{2}\s?\d{3}\s?\d{3}(?!\d)/g, 'teléfono'],
-    [/\b\d{1,5}\/\d{4}\b/g, 'número de procedimiento o autos'], [/\b(?:calle|c\/|avda\.?|avenida|plaza|pza\.?)\s+[A-ZÁÉÍÓÚÑ][^\n,]{2,40},?\s*(?:n[ºo°.]?\s*)?\d+/gi, 'dirección postal'],
-    [/\b(?:D\.|Dña\.|Don|Doña)\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){1,3}/g, 'nombre de persona'],
-    [/\bmatr[ií]cula\s+\d{4}\s?[A-Z]{3}\b/gi, 'matrícula'],
-  ];
+  const pruebas = PATRONES_IDENTIFICABLES;
   for (const [re, t] of pruebas) { const n = cuenta(re); if (n) avisos.push(`${n} posible${n > 1 ? 's' : ''} ${t}`); }
   if (/\d{8}[A-Z]|[A-ZÁÉÍÓÚÑ][a-z]+[ _-][A-ZÁÉÍÓÚÑ][a-z]+/.test(nombreArchivo)) avisos.push('el nombre del archivo puede identificar a alguien');
   return avisos;

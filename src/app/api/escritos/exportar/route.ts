@@ -13,7 +13,12 @@ export const runtime = 'nodejs';
 // asistente del expediente (con RLS) o del propio texto enviado por el profesional. Sale como BORRADOR.
 export async function POST(req: Request) {
   const h = await headers();
-  if (h.get('origin') !== env.origin) return new Response('Origen no permitido', { status: 403 });
+  // Los botones de descarga son formularios normales y el panel envía «Referrer-Policy: no-referrer», así que el
+  // navegador manda «Origin: null». Se admite solo si el propio navegador declara que la petición es del mismo origen
+  // (Sec-Fetch-Site no lo puede falsear una página ajena).
+  const origen = h.get('origin');
+  const mismo = origen === env.origin || ((origen === null || origen === 'null') && h.get('sec-fetch-site') === 'same-origin');
+  if (!mismo) return new Response('Origen no permitido', { status: 403 });
   const sesion = await auth.api.getSession({ headers: h });
   if (!sesion) return new Response('No autorizado', { status: 401 });
   if (await personalSinMfa(sesion.user.id, sesion.user.twoFactorEnabled)) return new Response('Activa el doble factor', { status: 403 });
@@ -32,8 +37,19 @@ export async function POST(req: Request) {
       if (!m) return null;
       texto = m.texto; titulo = `Borrador · ${m.titulo}`;
     }
+    let marca: string | null = null;
+    const escrito = String(f.get('escrito') ?? ''), version = Number(f.get('version'));
+    if (UUID.test(escrito) && Number.isInteger(version) && version > 0) {
+      // Versión concreta de un borrador del expediente (#94): sale marcada como BORRADOR en cada página.
+      const v = (await tx.query(`select v.texto, e.titulo from portal.escrito_versiones v join portal.escritos e on e.id = v.escrito_id
+        where v.escrito_id = $1 and v.version = $2`, [escrito, version])).rows[0];
+      if (!v) return null;
+      texto = v.texto; titulo = `${v.titulo} v${version}`.slice(0, 120); marca = `BORRADOR · versión ${version} · pendiente de revisión`;
+    }
     if (!texto.trim() || texto.length > 200000) return null;
-    return { texto, titulo, ...elegirEstilo(lista, UUID.test(estiloId) ? estiloId : null, materia) };
+    const elegido = elegirEstilo(lista, UUID.test(estiloId) ? estiloId : null, materia);
+    if (marca) elegido.estilo = { ...elegido.estilo, encabezado: elegido.estilo.encabezado ? `${marca} — ${elegido.estilo.encabezado}` : marca };
+    return { texto, titulo, ...elegido };
   });
   if (!r) return new Response('No encontrado', { status: 404 });
   const bloques = estructurar(r.texto);
