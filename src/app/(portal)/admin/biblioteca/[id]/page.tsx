@@ -7,6 +7,7 @@ import { comoUsuario } from '@/portal/lib/db';
 import { UUID } from '@/portal/lib/datos';
 import { requerirPersonal } from '@/portal/lib/sesion';
 import { fecha } from '@/portal/lib/textos';
+import { estiloDesdeModelo } from '../estilos/acciones';
 
 export const metadata: Metadata = { title: 'Modelo de la biblioteca' };
 
@@ -70,6 +71,12 @@ export default async function Modelo({ params, searchParams }: { params: Promise
           {editable || autor ? <SubirBiblioteca modelo={m.id} /> : null}
         </div>
         <aside className="grid gap-4">
+          {global && actual?.mime?.startsWith('application/vnd.openxmlformats') ? (
+            <section className="card"><h2 className="subtitulo">Estilo</h2>
+              <form action={estiloDesdeModelo}><input type="hidden" name="version" value={actual.id} />
+                <button className="btn btn-secundario" style={{ minHeight: 36 }}>Crear estilo a partir de este Word</button></form>
+              <p className="ayuda text-xs mt-1">Solo se lee el formato (márgenes, letra, interlineado, numeración); nunca textos ni firmas.</p></section>
+          ) : null}
           <section className="card"><h2 className="subtitulo">Estado</h2><EstadoModelo modelo={m.id} estado={m.estado} autor={autor} global={global} clase={m.clase} /></section>
           <section className="card" aria-label="Versiones"><h2 className="subtitulo">Versiones</h2>
             <ul className="grid gap-1 text-sm">{d.versiones.map((v) => (

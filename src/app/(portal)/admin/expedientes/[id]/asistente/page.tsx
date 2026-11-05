@@ -6,6 +6,7 @@ import { comoUsuario } from '@/portal/lib/db';
 import { UUID } from '@/portal/lib/datos';
 import { env } from '@/portal/lib/env';
 import { requerirPersonal } from '@/portal/lib/sesion';
+import { estilosDisponibles } from '@/portal/lib/estilos';
 
 export const metadata: Metadata = { title: 'Asistente del expediente' };
 
@@ -23,7 +24,8 @@ export default async function Asistente({ params, searchParams }: { params: Prom
     const hilo = q.hilo && UUID.test(q.hilo) && hilos.some((h) => h.id === q.hilo) ? q.hilo : null;
     const mensajes = hilo ? (await tx.query(`select m.id, m.rol, m.texto, m.citas, m.limites, m.created_at at, p.nombre_visible autor from portal.ia_mensajes m
       join portal.personal p on p.user_id = m.autor_id where m.hilo_id = $1 and m.solicitud_id = $2 order by m.created_at`, [hilo, id])).rows : [];
-    return { c, hilos, hilo, mensajes: mensajes.map((m) => ({ ...m, at: new Date(m.at).toISOString() })) as MensajeIA[] };
+    const estilos = (await estilosDisponibles(tx)).map((e) => ({ id: e.id, nombre: e.nombre }));
+    return { c, hilos, hilo, estilos, mensajes: mensajes.map((m) => ({ ...m, at: new Date(m.at).toISOString() })) as MensajeIA[] };
   });
   if (!d) notFound();
   return (
@@ -40,7 +42,7 @@ export default async function Asistente({ params, searchParams }: { params: Prom
           <p className="ayuda text-sm">{d.c.cliente} · solo con lo que consta en este expediente</p>
           <h1 className="subtitulo" style={{ marginBottom: 0 }}>Asistente · {d.c.titulo}</h1>
         </header>
-        {env.iaClave ? <AsistenteIA key={d.hilo ?? 'nuevo'} solicitud={id} hilo={d.hilo} mensajes={d.mensajes} />
+        {env.iaClave ? <AsistenteIA key={d.hilo ?? 'nuevo'} solicitud={id} hilo={d.hilo} mensajes={d.mensajes} estilos={d.estilos} />
           : <p className="aviso">El asistente de IA no está configurado en este servidor.</p>}
       </section>
     </div>
