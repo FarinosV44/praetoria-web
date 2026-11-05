@@ -1,6 +1,7 @@
 import { poolApp } from '@/portal/lib/db';
 import { ejecutarCicloAvisos } from '@/portal/lib/avisos-core';
 import { claveCronValida } from '@/portal/lib/cron-clave';
+import { purgarPapelera } from '@/portal/lib/papelera';
 import { cicloSeguros } from '@/seguros/lib/tarea-portal';
 
 export const runtime = 'nodejs';
@@ -14,7 +15,7 @@ const noExiste = () => new Response('Not Found', { status: 404 });
 // permanentes). Solo devuelve recuentos: nunca datos personales.
 export async function POST(req: Request) {
   if (!autorizada(req)) return noExiste();
-  const resultado = await ejecutarCicloAvisos(poolApp());
+  const resultado = { ...(await ejecutarCicloAvisos(poolApp())), papelera: await purgarPapelera(poolApp()).catch(() => ({ purgados: 0, fallos: -1 })) };
   // Gestor de seguros (/admin/seguros): un fallo suyo nunca detiene los avisos del despacho.
   const seguros = await cicloSeguros(poolApp()).catch((e: Error) => ({ error: e.message.slice(0, 200) }));
   console.log(JSON.stringify({ ...resultado, seguros }));

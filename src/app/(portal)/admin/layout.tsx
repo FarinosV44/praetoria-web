@@ -22,6 +22,7 @@ export default async function DespachoLayout({ children }: { children: React.Rea
         </div>
         <nav aria-label="Despacho" className="wrap flex gap-4 pb-3 text-sm font-semibold overflow-x-auto">
           <Link href="/admin/">Bandeja</Link>
+          <Link href="/admin/expedientes/">Expedientes</Link>
           <Link href="/admin/clientes/">Clientes</Link>
           <Link href="/admin/agenda/">Agenda</Link>
           <Link href="/admin/avisos/">Avisos{avisos ? ` (${avisos})` : ''}</Link>

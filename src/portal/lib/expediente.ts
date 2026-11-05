@@ -17,7 +17,8 @@ export type Entrada =
 
 const EVENTOS_EN_CRONOLOGIA = ['solicitud_enviada', 'estado_solicitud', 'estado_visible', 'expediente_abierto', 'documento_compartido',
   'documento_solicitado', 'requisito_actualizado', 'documento_revisado', 'conflictos_revisados', 'responsable_asignado',
-  'asignacion', 'asignacion_retirada', 'tarea_encargada', 'tarea_reasignada', 'tarea_completada', 'tarea_reprogramada', 'plazo_verificado'];
+  'asignacion', 'asignacion_retirada', 'tarea_encargada', 'tarea_reasignada', 'tarea_completada', 'tarea_reprogramada', 'plazo_verificado',
+  'expediente_cerrado', 'expediente_reabierto', 'documento_eliminado', 'documento_restaurado', 'documento_purgado'];
 
 export async function cronologia(tx: Tx, sid: string, limite = 400): Promise<Entrada[]> {
   const r = await tx.query(`
@@ -81,12 +82,12 @@ export async function cronologia(tx: Tx, sid: string, limite = 400): Promise<Ent
 export type Cabecera = {
   id: string; referencia: string; expediente_ref: string | null; titulo: string; estado: string; estado_visible: string | null;
   cliente_id: string; cliente: string; cliente_email: string; responsable: string | null; proxima: Date | null; proxima_titulo: string | null;
-  docs: number; faltan: number; por_revisar: number; cuenta_activa: boolean;
+  docs: number; faltan: number; por_revisar: number; cuenta_activa: boolean; expediente_estado: string | null;
 };
 
 export async function cabecera(tx: Tx, sid: string, uid: string): Promise<Cabecera | null> {
   const r = await tx.query(`
-    select s.id, s.referencia, e.referencia expediente_ref, coalesce(e.titulo, t.nombre, 'Solicitud') titulo, s.estado,
+    select s.id, s.referencia, e.referencia expediente_ref, e.estado::text expediente_estado, coalesce(e.titulo, t.nombre, 'Solicitud') titulo, s.estado,
       coalesce(e.estado_visible, s.estado_visible) estado_visible, s.cliente_id, us.name cliente, us.email cliente_email,
       p.nombre_visible responsable,
       (select min(a.inicio) from portal.agenda_eventos a where a.solicitud_id = s.id and a.estado = 'pendiente' and a.inicio >= now()) proxima,
