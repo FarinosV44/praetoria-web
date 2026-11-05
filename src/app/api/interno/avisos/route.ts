@@ -2,6 +2,7 @@ import { poolApp } from '@/portal/lib/db';
 import { ejecutarCicloAvisos } from '@/portal/lib/avisos-core';
 import { claveCronValida } from '@/portal/lib/cron-clave';
 import { purgarPapelera } from '@/portal/lib/papelera';
+import { cicloSeguros } from '@/seguros/lib/tarea-portal';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -15,8 +16,10 @@ const noExiste = () => new Response('Not Found', { status: 404 });
 export async function POST(req: Request) {
   if (!autorizada(req)) return noExiste();
   const resultado = { ...(await ejecutarCicloAvisos(poolApp())), papelera: await purgarPapelera(poolApp()).catch(() => ({ purgados: 0, fallos: -1 })) };
-  console.log(JSON.stringify(resultado));
-  return Response.json(resultado);
+  // Gestor de seguros (/admin/seguros): un fallo suyo nunca detiene los avisos del despacho.
+  const seguros = await cicloSeguros(poolApp()).catch((e: Error) => ({ error: e.message.slice(0, 200) }));
+  console.log(JSON.stringify({ ...resultado, seguros }));
+  return Response.json({ ...resultado, seguros });
 }
 
 // TEMPORAL: para averiguar qué cabecera de IP fija la CDN de Hostinger y poder configurar TRUSTED_IP_HEADER.
