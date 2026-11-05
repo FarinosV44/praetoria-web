@@ -1,11 +1,11 @@
 // Genera la versión Markdown de cada página pública a partir de la copia final (out/), ya con los ajustes de HTML.
 // La sirven /api/markdown (si la petición pide Accept: text/markdown) y el servidor MCP (/mcp/).
-//   node scripts/agentes/generar.mjs out .next/markdown
+//   node scripts/agentes/generar.mjs out .next/server/app/__markdown
 import { mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative, sep } from 'node:path';
 import { htmlAMarkdown } from './markdown.mjs';
 
-const [origen = 'out', destino = '.next/markdown'] = process.argv.slice(2);
+const [origen = 'out', destino = '.next/server/app/__markdown'] = process.argv.slice(2);
 const walk = (d) => readdirSync(d).flatMap((f) => (statSync(join(d, f)).isDirectory() ? walk(join(d, f)) : [join(d, f)]));
 
 // Solo lo que está en el sitemap es consultable por el servidor MCP: nada de pendientes de revisión jurídica ni /gracias/

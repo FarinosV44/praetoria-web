@@ -25,4 +25,7 @@ for (const dir of ['out', '.next/server/app', '.next/standalone/.next/server/app
   if (existsSync(dir)) run(ruta('./postbuild.mjs'), dir);
 }
 // Versión Markdown de las páginas públicas, sobre el HTML ya definitivo
-run(ruta('./agentes/generar.mjs'), 'out', '.next/markdown');
+// Junto a las páginas prerenderizadas: el despliegue de Hostinger no conserva otras carpetas de .next
+for (const dir of ['.next/server/app', '.next/standalone/.next/server/app']) {
+  if (existsSync(dir)) run(ruta('./agentes/generar.mjs'), 'out', `${dir}/__markdown`);
+}

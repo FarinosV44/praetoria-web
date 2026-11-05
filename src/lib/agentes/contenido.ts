@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import { site } from '@/lib/site';
 import type { Entrada, FuenteMcp } from './mcp';
 
-const DIR = join(process.cwd(), '.next/markdown');
+const DIR = join(process.cwd(), '.next/server/app/__markdown');
 
 /** Markdown de una ruta pública; null si no existe. Los segmentos solo admiten letras, cifras, «-» y «_»: nunca «.» ni barras. */
 export function markdownDe(segmentos: string[]): string | null {

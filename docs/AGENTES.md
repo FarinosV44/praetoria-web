@@ -5,7 +5,7 @@
 | Señales de uso del contenido | `src/app/robots.txt/route.ts` | `Content-Signal: search=yes, ai-train=no`. No declara `ai-input`. Solo en el build indexable |
 | Datos del despacho | `src/lib/seo.ts` | Tipo `LegalService` y `LocalBusiness` en todas las páginas |
 | Resumen del sitio | `src/app/llms.txt/route.ts` | Mismos criterios que el sitemap |
-| Markdown por `Accept: text/markdown` | `next.config.ts` → `src/app/api/markdown/` | Lo genera `scripts/agentes/generar.mjs` en el build, en `.next/markdown/`, desde el HTML final |
+| Markdown por `Accept: text/markdown` | `next.config.ts` → `src/app/api/markdown/` | Lo genera `scripts/agentes/generar.mjs` en el build, en `.next/server/app/__markdown/`, desde el HTML final |
 | Servidor MCP | `src/app/mcp/route.ts`, `src/lib/agentes/` | Público, sin estado y de solo lectura |
 | Tarjeta del servidor MCP | `public/.well-known/mcp/server-card.json` | Si cambia la versión o el endpoint, actualizarla junto con `src/lib/agentes/mcp.ts` |
 | WebMCP | `src/components/HerramientasAgentes.tsx` | Mismas herramientas que el servidor MCP, a través de `/mcp/` |
