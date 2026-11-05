@@ -30,10 +30,13 @@ export function Subidor({ requisitoId, solicitudId, multiple, maxMb, titulo }: {
     xhr.open('POST', '/api/documentos/');
     xhr.upload.onprogress = (e) => { if (e.lengthComputable) actualizar(clave, { progreso: Math.round((e.loaded / e.total) * 100) }); };
     xhr.onload = () => {
-      let r: { ok?: boolean; error?: string } = {};
-      try { r = JSON.parse(xhr.responseText); } catch { /* respuesta no JSON */ }
+      let r: { ok?: boolean; error?: string; ref?: string } = {};
+      try { r = JSON.parse(xhr.responseText); } catch { /* respuesta no JSON (p. ej. un proxy intermedio) */ }
+      const porEstado = xhr.status === 413 ? 'El archivo es demasiado grande para el servidor.' : xhr.status === 401 ? 'Tu sesión ha caducado. Vuelve a entrar.'
+        : xhr.status >= 500 ? 'El servidor no ha podido guardarlo. No se ha guardado nada; inténtalo de nuevo.' : `No se ha podido subir (error ${xhr.status}).`;
+      const error = `${r.error ?? porEstado}${r.ref ? ` · ref. ${r.ref}` : ''}`;
       if (xhr.status === 200 && r.ok) { actualizar(clave, { estado: 'ok', progreso: 100 }); router.refresh(); }
-      else actualizar(clave, { estado: 'error', error: r.error ?? 'No se ha podido subir. Inténtalo de nuevo.' });
+      else actualizar(clave, { estado: 'error', error: error });
     };
     xhr.onerror = () => actualizar(clave, { estado: 'error', error: 'Sin conexión. Comprueba tu red y pulsa «Reintentar».' });
     xhr.send(fd);
