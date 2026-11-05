@@ -124,8 +124,8 @@ export default async function Panel({ searchParams }: { searchParams: Promise<Bu
       {filas.length === 0 ? (
         <div className="tarjeta vacio">
           <h2>{hayFiltros ? 'No hay pólizas con estos filtros' : 'Todavía no hay pólizas'}</h2>
-          <p>{hayFiltros ? 'Prueba a quitar algún filtro.' : 'Añade la primera póliza a mano; después podrás adjuntar sus documentos.'}</p>
-          <Link className="boton boton--principal" href="/admin/seguros/polizas/nueva"><IconoMas /> Añadir póliza</Link>
+          <p>{hayFiltros ? 'Prueba a quitar algún filtro.' : 'Sube los documentos de tus pólizas: la IA guarda sus datos sin que tengas que escribir nada.'}</p>
+          {!hayFiltros && <Link className="boton boton--principal" href="/admin/seguros/importar/"><IconoMas /> Subir pólizas</Link>}
         </div>
       ) : (
         <>
