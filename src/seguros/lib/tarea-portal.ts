@@ -4,6 +4,7 @@ import { segurosConfigurado } from './db';
 import { tareaAvisos } from './avisos/tarea';
 import { procesarColaIA } from './ia/siniestro';
 import { procesarColaExtraccion } from './ia/extraccion';
+import { procesarColaImportaciones } from './ia/importacion';
 import { sincronizarDispositivosPortal } from './portal';
 
 /**
@@ -20,6 +21,6 @@ export async function cicloSeguros(poolPortal: Pool, ahora = new Date()) {
     r.dispositivos = await sincronizarDispositivosPortal(poolPortal);
     r.avisos = await tareaAvisos(ahora);
   }
-  r.ia = (await procesarColaExtraccion()) + (await procesarColaIA());
+  r.ia = (await procesarColaImportaciones()) + (await procesarColaExtraccion()) + (await procesarColaIA());
   return r;
 }

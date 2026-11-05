@@ -10,11 +10,12 @@ import { costeAnual, deCentimos, formatoImporte, textoPeriodicidad } from '@/seg
 import { fechaLarga, fechaMedia, hoyMadrid, textoDias } from '@/seguros/lib/fechas';
 import { Estado, Revisar } from '@/seguros/components/estado';
 import { IconoDocumento, IconoRamo, IconoTelefono } from '@/seguros/components/iconos';
-import { CampoArchivo, Enviar, Formulario, Selector } from '@/seguros/components/formulario';
-import { accionEliminarDocumento, accionSubirDocumento } from '../acciones';
+import { accionEliminarDocumento } from '../acciones';
 import { accionRenegociar } from '../lectura-acciones';
-import { subidaDirecta } from '@/seguros/lib/almacen';
+import { iaConfigurada } from '@/seguros/lib/ia/proveedor';
 import { SubidaDirecta } from '@/seguros/components/subida-directa';
+import { Importar } from '@/seguros/components/importar';
+import type { Origen } from '@/seguros/lib/ia/importacion';
 import { renovacionDeAnualidad } from '@/seguros/lib/datos/renovaciones';
 import { q } from '@/seguros/lib/db';
 import { ESTADOS_SINIESTRO } from '@/seguros/lib/datos/siniestros';
@@ -141,22 +142,31 @@ export default async function Ficha({ params, searchParams }: { params: Promise<
             </section>
             <aside className="tarjeta tarjeta--pad contactos" aria-labelledby="t-contactos">
               <h2 id="t-contactos" style={{ marginBottom: 'var(--e-4)' }}>Contactos</h2>
-              {!p.mediador && !p.mediador_telefono && !p.asistencia_telefono && !p.mediador_email
-                ? <p className="secundario pequeno">Sin contactos. Añádelos en <Link href={`/admin/seguros/polizas/${id}/editar`}>Editar</Link>.</p>
+              {!p.mediador && !p.mediador_telefono && !p.asistencia_telefono && !p.mediador_email && !p.siniestros_telefono && !p.siniestros_email && !p.siniestros_web
+                ? <p className="secundario pequeno">Sin contactos todavía. Se completan al subir los documentos de la póliza.</p>
                 : (
                   <div style={{ display: 'grid', gap: 'var(--e-4)' }}>
+                    {(p.siniestros_telefono || p.siniestros_email || p.siniestros_web) && (
+                      <div>
+                        <p className="secundario pequeno">Comunicar un siniestro</p>
+                        {p.siniestros_telefono && <><a className="boton boton--peq" style={{ marginTop: 6 }} href={`tel:${p.siniestros_telefono.replace(/[^\d+]/g, '')}`}><IconoTelefono /> {p.siniestros_telefono}</a><Procedencia o={p.origen_datos?.siniestros_telefono} /></>}
+                        {p.siniestros_email && <p style={{ marginTop: 6 }}><a href={`mailto:${p.siniestros_email}`}>{p.siniestros_email}</a><Procedencia o={p.origen_datos?.siniestros_email} /></p>}
+                        {p.siniestros_web && <p style={{ marginTop: 6 }}><a href={p.siniestros_web} target="_blank" rel="noopener noreferrer">Declarar en la web</a><Procedencia o={p.origen_datos?.siniestros_web} /></p>}
+                      </div>
+                    )}
+                    {p.asistencia_telefono && (
+                      <div>
+                        <p className="secundario pequeno">Asistencia 24 horas</p>
+                        <a className="boton boton--peq" style={{ marginTop: 6 }} href={`tel:${p.asistencia_telefono.replace(/[^\d+]/g, '')}`}><IconoTelefono /> {p.asistencia_telefono}</a>
+                        <Procedencia o={p.origen_datos?.asistencia_telefono} />
+                      </div>
+                    )}
                     {(p.mediador || p.mediador_telefono || p.mediador_email) && (
                       <div>
                         <p className="secundario pequeno">Mediador</p>
                         {p.mediador && <p style={{ fontWeight: 700 }}>{p.mediador}</p>}
                         {p.mediador_telefono && <a className="boton boton--peq" style={{ marginTop: 6 }} href={`tel:${p.mediador_telefono.replace(/[^\d+]/g, '')}`}><IconoTelefono /> {p.mediador_telefono}</a>}
                         {p.mediador_email && <p style={{ marginTop: 6 }}><a href={`mailto:${p.mediador_email}`}>{p.mediador_email}</a></p>}
-                      </div>
-                    )}
-                    {p.asistencia_telefono && (
-                      <div>
-                        <p className="secundario pequeno">Asistencia y siniestros</p>
-                        <a className="boton boton--peq" style={{ marginTop: 6 }} href={`tel:${p.asistencia_telefono.replace(/[^\d+]/g, '')}`}><IconoTelefono /> {p.asistencia_telefono}</a>
                       </div>
                     )}
                   </div>
@@ -250,18 +260,10 @@ function Documentos({ id, documentos, anualidades }: { id: string; documentos: D
       <aside className="tarjeta tarjeta--pad" aria-labelledby="t-subir">
         <h2 id="t-subir" style={{ marginBottom: 'var(--e-4)' }}>Adjuntar documentos</h2>
         <a className="boton boton--peq boton--sutil" href={`/api/seguros/exportar/poliza/${id}`} style={{ marginBottom: 'var(--e-4)' }}>Descargar todo (ZIP)</a>
-        {subidaDirecta() ? (
+        {iaConfigurada() ? <Importar polizaId={id} compacto /> : (
           <SubidaDirecta destino="poliza" id={id} tipos={Object.entries(TIPOS_DOCUMENTO).map(([valor, texto]) => ({ valor, texto }))} tipoDefecto="condiciones_particulares"
             anualidades={opcionesAnualidad} anualidadDefecto={anualidades[0]?.id ?? ''}
             ayuda={`PDF o foto (JPEG, PNG, WebP, HEIC). Máximo ${Math.round(maxBytes() / 1024 / 1024)} MB por archivo.`} />
-        ) : (
-          <Formulario accion={accionSubirDocumento.bind(null, id)} encType="multipart/form-data" aria="Adjuntar documentos">
-            <CampoArchivo nombre="archivo" etiqueta="Archivos" multiple accept="application/pdf,image/jpeg,image/png,image/webp,image/heic,.heic"
-              ayuda={`PDF o foto (JPEG, PNG, WebP, HEIC). Máximo ${Math.round(maxBytes() / 1024 / 1024)} MB por archivo.`} />
-            <Selector nombre="tipo" etiqueta="Tipo de documento" defecto="condiciones_particulares" opciones={Object.entries(TIPOS_DOCUMENTO).map(([valor, texto]) => ({ valor, texto }))} />
-            <Selector nombre="anualidad_id" etiqueta="Anualidad a la que corresponde" defecto={anualidades[0]?.id ?? ''} vacio="Sin anualidad concreta" opciones={opcionesAnualidad} />
-            <Enviar pendiente="Subiendo…">Subir</Enviar>
-          </Formulario>
         )}
         <p className="ayuda secundario pequeno" style={{ marginTop: 'var(--e-3)' }}>Después, abre el documento y pulsa «Leer datos» para que se propongan los datos con su página; tú los confirmas.</p>
       </aside>
@@ -312,5 +314,17 @@ async function SiniestrosPoliza({ id }: { id: string }) {
         <ul className="lista-simple">{lista.map((s) => <li key={s.id}><div><Link href={`/admin/seguros/siniestros/${s.id}`} style={{ fontWeight: 700 }}>{s.titulo}</Link><p className="linea-2">{s.fecha_hecho ? fechaMedia(s.fecha_hecho) : 'Fecha pendiente'}</p></div><span className="estado estado--neutro">{ESTADOS_SINIESTRO[s.estado]}</span></li>)}</ul>
       )}
     </div>
+  );
+}
+
+/** De dónde sale un dato guardado automáticamente: documento y página, o página web consultada. */
+function Procedencia({ o }: { o?: Origen }) {
+  if (!o) return null;
+  return (
+    <span className="origen" style={{ display: 'block', marginTop: 4 }}>
+      {o.origen === 'documento'
+        ? <>Según {o.documento_id ? <a href={`/api/seguros/documentos/${o.documento_id}/${o.pagina ? `#page=${o.pagina}` : ''}`} target="_blank" rel="noopener">{o.documento}</a> : o.documento}{o.pagina ? `, pág. ${o.pagina}` : ''}</>
+        : <>Encontrado en internet: <a href={o.url} target="_blank" rel="noopener noreferrer">{(() => { try { return new URL(o.url).hostname.replace(/^www\./, ''); } catch { return o.titulo; } })()}</a> ({o.fecha.split('-').reverse().join('/')})</>}
+    </span>
   );
 }

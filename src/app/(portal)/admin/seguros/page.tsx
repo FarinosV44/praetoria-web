@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Importar } from '@/seguros/components/importar';
+import { iaConfigurada } from '@/seguros/lib/ia/proveedor';
 import { exigirUsuario } from '@/seguros/lib/auth/servidor';
 import { panel, type Filtros as TFiltros, type FilaPanel } from '@/seguros/lib/datos/panel';
 import { listarTitulares } from '@/seguros/lib/datos/titulares';
@@ -54,13 +56,15 @@ export default async function Panel({ searchParams }: { searchParams: Promise<Bu
 
   if (titulares.length === 0) {
     return (
-      <div className="tarjeta vacio">
-        <h1>Empieza por crear un titular</h1>
-        <p>Cada póliza pertenece a una empresa o a un particular. Crea el primero y después añade sus pólizas.</p>
-        {u.rol === 'admin'
-          ? <Link className="boton boton--principal" href="/admin/seguros/titulares/nuevo"><IconoMas /> Crear titular</Link>
-          : <p>Pide a un administrador que te dé acceso a un titular.</p>}
-      </div>
+      <>
+        <div className="encabezado"><div>
+          <h1>Sube tus pólizas</h1>
+          <p className="secundario pequeno">No hace falta escribir nada: la IA lee cada documento, crea el titular y la póliza con sus fechas, prima y coberturas, y busca en internet el teléfono de siniestros si no figura.</p>
+        </div></div>
+        {iaConfigurada()
+          ? <Importar titulares={[]} />
+          : <div className="aviso aviso--atencion" style={{ display: 'block' }}>Lectura automática sin configurar (falta <code>ANTHROPIC_API_KEY</code>). Puedes <Link href="/admin/seguros/titulares/nuevo">crear un titular</Link> y añadir las pólizas a mano.</div>}
+      </>
     );
   }
 
@@ -73,7 +77,8 @@ export default async function Panel({ searchParams }: { searchParams: Promise<Bu
         </div>
         <div className="acciones">
           <a className="boton boton--sutil solo-escritorio" href={`/api/seguros/exportar/polizas${f.titular ? `?titular=${f.titular}` : ''}`}>Exportar CSV</a>
-          <Link className="boton boton--principal" href={`/admin/seguros/polizas/nueva${f.titular ? `?titular=${f.titular}` : ''}`}><IconoMas /> Añadir póliza</Link>
+          <Link className="boton boton--sutil solo-escritorio" href={`/admin/seguros/polizas/nueva${f.titular ? `?titular=${f.titular}` : ''}`}>Añadir a mano</Link>
+          <Link className="boton boton--principal" href="/admin/seguros/importar/"><IconoMas /> Subir pólizas</Link>
         </div>
       </div>
 
