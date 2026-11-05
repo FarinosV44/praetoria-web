@@ -41,7 +41,7 @@ async function textoDocumento(tx: Tx, d: { id: string; solicitud_id: string; sto
   const ya = (await tx.query('select estado, paginas, detalle from portal.documentos_texto where documento_id = $1', [d.id])).rows[0];
   if (ya) return ya as { estado: string; paginas: string[]; detalle: string | null };
   let r: { estado: string; paginas: string[]; detalle: string | null };
-  if (d.analisis === 'infectado') r = { estado: 'no_admitido', paginas: [], detalle: 'bloqueado por el antivirus' };
+  if (d.analisis === 'infectado' || d.analisis === 'error') r = { estado: 'no_admitido', paginas: [], detalle: d.analisis === 'infectado' ? 'bloqueado por el antivirus' : 'el análisis del archivo falló: no se usa' };
   else if (d.mime.startsWith('image/')) r = { estado: 'sin_texto', paginas: [], detalle: 'imagen: no se lee su contenido (sin OCR)' };
   else {
     try {
@@ -60,7 +60,7 @@ async function textoDocumento(tx: Tx, d: { id: string; solicitud_id: string; sto
 const palabras = (t: string) => new Set(t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').match(/[a-z0-9ñ]{4,}/g) ?? []);
 
 /** Fuentes del asunto para una pregunta, con identificadores citables y los límites de lectura. */
-export async function contexto(tx: Tx, sid: string, pregunta: string): Promise<{ fuentes: Fuente[]; limites: string[] }> {
+export async function contexto(tx: Tx, sid: string, pregunta: string, presupuesto = PRESUPUESTO): Promise<{ fuentes: Fuente[]; limites: string[] }> {
   const fuentes: Fuente[] = [];
   const limites: string[] = [];
   const c = (await tx.query(`select coalesce(e.titulo, t.nombre, s.referencia) titulo, coalesce(e.referencia, s.referencia) ref, s.estado, s.descripcion,
@@ -91,6 +91,8 @@ export async function contexto(tx: Tx, sid: string, pregunta: string): Promise<{
   let n = 0;
   for (const d of docs) {
     n += 1;
+    // Lo bloqueado o sin analizar correctamente no se usa, aunque su texto se hubiera extraído antes.
+    if (d.analisis === 'infectado' || d.analisis === 'error') { limites.push(`${d.nombre_original} (v${d.version}): no se usa (análisis del archivo: ${d.analisis})`); continue; }
     const t = await textoDocumento(tx, d);
     if (t.estado !== 'ok') { limites.push(`${d.nombre_original} (v${d.version}): ${t.detalle}`); continue; }
     t.paginas.forEach((texto, i) => {
@@ -105,7 +107,7 @@ export async function contexto(tx: Tx, sid: string, pregunta: string): Promise<{
   let usado = fuentes.reduce((a, f) => a + f.texto.length, 0);
   const omitidas: string[] = [];
   for (const p of paginas.sort((a, b) => b.puntos - a.puntos)) {
-    if (usado + p.texto.length > PRESUPUESTO) { omitidas.push(p.etiqueta); continue; }
+    if (usado + p.texto.length > presupuesto) { omitidas.push(p.etiqueta); continue; }
     usado += p.texto.length;
     const { puntos: _p, ...f } = p; void _p;
     fuentes.push(f);
@@ -146,26 +148,34 @@ export function bloqueFuentes(fuentes: Fuente[]): string {
 
 export type Turno = { rol: 'usuario' | 'asistente'; texto: string };
 
-/** Llamada real a la API de Anthropic. Sin herramientas; con tiempo límite. */
-export async function llamarIA(historial: Turno[], pregunta: string, fuentes: Fuente[]) {
+/** Llamada real a la API de Anthropic, sin herramientas y con tiempo límite. No registra el contenido. */
+export async function llamarAnthropic(o: { system: string; messages: { role: string; content: string }[]; maxTokens: number; segundos: number }) {
   const clave = env.iaClave;
   if (!clave) throw new Error('El asistente de IA no está configurado.');
-  const messages = [
-    ...historial.slice(-6).map((t) => ({ role: t.rol === 'usuario' ? 'user' : 'assistant', content: t.texto })),
-    { role: 'user', content: `${bloqueFuentes(fuentes)}\n\nPregunta del abogado:\n${pregunta}` },
-  ];
   const r = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: { 'x-api-key': clave, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
-    body: JSON.stringify({ model: env.iaModelo, max_tokens: 4096, system: SISTEMA, messages }),
-    signal: AbortSignal.timeout(120_000),
+    body: JSON.stringify({ model: env.iaModelo, max_tokens: o.maxTokens, system: o.system, messages: o.messages }),
+    signal: AbortSignal.timeout(o.segundos * 1000),
+  }).catch((e: Error) => {
+    console.error(`IA: sin respuesta de la API (${e.name})`);
+    throw new Error('El servicio de IA no ha respondido a tiempo. Lo escrito queda guardado.');
   });
   if (!r.ok) {
     // Sin el contenido de la petición en los registros: solo el código.
     console.error(`IA: la API respondió ${r.status}`);
-    throw new Error(r.status === 429 || r.status === 529 ? 'El servicio de IA está saturado. Inténtalo en un minuto.' : 'El servicio de IA no ha respondido. Tu pregunta queda guardada.');
+    throw new Error(r.status === 429 || r.status === 529 ? 'El servicio de IA está saturado. Inténtalo en un minuto.' : 'El servicio de IA no ha respondido. Lo escrito queda guardado.');
   }
-  const j = await r.json() as { content: { type: string; text?: string }[]; usage?: { input_tokens: number; output_tokens: number }; model: string };
+  const j = await r.json() as { content: { type: string; text?: string }[]; usage?: { input_tokens: number; output_tokens: number }; model: string; stop_reason?: string };
   const texto = j.content.filter((b) => b.type === 'text').map((b) => b.text).join('\n').trim();
-  return { texto, modelo: j.model, entrada: j.usage?.input_tokens ?? null, salida: j.usage?.output_tokens ?? null };
+  return { texto, modelo: j.model, entrada: j.usage?.input_tokens ?? null, salida: j.usage?.output_tokens ?? null, cortado: j.stop_reason === 'max_tokens' };
+}
+
+/** Pregunta al asistente con las fuentes del expediente. */
+export async function llamarIA(historial: Turno[], pregunta: string, fuentes: Fuente[]) {
+  const messages = [
+    ...historial.slice(-6).map((t) => ({ role: t.rol === 'usuario' ? 'user' : 'assistant', content: t.texto })),
+    { role: 'user', content: `${bloqueFuentes(fuentes)}\n\nPregunta del abogado:\n${pregunta}` },
+  ];
+  return llamarAnthropic({ system: SISTEMA, messages, maxTokens: 4096, segundos: 120 });
 }

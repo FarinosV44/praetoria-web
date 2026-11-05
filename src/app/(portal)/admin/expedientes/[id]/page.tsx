@@ -102,7 +102,9 @@ export default async function Expediente({ params }: { params: Promise<{ id: str
     if (!c) return null;
     const [entradas, rec, carpetas] = [await cronologia(tx, id), await recientes(tx, u.id),
       (await tx.query(`select distinct coalesce(q.carpeta, d.carpeta) c from portal.documentos d left join portal.requisitos q on q.id = d.requisito_id where d.solicitud_id = $1`, [id])).rows.map((r) => r.c as string)];
-    return { c, entradas, rec, carpetas, equipo: await equipoAsunto(tx, id), relevo: await relevo(tx, id), personal: await personalActivo(tx) };
+    const escritos = (await tx.query(`select e.id, e.titulo, e.updated_at, (select max(version) from portal.escrito_versiones v where v.escrito_id = e.id) version
+      from portal.escritos e where e.solicitud_id = $1 order by e.updated_at desc limit 20`, [id])).rows as { id: string; titulo: string; version: number }[];
+    return { c, entradas, rec, carpetas, escritos, equipo: await equipoAsunto(tx, id), relevo: await relevo(tx, id), personal: await personalActivo(tx) };
   });
   if (!d) notFound();
   const { c } = d;
@@ -118,6 +120,14 @@ export default async function Expediente({ params }: { params: Promise<{ id: str
           ))}
         </ul>
         <p className="mt-3 text-sm"><Link href="/admin/clientes/nuevo/">+ Nuevo cliente</Link></p>
+        {d.escritos.length ? (
+          <>
+            <p className="etiqueta text-sm mt-4 mb-1">Borradores de este asunto</p>
+            <ul className="grid gap-1 text-sm" data-escritos>
+              {d.escritos.map((e) => <li key={e.id}><Link href={`/admin/expedientes/${id}/escritos/${e.id}/`} className="block rounded px-2 py-1 no-underline truncate">✍️ {e.titulo} · v{e.version}</Link></li>)}
+            </ul>
+          </>
+        ) : null}
       </aside>
 
       <section className="expediente-central">
@@ -135,6 +145,7 @@ export default async function Expediente({ params }: { params: Promise<{ id: str
             {!c.cuenta_activa ? <span className="chip chip-aviso">El cliente aún no ha activado su acceso</span> : null}
             <Link href={`/admin/solicitudes/${id}/`}>Ficha completa</Link>
             {env.iaClave ? <Link href={`/admin/expedientes/${id}/asistente/`} className="font-semibold">✨ Asistente IA</Link> : null}
+            {env.iaClave ? <Link href={`/admin/expedientes/${id}/asistente/?modo=redactar`} className="font-semibold">✍️ Redactar escrito</Link> : null}
           </p>
           <div className="mt-1 text-sm"><EstadoCliente solicitud={id} actual={c.estado_visible} /></div>
           <div className="mt-1"><EquipoAsunto solicitud={id} miembros={d.equipo.miembros} gestiona={d.equipo.gestiona} /></div>

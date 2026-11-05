@@ -32,8 +32,19 @@ export async function POST(req: Request) {
       if (!m) return null;
       texto = m.texto; titulo = `Borrador · ${m.titulo}`;
     }
+    let marca: string | null = null;
+    const escrito = String(f.get('escrito') ?? ''), version = Number(f.get('version'));
+    if (UUID.test(escrito) && Number.isInteger(version) && version > 0) {
+      // Versión concreta de un borrador del expediente (#94): sale marcada como BORRADOR en cada página.
+      const v = (await tx.query(`select v.texto, e.titulo from portal.escrito_versiones v join portal.escritos e on e.id = v.escrito_id
+        where v.escrito_id = $1 and v.version = $2`, [escrito, version])).rows[0];
+      if (!v) return null;
+      texto = v.texto; titulo = `${v.titulo} v${version}`.slice(0, 120); marca = `BORRADOR · versión ${version} · pendiente de revisión`;
+    }
     if (!texto.trim() || texto.length > 200000) return null;
-    return { texto, titulo, ...elegirEstilo(lista, UUID.test(estiloId) ? estiloId : null, materia) };
+    const elegido = elegirEstilo(lista, UUID.test(estiloId) ? estiloId : null, materia);
+    if (marca) elegido.estilo = { ...elegido.estilo, encabezado: elegido.estilo.encabezado ? `${marca} — ${elegido.estilo.encabezado}` : marca };
+    return { texto, titulo, ...elegido };
   });
   if (!r) return new Response('No encontrado', { status: 404 });
   const bloques = estructurar(r.texto);

@@ -60,6 +60,7 @@
   .chip-info { background: var(--color-info-tint); color: var(--color-info); }
   .chip-ok { background: var(--color-ok-tint); color: var(--color-ok); }
   .chip-aviso { background: var(--color-warn-tint); color: var(--color-warn); }
+  .aviso { background: var(--color-warn-tint); border-left: 3px solid var(--color-warn); padding: .5rem .75rem; border-radius: .375rem; }
   .lista { display: grid; gap: 12px; }
   .fila { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
   .progreso { height: 8px; background: var(--color-stone-2); border-radius: 999px; overflow: hidden; }
