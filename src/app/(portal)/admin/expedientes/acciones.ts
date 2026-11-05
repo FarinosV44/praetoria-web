@@ -160,3 +160,50 @@ export async function reprogramarTarea(_: Resultado, f: FormData): Promise<Resul
   revalidatePath(`/admin/expedientes/${sid}/`);
   return { ok: 'Fecha cambiada.', n: Date.now() };
 }
+
+const sinPermiso = (e: unknown) => {
+  const m = (e as Error).message ?? '';
+  return /Sin permiso|row-level|42501/.test(m) ? 'No tienes permiso para hacerlo en este asunto.' : m.slice(0, 160);
+};
+
+/** Llevar un documento a la papelera (30 días para restaurarlo). Desaparece para el cliente, la búsqueda y la IA. */
+export async function eliminarDocumento(_: Resultado, f: FormData): Promise<Resultado> {
+  const u = await requerirPersonal();
+  const id = String(f.get('documento')), sid = String(f.get('solicitud')), motivo = String(f.get('motivo') ?? '').slice(0, 300);
+  if (!UUID.test(id) || !UUID.test(sid)) return { error: 'Documento no válido.' };
+  try {
+    await comoUsuario(u.id, async (tx) => {
+      if (!(await tx.query('select 1 from portal.documentos where id = $1 and solicitud_id = $2', [id, sid])).rowCount) throw new Error('Documento no encontrado.');
+      await tx.query('select portal.documento_eliminar($1, $2)', [id, motivo]);
+    });
+  } catch (e) { return { error: sinPermiso(e) }; }
+  revalidatePath(`/admin/expedientes/${sid}/`);
+  return { ok: 'Enviado a la papelera (30 días para restaurarlo).', n: Date.now() };
+}
+
+export async function restaurarDocumento(_: Resultado, f: FormData): Promise<Resultado> {
+  const u = await requerirPersonal();
+  const id = String(f.get('documento')), sid = String(f.get('solicitud'));
+  if (!UUID.test(id) || !UUID.test(sid)) return { error: 'Documento no válido.' };
+  try {
+    await comoUsuario(u.id, async (tx) => {
+      if (!(await tx.query('select 1 from portal.papelera($1) where id = $2', [sid, id])).rowCount) throw new Error('Documento no encontrado en la papelera.');
+      await tx.query('select portal.documento_restaurar($1)', [id]);
+    });
+  } catch (e) { return { error: sinPermiso(e) }; }
+  revalidatePath(`/admin/expedientes/${sid}/`);
+  return { ok: 'Restaurado.', n: Date.now() };
+}
+
+/** Cerrar o reabrir el expediente (queda en la cronología). */
+export async function estadoExpediente(_: Resultado, f: FormData): Promise<Resultado> {
+  const u = await requerirPersonal();
+  const sid = String(f.get('solicitud')), cerrar = f.get('cerrar') === '1';
+  if (!UUID.test(sid)) return { error: 'Asunto no válido.' };
+  try {
+    await comoUsuario(u.id, (tx) => tx.query('select portal.expediente_estado($1, $2)', [sid, cerrar]));
+  } catch (e) { return { error: sinPermiso(e) }; }
+  revalidatePath(`/admin/expedientes/${sid}/`);
+  revalidatePath('/admin/expedientes/');
+  return { ok: cerrar ? 'Expediente cerrado.' : 'Expediente reabierto.', n: Date.now() };
+}

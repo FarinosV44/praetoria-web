@@ -1,6 +1,7 @@
 import { poolApp } from '@/portal/lib/db';
 import { ejecutarCicloAvisos } from '@/portal/lib/avisos-core';
 import { claveCronValida } from '@/portal/lib/cron-clave';
+import { purgarPapelera } from '@/portal/lib/papelera';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -13,7 +14,7 @@ const noExiste = () => new Response('Not Found', { status: 404 });
 // permanentes). Solo devuelve recuentos: nunca datos personales.
 export async function POST(req: Request) {
   if (!autorizada(req)) return noExiste();
-  const resultado = await ejecutarCicloAvisos(poolApp());
+  const resultado = { ...(await ejecutarCicloAvisos(poolApp())), papelera: await purgarPapelera(poolApp()).catch(() => ({ purgados: 0, fallos: -1 })) };
   console.log(JSON.stringify(resultado));
   return Response.json(resultado);
 }

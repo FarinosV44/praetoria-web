@@ -24,3 +24,9 @@ export async function leerObjeto(clave: string): Promise<Blob> {
 export async function borrarObjetoHuerfano(clave: string) {
   try { await s().remove([clave]); } catch { /* sin almacenamiento o ya borrado: nada que limpiar */ }
 }
+
+/** Borrado definitivo de un objeto (purga de la papelera). Lanza si el almacenamiento no lo confirma. */
+export async function borrarObjeto(clave: string) {
+  const { error } = await s().remove([clave]);
+  if (error) throw new Error(`Almacenamiento: ${error.message}`);
+}
