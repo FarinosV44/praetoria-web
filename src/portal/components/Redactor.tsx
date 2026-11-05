@@ -6,14 +6,24 @@ import type { ModeloCandidato } from '@/portal/lib/redactor';
 
 const CLASE: Record<string, string> = { maestro: 'Maestro', historico_anonimizado: 'Histórico anonimizado', clausula: 'Cláusula' };
 export type EscritoActual = { id: string; titulo: string; version: number; modelos: { version_id: string; titulo: string; etiqueta: string }[] };
+export type EscritoHilo = EscritoActual & { hilo: string };
 
-/** Redactar un escrito con modelos aprobados de la biblioteca (#94): proponer, elegir, redactar e iterar. */
-export function Redactor({ solicitud, hilo, escrito }: { solicitud: string; hilo: string | null; escrito: EscritoActual | null }) {
+/** Redactar un escrito con modelos aprobados de la biblioteca (#94): proponer, elegir, redactar e iterar.
+ *  En el asistente trabaja sobre la conversación abierta; dentro del expediente (#78) se elige «nuevo» o un borrador
+ *  existente y el resultado aparece en la cronología, sin cambiar de pantalla. */
+export function Redactor({ solicitud, hilo: hiloFijo, escrito: escritoFijo, inicial = '', escritos, enExpediente = false, inicialSobre = null }: {
+  solicitud: string; hilo: string | null; escrito: EscritoActual | null; inicial?: string; escritos?: EscritoHilo[]; enExpediente?: boolean; inicialSobre?: string | null;
+}) {
   const router = useRouter();
-  const [instruccion, setInstruccion] = useState('');
+  const [sobre, setSobre] = useState(escritoFijo?.id ?? (inicialSobre && escritos?.some((e) => e.id === inicialSobre) ? inicialSobre : ''));
+  const elegido = escritos ? escritos.find((e) => e.id === sobre) ?? null : null;
+  const escrito: EscritoActual | null = escritos ? elegido : escritoFijo;
+  const hilo = escritos ? elegido?.hilo ?? null : hiloFijo;
+  const [hecho, setHecho] = useState<string | null>(null);
+  const [instruccion, setInstruccion] = useState(inicial);
   const [titulo, setTitulo] = useState('');
   const [propuesta, setPropuesta] = useState<Propuesta | null>(null);
-  const [seleccion, setSeleccion] = useState<string[]>(escrito?.modelos.map((m) => m.version_id) ?? []);
+  const [seleccion, setSeleccion] = useState<string[]>(() => escrito?.modelos.map((m) => m.version_id) ?? []);
   const [filtro, setFiltro] = useState('');
   const [trabajo, setTrabajo] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -30,11 +40,15 @@ export function Redactor({ solicitud, hilo, escrito }: { solicitud: string; hilo
       if (!r || r.estado === 'en_curso') return;
       clearInterval(t);
       setTrabajo(null);
-      if (r.estado === 'listo') { router.replace(`?hilo=${r.hilo}&modo=redactar`); router.refresh(); setInstruccion(''); }
+      if (r.estado === 'listo') {
+        setInstruccion(''); setPropuesta(null);
+        if (enExpediente) { setHecho(`Guardada la versión ${r.version} del borrador en la cronología.`); if (r.escrito) setSobre(r.escrito); router.refresh(); }
+        else { router.replace(`?hilo=${r.hilo}&modo=redactar`); router.refresh(); }
+      }
       else setError(r.error ?? 'No se ha podido redactar.');
     }, 4000);
     return () => clearInterval(t);
-  }, [trabajo, router]);
+  }, [trabajo, router, enExpediente]);
 
   const modelos = useMemo(() => {
     const todos = propuesta?.modelos ?? [];
@@ -55,7 +69,7 @@ export function Redactor({ solicitud, hilo, escrito }: { solicitud: string; hilo
     }
   });
   const redactarYa = () => empezar(async () => {
-    setError(null);
+    setError(null); setHecho(null);
     const r = await iniciarRedaccion({ sid: solicitud, hilo, instruccion, versiones: seleccion, titulo, procedimiento: propuesta?.procedimiento?.id ?? null });
     if (r.error) { setError(r.error); return; }
     setSegundos(0);
@@ -65,6 +79,17 @@ export function Redactor({ solicitud, hilo, escrito }: { solicitud: string; hilo
 
   return (
     <div className="grid gap-3" data-redactor>
+      {escritos && escritos.length ? (
+        <label className="text-sm flex flex-wrap gap-2 items-center">Sobre
+          <select value={sobre} disabled={ocupado} data-sobre onChange={(e) => {
+            const id = e.target.value; setSobre(id); setPropuesta(null);
+            setSeleccion(escritos.find((x) => x.id === id)?.modelos.map((m) => m.version_id) ?? []);
+          }}>
+            <option value="">Un escrito nuevo</option>
+            {escritos.map((e) => <option key={e.id} value={e.id}>«{e.titulo}» · v{e.version}</option>)}
+          </select>
+        </label>
+      ) : null}
       {escrito ? (
         <p className="aviso text-sm" data-escrito-actual>
           Trabajando sobre <a href={`/admin/expedientes/${solicitud}/escritos/${escrito.id}/`}><strong>«{escrito.titulo}»</strong> · versión {escrito.version}</a>.
@@ -129,6 +154,7 @@ export function Redactor({ solicitud, hilo, escrito }: { solicitud: string; hilo
 
       {trabajo ? <p className="evento-linea" role="status" data-redactando>Redactando el borrador con {seleccion.length} modelo{seleccion.length === 1 ? '' : 's'}… {segundos} s (suele tardar entre 1 y 4 minutos). Puedes seguir en otra pestaña.</p> : null}
       {error ? <p className="error text-sm" role="alert">{error}</p> : null}
+      {hecho ? <p className="exito text-sm" role="status" data-hecho>{hecho}</p> : null}
     </div>
   );
 }

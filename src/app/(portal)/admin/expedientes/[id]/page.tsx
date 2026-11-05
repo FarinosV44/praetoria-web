@@ -39,6 +39,25 @@ function Item({ e, sid }: { e: Entrada; sid: string }) {
       </li>
     );
   }
+  if (e.clase === 'borrador') {
+    return (
+      <li className="burbuja burbuja-documento" data-clase="borrador" data-borrador-version={e.version}>
+        <p className="meta">✍️ Borrador {e.origen === 'ia' ? 'preparado con IA' : 'corregido a mano'} · {e.autor} · {hora(e.at)} · <span title="No lo ve el cliente">🔒 interno</span></p>
+        <p className="fila"><span><strong>{e.titulo}</strong> · versión {e.version}</span><span className="chip chip-aviso">BORRADOR · requiere revisión</span></p>
+        {e.instruccion && e.origen === 'ia' ? <p className="text-sm">«{e.instruccion.length > 200 ? `${e.instruccion.slice(0, 200)}…` : e.instruccion}»</p> : null}
+        <p className="text-xs" data-modelos-usados>{e.modelos.length ? <>Modelos: {e.modelos.map((m) => `${m.etiqueta} ${m.titulo} v${m.version}`).join(' · ')}</> : 'Sin modelos de la biblioteca'}
+          {e.avisos ? ` · ⚠️ ${e.avisos} aviso${e.avisos > 1 ? 's' : ''}` : ''}{e.pendientes ? ` · ${e.pendientes} [PENDIENTE]` : ''}</p>
+        <div className="flex flex-wrap gap-3 items-center text-sm mt-1">
+          <Link href={`/admin/expedientes/${sid}/escritos/${e.escrito}/?v=${e.version}`}>Abrir y revisar</Link>
+          {e.hilo ? <Link href={`?redactar=${e.escrito}#compositor`} scroll={false}>Pedir cambios</Link> : null}
+          <form method="post" action="/api/escritos/exportar/" className="inline-flex gap-2" data-exportar>
+            <input type="hidden" name="escrito" value={e.escrito} /><input type="hidden" name="version" value={e.version} />
+            <button name="formato" value="docx" className="btn-texto">Word</button><button name="formato" value="pdf" className="btn-texto">PDF</button>
+          </form>
+        </div>
+      </li>
+    );
+  }
   if (e.clase === 'tarea') {
     return (
       <li className="burbuja burbuja-tarea" data-clase="tarea" data-tarea={e.titulo}>
@@ -93,17 +112,19 @@ function Continuar({ r }: { r: Relevo }) {
   );
 }
 
-export default async function Expediente({ params }: { params: Promise<{ id: string }> }) {
+export default async function Expediente({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ redactar?: string }> }) {
   const u = await requerirPersonal();
   const { id } = await params;
+  const { redactar } = await searchParams;
   if (!UUID.test(id)) notFound();
   const d = await comoUsuario(u.id, async (tx) => {
     const c = await cabecera(tx, id, u.id);
     if (!c) return null;
     const [entradas, rec, carpetas] = [await cronologia(tx, id), await recientes(tx, u.id),
       (await tx.query(`select distinct coalesce(q.carpeta, d.carpeta) c from portal.documentos d left join portal.requisitos q on q.id = d.requisito_id where d.solicitud_id = $1`, [id])).rows.map((r) => r.c as string)];
-    const escritos = (await tx.query(`select e.id, e.titulo, e.updated_at, (select max(version) from portal.escrito_versiones v where v.escrito_id = e.id) version
-      from portal.escritos e where e.solicitud_id = $1 order by e.updated_at desc limit 20`, [id])).rows as { id: string; titulo: string; version: number }[];
+    const escritos = (await tx.query(`select e.id, e.titulo, e.hilo_id hilo, v.version, v.modelos from portal.escritos e
+      join lateral (select version, modelos from portal.escrito_versiones x where x.escrito_id = e.id order by version desc limit 1) v on true
+      where e.solicitud_id = $1 order by e.updated_at desc limit 20`, [id])).rows as { id: string; titulo: string; hilo: string | null; version: number; modelos: { version_id: string; titulo: string; etiqueta: string }[] }[];
     return { c, entradas, rec, carpetas, escritos, equipo: await equipoAsunto(tx, id), relevo: await relevo(tx, id), personal: await personalActivo(tx) };
   });
   if (!d) notFound();
@@ -163,7 +184,9 @@ export default async function Expediente({ params }: { params: Promise<{ id: str
         <datalist id="documentos-expediente">{[...new Set(d.entradas.filter((x) => x.clase === 'documento').map((x) => (x as { nombre: string }).nombre))].map((n) => <option key={n} value={n} />)}</datalist>
         <datalist id="personal-equipo">{d.personal.map((p) => <option key={p.id} value={p.nombre} />)}</datalist>
         <datalist id="carpetas-expediente">{[...new Set([...d.carpetas, 'Documentación del despacho', 'Escritos', 'Prueba', 'Comunicaciones', 'Resoluciones', 'Economía'])].map((x) => <option key={x} value={x} />)}</datalist>
-        <Compositor solicitudId={id} maxMb={env.uploadMaxBytes / 1024 / 1024} />
+        <Compositor solicitudId={id} maxMb={env.uploadMaxBytes / 1024 / 1024} ia={!!env.iaClave}
+          escritos={d.escritos.filter((e) => e.hilo).map((e) => ({ id: e.id, titulo: e.titulo, version: e.version, hilo: e.hilo!, modelos: e.modelos }))}
+          abrirEscrito={redactar && UUID.test(redactar) ? redactar : null} />
       </section>
     </div>
   );

@@ -209,3 +209,32 @@ test('4. Quien no tiene el asunto no ve el borrador ni lo exporta', async ({ pag
     expect((await p.request.post('/api/escritos/exportar/', { form: { escrito: e.escrito!, version: '1', formato: 'docx' }, headers })).status()).toBe(403);
   }
 });
+
+test('5. Desde el chat del expediente: «Redacta…» propone el redactor, el borrador entra en la cronología y se itera sin salir', async ({ page: p }) => {
+  await entrarComo(p, SA);
+  await p.goto(`/admin/expedientes/${e.a}/`);
+  // Las versiones del escrito anterior están en la cronología como borradores internos
+  await expect(p.locator(`[data-clase="borrador"]`)).toHaveCount(3);
+  await expect(p.locator('[data-clase="borrador"]').first()).toContainText('BORRADOR · requiere revisión');
+  // Escribir la orden en el compositor sugiere el redactor; no se guarda como nota hasta que se elija
+  await p.getByLabel('Escribe en el expediente').fill('Redacta un requerimiento extrajudicial de pago de la pensión a la otra parte');
+  await p.locator('[data-sugerir-ia]').getByRole('button', { name: '✍️ Preparar escrito con IA' }).click();
+  await expect(p.getByLabel('Qué escrito necesitas')).toHaveValue(/requerimiento extrajudicial/);
+  await p.getByRole('button', { name: 'Buscar modelos' }).click();
+  await expect(p.locator('[data-propuesta]')).toBeVisible();
+  await p.getByRole('button', { name: 'Redactar borrador' }).click();
+  await expect(p.locator('[data-hecho]')).toContainText('versión 1', { timeout: 480_000 });
+  await expect(p.locator('[data-clase="borrador"]')).toHaveCount(4);
+  await expect(p.locator('[data-clase="nota"]', { hasText: 'requerimiento extrajudicial' })).toHaveCount(0);
+  expect(p.url()).toMatch(new RegExp(`/admin/expedientes/${e.a}/`));
+
+  // «Pedir cambios» sobre la demanda abre el redactor en el compositor sobre ESE escrito y crea su versión 4
+  await p.locator(`[data-clase="borrador"][data-borrador-version="3"]`).getByRole('link', { name: 'Pedir cambios' }).click();
+  await expect(p.locator('[data-sobre]')).toHaveValue(e.escrito!);
+  await expect(p.locator('[data-escrito-actual]')).toContainText('versión 3');
+  await p.getByLabel('Qué escrito necesitas').fill('Añade al final un OTROSÍ solicitando el recibimiento del pleito a prueba.');
+  await p.getByRole('button', { name: 'Crear versión nueva' }).click();
+  await expect(p.locator('[data-hecho]')).toContainText('versión 4', { timeout: 480_000 });
+  await expect(p.locator('[data-clase="borrador"][data-borrador-version="4"]')).toBeVisible();
+  // El cliente no ve borradores: el cliente nunca entra en /admin y la cronología del cliente no los incluye
+});
