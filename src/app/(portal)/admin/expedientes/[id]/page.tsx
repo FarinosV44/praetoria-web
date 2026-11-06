@@ -66,16 +66,16 @@ function Item({ e, sid }: { e: Entrada; sid: string }) {
     return (
       <li className="burbuja burbuja-tarea" data-clase="tarea" data-tarea={e.titulo}>
         <p className="meta">{e.tipo === 'plazo' ? (e.verificado ? 'Plazo verificado' : e.sugerida ? 'Fecha sugerida (sin validar)' : 'Plazo pendiente de verificar') : TIPO_ETIQUETA[e.tipo] ?? 'Tarea'} · responsable: {e.autor} · {hora(e.at)}</p>
-        <p className="fila"><span><strong>{e.titulo}</strong> · {fechaHora(e.inicio)}</span>
+        <div className="fila"><span><strong>{e.titulo}</strong> · {fechaHora(e.inicio)}</span>
           {e.estado === 'pendiente' ? <span className="flex gap-3 items-center"><Reasignar tarea={e.id} solicitud={sid} /><Completar tarea={e.id} solicitud={sid} /></span>
-            : <span className="chip chip-neutro">{e.estado === 'completado' ? 'Hecha' : 'Cancelada'}</span>}</p>
+            : <span className="chip chip-neutro">{e.estado === 'completado' ? 'Hecha' : 'Cancelada'}</span>}</div>
         {e.documento || e.fuente ? <p className="text-xs">Origen: {e.documento ? <a href={`/api/documentos/${e.documento.id}/?ver=1`} target="_blank" rel="noopener">📄 {e.documento.nombre}</a> : e.fuente}</p> : null}
         {e.estado === 'pendiente' ? (
-          <p className="flex flex-wrap gap-3 items-center text-xs mt-1">
+          <div className="flex flex-wrap gap-3 items-center text-xs mt-1">
             {e.tipo === 'plazo' && !e.verificado ? <VerificarPlazo tarea={e.id} solicitud={sid} /> : null}
             <Reprogramar tarea={e.id} solicitud={sid} fecha={partesMadrid(e.inicio).fecha} />
             <Link href={`/admin/agenda/${e.id}/`}>Avisos y detalles</Link>
-          </p>
+          </div>
         ) : <p className="text-xs"><Link href={`/admin/agenda/${e.id}/`}>Avisos y detalles</Link></p>}
       </li>
     );
@@ -88,13 +88,13 @@ function Item({ e, sid }: { e: Entrada; sid: string }) {
           <span className="ayuda text-sm"> · v{e.version} · {tamano(e.tamano)}</span></span>
         <a href={`/api/documentos/${e.id}/?descargar=1`} className="text-sm">Descargar</a>
       </p>
-      <p className="flex flex-wrap gap-3 items-center text-sm mt-1">
+      <div className="flex flex-wrap gap-3 items-center text-sm mt-1">
         <Carpeta documento={e.id} solicitud={sid} carpeta={e.carpeta} editable={e.del_despacho} />
         {e.visible ? <span className="chip chip-ok">Visible para el cliente</span> : <><span className="chip chip-neutro">🔒 Privado</span><Compartir documento={e.id} solicitud={sid} /></>}
         <Eliminar documento={e.id} solicitud={sid} nombre={e.nombre} />
         {e.estado === 'pendiente' ? <Link href={`/admin/solicitudes/${sid}/#documentacion`}>Revisar</Link> : null}
         {e.analisis === 'infectado' ? <span className="chip chip-aviso">Bloqueado por antivirus</span> : null}
-      </p>
+      </div>
     </li>
   );
 }
@@ -204,7 +204,7 @@ export default async function Expediente({ params, searchParams }: { params: Pro
             <div><dt>Abierto</dt><dd>{c.abierto_at ? fechaHora(new Date(c.abierto_at)) : '—'}</dd></div>
           </dl>
           {c.expediente_estado ? <DatosProceso solicitud={id} contraparte={c.contraparte} procedimiento={c.procedimiento} organo={c.organo} autos={c.numero_autos} /> : null}
-          <p className="text-sm flex flex-wrap gap-x-4 gap-y-1 mt-1">
+          <div className="text-sm flex flex-wrap gap-x-4 gap-y-1 mt-1">
             <span>📄 {c.docs} documentos{c.por_revisar ? ` · ${c.por_revisar} por revisar` : ''}{c.faltan ? ` · faltan ${c.faltan}` : ''}</span>
             {c.proxima ? <span>⏰ {c.proxima_titulo}: {fechaHora(c.proxima)}</span> : null}
             {!c.cuenta_activa ? <span className="chip chip-aviso">El cliente aún no ha activado su acceso</span> : null}
@@ -213,7 +213,7 @@ export default async function Expediente({ params, searchParams }: { params: Pro
             {d.opciones ? <PanelIA solicitud={id} opciones={d.opciones} /> : null}
             {env.iaClave ? <Link href={`/admin/expedientes/${id}/asistente/`} className="font-semibold">✨ Asistente IA</Link> : null}
             {env.iaClave ? <Link href={`/admin/expedientes/${id}/asistente/?modo=redactar`} className="font-semibold">✍️ Redactar escrito</Link> : null}
-          </p>
+          </div>
           <div className="mt-1 text-sm"><EstadoCliente solicitud={id} actual={c.estado_visible} /></div>
           <div className="mt-1"><EquipoAsunto solicitud={id} miembros={d.equipo.miembros} gestiona={d.equipo.gestiona} /></div>
           <Continuar r={d.relevo} />
@@ -257,14 +257,14 @@ export default async function Expediente({ params, searchParams }: { params: Pro
                     <li key={x.id} className="card" style={{ marginTop: 0, padding: 14 }} data-documento={x.nombre}>
                       <p className="fila"><span>📄 <a href={`/api/documentos/${x.id}/?ver=1`} target="_blank" rel="noopener" className="font-semibold">{x.nombre}</a><span className="ayuda text-sm"> · v{x.version} · {tamano(x.tamano)} · {x.carpeta}</span></span>
                         <a href={`/api/documentos/${x.id}/?descargar=1`} className="text-sm">Descargar</a></p>
-                      <p className="flex flex-wrap gap-2 items-center text-xs mt-1">
+                      <div className="flex flex-wrap gap-2 items-center text-xs mt-1">
                         {ix?.estado === 'ok' ? <span className="chip chip-ok" data-indexado>Disponible para la IA{ix.con_ocr ? ' (OCR)' : ''}</span>
                           : ix?.estado === 'error' || ix?.estado === 'sin_texto' ? <span className="chip chip-aviso" title={ix.detalle ?? ''}>{ix.detalle ?? 'Sin texto legible'}</span>
                             : <span className="chip chip-neutro">Procesando para la IA…</span>}
                         {ix && ix.estado !== 'pendiente' && ix.estado !== 'procesando' ? <Reindexar tipo="documento" origen={x.id} solicitud={id} /> : null}
                         {d.duplicados.includes(x.id) ? <span className="chip chip-aviso">Posible duplicado (mismo contenido que otro archivo)</span> : null}
                         {d.opciones && ix?.estado === 'ok' ? <AnalizarDocumento documento={x.id} ya={!!an} /> : null}
-                      </p>
+                      </div>
                       {an ? (
                         <details className="text-sm mt-2" data-analisis>
                           <summary>Análisis de la IA · {an.tipo}{an.modelo ? ` · ${an.modelo}` : ''} (revísalo)</summary>

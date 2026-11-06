@@ -128,7 +128,7 @@ test('5. App instalable: manifiesto, iconos y service worker sin caché de conte
 });
 
 test('6. Un cliente no ve la agenda ni registra dispositivos del despacho', async ({ page: p, request }) => {
-  const r = await request.post('/api/push/', { headers: { origin: 'http://localhost:3100' }, data: { endpoint: 'https://x.test/1', keys: { p256dh: 'B'.repeat(87), auth: 'a'.repeat(22) } } });
+  const r = await request.post('/api/push/', { headers: { origin: process.env.E2E_BASE_URL ?? 'http://localhost:3100' }, data: { endpoint: 'https://x.test/1', keys: { p256dh: 'B'.repeat(87), auth: 'a'.repeat(22) } } });
   expect(r.status()).toBe(401);
   await p.goto('/admin/agenda/');
   await expect(p).toHaveURL(/\/entrar\/$/);

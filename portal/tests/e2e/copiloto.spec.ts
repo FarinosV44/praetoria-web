@@ -328,7 +328,7 @@ test('12. Móvil: panel, expediente, editor y paleta sin desbordar la pantalla',
   await entrarComo(p, SA);
   const errores: string[] = [];
   p.on('pageerror', (x) => errores.push(`${p.url()}: ${x.message}`));
-  for (const ruta of ['/admin/', `/admin/expedientes/${e.x}/`, `/admin/expedientes/${e.x}/?vista=documentos`, `/admin/expedientes/${e.x}/escritos/${e.escrito}/`, '/admin/ia/', '/admin/ia/nuevo/', '/admin/ia/ajustes/']) {
+  for (const ruta of ['/admin/', `/admin/expedientes/${e.x}/`, `/admin/expedientes/${e.x}/?vista=documentos`, `/admin/expedientes/${e.x}/asistente/`, `/admin/expedientes/${e.x}/escritos/${e.escrito}/`, '/admin/ia/', '/admin/ia/nuevo/', '/admin/ia/ajustes/']) {
     await p.goto(ruta);
     // Con isMobile, el navegador ensancha la página si algo desborda: se compara con el ancho real de la pantalla.
     const ancho = await p.evaluate(() => document.documentElement.scrollWidth);

@@ -69,7 +69,7 @@ export default async function Borrador({ params, searchParams }: { params: Promi
         </header>
 
         <div className="grid gap-4">
-          <section aria-label="Modelos utilizados" className="text-sm" data-modelos-usados>
+          <section aria-label="Modelos utilizados" className="text-sm overflow-x-auto" data-modelos-usados>
             <h2 className="etiqueta">Modelos utilizados</h2>
             {sel.modelos.length ? (
               <table className="tabla">

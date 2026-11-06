@@ -78,11 +78,11 @@ export function AsistenteIA({ solicitud, hilo, mensajes, estilos = [], modo = 'p
               : m.rol === 'asistente' ? <ConCitas texto={m.texto} citas={m.citas} /> : <p className="whitespace-pre-wrap">{m.texto}</p>}
             {m.limites.length ? <ul className="text-xs mt-1" data-limites>{m.limites.map((l, i) => <li key={i}>⚠️ {l}</li>)}</ul> : null}
             {m.rol === 'asistente' && !m.borrador ? (
-              <p className="flex flex-wrap gap-3 items-center mt-1">
+              <div className="flex flex-wrap gap-3 items-center mt-1">
                 <button type="button" className="btn-texto text-sm" onClick={() => navigator.clipboard?.writeText(m.texto)}>Copiar</button>
                 <GuardarNota solicitud={solicitud} mensaje={m.id} />
                 <CrearEscrito solicitud={solicitud} mensaje={m.id} />
-              </p>
+              </div>
             ) : null}
             {m.rol === 'asistente' && !m.borrador ? (
               <form method="post" action="/api/escritos/exportar/" className="flex flex-wrap gap-2 items-center text-sm mt-1" data-exportar>

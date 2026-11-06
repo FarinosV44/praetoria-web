@@ -29,7 +29,7 @@ export default async function AjustesPagina() {
     <div className="grid gap-4 max-w-4xl">
       <div><Migas items={[{ texto: 'Copiloto', href: '/admin/ia/' }, { texto: 'Ajustes de IA' }]} /><h1 className="titulo">Ajustes de IA</h1></div>
       <AjustesIA d={JSON.parse(JSON.stringify(d.a))} claves={clavesIA()} />
-      <section className="card" data-estado-indice>
+      <section className="card overflow-x-auto" data-estado-indice>
         <h2 className="subtitulo">Conocimiento indexado</h2>
         {d.indice.length ? (
           <table className="tabla"><thead><tr><th>Origen</th><th>Estado</th><th>Elementos</th><th>Fragmentos</th></tr></thead>
