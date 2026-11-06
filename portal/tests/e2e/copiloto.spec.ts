@@ -323,14 +323,18 @@ test('11. Sin credenciales ni desde otro origen no se puede usar la IA', async (
 });
 
 test('12. Móvil: panel, expediente, editor y paleta sin desbordar la pantalla', async ({ browser }) => {
-  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
   const p = await ctx.newPage();
   await entrarComo(p, SA);
+  const errores: string[] = [];
+  p.on('pageerror', (x) => errores.push(`${p.url()}: ${x.message}`));
   for (const ruta of ['/admin/', `/admin/expedientes/${e.x}/`, `/admin/expedientes/${e.x}/?vista=documentos`, `/admin/expedientes/${e.x}/escritos/${e.escrito}/`, '/admin/ia/', '/admin/ia/nuevo/', '/admin/ia/ajustes/']) {
     await p.goto(ruta);
-    const sobra = await p.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-    expect(sobra, `desbordamiento horizontal en ${ruta}`).toBeLessThanOrEqual(1);
+    // Con isMobile, el navegador ensancha la página si algo desborda: se compara con el ancho real de la pantalla.
+    const ancho = await p.evaluate(() => document.documentElement.scrollWidth);
+    expect(ancho, `desbordamiento horizontal en ${ruta}`).toBeLessThanOrEqual(391);
   }
+  expect(errores, 'sin errores de JavaScript en las pantallas del despacho').toEqual([]);
   await ctx.close();
 });
 

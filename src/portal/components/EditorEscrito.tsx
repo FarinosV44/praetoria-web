@@ -45,11 +45,12 @@ export function EditorEscrito({ solicitud, escrito, base, texto, ia }: { solicit
   useEffect(() => {
     if (r.version) { try { localStorage.removeItem(clave); } catch { /* sin almacenamiento local */ } router.replace(`?v=${r.version}`); }
   }, [r.version, r.n, router, clave]);
+  // Al salir se guarda sin esperar: lo escrito en el último instante tampoco se pierde.
   useEffect(() => {
-    const aviso = (e: BeforeUnloadEvent) => { if (valor !== texto) e.preventDefault(); };
-    window.addEventListener('beforeunload', aviso);
-    return () => window.removeEventListener('beforeunload', aviso);
-  }, [valor, texto]);
+    const guardar = () => { try { if (valor !== texto) localStorage.setItem(clave, valor); } catch { /* sin almacenamiento local */ } };
+    window.addEventListener('pagehide', guardar);
+    return () => window.removeEventListener('pagehide', guardar);
+  }, [valor, texto, clave]);
 
   const cambiado = valor !== texto;
   const palabras = useMemo(() => valor.trim().split(/\s+/).filter(Boolean).length, [valor]);
