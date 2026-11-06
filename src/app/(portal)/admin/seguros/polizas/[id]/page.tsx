@@ -14,6 +14,7 @@ import { accionEliminarDocumento } from '../acciones';
 import { accionRenegociar } from '../lectura-acciones';
 import { iaConfigurada } from '@/seguros/lib/ia/proveedor';
 import { CondicionesEnFecha, EditarDocumento, Expediente, Recibos } from './expediente';
+import { Asistente } from './asistente';
 import { SubidaDirecta } from '@/seguros/components/subida-directa';
 import { Importar } from '@/seguros/components/importar';
 import type { Origen } from '@/seguros/lib/ia/importacion';
@@ -26,6 +27,7 @@ export const metadata: Metadata = { title: 'Póliza' };
 const PESTANAS = [
   { clave: 'resumen', texto: 'Resumen' },
   { clave: 'expediente', texto: 'Expediente' },
+  { clave: 'asistente', texto: 'Asistente IA' },
   { clave: 'recibos', texto: 'Recibos y pagos' },
   { clave: 'condiciones', texto: 'Condiciones' },
   { clave: 'documentos', texto: 'Documentos' },
@@ -38,9 +40,9 @@ const ESTADO_DOC: Record<string, { texto: string; clase: string }> = {
   revision: { texto: 'Datos por revisar', clase: 'revisar' }, confirmado: { texto: 'Datos confirmados', clase: 'vigente' }, error: { texto: 'Lectura fallida', clase: 'vencida' },
 };
 
-export default async function Ficha({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ pestana?: string; volver?: string; creada?: string; buscar?: string; clase?: string; fecha?: string }> }) {
+export default async function Ficha({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ pestana?: string; volver?: string; creada?: string; buscar?: string; clase?: string; fecha?: string; c?: string }> }) {
   const { id } = await params;
-  const { pestana = 'resumen', volver, creada, buscar, clase, fecha } = await searchParams;
+  const { pestana = 'resumen', volver, creada, buscar, clase, fecha, c } = await searchParams;
   const u = await exigirUsuario();
   const p = await obtenerPoliza(u, id).catch((e) => { if (e instanceof NoEncontrado) notFound(); throw e; });
   const [anualidades, documentos] = await Promise.all([listarAnualidades(u, id), listarDocumentos(u, id)]);
@@ -119,7 +121,8 @@ export default async function Ficha({ params, searchParams }: { params: Promise<
         ))}
       </nav>
 
-      {pestana === 'expediente' ? <Expediente u={u} id={id} buscar={buscar} clase={clase} documentos={documentos} />
+      {pestana === 'asistente' ? <Asistente u={u} id={id} c={c} />
+        : pestana === 'expediente' ? <Expediente u={u} id={id} buscar={buscar} clase={clase} documentos={documentos} />
         : pestana === 'recibos' ? <Recibos u={u} id={id} moneda={p.moneda} documentos={documentos} />
         : pestana === 'condiciones' ? <><CondicionesEnFecha u={u} id={id} fecha={fecha} /><Condiciones id={id} actual={actual} documentos={documentos} /></>
         : pestana === 'siniestros' ? <SiniestrosPoliza id={id} />

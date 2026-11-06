@@ -386,3 +386,14 @@
 .seguros .titulo-grupo { font-size: var(--texto-m); margin: var(--e-4) 0 var(--e-2); }
 .seguros .calendario-pagos { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--e-3); }
 @media (min-width: 761px) { .seguros .solo-movil { display: none; } }
+
+/* Asistente de IA del seguro y escritos */
+.seguros .mensajes { list-style: none; padding: 0; margin: 0 0 var(--e-4); display: grid; gap: var(--e-3); }
+.seguros .mensaje { padding: var(--e-3) var(--e-4); border: 1px solid var(--color-borde); border-radius: var(--radio); background: var(--color-superficie); overflow-wrap: anywhere; }
+.seguros .mensaje--usuario { background: var(--color-hover); }
+.seguros .mensaje__quien { font-size: var(--texto-xs); color: var(--color-texto-2); font-weight: 600; margin-bottom: var(--e-1); }
+.seguros .citas { list-style: none; padding: 0; margin: var(--e-2) 0 0; display: grid; gap: var(--e-1); border-top: 1px solid var(--color-borde); padding-top: var(--e-2); overflow-wrap: anywhere; }
+.seguros .sugerencias { display: flex; flex-wrap: wrap; gap: var(--e-2); margin-top: var(--e-3); }
+.seguros .sugerencias form { display: contents; }
+.seguros .sugerencias .boton { white-space: normal; text-align: left; height: auto; }
+.seguros .asunto + .asunto { border-top: 1px solid var(--color-borde); padding-top: var(--e-3); }

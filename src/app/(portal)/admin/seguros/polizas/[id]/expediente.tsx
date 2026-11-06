@@ -188,6 +188,16 @@ export async function CondicionesEnFecha({ u, id, fecha }: { u: Usuario; id: str
                 </li>))}</ul>
             </div>
           )}
+          {c.anteriores.length > 0 && (
+            <div style={{ marginTop: 'var(--e-3)' }}>
+              <p style={{ fontWeight: 650 }}>Modificaciones de periodos anteriores</p>
+              <p className="pequeno secundario">Pueden seguir aplicando tras la renovación salvo que las condiciones del periodo digan otra cosa: compruébalo en sus documentos.</p>
+              <ul className="lista-puntos pequeno">{c.anteriores.map((m) => (
+                <li key={m.id}>{m.fecha_efecto ? `${fechaMedia(m.fecha_efecto)}: ` : ''}{m.descripcion}
+                  {m.documento_id && <> · <a href={`/api/seguros/documentos/${m.documento_id}/${m.pagina ? `#page=${m.pagina}` : ''}`} target="_blank" rel="noopener">documento{m.pagina ? `, pág. ${m.pagina}` : ''}</a></>}
+                </li>))}</ul>
+            </div>
+          )}
           {a.garantias && a.garantias.length > 0 && <p className="pequeno" style={{ marginTop: 'var(--e-2)' }}><strong>Garantías del periodo:</strong> {a.garantias.map((g) => g.texto).join('; ')}</p>}
           {a.franquicias && a.franquicias.length > 0 && <p className="pequeno"><strong>Franquicias:</strong> {a.franquicias.map((g) => g.texto).join('; ')}</p>}
           <p className="pequeno" style={{ marginTop: 'var(--e-2)' }}><strong>Documentos de condiciones de ese periodo:</strong> {c.documentos.length ? c.documentos.map((d, i) => <span key={d.id}>{i ? ', ' : ''}<a href={`/api/seguros/documentos/${d.id}/`} target="_blank" rel="noopener">{d.nombre_original}</a></span>) : 'ninguno registrado'}</p>

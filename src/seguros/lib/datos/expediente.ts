@@ -191,6 +191,8 @@ export type CondicionesEnFecha = {
   anualidad: Record<string, unknown> | null;
   modificaciones: { id: string; fecha_efecto: string | null; descripcion: string; documento_id: string | null; pagina: number | null; cita: string | null }[];
   documentos: { id: string; tipo: string; nombre_original: string; fecha_documento: string | null }[];
+  /** Modificaciones de periodos anteriores: pueden seguir aplicando tras la renovación salvo que esta las cambie. */
+  anteriores: CondicionesEnFecha['modificaciones'];
   vigente_hoy: boolean;
 };
 
@@ -213,8 +215,11 @@ export async function condicionesEnFecha(u: Usuario, polizaId: string, fecha: st
         AND (anualidad_id = $2 OR (anualidad_id IS NULL AND tipo = 'condiciones_generales'))
         AND (fecha_documento IS NULL OR fecha_documento <= $3)
       ORDER BY fecha_documento NULLS FIRST`, [polizaId, a.id, fecha], db) : [];
+  const anteriores = a ? await q<CondicionesEnFecha['modificaciones'][number]>(
+    `SELECT id, fecha_efecto, descripcion, documento_id, pagina, cita FROM modificaciones
+      WHERE poliza_id = $1 AND anulada_en IS NULL AND fecha_efecto < $2 AND (anualidad_id IS NULL OR anualidad_id <> $3) ORDER BY fecha_efecto`, [polizaId, a.inicio, a.id], db) : [];
   const hoy = hoyMadrid();
-  return { fecha, anualidad: a, modificaciones, documentos, vigente_hoy: !!a && String(a.inicio) <= hoy && (!a.fin || String(a.fin) > hoy) };
+  return { fecha, anualidad: a, modificaciones, documentos, anteriores, vigente_hoy: !!a && String(a.inicio) <= hoy && (!a.fin || String(a.fin) > hoy) };
 }
 
 // ---------------------------------------------------------------- Documentos: tipo, fecha y siniestros
