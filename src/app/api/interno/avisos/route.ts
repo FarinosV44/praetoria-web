@@ -1,6 +1,7 @@
 import { poolApp } from '@/portal/lib/db';
 import { ejecutarCicloAvisos } from '@/portal/lib/avisos-core';
 import { claveCronValida } from '@/portal/lib/cron-clave';
+import { procesarCola } from '@/portal/lib/indexador';
 import { purgarPapelera } from '@/portal/lib/papelera';
 import { cicloSeguros } from '@/seguros/lib/tarea-portal';
 
@@ -18,6 +19,8 @@ export async function POST(req: Request) {
   const resultado = { ...(await ejecutarCicloAvisos(poolApp())), papelera: await purgarPapelera(poolApp()).catch(() => ({ purgados: 0, fallos: -1 })) };
   // Gestor de seguros (/admin/seguros): un fallo suyo nunca detiene los avisos del despacho.
   const seguros = await cicloSeguros(poolApp()).catch((e: Error) => ({ error: e.message.slice(0, 200) }));
+  // Indexación documental sin esperar: el OCR puede durar minutos y la tarea cron no debe quedarse colgada.
+  void procesarCola(poolApp()).catch((e: Error) => console.error(`indexación: ${e.name}`));
   console.log(JSON.stringify({ ...resultado, seguros }));
   return Response.json({ ...resultado, seguros });
 }

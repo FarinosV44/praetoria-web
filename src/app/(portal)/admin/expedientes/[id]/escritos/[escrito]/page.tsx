@@ -2,12 +2,14 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ConCitas, type Cita } from '@/portal/components/ConCitas';
-import { EditarBorrador } from '@/portal/components/EditarBorrador';
+import { EditorEscrito } from '@/portal/components/EditorEscrito';
+import { Migas } from '@/portal/components/NavDespacho';
 import { comoUsuario } from '@/portal/lib/db';
 import { UUID } from '@/portal/lib/datos';
 import { diferencias } from '@/portal/lib/biblioteca';
 import { estilosDisponibles } from '@/portal/lib/estilos';
 import type { Aviso, ModeloUsado } from '@/portal/lib/redactor';
+import { env } from '@/portal/lib/env';
 import { requerirPersonal } from '@/portal/lib/sesion';
 
 export const metadata: Metadata = { title: 'Borrador de escrito' };
@@ -17,7 +19,7 @@ const TIPO_AVISO: Record<string, string> = { laguna: 'Faltas o contradicciones',
 const CLASE: Record<string, string> = { maestro: 'Maestro', historico_anonimizado: 'Histórico anonimizado', clausula: 'Cláusula' };
 const fecha = (d: Date | string) => new Intl.DateTimeFormat('es-ES', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Europe/Madrid' }).format(new Date(d));
 
-export default async function Borrador({ params, searchParams }: { params: Promise<{ id: string; escrito: string }>; searchParams: Promise<{ v?: string }> }) {
+export default async function Borrador({ params, searchParams }: { params: Promise<{ id: string; escrito: string }>; searchParams: Promise<{ v?: string; con?: string }> }) {
   const u = await requerirPersonal();
   const { id, escrito } = await params;
   const q = await searchParams;
@@ -38,14 +40,14 @@ export default async function Borrador({ params, searchParams }: { params: Promi
   if (!d || !d.versiones.length) notFound();
   const ultima = d.versiones[d.versiones.length - 1]!;
   const sel = d.versiones.find((v) => String(v.version) === q.v) ?? ultima;
-  const anterior = d.versiones.find((v) => v.version === sel.version - 1);
+  const anterior = d.versiones.find((v) => String(v.version) === q.con && v.version !== sel.version) ?? d.versiones.find((v) => v.version === sel.version - 1);
   const cambios = anterior ? diferencias(anterior.texto, sel.texto).filter((c) => c.tipo !== '=') : [];
   const grupos = Object.entries(sel.avisos.reduce<Record<string, string[]>>((a, x) => { (a[x.tipo] ??= []).push(x.texto); return a; }, {}));
 
   return (
     <div className="expediente">
       <aside className="expediente-lateral" aria-label="Versiones">
-        <p className="text-sm mb-2"><Link href={`/admin/expedientes/${id}/`}>← Volver al expediente</Link></p>
+        <Migas items={[{ texto: 'Expedientes', href: '/admin/expedientes/' }, { texto: d.e.asunto, href: `/admin/expedientes/${id}/?vista=escritos` }, { texto: d.e.titulo }]} />
         {d.e.hilo_id ? <p className="mb-2"><Link href={`/admin/expedientes/${id}/asistente/?hilo=${d.e.hilo_id}&modo=redactar`} className="btn btn-secundario" style={{ minHeight: 34 }}>✍️ Seguir con el asistente</Link></p> : null}
         <p className="etiqueta text-sm mb-1">Versiones</p>
         <ol className="grid gap-1 text-sm" data-versiones>
@@ -101,6 +103,15 @@ export default async function Borrador({ params, searchParams }: { params: Promi
           {anterior ? (
             <details className="text-sm" data-diferencias>
               <summary>Cambios respecto a la versión {anterior.version} ({cambios.length} líneas)</summary>
+              {d.versiones.length > 2 ? (
+                <form className="flex gap-2 items-center my-2" data-comparar>
+                  <input type="hidden" name="v" value={sel.version} />
+                  <label className="flex gap-1 items-center">Comparar la versión {sel.version} con
+                    <select name="con" defaultValue={anterior.version}>{d.versiones.filter((v) => v.version !== sel.version).map((v) => <option key={v.version} value={v.version}>versión {v.version}</option>)}</select>
+                  </label>
+                  <button className="btn-texto">Comparar</button>
+                </form>
+              ) : null}
               <div className="border rounded p-2 max-h-[32rem] overflow-auto">{cambios.slice(0, 400).map((c, i) => (
                 <p key={i} data-cambio={c.tipo} style={{ background: c.tipo === '+' ? 'var(--color-ok-bg, #e7f6ec)' : 'var(--color-red-bg, #fdecec)' }}>{c.tipo === '+' ? '+ ' : '− '}{c.texto}</p>))}</div>
             </details>
@@ -117,11 +128,8 @@ export default async function Borrador({ params, searchParams }: { params: Promi
           </form>
 
           {d.e.escribe && sel.version === ultima.version ? (
-            <details>
-              <summary className="text-sm">Corregir a mano</summary>
-              <EditarBorrador solicitud={id} escrito={escrito} base={ultima.version} texto={ultima.texto} />
-            </details>
-          ) : null}
+            <EditorEscrito solicitud={id} escrito={escrito} base={ultima.version} texto={ultima.texto} ia={!!env.iaClave} />
+          ) : d.e.escribe ? <p className="ayuda text-sm">Estás viendo una versión anterior. <Link href={`?v=${ultima.version}`}>Abre la versión {ultima.version}</Link> para editarla.</p> : null}
         </div>
       </section>
     </div>

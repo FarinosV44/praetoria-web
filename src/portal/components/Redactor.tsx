@@ -11,8 +11,8 @@ export type EscritoHilo = EscritoActual & { hilo: string };
 /** Redactar un escrito con modelos aprobados de la biblioteca (#94): proponer, elegir, redactar e iterar.
  *  En el asistente trabaja sobre la conversación abierta; dentro del expediente (#78) se elige «nuevo» o un borrador
  *  existente y el resultado aparece en la cronología, sin cambiar de pantalla. */
-export function Redactor({ solicitud, hilo: hiloFijo, escrito: escritoFijo, inicial = '', escritos, enExpediente = false, inicialSobre = null }: {
-  solicitud: string; hilo: string | null; escrito: EscritoActual | null; inicial?: string; escritos?: EscritoHilo[]; enExpediente?: boolean; inicialSobre?: string | null;
+export function Redactor({ solicitud, hilo: hiloFijo, escrito: escritoFijo, inicial = '', escritos, enExpediente = false, inicialSobre = null, destinoEscrito = false }: {
+  solicitud: string; hilo: string | null; escrito: EscritoActual | null; inicial?: string; escritos?: EscritoHilo[]; enExpediente?: boolean; inicialSobre?: string | null; destinoEscrito?: boolean;
 }) {
   const router = useRouter();
   const [sobre, setSobre] = useState(escritoFijo?.id ?? (inicialSobre && escritos?.some((e) => e.id === inicialSobre) ? inicialSobre : ''));
@@ -29,6 +29,8 @@ export function Redactor({ solicitud, hilo: hiloFijo, escrito: escritoFijo, inic
   const [error, setError] = useState<string | null>(null);
   const [buscando, empezar] = useTransition();
   const [segundos, setSegundos] = useState(0);
+  const [modo, setModo] = useState<'rapido' | 'equilibrado' | 'maximo'>('maximo');
+  const [progreso, setProgreso] = useState<string | null>(null);
 
   // Consulta el estado de la redacción en curso cada 4 s.
   useEffect(() => {
@@ -37,18 +39,20 @@ export function Redactor({ solicitud, hilo: hiloFijo, escrito: escritoFijo, inic
     const t = setInterval(async () => {
       setSegundos(Math.round((Date.now() - inicio) / 1000));
       const r = await estadoRedaccion(trabajo).catch(() => null);
+      if (r?.progreso) setProgreso(r.progreso);
       if (!r || r.estado === 'en_curso') return;
       clearInterval(t);
       setTrabajo(null);
       if (r.estado === 'listo') {
         setInstruccion(''); setPropuesta(null);
-        if (enExpediente) { setHecho(`Guardada la versión ${r.version} del borrador en la cronología.`); if (r.escrito) setSobre(r.escrito); router.refresh(); }
+        if (destinoEscrito && r.escrito) router.push('/admin/expedientes/' + solicitud + '/escritos/' + r.escrito + '/');
+        else if (enExpediente) { setHecho(`Guardada la versión ${r.version} del borrador en la cronología.`); if (r.escrito) setSobre(r.escrito); router.refresh(); }
         else { router.replace(`?hilo=${r.hilo}&modo=redactar`); router.refresh(); }
       }
       else setError(r.error ?? 'No se ha podido redactar.');
     }, 4000);
     return () => clearInterval(t);
-  }, [trabajo, router, enExpediente]);
+  }, [trabajo, router, enExpediente, destinoEscrito, solicitud]);
 
   const modelos = useMemo(() => {
     const todos = propuesta?.modelos ?? [];
@@ -70,7 +74,7 @@ export function Redactor({ solicitud, hilo: hiloFijo, escrito: escritoFijo, inic
   });
   const redactarYa = () => empezar(async () => {
     setError(null); setHecho(null);
-    const r = await iniciarRedaccion({ sid: solicitud, hilo, instruccion, versiones: seleccion, titulo, procedimiento: propuesta?.procedimiento?.id ?? null });
+    const r = await iniciarRedaccion({ sid: solicitud, hilo, instruccion, versiones: seleccion, titulo, procedimiento: propuesta?.procedimiento?.id ?? null, modo });
     if (r.error) { setError(r.error); return; }
     setSegundos(0);
     setTrabajo(r.trabajo!);
@@ -102,7 +106,12 @@ export function Redactor({ solicitud, hilo: hiloFijo, escrito: escritoFijo, inic
           placeholder={escrito ? 'Ej.: usa el modelo B2 para el suplico; añade el hecho de la carta del 3 de marzo; suprime el tercer fundamento…' : 'Ej.: prepara la demanda de divorcio contencioso con nuestras plantillas'} />
         <div className="fila">
           <span className="ayuda text-xs">Solo modelos aprobados de la biblioteca y lo que consta en este expediente. Resultado: borrador para revisar.</span>
-          <span className="flex gap-2">
+          <span className="flex flex-wrap gap-2 items-center">
+            <label className="text-sm flex gap-1 items-center">Calidad
+              <select value={modo} onChange={(e) => setModo(e.target.value as typeof modo)} disabled={ocupado} data-modo-ia>
+                <option value="rapido">Rápido</option><option value="equilibrado">Equilibrado</option><option value="maximo">Máxima calidad</option>
+              </select>
+            </label>
             <button type="button" className="btn btn-secundario" style={{ minHeight: 38 }} disabled={ocupado || instruccion.trim().length < 3} onClick={buscar}>
               {buscando && !trabajo ? 'Buscando…' : escrito ? 'Cambiar modelos' : 'Buscar modelos'}
             </button>
@@ -152,7 +161,7 @@ export function Redactor({ solicitud, hilo: hiloFijo, escrito: escritoFijo, inic
         </section>
       ) : null}
 
-      {trabajo ? <p className="evento-linea" role="status" data-redactando>Redactando el borrador con {seleccion.length} modelo{seleccion.length === 1 ? '' : 's'}… {segundos} s (suele tardar entre 1 y 4 minutos). Puedes seguir en otra pestaña.</p> : null}
+      {trabajo ? <p className="evento-linea" role="status" data-redactando>{progreso ?? `Redactando el borrador con ${seleccion.length} modelo${seleccion.length === 1 ? '' : 's'}…`} {segundos} s. En máxima calidad puede tardar bastantes minutos. El trabajo continúa aunque cambies de pestaña.</p> : null}
       {error ? <p className="error text-sm" role="alert">{error}</p> : null}
       {hecho ? <p className="exito text-sm" role="status" data-hecho>{hecho}</p> : null}
     </div>
