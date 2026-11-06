@@ -331,8 +331,12 @@ test('12. Móvil: panel, expediente, editor y paleta sin desbordar la pantalla',
   for (const ruta of ['/admin/', `/admin/expedientes/${e.x}/`, `/admin/expedientes/${e.x}/?vista=documentos`, `/admin/expedientes/${e.x}/asistente/`, `/admin/expedientes/${e.x}/escritos/${e.escrito}/`, '/admin/ia/', '/admin/ia/nuevo/', '/admin/ia/ajustes/']) {
     await p.goto(ruta);
     // Con isMobile, el navegador ensancha la página si algo desborda: se compara con el ancho real de la pantalla.
-    const ancho = await p.evaluate(() => document.documentElement.scrollWidth);
-    expect.soft(ancho, `desbordamiento horizontal en ${ruta}`).toBeLessThanOrEqual(391);
+    const { ancho, culpables } = await p.evaluate(() => ({
+      ancho: document.documentElement.scrollWidth,
+      culpables: [...document.querySelectorAll('main *')].filter((x) => x.getBoundingClientRect().right > 391 && !x.closest('.overflow-x-auto, .pestanas')).slice(0, 5)
+        .map((x) => `${x.tagName.toLowerCase()}.${String(x.className).slice(0, 40)} (${Math.round(x.getBoundingClientRect().right)})`),
+    }));
+    expect.soft(ancho, `desbordamiento horizontal en ${ruta}: ${culpables.join(' | ')}`).toBeLessThanOrEqual(391);
   }
   expect(errores, 'sin errores de JavaScript en las pantallas del despacho').toEqual([]);
   await ctx.close();
