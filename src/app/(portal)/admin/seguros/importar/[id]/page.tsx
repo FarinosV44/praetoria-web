@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { exigirUsuario } from '@/seguros/lib/auth/servidor';
-import { ETIQUETAS, importacionDe, type ResultadoPoliza } from '@/seguros/lib/ia/importacion';
+import { after } from 'next/server';
+import { ETIQUETAS, importacionDe, procesarImportacion, type ResultadoPoliza } from '@/seguros/lib/ia/importacion';
 import { NoEncontrado } from '@/seguros/lib/errores';
 import { Refrescar } from '@/seguros/components/copiar';
 
@@ -52,6 +53,9 @@ export default async function Resultado({ params }: { params: Promise<{ id: stri
   const u = await exigirUsuario();
   const i = await importacionDe(u, id).catch((e) => { if (e instanceof NoEncontrado) notFound(); throw e; });
   const enCurso = i.estado === 'pendiente' || i.estado === 'procesando';
+  // Si una lectura quedó en cola (se cortó, o se reintenta tras un fallo), se retoma al abrir esta página sin
+  // esperar al cron. procesarImportacion solo la toma si sigue «pendiente», así que no se duplica.
+  if (i.estado === 'pendiente') after(() => procesarImportacion(id).catch((e) => console.error('[seguros/importacion]', (e as Error).message)));
   return (
     <>
       <div className="migas"><Link href="/admin/seguros/importar/">← Subir pólizas</Link></div>

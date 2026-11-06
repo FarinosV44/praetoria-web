@@ -53,8 +53,12 @@ El sitio actual sirve archivos estáticos, con `.htaccess` y PHP. Para cambiarlo
 a poner el marco y la carpeta de salida previos. Hay que anotar esos ajustes antes de cambiarlos.
 
 ## Motor de avisos
-Hostinger no admite procesos ni temporizadores permanentes, así que los avisos los dispara una tarea cron. En el panel
-del sitio: Avanzado → Cron Jobs, cada minuto:
+Hostinger no admite procesos ni temporizadores permanentes, así que los avisos (del despacho y de Seguros) los dispara
+una tarea cron. En el panel del sitio: Avanzado → Cron Jobs → **Node.js**, archivo `scripts/cron.mjs`, cada minuto
+(Opciones comunes → «Una vez por minuto»). Hostinger lo ejecuta con las variables de la web, así que la clave no se
+escribe en el panel; el script llama a `PORTAL_ORIGIN/api/interno/avisos/` con `CRON_CLAVE`.
+
+Alternativa «Personalizado» (la clave queda visible en el panel):
 
     curl -fsS -X POST -H "x-cron-clave: VALOR_DE_CRON_CLAVE" https://DOMINIO/api/interno/avisos/
 
