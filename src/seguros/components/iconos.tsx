@@ -24,6 +24,7 @@ export function IconoRamo({ icono, etiqueta }: { icono: string; etiqueta?: strin
 }
 
 export const IconoPolizas = () => <Svg><rect x="5" y="3" width="14" height="18" rx="2" /><path d="M9 8h6M9 12h6M9 16h4" /></Svg>;
+export const IconoPagos = () => <Svg><rect x="3" y="6" width="18" height="12" rx="2" /><path d="M3 10h18M7 15h4" /></Svg>;
 export const IconoTitulares = () => <Svg><path d="M4 20V8l8-4 8 4v12" /><path d="M9 20v-6h6v6M4 20h16" /></Svg>;
 export const IconoAjustes = () => <Svg><circle cx="12" cy="12" r="3" /><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4" /></Svg>;
 export const IconoMas = () => <Svg><path d="M12 5v14M5 12h14" /></Svg>;

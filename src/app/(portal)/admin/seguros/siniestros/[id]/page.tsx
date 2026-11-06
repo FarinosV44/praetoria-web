@@ -5,6 +5,8 @@ import { exigirUsuario } from '@/seguros/lib/auth/servidor';
 import {
   archivosSiniestro, borradores, ESTADOS_SINIESTRO, eventos, obtenerSiniestro, polizasCandidatas, polizasDelSiniestro, TIPOS_ARCHIVO_SINIESTRO,
 } from '@/seguros/lib/datos/siniestros';
+import { documentosDeSiniestro } from '@/seguros/lib/datos/expediente';
+import { TIPOS_DOCUMENTO } from '@/seguros/lib/datos/documentos';
 import { analisisDe, revisarPreparacion } from '@/seguros/lib/ia/siniestro';
 import { iaConfigurada } from '@/seguros/lib/ia/proveedor';
 import { NoEncontrado } from '@/seguros/lib/errores';
@@ -200,9 +202,20 @@ export default async function FichaSiniestro({ params, searchParams }: { params:
   }
 
   async function Archivos({ id }: { id: string }) {
-    const lista = await archivosSiniestro(u, id);
+    const [lista, delSeguro] = await Promise.all([archivosSiniestro(u, id), documentosDeSiniestro(id)]);
     return (
       <div className="dos-columnas">
+        <div style={{ display: 'grid', gap: 'var(--e-4)', alignContent: 'start' }}>
+        {delSeguro.length > 0 && (
+          <section className="tarjeta" aria-label="Documentos del seguro vinculados a este siniestro">
+            <h2 className="tarjeta--pad" style={{ paddingBottom: 0, fontSize: 'var(--texto-m)' }}>Del expediente del seguro</h2>
+            <ul className="lista-simple">{delSeguro.map((d) => (
+              <li key={d.id}><div style={{ minWidth: 0 }}>
+                <a href={`/api/seguros/documentos/${d.id}/`} target="_blank" rel="noopener" style={{ fontWeight: 700, overflowWrap: 'anywhere' }}>{d.nombre_original}</a>
+                <p className="linea-2">{TIPOS_DOCUMENTO[d.tipo as keyof typeof TIPOS_DOCUMENTO] ?? d.tipo}{d.fecha_documento ? ` · ${fechaMedia(d.fecha_documento)}` : ''} · <Link href={`/admin/seguros/polizas/${d.poliza_id}?pestana=documentos`}>en el seguro</Link></p>
+              </div></li>))}</ul>
+          </section>
+        )}
         <section className="tarjeta" aria-label="Archivos del siniestro">
           {lista.length === 0 ? <div className="vacio"><h2>Sin archivos</h2><p>Añade fotos, el parte, presupuestos o las comunicaciones con la aseguradora.</p></div> : (
             <ul className="lista-simple">
@@ -221,6 +234,7 @@ export default async function FichaSiniestro({ params, searchParams }: { params:
             </ul>
           )}
         </section>
+        </div>
         <aside className="tarjeta tarjeta--pad" aria-labelledby="t-subir-s">
           <h2 id="t-subir-s" style={{ marginBottom: 'var(--e-4)' }}>Añadir archivos</h2>
           {subidaDirecta() ? (

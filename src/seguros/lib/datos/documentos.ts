@@ -12,9 +12,15 @@ import { guardarTextoDocumento } from '../pdf-texto';
 export const TIPOS_DOCUMENTO = {
   condiciones_particulares: 'Condiciones particulares',
   condiciones_generales: 'Condiciones generales',
-  suplemento: 'Suplemento',
-  recibo: 'Recibo',
+  suplemento: 'Suplemento o modificación',
   renovacion: 'Renovación',
+  recibo: 'Recibo',
+  justificante_pago: 'Justificante de pago',
+  comunicacion: 'Carta o correo',
+  siniestro: 'Documentación de siniestro',
+  informe: 'Informe o peritación',
+  fotografia: 'Fotografía',
+  reclamacion: 'Reclamación',
   oferta: 'Oferta',
   otro: 'Otro',
 } as const;
@@ -24,6 +30,7 @@ export type Documento = {
   id: string; poliza_id: string; anualidad_id: string | null; titular_id: string; tipo: TipoDocumento;
   nombre_original: string; mime: string; bytes: string; sha256: string; paginas: number | null;
   estado: string; subido_en: Date; subido_por_nombre: string | null; duplicado_de: string | null;
+  fecha_documento: string | null; descripcion: string | null; siniestro_id: string | null;
 };
 
 export const maxBytes = () => Number(process.env.MAX_UPLOAD_MB ?? 25) * 1024 * 1024;
@@ -32,12 +39,13 @@ export async function listarDocumentos(u: Usuario, polizaId: string, db: Db = po
   await exigirPoliza(u, polizaId, db);
   return q<Documento>(
     `SELECT d.id, d.poliza_id, d.anualidad_id, d.titular_id, d.tipo, d.nombre_original, d.mime, d.bytes, d.sha256, d.paginas,
-            d.estado, d.subido_en, us.nombre AS subido_por_nombre,
+            d.estado, d.subido_en, us.nombre AS subido_por_nombre, d.fecha_documento, d.descripcion,
+            (SELECT ds.siniestro_id FROM documento_siniestros ds WHERE ds.documento_id = d.id LIMIT 1) AS siniestro_id,
             (SELECT o.nombre_original FROM documentos o WHERE o.titular_id = d.titular_id AND o.sha256 = d.sha256
                AND o.id <> d.id AND o.eliminado_en IS NULL AND o.subido_en < d.subido_en ORDER BY o.subido_en LIMIT 1) AS duplicado_de
        FROM documentos d LEFT JOIN usuarios us ON us.id = d.subido_por
       WHERE d.poliza_id = $1 AND d.eliminado_en IS NULL
-      ORDER BY d.subido_en DESC`, [polizaId], db,
+      ORDER BY coalesce(d.fecha_documento, d.subido_en::date) DESC, d.subido_en DESC`, [polizaId], db,
   );
 }
 

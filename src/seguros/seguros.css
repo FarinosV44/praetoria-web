@@ -376,3 +376,13 @@
 .seguros .origen { color: var(--color-texto-2); font-size: var(--texto-xs); }
 .seguros .origen a { color: inherit; }
 .seguros .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Expediente y recibos */
+.seguros .fila-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--e-3); }
+.seguros .cronologia > li { display: flex; gap: var(--e-3); align-items: flex-start; }
+.seguros details > summary { cursor: pointer; color: var(--color-texto-2); }
+.seguros details[open] > summary { margin-bottom: var(--e-3); }
+.seguros .fila-grupo th { background: var(--color-hover); text-align: left; font-weight: 650; }
+.seguros .titulo-grupo { font-size: var(--texto-m); margin: var(--e-4) 0 var(--e-2); }
+.seguros .calendario-pagos { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--e-3); }
+@media (min-width: 761px) { .seguros .solo-movil { display: none; } }
