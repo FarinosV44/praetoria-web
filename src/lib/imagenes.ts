@@ -22,6 +22,16 @@ const origen = z.discriminatedUnion('tipo', [
     perfil: z.string().url().optional(),
     licencia: z.string().optional(),
   }),
+  /** Fotografía de Wikimedia Commons con licencia libre (CC BY / CC BY-SA / CC0): se acredita autor y licencia, y se indica si se ha recortado. */
+  z.object({
+    tipo: z.literal('commons'),
+    id: z.string().regex(/^[a-z0-9-]+$/),
+    autor: z.string(),
+    url: z.string().url(),
+    licencia: z.string().min(3),
+    licenciaUrl: z.string().url(),
+    modificada: z.string().optional(),
+  }),
   z.object({ tipo: z.literal('deca'), archivos: z.array(z.string()).min(1) }),
   z.object({ tipo: z.literal('praetoria'), original: z.string() }),
   /** Generada con IA (#28 §8). personalizada = recreación a partir de fotografías autorizadas por el titular. */
@@ -92,6 +102,8 @@ export function creditoDe(img: Imagen): string {
       return `Foto: ${img.origen.autor ?? 'autor pendiente'} en Unsplash`;
     case 'pexels':
       return `Foto: ${img.origen.autor} en Pexels`;
+    case 'commons':
+      return `Foto: ${img.origen.autor} en Wikimedia Commons (${img.origen.licencia}${img.origen.modificada ? `, ${img.origen.modificada}` : ''})`;
     case 'deca':
       return img.composicion === 'logo' ? 'Logotipo de DeCA Profesional' : 'Captura real de DeCA Profesional (datos de demostración)';
     case 'praetoria':
