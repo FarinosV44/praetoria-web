@@ -1,1 +1,9 @@
-info2|https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url|extmetadata|size&iiurlwidth=700&titles=File%3AAgencia%20Estatal%20de%20Administraci%C3%B3n%20Tributaria.jpg%7CFile%3AAgencia%20Tributaria%20GR%2001.jpg%7CFile%3AAgencia%20Tributaria%20GR%2002.jpg%7CFile%3AAlicante%20-%20Agencia%20Estatal%20de%20Administraci%C3%B3n%20Tributaria%201.jpg%7CFile%3AAlicante%20-%20Agencia%20Estatal%20de%20Administraci%C3%B3n%20Tributaria%202.jpg%7CFile%3AAgencia%20Tributaria%20%28Ceuta%29.jpg%7CFile%3AAgencia%20tributaria%20aduanas.jpg%7CFile%3AGranada%20-%20Delegaci%C3%B3n%20de%20la%20Agencia%20Tributaria%20%28AEAT%29%201.jpg%7CFile%3AAlcorc%C3%B3n%20-%20Agencia%20Tributaria%201.jpg&format=json
+l0|https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/Agencia_Estatal_de_Administraci%C3%B3n_Tributaria.jpg/960px-Agencia_Estatal_de_Administraci%C3%B3n_Tributaria.jpg
+l1|https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/Agencia_Tributaria_%28Ceuta%29.jpg/960px-Agencia_Tributaria_%28Ceuta%29.jpg
+l2|https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Agencia_Tributaria_GR_01.jpg/960px-Agencia_Tributaria_GR_01.jpg
+l3|https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Agencia_Tributaria_GR_02.jpg/960px-Agencia_Tributaria_GR_02.jpg
+l4|https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/Agencia_tributaria_aduanas.jpg/960px-Agencia_tributaria_aduanas.jpg
+l5|https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/Alcorc%C3%B3n_-_Agencia_Tributaria_1.jpg/960px-Alcorc%C3%B3n_-_Agencia_Tributaria_1.jpg
+l6|https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/Alicante_-_Agencia_Estatal_de_Administraci%C3%B3n_Tributaria_1.jpg/960px-Alicante_-_Agencia_Estatal_de_Administraci%C3%B3n_Tributaria_1.jpg
+l7|https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Alicante_-_Agencia_Estatal_de_Administraci%C3%B3n_Tributaria_2.jpg/960px-Alicante_-_Agencia_Estatal_de_Administraci%C3%B3n_Tributaria_2.jpg
+l8|https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Granada_-_Delegaci%C3%B3n_de_la_Agencia_Tributaria_%28AEAT%29_1.jpg/960px-Granada_-_Delegaci%C3%B3n_de_la_Agencia_Tributaria_%28AEAT%29_1.jpg
