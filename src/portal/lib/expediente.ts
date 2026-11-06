@@ -83,6 +83,7 @@ export type Cabecera = {
   id: string; referencia: string; expediente_ref: string | null; titulo: string; estado: string; estado_visible: string | null;
   cliente_id: string; cliente: string; cliente_email: string; responsable: string | null; proxima: Date | null; proxima_titulo: string | null;
   docs: number; faltan: number; por_revisar: number; cuenta_activa: boolean; expediente_estado: string | null;
+  contraparte: string | null; organo: string | null; numero_autos: string | null; procedimiento: string | null; abierto_at: Date | null;
 };
 
 export async function cabecera(tx: Tx, sid: string, uid: string): Promise<Cabecera | null> {
@@ -95,7 +96,8 @@ export async function cabecera(tx: Tx, sid: string, uid: string): Promise<Cabece
       (select count(*) from portal.documentos d where d.solicitud_id = s.id)::int docs,
       (select count(*) from portal.requisitos q where q.solicitud_id = s.id and q.obligatorio and q.estado in ('pendiente','subsanacion'))::int faltan,
       (select count(*) from portal.documentos d where d.solicitud_id = s.id and d.estado = 'pendiente')::int por_revisar,
-      us."emailVerified" cuenta_activa
+      us."emailVerified" cuenta_activa, s.contraparte, e.organo, e.numero_autos, e.abierto_at,
+      (select nombre from portal.bib_procedimientos pr where pr.id = e.procedimiento_id) procedimiento
     from portal.solicitudes s join identidad."user" us on us.id = s.cliente_id
     left join portal.expedientes e on e.solicitud_id = s.id left join portal.tipos_asunto t on t.id = s.tipo_asunto_id
     left join portal.personal p on p.user_id = coalesce(e.responsable_id, s.responsable_id)

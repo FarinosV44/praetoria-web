@@ -1,12 +1,16 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { AnalizarDocumento, DatosProceso, DecidirPropuesta, Reindexar } from '@/portal/components/ExpedienteIA';
 import { Compositor } from '@/portal/components/Compositor';
+import { Migas } from '@/portal/components/NavDespacho';
+import { PanelIA } from '@/portal/components/PanelIA';
 import { Carpeta, CerrarExpediente, Compartir, Eliminar, Restaurar, Completar, EquipoAsunto, EstadoCliente, Reasignar, Reprogramar, VerificarPlazo } from '@/portal/components/ExpedienteAcciones';
 import { ChipSolicitud, tamano } from '@/portal/components/ui';
 import { comoUsuario } from '@/portal/lib/db';
 import { UUID } from '@/portal/lib/datos';
 import { env } from '@/portal/lib/env';
+import { opcionesIA } from '@/portal/lib/ia-opciones';
 import { cabecera, cronologia, recientes, type Entrada } from '@/portal/lib/expediente';
 import { equipoAsunto, personalActivo, relevo, type Relevo } from '@/portal/lib/equipo';
 import { fechaHora, partesMadrid, TIPO_ETIQUETA } from '@/portal/lib/agenda';
@@ -62,16 +66,16 @@ function Item({ e, sid }: { e: Entrada; sid: string }) {
     return (
       <li className="burbuja burbuja-tarea" data-clase="tarea" data-tarea={e.titulo}>
         <p className="meta">{e.tipo === 'plazo' ? (e.verificado ? 'Plazo verificado' : e.sugerida ? 'Fecha sugerida (sin validar)' : 'Plazo pendiente de verificar') : TIPO_ETIQUETA[e.tipo] ?? 'Tarea'} · responsable: {e.autor} · {hora(e.at)}</p>
-        <p className="fila"><span><strong>{e.titulo}</strong> · {fechaHora(e.inicio)}</span>
+        <div className="fila"><span><strong>{e.titulo}</strong> · {fechaHora(e.inicio)}</span>
           {e.estado === 'pendiente' ? <span className="flex gap-3 items-center"><Reasignar tarea={e.id} solicitud={sid} /><Completar tarea={e.id} solicitud={sid} /></span>
-            : <span className="chip chip-neutro">{e.estado === 'completado' ? 'Hecha' : 'Cancelada'}</span>}</p>
+            : <span className="chip chip-neutro">{e.estado === 'completado' ? 'Hecha' : 'Cancelada'}</span>}</div>
         {e.documento || e.fuente ? <p className="text-xs">Origen: {e.documento ? <a href={`/api/documentos/${e.documento.id}/?ver=1`} target="_blank" rel="noopener">📄 {e.documento.nombre}</a> : e.fuente}</p> : null}
         {e.estado === 'pendiente' ? (
-          <p className="flex flex-wrap gap-3 items-center text-xs mt-1">
+          <div className="flex flex-wrap gap-3 items-center text-xs mt-1">
             {e.tipo === 'plazo' && !e.verificado ? <VerificarPlazo tarea={e.id} solicitud={sid} /> : null}
             <Reprogramar tarea={e.id} solicitud={sid} fecha={partesMadrid(e.inicio).fecha} />
             <Link href={`/admin/agenda/${e.id}/`}>Avisos y detalles</Link>
-          </p>
+          </div>
         ) : <p className="text-xs"><Link href={`/admin/agenda/${e.id}/`}>Avisos y detalles</Link></p>}
       </li>
     );
@@ -84,13 +88,13 @@ function Item({ e, sid }: { e: Entrada; sid: string }) {
           <span className="ayuda text-sm"> · v{e.version} · {tamano(e.tamano)}</span></span>
         <a href={`/api/documentos/${e.id}/?descargar=1`} className="text-sm">Descargar</a>
       </p>
-      <p className="flex flex-wrap gap-3 items-center text-sm mt-1">
+      <div className="flex flex-wrap gap-3 items-center text-sm mt-1">
         <Carpeta documento={e.id} solicitud={sid} carpeta={e.carpeta} editable={e.del_despacho} />
         {e.visible ? <span className="chip chip-ok">Visible para el cliente</span> : <><span className="chip chip-neutro">🔒 Privado</span><Compartir documento={e.id} solicitud={sid} /></>}
         <Eliminar documento={e.id} solicitud={sid} nombre={e.nombre} />
         {e.estado === 'pendiente' ? <Link href={`/admin/solicitudes/${sid}/#documentacion`}>Revisar</Link> : null}
         {e.analisis === 'infectado' ? <span className="chip chip-aviso">Bloqueado por antivirus</span> : null}
-      </p>
+      </div>
     </li>
   );
 }
@@ -113,10 +117,12 @@ function Continuar({ r }: { r: Relevo }) {
   );
 }
 
-export default async function Expediente({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ redactar?: string }> }) {
+export default async function Expediente({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ redactar?: string; vista?: string; q?: string }> }) {
   const u = await requerirPersonal();
   const { id } = await params;
-  const { redactar } = await searchParams;
+  const { redactar, vista: vistaPedida, q: qDocs } = await searchParams;
+  const vista = (['cronologia', 'documentos', 'plazos', 'escritos'] as const).find((v) => v === vistaPedida) ?? 'cronologia';
+  const busca = (qDocs ?? '').trim().slice(0, 200);
   if (!UUID.test(id)) notFound();
   const d = await comoUsuario(u.id, async (tx) => {
     const c = await cabecera(tx, id, u.id);
@@ -129,7 +135,13 @@ export default async function Expediente({ params, searchParams }: { params: Pro
     const papelera = (await tx.query(`select id, nombre, version, eliminado_at, eliminado_por, motivo, purgado_at, greatest(0, 30 - floor(extract(epoch from now() - eliminado_at) / 86400))::int dias
       from portal.papelera($1) limit 30`, [id])).rows as
       { id: string; nombre: string; version: number; eliminado_at: Date; eliminado_por: string | null; motivo: string | null; purgado_at: Date | null; dias: number }[];
-    return { c, entradas, rec, carpetas, escritos, papelera, equipo: await equipoAsunto(tx, id), relevo: await relevo(tx, id), personal: await personalActivo(tx) };
+    const propuestas = (await tx.query(`select p.id, p.tipo, p.titulo, p.fecha, p.fundamento, d.nombre_original documento from portal.ia_propuestas p
+      left join portal.documentos d on d.id = p.documento_id where p.solicitud_id = $1 and p.estado = 'pendiente' order by p.created_at desc limit 30`, [id])).rows as { id: string; tipo: string; titulo: string; fecha: Date | null; fundamento: string | null; documento: string | null }[];
+    const analisis = (await tx.query(`select documento_id, tipo, resumen, datos, modelo from portal.doc_analisis where solicitud_id = $1`, [id])).rows as { documento_id: string; tipo: string; resumen: string; datos: Record<string, unknown>; modelo: string | null }[];
+    const indexado = (await tx.query(`select origen_id, estado, detalle, fragmentos, con_ocr from portal.ia_indexacion where tipo = 'documento' and solicitud_id = $1`, [id])).rows as { origen_id: string; estado: string; detalle: string | null; fragmentos: number; con_ocr: boolean }[];
+    const coincidentes = busca.length >= 2 ? (await tx.query(`select distinct f.documento_id from portal.doc_fragmentos f where f.solicitud_id = $1 and f.tsv @@ websearch_to_tsquery('spanish', $2)`, [id, busca])).rows.map((r) => r.documento_id as string) : [];
+    const duplicados = (await tx.query(`select array_agg(id::text) ids from portal.documentos where solicitud_id = $1 group by sha256 having count(*) > 1`, [id])).rows.flatMap((r) => r.ids as string[]);
+    return { c, entradas, rec, carpetas, escritos, papelera, propuestas, analisis, indexado, coincidentes, duplicados, opciones: env.iaClave ? await opcionesIA(tx) : null, equipo: await equipoAsunto(tx, id), relevo: await relevo(tx, id), personal: await personalActivo(tx) };
   });
   if (!d) notFound();
   const { c } = d;
@@ -175,6 +187,7 @@ export default async function Expediente({ params, searchParams }: { params: Pro
       </aside>
 
       <section className="expediente-central">
+        <Migas items={[{ texto: 'Expedientes', href: '/admin/expedientes/' }, { texto: c.titulo }]} />
         <header className="expediente-cabecera">
           <div className="fila">
             <div className="min-w-0">
@@ -183,34 +196,114 @@ export default async function Expediente({ params, searchParams }: { params: Pro
             </div>
             <span className="flex gap-2 items-center">{c.expediente_estado === 'cerrado' ? <span className="chip chip-neutro" data-expediente-cerrado>Expediente cerrado</span> : null}<ChipSolicitud estado={c.estado} /></span>
           </div>
-          <p className="text-sm flex flex-wrap gap-x-4 gap-y-1 mt-1">
+          <dl className="ficha-proceso" data-ficha-proceso>
+            <div><dt>Contrario</dt><dd>{c.contraparte ?? '—'}</dd></div>
+            <div><dt>Procedimiento</dt><dd>{c.procedimiento ?? '—'}</dd></div>
+            <div><dt>Órgano</dt><dd>{c.organo ?? '—'}</dd></div>
+            <div><dt>N.º de autos</dt><dd>{c.numero_autos ?? '—'}</dd></div>
+            <div><dt>Abierto</dt><dd>{c.abierto_at ? fechaHora(new Date(c.abierto_at)) : '—'}</dd></div>
+          </dl>
+          {c.expediente_estado ? <DatosProceso solicitud={id} contraparte={c.contraparte} procedimiento={c.procedimiento} organo={c.organo} autos={c.numero_autos} /> : null}
+          <div className="text-sm flex flex-wrap gap-x-4 gap-y-1 mt-1">
             <span>📄 {c.docs} documentos{c.por_revisar ? ` · ${c.por_revisar} por revisar` : ''}{c.faltan ? ` · faltan ${c.faltan}` : ''}</span>
             {c.proxima ? <span>⏰ {c.proxima_titulo}: {fechaHora(c.proxima)}</span> : null}
             {!c.cuenta_activa ? <span className="chip chip-aviso">El cliente aún no ha activado su acceso</span> : null}
             <Link href={`/admin/solicitudes/${id}/`}>Ficha completa</Link>
             {c.expediente_estado ? <CerrarExpediente solicitud={id} cerrado={c.expediente_estado === 'cerrado'} /> : null}
+            {d.opciones ? <PanelIA solicitud={id} opciones={d.opciones} /> : null}
             {env.iaClave ? <Link href={`/admin/expedientes/${id}/asistente/`} className="font-semibold">✨ Asistente IA</Link> : null}
             {env.iaClave ? <Link href={`/admin/expedientes/${id}/asistente/?modo=redactar`} className="font-semibold">✍️ Redactar escrito</Link> : null}
-          </p>
+          </div>
           <div className="mt-1 text-sm"><EstadoCliente solicitud={id} actual={c.estado_visible} /></div>
           <div className="mt-1"><EquipoAsunto solicitud={id} miembros={d.equipo.miembros} gestiona={d.equipo.gestiona} /></div>
           <Continuar r={d.relevo} />
         </header>
 
-        <ol className="cronologia" aria-label="Cronología del expediente">
-          {d.entradas.length === 0 ? <li className="evento-linea">Expediente vacío. Escribe abajo, pega un texto o arrastra documentos.</li> : null}
-          {d.entradas.map((e, i) => {
+        <nav className="pestanas" aria-label="Vistas del expediente">
+          {([['cronologia', 'Cronología', null], ['documentos', 'Documentación', c.docs], ['plazos', 'Plazos y tareas', d.entradas.filter((x) => x.clase === 'tarea' && x.estado === 'pendiente').length], ['escritos', 'Escritos', d.escritos.length]] as const).map(([k, t, n]) => (
+            <Link key={k} href={k === 'cronologia' ? '?' : `?vista=${k}`} scroll={false} aria-current={vista === k ? 'page' : undefined}>{t}{n ? <span className="ayuda text-xs"> {n}</span> : null}</Link>
+          ))}
+        </nav>
+
+        {d.propuestas.length ? (
+          <section className="card" aria-label="Propuestas de la IA" data-propuestas>
+            <h2 className="font-semibold">Propuestas de la IA por revisar</h2>
+            <p className="ayuda text-xs mb-2">No se ha cambiado nada. Un plazo aceptado queda como fecha sugerida sin verificar: comprueba notificación, días inhábiles y norma aplicable.</p>
+            <ul className="grid gap-2">{d.propuestas.map((p) => (
+              <li key={p.id} className="border rounded p-2 text-sm" data-propuesta={p.titulo}>
+                <p><strong>{p.tipo === 'plazo' ? 'Posible plazo' : 'Tarea'}:</strong> {p.titulo}{p.documento ? <span className="ayuda"> · {p.documento}</span> : null}</p>
+                {p.fundamento ? <p className="ayuda text-xs">{p.fundamento}</p> : null}
+                <DecidirPropuesta propuesta={p.id} solicitud={id} fecha={p.fecha ? new Date(p.fecha).toISOString().slice(0, 10) : ''} />
+              </li>
+            ))}</ul>
+          </section>
+        ) : null}
+
+        {vista === 'documentos' ? (
+          <section className="grid gap-3" aria-label="Documentación del expediente" data-vista="documentos">
+            <form className="flex gap-2"><input type="hidden" name="vista" value="documentos" />
+              <input name="q" type="search" defaultValue={busca} placeholder="Busca por nombre o dentro del contenido" aria-label="Buscar en la documentación" className="border rounded-md p-2 flex-1 min-w-0" />
+              <button className="btn btn-secundario" style={{ minHeight: 40 }}>Buscar</button>
+            </form>
+            {(() => {
+              const docs = d.entradas.filter((x): x is Extract<Entrada, { clase: 'documento' }> => x.clase === 'documento')
+                .filter((x) => !busca || x.nombre.toLowerCase().includes(busca.toLowerCase()) || d.coincidentes.includes(x.id));
+              if (!docs.length) return <p className="ayuda">{busca ? 'Ningún documento coincide.' : 'Aún no hay documentos. Súbelos desde la cronología.'}</p>;
+              return (
+                <ul className="grid gap-2">{docs.map((x) => {
+                  const ix = d.indexado.find((i) => i.origen_id === x.id);
+                  const an = d.analisis.find((a) => a.documento_id === x.id);
+                  return (
+                    <li key={x.id} className="card" style={{ marginTop: 0, padding: 14 }} data-documento={x.nombre}>
+                      <p className="fila"><span>📄 <a href={`/api/documentos/${x.id}/?ver=1`} target="_blank" rel="noopener" className="font-semibold">{x.nombre}</a><span className="ayuda text-sm"> · v{x.version} · {tamano(x.tamano)} · {x.carpeta}</span></span>
+                        <a href={`/api/documentos/${x.id}/?descargar=1`} className="text-sm">Descargar</a></p>
+                      <div className="flex flex-wrap gap-2 items-center text-xs mt-1">
+                        {ix?.estado === 'ok' ? <span className="chip chip-ok" data-indexado>Disponible para la IA{ix.con_ocr ? ' (OCR)' : ''}</span>
+                          : ix?.estado === 'error' || ix?.estado === 'sin_texto' ? <span className="chip chip-aviso" title={ix.detalle ?? ''}>{ix.detalle ?? 'Sin texto legible'}</span>
+                            : <span className="chip chip-neutro">Procesando para la IA…</span>}
+                        {ix && ix.estado !== 'pendiente' && ix.estado !== 'procesando' ? <Reindexar tipo="documento" origen={x.id} solicitud={id} /> : null}
+                        {d.duplicados.includes(x.id) ? <span className="chip chip-aviso">Posible duplicado (mismo contenido que otro archivo)</span> : null}
+                        {d.opciones && ix?.estado === 'ok' ? <AnalizarDocumento documento={x.id} ya={!!an} /> : null}
+                      </div>
+                      {an ? (
+                        <details className="text-sm mt-2" data-analisis>
+                          <summary>Análisis de la IA · {an.tipo}{an.modelo ? ` · ${an.modelo}` : ''} (revísalo)</summary>
+                          <p className="whitespace-pre-wrap mt-1">{an.resumen}</p>
+                          {([['Órgano', an.datos.organo], ['Procedimiento', an.datos.procedimiento], ['Fallo', an.datos.fallo], ['Estrategia preliminar', an.datos.estrategia_preliminar]] as const).map(([t, v]) => (v ? <p key={t} className="mt-1"><strong>{t}:</strong> {String(v)}</p> : null))}
+                          {([['Partes', an.datos.partes], ['Pretensiones', an.datos.pretensiones], ['Cuantías', an.datos.cuantias], ['Documentos citados', an.datos.documentos_citados], ['Advertencias', an.datos.advertencias]] as const).map(([t, v]) => (Array.isArray(v) && v.length ? <div key={t} className="mt-1"><strong>{t}</strong><ul>{v.map((y, i) => <li key={i}>{String(y)}</li>)}</ul></div> : null))}
+                          {Array.isArray(an.datos.fechas) && an.datos.fechas.length ? <div className="mt-1"><strong>Fechas que constan en el documento</strong><ul>{(an.datos.fechas as { fecha: string; que: string; cita: string }[]).map((f, i) => <li key={i}>{f.fecha}: {f.que} <span className="ayuda">«{f.cita}»</span></li>)}</ul></div> : null}
+                        </details>
+                      ) : null}
+                    </li>
+                  );
+                })}</ul>
+              );
+            })()}
+          </section>
+        ) : vista === 'escritos' ? (
+          <section className="grid gap-2" aria-label="Escritos del expediente" data-vista="escritos">
+            <p className="fila"><span className="ayuda text-sm">{d.escritos.length ? 'Borradores de este asunto.' : 'Aún no hay escritos.'}</span>{env.iaClave ? <Link href={`/admin/ia/nuevo/?expediente=${id}`} className="btn btn-secundario" style={{ minHeight: 38 }}>✍️ Nuevo escrito</Link> : null}</p>
+            <ul className="grid gap-2">{d.escritos.map((e) => <li key={e.id} className="card" style={{ marginTop: 0, padding: 14 }}><Link href={`/admin/expedientes/${id}/escritos/${e.id}/`} className="font-semibold">{e.titulo}</Link> <span className="ayuda text-sm">· versión {e.version}{e.modelos.length ? ` · ${e.modelos.length} modelo${e.modelos.length > 1 ? 's' : ''} de la biblioteca` : ''}</span> <span className="chip chip-aviso">BORRADOR</span></li>)}</ul>
+          </section>
+        ) : null}
+
+        {vista === 'cronologia' || vista === 'plazos' ? (<>
+        <ol className="cronologia" aria-label={vista === 'plazos' ? 'Plazos y tareas del expediente' : 'Cronología del expediente'}>
+          {vista === 'plazos' && !d.entradas.some((x) => x.clase === 'tarea') ? <li className="evento-linea">No hay plazos ni tareas en este expediente.</li> : null}
+          {vista === 'cronologia' && d.entradas.length === 0 ? <li className="evento-linea">Expediente vacío. Escribe abajo, pega un texto o arrastra documentos.</li> : null}
+          {(vista === 'plazos' ? d.entradas.filter((x) => x.clase === 'tarea') : d.entradas).map((e, i, lista) => {
             const k = dia(new Date(e.at));
-            const nuevoDia = i === 0 || k !== dia(new Date(d.entradas[i - 1]!.at));
+            const nuevoDia = i === 0 || k !== dia(new Date(lista[i - 1]!.at));
             return [nuevoDia ? <li className="dia" key={`d-${k}`}>{k}</li> : null, <Item key={`${e.clase}-${e.id}`} e={e} sid={id} />];
           })}
         </ol>
+        </>) : null}
         <datalist id="documentos-expediente">{[...new Set(d.entradas.filter((x) => x.clase === 'documento').map((x) => (x as { nombre: string }).nombre))].map((n) => <option key={n} value={n} />)}</datalist>
         <datalist id="personal-equipo">{d.personal.map((p) => <option key={p.id} value={p.nombre} />)}</datalist>
         <datalist id="carpetas-expediente">{[...new Set([...d.carpetas, 'Documentación del despacho', 'Escritos', 'Prueba', 'Comunicaciones', 'Resoluciones', 'Economía'])].map((x) => <option key={x} value={x} />)}</datalist>
-        <Compositor solicitudId={id} maxMb={env.uploadMaxBytes / 1024 / 1024} ia={!!env.iaClave}
+        {vista !== 'cronologia' ? null : <Compositor solicitudId={id} maxMb={env.uploadMaxBytes / 1024 / 1024} ia={!!env.iaClave}
           escritos={d.escritos.filter((e) => e.hilo).map((e) => ({ id: e.id, titulo: e.titulo, version: e.version, hilo: e.hilo!, modelos: e.modelos }))}
-          abrirEscrito={redactar && UUID.test(redactar) ? redactar : null} />
+          abrirEscrito={redactar && UUID.test(redactar) ? redactar : null} />}
       </section>
     </div>
   );

@@ -116,7 +116,7 @@ test('3. Pestaña Expedientes: abiertos y cerrados, agrupados por cliente o por 
   await expect(p.locator('[data-expediente-cerrado]')).toBeVisible();
   await expect(p.locator('[data-clase="evento"]', { hasText: 'Expediente cerrado' })).toBeVisible();
 
-  await p.getByRole('link', { name: 'Expedientes', exact: true }).click();
+  await p.getByRole('navigation', { name: 'Despacho' }).getByRole('link', { name: 'Expedientes', exact: true }).click();
   await expect(p).toHaveURL(/\/admin\/expedientes\/$/);
   await p.getByLabel('Buscar expedientes').fill(suf);
   await p.getByLabel('Buscar expedientes').press('Enter');

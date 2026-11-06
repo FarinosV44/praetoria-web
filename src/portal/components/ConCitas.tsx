@@ -3,7 +3,7 @@ export type Cita = { id: string; etiqueta: string; enlace?: string };
 /** Texto con las citas [D1-p2] como enlaces a su fuente y los marcadores [PENDIENTE: …] resaltados. */
 export function ConCitas({ texto, citas }: { texto: string; citas: Cita[] }) {
   const mapa = new Map(citas.map((c) => [c.id, c]));
-  const partes = texto.split(/(\[(?:[NMTF]\d+|D\d+-p\d+)\]|\[PENDIENTE:[^\]]*\])/g);
+  const partes = texto.split(/(\[(?:[NMTFPA]\d+|D\d+-p\d+)\]|\[PENDIENTE:[^\]]*\])/g);
   return (
     <p className="whitespace-pre-wrap">
       {partes.map((p, i) => {

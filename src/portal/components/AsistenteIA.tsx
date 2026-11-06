@@ -1,13 +1,14 @@
 'use client';
-import { useActionState, useEffect, useRef } from 'react';
+import { useActionState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { guardarComoNota, preguntar, type ResultadoIA } from '@/app/(portal)/admin/expedientes/[id]/asistente/acciones';
+import { crearEscritoDesdeRespuesta, guardarComoNota, type ResultadoIA } from '@/app/(portal)/admin/expedientes/[id]/asistente/acciones';
+import { ChatVivo, type OpcionesIA } from './ChatVivo';
 
 import { ConCitas, type Cita } from './ConCitas';
 import { Redactor, type EscritoActual } from './Redactor';
 
 type Borrador = { escrito: string; version: number; titulo: string; modelos: { etiqueta: string; titulo: string; version: number; secciones: string; modelo_id: string }[]; avisos: { tipo: string; texto: string }[] };
-export type MensajeIA = { id: string; rol: 'usuario' | 'asistente'; texto: string; citas: Cita[]; limites: string[]; autor: string; at: string; borrador?: Borrador | null };
+export type MensajeIA = { id: string; rol: 'usuario' | 'asistente'; texto: string; citas: Cita[]; limites: string[]; autor: string; at: string; borrador?: Borrador | null; modelo?: string | null; modo?: string | null; coste_usd?: string | null };
 
 const TIPO_AVISO: Record<string, string> = { laguna: 'Falta o contradicción', pendiente: 'Marcadores', norma: 'Norma sin verificar', jurisprudencia: 'Jurisprudencia retirada',
   trasvase: 'Datos de otro asunto retirados', cita: 'Citas', limite: 'Límite de lectura' };
@@ -35,8 +36,8 @@ function TarjetaBorrador({ solicitud, b, texto, citas }: { solicitud: string; b:
   );
 }
 
-const RAPIDAS = ['Resúmeme el asunto', '¿Qué falta para avanzar?', '¿Qué plazos y fechas constan y cuáles están sin verificar?',
-  'Prepara un borrador de informe para el cliente', 'Prepara un borrador de escrito con lo que consta'];
+const RAPIDAS = ['¿En qué situación se encuentra este procedimiento?', '¿Cuál fue nuestra última actuación?', '¿Qué documentación falta?',
+  '¿Qué contradicciones hay entre las versiones de las partes?', '¿Qué prueba tenemos para acreditar los hechos?', 'Redacta un correo explicando al cliente la situación actual', 'Busca un escrito parecido en la biblioteca'];
 
 function GuardarNota({ solicitud, mensaje }: { solicitud: string; mensaje: string }) {
   const [r, accion, pendiente] = useActionState<ResultadoIA, FormData>(guardarComoNota, {});
@@ -50,30 +51,38 @@ function GuardarNota({ solicitud, mensaje }: { solicitud: string; mensaje: strin
   );
 }
 
-export function AsistenteIA({ solicitud, hilo, mensajes, estilos = [], modo = 'preguntar', escrito = null }: { solicitud: string; hilo: string | null; mensajes: MensajeIA[]; estilos?: { id: string; nombre: string }[]; modo?: 'preguntar' | 'redactar'; escrito?: EscritoActual | null }) {
+function CrearEscrito({ solicitud, mensaje }: { solicitud: string; mensaje: string }) {
   const router = useRouter();
-  const [r, accion, pendiente] = useActionState<ResultadoIA, FormData>(preguntar, {});
-  const texto = useRef<HTMLTextAreaElement>(null);
-  const form = useRef<HTMLFormElement>(null);
-  useEffect(() => {
-    if (r.hilo && r.hilo !== hilo) router.replace(`?hilo=${r.hilo}`);
-  }, [r.hilo, r.n, hilo, router]);
-  const enviar = (t: string) => { if (texto.current) { texto.current.value = t; form.current?.requestSubmit(); } };
+  const [r, accion, pendiente] = useActionState<ResultadoIA, FormData>(crearEscritoDesdeRespuesta, {});
+  useEffect(() => { if (r.escrito) router.push(`/admin/expedientes/${solicitud}/escritos/${r.escrito}/`); }, [r.escrito, router, solicitud]);
+  return (
+    <form action={accion} className="inline">
+      <input type="hidden" name="solicitud" value={solicitud} /><input type="hidden" name="mensaje" value={mensaje} />
+      <button className="btn-texto text-sm" disabled={pendiente}>Crear escrito con esto</button>
+      {r.error ? <span className="text-xs" role="alert"> {r.error}</span> : null}
+    </form>
+  );
+}
+
+const MODO_T: Record<string, string> = { rapido: 'rápido', equilibrado: 'equilibrado', maximo: 'máxima calidad' };
+
+export function AsistenteIA({ solicitud, hilo, mensajes, estilos = [], modo = 'preguntar', escrito = null, opciones, reanudar = null }: { solicitud: string; hilo: string | null; mensajes: MensajeIA[]; estilos?: { id: string; nombre: string }[]; modo?: 'preguntar' | 'redactar'; escrito?: EscritoActual | null; opciones: OpcionesIA; reanudar?: string | null }) {
   return (
     <div className="grid gap-3">
       <ol className="cronologia" aria-label="Conversación con el asistente" aria-live="polite">
         {mensajes.length === 0 ? <li className="evento-linea">Pregunta lo que necesites sobre este expediente. Solo se usa lo que consta en él, con citas a cada fuente.</li> : null}
         {mensajes.map((m) => (
           <li key={m.id} className={`burbuja ${m.rol === 'usuario' ? 'burbuja-interna' : 'burbuja-documento'}`} data-ia={m.rol}>
-            <p className="meta">{m.rol === 'usuario' ? m.autor : 'Asistente (borrador, revísalo)'} · {new Date(m.at).toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })}</p>
+            <p className="meta">{m.rol === 'usuario' ? m.autor : <>Asistente{m.modelo ? <> · <span data-modelo-usado>{m.modelo}</span>{m.modo ? ` (${MODO_T[m.modo] ?? m.modo})` : ''}</> : ''} · borrador, revísalo</>} · {new Date(m.at).toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })}</p>
             {m.borrador ? <TarjetaBorrador solicitud={solicitud} b={m.borrador} texto={m.texto} citas={m.citas} />
               : m.rol === 'asistente' ? <ConCitas texto={m.texto} citas={m.citas} /> : <p className="whitespace-pre-wrap">{m.texto}</p>}
             {m.limites.length ? <ul className="text-xs mt-1" data-limites>{m.limites.map((l, i) => <li key={i}>⚠️ {l}</li>)}</ul> : null}
             {m.rol === 'asistente' && !m.borrador ? (
-              <p className="flex flex-wrap gap-3 items-center mt-1">
+              <div className="flex flex-wrap gap-3 items-center mt-1">
                 <button type="button" className="btn-texto text-sm" onClick={() => navigator.clipboard?.writeText(m.texto)}>Copiar</button>
                 <GuardarNota solicitud={solicitud} mensaje={m.id} />
-              </p>
+                <CrearEscrito solicitud={solicitud} mensaje={m.id} />
+              </div>
             ) : null}
             {m.rol === 'asistente' && !m.borrador ? (
               <form method="post" action="/api/escritos/exportar/" className="flex flex-wrap gap-2 items-center text-sm mt-1" data-exportar>
@@ -87,28 +96,13 @@ export function AsistenteIA({ solicitud, hilo, mensajes, estilos = [], modo = 'p
             ) : null}
           </li>
         ))}
-        {pendiente ? <li className="evento-linea" role="status">El asistente está leyendo el expediente…</li> : null}
       </ol>
       <nav className="flex gap-2" aria-label="Modo del asistente">
         <a href={`?${hilo ? `hilo=${hilo}&` : ''}modo=preguntar`} className={`chip ${modo === 'preguntar' ? 'chip-info' : 'chip-neutro'} no-underline`} aria-current={modo === 'preguntar' ? 'page' : undefined}>Preguntar</a>
         <a href={`?${hilo ? `hilo=${hilo}&` : ''}modo=redactar`} className={`chip ${modo === 'redactar' ? 'chip-info' : 'chip-neutro'} no-underline`} aria-current={modo === 'redactar' ? 'page' : undefined}>✍️ Redactar escrito con la biblioteca</a>
       </nav>
-      {modo === 'redactar' ? <Redactor solicitud={solicitud} hilo={hilo} escrito={escrito} /> : (<>
-      <div className="flex flex-wrap gap-2">
-        {RAPIDAS.map((t) => <button key={t} type="button" className="chip chip-neutro" style={{ cursor: 'pointer', border: 0 }} disabled={pendiente} onClick={() => enviar(t)}>{t}</button>)}
-      </div>
-      <form ref={form} action={accion} className="caja-compositor">
-        <input type="hidden" name="solicitud" value={solicitud} /><input type="hidden" name="hilo" value={hilo ?? ''} />
-        <label htmlFor="ia-texto" className="sr-only">Pregunta al asistente</label>
-        <textarea id="ia-texto" ref={texto} name="texto" rows={3} maxLength={8000} placeholder="Pregunta sobre este expediente…"
-          onKeyDown={(e) => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); form.current?.requestSubmit(); } }} />
-        <div className="fila">
-          <span className="ayuda text-xs">La IA solo propone: nada se envía, guarda ni publica sin que tú lo hagas.</span>
-          <button className="btn btn-primario" style={{ minHeight: 38 }} disabled={pendiente}>{pendiente ? 'Pensando…' : 'Preguntar'}</button>
-        </div>
-      </form>
-      </>)}
-      {r.error ? <p className="error text-sm" role="alert">{r.error}</p> : null}
+      {modo === 'redactar' ? <Redactor solicitud={solicitud} hilo={hilo} escrito={escrito} />
+        : <ChatVivo solicitud={solicitud} hilo={hilo} opciones={opciones} rapidas={RAPIDAS} reanudar={reanudar} />}
     </div>
   );
 }

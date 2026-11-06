@@ -207,3 +207,39 @@ export async function estadoExpediente(_: Resultado, f: FormData): Promise<Resul
   revalidatePath('/admin/expedientes/');
   return { ok: cerrar ? 'Expediente cerrado.' : 'Expediente reabierto.', n: Date.now() };
 }
+
+/** Datos procesales del expediente (órgano, autos, procedimiento). Solo quien puede escribir en el asunto. */
+export async function guardarDatosProceso(_: Resultado, f: FormData): Promise<Resultado> {
+  const u = await requerirPersonal();
+  const sid = String(f.get('solicitud'));
+  if (!UUID.test(sid)) return { error: 'Asunto no válido.' };
+  const organo = String(f.get('organo') ?? '').trim().slice(0, 200) || null, autos = String(f.get('autos') ?? '').trim().slice(0, 80) || null;
+  const contraparte = String(f.get('contraparte') ?? '').trim().slice(0, 300) || null, nombreProc = String(f.get('procedimiento') ?? '').trim();
+  try {
+    await comoUsuario(u.id, async (tx) => {
+      if (!(await tx.query('select portal.personal_escribe($1) ok', [sid])).rows[0].ok) throw new Error('No tienes permiso para escribir en este asunto.');
+      let proc: string | null = null;
+      if (nombreProc) {
+        proc = (await tx.query('select id from portal.bib_procedimientos where lower(nombre) = lower($1) order by activo desc limit 1', [nombreProc])).rows[0]?.id ?? null;
+        if (!proc) throw new Error(`No existe el procedimiento «${nombreProc.slice(0, 80)}» en el catálogo.`);
+      }
+      const r = await tx.query('update portal.expedientes set organo = $2, numero_autos = $3, procedimiento_id = $4 where solicitud_id = $1', [sid, organo, autos, proc]);
+      if (!r.rowCount) throw new Error('Este asunto aún no tiene expediente abierto.');
+      await tx.query('update portal.solicitudes set contraparte = $2 where id = $1', [sid, contraparte]);
+    });
+  } catch (e) { const m = (e as Error).message; return { error: /row-level|42501|permission denied/.test(m) ? 'No tienes permiso para cambiar estos datos.' : m.slice(0, 160) }; }
+  revalidatePath(`/admin/expedientes/${sid}/`);
+  return { ok: 'Datos guardados.', n: Date.now() };
+}
+
+/** Decide una propuesta de la IA. Aceptar un plazo lo crea como fecha sugerida y sin verificar. */
+export async function decidirPropuesta(_: Resultado, f: FormData): Promise<Resultado> {
+  const u = await requerirPersonal();
+  const id = String(f.get('propuesta')), sid = String(f.get('solicitud')), aceptar = f.get('decision') === 'aceptar', fecha = String(f.get('fecha') ?? '');
+  if (!UUID.test(id) || !UUID.test(sid)) return { error: 'Propuesta no válida.' };
+  if (fecha && !/^\d{4}-\d{2}-\d{2}$/.test(fecha)) return { error: 'Fecha no válida.' };
+  try { await comoUsuario(u.id, (tx) => tx.query('select portal.ia_propuesta_decidir($1, $2, $3::date)', [id, aceptar, fecha || null])); }
+  catch (e) { const m = (e as Error).message; return { error: /42501|Sin permiso/.test(m) ? 'No tienes permiso para decidir esta propuesta.' : m.slice(0, 160) }; }
+  revalidatePath(`/admin/expedientes/${sid}/`);
+  return { ok: aceptar ? 'Añadida a la agenda.' : 'Propuesta descartada.', n: Date.now() };
+}

@@ -1,7 +1,9 @@
-import Link from 'next/link';
 import { Marca } from '@/portal/components/Marca';
+import { NavDespacho } from '@/portal/components/NavDespacho';
+import { PaletaComandos } from '@/portal/components/PaletaComandos';
 import { Salir } from '@/portal/components/Salir';
 import { AvisoEntorno } from '@/portal/components/ui';
+import { env } from '@/portal/lib/env';
 import { requerirPersonal } from '@/portal/lib/sesion';
 import { comoUsuario } from '@/portal/lib/db';
 
@@ -12,29 +14,35 @@ export default async function DespachoLayout({ children }: { children: React.Rea
   const avisos = u.mfa || !process.env.STAFF_MFA_REQUIRED || process.env.STAFF_MFA_REQUIRED === 'false'
     ? await comoUsuario(u.id, async (tx) => (await tx.query('select count(*)::int n from portal.avisos_internos where user_id = $1 and leido_at is null', [u.id])).rows[0].n as number)
     : 0;
+  const rol = u.personal!.rol, esGlobal = rol === 'administrador', conBiblioteca = rol !== 'facturacion', conIA = !!env.iaClave && conBiblioteca;
+  const grupos = [
+    { titulo: 'Trabajo', enlaces: [
+      { href: '/admin/', texto: 'Inicio' }, { href: '/admin/expedientes/', texto: 'Expedientes' }, { href: '/admin/clientes/', texto: 'Clientes' },
+      { href: '/admin/agenda/', texto: 'Agenda' }, { href: '/admin/avisos/', texto: 'Avisos', n: avisos },
+    ] },
+    ...(conBiblioteca ? [{ titulo: 'Inteligencia jurídica', enlaces: [
+      ...(conIA ? [{ href: '/admin/ia/', texto: 'Copiloto' }, { href: '/admin/ia/nuevo/', texto: 'Nuevo escrito' }] : []),
+      { href: '/admin/biblioteca/', texto: 'Biblioteca' },
+    ] }] : []),
+    { titulo: 'Gestión', enlaces: [
+      { href: '/admin/plantillas/', texto: 'Plantillas' },
+      ...(esGlobal ? [{ href: '/admin/seguros/', texto: 'Seguros' }, { href: '/admin/equipo/', texto: 'Equipo' }, { href: '/admin/ia/ajustes/', texto: 'Ajustes de IA' }] : []),
+      { href: '/admin/app/', texto: 'App móvil' }, { href: '/admin/seguridad/', texto: 'Seguridad' },
+    ] },
+  ];
   return (
-    <div className="min-h-dvh flex flex-col">
+    <div className="shell">
+      <a href="#contenido" className="saltar">Saltar al contenido</a>
       <AvisoEntorno />
-      <header style={{ background: '#fff', borderBottom: '1px solid var(--color-line)' }}>
-        <div className="wrap fila py-3">
-          <div className="flex items-center gap-3"><Marca destino="/admin/" /><span className="chip chip-neutro">Despacho</span></div>
-          <div className="flex items-center gap-3"><span className="ayuda hidden sm:inline">{u.personal!.nombre}</span><Salir /></div>
-        </div>
-        <nav aria-label="Despacho" className="wrap flex gap-4 pb-3 text-sm font-semibold overflow-x-auto">
-          <Link href="/admin/">Bandeja</Link>
-          <Link href="/admin/expedientes/">Expedientes</Link>
-          <Link href="/admin/clientes/">Clientes</Link>
-          <Link href="/admin/agenda/">Agenda</Link>
-          <Link href="/admin/avisos/">Avisos{avisos ? ` (${avisos})` : ''}</Link>
-          {u.personal!.rol !== 'facturacion' ? <Link href="/admin/biblioteca/">Biblioteca</Link> : null}
-          <Link href="/admin/plantillas/">Plantillas</Link>
-          <Link href="/admin/app/">App móvil</Link>
-          {u.personal!.rol === 'administrador' ? <Link href="/admin/seguros/">Seguros</Link> : null}
-          {u.personal!.rol === 'administrador' ? <Link href="/admin/equipo/">Equipo</Link> : null}
-          <Link href="/admin/seguridad/">Seguridad</Link>
-        </nav>
+      <header className="shell-cabecera">
+        <div className="flex items-center gap-3"><Marca destino="/admin/" /><span className="chip chip-neutro">Despacho</span></div>
+        <div className="flex items-center gap-3"><span className="ayuda hidden sm:inline">{u.personal!.nombre}</span><Salir /></div>
       </header>
-      <main id="contenido" className="wrap flex-1 py-6">{children}</main>
+      <div className="shell-cuerpo">
+        <NavDespacho grupos={grupos} />
+        <main id="contenido" className="shell-contenido">{children}</main>
+      </div>
+      <PaletaComandos esGlobal={esGlobal} conBiblioteca={conBiblioteca} conIA={conIA} />
     </div>
   );
 }

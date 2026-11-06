@@ -107,7 +107,7 @@ test('4. Agenda: vista judicial con avisos una semana, 24 h y 1 h antes; el moto
   await p.goto('/admin/avisos/');
   const aviso = p.locator('[data-aviso="Llamar al cliente ficticio"]');
   await expect(aviso).toBeVisible();
-  await expect(p.getByRole('link', { name: /Avisos \(1\)/ })).toBeVisible();
+  await expect(p.getByRole('link', { name: /Avisos 1 sin leer/ })).toBeVisible();
   await aviso.getByRole('button', { name: 'Posponer 1 h' }).click();
   await expect(p.getByRole('status')).toContainText('Aviso pospuesto');
   await expect(p.getByText(/Llamar al cliente ficticio/).last()).toBeVisible();
@@ -128,7 +128,7 @@ test('5. App instalable: manifiesto, iconos y service worker sin caché de conte
 });
 
 test('6. Un cliente no ve la agenda ni registra dispositivos del despacho', async ({ page: p, request }) => {
-  const r = await request.post('/api/push/', { headers: { origin: 'http://localhost:3100' }, data: { endpoint: 'https://x.test/1', keys: { p256dh: 'B'.repeat(87), auth: 'a'.repeat(22) } } });
+  const r = await request.post('/api/push/', { headers: { origin: process.env.E2E_BASE_URL ?? 'http://localhost:3100' }, data: { endpoint: 'https://x.test/1', keys: { p256dh: 'B'.repeat(87), auth: 'a'.repeat(22) } } });
   expect(r.status()).toBe(401);
   await p.goto('/admin/agenda/');
   await expect(p).toHaveURL(/\/entrar\/$/);

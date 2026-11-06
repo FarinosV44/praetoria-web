@@ -5,6 +5,7 @@ import { comoUsuario } from '@/portal/lib/db';
 import { recientes } from '@/portal/lib/expediente';
 import { miTrabajo } from '@/portal/lib/equipo';
 import { MiTrabajo } from '@/portal/components/MiTrabajo';
+import { panelInicio } from '@/portal/lib/panel';
 import { requerirPersonal } from '@/portal/lib/sesion';
 import { fecha } from '@/portal/lib/textos';
 
@@ -24,7 +25,7 @@ export default async function Bandeja({ searchParams }: { searchParams: Promise<
   const u = await requerirPersonal();
   const v = ((await searchParams).vista ?? 'nuevas') as Vista;
   const vista = vistas[v] ?? vistas.nuevas;
-  const { filas, cuentas, rec, trabajo } = await comoUsuario(u.id, async (tx) => {
+  const { filas, cuentas, rec, trabajo, panel } = await comoUsuario(u.id, async (tx) => {
     const base = `with x as (
       select s.*, t.nombre tipo_nombre, us.name cliente_nombre, us.email cliente_email, e.referencia expediente_ref, p.nombre_visible responsable,
         (select count(*) from portal.documentos d where d.solicitud_id = s.id and d.estado = 'pendiente')::int por_revisar,
@@ -37,7 +38,7 @@ export default async function Bandeja({ searchParams }: { searchParams: Promise<
     const filas = (await tx.query(`${base} select * from x s where ${vista.where} order by s.urgencia = 'urgente' desc, s.enviada_at limit 200`)).rows;
     const cuentas: Record<string, number> = {};
     for (const [k, def] of Object.entries(vistas)) cuentas[k] = (await tx.query(`${base} select count(*)::int n from x s where ${def.where}`)).rows[0].n;
-    return { filas, cuentas, rec: await recientes(tx, u.id), trabajo: await miTrabajo(tx, u.id) };
+    return { filas, cuentas, rec: await recientes(tx, u.id), trabajo: await miTrabajo(tx, u.id), panel: await panelInicio(tx, u.id) };
   });
   return (
     <div className="grid gap-5">
@@ -53,7 +54,35 @@ export default async function Bandeja({ searchParams }: { searchParams: Promise<
           </div>
         ) : null}
       </section>
+      <section className="panel-resumen" aria-label="Resumen del despacho">
+        <div><span className="panel-cifra">{cuentas.expedientes}</span><span className="ayuda">expedientes abiertos</span></div>
+        <div data-aviso={panel.vencidos.length ? 'si' : undefined}><span className="panel-cifra">{panel.vencidos.length}</span><span className="ayuda">plazos vencidos</span></div>
+        <div><span className="panel-cifra">{panel.sinVerificar.length}</span><span className="ayuda">plazos sin verificar</span></div>
+        <div><span className="panel-cifra">{cuentas.faltan}</span><span className="ayuda">con documentación pendiente</span></div>
+      </section>
+      {panel.vencidos.length ? (
+        <section className="aviso" aria-label="Plazos vencidos" data-alerta="vencidos">
+          <strong>Plazos vencidos sin completar</strong>
+          <ul className="text-sm mt-1">{panel.vencidos.map((p) => <li key={p.id}><Link href={`/admin/expedientes/${p.sid}/?vista=plazos`}>{p.titulo}</Link> · {fecha(p.inicio)}<span className="ayuda"> · {p.asunto}</span></li>)}</ul>
+        </section>
+      ) : null}
       <MiTrabajo d={trabajo} />
+      <section className="grid md:grid-cols-3 gap-3" aria-label="Escritos e inteligencia artificial">
+        <div className="card" data-bloque="plazos-sin-verificar">
+          <h3 className="font-semibold mb-2">Plazos por verificar</h3>
+          {panel.sinVerificar.length ? <ul className="grid gap-1 text-sm">{panel.sinVerificar.map((p) => <li key={p.id}><Link href={`/admin/expedientes/${p.sid}/?vista=plazos`}>{p.titulo}</Link> · {fecha(p.inicio)}<span className="ayuda"> · {p.asunto}</span></li>)}</ul> : <p className="ayuda text-sm">Ningún plazo pendiente de verificar.</p>}
+          {panel.propuestas ? <p className="text-sm mt-2"><strong>{panel.propuestas}</strong> propuesta{panel.propuestas > 1 ? 's' : ''} de la IA por revisar en los expedientes.</p> : null}
+        </div>
+        <div className="card" data-bloque="borradores">
+          <h3 className="font-semibold mb-2">Borradores recientes</h3>
+          {panel.borradores.length ? <ul className="grid gap-1 text-sm">{panel.borradores.map((b) => <li key={b.id}><Link href={`/admin/expedientes/${b.sid}/escritos/${b.id}/`}>{b.titulo}</Link> · v{b.version}<span className="ayuda"> · {b.asunto}</span></li>)}</ul> : <p className="ayuda text-sm">Aún no hay borradores. <Link href="/admin/ia/nuevo/">Crear un escrito</Link></p>}
+        </div>
+        <div className="card" data-bloque="actividad-ia">
+          <h3 className="font-semibold mb-2">Actividad de la IA</h3>
+          {panel.actividad.length ? <ul className="grid gap-1 text-sm">{panel.actividad.map((a) => <li key={a.id}>{a.sid ? <Link href={`/admin/expedientes/${a.sid}/asistente/`}>{a.texto}</Link> : a.texto}<span className="ayuda"> · {a.estado === 'error' ? 'con error' : a.estado === 'en_curso' ? 'en curso' : fecha(a.at)}</span></li>)}</ul> : <p className="ayuda text-sm">Sin actividad reciente.</p>}
+          {panel.errores ? <p className="text-sm mt-2">⚠️ {panel.errores} documento{panel.errores > 1 ? 's' : ''} sin indexar por error.</p> : null}
+        </div>
+      </section>
       <h1 className="titulo">Bandeja</h1>
       <nav aria-label="Vistas" className="flex flex-wrap gap-2">
         {Object.entries(vistas).map(([k, d]) => (
