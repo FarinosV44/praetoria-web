@@ -104,6 +104,7 @@
   .shell-contenido button.chip { white-space: normal; text-align: left; }
   .shell-contenido mark.chip { display: inline; white-space: normal; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
   .shell-contenido fieldset { min-width: 0; }
+  .shell-contenido .grid > .card + .card { margin-top: 0; }
   .shell-contenido .tabla { overflow-wrap: normal; }
   /* Una rejilla sin columnas explícitas no debe crecer con su contenido: las tablas anchas se desplazan dentro de su tarjeta. */
   .shell-contenido .grid:not([class*=' grid-cols-']) { grid-template-columns: minmax(0, 1fr); }

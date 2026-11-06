@@ -330,6 +330,7 @@ test('12. Móvil: panel, expediente, editor y paleta sin desbordar la pantalla',
   p.on('pageerror', (x) => errores.push(`${p.url()}: ${x.message}`));
   for (const ruta of ['/admin/', `/admin/expedientes/${e.x}/`, `/admin/expedientes/${e.x}/?vista=documentos`, `/admin/expedientes/${e.x}/asistente/`, `/admin/expedientes/${e.x}/escritos/${e.escrito}/`, '/admin/ia/', '/admin/ia/nuevo/', '/admin/ia/ajustes/']) {
     await p.goto(ruta);
+    if (process.env.E2E_CAPTURAS && ruta.includes('escritos')) await p.screenshot({ path: join(process.env.E2E_CAPTURAS, 'movil-escrito.png') });
     // Con isMobile, el navegador ensancha la página si algo desborda: se compara con el ancho real de la pantalla.
     const { ancho, culpables } = await p.evaluate(() => ({
       ancho: document.documentElement.scrollWidth,
@@ -339,6 +340,23 @@ test('12. Móvil: panel, expediente, editor y paleta sin desbordar la pantalla',
     expect.soft(ancho, `desbordamiento horizontal en ${ruta}: ${culpables.join(' | ')}`).toBeLessThanOrEqual(391);
   }
   expect(errores, 'sin errores de JavaScript en las pantallas del despacho').toEqual([]);
+  await ctx.close();
+});
+
+test('13. Escritorio: pantallas principales sin desbordar, con captura opcional para revisarlas', async ({ browser }) => {
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  const p = await ctx.newPage();
+  await entrarComo(p, SA);
+  const pantallas: [string, string][] = [['inicio', '/admin/'], ['expediente', `/admin/expedientes/${e.x}/`], ['documentos', `/admin/expedientes/${e.x}/?vista=documentos`],
+    ['asistente', `/admin/expedientes/${e.x}/asistente/`], ['escrito', `/admin/expedientes/${e.x}/escritos/${e.escrito}/`], ['copiloto', '/admin/ia/'], ['nuevo', `/admin/ia/nuevo/?expediente=${e.x}`], ['ajustes', '/admin/ia/ajustes/']];
+  for (const [nombre, ruta] of pantallas) {
+    await p.goto(ruta);
+    expect.soft(await p.evaluate(() => document.documentElement.scrollWidth), `desbordamiento en ${ruta}`).toBeLessThanOrEqual(1441);
+    if (process.env.E2E_CAPTURAS) await p.screenshot({ path: join(process.env.E2E_CAPTURAS, `${nombre}.png`) });
+  }
+  await p.goto('/admin/');
+  await p.keyboard.press('Control+k');
+  if (process.env.E2E_CAPTURAS) await p.screenshot({ path: join(process.env.E2E_CAPTURAS, 'paleta.png') });
   await ctx.close();
 });
 
