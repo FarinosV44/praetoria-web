@@ -101,6 +101,8 @@
   .shell-cabecera { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #fff; border-bottom: 1px solid var(--color-line); padding: 10px 16px; }
   .shell-cuerpo { flex: 1; display: flex; flex-direction: column; min-width: 0; max-width: 100%; }
   .shell-contenido { flex: 1; min-width: 0; width: 100%; padding: 16px; }
+  /* Una rejilla sin columnas explícitas no debe crecer con su contenido: las tablas anchas se desplazan dentro de su tarjeta. */
+  .shell-contenido .grid:not([class*=' grid-cols-']) { grid-template-columns: minmax(0, 1fr); }
   .nav-despacho { min-width: 0; max-width: 100%; display: flex; gap: 14px; align-items: center; overflow-x: auto; background: #fff; border-bottom: 1px solid var(--color-line); padding: 8px 16px; font-size: .92rem; font-weight: 600; }
   .nav-despacho a { white-space: nowrap; text-decoration: none; border-radius: 6px; padding: 5px 8px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
   .nav-despacho a:hover { background: var(--color-stone); }

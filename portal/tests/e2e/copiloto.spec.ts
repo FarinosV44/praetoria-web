@@ -332,7 +332,7 @@ test('12. Móvil: panel, expediente, editor y paleta sin desbordar la pantalla',
     await p.goto(ruta);
     // Con isMobile, el navegador ensancha la página si algo desborda: se compara con el ancho real de la pantalla.
     const ancho = await p.evaluate(() => document.documentElement.scrollWidth);
-    expect(ancho, `desbordamiento horizontal en ${ruta}`).toBeLessThanOrEqual(391);
+    expect.soft(ancho, `desbordamiento horizontal en ${ruta}`).toBeLessThanOrEqual(391);
   }
   expect(errores, 'sin errores de JavaScript en las pantallas del despacho').toEqual([]);
   await ctx.close();

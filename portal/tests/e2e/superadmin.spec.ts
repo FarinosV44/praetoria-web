@@ -107,7 +107,7 @@ test('4. Agenda: vista judicial con avisos una semana, 24 h y 1 h antes; el moto
   await p.goto('/admin/avisos/');
   const aviso = p.locator('[data-aviso="Llamar al cliente ficticio"]');
   await expect(aviso).toBeVisible();
-  await expect(p.getByRole('link', { name: /Avisos \(1\)/ })).toBeVisible();
+  await expect(p.getByRole('link', { name: /Avisos 1 sin leer/ })).toBeVisible();
   await aviso.getByRole('button', { name: 'Posponer 1 h' }).click();
   await expect(p.getByRole('status')).toContainText('Aviso pospuesto');
   await expect(p.getByText(/Llamar al cliente ficticio/).last()).toBeVisible();
