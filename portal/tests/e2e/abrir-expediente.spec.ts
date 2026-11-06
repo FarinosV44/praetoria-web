@@ -38,7 +38,7 @@ test('Abrir expedientes para un cliente que ya existe', async ({ page: p }) => {
   await expect(p.getByRole('link', { name: 'Abrir el expediente' })).toHaveCount(0);
 
   // 1) Desde la pestaña Expedientes → Abrir expediente
-  await p.getByRole('link', { name: 'Expedientes', exact: true }).click();
+  await p.getByRole('navigation', { name: 'Despacho' }).getByRole('link', { name: 'Expedientes', exact: true }).click();
   await p.getByRole('link', { name: '+ Abrir expediente' }).click();
   await p.getByLabel('Buscar cliente').fill(suf);
   await p.getByRole('radio', { name: new RegExp(CLI.nombre) }).check();

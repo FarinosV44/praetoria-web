@@ -224,7 +224,8 @@ test('8. Nuevo escrito con un modelo aprobado: BOE, salvaguardas, editor, versio
   const todo = (await enviados()).map((x) => x.cuerpo).join('\n');
   expect(todo, 'el borrador no recibe datos del otro expediente').not.toContain('VERDE-99');
 
-  await p.locator('#borrador-texto').evaluate((el: HTMLTextAreaElement) => { el.focus(); const i = el.value.indexOf('Hecho acreditado'); el.setSelectionRange(i, i + 16); el.dispatchEvent(new Event('select', { bubbles: true })); });
+  await p.locator('#borrador-texto').evaluate((el: HTMLTextAreaElement) => { el.focus(); const i = el.value.indexOf('Hecho acreditado'); el.setSelectionRange(i, i + 16); });
+  await p.locator('#borrador-texto').dispatchEvent('mouseup');
   await p.locator('[data-accion-ia="reformular"]').click();
   const prop = p.locator('[data-propuesta-ia]');
   await expect(prop).toContainText('TEXTO REFORMULADO', { timeout: 60_000 });

@@ -12,7 +12,7 @@ export function NavDespacho({ grupos }: { grupos: Grupo[] }) {
   return (
     <nav aria-label="Despacho" className="nav-despacho">
       <button type="button" className="nav-buscar" onClick={() => window.dispatchEvent(new Event('abrir-paleta'))}>
-        <span>Buscar o ir a…</span><kbd>Ctrl K</kbd>
+        <span>Ir a…</span><kbd>Ctrl K</kbd>
       </button>
       {grupos.map((g) => (
         <div key={g.titulo} className="nav-grupo">
