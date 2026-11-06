@@ -29,7 +29,10 @@ export default async function Pagos({ searchParams }: { searchParams: Promise<Re
   const suma = (t: { pagado: number; confirmado: number; estimado: number }) => t.pagado + t.confirmado + t.estimado;
   const anio = hoy.slice(0, 4);
   const delAnio = totales.filter((t) => t.mes.startsWith(anio)).reduce((a, t) => a + suma(t), 0);
-  const tres = totales.filter((t) => t.mes > hoy.slice(0, 7)).slice(0, 3).reduce((a, t) => a + suma(t), 0);
+  // Los 3 meses naturales siguientes al actual (no los 3 primeros meses que tengan algún pago).
+  const sig = (n: number) => new Date(Date.UTC(Number(hoy.slice(0, 4)), Number(hoy.slice(5, 7)) - 1 + n, 1)).toISOString().slice(0, 7);
+  const tresMeses = new Set([sig(1), sig(2), sig(3)]);
+  const tres = totales.filter((t) => tresMeses.has(t.mes)).reduce((a, t) => a + suma(t), 0);
   const total12 = totales.reduce((a, t) => a + suma(t), 0);
   const enlace = (cambios: Record<string, string | null>) => {
     const p = new URLSearchParams();
