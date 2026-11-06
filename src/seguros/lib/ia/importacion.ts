@@ -342,6 +342,32 @@ function aceptar(campo: string, p: Propuesta | undefined, archivos: Archivo[], p
   return { valor, origen: { origen: 'documento', documento_id: null, documento: doc !== null ? archivos[doc]!.nombre : archivos[0]!.nombre, pagina, cita } };
 }
 
+/** Palabras significativas de un objeto asegurado (dirección, matrícula…), para comparar sin depender del formato. */
+const tokens = (s: string) => new Set(normalizar(s).split(/[^a-z0-9]+/).filter((t) => t.length > 1 && !['de', 'del', 'la', 'el', 'en', 'calle', 'c', 'uso', 'habitual', 'chalet', 'vivienda', 'piso'].includes(t)));
+function parecido(a: string, b: string) {
+  const x = tokens(a), y = tokens(b);
+  if (!x.size || !y.size) return 0;
+  let comunes = 0;
+  for (const t of x) if (y.has(t)) comunes++;
+  return comunes / Math.min(x.size, y.size);
+}
+
+/** Póliza existente del mismo seguro cuando no coincide (o no consta) el número. Solo si la coincidencia es inequívoca. */
+export async function buscarMismoSeguro(titularId: string, ramoId: string, aseguradora: string, numero: string | null, riesgo: string | null, db: Db = pool()) {
+  const cand = (await q<{ id: string; aseguradora: string; numero: string | null; riesgo: string | null }>(
+    `SELECT id, aseguradora, numero, riesgo FROM polizas WHERE titular_id = $1 AND ramo_id = $2 AND archivada_en IS NULL AND estado NOT IN ('anulada', 'sustituida')`,
+    [titularId, ramoId], db)).filter((c) => {
+    const a = norm(c.aseguradora), b = norm(aseguradora);
+    if (!(a === b || a.includes(b) || b.includes(a))) return false;
+    if (numero && c.numero && normNumero(c.numero) !== normNumero(numero)) return false; // números distintos: seguros distintos
+    return true;
+  });
+  const conRiesgo = riesgo ? cand.filter((c) => c.riesgo && parecido(c.riesgo, riesgo) >= 0.6) : [];
+  if (conRiesgo.length === 1) return conRiesgo[0]!.id;
+  if (!riesgo && cand.length === 1 && (!numero || !cand[0]!.numero)) return cand[0]!.id;
+  return null;
+}
+
 const norm = (s: string) => normalizar(s).replace(/\b(s ?a|s ?l|s ?l ?u|seguros|compania de seguros y reaseguros|sociedad anonima|de|y)\b/g, ' ').replace(/\s+/g, ' ').trim();
 const normNumero = (s: string) => s.toUpperCase().replace(/[^A-Z0-9]/g, '');
 const normNif = (s: string) => s.toUpperCase().replace(/[^A-Z0-9]/g, '');
@@ -410,6 +436,10 @@ async function guardarPoliza(u: Usuario, imp: { id: string; poliza_id: string | 
     if (!titularId) return { ...base, poliza_id: null, accion: 'no_creada', nombre: aceptados.aseguradora?.valor ?? 'Póliza sin identificar', titular: null, titular_creado: false, anualidad: 'ninguna', motivo: 'No consta el tomador en el documento. Elige el titular y vuelve a subirlo.' };
     if (!aceptados.aseguradora) return { ...base, poliza_id: null, accion: 'no_creada', nombre: 'Póliza sin identificar', titular: null, titular_creado: titularCreado, anualidad: 'ninguna', motivo: 'No consta la aseguradora en el documento.' };
     titularNombre = (await q1<{ nombre: string }>('SELECT nombre FROM titulares WHERE id = $1', [titularId], db))!.nombre;
+    // Mismo seguro subido antes sin número (o con otro documento): mismo titular, tipo y aseguradora, y el mismo
+    // objeto asegurado. Un suplemento, recibo o renovación nunca abre una póliza nueva si ya existe la suya.
+    const mismoSeguro = await buscarMismoSeguro(titularId, ramo.id, aceptados.aseguradora.valor, aceptados.numero?.valor ?? null, aceptados.riesgo?.valor ?? null, db);
+    if (mismoSeguro) polizaId = mismoSeguro;
   }
 
   return transaccion(async (tx) => {

@@ -214,8 +214,11 @@ function Recibo({ p }: { p: FilaPanel }) {
   if (!p.periodicidad && !p.importe_recibo) return <span className="pendiente">Pendiente</span>;
   return (
     <>
-      {p.importe_recibo && <span className="cifra">{formatoImporte(p.importe_recibo, p.moneda)}</span>}
-      <span className="linea-2" style={{ display: 'block' }}>{textoPeriodicidad(p.periodicidad) || 'periodicidad pendiente'}</span>
+      <span className="linea-2" style={{ display: 'block' }}>
+        {textoPeriodicidad(p.periodicidad) || 'periodicidad pendiente'}
+        {/* El recibo solo se repite si no coincide con el importe anual (pago fraccionado o sin coste anual) */}
+        {p.importe_recibo && (p.periodicidad !== 'anual' || !p.coste) ? <> · recibo <span className="cifra">{formatoImporte(p.importe_recibo, p.moneda)}</span></> : null}
+      </span>
     </>
   );
 }

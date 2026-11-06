@@ -137,6 +137,33 @@ describe('alta de pólizas leyendo los documentos', () => {
     expect((await q<{ n: number }>('SELECT count(*)::int AS n FROM polizas WHERE numero = $1', ['IMP-7788']))[0]!.n).toBe(1);
   });
 
+  it('las condiciones sin número y un suplemento posterior con número del mismo bien van a la misma póliza', async () => {
+    const sufijo = String(Date.now());
+    const titular = `Particular Inventado ${sufijo}`;
+    const c = (valor: string, cita: string) => ({ valor, documento: 1, pagina: 1, cita, confianza: 'alta' });
+    const cp = pdfSintetico([`CONDICIONES PARTICULARES (FICTICIAS)\nMutua Imaginaria de Seguros, S.A.\nTomador: ${titular}\nRiesgo: Chalet, calle Inventada 7, 46999 Pueblo Ficticio (Valencia)`]);
+    fijarProveedorDePrueba(proveedor({ polizas: [{ documentos: [{ indice: 1, tipo: 'condiciones_particulares' }], ramo: 'hogar',
+      titular: { tipo: 'particular', nombre: c(titular, `Tomador: ${titular}`) },
+      campos: { aseguradora: c('Mutua Imaginaria de Seguros, S.A.', 'Mutua Imaginaria de Seguros, S.A.'), riesgo: c('Chalet, calle Inventada 7, 46999 Pueblo Ficticio (Valencia)', 'Chalet, calle Inventada 7, 46999 Pueblo Ficticio (Valencia)') } }], avisos: [] }));
+    const a = await lote(admin, [{ nombre: 'cp.pdf', datos: cp }]);
+    await procesarImportacion(a);
+    const primera = (await importacionDe(admin, a)).resultado!.polizas[0]!;
+    expect(primera.accion).toBe('creada');
+
+    const sup = pdfSintetico([`SUPLEMENTO (FICTICIO)\nMutua Imaginaria de Seguros S.A. Poliza ${sufijo}\nTomador: ${titular}\nRiesgo: Chalet de uso habitual en calle Inventada, 7, 46999 Pueblo Ficticio (Valencia)`]);
+    fijarProveedorDePrueba(proveedor({ polizas: [{ documentos: [{ indice: 1, tipo: 'suplemento' }], ramo: 'hogar',
+      titular: { tipo: 'particular', nombre: c(titular, `Tomador: ${titular}`) },
+      campos: { aseguradora: c('Mutua Imaginaria de Seguros S.A.', 'Mutua Imaginaria de Seguros S.A.'), numero: c(sufijo, `Poliza ${sufijo}`),
+        riesgo: c('Chalet de uso habitual en calle Inventada, 7, 46999 Pueblo Ficticio (Valencia)', 'Chalet de uso habitual en calle Inventada, 7, 46999 Pueblo Ficticio (Valencia)') } }], avisos: [] }));
+    const b = await lote(admin, [{ nombre: 'suplemento.pdf', datos: sup }]);
+    await procesarImportacion(b);
+    const segunda = (await importacionDe(admin, b)).resultado!.polizas[0]!;
+    expect(segunda.accion).toBe('actualizada');
+    expect(segunda.poliza_id).toBe(primera.poliza_id);
+    expect((await obtenerPoliza(admin, primera.poliza_id!)).numero).toBe(sufijo); // faltaba: se completa
+    expect((await listarDocumentos(admin, primera.poliza_id!)).map((d) => d.tipo).sort()).toEqual(['condiciones_particulares', 'suplemento']);
+  });
+
   it('sin tomador ni titular elegido no crea nada; con la IA sin configurar no se acepta el lote', async () => {
     fijarProveedorDePrueba(proveedor({ polizas: [{ documentos: [{ indice: 1, tipo: 'otro' }], ramo: 'hogar', campos: {
       aseguradora: { valor: 'Otra Ficticia', documento: 1, pagina: 1, cita: 'CONDICIONES PARTICULARES DE PRUEBA', confianza: 'alta' } } }], avisos: ['Falta la página del tomador'] }));
