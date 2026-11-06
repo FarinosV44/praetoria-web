@@ -49,27 +49,36 @@ class Anthropic implements ProveedorIA {
         : { type: 'image', source: { type: 'base64', media_type: d.mime, data: d.base64 } }),
       { type: 'text', text: p.texto },
     ];
-    const r = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-api-key': this.clave, 'anthropic-version': '2023-06-01' },
-      body: JSON.stringify({
-        model: this.modelo,
-        max_tokens: p.maxTokens ?? 8000,
-        system: p.sistema,
-        tools: [{ name: p.herramienta.nombre, description: p.herramienta.descripcion, input_schema: p.herramienta.esquema }],
-        tool_choice: { type: 'tool', name: p.herramienta.nombre },
-        messages: [{ role: 'user', content: contenido }],
-      }),
-      signal: AbortSignal.timeout(240_000),
-    });
-    if (!r.ok) {
-      const cuerpo = (await r.text()).slice(0, 300);
-      throw new ErrorIA(`El proveedor de IA respondió ${r.status}: ${cuerpo}`, r.status === 429 || r.status >= 500);
+    // Sin «tool_choice» forzado: los modelos actuales no lo admiten (error 400). Se pide la herramienta en el
+    // mensaje y, si el modelo contesta sin usarla, se le vuelve a pedir en la misma conversación.
+    type Bloque = { type: string; name?: string; input?: unknown };
+    const mensajes: { role: 'user' | 'assistant'; content: unknown }[] = [{ role: 'user', content: contenido }];
+    let entrada = 0, salida = 0;
+    for (let vuelta = 0; vuelta < 3; vuelta++) {
+      const r = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', 'x-api-key': this.clave, 'anthropic-version': '2023-06-01' },
+        body: JSON.stringify({
+          model: this.modelo,
+          max_tokens: p.maxTokens ?? 8000,
+          system: `${p.sistema}\n\nResponde SIEMPRE llamando a la herramienta «${p.herramienta.nombre}», sin texto aparte.`,
+          tools: [{ name: p.herramienta.nombre, description: p.herramienta.descripcion, input_schema: p.herramienta.esquema }],
+          messages: mensajes,
+        }),
+        signal: AbortSignal.timeout(240_000),
+      });
+      if (!r.ok) {
+        const cuerpo = (await r.text()).slice(0, 300);
+        throw new ErrorIA(`El proveedor de IA respondió ${r.status}: ${cuerpo}`, r.status === 429 || r.status >= 500);
+      }
+      const j = await r.json() as { model: string; stop_reason: string; content: Bloque[]; usage?: { input_tokens: number; output_tokens: number } };
+      entrada += j.usage?.input_tokens ?? 0; salida += j.usage?.output_tokens ?? 0;
+      const uso = j.content.find((c) => c.type === 'tool_use' && c.name === p.herramienta.nombre);
+      if (uso) return { datos: uso.input, modelo: j.model, tokensEntrada: entrada, tokensSalida: salida };
+      if (j.stop_reason === 'max_tokens') throw new ErrorIA('La respuesta de la IA se cortó por longitud (documentos demasiado largos). Prueba con menos documentos a la vez.', false);
+      mensajes.push({ role: 'assistant', content: j.content }, { role: 'user', content: `Registra ahora el resultado llamando a la herramienta «${p.herramienta.nombre}».` });
     }
-    const j = await r.json() as { model: string; content: { type: string; name?: string; input?: unknown }[]; usage?: { input_tokens: number; output_tokens: number } };
-    const uso = j.content.find((c) => c.type === 'tool_use' && c.name === p.herramienta.nombre);
-    if (!uso) throw new ErrorIA('La IA no devolvió una respuesta estructurada.', true);
-    return { datos: uso.input, modelo: j.model, tokensEntrada: j.usage?.input_tokens, tokensSalida: j.usage?.output_tokens };
+    throw new ErrorIA('La IA no devolvió una respuesta estructurada.', true);
   }
 
   /**

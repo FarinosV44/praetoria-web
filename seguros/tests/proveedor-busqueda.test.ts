@@ -26,6 +26,23 @@ describe('búsqueda en internet del proveedor', () => {
     expect(r.datos).toMatchObject({ siniestros_telefono: { valor: '910000222' } });
   });
 
+  it('la lectura no fuerza tool_choice (los modelos actuales lo rechazan) y vuelve a pedir la herramienta si contesta con texto', async () => {
+    process.env.ANTHROPIC_API_KEY = 'clave-de-prueba';
+    const cuerpos: Record<string, unknown>[] = [];
+    const respuestas = [
+      { model: 'm', stop_reason: 'end_turn', content: [{ type: 'text', text: 'He leído el documento.' }] },
+      { model: 'm', stop_reason: 'tool_use', content: [{ type: 'tool_use', id: 't', name: 'registrar', input: { ok: true } }], usage: { input_tokens: 10, output_tokens: 5 } },
+    ];
+    vi.stubGlobal('fetch', vi.fn(async (_u: string, init: { body: string }) => {
+      cuerpos.push(JSON.parse(init.body));
+      return new Response(JSON.stringify(respuestas.shift()), { status: 200 });
+    }));
+    const r = await proveedorIA()!.pedir({ sistema: 's', documentos: [], texto: 't', herramienta: { nombre: 'registrar', descripcion: 'd', esquema: { type: 'object' } } });
+    expect(cuerpos.every((c) => !('tool_choice' in c))).toBe(true);
+    expect(cuerpos[1]!.messages).toHaveLength(3);
+    expect(r.datos).toEqual({ ok: true });
+  });
+
   it('un error de la API se informa tal cual (p. ej., búsqueda no habilitada en la organización)', async () => {
     process.env.ANTHROPIC_API_KEY = 'clave-de-prueba';
     vi.stubGlobal('fetch', vi.fn(async () => new Response('{"error":{"message":"web search is not enabled"}}', { status: 400 })));
