@@ -13,6 +13,6 @@ jobs:
       - run: |
           mkdir -p tmp-fotos/mini tmp-fotos/grandes
           while IFS='|' read -r id ph; do [ -n "$id" ] && curl -sfL "https://images.unsplash.com/$ph?w=420&q=60&fm=jpg" -o "tmp-fotos/mini/$id.jpg" || true; done < tmp-fotos/lista.txt
-          if [ -f tmp-fotos/grandes.txt ]; then while IFS='|' read -r id ph; do if [ -n "$id" ]; then if [ -n "$ph" ]; then u="https://images.unsplash.com/$ph?w=2400&q=85&fm=jpg"; else u="https://unsplash.com/photos/$id/download?force=true"; fi; curl -sfL "$u" -o "tmp-fotos/grandes/$id.jpg" || true; fi; done < tmp-fotos/grandes.txt; fi
+          if [ -f tmp-fotos/grandes.txt ]; then while IFS='|' read -r id ph; do if [ -n "$id" ]; then case "$ph" in https://*) u="$ph"; ext=bin;; *) ext=jpg;; esac; if [ "$ext" = bin ]; then :; elif [ -n "$ph" ]; then u="https://images.unsplash.com/$ph?w=2400&q=85&fm=jpg"; else u="https://unsplash.com/photos/$id/download?force=true"; fi; curl -sfL -A "PraetoriaWebBot/1.0 (https://praetoriaabogados.es)" "$u" -o "tmp-fotos/grandes/$id.$ext" || true; fi; done < tmp-fotos/grandes.txt; fi
           git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add tmp-fotos && git commit -m "tmp: fotos descargadas" && git push
