@@ -13,21 +13,26 @@ import { IconoDocumento, IconoRamo, IconoTelefono } from '@/seguros/components/i
 import { accionEliminarDocumento } from '../acciones';
 import { accionRenegociar } from '../lectura-acciones';
 import { iaConfigurada } from '@/seguros/lib/ia/proveedor';
+import { CondicionesEnFecha, EditarDocumento, Expediente, Recibos } from './expediente';
+import { Asistente } from './asistente';
 import { SubidaDirecta } from '@/seguros/components/subida-directa';
 import { Importar } from '@/seguros/components/importar';
 import type { Origen } from '@/seguros/lib/ia/importacion';
 import { renovacionDeAnualidad } from '@/seguros/lib/datos/renovaciones';
-import { q } from '@/seguros/lib/db';
+import { q, q as consulta } from '@/seguros/lib/db';
 import { ESTADOS_SINIESTRO } from '@/seguros/lib/datos/siniestros';
 
 export const metadata: Metadata = { title: 'Póliza' };
 
 const PESTANAS = [
   { clave: 'resumen', texto: 'Resumen' },
+  { clave: 'expediente', texto: 'Expediente' },
+  { clave: 'asistente', texto: 'Asistente IA' },
+  { clave: 'recibos', texto: 'Recibos y pagos' },
   { clave: 'condiciones', texto: 'Condiciones' },
-  { clave: 'anualidades', texto: 'Anualidades e historial' },
   { clave: 'documentos', texto: 'Documentos' },
   { clave: 'siniestros', texto: 'Siniestros' },
+  { clave: 'anualidades', texto: 'Periodos' },
 ] as const;
 
 const ESTADO_DOC: Record<string, { texto: string; clase: string }> = {
@@ -35,9 +40,9 @@ const ESTADO_DOC: Record<string, { texto: string; clase: string }> = {
   revision: { texto: 'Datos por revisar', clase: 'revisar' }, confirmado: { texto: 'Datos confirmados', clase: 'vigente' }, error: { texto: 'Lectura fallida', clase: 'vencida' },
 };
 
-export default async function Ficha({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ pestana?: string; volver?: string; creada?: string }> }) {
+export default async function Ficha({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ pestana?: string; volver?: string; creada?: string; buscar?: string; clase?: string; fecha?: string; c?: string }> }) {
   const { id } = await params;
-  const { pestana = 'resumen', volver, creada } = await searchParams;
+  const { pestana = 'resumen', volver, creada, buscar, clase, fecha, c } = await searchParams;
   const u = await exigirUsuario();
   const p = await obtenerPoliza(u, id).catch((e) => { if (e instanceof NoEncontrado) notFound(); throw e; });
   const [anualidades, documentos] = await Promise.all([listarAnualidades(u, id), listarDocumentos(u, id)]);
@@ -116,10 +121,13 @@ export default async function Ficha({ params, searchParams }: { params: Promise<
         ))}
       </nav>
 
-      {pestana === 'condiciones' ? <Condiciones id={id} actual={actual} documentos={documentos} />
+      {pestana === 'asistente' ? <Asistente u={u} id={id} c={c} />
+        : pestana === 'expediente' ? <Expediente u={u} id={id} buscar={buscar} clase={clase} documentos={documentos} />
+        : pestana === 'recibos' ? <Recibos u={u} id={id} moneda={p.moneda} documentos={documentos} />
+        : pestana === 'condiciones' ? <><CondicionesEnFecha u={u} id={id} fecha={fecha} /><Condiciones id={id} actual={actual} documentos={documentos} /></>
         : pestana === 'siniestros' ? <SiniestrosPoliza id={id} />
         : pestana === 'anualidades' ? <Anualidades id={id} anualidades={anualidades} actualId={actual?.id} moneda={p.moneda} documentos={documentos} />
-        : pestana === 'documentos' ? <Documentos id={id} documentos={documentos} anualidades={anualidades} />
+        : pestana === 'documentos' ? <Documentos id={id} documentos={documentos} anualidades={anualidades} sins={await consulta<{ id: string; titulo: string }>(`SELECT s.id, s.titulo FROM siniestros s JOIN siniestro_polizas sp ON sp.siniestro_id = s.id WHERE sp.poliza_id = $1 AND s.archivado_en IS NULL`, [id])} />
         : (
           <div className="dos-columnas">
             <section className="tarjeta tarjeta--pad" aria-labelledby="t-datos">
@@ -216,7 +224,7 @@ function Anualidades({ id, anualidades, actualId, moneda, documentos }: { id: st
   );
 }
 
-function Documentos({ id, documentos, anualidades }: { id: string; documentos: Documento[]; anualidades: Anualidad[] }) {
+function Documentos({ id, documentos, anualidades, sins }: { id: string; documentos: Documento[]; anualidades: Anualidad[]; sins: { id: string; titulo: string }[] }) {
   const opcionesAnualidad = anualidades.map((a) => ({ valor: a.id, texto: a.inicio || a.fin ? `${fechaMedia(a.inicio) || '¿?'} – ${fechaMedia(a.fin) || '¿?'}` : 'Fechas pendientes' }));
   const tamano = (b: string) => { const n = Number(b); return n > 1024 * 1024 ? `${(n / 1024 / 1024).toFixed(1).replace('.', ',')} MB` : `${Math.max(1, Math.round(n / 1024))} KB`; };
   return (
@@ -238,10 +246,13 @@ function Documentos({ id, documentos, anualidades }: { id: string; documentos: D
                     <div style={{ minWidth: 0 }}>
                       <a href={`/api/seguros/documentos/${d.id}`} target="_blank" rel="noopener" style={{ fontWeight: 700, overflowWrap: 'anywhere' }}>{d.nombre_original}</a>
                       <p className="linea-2">
-                        {TIPOS_DOCUMENTO[d.tipo]}{anualidad ? ` · ${anualidad.texto}` : ''} · {tamano(d.bytes)} · subido {fechaMedia(hoyMadrid(new Date(d.subido_en)))}
+                        {TIPOS_DOCUMENTO[d.tipo]}{d.fecha_documento ? ` · ${fechaMedia(d.fecha_documento)}` : ''}{anualidad ? ` · periodo ${anualidad.texto}` : ''} · {tamano(d.bytes)} · subido {fechaMedia(hoyMadrid(new Date(d.subido_en)))}
                       </p>
+                      {d.descripcion && <p className="linea-2">{d.descripcion}</p>}
+                      {d.siniestro_id && <p className="linea-2"><Link href={`/admin/seguros/siniestros/${d.siniestro_id}`}>Vinculado a un siniestro</Link></p>}
                       {d.duplicado_de && <p className="linea-2" style={{ color: 'var(--color-aviso-texto)' }}>Idéntico a «{d.duplicado_de}»</p>}
                       <span className={`estado estado--${ESTADO_DOC[d.estado]?.clase ?? 'neutro'}`} style={{ marginTop: 4 }}>{ESTADO_DOC[d.estado]?.texto ?? d.estado}</span>
+                      <EditarDocumento id={id} d={d} anualidades={anualidades} sins={sins} />
                     </div>
                   </div>
                   <div className="acciones">

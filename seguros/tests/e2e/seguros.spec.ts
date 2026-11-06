@@ -67,6 +67,32 @@ test('panel, ficha, documento y avisos dentro de /admin/seguros', async ({ page:
   expect(csv.headers()['content-type']).toContain('text/csv');
 });
 
+test('expediente, recibos, condiciones, asistente y previsión de pagos', async ({ page: p }) => {
+  await entrar(p, SUPER);
+  await p.goto('/admin/seguros/');
+  await p.locator('a.fila-enlace').first().click();
+  await expect(p).toHaveURL(/\/admin\/seguros\/polizas\/[0-9a-f-]{36}\/?/);
+  const base = p.url().replace(/\?.*/, '');
+  await p.goto(base + '?pestana=expediente');
+  await expect(p.getByRole('search', { name: 'Buscar en el expediente' })).toBeVisible();
+  await p.goto(base + '?pestana=recibos');
+  await expect(p.getByRole('heading', { name: /Recibos/ }).first()).toBeVisible();
+  await p.goto(base + '?pestana=condiciones');
+  await expect(p.getByLabel('Condiciones aplicables el', { exact: true })).toBeVisible();
+  await p.goto(base + '?pestana=asistente');
+  await expect(p.getByRole('heading', { name: 'Asuntos' })).toBeVisible();
+  // Sin clave de IA en local: se dice, no se simula una respuesta ni se ofrece preguntar
+  await expect(p.getByText(/Asistente sin configurar/)).toBeVisible();
+  await expect(p.getByRole('button', { name: 'Preguntar' })).toHaveCount(0);
+  if (capturas) await p.screenshot({ path: 'docs/portal/capturas/seguros-asistente.png', fullPage: true });
+  await p.getByRole('navigation', { name: 'Seguros' }).first().getByRole('link', { name: 'Pagos' }).click();
+  await expect(p).toHaveURL(/\/admin\/seguros\/pagos\/$/);
+  await expect(p.getByText('Este mes').first()).toBeVisible();
+  if (capturas) await p.screenshot({ path: 'docs/portal/capturas/seguros-pagos.png', fullPage: true });
+  // Un escrito de otro o inexistente no se sirve
+  expect((await p.request.get('/api/seguros/escritos/00000000-0000-4000-8000-000000000000/')).status()).toBe(404);
+});
+
 test('en el móvil, barra inferior del gestor', async ({ browser }) => {
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 });
   const p = await ctx.newPage();

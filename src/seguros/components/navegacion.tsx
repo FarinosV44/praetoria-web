@@ -2,11 +2,12 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { IconoAjustes, IconoAvisos, IconoPolizas, IconoSiniestros, IconoTitulares } from './iconos';
+import { IconoAjustes, IconoAvisos, IconoPagos, IconoPolizas, IconoSiniestros, IconoTitulares } from './iconos';
 
 const B = '/admin/seguros';
 const ENLACES = [
   { href: `${B}/`, texto: 'Pólizas', icono: IconoPolizas, activo: (p: string) => p === `${B}/` || p === B || p.startsWith(`${B}/polizas`) || p.startsWith(`${B}/renovaciones`) },
+  { href: `${B}/pagos/`, texto: 'Pagos', icono: IconoPagos, activo: (p: string) => p.startsWith(`${B}/pagos`) },
   { href: `${B}/avisos/`, texto: 'Avisos', icono: IconoAvisos, activo: (p: string) => p.startsWith(`${B}/avisos`) },
   { href: `${B}/siniestros/`, texto: 'Siniestros', icono: IconoSiniestros, activo: (p: string) => p.startsWith(`${B}/siniestros`) },
   { href: `${B}/titulares/`, texto: 'Titulares', icono: IconoTitulares, activo: (p: string) => p.startsWith(`${B}/titulares`) },

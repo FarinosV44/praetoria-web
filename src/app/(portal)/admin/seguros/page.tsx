@@ -34,7 +34,8 @@ function leerFiltros(b: Busqueda): TFiltros {
     aseguradora: b.aseguradora || undefined,
     estado: v(b.estado, ESTADOS.map((e) => e.valor)),
     q: b.q?.slice(0, 100) || undefined,
-    orden: v(b.orden, ['vencimiento', 'coste', 'titular'] as const),
+    orden: v(b.orden, ['vencimiento', 'coste', 'titular', 'cobro'] as const),
+    agrupar: v(b.agrupar, ['titular', 'ramo'] as const),
   };
 }
 
@@ -77,6 +78,7 @@ export default async function Panel({ searchParams }: { searchParams: Promise<Bu
         </div>
         <div className="acciones">
           <a className="boton boton--sutil solo-escritorio" href={`/api/seguros/exportar/polizas${f.titular ? `?titular=${f.titular}` : ''}`}>Exportar CSV</a>
+          <Link className="boton boton--sutil" href="/admin/seguros/pagos/">Previsión de pagos</Link>
           <Link className="boton boton--sutil solo-escritorio" href={`/admin/seguros/polizas/nueva${f.titular ? `?titular=${f.titular}` : ''}`}>Añadir a mano</Link>
           <Link className="boton boton--principal" href="/admin/seguros/importar/"><IconoMas /> Subir pólizas</Link>
         </div>
@@ -136,22 +138,64 @@ export default async function Panel({ searchParams }: { searchParams: Promise<Bu
                 <tr>
                   <th scope="col">Titular y seguro</th>
                   <th scope="col">Aseguradora</th>
-                  <th scope="col" className="num">Prima anual</th>
-                  <th scope="col" className="num">Recibo</th>
-                  <th scope="col">Vencimiento</th>
+                  <th scope="col" className="num">Importe</th>
+                  <th scope="col">Próximo cobro</th>
+                  <th scope="col">Vencimiento y oposición</th>
                   <th scope="col">Situación</th>
                 </tr>
               </thead>
-              <tbody>
-                {filas.map((p) => <FilaTabla key={p.id} p={p} volver={volver} />)}
-              </tbody>
+              {grupos(filas, f.agrupar).map(([g, fs]) => (
+                <tbody key={g || 'todas'}>
+                  {g && <tr className="fila-grupo"><th colSpan={6} scope="rowgroup">{g} <span className="linea-2">· {fs.length}</span></th></tr>}
+                  {fs.map((p) => <FilaTabla key={p.id} p={p} volver={volver} />)}
+                </tbody>
+              ))}
             </table>
           </div>
-          <ul className="lista-tarjetas" aria-label="Pólizas">
-            {filas.map((p) => <TarjetaPoliza key={p.id} p={p} volver={volver} />)}
-          </ul>
+          {grupos(filas, f.agrupar).map(([g, fs]) => (
+            <section key={g || 'todas'} aria-label={g || 'Pólizas'}>
+              {g && <h2 className="titulo-grupo solo-movil">{g}</h2>}
+              <ul className="lista-tarjetas" aria-label={g ? `Pólizas de ${g}` : 'Pólizas'}>
+                {fs.map((p) => <TarjetaPoliza key={p.id} p={p} volver={volver} />)}
+              </ul>
+            </section>
+          ))}
         </>
       )}
+    </>
+  );
+}
+
+function grupos(filas: FilaPanel[], agrupar?: 'titular' | 'ramo'): [string, FilaPanel[]][] {
+  if (!agrupar) return [['', filas]];
+  const m = new Map<string, FilaPanel[]>();
+  for (const p of filas) {
+    const k = agrupar === 'titular' ? `${p.titular_nombre} · ${p.titular_tipo === 'empresa' ? 'Empresa' : 'Particular'}` : p.ramo_nombre;
+    m.set(k, [...(m.get(k) ?? []), p]);
+  }
+  return [...m.entries()].sort((a, b) => a[0].localeCompare(b[0], 'es'));
+}
+
+const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+const textoMes = (m: string) => `${MESES[Number(m.slice(5, 7)) - 1]} ${m.slice(0, 4)}`;
+
+function ProximoCobro({ p }: { p: FilaPanel }) {
+  const c = p.proximo_cobro;
+  if (!c) return <span className="pendiente">Sin previsión</span>;
+  return (
+    <>
+      <span className="cifra">{formatoImporte(c.importe, p.moneda)}</span>
+      <span className="linea-2" style={{ display: 'block' }}>{c.fecha ? `cobro ${fechaMedia(c.fecha)}` : `${textoMes(c.mes)} · estimado`}</span>
+    </>
+  );
+}
+
+function VtoOposicion({ p }: { p: FilaPanel }) {
+  return (
+    <>
+      {p.fin ? <span className="vto">{fechaMedia(p.fin)}</span> : <span className="pendiente">Vencimiento pendiente</span>}
+      <span style={{ display: 'block' }}><Dias dias={p.dias} /></span>
+      <span className="linea-2" style={{ display: 'block' }}>{p.plazo_oposicion ? `Oposición hasta ${fechaMedia(p.plazo_oposicion)}${p.plazo_oposicion_confirmado ? '' : ' (sin comprobar)'}` : 'Oposición: no registrada'}</span>
     </>
   );
 }
@@ -190,16 +234,14 @@ function FilaTabla({ p, volver }: { p: FilaPanel; volver: string }) {
         </div>
       </td>
       <td>{p.aseguradora}{p.numero && <span className="linea-2" style={{ display: 'block' }}>Nº {p.numero}</span>}</td>
-      <td className="num"><ImporteAnual p={p} /></td>
-      <td className="num"><Recibo p={p} /></td>
-      <td>
-        {p.fin ? <span className="vto">{fechaMedia(p.fin)}</span> : <span className="pendiente">Pendiente</span>}
-        <span style={{ display: 'block' }}><Dias dias={p.dias} /></span>
-      </td>
+      <td className="num"><ImporteAnual p={p} /><Recibo p={p} /></td>
+      <td><ProximoCobro p={p} /></td>
+      <td><VtoOposicion p={p} /></td>
       <td>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           <Estado situacion={p.situacion} />
           {!p.datos_confirmados && <Revisar />}
+          {p.avisos_pendientes > 0 && <Link className="estado estado--vencida" href="/admin/seguros/avisos/">{p.avisos_pendientes} {p.avisos_pendientes === 1 ? 'aviso' : 'avisos'}</Link>}
         </div>
       </td>
     </tr>
@@ -223,13 +265,18 @@ function TarjetaPoliza({ p, volver }: { p: FilaPanel; volver: string }) {
           <dd><ImporteAnual p={p} /></dd>
         </div>
         <div>
+          <dt>Próximo cobro</dt>
+          <dd><ProximoCobro p={p} /></dd>
+        </div>
+        <div>
           <dt>Vencimiento</dt>
-          <dd>{p.fin ? <span className="vto">{fechaMedia(p.fin)}</span> : <span className="pendiente">Pendiente</span>} <Dias dias={p.dias} /></dd>
+          <dd><VtoOposicion p={p} /></dd>
         </div>
       </dl>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         <Estado situacion={p.situacion} />
         {!p.datos_confirmados && <Revisar />}
+        {p.avisos_pendientes > 0 && <span className="estado estado--vencida">{p.avisos_pendientes} {p.avisos_pendientes === 1 ? 'aviso' : 'avisos'}</span>}
         {p.periodicidad && <span className="estado estado--neutro">{textoPeriodicidad(p.periodicidad)}{p.importe_recibo ? ` · ${formatoImporte(p.importe_recibo, p.moneda)}` : ''}</span>}
       </div>
     </li>
@@ -273,7 +320,15 @@ function Filtros({ f, titulares, opciones, hayFiltros }: { f: TFiltros; titulare
               <select name="orden" defaultValue={f.orden ?? 'vencimiento'}>
                 <option value="vencimiento">Vencimiento</option>
                 <option value="coste">Coste anual</option>
+                <option value="cobro">Próximo cobro</option>
                 <option value="titular">Titular</option>
+              </select>
+            </label>
+            <label>Agrupar
+              <select name="agrupar" defaultValue={f.agrupar ?? ''}>
+                <option value="">Sin agrupar</option>
+                <option value="titular">Por titular</option>
+                <option value="ramo">Por tipo de seguro</option>
               </select>
             </label>
           </div>
@@ -285,7 +340,7 @@ function Filtros({ f, titulares, opciones, hayFiltros }: { f: TFiltros; titulare
       {hayFiltros && <Link className="boton boton--sutil" href="/admin/seguros/">Quitar filtros</Link>}
     </div>
   );
-  const activos = [f.titular, f.ramo, f.aseguradora, f.estado && f.estado !== 'todos' ? f.estado : null, f.q, f.orden && f.orden !== 'vencimiento' ? f.orden : null].filter(Boolean).length;
+  const activos = [f.titular, f.ramo, f.aseguradora, f.estado && f.estado !== 'todos' ? f.estado : null, f.q, f.orden && f.orden !== 'vencimiento' ? f.orden : null, f.agrupar].filter(Boolean).length;
   return (
     <>
       <form className="filtros solo-escritorio" method="get" action="/admin/seguros/" role="search" aria-label="Filtrar pólizas">

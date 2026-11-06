@@ -31,6 +31,59 @@ Usa `ANTHROPIC_API_KEY` (la del portal). La búsqueda usa la herramienta de bús
 se factura aparte por búsqueda en la misma cuenta y debe estar permitida en la organización de la consola; si no lo
 está, el resultado lo dice y el resto de datos se guardan igualmente.
 
+## Expediente permanente de cada seguro
+
+Cada póliza es un expediente que no se rehace al renovar: la póliza original, condiciones generales y particulares,
+suplementos y modificaciones, renovaciones, recibos y justificantes, cartas y correos, documentación de siniestros
+(informes, fotografías, reclamaciones), notas y escritos quedan en el **mismo seguro**, ordenados por tipo y fecha.
+
+- **Expediente** (pestaña): cronología única (documentos, notas, comunicaciones enviadas y recibidas, modificaciones,
+  recibos, periodos, siniestros y escritos) con búsqueda también dentro del texto de los documentos. Las notas propias
+  se marcan como «sin acreditar».
+- Un documento de siniestro se **vincula** al siniestro (`documento_siniestros`), sin copiar el archivo.
+- Un recibo o una renovación nunca crean una póliza nueva: la IA los asigna al seguro y periodo existentes; solo
+  las condiciones particulares, renovaciones y suplementos definen datos de un periodo (`definePeriodo`).
+- **Condiciones**: «Condiciones aplicables el…» muestra el periodo, las modificaciones con efecto hasta esa fecha y los
+  documentos de condiciones de ese periodo; también las modificaciones de periodos anteriores, avisando de que pueden
+  seguir aplicando salvo que la renovación diga otra cosa. Sirve para consultar las condiciones de la fecha de un siniestro
+  aunque después se haya renovado.
+
+## Recibos, pagos y previsión
+
+- Cada recibo guarda periodo, fecha prevista de cargo, **fecha real de pago**, importe, periodicidad, estado
+  (`previsto`, `pendiente`, `pagado`, `devuelto`, `anulado`), el documento del recibo y el justificante. Un recibo
+  emitido no es un pago: «pagado» exige fecha de pago (también en la base de datos).
+- La IA extrae los recibos y justificantes que se suben (quedan «por revisar» hasta que alguien los confirma o
+  corrige) y evita duplicados por número o por periodo e importe. La lista muestra la subida respecto al anterior.
+- **Pagos** (`/admin/seguros/pagos/`): previsión mensual por seguro y titular, totales de este mes, próximos 3 meses,
+  resto del año y 12 meses, en lista o calendario, filtrable por titular. Distingue **pagado**, **confirmado** (recibo
+  emitido con fecha) y **estimado** (periodicidad + último importe, sin fecha exacta inventada); un recibo real
+  sustituye a la estimación de su periodo, así que nada se cuenta dos veces.
+- El panel muestra por fila titular, tipo y objeto, aseguradora, importe y periodicidad, **próximo cobro**,
+  **vencimiento** y **fecha límite de oposición** por separado, estado y avisos; ordena por próximo cobro o
+  vencimiento y agrupa por titular o tipo.
+
+## Asistente de IA del seguro y escritos
+
+- Pestaña **Asistente IA** de cada póliza: conversaciones propias del seguro (y, si se abren desde un asunto, de ese
+  asunto). El servidor construye el contexto solo con ese expediente, después de comprobar el permiso del usuario,
+  y elige las páginas relevantes de sus documentos (las del siniestro y las condiciones del periodo del hecho primero).
+- Las respuestas citan documento, página y fecha; cada cita se **comprueba** contra el texto del PDF y se marca
+  «cita comprobada» o «la cita no aparece en el documento». Separa condiciones vigentes hoy de las aplicables en la
+  fecha del hecho, hechos documentados de notas propias y comunicaciones anteriores de posteriores.
+- **Asuntos** (cada siniestro crea el suyo; se pueden abrir otros): resumen con qué ha ocurrido, última actuación,
+  respuesta recibida, documentación pendiente y siguiente paso. Si no hay respuesta acreditada dice «No consta
+  respuesta posterior a la última actuación» y nunca cierra el asunto por su cuenta. Al entrar documentos o
+  comunicaciones nuevas el resumen se marca como desactualizado para regenerarlo.
+- **Escritos** desde el chat (declarar un siniestro, contestar una petición, reclamar falta de respuesta, revisar una
+  denegación, revisión de prima, comunicar una circunstancia): usa los datos del expediente; si falta un dato
+  imprescindible lo pregunta y no redacta. El borrador se guarda en el seguro y su asunto
+  (`/admin/seguros/polizas/<id>/escritos/<escrito>/`), con versiones, copia y descarga en Word o texto.
+  **Generar no es enviar**: el envío (fecha, medio, destinatario, versión) y la respuesta se registran después y pasan
+  al expediente como comunicaciones.
+- Las respuestas se procesan en segundo plano (`after()`), con respaldo en el cron cada minuto. Límite: 200 consultas
+  de IA por persona y día. Sin `ANTHROPIC_API_KEY` la pestaña dice «Asistente sin configurar» y no deja preguntar.
+
 ## Quién entra
 
 - Solo **superadministración**: personal activo con rol `administrador` y, si `STAFF_MFA_REQUIRED` no es
@@ -80,7 +133,8 @@ Sin `DATABASE_URL_SEGUROS`, la página Seguros muestra «Sin configurar» y el c
 
 Migraciones del gestor (con `DATABASE_URL_SEGUROS` en `.env.local`): `npm run seguros:migrate`. Las 0001–0005 ya están
 aplicadas en Supabase (la 0005, vinculación con el portal, el 05/11/2026 con autorización del propietario). La 0006
-(subir pólizas con IA y contactos de internet) se aplica antes de desplegar esta versión.
+(subir pólizas con IA y contactos de internet) está aplicada. La **0007** (expediente, recibos, asuntos,
+conversaciones y escritos; solo añade tablas y columnas, no borra nada) se aplica antes de desplegar esta versión.
 
 **Comprobar**: entrar como superadministración → menú Seguros → «Ajustes › Estado y avisos» muestra la última
 ejecución; «Avisos en el móvil» → «Comprobar y enviar prueba» debe hacer sonar el móvil.

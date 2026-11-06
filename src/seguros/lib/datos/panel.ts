@@ -3,6 +3,7 @@ import type { Usuario } from '../auth/sesiones';
 import { esUuid, filtroSql, titularesPermitidos } from '../acceso';
 import { costeAnual, type CosteAnual } from '../dinero';
 import { diasEntre, hoyMadrid, sumarMeses } from '../fechas';
+import { prevision } from './recibos';
 
 export type Filtros = {
   ambito?: 'todos' | 'empresas' | 'particulares';
@@ -13,7 +14,8 @@ export type Filtros = {
   desde?: string;
   hasta?: string;
   q?: string;
-  orden?: 'vencimiento' | 'coste' | 'titular';
+  orden?: 'vencimiento' | 'coste' | 'titular' | 'cobro';
+  agrupar?: 'titular' | 'ramo';
 };
 
 export type Situacion = 'vigente' | 'proxima' | 'vencida' | 'sin_fecha' | 'negociacion' | 'anulada' | 'sustituida';
@@ -28,8 +30,10 @@ export type FilaPanel = {
   prima_anual: string | null; periodicidad: string | null; importe_recibo: string | null;
   plazo_oposicion: string | null; plazo_oposicion_confirmado: boolean; datos_confirmados: boolean;
   documentos: number;
+  avisos_pendientes: number;
   // Calculados
   coste: CosteAnual;
+  proximo_cobro: { fecha: string | null; mes: string; importe: string; tipo: 'confirmado' | 'estimado' } | null;
   dias: number | null;
   situacion: Situacion;
 };
@@ -46,7 +50,8 @@ const SQL_PANEL = (filtroTitular: string) => `
          a.id AS anualidad_id, a.inicio, a.fin, a.prima_anual, a.periodicidad, a.importe_recibo,
          a.plazo_oposicion, coalesce(a.plazo_oposicion_confirmado, false) AS plazo_oposicion_confirmado,
          coalesce(a.datos_confirmados, false) AS datos_confirmados,
-         (SELECT count(*)::int FROM documentos d WHERE d.poliza_id = p.id AND d.eliminado_en IS NULL) AS documentos
+         (SELECT count(*)::int FROM documentos d WHERE d.poliza_id = p.id AND d.eliminado_en IS NULL) AS documentos,
+         (SELECT count(*)::int FROM avisos v WHERE v.poliza_id = p.id AND v.estado = 'emitido') AS avisos_pendientes
     FROM polizas p
     JOIN titulares t ON t.id = p.titular_id
     JOIN ramos r ON r.id = p.ramo_id
@@ -72,9 +77,18 @@ export function situacion(f: Pick<FilaPanel, 'estado' | 'fin'>, hoy: string): { 
 export async function panel(u: Usuario, f: Filtros = {}, hoy = hoyMadrid(), db: Db = pool()) {
   const params: unknown[] = [hoy];
   const filtroTitular = filtroSql(await titularesPermitidos(u, db), 't.id', params);
-  const todas = (await q<Omit<FilaPanel, 'coste' | 'dias' | 'situacion'>>(SQL_PANEL(filtroTitular), params, db)).map((fila) => ({
+  // Próximo cobro: el primer recibo pendiente o previsto con fecha, o la estimación del mes (sin día) si no hay recibo.
+  const previstos = await prevision(u, { desde: hoy.slice(0, 7), meses: 14 }, db);
+  const proximo = new Map<string, FilaPanel['proximo_cobro']>();
+  for (const x of previstos) {
+    if (x.tipo === 'pagado' || proximo.has(x.poliza_id)) continue;
+    if (x.fecha && x.fecha < hoy) continue;
+    proximo.set(x.poliza_id, { fecha: x.fecha, mes: x.mes, importe: x.importe, tipo: x.tipo });
+  }
+  const todas = (await q<Omit<FilaPanel, 'coste' | 'dias' | 'situacion' | 'proximo_cobro'>>(SQL_PANEL(filtroTitular), params, db)).map((fila) => ({
     ...fila,
     coste: costeAnual(fila),
+    proximo_cobro: proximo.get(fila.id) ?? null,
     ...situacion(fila, hoy),
   })) as FilaPanel[];
 
@@ -110,6 +124,11 @@ export async function panel(u: Usuario, f: Filtros = {}, hoy = hoyMadrid(), db: 
   visibles.sort((a, b) => {
     if (orden === 'coste') return (b.coste?.centimos ?? -1) - (a.coste?.centimos ?? -1);
     if (orden === 'titular') return a.titular_nombre.localeCompare(b.titular_nombre, 'es') || a.nombre.localeCompare(b.nombre, 'es');
+    if (orden === 'cobro') {
+      const ca = a.proximo_cobro ? a.proximo_cobro.fecha ?? `${a.proximo_cobro.mes}-99` : '9999';
+      const cb = b.proximo_cobro ? b.proximo_cobro.fecha ?? `${b.proximo_cobro.mes}-99` : '9999';
+      return ca.localeCompare(cb) || a.nombre.localeCompare(b.nombre, 'es');
+    }
     // Vencimiento: primero las fechas más cercanas; las pendientes al final.
     if (a.fin === b.fin) return a.nombre.localeCompare(b.nombre, 'es');
     if (!a.fin) return 1;
