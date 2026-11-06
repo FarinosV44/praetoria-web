@@ -4,6 +4,7 @@
 Originales privados (no se publican; Netlify solo publica out/):
   fotos/editorial/<id-unsplash>.jpg   fotografías con licencia Unsplash
   fotos/editorial/pexels-<id>.jpg     fotografías con licencia Pexels
+  fotos/editorial/<id>.jpg            fotografías de Wikimedia Commons (tipo commons; id = nombre del archivo)
   fotos/ia/*.png                      escenas generadas con IA (#28 §8), incluidas dos recreaciones autorizadas
   fotos/deca/*.png                    capturas reales de DeCA Profesional (repositorio farvertrans-deca, public/guia)
 
@@ -96,7 +97,7 @@ def composicion_deca(img):
 
 def fotografia(img):
     o = img['origen']
-    nombre = f"pexels-{o['id']}" if o['tipo'] == 'pexels' else o.get('id')
+    nombre = f"pexels-{o['id']}" if o['tipo'] == 'pexels' else o.get('id')  # commons: fotos/editorial/<id>.jpg
     src = RAIZ / (o['original'] if o['tipo'] in ('ia', 'prensa') else f"fotos/editorial/{nombre}.jpg")
     if not src.exists():
         return None

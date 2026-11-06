@@ -1892,6 +1892,32 @@
         1600
       ],
       "avif": true
+    },
+    {
+      "id": "hacienda-agencia-tributaria-placa",
+      "estado": "publicada",
+      "escena": "Hacienda: placas de la Delegación de Economía y Hacienda y de la Agencia Tributaria en la fachada de una delegación",
+      "archivo": "ed/agencia-tributaria-placa-delegacion",
+      "alt": "Fachada de una delegación con el cartel amarillo del Ministerio de Economía y el rótulo con el logotipo de la Agencia Tributaria",
+      "foco": "62% 50%",
+      "origen": {
+        "tipo": "commons",
+        "id": "agencia-tributaria-granada-commons",
+        "autor": "Urci dream",
+        "url": "https://commons.wikimedia.org/wiki/File:Agencia_Tributaria_GR_02.jpg",
+        "licencia": "CC BY-SA 4.0",
+        "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.es",
+        "modificada": "recortada y enderezada"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
     }
   ]
 }

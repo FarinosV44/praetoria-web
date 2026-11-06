@@ -83,6 +83,8 @@ const procedencia = (img) =>
     ? `${img.origen.personalizada ? 'Recreación con IA a partir de fotografías autorizadas por el titular' : 'Generada con IA'} (\`${img.origen.original}\`) · ${img.origen.nota}`
     : img.origen.tipo === 'pexels'
     ? `[${img.origen.autor} / Pexels](${img.origen.url}) · Licencia Pexels`
+    : img.origen.tipo === 'commons'
+    ? `[${img.origen.autor} / Wikimedia Commons](${img.origen.url}) · [${img.origen.licencia}](${img.origen.licenciaUrl})${img.origen.modificada ? ` · ${img.origen.modificada}` : ''}`
     : img.origen.tipo === 'unsplash'
     ? img.origen.autor ? `[${img.origen.autor} / Unsplash](${img.origen.url}) · Licencia Unsplash` : `Unsplash ${img.origen.id} (pendiente de procesar)`
     : img.origen.tipo === 'prensa'
