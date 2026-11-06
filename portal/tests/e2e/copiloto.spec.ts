@@ -344,9 +344,10 @@ test('12. Móvil: panel, expediente, editor y paleta sin desbordar la pantalla',
 
 async function entrarComo(p: Page, c: Cuenta) {
   await entrar(p, c.email, c.clave);
-  const codigo = p.getByLabel(/código/i);
-  if (await codigo.count()) {
-    await codigo.first().fill(new TOTP({ secret: c.totp! }).generate());
+  // Se espera a saber adónde lleva el acceso: pedir el código o entrar directamente.
+  await p.waitForURL(/\/(entrar\/codigo|admin)\/$/);
+  if (p.url().includes('/entrar/codigo/')) {
+    await p.getByLabel(/código/i).first().fill(new TOTP({ secret: c.totp! }).generate());
     await p.getByRole('button', { name: /Verificar|Entrar|Continuar/ }).first().click();
   }
   await expect(p).toHaveURL(/\/admin\/$/);

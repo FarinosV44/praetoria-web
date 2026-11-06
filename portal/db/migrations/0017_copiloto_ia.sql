@@ -352,7 +352,9 @@ grant update (estado, fragmentos, con_ocr, con_embeddings, detalle, actualizado_
 grant update (estado, paginas, detalle, metodo, extraido_at) on portal.documentos_texto to portal_app;
 grant update (texto_ocr) on portal.bib_versiones to portal_app;
 
--- Las funciones solo las invoca quien debe.
-revoke execute on all functions in schema portal from public;
+-- Las funciones solo las invoca quien debe. Solo se tocan las de esta migración: en este proyecto conviven otros esquemas.
+revoke execute on function portal.ia_usa_biblioteca(), portal.t_indexar_documento(), portal.t_indexar_version(), portal.t_indexar_aprobado(), portal.t_purgar_fragmentos(),
+  portal.ia_indexacion_tomar(int), portal.ia_ejecutor(), portal.ia_reindexar(text, uuid), portal.ia_gasto(timestamptz), portal.ia_consultas_hora(),
+  portal.t_ia_autor(), portal.t_ia_ajustes() from public;
 grant execute on function portal.ia_usa_biblioteca(), portal.ia_indexacion_tomar(int), portal.ia_ejecutor(), portal.ia_reindexar(text, uuid),
   portal.ia_gasto(timestamptz), portal.ia_consultas_hora() to portal_app;
