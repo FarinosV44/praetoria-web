@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import './despacho.css' layer(components);
 
 /* Área de clientes de Praetoria: mismos tokens que la web pública (grafito, piedra y el rojo del
    logotipo), con una interfaz más tranquila y pensada primero para el móvil. */
@@ -108,20 +109,8 @@
   .shell-contenido .tabla { overflow-wrap: normal; }
   /* Una rejilla sin columnas explícitas no debe crecer con su contenido: las tablas anchas se desplazan dentro de su tarjeta. */
   .shell-contenido .grid:not([class*=' grid-cols-']) { grid-template-columns: minmax(0, 1fr); }
-  .nav-despacho { min-width: 0; max-width: 100%; display: flex; gap: 14px; align-items: center; overflow-x: auto; background: #fff; border-bottom: 1px solid var(--color-line); padding: 8px 16px; font-size: .92rem; font-weight: 600; }
-  .nav-despacho a { white-space: nowrap; text-decoration: none; border-radius: 6px; padding: 5px 8px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-  .nav-despacho a:hover { background: var(--color-stone); }
-  .nav-despacho a[aria-current='page'] { background: var(--color-ink); color: #fff; }
-  .nav-grupo { display: contents; }
-  .nav-titulo { display: none; }
-  .nav-n { background: var(--color-red); color: #fff; border-radius: 999px; font-size: .72rem; padding: 0 6px; }
-  .nav-buscar { display: none; }
   @media (min-width: 1000px) {
     .shell-cuerpo { flex-direction: row; }
-    .nav-despacho { flex-direction: column; align-items: stretch; gap: 2px; overflow: visible auto; width: 212px; flex-shrink: 0; border-bottom: 0; border-right: 1px solid var(--color-line); padding: 12px 10px; position: sticky; top: 0; align-self: flex-start; height: 100dvh; }
-    .nav-grupo { display: flex; flex-direction: column; gap: 1px; margin-top: 12px; }
-    .nav-titulo { display: block; font-size: .72rem; font-weight: 600; color: var(--color-muted); text-transform: uppercase; letter-spacing: .04em; padding: 0 8px 4px; }
-    .nav-buscar { display: flex; align-items: center; justify-content: space-between; gap: 8px; background: var(--color-stone); border: 1px solid var(--color-line); border-radius: 7px; padding: 6px 8px; font: inherit; font-size: .85rem; font-weight: 500; color: var(--color-muted); cursor: pointer; }
     .shell-contenido { padding: 20px 28px; }
   }
   kbd { font-family: inherit; font-size: .72rem; border: 1px solid var(--color-line); border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; background: #fff; color: var(--color-ink-2); white-space: nowrap; }

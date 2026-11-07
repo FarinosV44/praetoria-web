@@ -1,3 +1,4 @@
+import { Cabecera } from '@/portal/components/despacho';
 import type { Metadata } from 'next';
 import { ActivarNotificaciones } from '@/portal/components/ActivarNotificaciones';
 import { comoUsuario } from '@/portal/lib/db';
@@ -13,7 +14,7 @@ export default async function AppMovil() {
   const clave = process.env.VAPID_PUBLIC_KEY ?? '';
   return (
     <div className="grid gap-5 max-w-2xl">
-      <h1 className="titulo">App y notificaciones</h1>
+      <Cabecera titulo="App y notificaciones" />
       <section className="card">
         <h2 className="subtitulo">1. Instala Praetoria en tu móvil</h2>
         <p className="mb-2"><strong>iPhone:</strong> abre esta dirección en Safari → botón Compartir → «Añadir a pantalla de inicio» → «Añadir». Abre Praetoria desde el icono.</p>

@@ -99,7 +99,7 @@ export function AsistenteIA({ solicitud, hilo, mensajes, estilos = [], modo = 'p
       </ol>
       <nav className="flex gap-2" aria-label="Modo del asistente">
         <a href={`?${hilo ? `hilo=${hilo}&` : ''}modo=preguntar`} className={`chip ${modo === 'preguntar' ? 'chip-info' : 'chip-neutro'} no-underline`} aria-current={modo === 'preguntar' ? 'page' : undefined}>Preguntar</a>
-        <a href={`?${hilo ? `hilo=${hilo}&` : ''}modo=redactar`} className={`chip ${modo === 'redactar' ? 'chip-info' : 'chip-neutro'} no-underline`} aria-current={modo === 'redactar' ? 'page' : undefined}>✍️ Redactar escrito con la biblioteca</a>
+        <a href={`?${hilo ? `hilo=${hilo}&` : ''}modo=redactar`} className={`chip ${modo === 'redactar' ? 'chip-info' : 'chip-neutro'} no-underline`} aria-current={modo === 'redactar' ? 'page' : undefined}>Redactar escrito con la biblioteca</a>
       </nav>
       {modo === 'redactar' ? <Redactor solicitud={solicitud} hilo={hilo} escrito={escrito} />
         : <ChatVivo solicitud={solicitud} hilo={hilo} opciones={opciones} rapidas={RAPIDAS} reanudar={reanudar} />}

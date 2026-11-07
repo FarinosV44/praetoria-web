@@ -20,7 +20,7 @@ export function PanelIA({ solicitud, opciones }: { solicitud: string; opciones: 
   }, []);
   return (
     <>
-      <button type="button" className="btn-texto font-semibold" onClick={() => setAbierto(true)} data-abrir-panel-ia>✨ Preguntar a la IA</button>
+      <button type="button" className="btn-texto font-semibold" onClick={() => setAbierto(true)} data-abrir-panel-ia>Preguntar a la IA</button>
       {abierto ? (
         <aside className="panel-lateral" aria-label="Asistente del expediente" data-panel-ia>
           <div className="fila mb-2">

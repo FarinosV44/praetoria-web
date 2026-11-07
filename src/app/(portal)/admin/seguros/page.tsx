@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Cabecera, FiltroSelector, Filtros as TarjetaFiltros, FiltroTexto, Kpi, RejillaKpi, Vistas, enlaceCon, textoOpcion } from '@/portal/components/despacho';
 import { Importar } from '@/seguros/components/importar';
 import { iaConfigurada } from '@/seguros/lib/ia/proveedor';
 import { exigirUsuario } from '@/seguros/lib/auth/servidor';
@@ -70,58 +71,27 @@ export default async function Panel({ searchParams }: { searchParams: Promise<Bu
   }
 
   return (
-    <>
-      <div className="encabezado">
-        <div>
-          <h1>Pólizas</h1>
-          <p className="secundario pequeno">{filas.length} {filas.length === 1 ? 'póliza' : 'pólizas'}{hayFiltros ? ' con estos filtros' : ''}</p>
-        </div>
-        <div className="acciones">
-          <a className="boton boton--sutil solo-escritorio" href={`/api/seguros/exportar/polizas${f.titular ? `?titular=${f.titular}` : ''}`}>Exportar CSV</a>
-          <Link className="boton boton--sutil" href="/admin/seguros/pagos/">Previsión de pagos</Link>
-          <Link className="boton boton--sutil solo-escritorio" href={`/admin/seguros/polizas/nueva${f.titular ? `?titular=${f.titular}` : ''}`}>Añadir a mano</Link>
-          <Link className="boton boton--principal" href="/admin/seguros/importar/"><IconoMas /> Subir pólizas</Link>
-        </div>
-      </div>
+    <div className="grid gap-4">
+      <Cabecera seccion="Seguros" titulo="Pólizas" entradilla={`${filas.length} ${filas.length === 1 ? 'póliza' : 'pólizas'}${hayFiltros ? ' con estos filtros' : ''}`}
+        acciones={<>
+          <a className="btn btn-secundario solo-escritorio" href={`/api/seguros/exportar/polizas${f.titular ? `?titular=${f.titular}` : ''}`}>Exportar CSV</a>
+          <Link className="btn btn-secundario" href="/admin/seguros/pagos/">Previsión de pagos</Link>
+          <Link className="btn btn-secundario solo-escritorio" href={`/admin/seguros/polizas/nueva${f.titular ? `?titular=${f.titular}` : ''}`}>Añadir a mano</Link>
+          <Link className="btn btn-primario" href="/admin/seguros/importar/"><IconoMas /> Subir pólizas</Link>
+        </>} />
 
-      <section className="resumen" aria-label="Resumen">
-        <div className="tarjeta cifra-clave cifra-clave--principal">
-          <span className="cifra-clave__etq">Gasto anual activo{hayFiltros ? ' (filtrado)' : ''}</span>
-          <span className="cifra-clave__valor">
-            {totalPrincipal ? formatoImporte(deCentimos(totalPrincipal.centimos), totalPrincipal.moneda) : '—'}
-          </span>
-          {resumen.totales.slice(1).map((t) => (
-            <span key={t.moneda} className="cifra-clave__nota cifra">+ {formatoImporte(deCentimos(t.centimos), t.moneda)}</span>
-          ))}
-          <span className="cifra-clave__nota">
-            {resumen.conImporte} de {resumen.activas} pólizas con importe
-            {resumen.totales.some((t) => t.estimado) ? ' · incluye importes estimados a partir del recibo' : ''}
-          </span>
-        </div>
-        <Link className="tarjeta cifra-clave" href={conParametros(b, { estado: 'proximas' })}>
-          <span className="cifra-clave__etq">Vencen este mes</span>
-          <span className="cifra-clave__valor">{resumen.proximas}</span>
-          <span className="cifra-clave__nota">Para renegociar a tiempo</span>
-        </Link>
-        <Link className="tarjeta cifra-clave" href={conParametros(b, { estado: resumen.vencidas ? 'vencidas' : 'sin_fecha' })}>
-          <span className="cifra-clave__etq">{resumen.vencidas ? 'Vencidas sin renovar' : 'Sin fecha confirmada'}</span>
-          <span className="cifra-clave__valor">{resumen.vencidas || resumen.sinFecha}</span>
-          <span className="cifra-clave__nota">{resumen.vencidas ? `y ${resumen.sinFecha} sin fecha` : 'Revisa sus documentos'}</span>
-        </Link>
-        <Link className="tarjeta cifra-clave" href={conParametros(b, { estado: 'revisar' })}>
-          <span className="cifra-clave__etq">Por revisar</span>
-          <span className="cifra-clave__valor">{resumen.revisar}</span>
-          <span className="cifra-clave__nota">Datos sin confirmar</span>
-        </Link>
-      </section>
+      <RejillaKpi etiqueta="Resumen">
+        <Kpi etiqueta={`Gasto anual activo${hayFiltros ? ' (filtrado)' : ''}`}
+          valor={<>{totalPrincipal ? formatoImporte(deCentimos(totalPrincipal.centimos), totalPrincipal.moneda) : '—'}{resumen.totales.slice(1).map((t) => <span key={t.moneda} className="cifra"> + {formatoImporte(deCentimos(t.centimos), t.moneda)}</span>)}</>}
+          nota={`${resumen.conImporte} de ${resumen.activas} pólizas con importe${resumen.totales.some((t) => t.estimado) ? ' · incluye estimados' : ''}`} />
+        <Kpi etiqueta="Vencen este mes" valor={resumen.proximas} nota="Para renegociar a tiempo" tono={resumen.proximas ? 'aviso' : undefined} href={conParametros(b, { estado: 'proximas' })} />
+        <Kpi etiqueta={resumen.vencidas ? 'Vencidas sin renovar' : 'Sin fecha confirmada'} valor={resumen.vencidas || resumen.sinFecha} nota={resumen.vencidas ? `y ${resumen.sinFecha} sin fecha` : 'Revisa sus documentos'} tono={resumen.vencidas ? 'alerta' : undefined} href={conParametros(b, { estado: resumen.vencidas ? 'vencidas' : 'sin_fecha' })} />
+        <Kpi etiqueta="Por revisar" valor={resumen.revisar} nota="Datos sin confirmar" href={conParametros(b, { estado: 'revisar' })} />
+      </RejillaKpi>
 
-      <nav className="segmentos" aria-label="Tipo de titular" style={{ marginBottom: 'var(--e-4)' }}>
-        {([['todos', 'Todos'], ['empresas', 'Empresas'], ['particulares', 'Particulares']] as const).map(([v, t]) => (
-          <Link key={v} href={conParametros(b, { ambito: v === 'todos' ? undefined : v, titular: undefined })} aria-current={(f.ambito ?? 'todos') === v ? 'true' : undefined}>{t}</Link>
-        ))}
-      </nav>
+      <Vistas etiqueta="Tipo de titular" visible="Titular" items={([['todos', 'Todos'], ['empresas', 'Empresas'], ['particulares', 'Particulares']] as const).map(([v, t]) => ({ texto: t, href: conParametros(b, { ambito: v === 'todos' ? undefined : v, titular: undefined }), activo: (f.ambito ?? 'todos') === v }))} />
 
-      <Filtros f={f} titulares={titulares} opciones={opciones} hayFiltros={hayFiltros} />
+      <Filtros f={f} b={b} titulares={titulares} opciones={opciones} />
 
       {filas.length === 0 ? (
         <div className="tarjeta vacio">
@@ -131,7 +101,7 @@ export default async function Panel({ searchParams }: { searchParams: Promise<Bu
         </div>
       ) : (
         <>
-          <div className="tarjeta solo-escritorio">
+          <div className="tabla-marco solo-escritorio">
             <table className="tabla">
               <caption className="sr">Pólizas: titular, tipo de seguro, importe y vencimiento</caption>
               <thead>
@@ -162,7 +132,7 @@ export default async function Panel({ searchParams }: { searchParams: Promise<Bu
           ))}
         </>
       )}
-    </>
+    </div>
   );
 }
 
@@ -211,7 +181,7 @@ function ImporteAnual({ p }: { p: FilaPanel }) {
 }
 
 function Recibo({ p }: { p: FilaPanel }) {
-  if (!p.periodicidad && !p.importe_recibo) return <span className="pendiente">Pendiente</span>;
+  if (!p.periodicidad && !p.importe_recibo) return null;
   return (
     <>
       <span className="linea-2" style={{ display: 'block' }}>
@@ -289,72 +259,38 @@ function TarjetaPoliza({ p, volver }: { p: FilaPanel; volver: string }) {
 type Opciones = Awaited<ReturnType<typeof panel>>['opciones'];
 type ListaTitulares = Awaited<ReturnType<typeof listarTitulares>>;
 
-/** Filtros: barra visible en escritorio y panel plegable en móvil (mismo formulario GET, sin JavaScript). */
-function Filtros({ f, titulares, opciones, hayFiltros }: { f: TFiltros; titulares: ListaTitulares; opciones: Opciones; hayFiltros: boolean }) {
-  const campos = (
-          <div className="filtros__campos">
-            <label>Buscar
-              <input type="search" name="q" defaultValue={f.q} placeholder="Póliza, matrícula, inmueble…" />
-            </label>
-            <label>Titular
-              <select name="titular" defaultValue={f.titular ?? ''}>
-                <option value="">Todos</option>
-                {titulares.filter((t) => !f.ambito || f.ambito === 'todos' || (f.ambito === 'empresas') === (t.tipo === 'empresa')).map((t) => <option key={t.id} value={t.id}>{t.nombre}</option>)}
-              </select>
-            </label>
-            <label>Tipo de seguro
-              <select name="ramo" defaultValue={f.ramo ?? ''}>
-                <option value="">Todos</option>
-                {opciones.ramos.map((r) => <option key={r.clave} value={r.clave}>{r.nombre}</option>)}
-              </select>
-            </label>
-            <label>Aseguradora
-              <select name="aseguradora" defaultValue={f.aseguradora ?? ''}>
-                <option value="">Todas</option>
-                {opciones.aseguradoras.map((a) => <option key={a} value={a}>{a}</option>)}
-              </select>
-            </label>
-            <label>Situación
-              <select name="estado" defaultValue={f.estado ?? 'todos'}>
-                {ESTADOS.map((e) => <option key={e.valor} value={e.valor}>{e.texto}</option>)}
-              </select>
-            </label>
-            <label>Ordenar por
-              <select name="orden" defaultValue={f.orden ?? 'vencimiento'}>
-                <option value="vencimiento">Vencimiento</option>
-                <option value="coste">Coste anual</option>
-                <option value="cobro">Próximo cobro</option>
-                <option value="titular">Titular</option>
-              </select>
-            </label>
-            <label>Agrupar
-              <select name="agrupar" defaultValue={f.agrupar ?? ''}>
-                <option value="">Sin agrupar</option>
-                <option value="titular">Por titular</option>
-                <option value="ramo">Por tipo de seguro</option>
-              </select>
-            </label>
-          </div>
-  );
-  const ocultos = f.ambito ? <input type="hidden" name="ambito" value={f.ambito} /> : null;
-  const botones = (
-    <div className="acciones">
-      <button className="boton boton--oscuro" type="submit">Aplicar</button>
-      {hayFiltros && <Link className="boton boton--sutil" href="/admin/seguros/">Quitar filtros</Link>}
-    </div>
-  );
-  const activos = [f.titular, f.ramo, f.aseguradora, f.estado && f.estado !== 'todos' ? f.estado : null, f.q, f.orden && f.orden !== 'vencimiento' ? f.orden : null, f.agrupar].filter(Boolean).length;
+/** Tarjeta de filtros común del despacho (formulario GET: atrás y recargar conservan la vista). */
+function Filtros({ f, b, titulares, opciones }: { f: TFiltros; b: Busqueda; titulares: ListaTitulares; opciones: Opciones }) {
+  const BASE = '/admin/seguros/';
+  const sitio: [string, string][] = ESTADOS.map((e) => [e.valor, e.texto]);
+  const ORDEN: [string, string][] = [['vencimiento', 'Vencimiento'], ['coste', 'Coste anual'], ['cobro', 'Próximo cobro'], ['titular', 'Titular']];
+  const AGRUPAR: [string, string][] = [['', 'Sin agrupar'], ['titular', 'Por titular'], ['ramo', 'Por tipo de seguro']];
+  const opTit: [string, string][] = [['', 'Todos'], ...titulares.filter((t) => !f.ambito || f.ambito === 'todos' || (f.ambito === 'empresas') === (t.tipo === 'empresa')).map((t): [string, string] => [t.id, t.nombre])];
+  const opRamo: [string, string][] = [['', 'Todos'], ...opciones.ramos.map((r): [string, string] => [r.clave, r.nombre])];
+  const opAseg: [string, string][] = [['', 'Todas'], ...opciones.aseguradoras.map((a): [string, string] => [a, a])];
+  const quitar = (c: Busqueda) => enlaceCon(BASE, b, c);
+  const activos = [
+    f.q ? { texto: `Buscar: ${f.q}`, href: quitar({ q: undefined }) } : null,
+    f.titular ? { texto: `Titular: ${textoOpcion(opTit, f.titular)}`, href: quitar({ titular: undefined }) } : null,
+    f.ramo ? { texto: `Seguro: ${textoOpcion(opRamo, f.ramo)}`, href: quitar({ ramo: undefined }) } : null,
+    f.aseguradora ? { texto: `Aseguradora: ${f.aseguradora}`, href: quitar({ aseguradora: undefined }) } : null,
+    f.estado && f.estado !== 'todos' ? { texto: `Situación: ${textoOpcion(sitio, f.estado)}`, href: quitar({ estado: undefined }) } : null,
+    f.orden && f.orden !== 'vencimiento' ? { texto: `Orden: ${textoOpcion(ORDEN, f.orden)}`, href: quitar({ orden: undefined }) } : null,
+    f.agrupar ? { texto: textoOpcion(AGRUPAR, f.agrupar), href: quitar({ agrupar: undefined }) } : null,
+  ].filter((x): x is { texto: string; href: string } => !!x);
+  const nAvanzados = (f.orden && f.orden !== 'vencimiento' ? 1 : 0) + (f.agrupar ? 1 : 0);
   return (
-    <>
-      <form className="filtros solo-escritorio" method="get" action="/admin/seguros/" role="search" aria-label="Filtrar pólizas">
-        {ocultos}{campos}{botones}
-      </form>
-      <details className="filtros-movil tarjeta" open={activos > 0}>
-        <summary>Buscar y filtrar{activos > 0 ? ` · ${activos} ${activos === 1 ? 'filtro activo' : 'filtros activos'}` : ''}</summary>
-        <form className="filtros" method="get" action="/admin/seguros/" role="search" aria-label="Filtrar pólizas (móvil)">
-          {ocultos}{campos}{botones}
-        </form>
-      </details>
-    </>
+    <TarjetaFiltros accion={BASE} etiqueta="Filtrar pólizas" columnas={5} ocultos={{ ambito: f.ambito }} activos={activos} limpiar={enlaceCon(BASE, { ambito: f.ambito })} nAvanzados={nAvanzados}
+      basicos={<>
+        <FiltroTexto nombre="q" etiqueta="Buscar" valor={f.q} ayuda="Póliza, matrícula, inmueble…" />
+        <FiltroSelector nombre="titular" etiqueta="Titular" valor={f.titular} opciones={opTit} />
+        <FiltroSelector nombre="ramo" etiqueta="Tipo de seguro" valor={f.ramo} opciones={opRamo} />
+        <FiltroSelector nombre="aseguradora" etiqueta="Aseguradora" valor={f.aseguradora} opciones={opAseg} />
+        <FiltroSelector nombre="estado" etiqueta="Situación" valor={f.estado ?? 'todos'} opciones={sitio} />
+      </>}
+      avanzados={<>
+        <FiltroSelector nombre="orden" etiqueta="Ordenar por" valor={f.orden ?? 'vencimiento'} opciones={ORDEN} />
+        <FiltroSelector nombre="agrupar" etiqueta="Agrupar" valor={f.agrupar} opciones={AGRUPAR} />
+      </>} />
   );
 }

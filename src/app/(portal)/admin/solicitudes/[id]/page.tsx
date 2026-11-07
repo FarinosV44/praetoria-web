@@ -2,6 +2,7 @@
 /* eslint-disable react-hooks/static-components */
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Cabecera } from '@/portal/components/despacho';
 import { notFound } from 'next/navigation';
 import { ChipRequisito, ChipSolicitud, tamano } from '@/portal/components/ui';
 import { Mensajes } from '@/portal/components/Mensajes';
@@ -38,16 +39,11 @@ export default async function DetalleDespacho({ params, searchParams }: { params
 
   return (
     <div className="grid gap-5">
-      <p><Link href="/admin/">← Bandeja</Link></p>
+      <Cabecera titulo={s.expediente_titulo ?? s.tipo_nombre} migas={[{ texto: 'Bandeja', href: '/admin/' }, { texto: s.referencia }]}
+        entradilla={<>{s.expediente_ref ? `Expediente ${s.expediente_ref} · ` : ''}Solicitud {s.referencia}{s.urgencia === 'urgente' ? <> · <span className="chip chip-peligro">Urgente</span></> : null}</>}
+        acciones={<ChipSolicitud estado={s.estado} />} />
       {q.ok ? <p className="exito" role="status">{q.ok}</p> : null}
       {q.error ? <p className="error" role="alert">{q.error}</p> : null}
-      <div className="fila">
-        <div>
-          <p className="ayuda">{s.expediente_ref ? `Expediente ${s.expediente_ref} · ` : ''}Solicitud {s.referencia}{s.urgencia === 'urgente' ? ' · URGENTE' : ''}</p>
-          <h1 className="titulo">{s.expediente_titulo ?? s.tipo_nombre}</h1>
-        </div>
-        <ChipSolicitud estado={s.estado} />
-      </div>
 
       <div className="grid gap-5 lg:grid-cols-[1fr_380px]">
         <div className="grid gap-5 content-start">
@@ -70,8 +66,8 @@ export default async function DetalleDespacho({ params, searchParams }: { params
             <datalist id="carpetas">{[...new Set([...d.reqs.map((r) => r.carpeta), 'Documentación del cliente', 'Identificación y encargo', 'Prueba', 'Contraparte', 'Escritos y actuaciones', 'Notificaciones y resoluciones', 'Comunicaciones', 'Economía'])].map((c) => <option key={c} value={c} />)}</datalist>
             <ul className="grid gap-4">
               {d.reqs.map((r, i) => (
-                <li key={r.id} className="card" style={{ margin: 0 }} data-requisito={r.titulo}>
-                  {i === 0 || d.reqs[i - 1]!.carpeta !== r.carpeta ? <p className="chip chip-neutro mb-2">📁 {r.carpeta}</p> : null}
+                <li key={r.id} className="card" data-requisito={r.titulo}>
+                  {i === 0 || d.reqs[i - 1]!.carpeta !== r.carpeta ? <p className="chip chip-neutro mb-2">{r.carpeta}</p> : null}
                   <div className="fila"><strong>{r.titulo}{r.obligatorio ? '' : ' (opcional)'}{r.solicitado_por ? ' · añadido por el despacho' : ''}</strong><ChipRequisito estado={r.estado} /></div>
                   <p className="ayuda">{r.explicacion}</p>
                   {r.comentario ? <p className="nota mt-2 text-sm">Visible al cliente: {r.comentario}</p> : null}
@@ -110,12 +106,12 @@ export default async function DetalleDespacho({ params, searchParams }: { params
                     <summary className="text-sm font-semibold cursor-pointer">Cambiar estado de este documento</summary>
                     <form action={A.estadoRequisito} className="grid gap-2 mt-2">
                       <H /><input type="hidden" name="requisito" value={r.id} />
-                      <select name="estado" defaultValue={r.estado} className="border rounded-md p-2" aria-label="Estado">
+                      <select name="estado" defaultValue={r.estado} className="control" aria-label="Estado">
                         <option value="pendiente">Pendiente de aportar</option><option value="en_revision">En revisión</option>
                         <option value="validado">Documento validado</option><option value="subsanacion">Necesita subsanación</option>
                         <option value="no_aplicable">No aplicable</option>
                       </select>
-                      <input name="comentario" placeholder="Comentario visible para el cliente (opcional)" className="border rounded-md p-2" aria-label="Comentario para el cliente" />
+                      <input name="comentario" placeholder="Comentario visible para el cliente (opcional)" className="control" aria-label="Comentario para el cliente" />
                       <button className="btn btn-secundario">Guardar</button>
                     </form>
                   </details>
@@ -152,7 +148,7 @@ export default async function DetalleDespacho({ params, searchParams }: { params
               <form action={A.registrarConflictos} className="grid gap-2 mb-4">
                 <H />
                 <p className="text-sm">Antes de aceptar, comprueba si el despacho representa o ha representado a la otra parte.</p>
-                <textarea name="nota" rows={2} placeholder="Nota interna (opcional)" className="border rounded-md p-2" aria-label="Nota de conflictos" />
+                <textarea name="nota" rows={2} placeholder="Nota interna (opcional)" className="control" aria-label="Nota de conflictos" />
                 <label className="flex gap-2 text-sm"><input type="checkbox" name="confirmo" /> He revisado los posibles conflictos de intereses</label>
                 <button className="btn btn-secundario">Registrar revisión</button>
               </form>
@@ -178,7 +174,7 @@ export default async function DetalleDespacho({ params, searchParams }: { params
             <h2 className="subtitulo">Responsable</h2>
             <form action={A.asignarResponsable} className="flex gap-2">
               <H />
-              <select name="responsable" defaultValue={s.responsable_id ?? ''} className="flex-1 border rounded-md p-2" aria-label="Responsable">
+              <select name="responsable" defaultValue={s.responsable_id ?? ''} className="flex-1 control" aria-label="Responsable">
                 <option value="" disabled>Sin asignar</option>
                 {d.personal.map((p) => <option key={p.user_id} value={p.user_id}>{p.nombre_visible}</option>)}
               </select>
@@ -189,14 +185,14 @@ export default async function DetalleDespacho({ params, searchParams }: { params
             <h2 className="subtitulo">Nota de estado para el cliente</h2>
             <p className="ayuda text-sm mb-2">Solo lo que el despacho quiera comunicar. No describas el pronóstico del asunto.</p>
             <form action={A.publicarEstado} className="grid gap-2">
-              <H /><textarea name="texto" rows={3} maxLength={600} defaultValue={s.estado_visible ?? ''} className="border rounded-md p-2" aria-label="Nota visible para el cliente" />
+              <H /><textarea name="texto" rows={3} maxLength={600} defaultValue={s.estado_visible ?? ''} className="control" aria-label="Nota visible para el cliente" />
               <button className="btn btn-secundario">Publicar</button>
             </form>
           </section>
           <section className="card">
             <h2 className="subtitulo">Notas internas</h2>
             <p className="ayuda text-sm mb-2">El cliente nunca las ve.</p>
-            <form action={A.notaInterna} className="grid gap-2 mb-3"><H /><textarea name="texto" rows={2} maxLength={4000} className="border rounded-md p-2" aria-label="Nota interna" /><button className="btn btn-secundario">Guardar nota</button></form>
+            <form action={A.notaInterna} className="grid gap-2 mb-3"><H /><textarea name="texto" rows={2} maxLength={4000} className="control" aria-label="Nota interna" /><button className="btn btn-secundario">Guardar nota</button></form>
             <ul className="grid gap-2 text-sm">{d.notas.map((n, i) => <li key={i}><span className="ayuda">{n.autor} · {fecha(n.created_at)}</span><br />{n.texto}</li>)}</ul>
           </section>
           <section className="card">

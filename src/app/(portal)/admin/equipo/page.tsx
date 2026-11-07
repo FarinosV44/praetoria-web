@@ -1,3 +1,4 @@
+import { Cabecera } from '@/portal/components/despacho';
 import type { Metadata } from 'next';
 import { FilaEmpleado, InvitarEmpleado } from '@/portal/components/Equipo';
 import { comoUsuario } from '@/portal/lib/db';
@@ -17,7 +18,7 @@ export default async function Equipo() {
     from portal.personal p join identidad."user" u on u.id = p.user_id order by p.activo desc, p.nombre_visible`)).rows);
   return (
     <div className="grid gap-5">
-      <h1 className="titulo">Equipo</h1>
+      <Cabecera titulo="Equipo" />
       <section className="card"><h2 className="subtitulo">Invitar a una persona del despacho</h2><InvitarEmpleado /></section>
       <section className="card overflow-x-auto">
         <h2 className="subtitulo">Personas con acceso</h2>

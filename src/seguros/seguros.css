@@ -397,3 +397,79 @@
 .seguros .sugerencias form { display: contents; }
 .seguros .sugerencias .boton { white-space: normal; text-align: left; height: auto; }
 .seguros .asunto + .asunto { border-top: 1px solid var(--color-borde); padding-top: var(--e-3); }
+
+/* ---------------------------------------------------------------- Sistema del despacho (docs/portal/SISTEMA-VISUAL.md) */
+/* Mismas medidas, tarjetas, tablas y estados que el resto del panel: Seguros no es una aplicación aparte. */
+.despacho .seguros {
+  --color-borde-fuerte: var(--color-line);
+  --color-superficie: #fbfaf7;
+  --color-hover: #fff;
+  --radio: 3px;
+  --radio-s: 3px;
+  --texto-m: .875rem;
+  --texto-s: .8125rem;
+  --texto-xs: .75rem;
+  --texto-l: .9375rem;
+  --texto-xl: 1.25rem;
+  --texto-xxl: 1.25rem;
+  --e-5: 1rem;
+  --e-6: 1.5rem;
+  --foco: 0 0 0 2px var(--color-red);
+}
+.despacho .seguros h1 { font-size: 1.25rem; font-weight: 700; }
+.despacho .seguros .encabezado { align-items: flex-start; padding-bottom: 12px; margin-bottom: 16px; border-bottom: 2px solid var(--color-ink); }
+.despacho .seguros .encabezado::before { content: 'Seguros'; flex-basis: 100%; display: flex; align-items: center; font-size: .65625rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--color-muted); }
+.despacho .seguros .seguros-cabecera { margin-bottom: 16px; border-bottom: 1px solid var(--color-line); }
+.despacho .seguros .nav a { padding: 10px 12px; font-size: .875rem; font-weight: 500; }
+.despacho .seguros .nav a[aria-current='page'] { font-weight: 600; }
+.despacho .seguros .boton { min-height: 38px; padding: 0 14px; font-size: .875rem; background: #fbfaf7; border-color: var(--color-line); }
+.despacho .seguros .boton:hover { border-color: var(--color-ink-2); background: #fff; }
+.despacho .seguros .boton--principal { background: var(--color-red); border-color: var(--color-red); color: #fff; }
+.despacho .seguros .boton--principal:hover { background: var(--color-red-dark); border-color: var(--color-red-dark); }
+.despacho .seguros .boton--oscuro { background: var(--color-ink); border-color: var(--color-ink); color: #fff; }
+.despacho .seguros .boton--sutil { border-color: var(--color-line); }
+.despacho .seguros .boton--peq { min-height: 32px; font-size: .8125rem; }
+.despacho .seguros .tarjeta--pad { padding: 14px 16px; }
+.despacho .seguros .resumen { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 12px; margin-bottom: 16px; }
+@media (min-width: 768px) { .despacho .seguros .resumen { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1180px) { .despacho .seguros .resumen { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.despacho .seguros .cifra-clave, .despacho .seguros .cifra-clave--principal { grid-column: auto; min-height: 92px; padding: 12px; border-top-width: 1px; border-top-color: var(--color-line); }
+.despacho .seguros .cifra-clave__etq { font-size: .75rem; }
+.despacho .seguros .cifra-clave__valor { font-size: 1.125rem; font-weight: 700; letter-spacing: 0; }
+.despacho .seguros .resumen .cifra-clave .cifra-clave__valor { font-size: 1.125rem; }
+.despacho .seguros .resumen .cifra-clave .cifra-clave__nota { display: block; }
+.despacho .seguros .tabla thead tr { border-bottom: 2px solid var(--color-ink); background: var(--color-stone); }
+.despacho .seguros .tabla th { padding: 8px 12px; border-bottom: 0; font-size: .65625rem; font-weight: 600; letter-spacing: .1em; }
+.despacho .seguros .tabla td { padding: 8px 12px; border-bottom-color: #e7e4dc; vertical-align: top; font-size: .875rem; }
+.despacho .seguros .tabla tbody tr:hover { background: #fff; }
+.despacho .seguros .tabla a.fila-enlace { color: #1f4a78; font-weight: 600; }
+.despacho .seguros .tabla .fila-grupo th { font-size: .8125rem; letter-spacing: 0; text-transform: none; color: var(--color-ink); background: #f5f3ee; }
+.despacho .seguros .icono-ramo { width: 32px; height: 32px; border-radius: 3px; background: var(--color-stone); }
+.despacho .seguros .estado { padding: 1px 8px; border: 1px solid color-mix(in srgb, currentColor 26%, transparent); border-radius: 2px; font-size: .75rem; font-weight: 600; }
+.despacho .seguros .estado::before { display: none; }
+.despacho .seguros .segmentos { padding: 0; border: 0; background: none; gap: 6px; flex-wrap: wrap; }
+.despacho .seguros .segmentos a { padding: 3px 12px; background: #fbfaf7; border: 1px solid var(--color-line); border-radius: 999px; font-size: .75rem; font-weight: 500; color: var(--color-ink); }
+.despacho .seguros .segmentos a[aria-current='true'] { background: var(--color-ink); border-color: var(--color-ink); color: #fff; }
+.despacho .seguros .filtros { padding: 16px; background: color-mix(in srgb, var(--color-stone) 60%, #fbfaf7); border: 1px solid var(--color-line); border-radius: 12px; }
+.despacho .seguros .filtros label { gap: 6px; font-size: .875rem; font-weight: 500; color: var(--color-ink); }
+.despacho .seguros .filtros select, .despacho .seguros .filtros input { min-height: 44px; background: #fff; border-color: var(--color-line); border-radius: 11px; }
+.despacho .seguros .filtros select:focus, .despacho .seguros .filtros input:focus { outline: none; border-color: var(--color-red); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-red) 16%, transparent); }
+.despacho .seguros .campo input:not([type='checkbox']):not([type='radio']), .despacho .seguros .campo select, .despacho .seguros .campo textarea { background: #fff; border-radius: 11px; font-size: .875rem; }
+.despacho .seguros .aviso { border-radius: 3px; border-left: 3px solid currentColor; }
+.despacho .seguros .vacio { padding: 24px; background: var(--color-stone); border: 1px dashed var(--color-line); }
+.despacho .seguros .datos-clave dd { font-size: .9375rem; }
+@media (max-width: 760px) { .despacho .seguros .resumen .cifra-clave .cifra-clave__nota { display: block; } }
+
+/* Las piezas comunes dentro de Seguros: este archivo no va en capa y «.seguros a/button» heredaría el color */
+.despacho .seguros a.btn-primario, .despacho .seguros .btn-filtrar { color: #fff; }
+.despacho .seguros a.btn-secundario { color: var(--color-ink); }
+.despacho .seguros .btn svg { display: inline-block; width: 16px; height: 16px; }
+.despacho .seguros .vista { color: var(--color-ink); }
+.despacho .seguros .vista[aria-current] { color: #fff; }
+.despacho .seguros .vista:hover:not([aria-current]) { color: var(--color-red-dark); }
+.despacho .seguros a.kpi { color: var(--color-ink); }
+.despacho .seguros .kpi[data-tono='alerta'] .kpi-valor { color: var(--color-red-dark); }
+.despacho .seguros .filtro-chip { color: var(--color-muted); }
+.despacho .seguros .filtros-limpiar { color: #1f4a78; }
+.despacho .seguros .filtros-tarjeta svg { display: inline-block; }
+.despacho .seguros .selector-boton svg { display: block; }

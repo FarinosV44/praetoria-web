@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Cabecera, enlaceCon, FiltroSelector, Filtros, FiltroTexto, Resultados, textoOpcion, Vacio, Vistas } from '@/portal/components/despacho';
 import { redirect } from 'next/navigation';
 import { SubirBiblioteca } from '@/portal/components/Biblioteca';
 import { buscarModelos, CLASES, ESTADOS } from '@/portal/lib/biblioteca';
@@ -20,24 +21,31 @@ export default async function Biblioteca({ searchParams }: { searchParams: Promi
       from portal.bib_procedimientos p left join portal.bib_modelos m on m.procedimiento_id = p.id where p.materia_id = $1 and p.activo group by p.id order by p.orden, p.nombre`, [f.materia])).rows : [];
     return { materias, procs, modelos: await buscarModelos(tx, f) };
   });
-  const enlace = (c: Record<string, string | undefined>) => `?${new URLSearchParams(Object.entries({ ...f, ...c }).filter(([, v]) => v) as [string, string][])}`;
+  const BASE = '/admin/biblioteca/';
+  const enlace = (c: Record<string, string | undefined>) => enlaceCon(BASE, f, c);
+  const opcionesProc: [string, string][] = [['', 'Todos'], ...d.procs.map((p): [string, string] => [p.id, p.nombre])];
+  const opcionesClase: [string, string][] = [['', 'Todas'], ...Object.entries(CLASES).map(([k, v]): [string, string] => [k, v.t])];
+  const activos = [
+    f.q ? { texto: `Buscar: ${f.q}`, href: enlace({ q: undefined }) } : null,
+    f.procedimiento ? { texto: `Procedimiento: ${textoOpcion(opcionesProc, f.procedimiento)}`, href: enlace({ procedimiento: undefined }) } : null,
+    f.clase ? { texto: `Clase: ${textoOpcion(opcionesClase, f.clase)}`, href: enlace({ clase: undefined }) } : null,
+  ].filter((x): x is { texto: string; href: string } => !!x);
   return (
-    <div className="grid gap-5">
-      <div className="fila"><h1 className="titulo">Biblioteca jurídica</h1>
-        <span className="flex gap-2"><Link href="/admin/biblioteca/estilos/" className="btn btn-secundario">Estilos</Link>
-        {u.personal!.rol === 'administrador' ? <Link href="/admin/biblioteca/catalogo/" className="btn btn-secundario">Catálogo de procedimientos</Link> : null}</span></div>
-      <form className="flex gap-2" role="search">
-        {f.materia ? <input type="hidden" name="materia" value={f.materia} /> : null}
-        <input name="q" type="search" defaultValue={f.q ?? ''} placeholder="Buscar por contenido, procedimiento, materia o etiqueta (p. ej. «modificación de medidas», «TEAR»)" aria-label="Buscar en la biblioteca" className="border rounded-md p-3 flex-1 min-w-0" />
-        <button className="btn btn-primario">Buscar</button>
-      </form>
-      <nav aria-label="Materias" className="flex flex-wrap gap-2">
-        <Link href={enlace({ materia: undefined, procedimiento: undefined })} className={`chip ${!f.materia ? 'chip-info' : 'chip-neutro'} no-underline`}>Todas</Link>
-        {d.materias.map((m) => <Link key={m.id} href={enlace({ materia: m.id, procedimiento: undefined })} className={`chip ${f.materia === m.id ? 'chip-info' : 'chip-neutro'} no-underline`}>📁 {m.nombre} ({m.n})</Link>)}
-      </nav>
+    <div className="grid gap-4">
+      <Cabecera titulo="Biblioteca jurídica" entradilla="Modelos y escritos del despacho. El Copiloto solo se apoya en los modelos aprobados."
+        acciones={<><Link href="/admin/biblioteca/estilos/" className="btn btn-secundario">Estilos</Link>
+          {u.personal!.rol === 'administrador' ? <Link href="/admin/biblioteca/catalogo/" className="btn btn-secundario">Catálogo de procedimientos</Link> : null}</>} />
+      <Vistas etiqueta="Estado de los modelos" visible="Estado" items={[['', 'Vigentes'], ['aprobado', 'Aprobados'], ['revision', 'En revisión'], ['pendiente', 'Pendientes'], ['obsoleto', 'Obsoletos']].map(([v, t]) => ({ texto: t!, href: enlace({ estado: v || undefined }), activo: (f.estado ?? '') === v }))} />
+      <Vistas etiqueta="Materias" visible="Materia" items={[{ texto: 'Todas', href: enlace({ materia: undefined, procedimiento: undefined }), activo: !f.materia }, ...d.materias.map((m) => ({ texto: m.nombre, n: m.n, href: enlace({ materia: m.id, procedimiento: undefined }), activo: f.materia === m.id }))]} />
+      <Filtros accion={BASE} etiqueta="Buscar en la biblioteca" columnas={4} ocultos={{ estado: f.estado, materia: f.materia }} activos={activos} limpiar={enlaceCon(BASE, { estado: f.estado, materia: f.materia })}
+        basicos={<>
+          <FiltroTexto nombre="q" etiqueta="Buscar en la biblioteca" valor={f.q} ayuda="Contenido, procedimiento, materia o etiqueta" ancho />
+          {f.materia ? <FiltroSelector nombre="procedimiento" etiqueta="Procedimiento" valor={f.procedimiento} opciones={opcionesProc} /> : null}
+          <FiltroSelector nombre="clase" etiqueta="Clase" valor={f.clase} opciones={opcionesClase} />
+        </>} />
       {f.materia ? (
         <section className="card" aria-label="Procedimientos">
-          <ul className="grid sm:grid-cols-2 gap-1 text-sm">
+          <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-1 text-sm">
             {d.procs.map((p) => (
               <li key={p.id} data-procedimiento={p.nombre}>
                 <Link href={enlace({ procedimiento: p.id })} className={f.procedimiento === p.id ? 'font-semibold' : ''}>{p.nombre}</Link>
@@ -48,23 +56,30 @@ export default async function Biblioteca({ searchParams }: { searchParams: Promi
         </section>
       ) : null}
       {u.personal!.rol !== 'lectura' ? <SubirBiblioteca /> : null}
-      <section aria-label="Modelos" className="grid gap-2">
-        <p className="flex flex-wrap gap-2 text-sm">
-          {[['', 'Vigentes'], ['aprobado', 'Aprobados'], ['revision', 'En revisión'], ['pendiente', 'Pendientes'], ['obsoleto', 'Obsoletos']].map(([v, t]) => (
-            <Link key={v} href={enlace({ estado: v || undefined })} className={`chip ${(f.estado ?? '') === v ? 'chip-info' : 'chip-neutro'} no-underline`}>{t}</Link>))}
-        </p>
-        {d.modelos.length === 0 ? <p className="ayuda">{f.q ? 'No hay modelos que coincidan.' : 'Todavía no hay modelos aquí. Arrastra vuestros escritos para empezar.'}</p> : null}
-        <ul className="grid gap-2">
-          {d.modelos.map((m) => (
-            <li key={m.id} className="card" data-modelo={m.titulo}>
-              <p className="fila"><Link href={`/admin/biblioteca/${m.id}/`} className="font-semibold">{m.titulo}</Link>
-                <span className="flex gap-1"><span className={`chip ${ESTADOS[m.estado]?.chip}`}>{ESTADOS[m.estado]?.t}</span><span className="chip chip-neutro">{CLASES[m.clase]?.t}</span></span></p>
-              <p className="ayuda text-sm">{[m.materia, m.procedimiento, m.variante, m.tipo_escrito].filter(Boolean).join(' · ') || 'Sin clasificar'} · v{m.version ?? 0} · {m.autor} · {fecha(m.updated_at)}
-                {m.etiquetas?.length ? ` · ${m.etiquetas.map((e: string) => `#${e}`).join(' ')}` : ''}</p>
-              {m.fragmento ? <p className="text-sm mt-1">…{m.fragmento}…</p> : null}
-            </li>
-          ))}
-        </ul>
+      <section aria-label="Modelos" className="grid gap-3">
+        <Resultados total={d.modelos.length} nombre={['modelo', 'modelos']} />
+        {d.modelos.length === 0 ? <Vacio titulo={f.q ? 'No hay modelos que coincidan' : 'Todavía no hay modelos aquí'}>{f.q ? 'Prueba con otras palabras o quita algún filtro.' : 'Arrastra vuestros escritos para empezar.'}</Vacio> : (
+          <div className="tabla-marco">
+            <table className="tabla tabla-apilada">
+              <caption className="sr-only">Modelos de la biblioteca</caption>
+              <thead><tr><th>Modelo</th><th>Clasificación</th><th>Estado</th><th>Clase</th><th>Autor</th><th>Actualizado</th></tr></thead>
+              <tbody>
+                {d.modelos.map((m) => (
+                  <tr key={m.id} data-modelo={m.titulo}>
+                    <td data-e="Modelo"><Link href={`/admin/biblioteca/${m.id}/`}>{m.titulo}</Link>
+                      {m.etiquetas?.length ? <span className="ref">{m.etiquetas.map((e: string) => `#${e}`).join(' ')}</span> : null}
+                      {m.fragmento ? <span className="ref">…{m.fragmento}…</span> : null}</td>
+                    <td data-e="Clasificación" className="text-sm">{[m.materia, m.procedimiento, m.variante, m.tipo_escrito].filter(Boolean).join(' · ') || <span className="ayuda">Sin clasificar</span>}</td>
+                    <td data-e="Estado"><span className={`chip ${ESTADOS[m.estado]?.chip}`}>{ESTADOS[m.estado]?.t}</span></td>
+                    <td data-e="Clase"><span className="chip chip-neutro">{CLASES[m.clase]?.t}</span></td>
+                    <td data-e="Autor" className="text-sm">{m.autor}<span className="ref">v{m.version ?? 0}</span></td>
+                    <td data-e="Actualizado" className="text-sm whitespace-nowrap">{fecha(m.updated_at)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </section>
     </div>
   );

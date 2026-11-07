@@ -30,7 +30,7 @@ function Item({ e, sid }: { e: Entrada; sid: string }) {
   if (e.clase === 'nota') {
     return (
       <li className="burbuja burbuja-interna" data-clase="nota">
-        <p className="meta">{FUENTE[e.fuente] ?? 'Nota'} · {e.autor} · {hora(e.at)} · <span title="No lo ve el cliente">🔒 interno</span></p>
+        <p className="meta">{FUENTE[e.fuente] ?? 'Nota'} · {e.autor} · {hora(e.at)} · <span title="No lo ve el cliente">interno</span></p>
         <p className="whitespace-pre-wrap">{e.texto}</p>
       </li>
     );
@@ -46,7 +46,7 @@ function Item({ e, sid }: { e: Entrada; sid: string }) {
   if (e.clase === 'borrador') {
     return (
       <li className="burbuja burbuja-documento" data-clase="borrador" data-borrador-version={e.version}>
-        <p className="meta">✍️ Borrador {e.origen === 'ia' ? 'preparado con IA' : 'corregido a mano'} · {e.autor} · {hora(e.at)} · <span title="No lo ve el cliente">🔒 interno</span></p>
+        <p className="meta">Borrador {e.origen === 'ia' ? 'preparado con IA' : 'corregido a mano'} · {e.autor} · {hora(e.at)} · <span title="No lo ve el cliente">interno</span></p>
         <p className="fila"><span><strong>{e.titulo}</strong> · versión {e.version}</span><span className="chip chip-aviso">BORRADOR · requiere revisión</span></p>
         {e.instruccion && e.origen === 'ia' ? <p className="text-sm">«{e.instruccion.length > 200 ? `${e.instruccion.slice(0, 200)}…` : e.instruccion}»</p> : null}
         <p className="text-xs" data-modelos-usados>{e.modelos.length ? <>Modelos: {e.modelos.map((m) => `${m.etiqueta} ${m.titulo} v${m.version}`).join(' · ')}</> : 'Sin modelos de la biblioteca'}
@@ -69,7 +69,7 @@ function Item({ e, sid }: { e: Entrada; sid: string }) {
         <div className="fila"><span><strong>{e.titulo}</strong> · {fechaHora(e.inicio)}</span>
           {e.estado === 'pendiente' ? <span className="flex gap-3 items-center"><Reasignar tarea={e.id} solicitud={sid} /><Completar tarea={e.id} solicitud={sid} /></span>
             : <span className="chip chip-neutro">{e.estado === 'completado' ? 'Hecha' : 'Cancelada'}</span>}</div>
-        {e.documento || e.fuente ? <p className="text-xs">Origen: {e.documento ? <a href={`/api/documentos/${e.documento.id}/?ver=1`} target="_blank" rel="noopener">📄 {e.documento.nombre}</a> : e.fuente}</p> : null}
+        {e.documento || e.fuente ? <p className="text-xs">Origen: {e.documento ? <a href={`/api/documentos/${e.documento.id}/?ver=1`} target="_blank" rel="noopener">{e.documento.nombre}</a> : e.fuente}</p> : null}
         {e.estado === 'pendiente' ? (
           <div className="flex flex-wrap gap-3 items-center text-xs mt-1">
             {e.tipo === 'plazo' && !e.verificado ? <VerificarPlazo tarea={e.id} solicitud={sid} /> : null}
@@ -84,13 +84,13 @@ function Item({ e, sid }: { e: Entrada; sid: string }) {
     <li className="burbuja burbuja-documento" data-clase="documento" data-documento={e.nombre}>
       <p className="meta">{e.del_despacho ? 'Documento del despacho' : 'Documento del cliente'} · {e.autor} · {hora(e.at)}{e.origen === 'portapapeles' ? ' · pegado' : ''}</p>
       <p className="fila">
-        <span>📄 <a href={`/api/documentos/${e.id}/?ver=1`} target="_blank" rel="noopener" className="font-semibold">{e.nombre}</a>
+        <span><a href={`/api/documentos/${e.id}/?ver=1`} target="_blank" rel="noopener" className="font-semibold">{e.nombre}</a>
           <span className="ayuda text-sm"> · v{e.version} · {tamano(e.tamano)}</span></span>
         <a href={`/api/documentos/${e.id}/?descargar=1`} className="text-sm">Descargar</a>
       </p>
       <div className="flex flex-wrap gap-3 items-center text-sm mt-1">
         <Carpeta documento={e.id} solicitud={sid} carpeta={e.carpeta} editable={e.del_despacho} />
-        {e.visible ? <span className="chip chip-ok">Visible para el cliente</span> : <><span className="chip chip-neutro">🔒 Privado</span><Compartir documento={e.id} solicitud={sid} /></>}
+        {e.visible ? <span className="chip chip-ok">Visible para el cliente</span> : <><span className="chip chip-neutro">Privado</span><Compartir documento={e.id} solicitud={sid} /></>}
         <Eliminar documento={e.id} solicitud={sid} nombre={e.nombre} />
         {e.estado === 'pendiente' ? <Link href={`/admin/solicitudes/${sid}/#documentacion`}>Revisar</Link> : null}
         {e.analisis === 'infectado' ? <span className="chip chip-aviso">Bloqueado por antivirus</span> : null}
@@ -148,7 +148,7 @@ export default async function Expediente({ params, searchParams }: { params: Pro
   return (
     <div className="expediente">
       <aside className="expediente-lateral" aria-label="Expedientes recientes">
-        <form action="/admin/buscar/" className="mb-3"><input name="q" type="search" placeholder="Buscar cliente, asunto o documento" aria-label="Buscar" className="border rounded-md p-2 w-full" /></form>
+        <form action="/admin/buscar/" className="mb-3"><input name="q" type="search" placeholder="Buscar cliente, asunto o documento" aria-label="Buscar" className="control w-full" /></form>
         <p className="etiqueta text-sm mb-1">Recientes</p>
         <ul className="grid gap-1 text-sm">
           {d.rec.map((r) => (
@@ -161,13 +161,13 @@ export default async function Expediente({ params, searchParams }: { params: Pro
           <>
             <p className="etiqueta text-sm mt-4 mb-1">Borradores de este asunto</p>
             <ul className="grid gap-1 text-sm" data-escritos>
-              {d.escritos.map((e) => <li key={e.id}><Link href={`/admin/expedientes/${id}/escritos/${e.id}/`} className="block rounded px-2 py-1 no-underline truncate">✍️ {e.titulo} · v{e.version}</Link></li>)}
+              {d.escritos.map((e) => <li key={e.id}><Link href={`/admin/expedientes/${id}/escritos/${e.id}/`} className="block rounded px-2 py-1 no-underline truncate">{e.titulo} · v{e.version}</Link></li>)}
             </ul>
           </>
         ) : null}
         {d.papelera.length ? (
           <details className="mt-4 text-sm" data-papelera>
-            <summary className="etiqueta cursor-pointer">🗑 Papelera ({d.papelera.filter((x) => !x.purgado_at).length})</summary>
+            <summary className="etiqueta cursor-pointer">Papelera ({d.papelera.filter((x) => !x.purgado_at).length})</summary>
             <p className="ayuda text-xs mt-1">Se puede restaurar durante 30 días; después se borra el archivo y queda solo el registro.</p>
             <ul className="grid gap-2 mt-2">
               {d.papelera.map((x) => {
@@ -192,7 +192,7 @@ export default async function Expediente({ params, searchParams }: { params: Pro
           <div className="fila">
             <div className="min-w-0">
               <p className="ayuda text-sm"><Link href={`/admin/clientes/${c.cliente_id}/`}>{c.cliente}</Link> · {c.expediente_ref ?? c.referencia}{c.responsable ? ` · ${c.responsable}` : ''}</p>
-              <h1 className="subtitulo" style={{ marginBottom: 0 }}>{c.titulo}</h1>
+              <h1>{c.titulo}</h1>
             </div>
             <span className="flex gap-2 items-center">{c.expediente_estado === 'cerrado' ? <span className="chip chip-neutro" data-expediente-cerrado>Expediente cerrado</span> : null}<ChipSolicitud estado={c.estado} /></span>
           </div>
@@ -204,17 +204,20 @@ export default async function Expediente({ params, searchParams }: { params: Pro
             <div><dt>Abierto</dt><dd>{c.abierto_at ? fechaHora(new Date(c.abierto_at)) : '—'}</dd></div>
           </dl>
           {c.expediente_estado ? <DatosProceso solicitud={id} contraparte={c.contraparte} procedimiento={c.procedimiento} organo={c.organo} autos={c.numero_autos} /> : null}
-          <div className="text-sm flex flex-wrap gap-x-4 gap-y-1 mt-1">
-            <span>📄 {c.docs} documentos{c.por_revisar ? ` · ${c.por_revisar} por revisar` : ''}{c.faltan ? ` · faltan ${c.faltan}` : ''}</span>
-            {c.proxima ? <span>⏰ {c.proxima_titulo}: {fechaHora(c.proxima)}</span> : null}
+          <div className="expediente-resumen" data-resumen-expediente>
+            <span><strong>{c.docs}</strong> documentos{c.por_revisar ? <> · <strong>{c.por_revisar}</strong> por revisar</> : null}{c.faltan ? <> · faltan <strong>{c.faltan}</strong></> : null}</span>
+            {c.proxima ? <span>Próxima fecha: <strong>{c.proxima_titulo}</strong> · {fechaHora(c.proxima)}</span> : <span className="ayuda">Sin fechas próximas</span>}
             {!c.cuenta_activa ? <span className="chip chip-aviso">El cliente aún no ha activado su acceso</span> : null}
-            <Link href={`/admin/solicitudes/${id}/`}>Ficha completa</Link>
-            {c.expediente_estado ? <CerrarExpediente solicitud={id} cerrado={c.expediente_estado === 'cerrado'} /> : null}
-            {d.opciones ? <PanelIA solicitud={id} opciones={d.opciones} /> : null}
-            {env.iaClave ? <Link href={`/admin/expedientes/${id}/asistente/`} className="font-semibold">✨ Asistente IA</Link> : null}
-            {env.iaClave ? <Link href={`/admin/expedientes/${id}/asistente/?modo=redactar`} className="font-semibold">✍️ Redactar escrito</Link> : null}
           </div>
-          <div className="mt-1 text-sm"><EstadoCliente solicitud={id} actual={c.estado_visible} /></div>
+          <div className="expediente-acciones">
+            {env.iaClave ? <Link href={`/admin/expedientes/${id}/asistente/?modo=redactar`} className="btn btn-primario">Redactar escrito</Link> : null}
+            {env.iaClave ? <Link href={`/admin/expedientes/${id}/asistente/`} className="btn btn-secundario">Asistente IA</Link> : null}
+            {d.opciones ? <PanelIA solicitud={id} opciones={d.opciones} /> : null}
+            <Link href={`/admin/expedientes/${id}/?vista=documentos`} className="btn btn-secundario">Documentos</Link>
+            <Link href={`/admin/solicitudes/${id}/`} className="btn btn-secundario">Ficha completa</Link>
+            {c.expediente_estado ? <span className="accion-secundaria"><CerrarExpediente solicitud={id} cerrado={c.expediente_estado === 'cerrado'} /></span> : null}
+          </div>
+          <div className="mt-3 text-sm"><EstadoCliente solicitud={id} actual={c.estado_visible} /></div>
           <div className="mt-1"><EquipoAsunto solicitud={id} miembros={d.equipo.miembros} gestiona={d.equipo.gestiona} /></div>
           <Continuar r={d.relevo} />
         </header>
@@ -230,7 +233,7 @@ export default async function Expediente({ params, searchParams }: { params: Pro
             <h2 className="font-semibold">Propuestas de la IA por revisar</h2>
             <p className="ayuda text-xs mb-2">No se ha cambiado nada. Un plazo aceptado queda como fecha sugerida sin verificar: comprueba notificación, días inhábiles y norma aplicable.</p>
             <ul className="grid gap-2">{d.propuestas.map((p) => (
-              <li key={p.id} className="border rounded p-2 text-sm" data-propuesta={p.titulo}>
+              <li key={p.id} className="control text-sm" data-propuesta={p.titulo}>
                 <p><strong>{p.tipo === 'plazo' ? 'Posible plazo' : 'Tarea'}:</strong> {p.titulo}{p.documento ? <span className="ayuda"> · {p.documento}</span> : null}</p>
                 {p.fundamento ? <p className="ayuda text-xs">{p.fundamento}</p> : null}
                 <DecidirPropuesta propuesta={p.id} solicitud={id} fecha={p.fecha ? new Date(p.fecha).toISOString().slice(0, 10) : ''} />
@@ -242,8 +245,8 @@ export default async function Expediente({ params, searchParams }: { params: Pro
         {vista === 'documentos' ? (
           <section className="grid gap-3" aria-label="Documentación del expediente" data-vista="documentos">
             <form className="flex gap-2"><input type="hidden" name="vista" value="documentos" />
-              <input name="q" type="search" defaultValue={busca} placeholder="Busca por nombre o dentro del contenido" aria-label="Buscar en la documentación" className="border rounded-md p-2 flex-1 min-w-0" />
-              <button className="btn btn-secundario" style={{ minHeight: 40 }}>Buscar</button>
+              <input name="q" type="search" defaultValue={busca} placeholder="Busca por nombre o dentro del contenido" aria-label="Buscar en la documentación" className="control flex-1 min-w-0" />
+              <button className="btn btn-secundario">Buscar</button>
             </form>
             {(() => {
               const docs = d.entradas.filter((x): x is Extract<Entrada, { clase: 'documento' }> => x.clase === 'documento')
@@ -254,8 +257,8 @@ export default async function Expediente({ params, searchParams }: { params: Pro
                   const ix = d.indexado.find((i) => i.origen_id === x.id);
                   const an = d.analisis.find((a) => a.documento_id === x.id);
                   return (
-                    <li key={x.id} className="card" style={{ marginTop: 0, padding: 14 }} data-documento={x.nombre}>
-                      <p className="fila"><span>📄 <a href={`/api/documentos/${x.id}/?ver=1`} target="_blank" rel="noopener" className="font-semibold">{x.nombre}</a><span className="ayuda text-sm"> · v{x.version} · {tamano(x.tamano)} · {x.carpeta}</span></span>
+                    <li key={x.id} className="card" data-documento={x.nombre}>
+                      <p className="fila"><span><a href={`/api/documentos/${x.id}/?ver=1`} target="_blank" rel="noopener" className="font-semibold">{x.nombre}</a><span className="ayuda text-sm"> · v{x.version} · {tamano(x.tamano)} · {x.carpeta}</span></span>
                         <a href={`/api/documentos/${x.id}/?descargar=1`} className="text-sm">Descargar</a></p>
                       <div className="flex flex-wrap gap-2 items-center text-xs mt-1">
                         {ix?.estado === 'ok' ? <span className="chip chip-ok" data-indexado>Disponible para la IA{ix.con_ocr ? ' (OCR)' : ''}</span>
@@ -282,7 +285,7 @@ export default async function Expediente({ params, searchParams }: { params: Pro
           </section>
         ) : vista === 'escritos' ? (
           <section className="grid gap-2" aria-label="Escritos del expediente" data-vista="escritos">
-            <p className="fila"><span className="ayuda text-sm">{d.escritos.length ? 'Borradores de este asunto.' : 'Aún no hay escritos.'}</span>{env.iaClave ? <Link href={`/admin/ia/nuevo/?expediente=${id}`} className="btn btn-secundario" style={{ minHeight: 38 }}>✍️ Nuevo escrito</Link> : null}</p>
+            <p className="fila"><span className="ayuda text-sm">{d.escritos.length ? 'Borradores de este asunto.' : 'Aún no hay escritos.'}</span>{env.iaClave ? <Link href={`/admin/ia/nuevo/?expediente=${id}`} className="btn btn-secundario" style={{ minHeight: 38 }}>Nuevo escrito</Link> : null}</p>
             <ul className="grid gap-2">{d.escritos.map((e) => <li key={e.id} className="card" style={{ marginTop: 0, padding: 14 }}><Link href={`/admin/expedientes/${id}/escritos/${e.id}/`} className="font-semibold">{e.titulo}</Link> <span className="ayuda text-sm">· versión {e.version}{e.modelos.length ? ` · ${e.modelos.length} modelo${e.modelos.length > 1 ? 's' : ''} de la biblioteca` : ''}</span> <span className="chip chip-aviso">BORRADOR</span></li>)}</ul>
           </section>
         ) : null}

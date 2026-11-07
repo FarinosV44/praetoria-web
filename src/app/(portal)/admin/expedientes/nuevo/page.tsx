@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Cabecera } from '@/portal/components/despacho';
 import { AbrirExpediente } from '@/portal/components/AbrirExpediente';
 import { comoUsuario } from '@/portal/lib/db';
 import { UUID } from '@/portal/lib/datos';
@@ -22,7 +23,7 @@ export default async function NuevoExpediente({ searchParams }: { searchParams: 
   return (
     <div className="grid gap-4 max-w-3xl">
       <p><Link href="/admin/expedientes/">← Expedientes</Link></p>
-      <h1 className="titulo">Abrir expediente</h1>
+      <Cabecera titulo="Abrir expediente" migas={[{ texto: 'Expedientes', href: '/admin/expedientes/' }, { texto: 'Abrir expediente' }]} />
       <p className="ayuda">Para un cliente que ya está dado de alta. Si es nuevo, <Link href="/admin/clientes/nuevo/">dalo de alta</Link> y abre ahí el expediente.</p>
       {u.personal!.rol === 'lectura' || u.personal!.rol === 'facturacion' ? <p className="aviso">Tu rol no permite abrir expedientes.</p> : (
         <section className="card">

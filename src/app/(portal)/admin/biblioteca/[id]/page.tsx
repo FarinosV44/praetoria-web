@@ -40,7 +40,7 @@ export default async function Modelo({ params, searchParams }: { params: Promise
   const cambios = d.comparar && actual ? diferencias(d.comparar.texto, actual.texto) : null;
   return (
     <div className="grid gap-5">
-      <p className="text-sm"><Link href="/admin/biblioteca/">← Biblioteca</Link></p>
+      <nav aria-label="Ruta" className="migas"><ol><li><Link href="/admin/biblioteca/">Biblioteca</Link></li><li><span aria-current="page">{m.titulo}</span></li></ol></nav>
       <header className="grid gap-1">
         <h1 className="titulo" style={{ marginBottom: 0 }}>{m.titulo}</h1>
         <p className="flex flex-wrap gap-2 items-center text-sm">
@@ -61,11 +61,11 @@ export default async function Modelo({ params, searchParams }: { params: Promise
               {cambios ? (
                 <div className="grid gap-1" data-diferencias>
                   <p className="text-sm"><strong>Diferencias</strong> entre «{d.comparar!.titulo}» v{d.comparar!.version} (en rojo) y esta versión (en verde) · <Link href={`?v=${actual.version}`}>cerrar</Link></p>
-                  <div className="text-sm border rounded p-2 max-h-[32rem] overflow-auto">{cambios.map((c, i) => (
+                  <div className="text-sm control max-h-[32rem] overflow-auto">{cambios.map((c, i) => (
                     <p key={i} style={{ background: c.tipo === '+' ? 'var(--color-ok-bg, #e7f6ec)' : c.tipo === '-' ? 'var(--color-red-bg, #fdecec)' : undefined }}>
                       {c.tipo === '+' ? '+ ' : c.tipo === '-' ? '− ' : ''}{c.texto}</p>))}</div>
                 </div>
-              ) : <pre className="whitespace-pre-wrap text-sm border rounded p-3 max-h-[32rem] overflow-auto" style={{ fontFamily: 'inherit' }} data-texto-modelo>{actual.texto || 'Sin texto legible (PDF escaneado o imagen).'}</pre>}
+              ) : <pre className="whitespace-pre-wrap text-sm control max-h-[32rem] overflow-auto" style={{ fontFamily: 'inherit' }} data-texto-modelo>{actual.texto || 'Sin texto legible (PDF escaneado o imagen).'}</pre>}
             </section>
           ) : null}
           {editable || autor ? <SubirBiblioteca modelo={m.id} /> : null}

@@ -55,7 +55,7 @@ test('3. Ficha del cliente: asuntos y documentos por carpeta, que se abren y des
   await p.getByRole('link', { name: 'Ana Ficticia Prueba' }).first().click();
   await expect(p.getByRole('heading', { name: 'Ana Ficticia Prueba' })).toBeVisible();
   await expect(p.getByText(/Asuntos \(1\)/)).toBeVisible();
-  await expect(p.getByText('📁 Documentación del cliente').first()).toBeVisible();
+  await expect(p.getByText('Documentación del cliente').first()).toBeVisible();
   const ver = p.getByRole('link', { name: 'carta-despido.pdf' });
   const href = (await ver.getAttribute('href'))!;
   const r1 = await p.request.get(href);
@@ -69,7 +69,7 @@ test('3. Ficha del cliente: asuntos y documentos por carpeta, que se abren y des
   await carta.getByLabel('Carpeta').fill('Prueba');
   await carta.getByRole('button', { name: 'Mover' }).click();
   await expect(p.getByRole('status')).toContainText('Movido a la carpeta «Prueba»');
-  await expect(p.getByText('📁 Prueba')).toBeVisible();
+  await expect(p.getByText('Prueba', { exact: true }).first()).toBeVisible();
 });
 
 test('4. Agenda: vista judicial con avisos una semana, 24 h y 1 h antes; el motor entrega el aviso vencido', async ({ page: p }) => {

@@ -132,7 +132,7 @@ test('1. Propone solo modelos aprobados y redacta un borrador con fuentes, sin d
     'Certificado ficticio de matrimonio de 2 de febrero de 2015, Registro Civil de Alicante');
 
   await p.goto(`/admin/expedientes/${e.a}/`);
-  await p.getByRole('link', { name: '✍️ Redactar escrito' }).click();
+  await p.getByRole('link', { name: 'Redactar escrito' }).click();
   await p.getByLabel('Qué escrito necesitas').fill('Prepara la demanda de divorcio contencioso con nuestras plantillas');
   await p.getByRole('button', { name: 'Buscar modelos' }).click();
   const prop = p.locator('[data-propuesta]');
@@ -170,7 +170,7 @@ test('2. Una instrucción por chat crea la versión 2 con diferencias; la 1 qued
   await entrarComo(p, SA);
   await p.goto(`/admin/expedientes/${e.a}/escritos/${e.escrito}/?v=1`);
   const v1 = await p.locator('[data-texto-borrador]').innerText();
-  await p.getByRole('link', { name: '✍️ Seguir con el asistente' }).click();
+  await p.getByRole('link', { name: 'Seguir con el asistente' }).click();
   await expect(p.locator('[data-escrito-actual]')).toContainText('versión 1');
   await p.getByLabel('Qué escrito necesitas').fill('Suprime el OTROSÍ de medidas provisionales y añade al suplico que se fije una pensión compensatoria a favor de la clienta.');
   await p.getByRole('button', { name: 'Crear versión nueva' }).click();
@@ -218,7 +218,7 @@ test('5. Desde el chat del expediente: «Redacta…» propone el redactor, el bo
   await expect(p.locator('[data-clase="borrador"]').first()).toContainText('BORRADOR · requiere revisión');
   // Escribir la orden en el compositor sugiere el redactor; no se guarda como nota hasta que se elija
   await p.getByLabel('Escribe en el expediente').fill('Redacta un requerimiento extrajudicial de pago de la pensión a la otra parte');
-  await p.locator('[data-sugerir-ia]').getByRole('button', { name: '✍️ Preparar escrito con IA' }).click();
+  await p.locator('[data-sugerir-ia]').getByRole('button', { name: 'Preparar escrito con IA' }).click();
   await expect(p.getByLabel('Qué escrito necesitas')).toHaveValue(/requerimiento extrajudicial/);
   await p.getByRole('button', { name: 'Buscar modelos' }).click();
   await expect(p.locator('[data-propuesta]')).toBeVisible();

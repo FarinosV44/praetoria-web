@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Cabecera } from '@/portal/components/despacho';
 import { redirect } from 'next/navigation';
 import { Migas } from '@/portal/components/NavDespacho';
 import { Redactor } from '@/portal/components/Redactor';
@@ -26,18 +27,18 @@ export default async function NuevoEscrito({ searchParams }: { searchParams: Pro
   const tipo = q.tipo && TIPOS.includes(q.tipo) ? q.tipo : '';
   return (
     <div className="grid gap-4 max-w-4xl" data-nuevo-escrito>
-      <div><Migas items={[{ texto: 'Copiloto', href: '/admin/ia/' }, { texto: 'Nuevo escrito' }]} /><h1 className="titulo">Nuevo escrito</h1></div>
+      <Cabecera titulo="Nuevo escrito" migas={[{ texto: 'Copiloto', href: '/admin/ia/' }, { texto: 'Nuevo escrito' }]} />
       {!env.iaClave ? <p className="aviso">El asistente de IA no está configurado en este servidor.</p> : !asuntos.length ? <p className="aviso">No tienes expedientes en los que puedas escribir.</p> : (
         <>
           <form className="card grid sm:grid-cols-[1fr_16rem_auto] gap-3 items-end">
             <label className="grid gap-1 text-sm font-semibold">Expediente
-              <select name="expediente" defaultValue={elegido?.id ?? ''} required className="border rounded p-2 font-normal">
+              <select name="expediente" defaultValue={elegido?.id ?? ''} required className="control font-normal">
                 <option value="" disabled>Elige un expediente…</option>
                 {asuntos.map((a) => <option key={a.id} value={a.id}>{a.cliente} · {a.titulo} ({a.ref})</option>)}
               </select>
             </label>
             <label className="grid gap-1 text-sm font-semibold">Tipo de escrito
-              <select name="tipo" defaultValue={tipo} className="border rounded p-2 font-normal"><option value="">Lo indico yo</option>{TIPOS.map((t) => <option key={t}>{t}</option>)}</select>
+              <select name="tipo" defaultValue={tipo} className="control font-normal"><option value="">Lo indico yo</option>{TIPOS.map((t) => <option key={t}>{t}</option>)}</select>
             </label>
             <button className="btn btn-secundario" style={{ minHeight: 42 }}>Continuar</button>
           </form>

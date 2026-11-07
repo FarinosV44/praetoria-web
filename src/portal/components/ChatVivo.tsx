@@ -84,7 +84,7 @@ export function ChatVivo({ solicitud, hilo, opciones, rapidas = [], reanudar = n
           placeholder={marcador ?? (solicitud ? 'Pregunta sobre este expediente…' : 'Pregunta a la biblioteca del despacho…')}
           onKeyDown={(e) => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); void enviar(texto); } }} />
         {adjuntos.length ? <ul className="flex flex-wrap gap-2 text-xs mb-1">{adjuntos.map((a, i) => (
-          <li key={i} className="chip chip-neutro">📎 {a.nombre} <button type="button" aria-label={`Quitar ${a.nombre}`} onClick={() => setAdjuntos((l) => l.filter((_, n) => n !== i))} style={{ background: 'none', border: 0, cursor: 'pointer' }}>×</button></li>
+          <li key={i} className="chip chip-neutro">{a.nombre} <button type="button" aria-label={`Quitar ${a.nombre}`} onClick={() => setAdjuntos((l) => l.filter((_, n) => n !== i))} style={{ background: 'none', border: 0, cursor: 'pointer' }}>×</button></li>
         ))}</ul> : null}
         <div className="fila">
           <span className="flex flex-wrap gap-2 items-center text-sm">

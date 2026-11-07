@@ -62,7 +62,7 @@ test('1. Dos expedientes con datos contradictorios; la IA de X responde solo con
     'La clave ficticia de este asunto es VERDE-99 y el despido fue el 20 de julio.', 'Carta de despido ficticia de 20 de julio de 2026 disciplinario');
 
   await p.goto(`/admin/expedientes/${e.x}/`);
-  await p.getByRole('link', { name: '✨ Asistente IA' }).click();
+  await p.getByRole('link', { name: 'Asistente IA' }).click();
   await p.getByLabel('Pregunta al asistente').fill('¿Cuál es la clave ficticia del asunto y en qué fecha y por qué causa fue el despido? Cita las fuentes.');
   await p.getByRole('button', { name: 'Preguntar' }).click();
   const r = p.locator('[data-ia="asistente"]').last();

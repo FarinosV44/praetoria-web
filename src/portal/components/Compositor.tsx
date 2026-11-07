@@ -111,7 +111,7 @@ export function Compositor({ solicitudId, maxMb, ia = false, escritos = [], abri
         <ul className="grid gap-1 mb-2 text-sm" aria-live="polite">
           {subidas.map((s) => (
             <li key={s.clave} className="fila" data-subida={s.nombre}>
-              <span className="truncate max-w-[60%]">📎 {s.nombre}</span>
+              <span className="truncate max-w-[60%]">{s.nombre}</span>
               {s.estado === 'subiendo' ? <span>{s.progreso} %</span> : null}
               {s.estado === 'ok' ? <span className="chip chip-ok">Guardado (privado)</span> : null}
               {s.estado === 'error' ? <span className="flex gap-2 items-center"><span className="text-[var(--color-red-dark)]">{s.error}</span>
@@ -129,7 +129,7 @@ export function Compositor({ solicitudId, maxMb, ia = false, escritos = [], abri
           {chip('nota', 'Nota interna')}
           {chip('cliente', 'Mensaje al cliente')}
           {chip('tarea', 'Tarea o plazo')}
-          {ia ? chip('escrito', '✍️ Preparar escrito con IA') : null}
+          {ia ? chip('escrito', 'Preparar escrito con IA') : null}
           {modo === 'nota' ? (
             <span className="flex gap-1 text-xs ml-auto">
               {([['nota', 'Nota'], ['texto_aportado', 'Texto pegado'], ['llamada', 'Llamada']] as const).map(([v, t]) => (
@@ -142,11 +142,11 @@ export function Compositor({ solicitudId, maxMb, ia = false, escritos = [], abri
         {modo === 'tarea' ? (
           <div className="flex flex-wrap gap-2 items-center text-sm">
             <label className="sr-only" htmlFor="tarea-fecha">Fecha</label>
-            <input id="tarea-fecha" name="fecha" type="date" defaultValue={manana()} className="border rounded-md p-2" required />
+            <input id="tarea-fecha" name="fecha" type="date" defaultValue={manana()} className="control" required />
             <label className="sr-only" htmlFor="tarea-hora">Hora</label>
-            <input id="tarea-hora" name="hora" type="time" className="border rounded-md p-2" aria-label="Hora (opcional)" />
-            <input name="para" list="personal-equipo" aria-label="Para (opcional)" placeholder="Para: yo" className="border rounded-md p-2 w-36" />
-            <input name="origen" list="documentos-expediente" aria-label="Origen (documento o notificación, opcional)" placeholder="Origen: documento o notificación" className="border rounded-md p-2 w-56" />
+            <input id="tarea-hora" name="hora" type="time" className="control" aria-label="Hora (opcional)" />
+            <input name="para" list="personal-equipo" aria-label="Para (opcional)" placeholder="Para: yo" className="control w-36" />
+            <input name="origen" list="documentos-expediente" aria-label="Origen (documento o notificación, opcional)" placeholder="Origen: documento o notificación" className="control w-56" />
             <label className="flex gap-1 items-center"><input type="checkbox" name="plazo" value="1" /> Es un plazo (pendiente de verificar)</label>
           </div>
         ) : null}
@@ -161,7 +161,7 @@ export function Compositor({ solicitudId, maxMb, ia = false, escritos = [], abri
             placeholder={modo === 'cliente' ? 'Mensaje que verá el cliente…' : modo === 'tarea' ? 'Qué hay que hacer (p. ej., Preparar escrito de alegaciones)' : 'Escribe una nota, pega un texto o una captura, o arrastra documentos aquí…'} />
           <div className="fila">
             <span className="flex gap-2 items-center">
-              <button type="button" className="btn btn-secundario" style={{ minHeight: 38 }} onClick={() => archivoRef.current?.click()}>📎 Adjuntar</button>
+              <button type="button" className="btn btn-secundario" style={{ minHeight: 38 }} onClick={() => archivoRef.current?.click()}>Adjuntar</button>
               <input ref={archivoRef} type="file" multiple accept={ACEPTA} className="sr-only" tabIndex={-1} aria-label="Adjuntar archivos al expediente"
                 onChange={(e) => { Array.from(e.target.files ?? []).forEach((f) => subir(f)); e.target.value = ''; }} />
               <span className="ayuda text-xs hidden sm:inline">Ctrl+Intro para guardar · los archivos quedan privados hasta compartirlos</span>
@@ -181,7 +181,7 @@ export function Compositor({ solicitudId, maxMb, ia = false, escritos = [], abri
             ¿Quieres que lo prepare el redactor con los modelos aprobados de la biblioteca?
             <button type="button" className="btn btn-secundario" style={{ minHeight: 32 }} onClick={() => {
               setInicialIA(textoRef.current?.value ?? ''); setSugerirIA(false); setModo('escrito');
-            }}>✍️ Preparar escrito con IA</button>
+            }}>Preparar escrito con IA</button>
             <span className="ayuda text-xs">o pulsa Guardar para dejarlo como nota.</span>
           </p>
         ) : null}

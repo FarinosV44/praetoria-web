@@ -74,8 +74,8 @@ test('1. La abogada entra con doble factor y da de alta un cliente con expedient
 test('2. Expediente conversacional: nota, texto pegado, archivos arrastrados y pegados, sin salir de la pantalla', async ({ page: p, browser }) => {
   await entrarAbogada(p);
   // Buscar al cliente por NIF y abrir su expediente: dos interacciones
-  await p.getByLabel('Buscar').fill(CLI.nif);
-  await p.getByRole('button', { name: 'Buscar' }).click();
+  await p.getByRole('searchbox', { name: /Buscar expediente,/ }).fill(CLI.nif);
+  await p.getByRole('searchbox', { name: /Buscar expediente,/ }).press('Enter');
   await p.getByRole('link', { name: /Carla Ficticia Exp · Reclamación de salarios ficticia/ }).click();
   await p.waitForURL(new RegExp(`/admin/expedientes/${e.sid}/$`));
 

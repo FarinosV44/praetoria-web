@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Cabecera } from '@/portal/components/despacho';
 import { notFound } from 'next/navigation';
 import { FormEvento } from '@/portal/components/FormEvento';
 import { comoUsuario } from '@/portal/lib/db';
@@ -31,7 +32,7 @@ export default async function Evento({ params, searchParams }: { params: Promise
   const p = partesMadrid(e.inicio);
   return (
     <div className="grid gap-5 max-w-3xl">
-      <p><Link href="/admin/agenda/">← Agenda</Link></p>
+      <nav aria-label="Ruta" className="migas"><ol><li><Link href="/admin/agenda/">Agenda</Link></li><li><span aria-current="page">{e.titulo}</span></li></ol></nav>
       {q.ok ? <p className="exito" role="status">{q.ok}</p> : null}
       {q.error ? <p className="error" role="alert">{q.error}</p> : null}
       <div className="fila"><h1 className="titulo">{e.titulo}</h1>

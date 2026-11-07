@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Cabecera } from '@/portal/components/despacho';
 import { CrearEstilo } from '@/portal/components/Estilos';
 import { comoUsuario } from '@/portal/lib/db';
 import { DESTINOS, estilosDisponibles } from '@/portal/lib/estilos';
@@ -14,7 +15,7 @@ export default async function Estilos() {
   return (
     <div className="grid gap-5">
       <p className="text-sm"><Link href="/admin/biblioteca/">← Biblioteca</Link></p>
-      <h1 className="titulo">Estilos de los escritos</h1>
+      <Cabecera titulo="Estilos de los escritos" migas={[{ texto: 'Biblioteca', href: '/admin/biblioteca/' }, { texto: 'Estilos' }]} />
       <p className="ayuda">Formato con el que se exportan los borradores a Word y PDF: tipografía, márgenes, interlineado, títulos, numeración, encabezado, pie y firma. Para crear uno a partir de un Word vuestro, súbelo a la biblioteca como «Estilo / maquetación» y usa «Crear estilo a partir de este Word».</p>
       {global ? <section className="card"><h2 className="subtitulo">Nuevo estilo</h2><CrearEstilo /></section> : null}
       <ul className="grid gap-2">{lista.length === 0 ? <li className="ayuda">Todavía no hay estilos: se usa el estilo base (Times New Roman 12, interlineado 1,5).</li> : null}

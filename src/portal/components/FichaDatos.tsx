@@ -13,7 +13,7 @@ export function FichaDatos({ cliente, v }: { cliente: string; v: V }) {
       <input type="hidden" name="cliente" value={cliente} />
       {CAMPOS.map(([k, t]) => (
         <label key={k} className="grid gap-1 text-sm"><span className="etiqueta">{t}</span>
-          <input name={k} defaultValue={v[k] ?? ''} maxLength={200} className="border rounded-md p-2" /></label>
+          <input name={k} defaultValue={v[k] ?? ''} maxLength={200} className="control" /></label>
       ))}
       <div className="sm:col-span-2 flex gap-3 items-center">
         <button className="btn btn-secundario" disabled={pendiente}>Guardar datos</button>

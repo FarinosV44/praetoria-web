@@ -30,7 +30,7 @@ export default async function Copiloto({ searchParams }: { searchParams: Promise
     <div className="expediente">
       <aside className="expediente-lateral" aria-label="Conversaciones">
         <p className="mb-2"><Link href="/admin/ia/" className="btn btn-secundario" style={{ minHeight: 34 }}>+ Nueva conversación</Link></p>
-        <p className="mb-2"><Link href="/admin/ia/nuevo/" className="btn btn-secundario" style={{ minHeight: 34 }}>✍️ Nuevo escrito</Link></p>
+        <p className="mb-2"><Link href="/admin/ia/nuevo/" className="btn btn-secundario" style={{ minHeight: 34 }}>Nuevo escrito</Link></p>
         <ul className="grid gap-1 text-sm">{d.hilos.map((h) => <li key={h.id}><Link href={`?hilo=${h.id}`} className={`block rounded px-2 py-1 no-underline truncate ${h.id === d.hilo ? 'activo' : ''}`}>{h.titulo}</Link></li>)}</ul>
       </aside>
       <section className="expediente-central">

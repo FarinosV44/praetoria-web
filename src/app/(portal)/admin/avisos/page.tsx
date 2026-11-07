@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Cabecera, Vacio } from '@/portal/components/despacho';
 import { comoUsuario } from '@/portal/lib/db';
 import { requerirPersonal } from '@/portal/lib/sesion';
 import { fechaHora, textoAntelacion, TIPO_ETIQUETA } from '@/portal/lib/agenda';
@@ -21,16 +22,16 @@ export default async function Avisos({ searchParams }: { searchParams: Promise<{
   const sinLeer = d.recibidos.filter((r) => !r.leido_at).length;
   return (
     <div className="grid gap-5">
-      <div className="fila"><h1 className="titulo">Avisos</h1>
-        {sinLeer ? <form action={marcarLeidos}><button className="btn btn-secundario" style={{ minHeight: 38 }}>Marcar todo como visto</button></form> : null}</div>
+      <Cabecera titulo="Avisos" entradilla="El canal que siempre funciona, llegue o no la notificación al teléfono."
+        acciones={sinLeer ? <form action={marcarLeidos}><button className="btn btn-secundario">Marcar todo como visto</button></form> : undefined} />
       {q.ok ? <p className="exito" role="status">{q.ok}</p> : null}
       {q.error ? <p className="error" role="alert">{q.error}</p> : null}
       <section className="card">
         <h2 className="subtitulo">Pendientes de atender ({sinLeer})</h2>
-        {d.recibidos.length === 0 ? <p className="ayuda">Todavía no has recibido avisos.</p> : (
+        {d.recibidos.length === 0 ? <Vacio titulo="Sin avisos">Todavía no has recibido avisos.</Vacio> : (
           <ul className="grid gap-3">
             {d.recibidos.map((r) => (
-              <li key={r.id} className="grid gap-2" style={{ borderTop: '1px solid var(--color-line)', paddingTop: 10, opacity: r.leido_at ? 0.65 : 1 }} data-aviso={r.titulo}>
+              <li key={r.id} className="grid gap-2" style={{ borderTop: '1px solid var(--d-linea-suave)', paddingTop: 10, opacity: r.leido_at ? 0.72 : 1 }} data-aviso={r.titulo}>
                 <div>
                   <Link href={`/admin/agenda/${r.evento_id}/`} className="font-semibold">{r.titulo}</Link>
                   <p className="ayuda text-sm">{TIPO_ETIQUETA[r.tipo]} · {fechaHora(r.inicio, !r.todo_el_dia)} · aviso {r.antelacion_min ? textoAntelacion(r.antelacion_min) : 'a la hora'} · recibido {fechaHora(r.created_at)} ({r.canales})</p>
@@ -39,10 +40,10 @@ export default async function Avisos({ searchParams }: { searchParams: Promise<{
                   <div className="flex flex-wrap gap-2">
                     {[[60, 'Posponer 1 h'], [1440, 'Posponer 1 día']].map(([m, t]) => (
                       <form key={m} action={posponer}><input type="hidden" name="aviso" value={r.aviso_id} /><input type="hidden" name="minutos" value={m} />
-                        <button className="btn btn-secundario" style={{ minHeight: 36 }}>{t}</button></form>
+                        <button className="btn btn-secundario" style={{ minHeight: 32 }}>{t}</button></form>
                     ))}
                     <form action={cambiarEstado}><input type="hidden" name="id" value={r.evento_id} /><input type="hidden" name="estado" value="completado" />
-                      <input type="hidden" name="destino" value="/admin/avisos/" /><button className="btn btn-secundario" style={{ minHeight: 36 }}>Completada</button></form>
+                      <input type="hidden" name="destino" value="/admin/avisos/" /><button className="btn btn-secundario" style={{ minHeight: 32 }}>Completada</button></form>
                   </div>
                 ) : null}
               </li>

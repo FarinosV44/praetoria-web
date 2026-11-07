@@ -9,7 +9,7 @@ function Enlace({ r }: { r: ResultadoEquipo }) {
   return (
     <div className="grid gap-1 text-sm" role="status">
       <p>{r.ok} {r.correo === 'enviado' ? 'Le hemos enviado el enlace por correo.' : 'No se pudo enviar el correo: entrégale este enlace por un canal privado.'}</p>
-      <input readOnly value={r.enlace} aria-label="Enlace de activación (un solo uso, 72 horas)" data-enlace-empleado className="border rounded p-2 w-full font-mono text-xs" onFocus={(e) => e.target.select()} />
+      <input readOnly value={r.enlace} aria-label="Enlace de activación (un solo uso, 72 horas)" data-enlace-empleado className="control w-full font-mono text-xs" onFocus={(e) => e.target.select()} />
     </div>
   );
 }
@@ -19,8 +19,8 @@ export function InvitarEmpleado() {
   return (
     <form action={accion} className="grid gap-3">
       <div className="grid sm:grid-cols-2 gap-3">
-        <label className="grid gap-1"><span className="etiqueta">Nombre</span><input name="nombre" required minLength={2} maxLength={120} className="border rounded-md p-2" /></label>
-        <label className="grid gap-1"><span className="etiqueta">Correo</span><input name="email" type="email" required className="border rounded-md p-2" /></label>
+        <label className="grid gap-1"><span className="etiqueta">Nombre</span><input name="nombre" required minLength={2} maxLength={120} className="control" /></label>
+        <label className="grid gap-1"><span className="etiqueta">Correo</span><input name="email" type="email" required className="control" /></label>
       </div>
       <fieldset className="flex flex-wrap gap-3 text-sm"><legend className="etiqueta mb-1">Rol</legend>
         {ROLES.map(([v, t], i) => <label key={v} className="flex gap-1 items-center"><input type="radio" name="rol" value={v} defaultChecked={i === 0} /> {t}</label>)}

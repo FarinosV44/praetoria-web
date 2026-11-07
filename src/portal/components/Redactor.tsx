@@ -125,7 +125,7 @@ export function Redactor({ solicitud, hilo: hiloFijo, escrito: escritoFijo, inic
       </div>
 
       {propuesta ? (
-        <section className="border rounded p-3 grid gap-2" aria-label="Modelos de la biblioteca" data-propuesta>
+        <section className="control grid gap-2" aria-label="Modelos de la biblioteca" data-propuesta>
           <p className="text-sm">
             {propuesta.procedimiento ? <>Procedimiento identificado: <strong data-procedimiento>{propuesta.procedimiento.nombre}</strong>. </> : <>No se ha identificado un procedimiento concreto. </>}
             {seleccion.length ? `${seleccion.length} modelo${seleccion.length > 1 ? 's' : ''} elegido${seleccion.length > 1 ? 's' : ''} (máximo 5).` : 'Ningún modelo elegido: se redactará solo con el expediente.'}
@@ -143,7 +143,7 @@ export function Redactor({ solicitud, hilo: hiloFijo, escrito: escritoFijo, inic
             {modelos.map((m: ModeloCandidato) => {
               const e = etiqueta(m.version_id);
               return (
-                <li key={m.version_id} className="border rounded p-2 text-sm" data-modelo={m.titulo}>
+                <li key={m.version_id} className="control text-sm" data-modelo={m.titulo}>
                   <label className="flex gap-2 items-start">
                     <input type="checkbox" checked={!!e} onChange={() => conmutar(m.version_id)} disabled={ocupado || (!e && seleccion.length >= 5)} aria-label={`Usar «${m.titulo}»`} />
                     <span className="grid gap-1">

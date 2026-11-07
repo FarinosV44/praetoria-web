@@ -20,8 +20,8 @@ export function AbrirExpediente({ clientes, cliente, tipos, equipo, yo }: { clie
       {clientes ? (
         <fieldset className="grid gap-2">
           <legend className="etiqueta">Cliente</legend>
-          <input type="search" value={filtro} onChange={(e) => setFiltro(e.target.value)} placeholder="Busca por nombre, correo o empresa" aria-label="Buscar cliente" className="border rounded-md p-2" />
-          <ul className="grid gap-1 max-h-64 overflow-auto border rounded-md p-2" role="radiogroup" aria-label="Clientes">
+          <input type="search" value={filtro} onChange={(e) => setFiltro(e.target.value)} placeholder="Busca por nombre, correo o empresa" aria-label="Buscar cliente" className="control" />
+          <ul className="grid gap-1 max-h-64 overflow-auto control" role="radiogroup" aria-label="Clientes">
             {lista.length === 0 ? <li className="ayuda text-sm">No hay clientes que coincidan. <Link href="/admin/clientes/nuevo/">Dar de alta uno nuevo</Link></li> : null}
             {lista.map((c) => (
               <li key={c.id}>
@@ -35,17 +35,17 @@ export function AbrirExpediente({ clientes, cliente, tipos, equipo, yo }: { clie
         </fieldset>
       ) : <input type="hidden" name="cliente" value={cliente} />}
       <label className="grid gap-1">Título del asunto
-        <input name="titulo" required minLength={3} maxLength={200} placeholder="Ej.: Reclamación de cantidad frente a…" className="border rounded-md p-2" />
+        <input name="titulo" required minLength={3} maxLength={200} placeholder="Ej.: Reclamación de cantidad frente a…" className="control" />
       </label>
       <div className="flex flex-wrap gap-3">
         <label className="grid gap-1 text-sm">Tipo de asunto (opcional)
-          <select name="tipo" defaultValue="" className="border rounded-md p-2">
+          <select name="tipo" defaultValue="" className="control">
             <option value="">Sin tipo</option>
             {tipos.map((t) => <option key={t.id} value={t.id}>{t.nombre}</option>)}
           </select>
         </label>
         <label className="grid gap-1 text-sm">Responsable
-          <select name="responsable" defaultValue={yo} className="border rounded-md p-2">
+          <select name="responsable" defaultValue={yo} className="control">
             {equipo.map((p) => <option key={p.id} value={p.id}>{p.nombre}{p.id === yo ? ' (yo)' : ''}</option>)}
           </select>
         </label>

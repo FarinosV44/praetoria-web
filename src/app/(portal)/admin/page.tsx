@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Cabecera, Kpi, Panel, RejillaKpi, Vacio, Vistas } from '@/portal/components/despacho';
 import { ChipSolicitud } from '@/portal/components/ui';
 import { comoUsuario } from '@/portal/lib/db';
 import { recientes } from '@/portal/lib/expediente';
@@ -40,77 +41,75 @@ export default async function Bandeja({ searchParams }: { searchParams: Promise<
     for (const [k, def] of Object.entries(vistas)) cuentas[k] = (await tx.query(`${base} select count(*)::int n from x s where ${def.where}`)).rows[0].n;
     return { filas, cuentas, rec: await recientes(tx, u.id), trabajo: await miTrabajo(tx, u.id), panel: await panelInicio(tx, u.id) };
   });
+  const kpi = (k: Vista) => `?vista=${k}#bandeja`;
+  const docs = (s: { por_revisar: number; pendientes_oblig: number; subsanar: number }) => [s.por_revisar ? `${s.por_revisar} por revisar` : '', s.pendientes_oblig ? `${s.pendientes_oblig} faltan` : '', s.subsanar ? `${s.subsanar} a subsanar` : ''].filter(Boolean).join(' · ') || 'Al día';
   return (
     <div className="grid gap-5">
-      <section className="grid gap-3">
-        <form action="/admin/buscar/" className="flex gap-2">
-          <input name="q" type="search" placeholder="Buscar cliente, NIF, referencia, asunto o documento" aria-label="Buscar" className="border rounded-md p-3 flex-1 min-w-0" />
-          <button className="btn btn-primario">Buscar</button>
-          <Link href="/admin/clientes/nuevo/" className="btn btn-secundario">+ Cliente</Link>
-        </form>
-        {rec.length ? (
-          <div className="flex flex-wrap gap-2" aria-label="Expedientes recientes">
-            {rec.map((r) => <Link key={r.id} href={`/admin/expedientes/${r.id}/`} className="chip chip-neutro no-underline">{r.cliente} · {r.titulo}</Link>)}
-          </div>
-        ) : null}
-      </section>
-      <section className="panel-resumen" aria-label="Resumen del despacho">
-        <div><span className="panel-cifra">{cuentas.expedientes}</span><span className="ayuda">expedientes abiertos</span></div>
-        <div data-aviso={panel.vencidos.length ? 'si' : undefined}><span className="panel-cifra">{panel.vencidos.length}</span><span className="ayuda">plazos vencidos</span></div>
-        <div><span className="panel-cifra">{panel.sinVerificar.length}</span><span className="ayuda">plazos sin verificar</span></div>
-        <div><span className="panel-cifra">{cuentas.faltan}</span><span className="ayuda">con documentación pendiente</span></div>
-      </section>
+      <Cabecera titulo="Bandeja del despacho" entradilla="Lo que está pendiente hoy: plazos, solicitudes y documentación."
+        acciones={<><Link href="/admin/clientes/nuevo/" className="btn btn-secundario">+ Cliente</Link><Link href="/admin/expedientes/nuevo/" className="btn btn-primario">+ Abrir expediente</Link></>} />
+      {rec.length ? (
+        <nav className="vistas" aria-label="Expedientes recientes">
+          <span className="vistas-etiqueta">Recientes</span>
+          {rec.map((r) => <Link key={r.id} href={`/admin/expedientes/${r.id}/`} className="vista">{r.cliente} · {r.titulo}</Link>)}
+        </nav>
+      ) : null}
+      <RejillaKpi etiqueta="Resumen del despacho">
+        <Kpi etiqueta="Plazos vencidos" valor={panel.vencidos.length} nota={panel.vencidos.length ? 'Requieren atención' : 'Ninguno'} tono={panel.vencidos.length ? 'alerta' : undefined} href="/admin/agenda/?vista=vencidos" />
+        <Kpi etiqueta="Plazos sin verificar" valor={panel.sinVerificar.length} nota="Fecha por comprobar" tono={panel.sinVerificar.length ? 'aviso' : undefined} href="/admin/agenda/?vista=verificar" />
+        <Kpi etiqueta="Solicitudes nuevas" valor={cuentas.nuevas} nota="Por revisar" href={kpi('nuevas')} />
+        <Kpi etiqueta="En revisión" valor={cuentas.revision} nota="Solicitudes en curso" href={kpi('revision')} />
+        <Kpi etiqueta="Expedientes abiertos" valor={cuentas.expedientes} nota="En tramitación" href="/admin/expedientes/" />
+        <Kpi etiqueta="Documentos por validar" valor={cuentas.validar} nota="Asuntos con archivos nuevos" tono={cuentas.validar ? 'aviso' : undefined} href={kpi('validar')} />
+        <Kpi etiqueta="Falta documentación" valor={cuentas.faltan} nota="Obligatoria sin aportar" href={kpi('faltan')} />
+        <Kpi etiqueta="Pendiente de subsanar" valor={cuentas.subsanar} nota="Devuelta al cliente" href={kpi('subsanar')} />
+      </RejillaKpi>
       {panel.vencidos.length ? (
-        <section className="aviso" aria-label="Plazos vencidos" data-alerta="vencidos">
+        <section className="aviso aviso-alerta" aria-label="Plazos vencidos" data-alerta="vencidos">
           <strong>Plazos vencidos sin completar</strong>
           <ul className="text-sm mt-1">{panel.vencidos.map((p) => <li key={p.id}><Link href={`/admin/expedientes/${p.sid}/?vista=plazos`}>{p.titulo}</Link> · {fecha(p.inicio)}<span className="ayuda"> · {p.asunto}</span></li>)}</ul>
         </section>
       ) : null}
-      <MiTrabajo d={trabajo} />
-      <section className="grid md:grid-cols-3 gap-3" aria-label="Escritos e inteligencia artificial">
-        <div className="card" data-bloque="plazos-sin-verificar">
-          <h3 className="font-semibold mb-2">Plazos por verificar</h3>
-          {panel.sinVerificar.length ? <ul className="grid gap-1 text-sm">{panel.sinVerificar.map((p) => <li key={p.id}><Link href={`/admin/expedientes/${p.sid}/?vista=plazos`}>{p.titulo}</Link> · {fecha(p.inicio)}<span className="ayuda"> · {p.asunto}</span></li>)}</ul> : <p className="ayuda text-sm">Ningún plazo pendiente de verificar.</p>}
-          {panel.propuestas ? <p className="text-sm mt-2"><strong>{panel.propuestas}</strong> propuesta{panel.propuestas > 1 ? 's' : ''} de la IA por revisar en los expedientes.</p> : null}
-        </div>
-        <div className="card" data-bloque="borradores">
-          <h3 className="font-semibold mb-2">Borradores recientes</h3>
-          {panel.borradores.length ? <ul className="grid gap-1 text-sm">{panel.borradores.map((b) => <li key={b.id}><Link href={`/admin/expedientes/${b.sid}/escritos/${b.id}/`}>{b.titulo}</Link> · v{b.version}<span className="ayuda"> · {b.asunto}</span></li>)}</ul> : <p className="ayuda text-sm">Aún no hay borradores. <Link href="/admin/ia/nuevo/">Crear un escrito</Link></p>}
-        </div>
-        <div className="card" data-bloque="actividad-ia">
-          <h3 className="font-semibold mb-2">Actividad de la IA</h3>
-          {panel.actividad.length ? <ul className="grid gap-1 text-sm">{panel.actividad.map((a) => <li key={a.id}>{a.sid ? <Link href={`/admin/expedientes/${a.sid}/asistente/`}>{a.texto}</Link> : a.texto}<span className="ayuda"> · {a.estado === 'error' ? 'con error' : a.estado === 'en_curso' ? 'en curso' : fecha(a.at)}</span></li>)}</ul> : <p className="ayuda text-sm">Sin actividad reciente.</p>}
-          {panel.errores ? <p className="text-sm mt-2">⚠️ {panel.errores} documento{panel.errores > 1 ? 's' : ''} sin indexar por error.</p> : null}
-        </div>
-      </section>
-      <h1 className="titulo">Bandeja</h1>
-      <nav aria-label="Vistas" className="flex flex-wrap gap-2">
-        {Object.entries(vistas).map(([k, d]) => (
-          <Link key={k} href={`?vista=${k}`} className={`chip ${k === v ? 'chip-info' : 'chip-neutro'} no-underline`} aria-current={k === v ? 'page' : undefined}>
-            {d.titulo} ({cuentas[k]})
-          </Link>
-        ))}
-      </nav>
-      <section className="card overflow-x-auto">
-        <h2 className="subtitulo">{vista.titulo}</h2>
-        {filas.length === 0 ? <p className="ayuda">No hay nada en esta vista.</p> : (
-          <table className="tabla">
-            <thead><tr><th>Referencia</th><th>Cliente</th><th>Asunto</th><th>Estado</th><th>Documentos</th><th>Responsable</th><th>Enviada</th></tr></thead>
-            <tbody>
-              {filas.map((s) => (
-                <tr key={s.id}>
-                  <td><Link href={`/admin/expedientes/${s.id}/`} className="font-semibold">{s.expediente_ref ?? s.referencia}</Link>{s.urgencia === 'urgente' ? <> <span className="chip chip-aviso">Urgente</span></> : null}</td>
-                  <td>{s.cliente_nombre}<br /><span className="ayuda">{s.cliente_email}</span></td>
-                  <td>{s.tipo_nombre}</td>
-                  <td><ChipSolicitud estado={s.estado} /></td>
-                  <td className="text-sm">{s.por_revisar} por revisar · {s.pendientes_oblig} faltan · {s.subsanar} a subsanar</td>
-                  <td>{s.responsable ?? <span className="ayuda">Sin asignar</span>}</td>
-                  <td className="text-sm">{s.enviada_at ? fecha(s.enviada_at) : '—'}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <section id="bandeja" className="grid gap-3" aria-labelledby="bandeja-titulo" style={{ scrollMarginTop: 70 }}>
+        <h2 id="bandeja-titulo" className="seccion-titulo">Bandeja</h2>
+        <Vistas etiqueta="Vistas" items={Object.entries(vistas).map(([k, d]) => ({ texto: d.titulo, href: `?vista=${k}#bandeja`, activo: k === v, n: cuentas[k] }))} />
+        {filas.length === 0 ? <Vacio titulo={`${vista.titulo}: nada pendiente`}>No hay nada en esta vista.</Vacio> : (
+          <div className="tabla-marco">
+            <table className="tabla tabla-apilada">
+              <caption className="sr-only">{vista.titulo}</caption>
+              <thead><tr><th>Referencia</th><th>Cliente</th><th>Asunto</th><th>Estado</th><th>Documentos</th><th>Responsable</th><th>Enviada</th></tr></thead>
+              <tbody>
+                {filas.map((s) => (
+                  <tr key={s.id}>
+                    <td data-e="Referencia"><Link href={`/admin/expedientes/${s.id}/`}>{s.expediente_ref ?? s.referencia}</Link>{s.urgencia === 'urgente' ? <> <span className="chip chip-peligro">Urgente</span></> : null}</td>
+                    <td data-e="Cliente">{s.cliente_nombre}<span className="ref">{s.cliente_email}</span></td>
+                    <td data-e="Asunto">{s.tipo_nombre}</td>
+                    <td data-e="Estado"><ChipSolicitud estado={s.estado} /></td>
+                    <td data-e="Documentos" className="text-sm">{docs(s)}</td>
+                    <td data-e="Responsable">{s.responsable ?? <span className="ayuda">Sin asignar</span>}</td>
+                    <td data-e="Enviada" className="text-sm whitespace-nowrap">{s.enviada_at ? fecha(s.enviada_at) : '—'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
+      </section>
+      <MiTrabajo d={trabajo} />
+      <section className="grid gap-3" aria-labelledby="ia-titulo">
+        <h2 id="ia-titulo" className="seccion-titulo">Escritos e inteligencia artificial</h2>
+        <div className="rejilla-paneles">
+          <Panel id="plazos-sin-verificar" titulo="Plazos por verificar" n={panel.sinVerificar.length} vacio="Ningún plazo pendiente de verificar."
+            pie={panel.propuestas ? <><strong>{panel.propuestas}</strong> propuesta{panel.propuestas > 1 ? 's' : ''} de la IA por revisar en los expedientes.</> : undefined}>
+            {panel.sinVerificar.map((p) => <li key={p.id}><Link href={`/admin/expedientes/${p.sid}/?vista=plazos`}>{p.titulo}</Link> · {fecha(p.inicio)}<span className="linea-2">{p.asunto}</span></li>)}
+          </Panel>
+          <Panel id="borradores" titulo="Borradores recientes" n={panel.borradores.length} vacio={<>Aún no hay borradores. <Link href="/admin/ia/nuevo/">Crear un escrito</Link></>}>
+            {panel.borradores.map((b) => <li key={b.id}><Link href={`/admin/expedientes/${b.sid}/escritos/${b.id}/`}>{b.titulo}</Link> · v{b.version}<span className="linea-2">{b.asunto}</span></li>)}
+          </Panel>
+          <Panel id="actividad-ia" titulo="Actividad de la IA" n={panel.actividad.length} vacio="Sin actividad reciente."
+            pie={panel.errores ? <span className="chip chip-aviso">{panel.errores} documento{panel.errores > 1 ? 's' : ''} sin indexar por error</span> : undefined}>
+            {panel.actividad.map((a) => <li key={a.id}>{a.sid ? <Link href={`/admin/expedientes/${a.sid}/asistente/`}>{a.texto}</Link> : a.texto}<span className="linea-2">{a.estado === 'error' ? 'Con error' : a.estado === 'en_curso' ? 'En curso' : fecha(a.at)}</span></li>)}
+          </Panel>
+        </div>
       </section>
     </div>
   );

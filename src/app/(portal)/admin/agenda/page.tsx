@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Cabecera, enlaceCon, FiltroSelector, Filtros, FiltroTexto, Resultados, textoOpcion, Vacio, Vistas } from '@/portal/components/despacho';
 import { FormEvento } from '@/portal/components/FormEvento';
 import { comoUsuario } from '@/portal/lib/db';
 import { requerirPersonal } from '@/portal/lib/sesion';
@@ -19,63 +20,78 @@ const vistas = {
 } as const;
 type Vista = keyof typeof vistas;
 
-export default async function Agenda({ searchParams }: { searchParams: Promise<{ vista?: string; ok?: string; error?: string }> }) {
+export default async function Agenda({ searchParams }: { searchParams: Promise<{ vista?: string; ok?: string; error?: string; q?: string; tipo?: string }> }) {
   const u = await requerirPersonal();
   const q = await searchParams;
   const v: Vista = (q.vista && q.vista in vistas ? q.vista : 'semana') as Vista;
+  const texto = (q.q ?? '').trim().slice(0, 100);
+  const tipo = q.tipo && q.tipo in TIPO_ETIQUETA ? q.tipo : '';
   const { eventos, asuntos } = await comoUsuario(u.id, async (tx) => ({
     eventos: (await tx.query(`select e.*, s.referencia, x.referencia exp_ref,
         (select count(*) from portal.agenda_avisos a where a.evento_id = e.id and a.estado = 'programado')::int avisos_pend
       from portal.agenda_eventos e left join portal.solicitudes s on s.id = e.solicitud_id left join portal.expedientes x on x.solicitud_id = e.solicitud_id
-      where ${vistas[v].w} order by e.inicio limit 300`)).rows,
+      where ${vistas[v].w} and ($1 = '' or e.titulo ilike '%' || $1 || '%' or coalesce(x.referencia, s.referencia, '') ilike '%' || $1 || '%') and ($2 = '' or e.tipo = $2) order by e.inicio limit 300`, [texto, tipo])).rows,
     asuntos: (await tx.query(`select s.id, coalesce(x.referencia || ' · ' || x.titulo, s.referencia || ' · ' || coalesce(t.nombre, '')) texto
       from portal.solicitudes s left join portal.expedientes x on x.solicitud_id = s.id left join portal.tipos_asunto t on t.id = s.tipo_asunto_id
       where s.estado in ('enviada', 'en_revision', 'aceptada') order by (x.id is null), coalesce(x.abierto_at, s.enviada_at) desc limit 200`)).rows,
   }));
   const hoy = partesMadrid(new Date()).fecha;
+  const BASE = '/admin/agenda/';
+  const actuales = { vista: v === 'semana' ? undefined : v, q: texto || undefined, tipo: tipo || undefined };
+  const enlace = (c: Record<string, string | undefined>) => enlaceCon(BASE, actuales, c);
+  const opcionesTipo: [string, string][] = [['', 'Todos'], ...Object.entries(TIPO_ETIQUETA).map(([k, t]): [string, string] => [k, t as string])];
+  const activos = [
+    texto ? { texto: `Buscar: ${texto}`, href: enlace({ q: undefined }) } : null,
+    tipo ? { texto: `Tipo: ${textoOpcion(opcionesTipo, tipo)}`, href: enlace({ tipo: undefined }) } : null,
+  ].filter((x): x is { texto: string; href: string } => !!x);
   return (
-    <div className="grid gap-5">
-      <div className="fila"><h1 className="titulo">Agenda</h1><Link href="/admin/avisos/" className="btn btn-secundario">Avisos</Link></div>
+    <div className="grid gap-4">
+      <Cabecera titulo="Agenda" entradilla="Plazos, citas y tareas del despacho, con sus avisos." acciones={<Link href="/admin/avisos/" className="btn btn-secundario">Avisos</Link>} />
       {q.ok ? <p className="exito" role="status">{q.ok}</p> : null}
       {q.error ? <p className="error" role="alert">{q.error}</p> : null}
-      <details className="card" open={!eventos.length}>
+      <details className="card" open={!eventos.length && !activos.length}>
         <summary className="subtitulo cursor-pointer">Nuevo evento</summary>
         <div className="mt-3"><FormEvento e={{ fecha: hoy, hora: '10:00' }} accion={crearEvento} asuntos={asuntos} boton="Guardar y programar avisos" /></div>
       </details>
-      <nav aria-label="Vistas de la agenda" className="flex flex-wrap gap-2">
-        {Object.entries(vistas).map(([k, d]) => (
-          <Link key={k} href={`?vista=${k}`} className={`chip ${k === v ? 'chip-info' : 'chip-neutro'} no-underline`} aria-current={k === v ? 'page' : undefined}>{d.t}</Link>
-        ))}
-      </nav>
-      <section className="card">
-        <h2 className="subtitulo">{vistas[v].t}</h2>
-        {eventos.length === 0 ? <p className="ayuda">No hay eventos en esta vista.</p> : (
-          <ul className="grid gap-3">
-            {eventos.map((e) => (
-              <li key={e.id} className="fila" style={{ borderTop: '1px solid var(--color-line)', paddingTop: 10 }} data-evento={e.titulo}>
-                <div>
-                  <Link href={`/admin/agenda/${e.id}/`} className="font-semibold">{e.titulo}</Link>
-                  <p className="ayuda text-sm">
-                    {fechaHora(e.inicio, !e.todo_el_dia)}{e.todo_el_dia ? ' · todo el día' : ''} · {TIPO_ETIQUETA[e.tipo]}
-                    {e.repeticion !== 'ninguna' ? ` · se repite (${e.repeticion})` : ''}{e.exp_ref ?? e.referencia ? ` · ${e.exp_ref ?? e.referencia}` : ''}
-                    {` · ${e.avisos_pend} avisos programados`}
-                  </p>
-                  {e.tipo === 'plazo' ? <span className={`chip ${e.plazo_verificado_at ? 'chip-ok' : 'chip-aviso'}`}>{e.plazo_verificado_at ? 'Fecha verificada' : 'Fecha pendiente de verificar'}</span> : null}
-                  {e.estado !== 'pendiente' ? <span className="chip chip-neutro">{e.estado === 'completado' ? 'Completado' : 'Cancelado'}</span> : null}
-                  {e.prioridad === 'alta' ? <span className="chip chip-aviso ml-1">Prioridad alta</span> : null}
-                </div>
-                {e.estado === 'pendiente' ? (
-                  <form action={cambiarEstado}>
-                    <input type="hidden" name="id" value={e.id} /><input type="hidden" name="estado" value="completado" />
-                    <input type="hidden" name="destino" value={`/admin/agenda/?vista=${v}`} />
-                    <button className="btn btn-secundario" style={{ minHeight: 38 }}>Completada</button>
-                  </form>
-                ) : null}
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+      <Vistas etiqueta="Vistas de la agenda" items={Object.entries(vistas).map(([k, d]) => ({ texto: d.t, href: enlace({ vista: k === 'semana' ? undefined : k }), activo: k === v }))} />
+      <Filtros accion={BASE} etiqueta="Buscar en la agenda" columnas={3} ocultos={{ vista: actuales.vista }} activos={activos} limpiar={enlaceCon(BASE, { vista: actuales.vista })}
+        basicos={<>
+          <FiltroTexto nombre="q" etiqueta="Buscar eventos" valor={texto} ayuda="Título o referencia del expediente" ancho />
+          <FiltroSelector nombre="tipo" etiqueta="Tipo de evento" valor={tipo} opciones={opcionesTipo} />
+        </>} />
+      <Resultados total={eventos.length} nombre={['evento', 'eventos']} />
+      {eventos.length === 0 ? <Vacio titulo={`${vistas[v].t}: sin eventos`}>No hay eventos en esta vista.</Vacio> : (
+        <div className="tabla-marco">
+          <table className="tabla tabla-apilada">
+            <caption className="sr-only">{vistas[v].t}</caption>
+            <thead><tr><th>Fecha</th><th>Evento</th><th>Tipo</th><th>Expediente</th><th>Situación</th><th>Avisos</th><th><span className="sr-only">Acción</span></th></tr></thead>
+            <tbody>
+              {eventos.map((e) => (
+                <tr key={e.id} data-evento={e.titulo}>
+                  <td data-e="Fecha" className="text-sm whitespace-nowrap">{fechaHora(e.inicio, !e.todo_el_dia)}{e.todo_el_dia ? <span className="ref">Todo el día</span> : null}</td>
+                  <td data-e="Evento"><Link href={`/admin/agenda/${e.id}/`}>{e.titulo}</Link>{e.repeticion !== 'ninguna' ? <span className="ref">Se repite ({e.repeticion})</span> : null}</td>
+                  <td data-e="Tipo" className="text-sm">{TIPO_ETIQUETA[e.tipo]}</td>
+                  <td data-e="Expediente" className="text-sm">{e.solicitud_id ? <Link href={`/admin/expedientes/${e.solicitud_id}/`}>{e.exp_ref ?? e.referencia}</Link> : <span className="ayuda">—</span>}</td>
+                  <td data-e="Situación"><div className="flex flex-wrap gap-1">
+                    {e.tipo === 'plazo' ? <span className={`chip ${e.plazo_verificado_at ? 'chip-ok' : 'chip-aviso'}`}>{e.plazo_verificado_at ? 'Fecha verificada' : 'Fecha pendiente de verificar'}</span> : null}
+                    {e.estado !== 'pendiente' ? <span className="chip chip-neutro">{e.estado === 'completado' ? 'Completado' : 'Cancelado'}</span> : null}
+                    {e.prioridad === 'alta' ? <span className="chip chip-aviso">Prioridad alta</span> : null}
+                    {e.estado === 'pendiente' && e.tipo !== 'plazo' && e.prioridad !== 'alta' ? <span className="ayuda">Pendiente</span> : null}
+                  </div></td>
+                  <td data-e="Avisos" className="text-sm whitespace-nowrap">{e.avisos_pend} programados</td>
+                  <td data-e="" className="text-right">{e.estado === 'pendiente' ? (
+                    <form action={cambiarEstado}>
+                      <input type="hidden" name="id" value={e.id} /><input type="hidden" name="estado" value="completado" />
+                      <input type="hidden" name="destino" value={`/admin/agenda/?vista=${v}`} />
+                      <button className="btn btn-secundario" style={{ minHeight: 32 }}>Completada</button>
+                    </form>
+                  ) : null}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }

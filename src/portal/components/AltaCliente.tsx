@@ -11,7 +11,7 @@ function EnlaceUnaVez({ enlace, correo }: { enlace: string; correo?: ResultadoAl
       {correo === 'fallido' ? <p><strong>No se pudo enviar el correo.</strong> Entrégale el enlace por un canal privado.</p> : null}
       <p className="text-sm">Enlace de activación (se muestra solo ahora; no lo pegues en grupos ni lo guardes):</p>
       <div className="flex gap-2">
-        <input readOnly value={enlace} className="border rounded-md p-2 flex-1 min-w-0 text-xs" aria-label="Enlace de activación" data-enlace-activacion />
+        <input readOnly value={enlace} className="control flex-1 min-w-0 text-xs" aria-label="Enlace de activación" data-enlace-activacion />
         <button type="button" className="btn btn-secundario" style={{ minHeight: 36 }}
           onClick={async () => { await navigator.clipboard.writeText(enlace).catch(() => {}); setCopiado(true); }}>{copiado ? 'Copiado' : 'Copiar'}</button>
       </div>

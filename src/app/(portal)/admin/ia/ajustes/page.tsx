@@ -1,3 +1,4 @@
+import { Cabecera } from '@/portal/components/despacho';
 import type { Metadata } from 'next';
 import { AjustesIA } from '@/portal/components/AjustesIA';
 import { Reindexar } from '@/portal/components/ExpedienteIA';
@@ -27,7 +28,7 @@ export default async function AjustesPagina() {
   const ESTADO: Record<string, string> = { ok: 'Procesados', pendiente: 'En cola', procesando: 'Procesando', sin_texto: 'Sin texto legible', error: 'Con error' };
   return (
     <div className="grid gap-4 max-w-4xl">
-      <div><Migas items={[{ texto: 'Copiloto', href: '/admin/ia/' }, { texto: 'Ajustes de IA' }]} /><h1 className="titulo">Ajustes de IA</h1></div>
+      <Cabecera titulo="Ajustes de IA" migas={[{ texto: 'Copiloto', href: '/admin/ia/' }, { texto: 'Ajustes de IA' }]} />
       <AjustesIA d={JSON.parse(JSON.stringify(d.a))} claves={clavesIA()} />
       <section className="card overflow-x-auto" data-estado-indice>
         <h2 className="subtitulo">Conocimiento indexado</h2>

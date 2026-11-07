@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Cabecera } from '@/portal/components/despacho';
 import { notFound } from 'next/navigation';
 import { ChipRequisito, ChipSolicitud, tamano } from '@/portal/components/ui';
 import { comoUsuario } from '@/portal/lib/db';
@@ -43,25 +44,9 @@ export default async function FichaCliente({ params }: { params: Promise<{ id: s
   const { c } = d;
   return (
     <div className="grid gap-5">
-      <p><Link href="/admin/clientes/">← Clientes</Link></p>
-      <div>
-        <h1 className="titulo">{c.name}</h1>
-        <p className="ayuda">{c.email}{c.telefono ? ` · ${c.telefono}` : ''} · {c.tipo === 'empresa' ? `Empresa: ${c.empresa}${c.cargo ? ` (${c.cargo})` : ''}` : 'Particular'} · alta {fecha(c.alta)}{c.verificado ? '' : ' · correo sin verificar'}</p>
-      </div>
-      <section className="card grid gap-3">
-        <h2 className="subtitulo" style={{ marginBottom: 0 }}>Acceso al área de clientes</h2>
-        {c.verificado ? <p><span className="chip chip-ok">Acceso activo</span> El cliente entra con su correo y su propia contraseña.</p>
-          : <><p className="ayuda">Todavía no ha activado su acceso.</p><Reinvitar cliente={c.id} /></>}
-      </section>
-      <section className="card">
-        <h2 className="subtitulo">Abrir un expediente nuevo para este cliente</h2>
-        {u.personal!.rol === 'lectura' || u.personal!.rol === 'facturacion' ? <p className="ayuda">Tu rol no permite abrir expedientes.</p>
-          : <AbrirExpediente cliente={c.id} tipos={d.tipos} equipo={d.equipo} yo={u.id} />}
-      </section>
-      <section className="card">
-        <h2 className="subtitulo">Datos de contacto y facturación</h2>
-        <FichaDatos cliente={c.id} v={{ telefono: c.telefono, nif: c.nif, empresa: c.empresa, direccion: c.direccion, codigo_postal: c.codigo_postal, localidad: c.localidad, provincia: c.provincia }} />
-      </section>
+      <Cabecera titulo={c.name} migas={[{ texto: 'Clientes', href: '/admin/clientes/' }, { texto: c.name }]} entradilla={<>{c.email}{c.telefono ? ` · ${c.telefono}` : ''} · {c.tipo === 'empresa' ? `Empresa: ${c.empresa}${c.cargo ? ` (${c.cargo})` : ''}` : 'Particular'} · alta {fecha(c.alta)}{c.verificado ? '' : ' · correo sin verificar'}</>} />
+      <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_360px] items-start">
+        <div className="grid gap-5 min-w-0">
       <section className="card overflow-x-auto">
         <h2 className="subtitulo">Asuntos ({d.asuntos.length})</h2>
         {d.asuntos.length === 0 ? <p className="ayuda">Este cliente aún no ha iniciado ninguna solicitud.</p> : (
@@ -85,7 +70,7 @@ export default async function FichaCliente({ params }: { params: Promise<{ id: s
           <ul className="grid gap-2">
             {d.docs.map((x, i) => (
               <li key={x.id}>
-                {i === 0 || d.docs[i - 1]!.carpeta !== x.carpeta ? <p className="chip chip-neutro mt-3 mb-1">📁 {x.carpeta}</p> : null}
+                {i === 0 || d.docs[i - 1]!.carpeta !== x.carpeta ? <p className="chip chip-neutro mt-3 mb-1">{x.carpeta}</p> : null}
                 <div className="fila text-sm" style={{ borderTop: '1px solid var(--color-line)', paddingTop: 6 }}>
                   <span>
                     <a href={`/api/documentos/${x.id}/?ver=1`} target="_blank" rel="noopener" className="font-semibold">{x.nombre_original}</a>
@@ -101,6 +86,24 @@ export default async function FichaCliente({ params }: { params: Promise<{ id: s
           </ul>
         )}
       </section>
+        </div>
+        <div className="grid gap-5 min-w-0">
+      <section className="card grid gap-3">
+        <h2 className="subtitulo" style={{ marginBottom: 0 }}>Acceso al área de clientes</h2>
+        {c.verificado ? <p><span className="chip chip-ok">Acceso activo</span> El cliente entra con su correo y su propia contraseña.</p>
+          : <><p className="ayuda">Todavía no ha activado su acceso.</p><Reinvitar cliente={c.id} /></>}
+      </section>
+      <section className="card">
+        <h2 className="subtitulo">Datos de contacto y facturación</h2>
+        <FichaDatos cliente={c.id} v={{ telefono: c.telefono, nif: c.nif, empresa: c.empresa, direccion: c.direccion, codigo_postal: c.codigo_postal, localidad: c.localidad, provincia: c.provincia }} />
+      </section>
+      <section className="card">
+        <h2 className="subtitulo">Abrir un expediente nuevo para este cliente</h2>
+        {u.personal!.rol === 'lectura' || u.personal!.rol === 'facturacion' ? <p className="ayuda">Tu rol no permite abrir expedientes.</p>
+          : <AbrirExpediente cliente={c.id} tipos={d.tipos} equipo={d.equipo} yo={u.id} />}
+      </section>
+        </div>
+      </div>
     </div>
   );
 }

@@ -106,8 +106,8 @@ test('2. Sin asignación, la empleada no ve ningún asunto ni por URL, documento
   expect((await p.goto(`/admin/solicitudes/${e.y}/`))!.status()).toBe(404);
   expect((await p.request.get(e.docY!)).status()).toBe(404);
   await p.goto(`/admin/buscar/?q=Ficticia`);
-  await expect(p.getByText(/Asuntos \(0\)/)).toBeVisible();
-  await expect(p.getByText(/Clientes \(0\)/)).toBeVisible();
+  await expect(p.locator('[data-bloque="asuntos"]')).toContainText('Ninguno');
+  await expect(p.locator('[data-bloque="clientes"]')).toContainText('Ninguno');
   await expect(p.getByRole('link', { name: 'Equipo' })).toHaveCount(0);
   expect((await p.goto('/admin/equipo/'))!.url()).toMatch(/\/admin\/$/);
 });

@@ -131,8 +131,11 @@ test('3. Pestaña Expedientes: abiertos y cerrados, agrupados por cliente o por 
 
   await p.getByRole('link', { name: /^Todos/ }).click();
   await expect(p).toHaveURL(/estado=todos/);
-  await p.getByRole('link', { name: 'Por tipo de asunto' }).click();
-  await expect(p).toHaveURL(/estado=todos&agrupar=asunto/);
+  await p.getByRole('combobox', { name: /^Agrupar/ }).click();
+  await p.getByRole('option', { name: 'Por tipo de asunto' }).click();
+  await p.getByRole('button', { name: 'Filtrar' }).click();
+  await expect(p).toHaveURL(/agrupar=asunto/);
+  await expect(p).toHaveURL(/estado=todos/);
   await expect(p.locator('[data-grupo="Sin tipo de asunto"]')).toBeVisible();
   await expect(p.locator(`[data-expediente="Despido ficticio ${suf}"]`)).toBeVisible();
   await expect(p.locator(`[data-expediente="Reclamación ficticia ${suf}"]`)).toBeVisible();

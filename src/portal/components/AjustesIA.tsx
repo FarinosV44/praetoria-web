@@ -27,9 +27,9 @@ function Comprobar({ proveedor, usados }: { proveedor: Proveedor; usados: string
 
 function Fila({ p, pre, d, claves }: { p: Proveedor; pre: 'a' | 'o'; d: Datos; claves: { anthropic: boolean; openai: boolean } }) {
   return (
-    <fieldset className="border rounded p-3 grid gap-2">
+    <fieldset className="control grid gap-2">
       <legend className="font-semibold px-1">{p === 'anthropic' ? 'Anthropic (Claude)' : 'OpenAI'} <span className={`chip ${claves[p] ? 'chip-ok' : 'chip-aviso'}`} data-clave={p}>{claves[p] ? 'Clave configurada en el servidor' : 'Sin clave en el servidor'}</span></legend>
-      {MODOS.map(([m, t]) => <label key={m} className="grid sm:grid-cols-[10rem_1fr] gap-1 items-center text-sm">{t}<input name={`${pre}_${m}`} defaultValue={d.modelos[p]?.[m] ?? ''} required list={`modelos-${p}`} className="border rounded p-2" /></label>)}
+      {MODOS.map(([m, t]) => <label key={m} className="grid sm:grid-cols-[10rem_1fr] gap-1 items-center text-sm">{t}<input name={`${pre}_${m}`} defaultValue={d.modelos[p]?.[m] ?? ''} required list={`modelos-${p}`} className="control" /></label>)}
       <datalist id={`modelos-${p}`}>{MODELOS_SUGERIDOS[p].map((x) => <option key={x} value={x} />)}</datalist>
       <Comprobar proveedor={p} usados={Object.values(d.modelos[p] ?? {})} />
     </fieldset>
@@ -63,23 +63,23 @@ export function AjustesIA({ d, claves }: { d: Datos; claves: { anthropic: boolea
       <section className="card grid gap-3">
         <h2 className="subtitulo">Límites de consumo</h2>
         <div className="grid sm:grid-cols-3 gap-3 text-sm">
-          <label className="grid gap-1">Límite diario (USD)<input name="diario" inputMode="decimal" defaultValue={d.limite_diario_usd ?? ''} placeholder="Sin límite" className="border rounded p-2" /></label>
-          <label className="grid gap-1">Límite mensual (USD)<input name="mensual" inputMode="decimal" defaultValue={d.limite_mensual_usd ?? ''} placeholder="Sin límite" className="border rounded p-2" /></label>
-          <label className="grid gap-1">Consultas por persona y hora<input name="por_hora" type="number" min={1} max={1000} defaultValue={d.limite_hora_usuario} required className="border rounded p-2" /></label>
+          <label className="grid gap-1">Límite diario (USD)<input name="diario" inputMode="decimal" defaultValue={d.limite_diario_usd ?? ''} placeholder="Sin límite" className="control" /></label>
+          <label className="grid gap-1">Límite mensual (USD)<input name="mensual" inputMode="decimal" defaultValue={d.limite_mensual_usd ?? ''} placeholder="Sin límite" className="control" /></label>
+          <label className="grid gap-1">Consultas por persona y hora<input name="por_hora" type="number" min={1} max={1000} defaultValue={d.limite_hora_usuario} required className="control" /></label>
         </div>
         <details className="text-sm"><summary>Tarifa de un modelo sin precio conocido (p. ej. OpenAI)</summary>
           <p className="ayuda my-1">Los modelos sin tarifa no suman coste estimado y no cuentan para el límite de gasto.</p>
           <div className="grid sm:grid-cols-3 gap-3">
-            <label className="grid gap-1">Modelo<input name="tarifa_modelo" defaultValue={tarifa?.[0] ?? ''} className="border rounded p-2" /></label>
-            <label className="grid gap-1">USD por millón de tokens de entrada<input name="tarifa_entrada" inputMode="decimal" defaultValue={tarifa?.[1].entrada ?? ''} className="border rounded p-2" /></label>
-            <label className="grid gap-1">USD por millón de tokens de salida<input name="tarifa_salida" inputMode="decimal" defaultValue={tarifa?.[1].salida ?? ''} className="border rounded p-2" /></label>
+            <label className="grid gap-1">Modelo<input name="tarifa_modelo" defaultValue={tarifa?.[0] ?? ''} className="control" /></label>
+            <label className="grid gap-1">USD por millón de tokens de entrada<input name="tarifa_entrada" inputMode="decimal" defaultValue={tarifa?.[1].entrada ?? ''} className="control" /></label>
+            <label className="grid gap-1">USD por millón de tokens de salida<input name="tarifa_salida" inputMode="decimal" defaultValue={tarifa?.[1].salida ?? ''} className="control" /></label>
           </div>
         </details>
       </section>
       <section className="card grid gap-2">
         <h2 className="subtitulo">Estilo del despacho</h2>
         <label className="text-sm" htmlFor="estilo">Preferencias de redacción para todos los escritos</label>
-        <textarea id="estilo" name="estilo" defaultValue={d.estilo_instrucciones} rows={5} maxLength={8000} className="border rounded p-2" placeholder="Ej.: fórmula de encabezamiento habitual, tratamiento, longitud de los fundamentos…" />
+        <textarea id="estilo" name="estilo" defaultValue={d.estilo_instrucciones} rows={5} maxLength={8000} className="control" placeholder="Ej.: fórmula de encabezamiento habitual, tratamiento, longitud de los fundamentos…" />
         <p className="ayuda text-xs">La maquetación de Word y PDF se gestiona en Biblioteca → Estilos.</p>
       </section>
       <p className="flex gap-3 items-center"><button className="btn btn-primario" disabled={pendiente}>{pendiente ? 'Guardando…' : 'Guardar ajustes'}</button>

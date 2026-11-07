@@ -48,7 +48,7 @@ export default async function Borrador({ params, searchParams }: { params: Promi
     <div className="expediente">
       <aside className="expediente-lateral" aria-label="Versiones">
         <Migas items={[{ texto: 'Expedientes', href: '/admin/expedientes/' }, { texto: d.e.asunto, href: `/admin/expedientes/${id}/?vista=escritos` }, { texto: d.e.titulo }]} />
-        {d.e.hilo_id ? <p className="mb-2"><Link href={`/admin/expedientes/${id}/asistente/?hilo=${d.e.hilo_id}&modo=redactar`} className="btn btn-secundario" style={{ minHeight: 34 }}>✍️ Seguir con el asistente</Link></p> : null}
+        {d.e.hilo_id ? <p className="mb-2"><Link href={`/admin/expedientes/${id}/asistente/?hilo=${d.e.hilo_id}&modo=redactar`} className="btn btn-secundario" style={{ minHeight: 34 }}>Seguir con el asistente</Link></p> : null}
         <p className="etiqueta text-sm mb-1">Versiones</p>
         <ol className="grid gap-1 text-sm" data-versiones>
           {[...d.versiones].reverse().map((v) => (
@@ -89,7 +89,7 @@ export default async function Borrador({ params, searchParams }: { params: Promi
             </section>
           ) : null}
 
-          <section aria-label="Texto del borrador" className="border rounded p-3" data-texto-borrador>
+          <section aria-label="Texto del borrador" className="control" data-texto-borrador>
             <ConCitas texto={sel.texto} citas={sel.citas} />
           </section>
 
@@ -112,7 +112,7 @@ export default async function Borrador({ params, searchParams }: { params: Promi
                   <button className="btn-texto">Comparar</button>
                 </form>
               ) : null}
-              <div className="border rounded p-2 max-h-[32rem] overflow-auto">{cambios.slice(0, 400).map((c, i) => (
+              <div className="control max-h-[32rem] overflow-auto">{cambios.slice(0, 400).map((c, i) => (
                 <p key={i} data-cambio={c.tipo} style={{ background: c.tipo === '+' ? 'var(--color-ok-bg, #e7f6ec)' : 'var(--color-red-bg, #fdecec)' }}>{c.tipo === '+' ? '+ ' : '− '}{c.texto}</p>))}</div>
             </details>
           ) : null}

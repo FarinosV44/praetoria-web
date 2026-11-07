@@ -45,7 +45,7 @@ export default async function Asistente({ params, searchParams }: { params: Prom
       <aside className="expediente-lateral" aria-label="Conversaciones">
         <Migas items={[{ texto: 'Expedientes', href: '/admin/expedientes/' }, { texto: d.c.titulo, href: `/admin/expedientes/${id}/` }, { texto: 'Asistente' }]} />
         <p className="mb-2"><Link href="?" className="btn btn-secundario" style={{ minHeight: 34 }}>+ Nueva conversación</Link></p>
-        <p className="mb-2"><Link href="?modo=redactar" className="btn btn-secundario" style={{ minHeight: 34 }}>✍️ Nuevo escrito</Link></p>
+        <p className="mb-2"><Link href="?modo=redactar" className="btn btn-secundario" style={{ minHeight: 34 }}>Nuevo escrito</Link></p>
         <ul className="grid gap-1 text-sm">
           {d.hilos.map((h) => <li key={h.id}><Link href={`?hilo=${h.id}`} className={`block rounded px-2 py-1 no-underline truncate ${h.id === d.hilo ? 'activo' : ''}`}>{h.titulo}</Link></li>)}
         </ul>

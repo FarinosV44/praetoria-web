@@ -12,7 +12,7 @@ export function FormEvento({ e, accion, asuntos, boton }: {
 }) {
   const fijos = new Set(AVISOS_FIJOS.map(([v]) => v));
   const extra = (e.avisos_min ?? []).find((m) => !fijos.has(m));
-  const campo = 'border rounded-md p-2 w-full';
+  const campo = 'control w-full';
   return (
     <form action={accion} className="grid gap-3">
       {e.id ? <input type="hidden" name="id" value={e.id} /> : null}
@@ -36,8 +36,8 @@ export function FormEvento({ e, accion, asuntos, boton }: {
         </div>
         <div className="flex gap-2 items-center text-sm">
           <span>Otro aviso:</span>
-          <input name="aviso_extra" type="number" min={1} max={999} defaultValue={extra ? (extra % 1440 === 0 ? extra / 1440 : extra % 60 === 0 ? extra / 60 : extra) : ''} className="border rounded-md p-2 w-20" aria-label="Cantidad" />
-          <select name="aviso_extra_unidad" defaultValue={extra ? (extra % 1440 === 0 ? 'd' : extra % 60 === 0 ? 'h' : 'min') : 'h'} className="border rounded-md p-2" aria-label="Unidad">
+          <input name="aviso_extra" type="number" min={1} max={999} defaultValue={extra ? (extra % 1440 === 0 ? extra / 1440 : extra % 60 === 0 ? extra / 60 : extra) : ''} className="control w-20" aria-label="Cantidad" />
+          <select name="aviso_extra_unidad" defaultValue={extra ? (extra % 1440 === 0 ? 'd' : extra % 60 === 0 ? 'h' : 'min') : 'h'} className="control" aria-label="Unidad">
             <option value="min">minutos antes</option><option value="h">horas antes</option><option value="d">días antes</option>
           </select>
         </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Cabecera } from '@/portal/components/despacho';
 import { NuevaMateria, NuevoProcedimiento } from '@/portal/components/Biblioteca';
 import { alternarProcedimiento } from '../acciones';
 import { comoUsuario } from '@/portal/lib/db';
@@ -17,7 +18,7 @@ export default async function Catalogo() {
   return (
     <div className="grid gap-5">
       <p className="text-sm"><Link href="/admin/biblioteca/">← Biblioteca</Link></p>
-      <h1 className="titulo">Catálogo de procedimientos</h1>
+      <Cabecera titulo="Catálogo de procedimientos" migas={[{ texto: 'Biblioteca', href: '/admin/biblioteca/' }, { texto: 'Catálogo' }]} />
       <p className="ayuda">Solo nombres de materias y procedimientos para clasificar vuestros escritos: el catálogo no contiene escritos ni normativa. Desactivar un procedimiento no borra sus modelos.</p>
       <section className="card grid gap-3"><h2 className="subtitulo">Añadir procedimiento</h2><NuevoProcedimiento materias={d.materias} /><NuevaMateria /></section>
       {d.materias.map((m) => (

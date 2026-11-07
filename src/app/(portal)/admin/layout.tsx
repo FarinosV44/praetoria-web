@@ -1,4 +1,4 @@
-import { Marca } from '@/portal/components/Marca';
+import { BarraCarga, BuscadorGlobal } from '@/portal/components/despacho-cliente';
 import { NavDespacho } from '@/portal/components/NavDespacho';
 import { PaletaComandos } from '@/portal/components/PaletaComandos';
 import { Salir } from '@/portal/components/Salir';
@@ -31,16 +31,19 @@ export default async function DespachoLayout({ children }: { children: React.Rea
     ] },
   ];
   return (
-    <div className="shell">
+    <div className="shell despacho">
       <a href="#contenido" className="saltar">Saltar al contenido</a>
+      <BarraCarga />
       <AvisoEntorno />
-      <header className="shell-cabecera">
-        <div className="flex items-center gap-3"><Marca destino="/admin/" /><span className="chip chip-neutro">Despacho</span></div>
-        <div className="flex items-center gap-3"><span className="ayuda hidden sm:inline">{u.personal!.nombre}</span><Salir /></div>
-      </header>
       <div className="shell-cuerpo">
-        <NavDespacho grupos={grupos} />
-        <main id="contenido" className="shell-contenido">{children}</main>
+        <NavDespacho grupos={grupos} correo={u.email} />
+        <div className="shell-derecha">
+          <header className="shell-cabecera">
+            <BuscadorGlobal />
+            <div className="cab-usuario"><span>{u.personal!.nombre}</span><Salir /></div>
+          </header>
+          <main id="contenido" className="shell-contenido">{children}</main>
+        </div>
       </div>
       <PaletaComandos esGlobal={esGlobal} conBiblioteca={conBiblioteca} conIA={conIA} />
     </div>

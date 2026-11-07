@@ -95,7 +95,7 @@ test('2. Ana sube dos variantes y un texto pegado: privados, clasificados por su
 test('3. Luis (otro abogado) no ve lo que no está aprobado: ni en la búsqueda, ni por URL, ni el original', async ({ page: p }) => {
   await entrarComo(p, LUIS);
   await p.goto('/admin/biblioteca/?q=modificación de medidas');
-  await expect(p.getByText('No hay modelos que coincidan.')).toBeVisible();
+  await expect(p.getByText('No hay modelos que coincidan')).toBeVisible();
   expect((await p.goto(`/admin/biblioteca/${e.a}/`))!.status()).toBe(404);
   expect((await p.request.get(e.versionA!)).status()).toBe(404);
 });
