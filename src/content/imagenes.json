@@ -1941,6 +1941,29 @@
         1600
       ],
       "avif": true
+    },
+    {
+      "id": "arte-bodegon-flores-barroco",
+      "estado": "publicada",
+      "escena": "Pintura barroca en interiores contemporáneos: bodegón de flores en cesto del siglo XVII",
+      "archivo": "ed/bodegon-flores-cesto-barroco",
+      "alt": "Bodegón barroco de flores en un cesto de mimbre apoyado en una mesa, con tulipanes, rosas, claveles y mariposas sobre fondo oscuro, en marco dorado",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "prensa",
+        "original": "fotos/prensa/bodegon-flores-cesto-barroco.jpg",
+        "fuente": "Imagen de bodegón barroco aportada por el titular",
+        "nota": "Imagen aportada por el titular el 09/11/2026 para ilustrar el artículo sobre pintura barroca en interiores contemporáneos"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
     }
   ]
 }
