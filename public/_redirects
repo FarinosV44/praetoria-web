@@ -13,6 +13,9 @@
 # Enlace interno roto que existía en un artículo de WordPress
 /deca-subcontratacion-agencias-transporte/                             /deca-y-subcontratacion-que-debe-hacer-realmente-una-agencia-de-transporte/ 301
 
+# Slug anterior de un artículo (wpId 2749), aún enlazado desde fuera; 404 en Search Console (09/11/2026)
+/nuevo-decreto-2026-si-el-propietario-tiene-2-viviendas-o-menos-el-desahucio-ya-no-se-suspende-automaticamente/ /nuevo-decreto-2026-desahucio/                     301
+
 # Categorías de WordPress (incluye su paginación /page/N/ y feed)
 /category/arte-y-patrimonio/*                                          /arte-y-patrimonio/                                301
 /category/civil-y-patrimonio/*                                         /blog/categoria/civil-vivienda/                    301

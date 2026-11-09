@@ -84,6 +84,8 @@ out('/blogs/', '/blog/');
 
 lines.push('', '# Enlace interno roto que existía en un artículo de WordPress');
 out('/deca-subcontratacion-agencias-transporte/', '/deca-y-subcontratacion-que-debe-hacer-realmente-una-agencia-de-transporte/');
+lines.push('', '# Slug anterior de un artículo (wpId 2749), aún enlazado desde fuera; 404 en Search Console (09/11/2026)');
+out('/nuevo-decreto-2026-si-el-propietario-tiene-2-viviendas-o-menos-el-desahucio-ya-no-se-suspende-automaticamente/', '/nuevo-decreto-2026-desahucio/');
 
 lines.push('', '# Categorías de WordPress (incluye su paginación /page/N/ y feed)');
 for (const c of wp.categories) {
