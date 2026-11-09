@@ -321,6 +321,7 @@ export const areaContent: AreaContent[] = [
     slug: 'arte-y-patrimonio',
     id: 'arte',
     group: 'particulares',
+    category: 'arte',
     title: 'Abogados de arte y patrimonio en Valencia | Praetoria Fine Art',
     description:
       'Praetoria Fine Art, la división de arte de Praetoria Abogados: compraventa y cesión de obras, herencias con colecciones, procedencia, atribución y exportación de bienes culturales.',

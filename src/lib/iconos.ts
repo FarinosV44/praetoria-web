@@ -43,4 +43,5 @@ export const iconoCategoria: Record<CategoryKey, LineIcon> = {
   laboral: 'trabajo',
   extranjeria: 'documento',
   'elegir-abogado': 'acompanar',
+  arte: 'arte',
 };
