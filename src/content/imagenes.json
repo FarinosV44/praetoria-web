@@ -1918,6 +1918,29 @@
         1600
       ],
       "avif": true
+    },
+    {
+      "id": "arte-homi-bhabha",
+      "estado": "publicada",
+      "escena": "Arte decolonial y poscolonial: retrato del teórico Homi K. Bhabha",
+      "archivo": "ed/homi-bhabha-retrato",
+      "alt": "Retrato de Homi K. Bhabha, teórico de los estudios poscoloniales, con gafas redondas de montura oscura y barba blanca, apoyando la barbilla en la mano",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "prensa",
+        "original": "fotos/prensa/homi-bhabha-retrato.jpg",
+        "fuente": "Retrato de Homi K. Bhabha aportado por el titular",
+        "nota": "Fotografía aportada por el titular el 09/11/2026 para ilustrar el artículo sobre artistas decoloniales"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
     }
   ]
 }

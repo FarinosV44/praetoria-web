@@ -6,7 +6,7 @@ date: 2026-11-09
 category: arte
 tags: ["arte decolonial", "artistas decoloniales", "arte contemporáneo", "comprar arte", "asesoramiento compra de arte", "coleccionismo", "Praetoria Fine Art"]
 intencion: "Conocer a los artistas decoloniales más relevantes y saber qué revisar antes de comprar su obra"
-imagenPendiente: "Obra contemporánea de un artista africano, latinoamericano o indígena en sala de exposición (p. ej., un tapiz de cápsulas metálicas o una instalación textil), con licencia libre o foto propia"
+imagen: arte-homi-bhabha
 ---
 
 Durante décadas, la historia del arte contemporáneo se contó desde unos pocos centros: París, Nueva York, Londres. Lo que se hacía en Lagos, Lima, La Habana o en los territorios indígenas aparecía, si aparecía, como un eco tardío de esas capitales. Hoy esa mirada está cambiando, y con ella el mercado. Las bienales, los grandes museos y los coleccionistas más atentos miran cada vez más a los **artistas decoloniales**: creadores que cuestionan las jerarquías heredadas del colonialismo y reclaman ser leídos en sus propios términos.
@@ -20,6 +20,8 @@ En **Praetoria Fine Art**, la división de arte y patrimonio de Praetoria Abogad
 El pensamiento decolonial parte de una idea sencilla: el colonialismo no terminó con las independencias. Sigue presente en cómo se reparten el poder, el conocimiento y también el reconocimiento artístico. En el arte, eso significa preguntarse **quién selecciona las obras, desde dónde y con qué criterios se interpretan**.
 
 El historiador Piotr Piotrowski lo explicó con una imagen muy clara. Frente a una historia del arte **«vertical»**, en la que el centro marca los estilos y las periferias solo los reciben, propuso una historia **«horizontal»**, atenta a las relaciones entre territorios y a las circunstancias de cada lugar. El informalismo no significaba lo mismo en Polonia que en Francia, y el arte conceptual no era lo mismo en Hungría que en Gran Bretaña. **La semejanza formal no implica una misma experiencia histórica.**
+
+Buena parte de este vocabulario viene de los estudios poscoloniales. El teórico **Homi K. Bhabha**, autor de *El lugar de la cultura* (1994), explicó que las culturas no son bloques puros y cerrados: se forman en el contacto y el conflicto, en un **«tercer espacio»** de **hibridación** donde se negocian los significados. Sus ideas ayudan a entender por qué tantos artistas actuales mezclan materiales, tradiciones y lenguajes sin pedir permiso a ningún canon.
 
 La comisaria e investigadora Olga Fernández, recogiendo una distinción del crítico cubano Gerardo Mosquera, habla de **culturas que comisarían y culturas comisariadas**: unas conservan el poder de elegir y explicar; otras son elegidas y explicadas. Ampliar el mapa, añadir artistas de más países, no basta si no cambia quién pone las reglas.
 
