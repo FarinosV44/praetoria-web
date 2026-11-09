@@ -193,6 +193,7 @@ export const categories = {
   laboral: { name: 'Laboral', area: 'abogado-laboralista-valencia' },
   extranjeria: { name: 'Extranjería', area: null },
   'elegir-abogado': { name: 'Cómo elegir abogado', area: null },
+  arte: { name: 'Arte y patrimonio', area: 'arte-y-patrimonio' },
 } as const;
 
 export type CategoryKey = keyof typeof categories;

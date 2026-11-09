@@ -17,7 +17,7 @@ import { registro } from './imagenes';
 
 const CONTENT = join(process.cwd(), 'src/content');
 
-const categoryKeys = ['transporte', 'mercantil', 'hacienda', 'civil-vivienda', 'familia', 'laboral', 'extranjeria', 'elegir-abogado'] as const;
+const categoryKeys = ['transporte', 'mercantil', 'hacienda', 'civil-vivienda', 'familia', 'laboral', 'extranjeria', 'elegir-abogado', 'arte'] as const;
 
 const postSchema = z.object({
   title: z.string(),

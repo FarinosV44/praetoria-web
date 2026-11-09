@@ -45,7 +45,7 @@ const hoy = new Date().toISOString().slice(0, 10);
 // Personas reales del despacho: autor y revisor nunca se inventan
 const PERSONAS = [site.lawyer, laboral.name];
 const CATEGORIA_DE_AREA = { transporte: 'transporte', mercantil: 'mercantil', hacienda: 'hacienda', civil: 'civil-vivienda', familia: 'familia', laboral: 'laboral' };
-const CATEGORIAS = ['transporte', 'mercantil', 'hacienda', 'civil-vivienda', 'familia', 'laboral', 'extranjeria', 'elegir-abogado'];
+const CATEGORIAS = ['transporte', 'mercantil', 'hacienda', 'civil-vivienda', 'familia', 'laboral', 'extranjeria', 'elegir-abogado', 'arte'];
 const OFICIALES = /(^|\.)(boe\.es|gob\.es|europa\.eu|poderjudicial\.es|agenciatributaria\.es|agenciatributaria\.gob\.es|seg-social\.es|seg-social\.gob\.es|gva\.es|dgt\.es|noticias\.juridicas\.com)$/;
 
 // 1. Campos obligatorios y formatos ----------------------------------------------------------------
