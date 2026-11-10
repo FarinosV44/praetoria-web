@@ -1,3 +1,3 @@
-g02|https://upload.wikimedia.org/wikipedia/commons/f/f2/Agencia_Tributaria_GR_02.jpg
-adu|https://upload.wikimedia.org/wikipedia/commons/b/b3/Agencia_tributaria_aduanas.jpg
-ali2|https://upload.wikimedia.org/wikipedia/commons/0/08/Alicante_-_Agencia_Estatal_de_Administraci%C3%B3n_Tributaria_2.jpg
+b1|https://commons.wikimedia.org/w/api.php?action=query&list=search&srsearch=huelga%20general%20Valencia&srnamespace=6&srlimit=50&format=json
+b2|https://commons.wikimedia.org/w/api.php?action=query&list=search&srsearch=vaga%20general%20Val%C3%A8ncia&srnamespace=6&srlimit=50&format=json
+b3|https://commons.wikimedia.org/w/api.php?action=query&list=search&srsearch=huelga%20general%20Espa%C3%B1a%20manifestaci%C3%B3n&srnamespace=6&srlimit=50&format=json
