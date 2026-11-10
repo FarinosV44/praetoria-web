@@ -1,11 +1,1 @@
-h0|https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/HuelgaGeneral29M2012Valencia_01.jpg/960px-HuelgaGeneral29M2012Valencia_01.jpg
-h1|https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/HuelgaGeneral29M2012Valencia_02.jpg/960px-HuelgaGeneral29M2012Valencia_02.jpg
-h2|https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/HuelgaGeneral29M2012Valencia_03.jpg/960px-HuelgaGeneral29M2012Valencia_03.jpg
-h3|https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/HuelgaGeneral29M2012Valencia_04.jpg/960px-HuelgaGeneral29M2012Valencia_04.jpg
-h4|https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/HuelgaGeneral29M2012Valencia_05.jpg/960px-HuelgaGeneral29M2012Valencia_05.jpg
-h5|https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/HuelgaGeneral29M2012Valencia_06.jpg/960px-HuelgaGeneral29M2012Valencia_06.jpg
-h6|https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/HuelgaGeneral29M2012Valencia_07.jpg/960px-HuelgaGeneral29M2012Valencia_07.jpg
-h7|https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/Manifestaci%C3%B3_per_la_vaga_general_del_29_de_mar%C3%A7_de_2012%2C_carrer_de_X%C3%A0tiva_de_Val%C3%A8ncia.JPG/960px-Manifestaci%C3%B3_per_la_vaga_general_del_29_de_mar%C3%A7_de_2012%2C_carrer_de_X%C3%A0tiva_de_Val%C3%A8ncia.JPG
-h8|https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Manifestaci%C3%B3_per_la_vaga_general%2C_29_de_mar%C3%A7_de_2012%2C_carrer_de_X%C3%A0tiva_de_Val%C3%A8ncia.JPG/960px-Manifestaci%C3%B3_per_la_vaga_general%2C_29_de_mar%C3%A7_de_2012%2C_carrer_de_X%C3%A0tiva_de_Val%C3%A8ncia.JPG
-h9|https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/Tancat_per_vaga_29_de_mar%C3%A7_No_es_fabrica%2C_no_es_consumeix%2C_no_es_ven_%28Val%C3%A8ncia%29.JPG/960px-Tancat_per_vaga_29_de_mar%C3%A7_No_es_fabrica%2C_no_es_consumeix%2C_no_es_ven_%28Val%C3%A8ncia%29.JPG
-h10|https://thumb.wikimedia.org/wikipedia/commons/thumb/2/26/Vaga_29_mar%C3%A7_2012-_Val%C3%A8ncia.jpg/960px-Vaga_29_mar%C3%A7_2012-_Val%C3%A8ncia.jpg
+h0full|https://upload.wikimedia.org/wikipedia/commons/8/8c/HuelgaGeneral29M2012Valencia_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
