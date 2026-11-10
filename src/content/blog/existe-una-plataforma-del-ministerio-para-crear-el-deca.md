@@ -1,7 +1,7 @@
 ---
 title: "¿Existe una plataforma del Ministerio para crear el DECA?"
-seoTitle: "App DECA del Ministerio (SIMPLE): gratis, pero con límites"
-description: "Sí, el Ministerio tiene una app gratuita para el DECA. Dónde está, cómo darte de alta sin certificado digital y cuándo se queda corta para una empresa."
+seoTitle: "DECA gratis del Ministerio: la app SIMPLE DeCA y sus límites"
+description: "¿Hay un DECA gratis? Sí: la app SIMPLE DeCA del Ministerio. Dónde descargarla, cómo darte de alta sin certificado digital y cuándo se queda corta para una empresa."
 date: 2026-09-18
 updated: 2026-10-23
 category: transporte

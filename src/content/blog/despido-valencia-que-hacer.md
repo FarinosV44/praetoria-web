@@ -1,7 +1,7 @@
 ---
 title: "Despido en Valencia: qué hacer en las primeras 48 horas para no perder tus derechos"
-seoTitle: "Despido en Valencia: qué hacer en las primeras 48 horas"
-description: "Te han despedido en Valencia: cómo firmar la carta sin renunciar a nada, qué revisar del finiquito y el plazo de 20 días hábiles para reclamar."
+seoTitle: "Despido en Valencia: indemnización, plazos y qué hacer en 48 horas"
+description: "Te han despedido en Valencia: cómo firmar la carta sin renunciar a nada, qué indemnización te corresponde, qué revisar del finiquito y el plazo de 20 días hábiles para reclamar."
 date: 2026-03-27
 updated: 2026-04-22
 category: laboral
