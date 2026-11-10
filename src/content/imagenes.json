@@ -1964,6 +1964,31 @@
         1600
       ],
       "avif": true
+    },
+    {
+      "id": "huelga-general-valencia",
+      "estado": "publicada",
+      "escena": "Huelga general: manifestación sindical multitudinaria por una avenida de Valencia",
+      "archivo": "ed/huelga-general-manifestacion-valencia",
+      "alt": "Miles de personas con banderas rojas de CCOO y UGT llenan una avenida arbolada con palmeras de Valencia durante la huelga general de 2012",
+      "foco": "50% 62%",
+      "origen": {
+        "tipo": "commons",
+        "id": "huelga-general-valencia-commons",
+        "autor": "Melderomer",
+        "url": "https://commons.wikimedia.org/wiki/File:HuelgaGeneral29M2012Valencia_01.jpg",
+        "licencia": "CC BY-SA 2.0",
+        "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0/deed.es"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
     }
   ]
 }
