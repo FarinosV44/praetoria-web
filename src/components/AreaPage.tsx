@@ -15,6 +15,8 @@ import { Composicion, Foto } from './Foto';
 import { RevisionPendiente } from './RevisionPendiente';
 import { FineArtLogo, FineArtSello, fineArt, fineArtLd } from './FineArt';
 import { JsonLd } from './JsonLd';
+import { Faq } from './Faq';
+import { serviceLd } from '@/lib/seo';
 
 export function AreaPage({ area }: { area: AreaContent }) {
   const group = groups[area.group];
@@ -30,7 +32,7 @@ export function AreaPage({ area }: { area: AreaContent }) {
 
   return (
     <div className={esArte ? 'area-page area-page--fine-art' : 'area-page'}>
-      {esArte && <JsonLd data={fineArtLd(`/${area.slug}/`)} />}
+      {esArte ? <JsonLd data={fineArtLd(`/${area.slug}/`)} /> : <JsonLd data={serviceLd({ nombre: area.h1, description: area.description, path: `/${area.slug}/` })} />}
       {area.revision === 'pendiente' && <RevisionPendiente indexable={area.indexable !== false} />}
       <section className="page-head area-head">
         <div className="wrap">
@@ -146,6 +148,7 @@ export function AreaPage({ area }: { area: AreaContent }) {
           <ServiceList services={serviciosDe(area.id)} defaultCta={area.ctaServicios} />
           <p className="closing">{area.closing}</p>
           {area.nota && <p className="area-note">{area.nota}</p>}
+          {area.faqs && area.faqs.length > 0 && <Faq items={area.faqs} />}
 
         </div>
       </section>

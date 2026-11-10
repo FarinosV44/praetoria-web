@@ -33,6 +33,8 @@ export type AreaContent = {
   urgente?: boolean;
   /** Estado de revisión jurídica del texto del área (#32) */
   revision?: 'pendiente' | 'revisado';
+  /** Preguntas frecuentes del área (marcado FAQPage) */
+  faqs?: { q: string; a: string }[];
   /** false: noindex y fuera del sitemap hasta la revisión jurídica (#32). Por defecto, indexable. */
   indexable?: boolean;
 };
@@ -109,6 +111,12 @@ export const areaContent: AreaContent[] = [
   },
   {
     slug: 'derecho-mercantil',
+    faqs: [
+      { q: "¿Qué hago si mi socio bloquea la empresa?", a: "Primero, revisar los estatutos y si existe pacto de socios. Después se valoran las salidas: negociar la compra o venta de participaciones, una mediación, el derecho de separación en los casos que prevé la ley o, si la paralización de los órganos sociales impide funcionar, la disolución de la sociedad." },
+      { q: "¿Responde el administrador de las deudas de la sociedad?", a: "Puede responder. Si las pérdidas dejan el patrimonio neto por debajo de la mitad del capital social, el administrador debe convocar la junta en dos meses para disolver o remediar la situación; si no lo hace, puede responder personalmente de las deudas posteriores. Y si la empresa es insolvente, debe solicitar el concurso en los dos meses siguientes." },
+      { q: "¿Cómo reclamo una factura impagada a otra empresa?", a: "Con un requerimiento fehaciente y, si no paga, con un procedimiento monitorio o el juicio que corresponda según la cuantía. Entre empresas se pueden reclamar además los intereses de demora y los costes de cobro que prevé la Ley 3/2004 de morosidad." },
+      { q: "¿Conviene firmar un pacto de socios?", a: "Sí, sobre todo en sociedades con pocos socios o al 50 %. Permite pactar cómo se toman las decisiones, qué pasa si un socio quiere salir, cómo se valoran sus participaciones y cómo se resuelve un bloqueo, antes de que haya conflicto." },
+    ],
     id: 'mercantil',
     group: 'empresas',
     title: 'Abogado mercantil en Valencia: sociedades y contratos',
@@ -159,6 +167,12 @@ export const areaContent: AreaContent[] = [
   },
   {
     slug: 'abogado-laboralista-valencia',
+    faqs: [
+      { q: "¿Qué plazo tengo para reclamar un despido en Valencia?", a: "Veinte días hábiles desde la fecha de efectos del despido. Primero hay que presentar la papeleta de conciliación ante el servicio de mediación, arbitraje y conciliación (SMAC) de la Generalitat, que suspende el plazo, y después, si no hay acuerdo, la demanda ante el Juzgado de lo Social. Pasado ese plazo el despido ya no se puede impugnar, por eso conviene consultar cuanto antes." },
+      { q: "¿Cuánto es la indemnización por despido improcedente?", a: "Con carácter general, 33 días de salario por año trabajado, con un máximo de 24 mensualidades. Si el contrato es anterior al 12 de febrero de 2012, el tiempo trabajado hasta esa fecha se calcula a 45 días por año. Puedes hacer una estimación con nuestra calculadora de indemnización por despido." },
+      { q: "¿Debo firmar la carta de despido y el finiquito?", a: "Firmar la carta solo acredita que la has recibido. En el finiquito, si no estás de acuerdo con las cantidades o con el despido, añade «no conforme» junto a la firma y pide copia. Así no renuncias a reclamar." },
+      { q: "¿Qué hago si la empresa me debe nóminas o el finiquito?", a: "Se pueden reclamar las cantidades adeudadas de hasta el último año, con el interés por mora del 10 %. El procedimiento empieza también con una papeleta de conciliación y, si la empresa es insolvente, el FOGASA responde dentro de sus límites." },
+    ],
     id: 'laboral',
     group: 'particulares',
     title: 'Abogado laboralista en Valencia: despidos y finiquitos',
@@ -224,6 +238,12 @@ export const areaContent: AreaContent[] = [
   },
   {
     slug: 'derecho-civil',
+    faqs: [
+      { q: "¿Qué plazo hay para aceptar una herencia?", a: "No hay un plazo general para aceptarla, pero cualquier interesado puede pedir al notario que requiera al heredero para que acepte o renuncie en 30 días naturales. Lo que sí corre es el plazo del Impuesto sobre Sucesiones: seis meses desde el fallecimiento, prorrogables si se pide a tiempo." },
+      { q: "¿Puedo renunciar a una herencia con deudas?", a: "Sí. La renuncia se hace ante notario y es total: no se puede renunciar solo a las deudas. Otra opción es aceptar a beneficio de inventario, de modo que las deudas solo se pagan con los bienes de la herencia y no con tu patrimonio." },
+      { q: "¿Qué pasa si un heredero no quiere firmar el reparto?", a: "Si no hay acuerdo, se puede pedir la división judicial de la herencia o, si lo solicitan herederos que representen al menos la mitad del haber hereditario, el nombramiento de un contador-partidor dativo ante notario." },
+      { q: "¿Qué hago si el inquilino deja de pagar el alquiler?", a: "Se puede presentar una demanda de desahucio por falta de pago y reclamar a la vez las rentas debidas. Antes conviene revisar el contrato, las cantidades y si el inquilino está en situación de vulnerabilidad, porque cambia los plazos del procedimiento." },
+    ],
     id: 'civil',
     group: 'particulares',
     title: 'Derecho civil en Valencia | Herencias, vivienda y reclamaciones',
@@ -276,6 +296,12 @@ export const areaContent: AreaContent[] = [
   },
   {
     slug: 'familia',
+    faqs: [
+      { q: "¿Cuánto tarda un divorcio de mutuo acuerdo en Valencia?", a: "Depende de la carga del juzgado, pero suele resolverse en pocos meses desde que se presenta la demanda con el convenio regulador. Si no hay hijos menores ni hijos mayores con medidas de apoyo, también se puede firmar ante notario, normalmente en menos tiempo." },
+      { q: "¿Hace falta abogado para divorciarse?", a: "Sí. En el divorcio judicial hacen falta abogado y procurador, que en el de mutuo acuerdo pueden ser los mismos para los dos cónyuges. En el divorcio ante notario también es obligatoria la asistencia de abogado." },
+      { q: "¿Hay que intentar un acuerdo antes de demandar?", a: "Desde abril de 2025, con la Ley Orgánica 1/2025, en la mayoría de los asuntos de familia hay que intentar antes un medio adecuado de solución de controversias, como una negociación entre abogados o una mediación. Hay excepciones, por ejemplo en los casos de violencia." },
+      { q: "¿Se puede cambiar la custodia o la pensión de alimentos después del divorcio?", a: "Sí, si cambian de forma sustancial las circunstancias que se tuvieron en cuenta: los ingresos de quien paga, las necesidades de los hijos o la situación de cada progenitor. Se hace mediante un acuerdo o un procedimiento de modificación de medidas." },
+    ],
     id: 'familia',
     group: 'particulares',
     title: 'Abogados de familia en Valencia | Divorcios, custodia y pensiones',
