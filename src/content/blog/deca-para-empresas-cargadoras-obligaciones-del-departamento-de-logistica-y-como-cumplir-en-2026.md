@@ -1,7 +1,7 @@
 ---
 title: "DECA para empresas cargadoras: obligaciones del departamento de logística y cómo cumplir en 2026"
-seoTitle: "DECA para cargadores: qué te toca si contratas portes"
-description: "Si contratas transportes eres cargador contractual y respondes de cuatro de los ocho datos del DECA. Qué revisar, qué mira la Inspección y cómo cumplir sin complicarte."
+seoTitle: "Cargador contractual en el DECA: quién es y qué le toca"
+description: "Quién es el cargador contractual en el DECA: si contratas portes, respondes de cuatro de los ocho datos. Qué revisar, qué mira la Inspección y cómo cumplir sin complicarte."
 date: 2026-09-17
 updated: 2026-10-25
 category: transporte

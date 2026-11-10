@@ -39,3 +39,7 @@ Y hay algo importante que mucha gente descubre tarde: una herencia no se complic
 Por eso, cada caso hay que tratarlo con una estrategia concreta. No es lo mismo una herencia simple que una con renuncias, ni una con un inmueble perfectamente inscrito que otra donde hay que reconstruir la titularidad. Cada situación exige un enfoque distinto.
 
 Si estás en ese punto en el que “hay que arreglar la herencia pero no sabes por dónde empezar”, lo más importante no es correr, sino hacerlo con criterio. Porque bien planteado, incluso un caso que parece complicado tiene solución. Y mal planteado, uno sencillo puede convertirse en un problema durante meses.
+
+En el área de [derecho civil y herencias en Valencia](/derecho-civil/) revisamos el testamento, el inventario y la situación de los inmuebles para proponerte el camino más rápido y seguro, tanto si hay acuerdo entre herederos como si no lo hay.
+
+[**Consultar una herencia**](/contacto/)

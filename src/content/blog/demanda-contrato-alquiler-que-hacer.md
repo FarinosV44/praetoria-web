@@ -1,7 +1,7 @@
 ---
 title: "Demanda por alquiler: qué hacer paso a paso si te han demandado (guía clara)"
-seoTitle: "¿Te han demandado por un alquiler? Qué hacer paso a paso"
-description: "¿Te han demandado por un contrato de alquiler? Te explico qué pasos seguir, qué documentación reunir y cómo defenderte. Revisión inicial sin compromiso."
+seoTitle: "Demanda de arrendamiento: qué hacer si te demandan por un alquiler"
+description: "¿Te ha llegado una demanda de arrendamiento? Qué pasos seguir, qué plazos tienes, qué documentación reunir y cómo defenderte. Revisión inicial sin compromiso."
 date: 2025-11-13
 updated: 2026-09-08
 category: civil-vivienda
@@ -67,4 +67,4 @@ Respecto a costes: la demanda, la contestación, los posibles peritos, costas ju
 
 Si te han demandado por un alquiler, **no esperes**: cada minuto cuenta. Actuar pronto, reunir la documentación y tener un abogado que conozca el territorio y el tipo de asunto puede marcar la diferencia. En Praetoria estamos a tu lado para ayudarte a enfrentar la demanda con la mejor estrategia.
 
-¿Quieres que revisemos sin compromiso tu situación concreta? Podemos fijar una cita para analizar tu caso y proponer la mejor vía de actuación. Contacta con el despacho.
+¿Quieres que revisemos sin compromiso tu situación concreta? Podemos fijar una cita para analizar tu caso y proponer la mejor vía de actuación desde nuestra área de [derecho civil y vivienda en Valencia](/derecho-civil/). [Contacta con el despacho](/contacto/).

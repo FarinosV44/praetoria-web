@@ -1,7 +1,7 @@
 ---
 title: "Calendario laboral Valencia 2027: festivos y puentes"
 seoTitle: "Calendario laboral Valencia 2027: festivos de la ciudad y puentes"
-description: "Los 14 festivos de Valencia ciudad en 2027: los 12 de la Comunitat Valenciana y los locales de Sant Vicent Màrtir y Sant Vicent Ferrer, con los puentes del año."
+description: "Festivos de Valencia ciudad en 2027: el 22 de enero (Sant Vicent Màrtir), el 5 de abril (Sant Vicent Ferrer), los 12 autonómicos y todos los puentes del año."
 date: 2026-10-26
 category: laboral
 tags: ["calendario laboral", "festivos Valencia"]
@@ -66,6 +66,10 @@ Si tu empresa no respeta los festivos o no los paga como corresponde, en el áre
 ### ¿Cuántos festivos hay en Valencia en 2027?
 
 Catorce: los 12 autonómicos de la Comunitat Valenciana y los 2 locales de Valencia ciudad, el 22 de enero (Sant Vicent Màrtir) y el 5 de abril (Sant Vicent Ferrer).
+
+### ¿Es festivo el 22 de enero de 2027 en Valencia?
+
+Sí, en Valencia ciudad. El viernes 22 de enero de 2027 es festivo local por Sant Vicent Màrtir, patrón de la ciudad, así que da lugar a un fin de semana largo del 22 al 24 de enero. No es festivo en el resto de la Comunitat Valenciana, salvo que otro municipio lo haya elegido como fiesta local.
 
 ### ¿Es festivo el 9 de octubre de 2027?
 

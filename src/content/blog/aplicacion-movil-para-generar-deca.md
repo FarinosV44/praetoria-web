@@ -1,7 +1,7 @@
 ---
 title: "Aplicación móvil para generar el DeCA"
-seoTitle: "App para hacer el DECA en el móvil: guía 2026"
-description: "Cómo generar, corregir y enseñar el DECA desde el móvil del conductor, con el QR listo para una inspección. Paso a paso y con 3 DeCA de prueba gratis."
+seoTitle: "App DECA: aplicación para hacer el DECA en el móvil (2026)"
+description: "La app DECA para generar, corregir y enseñar el DECA desde el móvil del conductor, con el QR listo para una inspección. Paso a paso y con 3 DeCA de prueba gratis."
 date: 2026-09-26
 updated: 2026-10-23
 category: transporte

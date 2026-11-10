@@ -170,3 +170,7 @@ Porque muchas veces el mejor resultado de un conflicto societario no es ganar un
 Es conseguir que el socio que quiere marcharse cobre un precio justo, que quien quiere continuar pueda hacerlo y que una empresa con valor no termine destruida por una pelea entre sus propietarios.
 
 **Si tienes problemas con tu socio, antes de tomar una decisión podemos analizar tu situación, valorar las posibles salidas y diseñar una estrategia para negociar desde una posición informada.**
+
+Lo llevamos desde el área de [derecho mercantil en Valencia](/derecho-mercantil/), donde también asesoramos en pactos de socios, compraventa de participaciones y conflictos societarios. Si el conflicto se cruza con un divorcio, te puede interesar la guía sobre [reservas de la empresa y gananciales](/reservas-empresa-gananciales-divorcio-tribunal-supremo/).
+
+[**Consultar un conflicto con un socio**](/contacto/)
