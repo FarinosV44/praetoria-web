@@ -2014,6 +2014,30 @@
         1600
       ],
       "avif": true
+    },
+    {
+      "id": "praetoria-tecnologica-logo",
+      "estado": "publicada",
+      "escena": "Logotipo oficial de Praetoria Tecnológica, completo y centrado sobre fondo blanco",
+      "archivo": "ed/praetoria-tecnologica-logo",
+      "alt": "Logotipo con la palabra PRAETORIA en verde petróleo y, debajo, TECNOLÓGICA en gris",
+      "foco": "50% 50%",
+      "composicion": "logo",
+      "origen": {
+        "tipo": "marca",
+        "nombre": "Praetoria Tecnológica",
+        "archivo": "fotos/marcas/praetoria-tecnologica.png",
+        "fuente": "repositorio oficial de praetoriatecnologica.es, public/brand/praetoria-tecnologica.png"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
     }
   ]
 }

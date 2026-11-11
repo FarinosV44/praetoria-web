@@ -66,7 +66,7 @@ def escalar(im, max_w, max_h, max_escala=1.6):
 
 
 def composicion_deca(img):
-    piezas = [Image.open(RAIZ / a).convert('RGB') for a in img['origen']['archivos']]
+    piezas = [Image.open(RAIZ / a).convert('RGB') for a in img['origen'].get('archivos', [])]
     lienzo = Image.new('RGB', (W, H), FONDO)
     # Degradado muy suave para dar profundidad sin decorar
     grad = Image.linear_gradient('L').resize((W, H)).point(lambda v: v * 0.10)
@@ -80,7 +80,8 @@ def composicion_deca(img):
         con_sombra(lienzo, b, x + a.width + gap, (H - b.height) // 2 + 10, 34)
     elif tipo == 'logo':
         # Logotipo propio sobre fondo blanco: se recorta a su contenido y se centra, sin sombra
-        pieza = Image.open(RAIZ / img['origen']['archivos'][0]).convert('RGBA')
+        o = img['origen']
+        pieza = Image.open(RAIZ / (o['archivo'] if o['tipo'] == 'marca' else o['archivos'][0])).convert('RGBA')
         caja = pieza.getchannel('A').point(lambda v: 255 if v > 8 else 0).getbbox() or pieza.getbbox()
         rgb = Image.new('RGB', pieza.size, (255, 255, 255))
         rgb.paste(pieza, mask=pieza.getchannel('A'))
@@ -131,7 +132,7 @@ def main(ids):
         if tipo == 'unsplash' and not (img['origen'].get('autor') and img['origen'].get('url')):
             faltan.append(f"{img['id']}: falta autor/enlace de Unsplash")
             continue
-        master = composicion_deca(img) if tipo == 'deca' else fotografia(img)
+        master = composicion_deca(img) if tipo in ('deca', 'marca') else fotografia(img)
         if master is None:
             faltan.append(f"{img['id']}: falta el original")
             continue
