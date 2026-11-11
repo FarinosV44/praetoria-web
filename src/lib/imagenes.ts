@@ -33,6 +33,8 @@ const origen = z.discriminatedUnion('tipo', [
     modificada: z.string().optional(),
   }),
   z.object({ tipo: z.literal('deca'), archivos: z.array(z.string()).min(1) }),
+  /** Logotipo oficial de una marca del Grupo Praetoria, sin retocar, centrado sobre fondo blanco (composición «logo»). */
+  z.object({ tipo: z.literal('marca'), nombre: z.string().min(3), archivo: z.string(), fuente: z.string().min(5) }),
   z.object({ tipo: z.literal('praetoria'), original: z.string() }),
   /** Generada con IA (#28 §8). personalizada = recreación a partir de fotografías autorizadas por el titular. */
   z.object({ tipo: z.literal('ia'), original: z.string(), personalizada: z.boolean(), nota: z.string().min(20) }),
@@ -106,6 +108,8 @@ export function creditoDe(img: Imagen): string {
       return `Foto: ${img.origen.autor} en Wikimedia Commons (${img.origen.licencia}${img.origen.modificada ? `, ${img.origen.modificada}` : ''})`;
     case 'deca':
       return img.composicion === 'logo' ? 'Logotipo de DeCA Profesional' : 'Captura real de DeCA Profesional (datos de demostración)';
+    case 'marca':
+      return `Logotipo de ${img.origen.nombre}`;
     case 'praetoria':
       return 'Oficinas de Praetoria en el centro de Valencia';
     case 'ia':
