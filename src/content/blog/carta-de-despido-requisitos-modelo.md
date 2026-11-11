@@ -148,7 +148,7 @@ Recibí, [fecha] — Firma de la persona trabajadora: «no conforme»
 
 ## Si eres la empresa
 
-La mayoría de los despidos que las empresas pierden en el juzgado no se pierden por falta de causa, sino por la carta: hechos mal descritos, una causa económica sin datos o una indemnización mal calculada. Desde el área laboral de Praetoria revisamos o redactamos la carta antes de entregarla, preparamos la audiencia previa y calculamos la indemnización con el salario correcto. [Escríbenos antes de despedir](/contacto/?servicio=laboral-despidos), no después.
+La mayoría de los despidos que las empresas pierden en el juzgado no se pierden por falta de causa, sino por la carta: hechos mal descritos, una causa económica sin datos o una indemnización mal calculada. Desde el área laboral de Praetoria revisamos o redactamos la carta antes de entregarla, preparamos la audiencia previa y calculamos la indemnización con el salario correcto. [Escríbenos antes de despedir](/contacto/?servicio=laboral-despidos), no después. Si vas a redactarla tú, sigue nuestra [guía de la carta de despido para empresas, con modelos en Word](/carta-de-despido-empresa-modelo-word/).
 
 ## Preguntas frecuentes
 
