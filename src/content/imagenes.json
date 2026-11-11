@@ -1989,6 +1989,31 @@
         1600
       ],
       "avif": true
+    },
+    {
+      "id": "carta-despido-empresa-firma",
+      "estado": "publicada",
+      "escena": "Carta de despido para empresas: dos personas revisan y firman documentos sobre una mesa de oficina",
+      "archivo": "ed/carta-despido-empresa-firma",
+      "alt": "Dos personas sentadas a una mesa gris; una firma un documento mientras la otra señala unas hojas impresas",
+      "foco": "45% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "HJckKnwCXxQ",
+        "autor": "Gabrielle Henderson",
+        "url": "https://unsplash.com/photos/HJckKnwCXxQ",
+        "perfil": "https://unsplash.com/@gabriellefaithhenderson",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
     }
   ]
 }
