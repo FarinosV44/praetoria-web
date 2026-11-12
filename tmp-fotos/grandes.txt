@@ -1,6 +1,1 @@
-m0|https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/2013-12-24_Coatlicue_anagoria.JPG/960px-2013-12-24_Coatlicue_anagoria.JPG
-m1|https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/Aztec_mirror%2C_Museo_de_Am%C3%A9rica%2C_Madrid.jpg/960px-Aztec_mirror%2C_Museo_de_Am%C3%A9rica%2C_Madrid.jpg
-m2|https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Coatlicue_%28Museo_Nacional_de_Antropolog%C3%ADa%29_20250426_160346.jpg/960px-Coatlicue_%28Museo_Nacional_de_Antropolog%C3%ADa%29_20250426_160346.jpg
-m3|https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/Escultura_de_Coatlicue_-_Museo_Nacional_de_Antropolog%C3%ADa_-_Sala_6_-_Mexicas.jpg/960px-Escultura_de_Coatlicue_-_Museo_Nacional_de_Antropolog%C3%ADa_-_Sala_6_-_Mexicas.jpg
-m4|https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/John_Dee%27s_Aztec_Scrying_Mirror.jpg/960px-John_Dee%27s_Aztec_Scrying_Mirror.jpg
-m5|https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/John_Dee%27s_mirror_British_Museum_26_07_2013.jpg/960px-John_Dee%27s_mirror_British_Museum_26_07_2013.jpg
+dee|https://upload.wikimedia.org/wikipedia/commons/f/f6/John_Dee%27s_Aztec_Scrying_Mirror.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
