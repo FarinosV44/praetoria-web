@@ -89,6 +89,8 @@ const procedencia = (img) =>
     ? img.origen.autor ? `[${img.origen.autor} / Unsplash](${img.origen.url}) · Licencia Unsplash` : `Unsplash ${img.origen.id} (pendiente de procesar)`
     : img.origen.tipo === 'prensa'
     ? `Imagen de prensa: ${img.origen.fuente} (\`${img.origen.original}\`) · ${img.origen.nota}`
+    : img.origen.tipo === 'propia'
+    ? `Foto propia de ${img.origen.autor} (\`fotos/editorial/${img.origen.id}.jpg\`)${img.origen.obra ? ` · obra: ${img.origen.obra}` : ''}`
     : img.origen.tipo === 'marca'
     ? `Logotipo oficial de ${img.origen.nombre} (\`${img.origen.archivo}\`, ${img.origen.fuente}) · sin retocar`
     : img.origen.tipo === 'deca'
