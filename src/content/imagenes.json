@@ -2038,6 +2038,31 @@
         1600
       ],
       "avif": true
+    },
+    {
+      "id": "espejo-azteca-john-dee",
+      "estado": "publicada",
+      "escena": "Espejo negro de obsidiana mexica que perteneció a John Dee, en una vitrina del Museo Británico",
+      "archivo": "ed/espejo-obsidiana-mexica-john-dee",
+      "alt": "Disco negro pulido con un asa perforada, expuesto en una vitrina; en su superficie oscura se refleja la silueta de quien lo fotografía",
+      "foco": "55% 50%",
+      "origen": {
+        "tipo": "commons",
+        "id": "espejo-azteca-john-dee-commons",
+        "autor": "roseandsigil",
+        "url": "https://commons.wikimedia.org/wiki/File:John_Dee%27s_Aztec_Scrying_Mirror.jpg",
+        "licencia": "CC BY 2.0",
+        "licenciaUrl": "https://creativecommons.org/licenses/by/2.0/deed.es"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
     }
   ]
 }
