@@ -1,1 +1,2 @@
-HJckKnwCXxQ|photo-1562564055-71e051d33c19
+s1|https://commons.wikimedia.org/w/api.php?action=query&list=search&srsearch=Coatlicue%20Museo%20Nacional%20de%20Antropolog%C3%ADa&srnamespace=6&srlimit=40&format=json
+s2|https://commons.wikimedia.org/w/api.php?action=query&list=search&srsearch=obsidian%20mirror%20Aztec&srnamespace=6&srlimit=30&format=json
