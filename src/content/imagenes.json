@@ -2063,6 +2063,29 @@
         1600
       ],
       "avif": true
+    },
+    {
+      "id": "chidy-wayne-interior",
+      "estado": "publicada",
+      "escena": "Un dibujo de Chidy Wayne enmarcado en una repisa doméstica, entre cerámica y objetos de diseño",
+      "archivo": "ed/chidy-wayne-dibujo-repisa",
+      "alt": "Figura humana trazada con línea clara sobre fondo negro, en un marco de madera apoyado en una repisa, junto a un jarrón amarillo con cara pintada",
+      "foco": "60% 45%",
+      "origen": {
+        "tipo": "propia",
+        "id": "chidy-wayne-interior-praetoria",
+        "autor": "Praetoria Fine Art",
+        "obra": "Chidy Wayne"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
     }
   ]
 }
