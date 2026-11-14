@@ -126,6 +126,8 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
     const raw = { ...datos(), id: envioId.current, t: cargado.current };
     const v = validarConsulta(raw);
     if (!v.ok) {
+      // Solo el nombre de los campos con error, nunca lo escrito
+      medir('form_error', { area: area || undefined, servicio: servicio || undefined, campo: Object.keys(v.errores).sort().join('-'), tipo: 'validacion' });
       setErrores(v.errores);
       setEstado({ tipo: 'editando' });
       requestAnimationFrame(() => resumenRef.current?.focus());
@@ -152,6 +154,7 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
         return;
       }
       if (res.status === 422 && body.errores) {
+        medir('form_error', { area: v.data.area, servicio: v.data.servicio || undefined, campo: Object.keys(body.errores).sort().join('-'), tipo: 'servidor' });
         setErrores(body.errores);
         setEstado({ tipo: 'editando' });
         requestAnimationFrame(() => resumenRef.current?.focus());
@@ -159,6 +162,7 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
       }
       throw new Error(`Respuesta ${res.status}`);
     } catch {
+      medir('form_error', { area: area || undefined, servicio: servicio || undefined, tipo: 'envio' });
       setEstado({
         tipo: 'error',
         mensaje: 'No hemos podido recibir tu consulta. Comprueba tu conexión y vuelve a intentarlo; tus datos siguen escritos.',

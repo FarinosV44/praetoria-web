@@ -5,12 +5,17 @@
 // con caracteres seguros (ids, rutas, slugs). Nombre, correo, teléfono o mensaje no tienen clave posible.
 import { analiticaPermitida } from './consentimiento.ts';
 
-export const EVENTOS = ['service_view', 'cta_click', 'whatsapp_click', 'phone_click', 'form_start', 'form_success', 'page_context', 'scroll_depth', 'outbound_click', 'tool_start'] as const;
+export const EVENTOS = [
+  'service_view', 'cta_click', 'whatsapp_click', 'phone_click', 'form_start', 'form_success', 'page_context', 'scroll_depth', 'outbound_click', 'tool_start',
+  // Ampliación: errores de formulario, más clics, tiempo de lectura, rendimiento real y señales de interés
+  'form_error', 'email_click', 'file_download', 'internal_click', 'time_on_page', 'text_copy', 'page_print', 'web_vitals', 'not_found', 'consent_granted',
+] as const;
 export type Evento = (typeof EVENTOS)[number];
 
-const CLAVES = ['area', 'servicio', 'tipo_pagina', 'ubicacion', 'destino', 'landing', 'origen', 'categoria', 'profundidad', 'herramienta'] as const;
+const CLAVES = ['area', 'servicio', 'tipo_pagina', 'ubicacion', 'destino', 'landing', 'origen', 'categoria', 'profundidad', 'herramienta', 'tipo', 'campo', 'tiempo', 'metrica', 'valoracion', 'formato'] as const;
 type Clave = (typeof CLAVES)[number];
-export type Parametros = Partial<Record<Clave, string | undefined>>;
+/** `value` es la métrica numérica estándar de GA (p. ej. milisegundos de un Web Vital): solo números finitos */
+export type Parametros = Partial<Record<Clave, string | undefined>> & { value?: number };
 
 const VALOR = /^[a-z0-9/][a-z0-9_\-/.]{0,119}$/;
 
@@ -21,6 +26,7 @@ export function limpiarParametros(p: Record<string, unknown>): Parametros {
     const v = typeof p[k] === 'string' ? (p[k] as string).toLowerCase() : '';
     if (v && VALOR.test(v)) out[k] = v;
   }
+  if (typeof p.value === 'number' && Number.isFinite(p.value)) out.value = Math.round(p.value * 1000) / 1000;
   return out;
 }
 
@@ -36,6 +42,23 @@ export function profundidadesNuevas(porcentaje: number, vistas: Set<number>): nu
 const LEGALES = ['/aviso-legal/', '/politica-de-privacidad/', '/politica-de-cookies/'];
 
 /** Tipo de página por su ruta. Las áreas, los servicios y los artículos se reconocen antes, con sus propios datos. */
+export const TIEMPOS = [15, 30, 60, 120, 300];
+
+/** Segundos de lectura (con la pestaña visible) alcanzados por primera vez; los anota en `vistos`. */
+export function tiemposNuevos(segundos: number, vistos: Set<number>): number[] {
+  const nuevos = TIEMPOS.filter((t) => segundos >= t && !vistos.has(t));
+  nuevos.forEach((t) => vistos.add(t));
+  return nuevos;
+}
+
+const DESCARGAS = /.(pdf|docx?|xlsx?|odt|ods|csv|zip|pptx?|txt|rtf)$/i;
+
+/** Formato de un enlace de descarga (pdf, docx…) o null si no es un archivo */
+export function formatoDescarga(href: string): string | null {
+  const ruta = href.split(/[?#]/)[0] ?? '';
+  return DESCARGAS.exec(ruta)?.[1]?.toLowerCase() ?? null;
+}
+
 export function tipoDePagina(path: string): string {
   if (path === '/') return 'portada';
   if (path.startsWith('/blog/')) return 'blog';

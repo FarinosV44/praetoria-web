@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <MarcoWeb>
-    <section className="section">
+    <section className="section" data-no-encontrada>
       <div className="wrap">
         <h1>Esta página no existe</h1>
         <p className="lede">Puede que haya cambiado de dirección al reorganizar la web. Prueba desde una de estas secciones:</p>

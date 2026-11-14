@@ -76,7 +76,7 @@ Qué comprueba cada cosa está en [`docs/CALIDAD.md`](docs/CALIDAD.md).
 La web está publicada en **praetoriaabogados.es**, servida por **Hostinger**, que compila la rama `main` en cada `push`
 (`docs/HOSTINGER.md`). No se usa Netlify. Cada PR se comprueba con la CI de GitHub antes de fusionarla.
 
-Google Analytics es opcional: variable de entorno `NEXT_PUBLIC_GA_ID = G-XXXXXXX` en el build. Con la variable puesta aparece el aviso de cookies, y Analytics solo se carga si el visitante acepta.
+Google Analytics 4 está activo con la propiedad `G-P31RCWQVVC` (`src/lib/consentimiento.ts`). `NEXT_PUBLIC_GA_ID` en el build la sustituye y `NEXT_PUBLIC_GA_ID=` vacío la desactiva. Analytics solo se carga si el visitante acepta en el aviso de cookies (eventos en `docs/MEDICION.md`).
 
 ## Migración SEO
 

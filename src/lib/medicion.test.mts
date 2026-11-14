@@ -1,7 +1,7 @@
 // node --test src/lib/medicion.test.mts
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { limpiarParametros, profundidadesNuevas, tipoDePagina } from './medicion.ts';
+import { formatoDescarga, limpiarParametros, profundidadesNuevas, tiemposNuevos, tipoDePagina } from './medicion.ts';
 import { rutaLimpia, utmLimpio } from './atribucion.ts';
 import { validarConsulta } from './consulta.ts';
 
@@ -52,6 +52,23 @@ test('cada umbral de desplazamiento se cuenta una sola vez', () => {
 test('los parámetros nuevos pasan por la misma lista cerrada', () => {
   assert.deepEqual(limpiarParametros({ profundidad: '50', categoria: 'laboral', herramienta: 'calculadora_despido' }), { categoria: 'laboral', profundidad: '50', herramienta: 'calculadora_despido' });
   assert.deepEqual(limpiarParametros({ herramienta: 'ana@example.com', categoria: 'con espacios', importe: '12000' }), {});
+});
+
+test('parámetros de la ampliación y value numérico', () => {
+  assert.deepEqual(limpiarParametros({ campo: 'nombre-telefono', tipo: 'llamada', tiempo: '60', metrica: 'lcp', valoracion: 'good', value: 1234.56789 }), {
+    tipo: 'llamada', campo: 'nombre-telefono', tiempo: '60', metrica: 'lcp', valoracion: 'good', value: 1234.568,
+  });
+  assert.deepEqual(limpiarParametros({ value: Number.NaN, campo: 'Juan Pérez' }), {});
+  assert.deepEqual(limpiarParametros({ value: '12' }), {});
+});
+
+test('tiempos de lectura una sola vez y formatos de descarga', () => {
+  const vistos = new Set<number>();
+  assert.deepEqual(tiemposNuevos(31, vistos), [15, 30]);
+  assert.deepEqual(tiemposNuevos(65, vistos), [60]);
+  assert.deepEqual(tiemposNuevos(65, vistos), []);
+  assert.equal(formatoDescarga('/docs/modelo.PDF?v=2'), 'pdf');
+  assert.equal(formatoDescarga('/blog/articulo/'), null);
 });
 
 test('tipo de página por su ruta', () => {

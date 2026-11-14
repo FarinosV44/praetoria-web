@@ -31,8 +31,17 @@ Se usa la integración existente: el aviso de cookies y `NEXT_PUBLIC_GA_ID`, con
 | `scroll_depth` | Al llegar al 25, 50, 75 y 100 % de la página, una vez por umbral | `profundidad`, `landing` |
 | `outbound_click` | Clic en un enlace a otra web (WhatsApp tiene su propio evento) | `destino` (solo el dominio), `landing`, `ubicacion` |
 | `tool_start` | Primer clic en un cuestionario o en la calculadora, por página. Nunca sus respuestas | `herramienta` (`cuestionario_divorcio`, `triaje_hacienda` o `calculadora_despido`), `landing` |
+| `form_error` | Envío rechazado por la validación del navegador o del servidor, o fallo de red. Solo los nombres de los campos | `campo` (p. ej. `nombre-telefono`, o `envio`), `tipo` (`validacion`, `servidor`, `envio` o `llamada`), `area`, `servicio` |
+| `email_click` | Clic en un enlace `mailto:`. Nunca la dirección | `landing`, `ubicacion` |
+| `file_download` | Clic en un PDF, Word, Excel, ZIP… | `formato`, `destino` (ruta propia o dominio), `landing`, `ubicacion` |
+| `internal_click` | Clic en un enlace interno que no va al formulario | `destino` (ruta sin parámetros), `landing`, `ubicacion` |
+| `time_on_page` | 15, 30, 60, 120 y 300 s de lectura con la pestaña visible, una vez por umbral | `tiempo`, `landing` |
+| `text_copy` / `page_print` | Primera copia de texto / impresión en la página. Nunca qué texto | `landing` |
+| `web_vitals` | Rendimiento real: LCP, CLS, INP, FCP y TTFB | `metrica`, `valoracion` (`good`, `needs-improvement`, `poor`), `value` (ms; CLS × 1000), `landing` |
+| `not_found` | Página 404 | `destino` (ruta pedida), `landing` |
+| `consent_granted` | Al aceptar las cookies | `landing` |
 
-**Activación.** Sin `NEXT_PUBLIC_GA_ID` en el momento del build no hay aviso de cookies ni medición. En Hostinger se define en las variables de la app y exige volver a compilar. Para ver en los informes de GA4 los parámetros propios, hay que registrarlos como dimensiones personalizadas.
+**Activación.** La propiedad GA4 `G-P31RCWQVVC` está fijada en `src/lib/consentimiento.ts`. `NEXT_PUBLIC_GA_ID` en el build la sustituye y `NEXT_PUBLIC_GA_ID=` (vacía) desactiva el aviso y la medición. gtag se carga solo tras «Aceptar», con el modo de consentimiento v2 (analítica concedida, publicidad denegada); al rechazar después, se retira el permiso en la misma visita. Las páginas vistas (también al navegar sin recargar) y la medición mejorada las añade GA4 por su cuenta. Para ver en los informes de GA4 los parámetros propios, hay que registrarlos como dimensiones personalizadas.
 
 **Sin publicidad.** `allow_google_signals` y `allow_ad_personalization_signals` están desactivados: la política de cookies lo declara, y unir los temas jurídicos que lee una persona a un perfil publicitario sería especialmente sensible.
 

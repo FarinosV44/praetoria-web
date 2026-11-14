@@ -6,14 +6,18 @@
 // - whatsapp_click y phone_click: microconversiones separadas, con destino general o laboral (#28). Un clic NO es una consulta ni un cliente.
 // - page_context: tipo de cada página vista (y categoría, en los artículos). scroll_depth: 25, 50, 75 y 100 % de la página.
 // - outbound_click: dominio de un enlace externo. tool_start: primer uso de un cuestionario o de la calculadora, nunca sus respuestas.
+// - form_error: campos con error (solo sus nombres). email_click, file_download (formato) e internal_click (ruta, sin parámetros).
+// - time_on_page: 15, 30, 60, 120 y 300 s de lectura con la pestaña visible. text_copy y page_print: una vez por página.
+// - web_vitals: LCP, CLS, INP, FCP y TTFB reales (value numérico). not_found: páginas 404 y su ruta. consent_granted: al aceptar.
 // También anota la ruta anterior (origen de la consulta) y la atribución de la visita, esta solo con consentimiento.
 import { usePathname } from 'next/navigation';
+import { useReportWebVitals } from 'next/web-vitals';
 import { useEffect } from 'react';
 import { areas, laboral } from '@/lib/site';
 import { indiceServicios, servicioPorId } from '@/lib/servicios-indice';
 import { anotarRuta, registrarAtribucion } from '@/lib/atribucion';
 import { EVENTO_CONSENTIMIENTO } from '@/lib/consentimiento';
-import { medir, profundidadesNuevas, tipoDePagina } from '@/lib/medicion';
+import { formatoDescarga, medir, profundidadesNuevas, tiemposNuevos, tipoDePagina } from '@/lib/medicion';
 
 /** Zona de la página donde está el enlace (para comparar CTA), sin textos del usuario */
 const ZONAS: [string, string][] = [
@@ -45,6 +49,11 @@ const HERRAMIENTAS: [string, string][] = [
 
 /** Lo que se mide al ver una página: su tipo siempre y, en áreas y servicios, también service_view. */
 function medirVista(path: string) {
+  if (document.querySelector('[data-no-encontrada]')) {
+    medir('not_found', { destino: path, landing: path });
+    medir('page_context', { tipo_pagina: 'no_encontrada', landing: path });
+    return;
+  }
   const vista = vistaDePagina(path);
   if (vista) {
     medir('service_view', { ...vista, landing: path });
@@ -57,6 +66,13 @@ function medirVista(path: string) {
 
 export function Medicion() {
   const path = usePathname();
+
+  // Rendimiento real de cada visita (Core Web Vitals). CLS va multiplicado por 1000 para que GA lo sume como entero.
+  useReportWebVitals((m) => {
+    if (!['LCP', 'CLS', 'INP', 'FCP', 'TTFB'].includes(m.name)) return;
+    const valoracion = (m as { rating?: string }).rating;
+    medir('web_vitals', { metrica: m.name.toLowerCase(), valoracion, value: m.name === 'CLS' ? m.value * 1000 : m.value, landing: location.pathname });
+  });
 
   useEffect(() => {
     anotarRuta(path);
@@ -80,11 +96,37 @@ export function Medicion() {
       herramientas.add(herramienta);
       medir('tool_start', { herramienta, landing: path });
     };
+    // Tiempo de lectura: solo cuenta con la pestaña visible
+    const tiempos = new Set<number>();
+    let segundos = 0;
+    const reloj = window.setInterval(() => {
+      if (document.visibilityState !== 'visible') return;
+      segundos += 1;
+      for (const t of tiemposNuevos(segundos, tiempos)) medir('time_on_page', { tiempo: String(t), landing: path });
+    }, 1000);
+    // Se copia texto (señal de interés): nunca qué texto
+    let copiado = false;
+    const alCopiar = () => {
+      if (copiado) return;
+      copiado = true;
+      medir('text_copy', { landing: path });
+    };
+    let impreso = false;
+    const alImprimir = () => {
+      if (impreso) return;
+      impreso = true;
+      medir('page_print', { landing: path });
+    };
     window.addEventListener('scroll', alDesplazar, { passive: true });
     document.addEventListener('click', alUsar);
+    document.addEventListener('copy', alCopiar);
+    window.addEventListener('beforeprint', alImprimir);
     return () => {
+      window.clearInterval(reloj);
       window.removeEventListener('scroll', alDesplazar);
       document.removeEventListener('click', alUsar);
+      document.removeEventListener('copy', alCopiar);
+      window.removeEventListener('beforeprint', alImprimir);
     };
   }, [path]);
 
@@ -92,7 +134,10 @@ export function Medicion() {
     const alAceptar = (e: Event) => {
       registrarAtribucion(new URL(location.href));
       // La página en la que se acepta también cuenta: sin esto se perdería la primera de cada visita
-      if ((e as CustomEvent).detail === 'granted') medirVista(location.pathname);
+      if ((e as CustomEvent).detail === 'granted') {
+        medir('consent_granted', { landing: location.pathname });
+        medirVista(location.pathname);
+      }
     };
     window.addEventListener(EVENTO_CONSENTIMIENTO, alAceptar);
     const onClick = (e: MouseEvent) => {
@@ -101,7 +146,12 @@ export function Medicion() {
       const href = a.getAttribute('href') ?? '';
       const landing = location.pathname;
       const ubicacion = zona(a);
-      if (href.startsWith('/contacto/')) {
+      const formato = formatoDescarga(href);
+      if (formato) {
+        // Antes que el resto: un PDF puede estar en la propia web o fuera
+        const url = new URL(href, location.origin);
+        medir('file_download', { formato, destino: url.hostname === location.hostname ? url.pathname : url.hostname, landing, ubicacion });
+      } else if (href.startsWith('/contacto/')) {
         const q = new URL(href, location.origin).searchParams;
         const sv = servicioPorId(q.get('servicio') ?? '');
         medir('cta_click', { destino: 'formulario', servicio: sv?.id, area: sv?.area ?? q.get('area') ?? undefined, landing, ubicacion });
@@ -111,10 +161,16 @@ export function Medicion() {
         // Un único número (centralita): el destino lo indica el canal del enlace, no el número.
         const canal = (a.closest('[data-canal]') as HTMLElement | null)?.dataset.canal;
         medir('phone_click', { destino: canal === 'laboral' || /laboral/i.test(a.textContent ?? '') ? 'laboral' : 'general', landing, ubicacion });
+      } else if (href.startsWith('mailto:')) {
+        // Nunca la dirección
+        medir('email_click', { landing, ubicacion });
       } else if (/^https?:\/\//.test(href)) {
         // Solo el dominio: la dirección completa podría llevar parámetros
         const dominio = new URL(href).hostname;
         if (dominio !== location.hostname) medir('outbound_click', { destino: dominio, landing, ubicacion });
+      } else if (href.startsWith('/') && !href.startsWith('//')) {
+        // Navegación interna: qué enlaces y desde qué zona se usan (solo la ruta, sin parámetros ni ancla)
+        medir('internal_click', { destino: href.split(/[?#]/)[0], landing, ubicacion });
       }
     };
     document.addEventListener('click', onClick);

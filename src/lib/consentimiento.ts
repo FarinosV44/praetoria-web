@@ -1,5 +1,7 @@
 // Preferencia de cookies (#9). Una sola fuente para el aviso (CookieConsent), la medición y la atribución.
-export const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+// ID de la propiedad GA4 de la web. NEXT_PUBLIC_GA_ID lo sustituye; vacío (NEXT_PUBLIC_GA_ID=) lo desactiva, para builds de prueba.
+export const GA_ID_WEB = 'G-P31RCWQVVC';
+export const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? GA_ID_WEB;
 export const CLAVE_CONSENTIMIENTO = 'praetoria-consent';
 /** Se emite al cambiar la preferencia, para que la medición reaccione sin recargar */
 export const EVENTO_CONSENTIMIENTO = 'praetoria:consent';

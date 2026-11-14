@@ -17,8 +17,9 @@ Este Sitio Web puede utilizar Google Analytics 4, un servicio de análisis web p
   - páginas vistas y su tipo, procedencia de la visita y tiempo de permanencia;
   - datos técnicos del dispositivo y del navegador, y ubicación aproximada;
   - hasta dónde se desplaza la lectura de cada página (25, 50, 75 y 100 %);
-  - clics en enlaces de contacto, en botones de consulta y en enlaces a otras webs (solo su dominio);
-  - inicio y envío correcto de formularios, y uso de cuestionarios y calculadoras.
+  - clics en enlaces de contacto, en botones de consulta, en enlaces internos, en descargas de documentos y en enlaces a otras webs (solo su dominio);
+  - inicio, errores (solo qué campos faltan o son incorrectos) y envío correcto de formularios, y uso de cuestionarios y calculadoras;
+  - si se copia texto o se imprime una página (nunca qué texto), las páginas no encontradas y la velocidad de carga de la web.
 
   **No se envía a Google Analytics** lo que escribes en los formularios ni tus respuestas a los cuestionarios y calculadoras. No se activan las señales de Google ni la personalización de anuncios.
 - **Procedencia de la visita (almacenamiento de sesión, sin cookies):** si aceptas las cookies analíticas, el navegador guarda durante la visita la primera página que visitaste y, si los hay, los parámetros de campaña de la dirección (utm_source, utm_medium, utm_campaign), para asociarlos a la consulta que envíes. Se borra al cerrar la pestaña o si rechazas las cookies analíticas. Sin tu consentimiento no se guarda.

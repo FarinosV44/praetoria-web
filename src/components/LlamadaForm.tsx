@@ -40,6 +40,7 @@ export function LlamadaForm() {
   const cargado = useRef(0);
   const envioId = useRef('');
   const enCurso = useRef(false);
+  const empezado = useRef(false); // form_start una sola vez
 
   useEffect(() => {
     cargado.current = Date.now();
@@ -72,6 +73,8 @@ export function LlamadaForm() {
     };
     const v = validarLlamada(raw);
     if (!v.ok) {
+      // Solo el nombre de los campos con error, nunca lo escrito
+      medir('form_error', { area: area || undefined, campo: Object.keys(v.errores).sort().join('-'), tipo: 'llamada' });
       setErrores(v.errores);
       setEstado({ tipo: 'editando' });
       requestAnimationFrame(() => resumenRef.current?.focus());
@@ -94,6 +97,7 @@ export function LlamadaForm() {
         return;
       }
       if (res.status === 422 && body.errores) {
+        medir('form_error', { area: area || undefined, campo: Object.keys(body.errores).sort().join('-'), tipo: 'llamada' });
         setErrores(body.errores);
         setEstado({ tipo: 'editando' });
         requestAnimationFrame(() => resumenRef.current?.focus());
@@ -101,6 +105,7 @@ export function LlamadaForm() {
       }
       throw new Error(`Respuesta ${res.status}`);
     } catch {
+      medir('form_error', { area: area || undefined, campo: 'envio', tipo: 'llamada' });
       setEstado({ tipo: 'error' });
     } finally {
       enCurso.current = false;
@@ -131,7 +136,13 @@ export function LlamadaForm() {
   const enviando = estado.tipo === 'enviando';
 
   return (
-    <form ref={formRef} className="form form--llamada" name="llamada-urgente" method="POST" action={apiUrl('/api/llamada')} noValidate onSubmit={onSubmit} aria-busy={enviando}>
+    <form ref={formRef} className="form form--llamada" name="llamada-urgente" method="POST" action={apiUrl('/api/llamada')} noValidate onSubmit={onSubmit} aria-busy={enviando}
+      onFocus={() => {
+        if (empezado.current) return;
+        empezado.current = true;
+        medir('form_start', { area: area || undefined, tipo: 'llamada' });
+      }}
+    >
       <p className="aviso-llamada">
         <strong>{AVISO_LLAMADA}</strong>
       </p>
