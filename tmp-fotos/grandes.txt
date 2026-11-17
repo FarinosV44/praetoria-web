@@ -1,3 +1,1 @@
-placa-vut|https://upload.wikimedia.org/wikipedia/commons/5/5b/Placa._Vivienda_de_uso_tur%C3%ADstico_%28VUT%29.jpg
-perello02|https://commons.wikimedia.org/wiki/Special:FilePath/Playa_de_El_Perell%C3%B3,_Sueca_02.jpg?width=1600
-perello04|https://commons.wikimedia.org/wiki/Special:FilePath/Playa_de_El_Perell%C3%B3,_Sueca_04.jpg?width=1600
+ii2|https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url|size|extmetadata&format=json&titles=File:Playa%20de%20El%20Perell%C3%B3,%20Sueca%2002.jpg
