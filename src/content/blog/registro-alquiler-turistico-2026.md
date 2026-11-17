@@ -1,114 +1,70 @@
 ---
-title: "Nuevo registro de alquiler turístico 2026: qué es y cómo afecta a propietarios"
-seoTitle: "Registro alquiler turístico 2026: normativa"
-description: "Conoce la nueva normativa de alquiler turístico 2026: qué es el registro obligatorio y cómo afecta a propietarios de apartamentos vacacionales."
+title: "Registro de alquiler turístico en 2026: qué queda en pie tras las sentencias del Supremo"
+seoTitle: "Registro alquiler turístico 2026 tras el Supremo"
+description: "El Supremo anuló en 2026 el Registro Único de Arrendamientos y el número del Registro de la Propiedad. Qué obligaciones siguen vigentes para viviendas turísticas en la Comunitat Valenciana."
 date: 2026-02-27
-updated: 2026-10-23
+updated: 2026-11-17
 category: civil-vivienda
-tags: ["alquiler turístico", "alquiler vacacional", "ley alquiler", "normativa alquiler", "propietarios vivienda"]
+tags: ["registro alquiler turístico", "Registro Único de Arrendamientos", "Real Decreto 1312/2024", "sentencia Supremo registro único", "Registro de Turismo Comunitat Valenciana", "alquiler de corta duración"]
 wpId: 2755
-intencion: "Cumplir el registro único de alquiler turístico de 2026"
+intencion: "Saber si sigue vigente el Registro Único de Arrendamientos y qué registros debe cumplir una vivienda turística en 2026"
 imagen: alquiler-turistico
 ---
 
+Este artículo se publicó en febrero de 2026, cuando los propietarios de viviendas turísticas y de temporada tenían que pedir un número estatal en el Registro de la Propiedad y presentar cada año un modelo informativo. **Lo hemos actualizado en noviembre de 2026**: el Tribunal Supremo anuló esas obligaciones entre mayo y junio. Te contamos qué ha cambiado y qué sigue siendo obligatorio.
 
-El sector de los **apartamentos turísticos y arrendamientos de corta duración** está viviendo un nuevo endurecimiento normativo.  
-Una de las últimas novedades es la obligación de presentar el **depósito del modelo informativo de arrendamientos de corta duración**, un trámite que ya está generando dudas entre propietarios y gestores.
+## Qué era el Registro Único de Arrendamientos
 
-> **Resumen rápido:** el **depósito del modelo informativo de arrendamientos de corta duración** es una nueva obligación dirigida a propietarios que alquilan viviendas por periodos cortos (turístico, temporal o de temporada), para aumentar el control fiscal, identificar propietarios y viviendas y cruzar datos con plataformas digitales. Pueden estar obligados propietarios, titulares, comercializadores y sociedades gestoras, aunque cada caso debe analizarse. Incumplirla puede acarrear **sanciones económicas** y requerimientos de la Agencia Tributaria.
+El [Real Decreto 1312/2024, de 23 de diciembre](https://www.boe.es/eli/es/rd/2024/12/23/1312/con), creó dos cosas:
 
-Muchos propietarios no saben si están obligados, cómo se presenta o qué riesgos existen si no se cumple correctamente.
+- **Un Registro Único de Arrendamientos**, gestionado por el Registro de la Propiedad. Quien quisiera anunciar una vivienda de alquiler de corta duración, turística o de temporada, tenía que obtener antes un número de registro. Cada doce meses había que aportar, además, un modelo informativo con los alquileres realizados.
+- **Una Ventanilla Única Digital de Arrendamientos**, a la que las plataformas como Airbnb o Booking envían los datos de los anuncios y de la actividad, en aplicación del [Reglamento (UE) 2024/1028](https://eur-lex.europa.eu/eli/reg/2024/1028/oj).
 
-En Praetoria División Jurídica gestionamos **todos los trámites burocráticos y jurídicos de apartamentos turísticos**, incluido este nuevo modelo informativo, para que el propietario no asuma riesgos innecesarios.
+El número estatal fue obligatorio desde el 1 de julio de 2025.
 
----
+## Qué anuló el Tribunal Supremo
 
-## ¿Qué es el modelo informativo de arrendamientos de corta duración?
+Varias comunidades autónomas y asociaciones del sector recurrieron el real decreto. El Supremo les dio parcialmente la razón porque el Estado no tenía competencia para crear un registro que se superpone a los registros autonómicos de turismo:
 
-Se trata de una nueva obligación informativa dirigida a propietarios que alquilan viviendas por periodos cortos (turístico, temporal o de temporada).
+- **Sentencia 620/2026, de 19 de mayo**, en el recurso de la Generalitat Valenciana. Anula los preceptos referidos al procedimiento de Registro Único y a la obligación de inscribirse en el Registro de la Propiedad para obtener el número.
+- **Sentencia 629/2026, de 21 de mayo**, en el recurso de las asociaciones de apartamentos turísticos de Barcelona y Girona, aclarada por auto de 11 de junio. Su fallo, publicado en el [BOE del 26 de junio de 2026](https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-13893), declara nulos los artículos 2.f) y 2.i), 5, 8, 9, 10 y 12.b), y los artículos 1, 2.j) y 6 solo en lo que se refieren al Registro Único y al número de registro.
+- **Sentencia de 1 de junio de 2026**, en el recurso de la Región de Murcia, en el mismo sentido.
 
-Su finalidad es:
+Entre los artículos anulados están las obligaciones de los arrendadores (artículo 5), el procedimiento para pedir el número (artículos 8 y 9) y su verificación, que incluía el modelo informativo anual (artículo 10). El texto consolidado del BOE ya los marca como anulados.
 
-- Aumentar el control fiscal sobre los alquileres
-- Identificar propietarios y viviendas
-- Cruzar datos con plataformas digitales
-- Controlar ingresos y situación administrativa
+## Qué sigue siendo obligatorio
 
-El incumplimiento puede derivar en:
+Las sentencias no eliminan todos los controles. Siguen vigentes:
 
-- Sanciones económicas
-- Requerimientos de la Agencia Tributaria
-- Problemas en inspecciones
-- Riesgos en caso de denuncias vecinales
+- **La Ventanilla Única Digital** y las obligaciones de las plataformas de transmitir datos de los anuncios y de la actividad a la Administración.
+- **El registro autonómico de turismo.** En la Comunitat Valenciana, una vivienda de uso turístico necesita un informe municipal de compatibilidad urbanística favorable, una declaración responsable y la inscripción en el Registro de Turismo, que dura cinco años. Ese es el número que debe constar en los anuncios. El trámite está en la [sede electrónica de la Generalitat](https://sede.gva.es/es/detall-tramit?id_proc=G19207).
+- **El registro de viajeros.** El [Real Decreto 933/2021](https://www.boe.es/eli/es/rd/2021/10/26/933/con) obliga a comunicar las reservas y las entradas de huéspedes a Interior en SES.HOSPEDAJES, en un plazo de 24 horas.
+- **Las obligaciones fiscales**, que además cambian: desde el 1 de diciembre de 2026 los alquileres de hasta 30 noches pasan a tributar al 10 % de IVA.
 
-Por eso es fundamental gestionarlo correctamente desde el inicio.
+## Si ya tenías número del Registro de la Propiedad
 
----
+No hace falta que hagas nada para «darlo de baja». El número deja de ser exigible porque la norma que lo imponía ha sido anulada. Lo que sí conviene revisar es que tus anuncios muestren el número del Registro de Turismo y que tu inscripción autonómica esté vigente.
 
-## ¿Quién está obligado a presentar el depósito del modelo informativo?
+La anulación alcanza también a los alquileres de temporada, que entraban en el mismo registro.
 
-En general, pueden estar obligados:
+## Cómo te ayudamos
 
-- Propietarios de apartamentos turísticos
-- Titulares de viviendas en alquiler de corta duración
-- Personas físicas o jurídicas que comercialicen alojamientos temporales
-- Sociedades que gestionen alquileres vacacionales
+En Praetoria Abogados revisamos la situación jurídica de tu vivienda y te defendemos si recibes un requerimiento o un expediente sancionador. Para el día a día, como la inscripción, las renovaciones, las comunicaciones de viajeros, las facturas o el nuevo IVA, [Praetoria Vacacional tiene un servicio de gestión para propietarios](https://praetoriavacacional.es/propietarios?utm_source=praetoriaabogados&utm_medium=blog&utm_campaign=registro-alquiler-turistico&utm_content=texto) que puedes contratar solo para los trámites.
 
-Cada caso debe analizarse individualmente, ya que no todas las situaciones son idénticas.
+Si lo que te preocupa es el IVA de diciembre y el resto de obligaciones del propietario, lo explicamos en [apartamentos turísticos: IVA, licencias y obligaciones desde diciembre de 2026](/apartamentos-turisticos-iva-licencias-obligaciones/).
 
----
+## Preguntas frecuentes
 
-## Errores frecuentes en apartamentos turísticos
+### ¿Sigue siendo obligatorio el Registro Único de Arrendamientos?
 
-En nuestra experiencia, los problemas más habituales son:
+No con carácter general. El Tribunal Supremo anuló en mayo y junio de 2026 los preceptos del Real Decreto 1312/2024 que regulaban el registro y el número del Registro de la Propiedad.
 
-- No registrar correctamente la vivienda
-- No presentar modelos informativos a tiempo
-- Declarar ingresos de forma incorrecta
-- Desconocer obligaciones autonómicas y estatales
-- No adaptar contratos a la normativa actual
-- Falta de coordinación entre fiscalidad y normativa turística
+### ¿Tengo que presentar el modelo informativo anual de arrendamientos de corta duración?
 
-Estos errores pueden convertirse en inspecciones o sanciones evitables.
+No. Esa obligación estaba en el artículo 10 del Real Decreto 1312/2024, que el Supremo declaró nulo.
 
----
+### ¿Qué número tengo que poner en mis anuncios en la Comunitat Valenciana?
 
-## En Praetoria gestionamos todo el proceso
+El de inscripción en el Registro de Turismo de la Comunitat Valenciana.
 
-En Praetoria División Jurídica ofrecemos un servicio integral para propietarios de apartamentos turísticos en Valencia y provincia:
-
-✔ Alta y regularización del apartamento turístico  
-✔ Revisión y redacción de contratos  
-✔ Presentación del modelo informativo de arrendamientos de corta duración  
-✔ Coordinación fiscal con asesoramiento tributario  
-✔ Defensa ante inspecciones o sanciones  
-✔ Adaptación a nuevas normativas autonómicas y estatales
-
-Nuestro objetivo es claro:  
-Que el propietario alquile con seguridad jurídica total.
-
----
-
-## ¿Por qué actuar ahora?
-
-La administración está intensificando el control sobre:
-
-- Viviendas turísticas
-- Alquileres de temporada
-- Arrendamientos de corta duración
-- Declaración de ingresos en plataformas como Airbnb
-
-Esperar a un requerimiento no es una estrategia inteligente.  
-Regularizar la situación ahora evita problemas futuros.
-
----
-
-## Abogado especializado en apartamentos turísticos en Valencia
-
-Si tienes un apartamento turístico o alquilas por corta duración, revisamos tu situación y gestionamos todos los trámites necesarios, incluido el nuevo modelo informativo.
-
-📍 Valencia  
-🌐 [www.praetoriaabogados.es](/)
-
-Praetoria División Jurídica  
-Diseño legal y estrategia práctica para que consigas lo que te propones.
+Fuentes: [Real Decreto 1312/2024, texto consolidado](https://www.boe.es/eli/es/rd/2024/12/23/1312/con); [Sentencia del Tribunal Supremo de 21 de mayo de 2026 y auto de 11 de junio (BOE-A-2026-13893)](https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-13893); [Reglamento (UE) 2024/1028](https://eur-lex.europa.eu/eli/reg/2024/1028/oj); [Real Decreto 933/2021](https://www.boe.es/eli/es/rd/2021/10/26/933/con); [Generalitat Valenciana, alta de viviendas de uso turístico](https://sede.gva.es/es/detall-tramit?id_proc=G19207). Normativa revisada el 17 de noviembre de 2026.

@@ -2136,6 +2136,32 @@
         1600
       ],
       "avif": true
+    },
+    {
+      "id": "apartamentos-turisticos-playa-perello",
+      "estado": "publicada",
+      "escena": "Apartamentos turísticos: paseo marítimo y playa de El Perelló (Sueca) en temporada baja",
+      "archivo": "ed/playa-el-perello-sueca",
+      "alt": "Paseo marítimo embaldosado frente a la playa de El Perelló, en Sueca, con el mar en calma y edificios al fondo",
+      "foco": "50% 55%",
+      "origen": {
+        "tipo": "commons",
+        "id": "playa-el-perello-sueca",
+        "autor": "19Tarrestnom65",
+        "url": "https://commons.wikimedia.org/wiki/File:Playa_de_El_Perell%C3%B3,_Sueca_02.jpg",
+        "licencia": "CC BY-SA 4.0",
+        "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.es",
+        "modificada": "recortada"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
     }
   ]
 }
