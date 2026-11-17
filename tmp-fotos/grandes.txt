@@ -1,1 +1,4 @@
-bq-page|https://unsplash.com/photos/bqUZEAeWuok
+cs1|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=30&format=json&srsearch=vivienda%20uso%20tur%C3%ADstico
+cs2|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=30&format=json&srsearch=apartamentos%20tur%C3%ADsticos%20Valencia
+cs3|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=30&format=json&srsearch=keys%20apartment%20rental
+cs4|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=30&format=json&srsearch=Cullera%20apartments%20beach
