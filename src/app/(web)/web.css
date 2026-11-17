@@ -2442,3 +2442,11 @@
   .fine-art-boton:hover, .fine-art-boton:focus-visible { transform: translateY(-1px); box-shadow: 0 6px 16px rgb(140 20 24 / 0.25); }
   .area-page--fine-art .area-head { border-top: 4px solid var(--red); }
 }
+
+/* Llamada a la acción dentro de un artículo (enlace destacado a un servicio) */
+.prose .aviso-cta { margin: 1.8rem 0; padding: 20px 22px; border: 1px solid var(--line); border-left: 4px solid var(--red); border-radius: var(--radius); background: var(--paper-2, #f6f4f1); }
+.prose .aviso-cta p { margin: 0 0 12px; font-family: var(--sans); font-size: 1.02rem; line-height: 1.5; }
+.prose .aviso-cta__acciones { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; margin: 0; }
+.prose .aviso-cta .btn { color: var(--paper); text-decoration: none; }
+.prose .aviso-cta .btn:hover { color: var(--paper); }
+.prose .aviso-cta__secundario { font-family: var(--sans); font-size: 0.95rem; }
