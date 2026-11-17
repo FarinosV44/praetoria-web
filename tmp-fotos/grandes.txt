@@ -1,4 +1,3 @@
-cs1|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=30&format=json&srsearch=vivienda%20uso%20tur%C3%ADstico
-cs2|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=30&format=json&srsearch=apartamentos%20tur%C3%ADsticos%20Valencia
-cs3|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=30&format=json&srsearch=keys%20apartment%20rental
-cs4|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=30&format=json&srsearch=Cullera%20apartments%20beach
+ii1|https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url|size|extmetadata&format=json&titles=File:Placa.%20Vivienda%20de%20uso%20tur%C3%ADstico%20(VUT).jpg
+cs5|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=30&format=json&srsearch=Perell%C3%B3%20Sueca%20playa
+cs6|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=30&format=json&srsearch=placa%20VT%20apartamento%20tur%C3%ADstico
