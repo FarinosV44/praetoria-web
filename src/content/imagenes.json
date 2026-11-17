@@ -2086,6 +2086,56 @@
         1600
       ],
       "avif": true
+    },
+    {
+      "id": "desplazamiento-francia-equipo",
+      "estado": "publicada",
+      "escena": "Desplazar trabajadores a Francia: un equipo técnico coordina una intervención en una planta industrial",
+      "archivo": "ed/desplazamiento-francia-equipo",
+      "alt": "Tres técnicos con casco, vistos de espaldas, observan una instalación de depósitos a presión junto a un compresor en una planta al aire libre",
+      "foco": "50% 50%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "VDpYOvZm2Ok",
+        "autor": "Christina Hawkins",
+        "url": "https://unsplash.com/photos/VDpYOvZm2Ok",
+        "perfil": "https://unsplash.com/@gx2000",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
+    },
+    {
+      "id": "desplazamiento-italia-planos",
+      "estado": "publicada",
+      "escena": "Desplazar trabajadores a Italia: un equipo revisa los planos de la obra antes de ejecutar los trabajos",
+      "archivo": "ed/desplazamiento-italia-planos",
+      "alt": "Tres hombres de pie en una obra de estructura de madera se inclinan sobre unos planos extendidos encima de un tablero y señalan los detalles",
+      "foco": "50% 45%",
+      "origen": {
+        "tipo": "unsplash",
+        "id": "DowtEyavqsY",
+        "autor": "Nate Johnston",
+        "url": "https://unsplash.com/photos/DowtEyavqsY",
+        "perfil": "https://unsplash.com/@natejohnston",
+        "licencia": "Licencia Unsplash (uso comercial gratuito)"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
     }
   ]
 }
