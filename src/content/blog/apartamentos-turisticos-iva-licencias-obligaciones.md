@@ -52,7 +52,7 @@ Lo que todo el mundo llama «licencia turística» son, en realidad, varios requ
 
 La inscripción dura cinco años y se renueva con una nueva declaración responsable y un informe actualizado. El cambio de titular tiene su propio trámite. Lo detallan las [preguntas frecuentes sobre viviendas de uso turístico](https://cindi.gva.es/documents/174670202/398265981/GUC19207_Preguntas+frecuentes+(FAQs)+viviendas+de+uso+turistico+17_03_2026+ultima+version.pdf/94ff9ab8-91ef-a3a2-d634-e58c8365fafb).
 
-Cuenta también la comunidad de propietarios: hay que acreditar que los estatutos no prohíben el uso turístico y, desde abril de 2025, la Ley de Propiedad Horizontal exige la aprobación expresa de la junta para iniciar la actividad en un piso.
+Cuenta también la comunidad de propietarios: hay que acreditar que los estatutos no prohíben el uso turístico y, desde abril de 2025, el [artículo 7.3 de la Ley de Propiedad Horizontal](https://www.boe.es/eli/es/l/1960/07/21/49/con) exige la aprobación expresa de la junta para iniciar la actividad en un piso.
 
 ### 10 días para Turismo, 30 noches para Hacienda
 

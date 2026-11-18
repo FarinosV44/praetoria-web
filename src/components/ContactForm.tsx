@@ -9,8 +9,6 @@ import { AREAS, AREAS_CON_ASUNTO, AREAS_CON_CUESTIONARIO, DOCUMENTOS, IMPORTES, 
 import { canalDe, contactos } from '@/lib/site';
 import { servicioPorId, serviciosDe } from '@/lib/servicios-indice';
 import type { ServicioArea } from '@/lib/servicios';
-import { leerRespuestasDivorcio, resumenDivorcio } from '@/lib/cuestionario-divorcio';
-import { leerRespuestasHacienda, resumenHacienda } from '@/lib/cuestionario-hacienda';
 import { leerAtribucion, paginaOrigen } from '@/lib/atribucion';
 import { medir } from '@/lib/medicion';
 import { apiUrl } from '@/lib/api';
@@ -69,19 +67,24 @@ export function ContactForm({ areaInicial }: { areaInicial?: AreaId }) {
       if (sv.problemaLaboral) setProblema(sv.problemaLaboral);
     } else if (ar) setArea(ar.id);
     // Respuestas del cuestionario de divorcio de esta sesión (nunca por la URL)
+    // Los cuestionarios se cargan aparte, solo cuando se llega desde uno (no pesan en el formulario normal)
     if (q.get('cuestionario') === 'divorcio') {
-      const resp = leerRespuestasDivorcio();
-      if (resp) setCuestionario({ tipo: 'divorcio', texto: resumenDivorcio(resp) });
+      void import('@/lib/cuestionario-divorcio').then(({ leerRespuestasDivorcio, resumenDivorcio }) => {
+        const resp = leerRespuestasDivorcio();
+        if (resp) setCuestionario({ tipo: 'divorcio', texto: resumenDivorcio(resp) });
+      });
     }
     if (q.get('cuestionario') === 'hacienda') {
-      const resp = leerRespuestasHacienda();
-      if (resp) {
-        setCuestionario({ tipo: 'hacienda', texto: resumenHacienda(resp) });
-        setOrganismo(resp.organismo);
-        setDocumento(resp.documento);
-        setFechaInicial(resp.recibida);
-        if (resp.descripcion && mensajeRef.current && !mensajeRef.current.value) mensajeRef.current.value = resp.descripcion;
-      }
+      void import('@/lib/cuestionario-hacienda').then(({ leerRespuestasHacienda, resumenHacienda }) => {
+        const resp = leerRespuestasHacienda();
+        if (resp) {
+          setCuestionario({ tipo: 'hacienda', texto: resumenHacienda(resp) });
+          setOrganismo(resp.organismo);
+          setDocumento(resp.documento);
+          setFechaInicial(resp.recibida);
+          if (resp.descripcion && mensajeRef.current && !mensajeRef.current.value) mensajeRef.current.value = resp.descripcion;
+        }
+      });
     }
     /* eslint-enable react-hooks/set-state-in-effect */
   }, []);

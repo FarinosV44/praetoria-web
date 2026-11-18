@@ -35,7 +35,11 @@ export async function obtenerEscrito(u: Usuario, id: string, db: Db = pool()) {
   const comunicaciones = await q<{ id: string; fecha: string; direccion: string; medio: string; interlocutor: string | null; resumen: string | null; escrito_version_id: string | null; documento_id: string | null }>(
     `SELECT c.id, c.fecha, c.direccion, c.medio, c.interlocutor, c.resumen, c.escrito_version_id, c.documento_id FROM comunicaciones c
       WHERE c.eliminado_en IS NULL AND (c.escrito_version_id IN (SELECT id FROM escrito_versiones WHERE escrito_id = $1)
-        OR (c.direccion = 'recibida' AND c.asunto_id IS NOT DISTINCT FROM $2 AND $2::uuid IS NOT NULL AND c.fecha >= $3::date))
+        OR (c.direccion = 'recibida' AND c.asunto_id IS NOT DISTINCT FROM $2 AND $2::uuid IS NOT NULL
+            -- Desde el primer envío registrado (puede tener fecha anterior a la creación del escrito en la app)
+            AND c.fecha >= LEAST($3::date, coalesce((SELECT min(c2.fecha) FROM comunicaciones c2
+                  WHERE c2.eliminado_en IS NULL AND c2.direccion = 'enviada'
+                    AND c2.escrito_version_id IN (SELECT id FROM escrito_versiones WHERE escrito_id = $1)), $3::date))))
       ORDER BY c.fecha`, [id, e.asunto_id, e.creado_en.toISOString().slice(0, 10)], db);
   return { ...e, versiones, comunicaciones };
 }
