@@ -40,7 +40,7 @@ Las grandes plataformas facturan su comisión desde otros países de la Unión E
 
 ### Reservas cobradas antes de diciembre
 
-El real decreto-ley no trae una regla especial para ellas. Por regla general el IVA se devenga al prestar el servicio, pero los anticipos lo devengan al cobrarse (artículo 75 de la ley). Así que no basta con mirar la fecha de llegada: hay que revisar cuándo y cómo se cobró cada reserva, que no es lo mismo una transferencia directa que un pago por plataforma.
+El real decreto-ley no trae una regla especial para ellas. En los arrendamientos el IVA se devenga cuando resulta exigible cada parte del precio, y los anticipos lo devengan al cobrarse (artículo 75 de la ley). Así que no basta con mirar la fecha de llegada: hay que revisar cuándo y cómo se cobró cada reserva, que no es lo mismo una transferencia directa que un pago por plataforma.
 
 ## Licencia turística en la Comunitat Valenciana: qué hace falta de verdad
 
