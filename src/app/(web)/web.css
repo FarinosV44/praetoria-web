@@ -2450,3 +2450,6 @@
 .prose .aviso-cta .btn { color: var(--paper); text-decoration: none; }
 .prose .aviso-cta .btn:hover { color: var(--paper); }
 .prose .aviso-cta__secundario { font-family: var(--sans); font-size: 0.95rem; }
+
+/* Portada del blog: artículos anteriores como lista de títulos */
+.page-blog .posts-anteriores { margin: 3rem 0 1.2rem; font-size: 1.4rem; }

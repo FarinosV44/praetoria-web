@@ -5,6 +5,9 @@ import { Breadcrumbs } from './Breadcrumbs';
 import { PostList } from './PostList';
 import { CtaBand } from './CtaBand';
 
+// Artículos con tarjeta (imagen y resumen) en /blog/; el resto se listan solo con título
+const TARJETAS_PORTADA = 60;
+
 export function blogMeta(category?: CategoryKey) {
   const cat = category ? categories[category] : undefined;
   return {
@@ -50,7 +53,16 @@ export function BlogIndex({ category }: { category?: CategoryKey }) {
       </section>
       <section className="section">
         <div className="wrap">
-          <PostList posts={posts} showCategory={!category} />
+          {category || posts.length <= TARJETAS_PORTADA ? (
+            <PostList posts={posts} showCategory={!category} />
+          ) : (
+            <>
+              <PostList posts={posts.slice(0, TARJETAS_PORTADA)} showCategory />
+              {/* El resto, como lista de títulos: todos siguen enlazados y la portada no crece sin límite */}
+              <h2 className="posts-anteriores">Artículos anteriores</h2>
+              <PostList posts={posts.slice(TARJETAS_PORTADA)} showCategory compact />
+            </>
+          )}
         </div>
       </section>
       <CtaBand />
