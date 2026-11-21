@@ -1,3 +1,3 @@
-cs7|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=30&format=json&srsearch=wedding%20rings%20money%20coins
-cs8|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=30&format=json&srsearch=wedding%20rings%20calculator
-cs9|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=30&format=json&srsearch=divorce%20rings%20euro
+cs10|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=40&format=json&srsearch=wedding%20rings%20filetype%3Abitmap
+cs11|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=40&format=json&srsearch=alianzas%20boda%20filetype%3Abitmap
+cs12|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=40&format=json&srsearch=couple%20paperwork%20bills%20filetype%3Abitmap
