@@ -2162,6 +2162,32 @@
         1600
       ],
       "avif": true
+    },
+    {
+      "id": "alianzas-oro-separacion-bienes",
+      "estado": "publicada",
+      "escena": "Separación de bienes: dos alianzas de oro sobre una mesa de madera",
+      "archivo": "ed/alianzas-oro-mesa-madera",
+      "alt": "Dos alianzas de oro apoyadas una junto a otra sobre una mesa de madera envejecida",
+      "foco": "45% 45%",
+      "origen": {
+        "tipo": "commons",
+        "id": "alianzas-oro-mesa-madera",
+        "autor": "Rgaudin",
+        "url": "https://commons.wikimedia.org/wiki/File:Two_golden_wedding_rings.jpg",
+        "licencia": "CC0 1.0",
+        "licenciaUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.es",
+        "modificada": "recortada"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
     }
   ]
 }
