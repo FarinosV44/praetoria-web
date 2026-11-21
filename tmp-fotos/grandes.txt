@@ -1,1 +1,3 @@
-ii2|https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url|size|extmetadata&format=json&titles=File:Playa%20de%20El%20Perell%C3%B3,%20Sueca%2002.jpg
+cs7|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=30&format=json&srsearch=wedding%20rings%20money%20coins
+cs8|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=30&format=json&srsearch=wedding%20rings%20calculator
+cs9|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=30&format=json&srsearch=divorce%20rings%20euro
