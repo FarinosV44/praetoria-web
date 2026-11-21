@@ -1,3 +1,6 @@
-cs10|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=40&format=json&srsearch=wedding%20rings%20filetype%3Abitmap
-cs11|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=40&format=json&srsearch=alianzas%20boda%20filetype%3Abitmap
-cs12|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=40&format=json&srsearch=couple%20paperwork%20bills%20filetype%3Abitmap
+r1|https://commons.wikimedia.org/wiki/Special:FilePath/Two_golden_wedding_rings.jpg?width=800
+r2|https://commons.wikimedia.org/wiki/Special:FilePath/Wedding_rings_(Unsplash).jpg?width=800
+r3|https://commons.wikimedia.org/wiki/Special:FilePath/Wedding_rings_2017_(Unsplash).jpg?width=800
+r4|https://commons.wikimedia.org/wiki/Special:FilePath/Pair_of_gold_wedding_rings.JPG?width=800
+r5|https://commons.wikimedia.org/wiki/Special:FilePath/Wedding_rings_20190228.jpg?width=800
+r6|https://commons.wikimedia.org/wiki/Special:FilePath/A_pair_of_wedding_rings.jpg?width=800
