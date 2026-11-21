@@ -1,6 +1,2 @@
-r1|https://commons.wikimedia.org/wiki/Special:FilePath/Two_golden_wedding_rings.jpg?width=800
-r2|https://commons.wikimedia.org/wiki/Special:FilePath/Wedding_rings_(Unsplash).jpg?width=800
-r3|https://commons.wikimedia.org/wiki/Special:FilePath/Wedding_rings_2017_(Unsplash).jpg?width=800
-r4|https://commons.wikimedia.org/wiki/Special:FilePath/Pair_of_gold_wedding_rings.JPG?width=800
-r5|https://commons.wikimedia.org/wiki/Special:FilePath/Wedding_rings_20190228.jpg?width=800
-r6|https://commons.wikimedia.org/wiki/Special:FilePath/A_pair_of_wedding_rings.jpg?width=800
+ii3|https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url|size|extmetadata&format=json&titles=File:Two%20golden%20wedding%20rings.jpg
+r1full|https://commons.wikimedia.org/wiki/Special:FilePath/Two_golden_wedding_rings.jpg
