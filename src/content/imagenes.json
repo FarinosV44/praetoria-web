@@ -2188,6 +2188,32 @@
         1600
       ],
       "avif": true
+    },
+    {
+      "id": "igual-trabajo-igual-salario-cartel",
+      "estado": "publicada",
+      "escena": "Igualdad retributiva: cartel «A igual feina, igual sou» en una manifestación del 8 de marzo",
+      "archivo": "ed/a-igual-feina-igual-sou",
+      "alt": "Cartel escrito a mano en catalán, con letras azules, que reclama igual salario por el mismo trabajo, junto a una tela estampada con gatos",
+      "foco": "35% 50%",
+      "origen": {
+        "tipo": "commons",
+        "id": "a-igual-feina-igual-sou",
+        "autor": "Farmengol",
+        "url": "https://commons.wikimedia.org/wiki/File:A_igual_feina_igual_sou.jpg",
+        "licencia": "CC BY-SA 4.0",
+        "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.es",
+        "modificada": "recortada"
+      },
+      "ancho": 1600,
+      "alto": 1000,
+      "variantes": [
+        480,
+        800,
+        1200,
+        1600
+      ],
+      "avif": true
     }
   ]
 }

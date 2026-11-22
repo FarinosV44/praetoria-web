@@ -245,6 +245,7 @@ export const servicios: Servicio[] = [
     pagina: '/reclamar-salarios-y-finiquito/',
     problemaLaboral: 'cantidades',
     revision: 'revisado',
+    articulos: ['pedir-salario-medio-companeros-transparencia-retributiva'],
     seo: {
       title: 'Reclamar salarios atrasados o un finiquito mal calculado',
       h1: 'Reclamar salarios, horas o un finiquito mal calculado',
