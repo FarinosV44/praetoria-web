@@ -1,3 +1,4 @@
-cs13|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=40&format=json&srsearch=payslip%20filetype%3Abitmap
-cs14|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=40&format=json&srsearch=euro%20banknotes%20calculator%20filetype%3Abitmap
-cs15|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=40&format=json&srsearch=equal%20pay%20filetype%3Abitmap
+p1|https://commons.wikimedia.org/wiki/Special:FilePath/A_igual_feina_igual_sou.jpg?width=900
+p2|https://commons.wikimedia.org/wiki/Special:FilePath/2023-03-13_paycheck-salary.jpg?width=900
+p3|https://commons.wikimedia.org/wiki/Special:FilePath/Equal_pay_for_equal_work.jpg?width=900
+ii4|https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url|size|extmetadata&format=json&titles=File:A%20igual%20feina%20igual%20sou.jpg|File:2023-03-13%20paycheck-salary.jpg|File:Equal%20pay%20for%20equal%20work.jpg
