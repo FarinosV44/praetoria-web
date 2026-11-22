@@ -1,2 +1,3 @@
-ii3|https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url|size|extmetadata&format=json&titles=File:Two%20golden%20wedding%20rings.jpg
-r1full|https://commons.wikimedia.org/wiki/Special:FilePath/Two_golden_wedding_rings.jpg
+cs13|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=40&format=json&srsearch=payslip%20filetype%3Abitmap
+cs14|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=40&format=json&srsearch=euro%20banknotes%20calculator%20filetype%3Abitmap
+cs15|https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&srlimit=40&format=json&srsearch=equal%20pay%20filetype%3Abitmap
